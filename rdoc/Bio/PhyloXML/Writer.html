@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::PhyloXML::Writer - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::PhyloXML::Writer-label-Description">Description</a>
+    <li><a href="#class-Bio::PhyloXML::Writer-label-Requirements">Requirements</a>
+    <li><a href="#class-Bio::PhyloXML::Writer-label-Usage">Usage</a>
+    <li><a href="#class-Bio::PhyloXML::Writer-label-References">References</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">LibXML</span>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-generate_xml">::generate_xml</a>
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-write">#write</a>
+    
+    <li ><a href="#method-i-write_other">#write_other</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::PhyloXML::Writer">
+  <h1 id="class-Bio::PhyloXML::Writer" class="class">
+    class Bio::PhyloXML::Writer
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Bio::PhyloXML::Writer-label-Description">Description<span><a href="#class-Bio::PhyloXML::Writer-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p><a href="Writer.html">Bio::PhyloXML::Writer</a> is for writing phyloXML
+(version 1.10) format files.</p>
+
+<h2 id="class-Bio::PhyloXML::Writer-label-Requirements">Requirements<span><a href="#class-Bio::PhyloXML::Writer-label-Requirements">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Libxml2 XML parser is required. Install libxml-ruby bindings from <a
+href="http://libxml.rubyforge.org">libxml.rubyforge.org</a> or</p>
+
+<pre>gem install -r libxml-ruby</pre>
+
+<h2 id="class-Bio::PhyloXML::Writer-label-Usage">Usage<span><a href="#class-Bio::PhyloXML::Writer-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre class="ruby"> <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio&#39;</span>
+
+<span class="ruby-comment"># Create new phyloxml parser</span>
+<span class="ruby-identifier">phyloxml</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;example.xml&#39;</span>)
+
+<span class="ruby-comment"># Read in some trees from file</span>
+<span class="ruby-identifier">tree1</span> = <span class="ruby-identifier">phyloxml</span>.<span class="ruby-identifier">next_tree</span>
+<span class="ruby-identifier">tree2</span> = <span class="ruby-identifier">phyloxml</span>.<span class="ruby-identifier">next_tree</span>
+
+<span class="ruby-comment"># Create new phyloxml writer</span>
+<span class="ruby-identifier">writer</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Writer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;tree.xml&#39;</span>)
+
+<span class="ruby-comment"># Write tree to the file tree.xml</span>
+<span class="ruby-identifier">writer</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">tree1</span>)
+
+<span class="ruby-comment"># Add another tree to the file</span>
+<span class="ruby-identifier">writer</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">tree2</span>)
+</pre>
+
+<h2 id="class-Bio::PhyloXML::Writer-label-References"><a href="../References.html">References</a><span><a href="#class-Bio::PhyloXML::Writer-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p><a
+href="http://www.phyloxml.org/documentation/version_100/phyloxml.xsd.html">www.phyloxml.org/documentation/version_100/phyloxml.xsd.html</a></p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="SCHEMA_LOCATION">SCHEMA_LOCATION
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-write_branch_length_as_subelement" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">write_branch_length_as_subelement</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-generate_xml" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">generate_xml</span><span
+            class="method-args">(root, elem, subelement_array)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Used by to_xml methods of <a href="../PhyloXML.html">PhyloXML</a> element
+classes. Generally not to be invoked directly.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="generate_xml-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_writer.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">generate_xml</span>(<span class="ruby-identifier">root</span>, <span class="ruby-identifier">elem</span>, <span class="ruby-identifier">subelement_array</span>)
+ <span class="ruby-comment">#example usage: generate_xml(node, self, [[ :complex,&#39;accession&#39;, ], [:simple, &#39;name&#39;,  @name], [:simple, &#39;location&#39;, @location]])</span>
+<span class="ruby-identifier">subelement_array</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subelem</span><span class="ruby-operator">|</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:simple</span>         
+    <span class="ruby-identifier">root</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">subelem</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">subelem</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_s</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
+
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:complex</span>
+    <span class="ruby-identifier">root</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">send</span>(<span class="ruby-string">&quot;to_xml&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:pattern</span>
+    <span class="ruby-comment">#seq, self, [[:pattern, &#39;symbol&#39;, @symbol, &quot;\S{1,10}&quot;]</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">=~</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">3</span>]
+        <span class="ruby-identifier">root</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">subelem</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">subelem</span>[<span class="ruby-value">2</span>])
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;#{subelem[2]} is not a valid value of #{subelem[1]}. It should follow pattern #{subelem[3]}&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:objarr</span>
+    <span class="ruby-comment">#[:objarr, &#39;annotation&#39;, &#39;annotations&#39;]])</span>
+    <span class="ruby-identifier">obj_arr</span> = <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">subelem</span>[<span class="ruby-value">2</span>])
+    <span class="ruby-identifier">obj_arr</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">arr_elem</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">root</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">arr_elem</span>.<span class="ruby-identifier">to_xml</span>
+    <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:simplearr</span>
+    <span class="ruby-comment">#  [:simplearr, &#39;common_name&#39;, @common_names]</span>
+    <span class="ruby-identifier">subelem</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">elem_val</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">root</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">subelem</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">elem_val</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">subelem</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-value">:attr</span>
+    <span class="ruby-comment">#[:attr, &#39;rooted&#39;]</span>
+    <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">subelem</span>[<span class="ruby-value">1</span>])
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">root</span>[<span class="ruby-identifier">subelem</span>[<span class="ruby-value">1</span>]] = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Not supported type of element by method generate_xml.&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+<span class="ruby-keyword">return</span> <span class="ruby-identifier">root</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(filename, indent=true)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Create new <a href="Writer.html">Writer</a> object. As parameters provide
+filename of xml file you wish to create. Optional parameter is whether to
+indent or no. Default is true. By default branch_length is written as
+subelement of clade element.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_writer.rb, line 82</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">indent</span>=<span class="ruby-keyword">true</span>)
+<span class="ruby-ivar">@write_branch_length_as_subelement</span> = <span class="ruby-keyword">true</span> <span class="ruby-comment">#default value</span>
+<span class="ruby-ivar">@filename</span> = <span class="ruby-identifier">filename</span>
+<span class="ruby-ivar">@indent</span> = <span class="ruby-identifier">indent</span>
+
+<span class="ruby-ivar">@doc</span> = <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>()
+<span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">root</span> = <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;phyloxml&#39;</span>)
+<span class="ruby-ivar">@root</span> = <span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">root</span>
+<span class="ruby-ivar">@root</span>[<span class="ruby-string">&#39;xmlns:xsi&#39;</span>] = <span class="ruby-string">&#39;http://www.w3.org/2001/XMLSchema-instance&#39;</span>
+<span class="ruby-ivar">@root</span>[<span class="ruby-string">&#39;xsi:schemaLocation&#39;</span>] = <span class="ruby-constant">SCHEMA_LOCATION</span>
+<span class="ruby-ivar">@root</span>[<span class="ruby-string">&#39;xmlns&#39;</span>] = <span class="ruby-string">&#39;http://www.phyloxml.org&#39;</span>
+
+<span class="ruby-comment">#@todo save encoding to be UTF-8. (However it is the default one).</span>
+<span class="ruby-comment">#it gives error NameError: uninitialized constant LibXML::XML::Encoding</span>
+<span class="ruby-comment">#@doc.encoding = XML::Encoding::UTF_8</span>
+
+<span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">save</span>(<span class="ruby-ivar">@filename</span>, <span class="ruby-value">:indent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-write" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">write</span><span
+            class="method-args">(tree)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Write a tree to a file in phyloxml format.</p>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;Bio&#39;</span>
+<span class="ruby-identifier">writer</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Writer</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-identifier">writer</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">tree</span>)
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="write-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_writer.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">tree</span>)
+  <span class="ruby-ivar">@root</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">phylogeny</span> = <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;phylogeny&#39;</span>)        
+  
+  <span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Writer</span>.<span class="ruby-identifier">generate_xml</span>(<span class="ruby-identifier">phylogeny</span>, <span class="ruby-identifier">tree</span>, [
+      [<span class="ruby-value">:attr</span>, <span class="ruby-string">&#39;rooted&#39;</span>],
+      [<span class="ruby-value">:simple</span>, <span class="ruby-string">&#39;name&#39;</span>, <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">name</span>],
+      [<span class="ruby-value">:complex</span>, <span class="ruby-string">&#39;id&#39;</span>, <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">phylogeny_id</span>],
+      [<span class="ruby-value">:simple</span>, <span class="ruby-string">&#39;description&#39;</span>, <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">description</span>],
+      [<span class="ruby-value">:simple</span>, <span class="ruby-string">&#39;date&#39;</span>, <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">date</span>],
+      [<span class="ruby-value">:objarr</span>, <span class="ruby-string">&#39;confidence&#39;</span>, <span class="ruby-string">&#39;confidences&#39;</span>]])
+
+  <span class="ruby-identifier">root_clade</span> = <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">root</span>.<span class="ruby-identifier">to_xml</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-ivar">@write_branch_length_as_subelement</span>)
+  
+  <span class="ruby-identifier">phylogeny</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">root_clade</span> 
+
+  <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">children</span>(<span class="ruby-identifier">tree</span>.<span class="ruby-identifier">root</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">root_clade</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">node_to_xml</span>(<span class="ruby-identifier">tree</span>, <span class="ruby-identifier">node</span>, <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">root</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Writer</span><span class="ruby-operator">::</span><span class="ruby-identifier">generate_xml</span>(<span class="ruby-identifier">phylogeny</span>, <span class="ruby-identifier">tree</span>, [
+      [<span class="ruby-value">:objarr</span>, <span class="ruby-string">&#39;clade_relation&#39;</span>, <span class="ruby-string">&#39;clade_relations&#39;</span>],
+      [<span class="ruby-value">:objarr</span>, <span class="ruby-string">&#39;sequence_relation&#39;</span>, <span class="ruby-string">&#39;sequence_relations&#39;</span>],
+      [<span class="ruby-value">:objarr</span>, <span class="ruby-string">&#39;property&#39;</span>, <span class="ruby-string">&#39;properties&#39;</span>]] )
+
+  <span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">save</span>(<span class="ruby-ivar">@filename</span>, <span class="ruby-value">:indent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@indent</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-write_other" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">write_other</span><span
+            class="method-args">(other_arr)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="../PhyloXML.html">PhyloXML</a> Schema allows to save data in
+different xml format after all phylogeny elements. This method is to write
+these additional data.</p>
+
+<pre class="ruby"><span class="ruby-identifier">parser</span> = <span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;phyloxml_examples.xml&#39;</span>)
+<span class="ruby-identifier">writer</span> = <span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Writer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;new.xml&#39;</span>)
+
+<span class="ruby-identifier">parser</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tree</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">writer</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">tree</span>)
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-comment"># When all the trees are read in by the parser, whats left is saved at</span>
+<span class="ruby-comment"># PhyloXML::Parser#other</span>
+<span class="ruby-identifier">writer</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">parser</span>.<span class="ruby-identifier">other</span>)
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="write_other-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_writer.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">write_other</span>(<span class="ruby-identifier">other_arr</span>)
+  <span class="ruby-identifier">other_arr</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">other_obj</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@root</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">other_obj</span>.<span class="ruby-identifier">to_xml</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@doc</span>.<span class="ruby-identifier">save</span>(<span class="ruby-ivar">@filename</span>, <span class="ruby-value">:indent</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@indent</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

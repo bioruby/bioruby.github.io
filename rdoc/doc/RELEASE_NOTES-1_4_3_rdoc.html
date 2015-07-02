@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>RELEASE_NOTES-1.4.3 - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-BioRuby+1.4.3+RELEASE+NOTES">BioRuby 1.4.3 RELEASE NOTES</a>
+    <li><a href="#label-New+features">New features</a>
+    <li><a href="#label-Bio-3A-3AKEGG-3A-3AKGML">Bio::KEGG::KGML</a>
+    <li><a href="#label-Improvements">Improvements</a>
+    <li><a href="#label-Portability+running+on+JRuby+and+Rubinius">Portability running on JRuby and Rubinius</a>
+    <li><a href="#label-Testing+on+Travis+CI">Testing on Travis CI</a>
+    <li><a href="#label-Bug+fixes">Bug fixes</a>
+    <li><a href="#label-Strange+behavior+related+with+-22circular+require-22+is+fixed">Strange behavior related with “circular require” is fixed</a>
+    <li><a href="#label-Other+bug+fixes">Other bug fixes</a>
+    <li><a href="#label-Incompatible+changes+and+removed+features">Incompatible changes and removed features</a>
+    <li><a href="#label-Bio-3A-3AFlatFile+use+binmode+-28binary+mode-29+when+opening+a+file">Bio::FlatFile use binmode (binary mode) when opening a file</a>
+    <li><a href="#label-Broader+FASTQ+file+recognition">Broader FASTQ file recognition</a>
+    <li><a href="#label-Bio-3A-3AKEGG-3A-3AKGML">Bio::KEGG::KGML</a>
+    <li><a href="#label-Bio-3A-3AEMBL-23os">Bio::EMBL#os</a>
+    <li><a href="#label-Tests">Tests</a>
+    <li><a href="#label-Other+removed+features">Other removed features</a>
+    <li><a href="#label-Known+issues">Known issues</a>
+    <li><a href="#label-JRuby">JRuby</a>
+    <li><a href="#label-Rubinius">Rubinius</a>
+    <li><a href="#label-DDBJ+Web+API+related+classes+-28Bio-3A-3ADDBJ-3A-3A-2A-2C+Bio-3A-3ABLAST-3A-3ARemote-3A-3ADDBJ-29">DDBJ Web API related classes (Bio::DDBJ::*, Bio::BLAST::Remote::DDBJ)</a>
+    <li><a href="#label-SOAP4R+with+Ruby+1.9">SOAP4R with Ruby 1.9</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES</a>
+  
+    <li><a href="../README_rdoc.html">README</a>
+  
+    <li><a href="../README_DEV_rdoc.html">README_DEV</a>
+  
+    <li><a href="../RELEASE_NOTES_rdoc.html">RELEASE_NOTES</a>
+  
+    <li><a href="../doc/Changes-1_3_rdoc.html">Changes-1.3</a>
+  
+    <li><a href="../doc/RELEASE_NOTES-1_4_0_rdoc.html">RELEASE_NOTES-1.4.0</a>
+  
+    <li><a href="../doc/RELEASE_NOTES-1_4_1_rdoc.html">RELEASE_NOTES-1.4.1</a>
+  
+    <li><a href="../doc/RELEASE_NOTES-1_4_2_rdoc.html">RELEASE_NOTES-1.4.2</a>
+  
+    <li><a href="../doc/RELEASE_NOTES-1_4_3_rdoc.html">RELEASE_NOTES-1.4.3</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page doc/RELEASE_NOTES-1.4.3.rdoc">
+
+<h1 id="label-BioRuby+1.4.3+RELEASE+NOTES">BioRuby 1.4.3 RELEASE NOTES<span><a href="#label-BioRuby+1.4.3+RELEASE+NOTES">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>A lot of changes have been made to the BioRuby 1.4.3 after the version
+1.4.2 is released. This document describes important and/or incompatible
+changes since the BioRuby 1.4.2 release.</p>
+
+<p>For known problems, see <a
+href="../KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a>.</p>
+
+<h2 id="label-New+features">New features<span><a href="#label-New+features">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Bio-3A-3AKEGG-3A-3AKGML"><a href="../Bio/KEGG/KGML.html">Bio::KEGG::KGML</a><span><a href="#label-Bio-3A-3AKEGG-3A-3AKGML">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>New class <a
+href="../Bio/KEGG/KGML/Graphics.html">Bio::KEGG::KGML::Graphics</a> for
+storing a graphics element. In the instance of the class, “coords”
+attribute is now available.</p>
+</li><li>
+<p>New class <a
+href="../Bio/KEGG/KGML/Substrate.html">Bio::KEGG::KGML::Substrate</a> for
+storing a substrate element.</p>
+</li><li>
+<p>New class <a
+href="../Bio/KEGG/KGML/Product.html">Bio::KEGG::KGML::Product</a> for
+storing a product element.</p>
+</li><li>
+<p>New method <a
+href="../Bio/KEGG/KGML/Reaction.html#attribute-i-id">Bio::KEGG::KGML::Reaction#id</a>.</p>
+</li><li>
+<p>Improve RDoc documentation.</p>
+</li><li>
+<p>Unit tests are added.</p>
+</li><li>
+<p>There are incompatible changes. See Incompatible changes below.</p>
+</li></ul>
+
+<h2 id="label-Improvements">Improvements<span><a href="#label-Improvements">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Portability+running+on+JRuby+and+Rubinius">Portability running on JRuby and Rubinius<span><a href="#label-Portability+running+on+JRuby+and+Rubinius">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Many failures and errors running on JRuby and Rubinius are resolved. Some
+of them are due to BioRuby bugs, and some of them are due to JRuby or
+Rubinius bugs. Artem Tarasov reported bugs in BioRuby and submitted bug
+reports to Rubinius. Clayton Wheeler and Naohisa Goto fixed bugs in BioRuby
+and submitted bug reports to JRuby.</p>
+
+<h3 id="label-Testing+on+Travis+CI">Testing on Travis CI<span><a href="#label-Testing+on+Travis+CI">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>BioRuby is now using Travis CI (<a
+href="http://travis-ci.org">travis-ci.org</a>/), a hosted continuous
+integration service for the open source community.</p>
+
+<h2 id="label-Bug+fixes">Bug fixes<span><a href="#label-Bug+fixes">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Strange+behavior+related+with+-22circular+require-22+is+fixed">Strange behavior related with “circular require” is fixed<span><a href="#label-Strange+behavior+related+with+-22circular+require-22+is+fixed">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Fixed: In previous versions, some bioruby files may be required more than
+two times, and this sometimes causes strange behavior, depending on the
+order of files in the disk.  In particular, unit tests running on JRuby
+sometimes crashes with strange errors. In BioRuby 1.4.3, almost all require
+and autoload lines are revised and are changed to avoid circular require.
+This also fixes crash on JRuby due to JRuby&#39;s autoload bug.</p>
+
+<h3 id="label-Other+bug+fixes">Other bug fixes<span><a href="#label-Other+bug+fixes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Fixed: Genomenet remote BLAST does not work.</p>
+</li><li>
+<p>Fixed: <a href="../Bio/KEGG/KGML.html">Bio::KEGG::KGML</a> ignores “coords”
+field.</p>
+</li><li>
+<p>Fixed: <a
+href="../Bio/NucleicAcid/Data.html#method-i-to_re">Bio::NucleicAcid::Data#to_re</a>(“s”)
+typo</p>
+</li><li>
+<p>To suppress rare failure of chi-square equiprobability tests for <a
+href="../Bio/Sequence/Common.html#method-i-randomize">Bio::Sequence::Common#randomize</a>,
+test code changed to retry up to 10 times if the chi-square test fails. 
+The assertion fails if the chi-square test fails 10 consecutive times, and
+this strongly suggests bugs in codes or in the random number generator.</p>
+</li><li>
+<p>Fixed: <a href="../Bio/EMBL.html#method-i-os">Bio::EMBL#os</a> raises
+RuntimeError. The fix includes incompatible change. See below “Incompatible
+changes”.</p>
+</li><li>
+<p>Fixed: bin/bioruby: Failed to save object with error message “can&#39;t
+convert Symbol into String” on Ruby 1.9.</p>
+</li></ul>
+
+<h2 id="label-Incompatible+changes+and+removed+features">Incompatible changes and removed features<span><a href="#label-Incompatible+changes+and+removed+features">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Bio-3A-3AFlatFile+use+binmode+-28binary+mode-29+when+opening+a+file"><a href="../Bio/FlatFile.html">Bio::FlatFile</a> use binmode (binary mode) when opening a file<span><a href="#label-Bio-3A-3AFlatFile+use+binmode+-28binary+mode-29+when+opening+a+file">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>In <a href="../Bio/FlatFile.html#method-c-open">Bio::FlatFile.open</a> and
+<a href="../Bio/FlatFile.html#method-c-auto">Bio::FlatFile.auto</a>,
+binmode (binary mode) is used by default when opening a file, unless text
+mode is explicitly specified with open mode string or with options. Due to
+the change, files using CR+LF line separator might not be read correctly.</p>
+
+<h3 id="label-Broader+FASTQ+file+recognition">Broader FASTQ file recognition<span><a href="#label-Broader+FASTQ+file+recognition">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Because PacBio RS sequencer may produce kilobases long reads and read
+buffer size (default 31 lines) for file format detection may not be
+sufficient to find the second id line starting with “+”, the regular
+expression for FASTQ is truncated only to check the first id line starting
+with “@”.</p>
+
+<h3 id="label-Bio-3A-3AKEGG-3A-3AKGML"><a href="../Bio/KEGG/KGML.html">Bio::KEGG::KGML</a><span><a href="#label-Bio-3A-3AKEGG-3A-3AKGML">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><a
+href="../Bio/KEGG/KGML/Reaction.html#attribute-i-substrates">Bio::KEGG::KGML::Reaction#substrates</a>
+and <a
+href="../Bio/KEGG/KGML/Reaction.html#attribute-i-products">Bio::KEGG::KGML::Reaction#products</a>
+are changed to return an array containing <a
+href="../Bio/KEGG/KGML/Substrate.html">Bio::KEGG::KGML::Substrate</a> and
+<a href="../Bio/KEGG/KGML/Product.html">Bio::KEGG::KGML::Product</a>
+objects, respectively. The changes enables us to get ID of substrates and
+products that were thrown away in the previous versions.</p>
+</li><li>
+<p>Most attribute methods that were different from the KGML attribute names
+are renamed to the names compatible with the KGML attribute names. Old
+method names are changed to aliases of them and marked as deprecated. The
+old names will be removed in the future.</p>
+<ul><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#attribute-i-id">Bio::KEGG::KGML::Entry#id</a>
+(old name: entry_id)</p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#attribute-i-type">Bio::KEGG::KGML::Entry#type</a>
+(old name: category)</p>
+</li><li>
+<p>Bio::KEGG::KGML::Entry#entry1 (old name: node1)</p>
+</li><li>
+<p>Bio::KEGG::KGML::Entry#entry2 (old name: node2)</p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#attribute-i-type">Bio::KEGG::KGML::Entry#type</a>
+(old name: rel)</p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Reaction.html#attribute-i-name">Bio::KEGG::KGML::Reaction#name</a>
+(old name: entry_id)</p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Reaction.html#attribute-i-type">Bio::KEGG::KGML::Reaction#type</a>
+(old name: direction)</p>
+</li></ul>
+</li><li>
+<p>Following attribute methods are deprecated because two or more graphics
+elements may exist in an entry element. They will be removed in the future.
+Instead, please use instance methods of <a
+href="../Bio/KEGG/KGML/Graphics.html">Bio::KEGG::KGML::Graphics</a>, which
+can be obtained from <a
+href="../Bio/KEGG/KGML/Entry.html#attribute-i-graphics">Bio::KEGG::KGML::Entry#graphics</a>
+attribute.</p>
+<ul><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#method-i-label">Bio::KEGG::KGML::Entry#label</a></p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#method-i-shape">Bio::KEGG::KGML::Entry#shape</a></p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#method-i-x">Bio::KEGG::KGML::Entry#x</a></p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#method-i-y">Bio::KEGG::KGML::Entry#y</a></p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#method-i-width">Bio::KEGG::KGML::Entry#width</a></p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#method-i-height">Bio::KEGG::KGML::Entry#height</a></p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#method-i-fgcolor">Bio::KEGG::KGML::Entry#fgcolor</a></p>
+</li><li>
+<p><a
+href="../Bio/KEGG/KGML/Entry.html#method-i-bgcolor">Bio::KEGG::KGML::Entry#bgcolor</a></p>
+</li></ul>
+</li></ul>
+
+<h3 id="label-Bio-3A-3AEMBL-23os"><a href="../Bio/EMBL.html#method-i-os">Bio::EMBL#os</a><span><a href="#label-Bio-3A-3AEMBL-23os">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="../Bio/EMBL.html#method-i-os">Bio::EMBL#os</a>, returns parser
+result of the EMBL OS line, no longer splits the content with comma, and it
+no longer raises error even if the OS line is not in the “Genus species
+(name)” format. The changes may affect the parsing of old EMBL files which
+contain two or more species names in an OS line.</p>
+
+<p>Note that <a href="../Bio/EMBL.html#method-i-os">Bio::EMBL#os</a> returns
+an Array containing several <a href="../Hash.html">Hash</a> objects, and
+the argument is always ignored. The return value type and the meaning of
+the argument might be changed in the future.</p>
+
+<h3 id="label-Tests">Tests<span><a href="#label-Tests">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Tests using network connections are moved under test/network/. To invoke
+these tests, run “rake test-network”.</p>
+</li><li>
+<p>BIORUBY_TEST_LIB environment variable</p>
+<ul><li>
+<p>The directory name specified with BIORUBY_TEST_LIB is always added on the
+top of $LOAD_PATH even if it is already included in the middle of
+$LOAD_PATH.</p>
+</li><li>
+<p>When BIORUBY_TEST_LIB is empty, it no longer add an empty string to
+$LOAD_PATH.</p>
+</li><li>
+<p>BIORUBY_TEST_LIB is ignored when BIORUBY_TEST_GEM is set.</p>
+</li></ul>
+</li><li>
+<p>BIORUBY_TEST_GEM environment variable</p>
+<ul><li>
+<p>New environment variable BIORUBY_TEST_GEM for testing installed bio-X.X.X
+gem. Version number can be specified. See the following examples
+with/without the version number:</p>
+<ul><li>
+<p>% env BIORUBY_TEST_GEM=1.4.2.5000 ruby test/runner.rb</p>
+</li><li>
+<p>% env BIORUBY_TEST_GEM=“” ruby test/runner.rb</p>
+</li></ul>
+</li></ul>
+</li></ul>
+
+<h3 id="label-Other+removed+features">Other removed features<span><a href="#label-Other+removed+features">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>rdoc.zsh is removed because it have not been used for a long time.</p>
+</li></ul>
+
+<h2 id="label-Known+issues">Known issues<span><a href="#label-Known+issues">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The following issues are added or updated. See <a
+href="../KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a> for other already
+known issues.</p>
+
+<h3 id="label-JRuby">JRuby<span><a href="#label-JRuby">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>On JRuby, errors may be raised due to the following unfixed bugs in JRuby.</p>
+<ul><li>
+<p><a href="http://jira.codehaus.org/browse/JRUBY-6195">JRUBY-6195</a>
+Process.spawn (and related methods) ignore option hash</p>
+</li><li>
+<p><a href="http://jira.codehaus.org/browse/JRUBY-6818">JRUBY-6818</a>
+Kernel.exec, Process.spawn (and IO.popen etc.) raise error when program is
+an array containing two strings</p>
+</li></ul>
+
+<p>With older version of JRuby, you may be bothered by the following bugs that
+have already been fixed in the head of JRuby.</p>
+<ul><li>
+<p><a href="http://jira.codehaus.org/browse/JRUBY-6658">JRUBY-6658</a> Problem
+when setting up an autoload entry, defining a class via require, then
+redefining the autoload entry</p>
+</li><li>
+<p><a href="http://jira.codehaus.org/browse/JRUBY-6666">JRUBY-6666</a>
+Open3.popen3 failing due to missing handling for [path, <a
+href="0">argv</a>] array</p>
+</li><li>
+<p><a href="http://jira.codehaus.org/browse/JRUBY-6819">JRUBY-6819</a>
+java.lang.ArrayIndexOutOfBoundsException in String#each_line</p>
+</li></ul>
+
+<p>Due to JRUBY-5678 (resolved issue) and the difference of behavior between
+CRuby and JRuby written in the comments of the issue tracking page, when
+running BioRuby on JRuby with sudo or root rights, TMPDIR environment
+variable should be set to a directory that is not world-writable.
+Currently, the workaround is needed for running BioRuby tests with JRuby on
+Travis-CI.</p>
+<ul><li>
+<p><a href="http://jira.codehaus.org/browse/JRUBY-5678">JRUBY-5678</a> tmpdir
+cannot be delete when jruby has sudo/root rights</p>
+</li></ul>
+
+<h3 id="label-Rubinius">Rubinius<span><a href="#label-Rubinius">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>According to Travis-CI, unit tests have failed on 1.9 mode of Rubinius.</p>
+
+<p>With older version of Rubinius, you may be bothered by the following bugs
+that have already been fixed in the head of Rubinius.</p>
+<ul><li>
+<p><a href="https://github.com/rubinius/rubinius/issues/1693">Rubinius Issue
+#1693</a> String#split gives incorrect output when splitting by /^/</p>
+</li><li>
+<p><a href="https://github.com/rubinius/rubinius/issues/1724">Rubinius Issue
+#1724</a> Creating Struct class with length attribute</p>
+</li></ul>
+
+<h3 id="label-DDBJ+Web+API+related+classes+-28Bio-3A-3ADDBJ-3A-3A-2A-2C+Bio-3A-3ABLAST-3A-3ARemote-3A-3ADDBJ-29">DDBJ Web API related classes (Bio::DDBJ::*, Bio::BLAST::Remote::DDBJ)<span><a href="#label-DDBJ+Web+API+related+classes+-28Bio-3A-3ADDBJ-3A-3A-2A-2C+Bio-3A-3ABLAST-3A-3ARemote-3A-3ADDBJ-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>DDBJ Web API is stopping after their system replacement in March 2012. (See
+the announcement though it is written only in Japanese: <a
+href="http://www.ddbj.nig.ac.jp/replace/rp120601-j.html">www.ddbj.nig.ac.jp/replace/rp120601-j.html</a>)
+Due to the stop of the DDBJ Web API, Bio::DDBJ::* and
+Bio::BLAST::Remote::DDBJ which are using the web API can not be used.</p>
+
+<h3 id="label-SOAP4R+with+Ruby+1.9">SOAP4R with Ruby 1.9<span><a href="#label-SOAP4R+with+Ruby+1.9">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>soap4r-ruby1.9 may raise “ununitialized constant XML::SaxParser” error with
+some combinations of XML parser libraries. It seems this is a bug of
+soap4r-ruby1.9.</p>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

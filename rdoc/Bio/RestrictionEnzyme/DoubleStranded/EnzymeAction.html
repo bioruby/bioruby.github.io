@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::RestrictionEnzyme::DoubleStranded::EnzymeAction - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/darkfish.js"></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../Range/SequenceRange.html">Bio::RestrictionEnzyme::Range::SequenceRange</a>
+  
+</div>
+
+    
+    
+    
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::RestrictionEnzyme::DoubleStranded::EnzymeAction">
+  <h1 id="class-Bio::RestrictionEnzyme::DoubleStranded::EnzymeAction" class="class">
+    class Bio::RestrictionEnzyme::DoubleStranded::EnzymeAction
+  </h1>
+
+  <section class="description">
+    
+<p>An <a href="EnzymeAction.html">EnzymeAction</a> is a way of representing a
+potential effect that a <a
+href="../../RestrictionEnzyme.html">RestrictionEnzyme</a> may have on a
+nucleotide sequence, an &#39;action&#39;.</p>
+
+<p>Multiple cuts in multiple locations on a sequence may occur in one
+&#39;action&#39; if it is done by a single enzyme.</p>
+
+<p>An <a href="EnzymeAction.html">EnzymeAction</a> is a series of locations
+that represents where the restriction enzyme will bind on the sequence, as
+well as what ranges are cut on the sequence itself.  The complexity is due
+to the fact that our virtual restriction enzyme may create multiple
+segments from its cutting action,  on which another restriction enzyme may
+operate upon.</p>
+
+<p>For example, the DNA sequence:</p>
+
+<pre>5&#39; - G A A T A A A C G A - 3&#39;
+3&#39; - C T T A T T T G C T - 5&#39;</pre>
+
+<p>When mixed with the restriction enzyme with the following cut pattern:</p>
+
+<pre>5&#39; -   A|A T A A A C|G   - 3&#39;
+        +-+         +  
+3&#39; -   T T|A T T T G|C   - 5&#39;</pre>
+
+<p>And also mixed with the restriction enzyme of the following cut pattern:</p>
+
+<pre>5&#39; -         A A|A C     - 3&#39;
+              +-+  
+3&#39; -         T|T T G     - 5&#39;</pre>
+
+<p>Would result in a DNA sequence with these cuts:</p>
+
+<pre>5&#39; - G A|A T A A|A C|G A - 3&#39;
+        +-+   +-+   +
+3&#39; - C T T|A T|T T G|C T - 5&#39;</pre>
+
+<p>Or these separate “free-floating” sequences:</p>
+
+<pre>5&#39; - G A   - 3&#39;
+3&#39; - C T T - 5&#39;
+
+5&#39; - A T A A - 3&#39;
+3&#39; -   A T   - 5&#39;
+
+5&#39; -   A C - 3&#39;
+3&#39; - T T G - 5&#39;
+
+5&#39; - G A - 3&#39;
+3&#39; - C T - 5&#39;</pre>
+
+<p>This would be represented by two EnzymeActions - one for each <a
+href="../../RestrictionEnzyme.html">RestrictionEnzyme</a>.</p>
+
+<p>This is, however, subject to competition.  If the second enzyme reaches the
+target first, the the first enzyme will not be able to find the appropriate
+bind site.</p>
+
+<p>FIXME complete these docs</p>
+
+<p>To initialize an <a href="EnzymeAction.html">EnzymeAction</a> you must
+first instantiate it with the beginning and ending locations of where it
+will operate on a nucleotide sequence.</p>
+
+<p>Next the ranges of cu</p>
+
+<p>An <a href="EnzymeAction.html">EnzymeAction</a> is Defines a single enzyme
+action, in this case being a range that correlates to the DNA sequence that
+may contain it&#39;s own internal cuts.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

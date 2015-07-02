@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::RestrictionEnzyme::Range::SequenceRange - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/darkfish.js"></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-add_cut_range">#add_cut_range</a>
+    
+    <li ><a href="#method-i-add_cut_ranges">#add_cut_ranges</a>
+    
+    <li ><a href="#method-i-add_horizontal_cut_range">#add_horizontal_cut_range</a>
+    
+    <li ><a href="#method-i-create_bins">#create_bins</a>
+    
+    <li ><a href="#method-i-fragments">#fragments</a>
+    
+    <li ><a href="#method-i-setup_new_bin">#setup_new_bin</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::RestrictionEnzyme::Range::SequenceRange">
+  <h1 id="class-Bio::RestrictionEnzyme::Range::SequenceRange" class="class">
+    class Bio::RestrictionEnzyme::Range::SequenceRange
+  </h1>
+
+  <section class="description">
+    
+<p>A defined range over a nucleotide sequence.</p>
+
+<p>This class accomadates having cuts defined on a sequence and returning the
+fragments made by those cuts.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="Bin">Bin
+        
+        <dd><p>A Bio::RestrictionEnzyme::Range::SequenceRange::Bin holds an
+<code>Array</code> of  indexes for the primary and complement strands
+(<code>p</code> and <code>c</code> accessors).</p>
+
+<p>Example hash with <a href="SequenceRange.html#Bin">Bin</a> values:</p>
+
+<pre>{0=&gt;#&lt;struct Bio::RestrictionEnzyme::Range::SequenceRange::Bin c=[0, 1], p=[0]&gt;,
+ 2=&gt;#&lt;struct Bio::RestrictionEnzyme::Range::SequenceRange::Bin c=[], p=[1, 2]&gt;,
+ 3=&gt;#&lt;struct Bio::RestrictionEnzyme::Range::SequenceRange::Bin c=[2, 3], p=[]&gt;,
+ 4=&gt;#&lt;struct Bio::RestrictionEnzyme::Range::SequenceRange::Bin c=[4, 5], p=[3, 4, 5]&gt;}</pre>
+
+<p>Note that the bin cannot be easily stored as a range since there may be
+nucleotides excised in the middle of a range.</p>
+
+<p>TODO: Perhaps store the bins as one-or-many ranges since missing
+nucleotides due to enzyme cutting is a special case.</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-c_left" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">c_left</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Left-most index of complementary strand</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-c_right" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">c_right</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Right-most index of complementary strand</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-cut_ranges" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">cut_ranges</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p><a href="CutRanges.html">CutRanges</a> in this <a
+href="SequenceRange.html">SequenceRange</a></p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-left" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">left</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Left-most index of DNA sequence</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-p_left" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">p_left</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Left-most index of primary strand</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-p_right" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">p_right</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Right-most index of primary strand</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-right" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">right</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Right-most index of DNA sequence</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-size" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">size</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Size of DNA sequence</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">( p_left = nil, p_right = nil, c_left = nil, c_right = nil )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/sequence_range.rb, line 55</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">p_left</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">p_right</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">c_left</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">c_right</span> = <span class="ruby-keyword">nil</span> )
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">p_left</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">c_left</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">p_right</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">c_right</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+  (<span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">p_left</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">p_right</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">p_left</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">p_right</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+  (<span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">c_left</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">c_right</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">c_left</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">c_right</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-ivar">@p_left</span>, <span class="ruby-ivar">@p_right</span>, <span class="ruby-ivar">@c_left</span>, <span class="ruby-ivar">@c_right</span> = <span class="ruby-identifier">p_left</span>, <span class="ruby-identifier">p_right</span>, <span class="ruby-identifier">c_left</span>, <span class="ruby-identifier">c_right</span>
+  <span class="ruby-ivar">@left</span> = [<span class="ruby-identifier">p_left</span>, <span class="ruby-identifier">c_left</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-ivar">@right</span> = [<span class="ruby-identifier">p_right</span>, <span class="ruby-identifier">c_right</span>].<span class="ruby-identifier">compact</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">last</span>
+  <span class="ruby-ivar">@size</span> = (<span class="ruby-ivar">@right</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@left</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@left</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@right</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@cut_ranges</span> = <span class="ruby-constant">CutRanges</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@__fragments_current</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add_cut_range" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_cut_range</span><span
+            class="method-args">( p_cut_left=nil, p_cut_right=nil, c_cut_left=nil, c_cut_right=nil )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If the first object is <a
+href="HorizontalCutRange.html">HorizontalCutRange</a> or <a
+href="VerticalCutRange.html">VerticalCutRange</a>, that is added to the <a
+href="SequenceRange.html">SequenceRange</a>.  Otherwise this method builds
+a <a href="VerticalCutRange.html">VerticalCutRange</a> object and adds it
+to the <a href="SequenceRange.html">SequenceRange</a>.</p>
+
+<p>Note: Cut occurs immediately after the index supplied. For example, a cut
+at &#39;0&#39; would mean a cut occurs between bases 0 and 1.</p>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><code>p_cut_left</code>: (<em>optional</em>) Left-most cut on the primary
+strand <strong>or</strong> a <a href="CutRange.html">CutRange</a> object. 
+<code>nil</code> to skip</p>
+</li><li>
+<p><code>p_cut_right</code>: (<em>optional</em>) Right-most cut on the primary
+strand.  <code>nil</code> to skip</p>
+</li><li>
+<p><code>c_cut_left</code>: (<em>optional</em>) Left-most cut on the
+complementary strand.  <code>nil</code> to skip</p>
+</li><li>
+<p><code>c_cut_right</code>: (<em>optional</em>) Right-most cut on the
+complementary strand.  <code>nil</code> to skip</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>nothing</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="add_cut_range-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/sequence_range.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_cut_range</span>( <span class="ruby-identifier">p_cut_left</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">p_cut_right</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">c_cut_left</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">c_cut_right</span>=<span class="ruby-keyword">nil</span> )
+  <span class="ruby-ivar">@__fragments_current</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">p_cut_left</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">CutRange</span> <span class="ruby-comment"># shortcut</span>
+    <span class="ruby-ivar">@cut_ranges</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">p_cut_left</span>
+  <span class="ruby-keyword">else</span>
+    [<span class="ruby-identifier">p_cut_left</span>, <span class="ruby-identifier">p_cut_right</span>, <span class="ruby-identifier">c_cut_left</span>, <span class="ruby-identifier">c_cut_right</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">raise</span> <span class="ruby-constant">IndexError</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@left</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-ivar">@right</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> }
+    <span class="ruby-ivar">@cut_ranges</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">VerticalCutRange</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">p_cut_left</span>, <span class="ruby-identifier">p_cut_right</span>, <span class="ruby-identifier">c_cut_left</span>, <span class="ruby-identifier">c_cut_right</span> )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-add_cut_ranges" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_cut_ranges</span><span
+            class="method-args">(*cut_ranges)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Add a series of <a href="CutRange.html">CutRange</a> objects
+(HorizontalCutRange or <a
+href="VerticalCutRange.html">VerticalCutRange</a>).</p>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><code>cut_ranges</code>: A series of <a href="CutRange.html">CutRange</a>
+objects</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>nothing</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="add_cut_ranges-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/sequence_range.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_cut_ranges</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">cut_ranges</span>)
+  <span class="ruby-identifier">cut_ranges</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cut_range</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&quot;Not of type CutRange&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cut_range</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">CutRange</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add_cut_range</span>( <span class="ruby-identifier">cut_range</span> )
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-add_horizontal_cut_range" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_horizontal_cut_range</span><span
+            class="method-args">( left, right=left )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Builds a <a href="HorizontalCutRange.html">HorizontalCutRange</a> object
+and adds it to the <a href="SequenceRange.html">SequenceRange</a>.</p>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><code>left</code>: Left-most cut</p>
+</li><li>
+<p><code>right</code>: (<em>optional</em>) Right side - by default this equals
+the left side, default is recommended.</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>nothing</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="add_horizontal_cut_range-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/sequence_range.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_horizontal_cut_range</span>( <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>=<span class="ruby-identifier">left</span> )
+  <span class="ruby-ivar">@__fragments_current</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-ivar">@cut_ranges</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">HorizontalCutRange</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-fragments" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fragments</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Calculates the fragments over this sequence range as defined after using
+the methods <a
+href="SequenceRange.html#method-i-add_cut_range">#add_cut_range</a>, <a
+href="SequenceRange.html#method-i-add_cut_ranges">#add_cut_ranges</a>,
+and/or <a
+href="SequenceRange.html#method-i-add_horizontal_cut_range">#add_horizontal_cut_range</a></p>
+
+<p>Example return value:</p>
+
+<pre>[#&lt;Bio::RestrictionEnzyme::Range::SequenceRange::Fragment:0x277bdc
+  @complement_bin=[0, 1],
+  @primary_bin=[0]&gt;,
+ #&lt;Bio::RestrictionEnzyme::Range::SequenceRange::Fragment:0x277bc8
+  @complement_bin=[],
+  @primary_bin=[1, 2]&gt;,
+ #&lt;Bio::RestrictionEnzyme::Range::SequenceRange::Fragment:0x277bb4
+  @complement_bin=[2, 3],
+  @primary_bin=[]&gt;,
+ #&lt;Bio::RestrictionEnzyme::Range::SequenceRange::Fragment:0x277ba0
+  @complement_bin=[4, 5],
+  @primary_bin=[3, 4, 5]&gt;]</pre>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><em>none</em></p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a
+href="SequenceRange/Fragments.html">Bio::RestrictionEnzyme::Range::SequenceRange::Fragments</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="fragments-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/sequence_range.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">fragments</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@__fragments</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@__fragments_current</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-ivar">@__fragments_current</span> = <span class="ruby-keyword">true</span>
+  
+  <span class="ruby-identifier">num_txt</span> = <span class="ruby-string">&#39;0123456789&#39;</span>
+  <span class="ruby-identifier">num_txt_repeat</span> = (<span class="ruby-identifier">num_txt</span> <span class="ruby-operator">*</span> ( <span class="ruby-ivar">@size</span>.<span class="ruby-identifier">div</span>(<span class="ruby-identifier">num_txt</span>.<span class="ruby-identifier">size</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>))[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-ivar">@size</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]
+  <span class="ruby-identifier">fragments</span> = <span class="ruby-constant">Fragments</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">num_txt_repeat</span>, <span class="ruby-identifier">num_txt_repeat</span>)
+
+  <span class="ruby-identifier">cc</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">RestrictionEnzyme</span><span class="ruby-operator">::</span><span class="ruby-constant">Range</span><span class="ruby-operator">::</span><span class="ruby-constant">SequenceRange</span><span class="ruby-operator">::</span><span class="ruby-constant">CalculatedCuts</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@size</span>)
+  <span class="ruby-identifier">cc</span>.<span class="ruby-identifier">add_cuts_from_cut_ranges</span>(<span class="ruby-ivar">@cut_ranges</span>)
+  <span class="ruby-identifier">cc</span>.<span class="ruby-identifier">remove_incomplete_cuts</span>
+  
+  <span class="ruby-identifier">create_bins</span>(<span class="ruby-identifier">cc</span>).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">bin</span><span class="ruby-operator">|</span> <span class="ruby-identifier">fragments</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Fragment</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">bin</span>.<span class="ruby-identifier">p</span>, <span class="ruby-identifier">bin</span>.<span class="ruby-identifier">c</span> ) }
+  <span class="ruby-ivar">@__fragments</span> = <span class="ruby-identifier">fragments</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">fragments</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-create_bins" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">create_bins</span><span
+            class="method-args">(cc)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Example:</p>
+
+<pre class="ruby"><span class="ruby-identifier">cc</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">RestrictionEnzyme</span><span class="ruby-operator">::</span><span class="ruby-constant">Range</span><span class="ruby-operator">::</span><span class="ruby-constant">SequenceRange</span><span class="ruby-operator">::</span><span class="ruby-constant">CalculatedCuts</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@size</span>)
+<span class="ruby-identifier">cc</span>.<span class="ruby-identifier">add_cuts_from_cut_ranges</span>(<span class="ruby-ivar">@cut_ranges</span>)
+<span class="ruby-identifier">cc</span>.<span class="ruby-identifier">remove_incomplete_cuts</span>
+<span class="ruby-identifier">bins</span> = <span class="ruby-identifier">create_bins</span>(<span class="ruby-identifier">cc</span>)
+</pre>
+
+<p>Example return value:</p>
+
+<pre>{0=&gt;#&lt;struct Bio::RestrictionEnzyme::Range::SequenceRange::Bin c=[0, 1], p=[0]&gt;,
+ 2=&gt;#&lt;struct Bio::RestrictionEnzyme::Range::SequenceRange::Bin c=[], p=[1, 2]&gt;,
+ 3=&gt;#&lt;struct Bio::RestrictionEnzyme::Range::SequenceRange::Bin c=[2, 3], p=[]&gt;,
+ 4=&gt;#&lt;struct Bio::RestrictionEnzyme::Range::SequenceRange::Bin c=[4, 5], p=[3, 4, 5]&gt;}</pre>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><code>cc</code>: <a
+href="SequenceRange/CalculatedCuts.html">Bio::RestrictionEnzyme::Range::SequenceRange::CalculatedCuts</a></p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><code>Hash</code> Keys are unique, values are
+Bio::RestrictionEnzyme::Range::SequenceRange::Bin objects filled with
+indexes of the sequence locations they represent.</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="create_bins-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/sequence_range.rb, line 194</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_bins</span>(<span class="ruby-identifier">cc</span>)
+  <span class="ruby-identifier">p_cut</span> = <span class="ruby-identifier">cc</span>.<span class="ruby-identifier">vc_primary_as_original_class</span>
+  <span class="ruby-identifier">c_cut</span> = <span class="ruby-identifier">cc</span>.<span class="ruby-identifier">vc_complement_as_original_class</span>
+  <span class="ruby-identifier">h_cut</span> = <span class="ruby-identifier">cc</span>.<span class="ruby-identifier">hc_between_strands_as_original_class</span>
+  
+  <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@circular</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@circular</span>
+    <span class="ruby-comment"># NOTE</span>
+    <span class="ruby-comment"># if it&#39;s circular we should start at the beginning of a cut for orientation</span>
+    <span class="ruby-comment"># scan for it, hack off the first set of hcuts and move them to the back</span>
+
+    <span class="ruby-identifier">unique_id</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">p_cut</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-value">-1</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">p_cut</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">-1</span>)
+    <span class="ruby-identifier">c_cut</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-value">-1</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">c_cut</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">-1</span>)
+    <span class="ruby-identifier">unique_id</span> = <span class="ruby-value">-1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">p_bin_id</span> = <span class="ruby-identifier">c_bin_id</span> = <span class="ruby-identifier">unique_id</span>
+  <span class="ruby-identifier">bins</span> = {}
+  <span class="ruby-identifier">setup_new_bin</span>(<span class="ruby-identifier">bins</span>, <span class="ruby-identifier">unique_id</span>)
+
+  <span class="ruby-value">-1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-ivar">@size</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span><span class="ruby-operator">|</span> <span class="ruby-comment"># NOTE - circular, for the future - should &#39;-1&#39; be replace with &#39;unique_id&#39;?</span>
+    
+    <span class="ruby-comment"># if bin_ids are out of sync but the strands are attached</span>
+    <span class="ruby-keyword">if</span> (<span class="ruby-identifier">p_bin_id</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">c_bin_id</span>) <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">h_cut</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">idx</span>)
+      <span class="ruby-identifier">min_id</span>, <span class="ruby-identifier">max_id</span> = [<span class="ruby-identifier">p_bin_id</span>, <span class="ruby-identifier">c_bin_id</span>].<span class="ruby-identifier">sort</span>
+      <span class="ruby-identifier">bins</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">max_id</span>)
+      <span class="ruby-identifier">p_bin_id</span> = <span class="ruby-identifier">c_bin_id</span> = <span class="ruby-identifier">min_id</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">bins</span>[ <span class="ruby-identifier">p_bin_id</span> ].<span class="ruby-identifier">p</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">idx</span>
+    <span class="ruby-identifier">bins</span>[ <span class="ruby-identifier">c_bin_id</span> ].<span class="ruby-identifier">c</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">idx</span>
+    
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">p_cut</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">idx</span>
+      <span class="ruby-identifier">p_bin_id</span> = (<span class="ruby-identifier">unique_id</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>)
+      <span class="ruby-identifier">setup_new_bin</span>(<span class="ruby-identifier">bins</span>, <span class="ruby-identifier">p_bin_id</span>)
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">c_cut</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">idx</span>             <span class="ruby-comment"># repetition</span>
+      <span class="ruby-identifier">c_bin_id</span> = (<span class="ruby-identifier">unique_id</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>)     <span class="ruby-comment"># repetition</span>
+      <span class="ruby-identifier">setup_new_bin</span>(<span class="ruby-identifier">bins</span>, <span class="ruby-identifier">c_bin_id</span>)   <span class="ruby-comment"># repetition</span>
+    <span class="ruby-keyword">end</span>                               <span class="ruby-comment"># repetition</span>
+     
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># Bin &quot;-1&quot; is an easy way to indicate the start of a strand just in case</span>
+  <span class="ruby-comment"># there is a horizontal cut at position 0</span>
+  <span class="ruby-identifier">bins</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-value">-1</span>) <span class="ruby-keyword">unless</span> ((<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@circular</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@circular</span>)
+  <span class="ruby-identifier">bins</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-setup_new_bin" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">setup_new_bin</span><span
+            class="method-args">(bins, bin_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Modifies bins in place by creating a new element with key bin_id and
+initializing the bin.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="setup_new_bin-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/sequence_range.rb, line 247</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">setup_new_bin</span>(<span class="ruby-identifier">bins</span>, <span class="ruby-identifier">bin_id</span>)
+  <span class="ruby-identifier">bins</span>[ <span class="ruby-identifier">bin_id</span> ] = <span class="ruby-constant">Bin</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">bins</span>[ <span class="ruby-identifier">bin_id</span> ].<span class="ruby-identifier">p</span> = <span class="ruby-constant">DenseIntArray</span>[] <span class="ruby-comment">#could be replaced by SortedNumArray[]</span>
+  <span class="ruby-identifier">bins</span>[ <span class="ruby-identifier">bin_id</span> ].<span class="ruby-identifier">c</span> = <span class="ruby-constant">DenseIntArray</span>[] <span class="ruby-comment">#could be replaced by SortedNumArray[] </span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

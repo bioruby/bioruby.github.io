@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::RestrictionEnzyme::SingleStrand::CutLocationsInEnzymeNotation - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../../";
+</script>
+
+<script src="../../../js/jquery.js"></script>
+<script src="../../../js/darkfish.js"></script>
+
+<link href="../../../css/fonts.css" rel="stylesheet">
+<link href="../../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../../table_of_contents.html#pages">Pages</a>
+    <a href="../../../table_of_contents.html#classes">Classes</a>
+    <a href="../../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">Array
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="../CutSymbol.html">Bio::RestrictionEnzyme::CutSymbol</a>
+  
+  
+  </ul>
+</div>
+
+    <div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    
+  
+    <li><a class="extend" href="../CutSymbol.html">Bio::RestrictionEnzyme::CutSymbol</a>
+  
+  
+  </ul>
+</div>
+
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-to_array_index">#to_array_index</a>
+    
+    <li ><a href="#method-i-validate_cut_locations">#validate_cut_locations</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::RestrictionEnzyme::SingleStrand::CutLocationsInEnzymeNotation">
+  <h1 id="class-Bio::RestrictionEnzyme::SingleStrand::CutLocationsInEnzymeNotation" class="class">
+    class Bio::RestrictionEnzyme::SingleStrand::CutLocationsInEnzymeNotation
+  </h1>
+
+  <section class="description">
+    
+<p>Stores the cut location in thier enzyme index notation</p>
+
+<p>May be initialized with a series of cuts or an enzyme pattern marked with
+cut symbols.</p>
+<dl class="rdoc-list note-list"><dt>Enzyme index notation
+<dd>
+<p>1..<em>n</em>, value before 1 is -1</p>
+</dd><dt>example
+<dd><dl class="rdoc-list label-list"><dt>-<a href="-2">3]</a>[-<a href="1">1]</a>[<a href="3">2]</a>[4][5
+<dd></dd></dl>
+</dd></dl>
+
+<p>Negative values are used to indicate when a cut may occur at a specified
+distance before the sequence begins.  This would be padded with &#39;n&#39;
+nucleotides to represent wildcards.</p>
+
+<p>Notes:</p>
+<ul><li>
+<p><code>0</code> is invalid as it does not refer to any index</p>
+</li><li>
+<p><code>nil</code> is not allowed here as it has no meaning</p>
+</li><li>
+<p><code>nil</code> values are kept track of in <a
+href="../DoubleStranded/CutLocations.html">DoubleStranded::CutLocations</a>
+as they need a reference point on the correlating strand.  In  <a
+href="../DoubleStranded/CutLocations.html">DoubleStranded::CutLocations</a>
+<code>nil</code> represents no cut or a partial  digestion.</p>
+</li></ul>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-max" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">max</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Last cut, in enzyme-index notation</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-min" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">min</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>First cut, in enzyme-index notation</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(*a)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Constructor for <a
+href="CutLocationsInEnzymeNotation.html">CutLocationsInEnzymeNotation</a></p>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><code>a</code>: <a href="../../Locations.html">Locations</a> of cuts
+represented as a string with cuts or an array of values</p>
+</li></ul>
+
+<p>Examples:</p>
+<ul><li>
+<p>n^ng^arraxt^n</p>
+</li><li>
+<p>2</p>
+</li><li>
+<p>-1, 5</p>
+</li><li><dl class="rdoc-list label-list"><dt>-1, 5
+<dd></dd></dl>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>nothing</p>
+</dd></dl>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand/cut_locations_in_enzyme_notation.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">a</span>)
+  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">flatten!</span> <span class="ruby-comment"># in case an array was passed as an argument</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">String</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">=~</span> <span class="ruby-identifier">re_cut_symbol</span>
+    <span class="ruby-comment"># Initialize with a cut symbol pattern such as &#39;n^ng^arraxt^n&#39;</span>
+    <span class="ruby-identifier">s</span> = <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
+    <span class="ruby-identifier">a</span> = []
+    <span class="ruby-identifier">i</span> = <span class="ruby-operator">-</span>( <span class="ruby-identifier">s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-identifier">cut_symbol</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{[^n]}</span> )  <span class="ruby-comment"># First character that&#39;s not &#39;n&#39;</span>
+    <span class="ruby-identifier">s</span>.<span class="ruby-identifier">each_byte</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">i</span>; <span class="ruby-keyword">next</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cut_symbol</span>; <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> }
+    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">n</span><span class="ruby-operator">-</span><span class="ruby-value">1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">n</span> } <span class="ruby-comment"># 0 is not a valid enzyme index, decrement from 0 and all negative</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_i</span> } <span class="ruby-comment"># Cut locations are always integers</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">validate_cut_locations</span>( <span class="ruby-identifier">a</span> )
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">a</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sort!</span>
+  <span class="ruby-ivar">@min</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">first</span>
+  <span class="ruby-ivar">@max</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">last</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">freeze</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-to_array_index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_array_index</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Transform the cut locations from enzyme index notation to 0-based index
+notation.</p>
+
+<pre>input -&gt; output
+[  1, 2, 3 ] -&gt; [ 0, 1, 2 ]
+[  1, 3, 5 ] -&gt; [ 0, 2, 4 ]
+[ -1, 1, 2 ] -&gt; [ 0, 1, 2 ]
+[ -2, 1, 3 ] -&gt; [ 0, 2, 4 ]</pre>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><em>none</em></p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><code>Array</code> of cuts in 0-based index notation</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="to_array_index-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand/cut_locations_in_enzyme_notation.rb, line 93</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_array_index</span>
+  <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@min</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@min</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">calc</span> = <span class="ruby-identifier">lambda</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> 
+      <span class="ruby-identifier">n</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">n</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@min</span>.<span class="ruby-identifier">abs</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">calc</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span> }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">calc</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-validate_cut_locations" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">validate_cut_locations</span><span
+            class="method-args">( input_cut_locations )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="validate_cut_locations-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand/cut_locations_in_enzyme_notation.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_cut_locations</span>( <span class="ruby-identifier">input_cut_locations</span> )
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input_cut_locations</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">input_cut_locations</span>.<span class="ruby-identifier">uniq</span>
+    <span class="ruby-identifier">err</span> = <span class="ruby-string">&quot;The cut locations supplied contain duplicate values.  Redundant / undefined meaning.\n&quot;</span>
+    <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;cuts: #{input_cut_locations.inspect}\n&quot;</span>
+    <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;unique: #{input_cut_locations.uniq.inspect}&quot;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">err</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">input_cut_locations</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword">nil</span>)
+    <span class="ruby-identifier">err</span> = <span class="ruby-string">&quot;The cut locations supplied contained a nil.  nil has no index for enzyme notation, alternative meaning is &#39;no cut&#39;.\n&quot;</span>
+    <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;cuts: #{input_cut_locations.inspect}&quot;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">err</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">input_cut_locations</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">0</span>)
+    <span class="ruby-identifier">err</span> = <span class="ruby-string">&quot;The cut locations supplied contained a &#39;0&#39;.  &#39;0&#39; has no index for enzyme notation, alternative meaning is &#39;no cut&#39;.\n&quot;</span>
+    <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;cuts: #{input_cut_locations.inspect}&quot;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">err</span>
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

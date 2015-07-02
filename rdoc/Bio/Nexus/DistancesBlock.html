@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::Nexus::DistancesBlock - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::Nexus::DistancesBlock-label-DESCRIPTION">DESCRIPTION</a>
+    <li><a href="#class-Bio::Nexus::DistancesBlock-label-Example+of+Distances+block-3A">Example of Distances block:</a>
+    <li><a href="#class-Bio::Nexus::DistancesBlock-label-USAGE">USAGE</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="GenericBlock.html">Bio::Nexus::GenericBlock</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-get_matrix">#get_matrix</a>
+    
+    <li ><a href="#method-i-get_number_of_characters">#get_number_of_characters</a>
+    
+    <li ><a href="#method-i-get_number_of_taxa">#get_number_of_taxa</a>
+    
+    <li ><a href="#method-i-get_triangle">#get_triangle</a>
+    
+    <li ><a href="#method-i-set_matrix">#set_matrix</a>
+    
+    <li ><a href="#method-i-set_number_of_characters">#set_number_of_characters</a>
+    
+    <li ><a href="#method-i-set_number_of_taxa">#set_number_of_taxa</a>
+    
+    <li ><a href="#method-i-set_triangle">#set_triangle</a>
+    
+    <li ><a href="#method-i-to_nexus">#to_nexus</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::Nexus::DistancesBlock">
+  <h1 id="class-Bio::Nexus::DistancesBlock" class="class">
+    class Bio::Nexus::DistancesBlock
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Bio::Nexus::DistancesBlock-label-DESCRIPTION">DESCRIPTION<span><a href="#class-Bio::Nexus::DistancesBlock-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p><a href="DistancesBlock.html">Bio::Nexus::DistancesBlock</a> represents a
+distances nexus block.</p>
+
+<h1 id="class-Bio::Nexus::DistancesBlock-label-Example+of+Distances+block-3A">Example of Distances block:<span><a href="#class-Bio::Nexus::DistancesBlock-label-Example+of+Distances+block-3A">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Begin Distances;</p>
+
+<pre>Dimensions nchar=20 ntax=5;
+Format Triangle=Upper;
+Matrix
+ taxon_1 0.0 1.0 2.0 4.0 7.0
+ taxon_2 1.0 0.0 3.0 5.0 8.0
+ taxon_3 3.0 4.0 0.0 6.0 9.0
+ taxon_4 7.0 3.0 1.0 0.0 9.5
+ taxon_5 1.2 1.3 1.4 1.5 0.0;</pre>
+
+<p>End;</p>
+
+<h2 id="class-Bio::Nexus::DistancesBlock-label-USAGE">USAGE<span><a href="#class-Bio::Nexus::DistancesBlock-label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio/db/nexus&#39;</span>
+
+<span class="ruby-comment"># Create a new parser:</span>
+<span class="ruby-identifier">nexus</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Nexus</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">nexus_data_as_string</span> )
+
+<span class="ruby-comment"># Get distances block(s):   </span>
+<span class="ruby-identifier">distances_blocks</span> = <span class="ruby-identifier">nexus</span>.<span class="ruby-identifier">get_distances_blocks</span>
+<span class="ruby-comment"># Get matrix as Bio::Nexus::NexusMatrix object:</span>
+<span class="ruby-identifier">matrix</span> = <span class="ruby-identifier">distances_blocks</span>[ <span class="ruby-value">0</span> ].<span class="ruby-identifier">get_matrix</span>
+<span class="ruby-comment"># Get value (column 0 are names):</span>
+<span class="ruby-identifier">val</span> = <span class="ruby-identifier">matrix</span>.<span class="ruby-identifier">get_value</span>( <span class="ruby-value">1</span>, <span class="ruby-value">5</span> )
+</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="TRIANGLE">TRIANGLE
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">( name )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new <a href="DistancesBlock.html">DistancesBlock</a> object named
+&#39;name&#39;.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>name</em>: <a href="../../String.html">String</a></p>
+</li></ul>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="GenericBlock.html#method-c-new">Bio::Nexus::GenericBlock.new</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 1333</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">name</span> )
+  <span class="ruby-keyword">super</span>( <span class="ruby-identifier">name</span> )        
+  <span class="ruby-ivar">@number_of_taxa</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@number_of_characters</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@triangle</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@matrix</span> = <span class="ruby-constant">NexusMatrix</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-get_matrix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_matrix</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets the matrix.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="NexusMatrix.html">Bio::Nexus::NexusMatrix</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_matrix-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 1392</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_matrix</span>
+  <span class="ruby-ivar">@matrix</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_number_of_characters" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_number_of_characters</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets the “number of characters” property.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Integer</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_number_of_characters-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 1378</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_number_of_characters</span>
+  <span class="ruby-ivar">@number_of_characters</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_number_of_taxa" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_number_of_taxa</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets the “number of taxa” property.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Integer</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_number_of_taxa-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 1371</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_number_of_taxa</span>
+  <span class="ruby-ivar">@number_of_taxa</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_triangle" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_triangle</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets the “triangle” property.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_triangle-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 1385</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_triangle</span>
+  <span class="ruby-ivar">@triangle</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_matrix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_matrix</span><span
+            class="method-args">( matrix )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sets the matrix.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>matrix</em>: <a
+href="NexusMatrix.html">Bio::Nexus::NexusMatrix</a></p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="set_matrix-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 1424</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_matrix</span>( <span class="ruby-identifier">matrix</span> )
+  <span class="ruby-ivar">@matrix</span> = <span class="ruby-identifier">matrix</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_number_of_characters" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_number_of_characters</span><span
+            class="method-args">( number_of_characters )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sets the “number of characters” property.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>number_of_characters</em>: Integer</p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="set_number_of_characters-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 1408</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_number_of_characters</span>( <span class="ruby-identifier">number_of_characters</span> )
+  <span class="ruby-ivar">@number_of_characters</span> = <span class="ruby-identifier">number_of_characters</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_number_of_taxa" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_number_of_taxa</span><span
+            class="method-args">( number_of_taxa )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sets the “number of taxa” property.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>number_of_taxa</em>: Integer</p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="set_number_of_taxa-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 1400</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_number_of_taxa</span>( <span class="ruby-identifier">number_of_taxa</span> )
+  <span class="ruby-ivar">@number_of_taxa</span> = <span class="ruby-identifier">number_of_taxa</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_triangle" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_triangle</span><span
+            class="method-args">( triangle )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Sets the “triangle” property.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>triangle</em>: <a href="../../String.html">String</a></p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="set_triangle-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 1416</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_triangle</span>( <span class="ruby-identifier">triangle</span> )
+  <span class="ruby-ivar">@triangle</span> = <span class="ruby-identifier">triangle</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_nexus" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_nexus</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a <a href="../../String.html">String</a> describing this block as
+nexus formatted data.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="to_nexus-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 1344</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_nexus</span>
+  <span class="ruby-identifier">line_1</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">line_1</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">DIMENSIONS</span>  
+  <span class="ruby-keyword">if</span> ( <span class="ruby-constant">Nexus</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span><span class="ruby-operator">::</span><span class="ruby-identifier">larger_than_zero</span>( <span class="ruby-identifier">get_number_of_taxa</span> ) )
+    <span class="ruby-identifier">line_1</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">&lt;&lt;</span>  <span class="ruby-constant">NTAX</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;=&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_number_of_taxa</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> ( <span class="ruby-constant">Nexus</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span><span class="ruby-operator">::</span><span class="ruby-identifier">larger_than_zero</span>( <span class="ruby-identifier">get_number_of_characters</span> ) )
+    <span class="ruby-identifier">line_1</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">&lt;&lt;</span>  <span class="ruby-constant">NCHAR</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;=&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_number_of_characters</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">line_1</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">DELIMITER</span>
+  
+  <span class="ruby-identifier">line_2</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">line_2</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">FORMAT</span>  
+  <span class="ruby-keyword">if</span> ( <span class="ruby-constant">Nexus</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span><span class="ruby-operator">::</span><span class="ruby-identifier">longer_than_zero</span>( <span class="ruby-identifier">get_triangle</span> ) )
+    <span class="ruby-identifier">line_2</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">TRIANGLE</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;=&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_triangle</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">line_2</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">DELIMITER</span>
+  
+  <span class="ruby-identifier">line_3</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">line_3</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">MATRIX</span> 
+  <span class="ruby-constant">Nexus</span><span class="ruby-operator">::</span><span class="ruby-constant">Util</span><span class="ruby-operator">::</span><span class="ruby-identifier">to_nexus_helper</span>( <span class="ruby-constant">DISTANCES_BLOCK</span>, [ <span class="ruby-identifier">line_1</span>, <span class="ruby-identifier">line_2</span>, <span class="ruby-identifier">line_3</span> ] <span class="ruby-operator">+</span>
+                                <span class="ruby-identifier">get_matrix</span>.<span class="ruby-identifier">to_nexus_row_array</span>( <span class="ruby-string">&quot; &quot;</span> ) )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

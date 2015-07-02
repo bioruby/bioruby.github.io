@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::PhyloXML::Parser - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::PhyloXML::Parser-label-Description">Description</a>
+    <li><a href="#class-Bio::PhyloXML::Parser-label-Requirements">Requirements</a>
+    <li><a href="#class-Bio::PhyloXML::Parser-label-Usage">Usage</a>
+    <li><a href="#class-Bio::PhyloXML::Parser-label-References">References</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">LibXML</span>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-for_io">::for_io</a>
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-c-open">::open</a>
+    
+    <li ><a href="#method-c-open_uri">::open_uri</a>
+    
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    
+    <li ><a href="#method-i-close">#close</a>
+    
+    <li ><a href="#method-i-closed-3F">#closed?</a>
+    
+    <li ><a href="#method-i-each">#each</a>
+    
+    <li ><a href="#method-i-next_tree">#next_tree</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::PhyloXML::Parser">
+  <h1 id="class-Bio::PhyloXML::Parser" class="class">
+    class Bio::PhyloXML::Parser
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Bio::PhyloXML::Parser-label-Description">Description<span><a href="#class-Bio::PhyloXML::Parser-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p><a href="Parser.html">Bio::PhyloXML::Parser</a> is for parsing phyloXML
+format files.</p>
+
+<h2 id="class-Bio::PhyloXML::Parser-label-Requirements">Requirements<span><a href="#class-Bio::PhyloXML::Parser-label-Requirements">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Libxml2 XML parser is required. Install libxml-ruby bindings from <a
+href="http://libxml.rubyforge.org">libxml.rubyforge.org</a> or</p>
+
+<pre>gem install -r libxml-ruby</pre>
+
+<h2 id="class-Bio::PhyloXML::Parser-label-Usage">Usage<span><a href="#class-Bio::PhyloXML::Parser-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre class="ruby"> <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio&#39;</span>
+
+<span class="ruby-comment"># Create new phyloxml parser</span>
+<span class="ruby-identifier">phyloxml</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;example.xml&#39;</span>)
+
+<span class="ruby-comment"># Print the names of all trees in the file</span>
+<span class="ruby-identifier">phyloxml</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tree</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h2 id="class-Bio::PhyloXML::Parser-label-References"><a href="../References.html">References</a><span><a href="#class-Bio::PhyloXML::Parser-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p><a
+href="http://www.phyloxml.org/documentation/version_100/phyloxml.xsd.html">www.phyloxml.org/documentation/version_100/phyloxml.xsd.html</a></p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-other" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">other</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>After parsing all the trees, if there is anything else in other xml format,
+it is saved in this array of <a href="Other.html">PhyloXML::Other</a>
+objects</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-for_io" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">for_io</span><span
+            class="method-args">(io, validate=true)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initializes LibXML::Reader and reads from the IO until it reaches the first
+phylogeny element.</p>
+
+<p>Create a new <a href="Parser.html">Bio::PhyloXML::Parser</a> object.</p>
+
+<pre class="ruby"><span class="ruby-identifier">p</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">for_io</span>(<span class="ruby-identifier">$stdin</span>)
+</pre>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>io</em>: IO object</p>
+</li><li>
+<p>(optional) <em>validate</em>: For IO reader, the “validate” option is
+ignored and no validation is executed.</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="Parser.html">Bio::PhyloXML::Parser</a> object</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="for_io-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_parser.rb, line 218</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">for_io</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">validate</span>=<span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">validate</span>)
+  <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">instance_eval</span> {
+    <span class="ruby-ivar">@reader</span> = <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Reader</span>.<span class="ruby-identifier">io</span>(<span class="ruby-identifier">io</span>,
+                             { <span class="ruby-value">:options</span> =<span class="ruby-operator">&gt;</span>
+                               <span class="ruby-constant">LibXML</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Options</span><span class="ruby-operator">::</span><span class="ruby-constant">NONET</span> })
+    <span class="ruby-identifier">_skip_leader</span>
+  }
+  <span class="ruby-identifier">obj</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(str, validate=true)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initializes LibXML::Reader and reads the PhyloXML-formatted string until it
+reaches the first phylogeny element.</p>
+
+<p>Create a new <a href="Parser.html">Bio::PhyloXML::Parser</a> object.</p>
+
+<pre class="ruby"><span class="ruby-identifier">str</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&quot;./phyloxml_examples.xml&quot;</span>)
+<span class="ruby-identifier">p</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
+</pre>
+
+<p>Deprecated usage: Reads data from a file. &lt;em&gt;str&lt;em&gt; is a
+filename.</p>
+
+<pre class="ruby"><span class="ruby-identifier">p</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;./phyloxml_examples.xml&quot;</span>)
+</pre>
+
+<p>Taking filename is deprecated. Use <a
+href="Parser.html#method-c-open">::open</a>.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>str</em>: PhyloXML-formatted string</p>
+</li><li>
+<p>(optional) <em>validate</em>: Whether to validate the file against schema
+or not. Default value is true.</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="Parser.html">Bio::PhyloXML::Parser</a> object</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_parser.rb, line 318</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">validate</span>=<span class="ruby-keyword">true</span>)
+
+  <span class="ruby-ivar">@other</span> = []
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">str</span>
+
+  <span class="ruby-comment"># For compatibility, if filename-like string is given,</span>
+  <span class="ruby-comment"># treat it as a filename.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-regexp">/[\&lt;\&gt;\r\n]/</span> <span class="ruby-operator">!~</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">and</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">str</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># assume that str is filename</span>
+    <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::PhyloXML::Parser.new(filename) is deprecated. Use Bio::PhyloXML::Parser.open(filename).&quot;</span>
+    <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">_secure_filename</span>(<span class="ruby-identifier">str</span>)
+    <span class="ruby-identifier">_validate</span>(<span class="ruby-value">:file</span>, <span class="ruby-identifier">filename</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">validate</span>
+    <span class="ruby-ivar">@reader</span> = <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Reader</span>.<span class="ruby-identifier">file</span>(<span class="ruby-identifier">filename</span>)
+    <span class="ruby-identifier">_skip_leader</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># initialize for string</span>
+  <span class="ruby-ivar">@reader</span> = <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Reader</span>.<span class="ruby-identifier">string</span>(<span class="ruby-identifier">str</span>,
+                               { <span class="ruby-value">:options</span> =<span class="ruby-operator">&gt;</span>
+                                 <span class="ruby-constant">LibXML</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Options</span><span class="ruby-operator">::</span><span class="ruby-constant">NONET</span> })
+  <span class="ruby-identifier">_skip_leader</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-open" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">open</span><span
+            class="method-args">(filename, validate=true) { |obj| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initializes LibXML::Reader and reads the file until it reaches the first
+phylogeny element.</p>
+
+<p>Example: Create a new <a href="Parser.html">Bio::PhyloXML::Parser</a>
+object.</p>
+
+<pre class="ruby"><span class="ruby-identifier">p</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&quot;./phyloxml_examples.xml&quot;</span>)
+</pre>
+
+<p>If the optional code block is given, <a
+href="../PhyloXML.html">Bio::PhyloXML</a> object is passed to the block as
+an argument. When the block terminates, the <a
+href="../PhyloXML.html">Bio::PhyloXML</a> object is automatically closed,
+and the open method returns the value of the block.</p>
+
+<p>Example: Get the first tree in the file.</p>
+
+<pre class="ruby"><span class="ruby-identifier">tree</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&quot;example.xml&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">px</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">px</span>.<span class="ruby-identifier">next_tree</span>
+<span class="ruby-keyword">end</span>
+</pre>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>filename</em>: Path to the file to parse.</p>
+</li><li>
+<p>(optional) <em>validate</em>: Whether to validate the file against schema
+or not. Default value is true.</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>(without block) <a href="Parser.html">Bio::PhyloXML::Parser</a> object</p>
+</dd><dt><strong>Returns</strong>
+<dd>
+<p>(with block) the value of the block</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="open-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_parser.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">validate</span>=<span class="ruby-keyword">true</span>)
+  <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">validate</span>)
+  <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">instance_eval</span> {
+    <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">_secure_filename</span>(<span class="ruby-identifier">filename</span>)
+    <span class="ruby-identifier">_validate</span>(<span class="ruby-value">:file</span>, <span class="ruby-identifier">filename</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">validate</span>
+    <span class="ruby-comment"># XML::Parser::Options::NONET for security reason</span>
+    <span class="ruby-ivar">@reader</span> = <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Reader</span>.<span class="ruby-identifier">file</span>(<span class="ruby-identifier">filename</span>,
+                               { <span class="ruby-value">:options</span> =<span class="ruby-operator">&gt;</span>
+                                 <span class="ruby-constant">LibXML</span><span class="ruby-operator">::</span><span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span><span class="ruby-operator">::</span><span class="ruby-constant">Options</span><span class="ruby-operator">::</span><span class="ruby-constant">NONET</span> })
+    <span class="ruby-identifier">_skip_leader</span>
+  }
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">obj</span>
+    <span class="ruby-keyword">ensure</span>
+      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">closed?</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">ret</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">obj</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-open_uri" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">open_uri</span><span
+            class="method-args">(uri, validate=true) { |obj| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Initializes LibXML::Reader and reads the file until it reaches the first
+phylogeny element.</p>
+
+<p>Create a new <a href="Parser.html">Bio::PhyloXML::Parser</a> object.</p>
+
+<pre class="ruby"><span class="ruby-identifier">p</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-string">&quot;http://www.phyloxml.org/examples/apaf.xml&quot;</span>)
+</pre>
+
+<p>If the optional code block is given, <a
+href="../PhyloXML.html">Bio::PhyloXML</a> object is passed to the block as
+an argument. When the block terminates, the <a
+href="../PhyloXML.html">Bio::PhyloXML</a> object is automatically closed,
+and the <a href="Parser.html#method-c-open_uri">::open_uri</a> method
+returns the value of the block.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>uri</em>: (URI or <a href="../../String.html">String</a>)
+URI to the data to parse</p>
+</li><li>
+<p>(optional) <em>validate</em>: For URI reader, the “validate” option is
+ignored and no validation is executed.</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>(without block) <a href="Parser.html">Bio::PhyloXML::Parser</a> object</p>
+</dd><dt><strong>Returns</strong>
+<dd>
+<p>(with block) the value of the block</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="open_uri-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_parser.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-identifier">validate</span>=<span class="ruby-keyword">true</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">uri</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">URI</span>
+    <span class="ruby-identifier">uri</span> = <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># raises error if not a String</span>
+    <span class="ruby-identifier">uri</span> = <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">to_str</span>
+    <span class="ruby-comment"># raises error if invalid URI</span>
+    <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">uri</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">validate</span>)
+  <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">instance_eval</span> {
+    <span class="ruby-ivar">@reader</span> = <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Reader</span>.<span class="ruby-identifier">file</span>(<span class="ruby-identifier">uri</span>)
+    <span class="ruby-identifier">_skip_leader</span>
+  }
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">obj</span>
+    <span class="ruby-keyword">ensure</span>
+      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">close</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">obj</span>.<span class="ruby-identifier">closed?</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">ret</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">obj</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-5B-5D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">[]</span><span
+            class="method-args">(i)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Access the specified tree in the file. It parses trees until the specified
+tree is reached.</p>
+
+<pre class="ruby"><span class="ruby-comment"># Get 3rd tree in the file (starts counting from 0).</span>
+<span class="ruby-identifier">parser</span> = <span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;phyloxml_examples.xml&#39;</span>)
+<span class="ruby-identifier">tree</span> = <span class="ruby-identifier">parser</span>[<span class="ruby-value">2</span>]
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_parser.rb, line 364</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">i</span>)
+  <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>
+  (<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
+   <span class="ruby-identifier">tree</span> =  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">next_tree</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">tree</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-close" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">close</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Closes the LibXML::Reader inside the object. It also closes the opened file
+if it is created by using <a href="Parser.html#method-c-open">::open</a>
+method.</p>
+
+<p>When closed object is closed again, or closed object is used, it raises
+LibXML::XML::Error.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>nil</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="close-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_parser.rb, line 188</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">close</span>
+  <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-ivar">@reader</span> = <span class="ruby-constant">ClosedPhyloXMLParser</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-closed-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">closed?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If the object is closed by using the close method or equivalent, returns
+true. Otherwise, returns false.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>true or false</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="closed-3F-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_parser.rb, line 198</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">closed?</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">ClosedPhyloXMLParser</span>) <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each</span><span
+            class="method-args">() { |tree| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterate through all trees in the file.</p>
+
+<pre class="ruby"><span class="ruby-identifier">phyloxml</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;example.xml&#39;</span>)
+<span class="ruby-identifier">phyloxml</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tree</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="each-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_parser.rb, line 351</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">tree</span> = <span class="ruby-identifier">next_tree</span>
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">tree</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-next_tree" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">next_tree</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parse and return the next phylogeny tree. If there are no more phylogeny
+element, nil is returned. If there is something else besides phylogeny
+elements, it is saved in the <a
+href="Parser.html#attribute-i-other">#other</a>.</p>
+
+<pre class="ruby"><span class="ruby-identifier">p</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&quot;./phyloxml_examples.xml&quot;</span>)
+<span class="ruby-identifier">tree</span> = <span class="ruby-identifier">p</span>.<span class="ruby-identifier">next_tree</span>
+</pre>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="Tree.html">Bio::PhyloXML::Tree</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="next_tree-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/phyloxml/phyloxml_parser.rb, line 381</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">next_tree</span>()
+
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">is_element?</span>(<span class="ruby-string">&#39;phylogeny&#39;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">node_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Reader</span><span class="ruby-operator">::</span><span class="ruby-constant">TYPE_END_ELEMENT</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_end_element?</span>(<span class="ruby-string">&#39;phyloxml&#39;</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">read</span>
+        <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">read</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_end_element?</span>(<span class="ruby-string">&#39;phyloxml&#39;</span>)
+          <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>        
+    <span class="ruby-comment"># phyloxml can hold only phylogeny and &quot;other&quot; elements. If this is not</span>
+    <span class="ruby-comment"># phylogeny element then it is other. Also, &quot;other&quot; always comes after</span>
+    <span class="ruby-comment"># all phylogenies        </span>
+    <span class="ruby-ivar">@other</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">parse_other</span>        
+    <span class="ruby-comment">#return nil for tree, since this is not valid phyloxml tree.</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">tree</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Tree</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-comment"># keep track of current node in clades array/stack. Current node is the</span>
+  <span class="ruby-comment"># last element in the clades array</span>
+  <span class="ruby-identifier">clades</span> = []
+  <span class="ruby-identifier">clades</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">tree</span>
+  
+  <span class="ruby-comment">#keep track of current edge to be able to parse branch_length tag</span>
+  <span class="ruby-identifier">current_edge</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-comment"># we are going to parse clade iteratively by pointing (and changing) to</span>
+  <span class="ruby-comment"># the current node in the tree. Since the property element is both in</span>
+  <span class="ruby-comment"># clade and in the phylogeny, we need some boolean to know if we are</span>
+  <span class="ruby-comment"># parsing the clade (there can be only max 1 clade in phylogeny) or</span>
+  <span class="ruby-comment"># parsing phylogeny</span>
+  <span class="ruby-identifier">parsing_clade</span> = <span class="ruby-keyword">false</span>
+
+  <span class="ruby-keyword">while</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">is_end_element?</span>(<span class="ruby-string">&#39;phylogeny&#39;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_end_element?</span>(<span class="ruby-string">&#39;phyloxml&#39;</span>)
+    
+    <span class="ruby-comment"># parse phylogeny elements, except clade</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">parsing_clade</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_element?</span>(<span class="ruby-string">&#39;phylogeny&#39;</span>)
+        <span class="ruby-ivar">@reader</span>[<span class="ruby-string">&quot;rooted&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">rooted</span> = <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">rooted</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-ivar">@reader</span>[<span class="ruby-string">&quot;rerootable&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;true&quot;</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">rerootable</span> = <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">rerootable</span> = <span class="ruby-keyword">false</span>
+        <span class="ruby-identifier">parse_attributes</span>(<span class="ruby-identifier">tree</span>, [<span class="ruby-string">&quot;branch_length_unit&quot;</span>, <span class="ruby-string">&#39;type&#39;</span>])
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">parse_simple_elements</span>(<span class="ruby-identifier">tree</span>, [ <span class="ruby-string">&quot;name&quot;</span>, <span class="ruby-string">&#39;description&#39;</span>, <span class="ruby-string">&quot;date&quot;</span>])
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_element?</span>(<span class="ruby-string">&#39;confidence&#39;</span>)
+        <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">confidences</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">parse_confidence</span>
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">node_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Reader</span><span class="ruby-operator">::</span><span class="ruby-constant">TYPE_ELEMENT</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">name</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;clade&#39;</span>
+        <span class="ruby-comment">#parse clade element</span>
+
+        <span class="ruby-identifier">parsing_clade</span> = <span class="ruby-keyword">true</span>
+
+        <span class="ruby-identifier">node</span>= <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PhyloXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Node</span>.<span class="ruby-identifier">new</span>
+
+        <span class="ruby-identifier">branch_length</span> = <span class="ruby-ivar">@reader</span>[<span class="ruby-string">&#39;branch_length&#39;</span>]
+
+        <span class="ruby-identifier">parse_attributes</span>(<span class="ruby-identifier">node</span>, [<span class="ruby-string">&quot;id_source&quot;</span>])
+
+        <span class="ruby-comment">#add new node to the tree</span>
+        <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">add_node</span>(<span class="ruby-identifier">node</span>)
+        <span class="ruby-comment"># The first clade will always be root since by xsd schema phyloxml can</span>
+        <span class="ruby-comment"># have 0 to 1 clades in it.</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">root</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+          <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">root</span> = <span class="ruby-identifier">node</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">current_edge</span> = <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">add_edge</span>(<span class="ruby-identifier">clades</span>[<span class="ruby-value">-1</span>], <span class="ruby-identifier">node</span>,
+                                       <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Tree</span><span class="ruby-operator">::</span><span class="ruby-constant">Edge</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">branch_length</span>))
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">clades</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">node</span>
+        <span class="ruby-comment">#end if clade element</span>
+      <span class="ruby-keyword">else</span>
+       <span class="ruby-identifier">parse_clade_elements</span>(<span class="ruby-identifier">clades</span>[<span class="ruby-value">-1</span>], <span class="ruby-identifier">current_edge</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">parsing_clade</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment">#end clade element, go one parent up</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_end_element?</span>(<span class="ruby-string">&#39;clade&#39;</span>)
+
+       <span class="ruby-comment">#if we have reached the closing tag of the top-most clade, then our</span>
+      <span class="ruby-comment"># curent node should point to the root, If thats the case, we are done</span>
+      <span class="ruby-comment"># parsing the clade element</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">clades</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">root</span>
+        <span class="ruby-identifier">parsing_clade</span> = <span class="ruby-keyword">false</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment"># set current node (clades[-1) to the previous clade in the array</span>
+        <span class="ruby-identifier">clades</span>.<span class="ruby-identifier">pop</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>          
+
+    <span class="ruby-comment">#parsing phylogeny elements</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">parsing_clade</span>
+
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">node_type</span> <span class="ruby-operator">==</span> <span class="ruby-constant">XML</span><span class="ruby-operator">::</span><span class="ruby-constant">Reader</span><span class="ruby-operator">::</span><span class="ruby-constant">TYPE_ELEMENT</span>
+        <span class="ruby-keyword">case</span> <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">name</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;property&#39;</span>
+          <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">properties</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">parse_property</span>
+
+        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;clade_relation&#39;</span>
+          <span class="ruby-identifier">clade_relation</span> = <span class="ruby-constant">CladeRelation</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-identifier">parse_attributes</span>(<span class="ruby-identifier">clade_relation</span>, [<span class="ruby-string">&quot;id_ref_0&quot;</span>, <span class="ruby-string">&quot;id_ref_1&quot;</span>, <span class="ruby-string">&quot;distance&quot;</span>, <span class="ruby-string">&quot;type&quot;</span>])
+
+          <span class="ruby-comment">#@ add unit test for this</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">empty_element?</span>
+            <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">read</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_element?</span>(<span class="ruby-string">&#39;confidence&#39;</span>)
+              <span class="ruby-identifier">clade_relation</span>.<span class="ruby-identifier">confidence</span> = <span class="ruby-identifier">parse_confidence</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">clade_relations</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">clade_relation</span>
+
+        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;sequence_relation&#39;</span>
+          <span class="ruby-identifier">sequence_relation</span> = <span class="ruby-constant">SequenceRelation</span>.<span class="ruby-identifier">new</span>
+          <span class="ruby-identifier">parse_attributes</span>(<span class="ruby-identifier">sequence_relation</span>, [<span class="ruby-string">&quot;id_ref_0&quot;</span>, <span class="ruby-string">&quot;id_ref_1&quot;</span>, <span class="ruby-string">&quot;distance&quot;</span>, <span class="ruby-string">&quot;type&quot;</span>])
+          <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">empty_element?</span>
+            <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">read</span>
+            <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_element?</span>(<span class="ruby-string">&#39;confidence&#39;</span>)
+              <span class="ruby-identifier">sequence_relation</span>.<span class="ruby-identifier">confidence</span> = <span class="ruby-identifier">parse_confidence</span>
+            <span class="ruby-keyword">end</span>
+          <span class="ruby-keyword">end</span>
+          <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">sequence_relations</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sequence_relation</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;phylogeny&#39;</span>
+          <span class="ruby-comment">#do nothing</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">other</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">parse_other</span>
+          <span class="ruby-comment">#puts &quot;Not recognized element. #{@reader.name}&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-comment"># go to next element        </span>
+    <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">read</span>    
+  <span class="ruby-keyword">end</span> <span class="ruby-comment">#end while not &lt;/phylogeny&gt;</span>
+  <span class="ruby-comment">#move on to the next tag after /phylogeny which is text, since phylogeny</span>
+  <span class="ruby-comment">#end tag is empty element, which value is nil, therefore need to move to</span>
+  <span class="ruby-comment">#the next meaningful element (therefore @reader.read twice)</span>
+  <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">read</span> 
+  <span class="ruby-ivar">@reader</span>.<span class="ruby-identifier">read</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">tree</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

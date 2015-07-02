@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::KEGG::Keggtab - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::KEGG::Keggtab-label-Description">Description</a>
+    <li><a href="#class-Bio::KEGG::Keggtab-label-References">References</a>
+    <li><a href="#class-Bio::KEGG::Keggtab-label-Format">Format</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-alias_list">#alias_list</a>
+    
+    <li ><a href="#method-i-aliases">#aliases</a>
+    
+    <li ><a href="#method-i-child_nodes">#child_nodes</a>
+    
+    <li ><a href="#method-i-database">#database</a>
+    
+    <li ><a href="#method-i-db_by_abbrev">#db_by_abbrev</a>
+    
+    <li ><a href="#method-i-db_path">#db_path</a>
+    
+    <li ><a href="#method-i-db_path_by_abbrev">#db_path_by_abbrev</a>
+    
+    <li ><a href="#method-i-keggorg2taxo">#keggorg2taxo</a>
+    
+    <li ><a href="#method-i-keggorg2taxonomy">#keggorg2taxonomy</a>
+    
+    <li ><a href="#method-i-korg2taxo">#korg2taxo</a>
+    
+    <li ><a href="#method-i-korg2taxonomy">#korg2taxonomy</a>
+    
+    <li ><a href="#method-i-name">#name</a>
+    
+    <li ><a href="#method-i-name_by_abbrev">#name_by_abbrev</a>
+    
+    <li ><a href="#method-i-path">#path</a>
+    
+    <li ><a href="#method-i-taxa_list">#taxa_list</a>
+    
+    <li ><a href="#method-i-taxo2keggorgs">#taxo2keggorgs</a>
+    
+    <li ><a href="#method-i-taxo2korgs">#taxo2korgs</a>
+    
+    <li ><a href="#method-i-taxon2keggorgs">#taxon2keggorgs</a>
+    
+    <li ><a href="#method-i-taxon2korgs">#taxon2korgs</a>
+    
+    <li ><a href="#method-i-taxonomy">#taxonomy</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::KEGG::Keggtab">
+  <h1 id="class-Bio::KEGG::Keggtab" class="class">
+    class Bio::KEGG::Keggtab
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Bio::KEGG::Keggtab-label-Description">Description<span><a href="#class-Bio::KEGG::Keggtab-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Parse &#39;keggtab&#39; <a href="../KEGG.html">KEGG</a> database definition
+file which also includes Taxonomic category of the <a
+href="../KEGG.html">KEGG</a> organisms.</p>
+
+<h2 id="class-Bio::KEGG::Keggtab-label-References"><a href="../References.html">References</a><span><a href="#class-Bio::KEGG::Keggtab-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The &#39;keggtab&#39; file is included in</p>
+<ul><li>
+<p><a
+href="ftp://ftp.genome.jp/pub/kegg/tarfiles/genes.tar.gz">ftp.genome.jp/pub/kegg/tarfiles/genes.tar.gz</a></p>
+</li><li>
+<p><a
+href="ftp://ftp.genome.jp/pub/kegg/tarfiles/genes.weekly.last.tar.Z">ftp.genome.jp/pub/kegg/tarfiles/genes.weekly.last.tar.Z</a></p>
+</li></ul>
+
+<h2 id="class-Bio::KEGG::Keggtab-label-Format">Format<span><a href="#class-Bio::KEGG::Keggtab-label-Format">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>File format is something like</p>
+
+<pre># KEGGTAB
+#
+# name            type            directory                    abbreviation
+#
+enzyme            enzyme          $BIOROOT/db/ideas/ligand     ec
+ec                alias           enzyme
+(snip)
+# Human
+h.sapiens         genes           $BIOROOT/db/kegg/genes       hsa
+H.sapiens         alias           h.sapiens
+hsa               alias           h.sapiens
+(snip)
+#
+# Taxonomy
+#
+(snip)
+animals           alias           hsa+mmu+rno+dre+dme+cel
+eukaryotes        alias           animals+plants+protists+fungi
+genes             alias           eubacteria+archaea+eukaryotes</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-bioroot" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">bioroot</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Returns a string of the BIOROOT path prefix.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-db_names" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">db_names</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(file_path, bioroot = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Path for keggtab file and optionally set bioroot top directory.
+Environmental variable BIOROOT overrides bioroot.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">file_path</span>, <span class="ruby-identifier">bioroot</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@bioroot</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;BIOROOT&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">bioroot</span>
+  <span class="ruby-ivar">@db_names</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@database</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@taxonomy</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file_path</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">parse_keggtab</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">read</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-alias_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alias_list</span><span
+            class="method-args">(db_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>deprecated</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alias_list-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alias_list</span>(<span class="ruby-identifier">db_name</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@db_names</span>[<span class="ruby-identifier">db_name</span>]
+    <span class="ruby-ivar">@db_names</span>[<span class="ruby-identifier">db_name</span>].<span class="ruby-identifier">aliases</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-aliases" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">aliases</span><span
+            class="method-args">(db_abbrev)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an Array containing all alias names for the database. (e.g.
+&#39;hsa&#39; -&gt; [“H.sapiens”, “hsa”], &#39;hpj&#39; -&gt;
+[“H.pylori_J99”, “hpj”])</p>
+          
+          
+
+          
+          <div class="method-source-code" id="aliases-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">aliases</span>(<span class="ruby-identifier">db_abbrev</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
+    <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>].<span class="ruby-identifier">aliases</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-child_nodes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">child_nodes</span><span
+            class="method-args">(node = 'genes')</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="child_nodes-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 196</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">child_nodes</span>(<span class="ruby-identifier">node</span> = <span class="ruby-string">&#39;genes&#39;</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-database" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">database</span><span
+            class="method-args">(db_abbrev = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a hash containing <a href="Keggtab/DB.html">DB</a> definition
+section of the keggtab file. If database name is given as an argument,
+returns a <a href="Keggtab/DB.html">Keggtab::DB</a> object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="database-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">database</span>(<span class="ruby-identifier">db_abbrev</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">db_abbrev</span>
+    <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@database</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-db_by_abbrev" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">db_by_abbrev</span><span
+            class="method-args">(db_abbrev)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>deprecated</p>
+          
+          
+
+          
+          <div class="method-source-code" id="db_by_abbrev-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">db_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
+  <span class="ruby-ivar">@db_names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">db</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">db</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">abbrev</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">db_abbrev</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-db_path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">db_path</span><span
+            class="method-args">(db_name)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>deprecated</p>
+          
+          
+
+          
+          <div class="method-source-code" id="db_path-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">db_path</span>(<span class="ruby-identifier">db_name</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bioroot</span>
+    <span class="ruby-node">&quot;#{@db_names[db_name].path.sub(/\$BIOROOT/,@bioroot)}/#{db_name}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-node">&quot;#{@db_names[db_name].path}/#{db_name}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-db_path_by_abbrev" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">db_path_by_abbrev</span><span
+            class="method-args">(db_abbrev)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>deprecated</p>
+          
+          
+
+          
+          <div class="method-source-code" id="db_path_by_abbrev-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">db_path_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
+  <span class="ruby-identifier">db_name</span> = <span class="ruby-identifier">name_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
+  <span class="ruby-identifier">db_path</span>(<span class="ruby-identifier">db_name</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-keggorg2taxo" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">keggorg2taxo</span><span
+            class="method-args">(keggorg)</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Keggtab.html#method-i-korg2taxo">korg2taxo</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-keggorg2taxonomy" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">keggorg2taxonomy</span><span
+            class="method-args">(keggorg)</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Keggtab.html#method-i-korg2taxo">korg2taxo</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-korg2taxo" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">korg2taxo</span><span
+            class="method-args">(keggorg)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array of taxonomy names the organism belongs. (e.g.
+&#39;eco&#39; -&gt;
+[&#39;proteogamma&#39;,&#39;proteobacteria&#39;,&#39;eubacteria&#39;,&#39;genes&#39;])
+This method has aliases as keggorg2taxo, korg2taxonomy, keggorg2taxonomy.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="korg2taxo-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 225</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">korg2taxo</span>(<span class="ruby-identifier">keggorg</span>)
+  <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">traverse</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">keggorg</span><span class="ruby-operator">|</span>
+    <span class="ruby-ivar">@taxonomy</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">keggorg</span>)
+        <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">k</span>)
+        <span class="ruby-identifier">traverse</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">k</span>)
+        <span class="ruby-keyword">break</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  }
+  <span class="ruby-identifier">traverse</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">keggorg</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">tmp</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Keggtab.html#method-i-keggorg2taxo">keggorg2taxo</a>, <a href="Keggtab.html#method-i-korg2taxonomy">korg2taxonomy</a>, <a href="Keggtab.html#method-i-keggorg2taxonomy">keggorg2taxonomy</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-korg2taxonomy" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">korg2taxonomy</span><span
+            class="method-args">(keggorg)</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Keggtab.html#method-i-korg2taxo">korg2taxo</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">name</span><span
+            class="method-args">(db_abbrev)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a canonical database name for the abbreviation. (e.g. &#39;ec&#39;
+-&gt; &#39;enzyme&#39;,  &#39;hsa&#39; -&gt; &#39;h.sapies&#39;, …)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="name-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>(<span class="ruby-identifier">db_abbrev</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
+    <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>].<span class="ruby-identifier">name</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-name_by_abbrev" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">name_by_abbrev</span><span
+            class="method-args">(db_abbrev)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>deprecated</p>
+          
+          
+
+          
+          <div class="method-source-code" id="name_by_abbrev-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">name_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
+  <span class="ruby-identifier">db_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>).<span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-path" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">path</span><span
+            class="method-args">(db_abbrev)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an absolute path for the flat file database. (e.g.
+&#39;/bio/db/kegg/genes&#39;, …)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="path-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">path</span>(<span class="ruby-identifier">db_abbrev</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
+    <span class="ruby-identifier">file</span> = <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>].<span class="ruby-identifier">name</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bioroot</span>
+      <span class="ruby-node">&quot;#{@database[db_abbrev].path.sub(/\$BIOROOT/,@bioroot)}/#{file}&quot;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-node">&quot;#{@database[db_abbrev].path}/#{file}&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-taxa_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taxa_list</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>List of all node labels from <a href="../Taxonomy.html">Taxonomy</a>
+section. (e.g. [“actinobacteria”, “animals”, “archaea”, “bacillales”, …)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="taxa_list-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taxa_list</span>
+  <span class="ruby-ivar">@taxonomy</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-taxo2keggorgs" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">taxo2keggorgs</span><span
+            class="method-args">(node = 'genes')</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Keggtab.html#method-i-taxo2korgs">taxo2korgs</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-taxo2korgs" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taxo2korgs</span><span
+            class="method-args">(node = 'genes')</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array of organism names included in the specified taxon label.
+(e.g. &#39;proteobeta&#39; -&gt; [“nme”, “nma”, “rso”]) This method has
+taxo2keggorgs, taxon2korgs, and taxon2keggorgs aliases.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="taxo2korgs-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taxo2korgs</span>(<span class="ruby-identifier">node</span> = <span class="ruby-string">&#39;genes&#39;</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">node</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>]
+      <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">taxo2korgs</span>(<span class="ruby-identifier">x</span>))
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">tmp</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Keggtab.html#method-i-taxo2keggorgs">taxo2keggorgs</a>, <a href="Keggtab.html#method-i-taxon2korgs">taxon2korgs</a>, <a href="Keggtab.html#method-i-taxon2keggorgs">taxon2keggorgs</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-taxon2keggorgs" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">taxon2keggorgs</span><span
+            class="method-args">(node = 'genes')</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Keggtab.html#method-i-taxo2korgs">taxo2korgs</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-taxon2korgs" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">taxon2korgs</span><span
+            class="method-args">(node = 'genes')</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Keggtab.html#method-i-taxo2korgs">taxo2korgs</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-taxonomy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">taxonomy</span><span
+            class="method-args">(node = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a hash containing <a href="../Taxonomy.html">Taxonomy</a> section
+of the keggtab file. If argument is given, returns a List of all child
+nodes belongs to the label node. (e.g. “eukaryotes” -&gt; [“animals”,
+“plants”, “protists”, “fungi”], …)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="taxonomy-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">taxonomy</span>(<span class="ruby-identifier">node</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span>
+    <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@taxonomy</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

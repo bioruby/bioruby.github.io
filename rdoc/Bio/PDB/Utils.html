@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Bio::PDB::Utils - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-acos">::acos</a>
+    
+    <li ><a href="#method-c-calculatePlane">::calculatePlane</a>
+    
+    <li ><a href="#method-c-convert_to_xyz">::convert_to_xyz</a>
+    
+    <li ><a href="#method-c-dihedral_angle">::dihedral_angle</a>
+    
+    <li ><a href="#method-c-distance">::distance</a>
+    
+    <li ><a href="#method-c-rad2deg">::rad2deg</a>
+    
+    <li ><a href="#method-c-to_xyz">::to_xyz</a>
+    
+    <li ><a href="#method-i-centreOfGravity">#centreOfGravity</a>
+    
+    <li ><a href="#method-i-finder">#finder</a>
+    
+    <li ><a href="#method-i-geometricCentre">#geometricCentre</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Bio::PDB::Utils">
+  <h1 id="module-Bio::PDB::Utils" class="module">
+    module Bio::PDB::Utils
+  </h1>
+
+  <section class="description">
+    
+<p>Utility methods for <a href="../PDB.html">PDB</a> data. The methods in this
+mixin should be applicalbe to all <a href="../PDB.html">PDB</a> objects.</p>
+
+<p><a href="Utils.html">Bio::PDB::Utils</a> is included by <a
+href="../PDB.html">Bio::PDB</a>, <a href="Model.html">Bio::PDB::Model</a>,
+<a href="Chain.html">Bio::PDB::Chain</a>, <a
+href="Residue.html">Bio::PDB::Residue</a>, and <a
+href="Heterogen.html">Bio::PDB::Heterogen</a> classes.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="ElementMass">ElementMass
+        
+        <dd><p>Returns the coords of the centre of gravity for any <a
+href="AtomFinder.html">AtomFinder</a> implementing object Blleurgh! -
+working out what element it is from the atom name is tricky - this&#39;ll
+work in most cases but not metals etc… a proper element field is included
+in some <a href="../PDB.html">PDB</a> files but not all.</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-acos" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">acos</span><span
+            class="method-args">(x)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>acos</p>
+          
+          
+
+          
+          <div class="method-source-code" id="acos-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 168</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">acos</span>(<span class="ruby-identifier">x</span>)
+  <span class="ruby-constant">Math</span>.<span class="ruby-identifier">atan2</span>(<span class="ruby-constant">Math</span>.<span class="ruby-identifier">sqrt</span>(<span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span><span class="ruby-operator">**</span><span class="ruby-value">2</span>),<span class="ruby-identifier">x</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-calculatePlane" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">calculatePlane</span><span
+            class="method-args">(coord1, coord2, coord3)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>calculates plane</p>
+          
+          
+
+          
+          <div class="method-source-code" id="calculatePlane-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">calculatePlane</span>(<span class="ruby-identifier">coord1</span>, <span class="ruby-identifier">coord2</span>, <span class="ruby-identifier">coord3</span>)
+  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">z</span>) <span class="ruby-operator">+</span>
+      <span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">z</span>) <span class="ruby-operator">+</span> 
+      <span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">z</span>)
+  <span class="ruby-identifier">b</span> = <span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">x</span>) <span class="ruby-operator">+</span>
+      <span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">x</span>) <span class="ruby-operator">+</span> 
+      <span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">x</span>)
+  <span class="ruby-identifier">c</span> = <span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">y</span>) <span class="ruby-operator">+</span>
+      <span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">y</span>) <span class="ruby-operator">+</span> 
+      <span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">y</span>)
+  <span class="ruby-identifier">d</span> = <span class="ruby-value">-1</span> <span class="ruby-operator">*</span>
+      (
+       (<span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">z</span>)) <span class="ruby-operator">+</span>
+       (<span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">z</span>)) <span class="ruby-operator">+</span>
+       (<span class="ruby-identifier">coord3</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord2</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">coord1</span>.<span class="ruby-identifier">z</span>))
+       )
+
+  <span class="ruby-keyword">return</span> [<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>,<span class="ruby-identifier">c</span>,<span class="ruby-identifier">d</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-convert_to_xyz" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">convert_to_xyz</span><span
+            class="method-args">(obj)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Implicit conversion into Vector or <a
+href="Coordinate.html">Bio::PDB::Coordinate</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="convert_to_xyz-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 139</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_to_xyz</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Vector</span>)
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">xyz</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
+      <span class="ruby-identifier">obj</span> = <span class="ruby-constant">Vector</span>.<span class="ruby-identifier">elements</span>(<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_a</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">obj</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-dihedral_angle" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dihedral_angle</span><span
+            class="method-args">(coord1, coord2, coord3, coord4)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Calculates dihedral angle.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="dihedral_angle-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dihedral_angle</span>(<span class="ruby-identifier">coord1</span>, <span class="ruby-identifier">coord2</span>, <span class="ruby-identifier">coord3</span>, <span class="ruby-identifier">coord4</span>)
+  (<span class="ruby-identifier">a1</span>,<span class="ruby-identifier">b1</span>,<span class="ruby-identifier">c1</span>,<span class="ruby-identifier">d</span>) = <span class="ruby-identifier">calculatePlane</span>(<span class="ruby-identifier">coord1</span>,<span class="ruby-identifier">coord2</span>,<span class="ruby-identifier">coord3</span>)
+  (<span class="ruby-identifier">a2</span>,<span class="ruby-identifier">b2</span>,<span class="ruby-identifier">c2</span>)   = <span class="ruby-identifier">calculatePlane</span>(<span class="ruby-identifier">coord2</span>,<span class="ruby-identifier">coord3</span>,<span class="ruby-identifier">coord4</span>)
+  
+  <span class="ruby-identifier">torsion</span> = <span class="ruby-identifier">acos</span>((<span class="ruby-identifier">a1</span><span class="ruby-operator">*</span><span class="ruby-identifier">a2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b1</span><span class="ruby-operator">*</span><span class="ruby-identifier">b2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">c1</span><span class="ruby-operator">*</span><span class="ruby-identifier">c2</span>)<span class="ruby-operator">/</span>(<span class="ruby-constant">Math</span>.<span class="ruby-identifier">sqrt</span>(<span class="ruby-identifier">a1</span><span class="ruby-operator">**</span><span class="ruby-value">2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b1</span><span class="ruby-operator">**</span><span class="ruby-value">2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">c1</span><span class="ruby-operator">**</span><span class="ruby-value">2</span>) <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">sqrt</span>(<span class="ruby-identifier">a2</span><span class="ruby-operator">**</span><span class="ruby-value">2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b2</span><span class="ruby-operator">**</span><span class="ruby-value">2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">c2</span><span class="ruby-operator">**</span><span class="ruby-value">2</span>)))
+  
+  <span class="ruby-keyword">if</span> ((<span class="ruby-identifier">a1</span><span class="ruby-operator">*</span><span class="ruby-identifier">coord4</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b1</span><span class="ruby-operator">*</span><span class="ruby-identifier">coord4</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">c1</span><span class="ruby-operator">*</span><span class="ruby-identifier">coord4</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">d</span>) <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>)
+    <span class="ruby-operator">-</span><span class="ruby-identifier">torsion</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">torsion</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-distance" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">distance</span><span
+            class="method-args">(coord1, coord2)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Calculates distance between <em>coord1</em> and <em>coord2</em>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="distance-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">distance</span>(<span class="ruby-identifier">coord1</span>, <span class="ruby-identifier">coord2</span>)
+  <span class="ruby-identifier">coord1</span> = <span class="ruby-identifier">convert_to_xyz</span>(<span class="ruby-identifier">coord1</span>)
+  <span class="ruby-identifier">coord2</span> = <span class="ruby-identifier">convert_to_xyz</span>(<span class="ruby-identifier">coord2</span>)
+  (<span class="ruby-identifier">coord1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">coord2</span>).<span class="ruby-identifier">r</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-rad2deg" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">rad2deg</span><span
+            class="method-args">(r)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>radian to degree</p>
+          
+          
+
+          
+          <div class="method-source-code" id="rad2deg-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">rad2deg</span>(<span class="ruby-identifier">r</span>)
+  (<span class="ruby-identifier">r</span><span class="ruby-operator">/</span><span class="ruby-constant">Math</span><span class="ruby-operator">::</span><span class="ruby-constant">PI</span>)<span class="ruby-operator">*</span><span class="ruby-value">180</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-to_xyz" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_xyz</span><span
+            class="method-args">(obj)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>(Deprecated) alias of <a
+href="Utils.html#method-c-convert_to_xyz">::convert_to_xyz</a>(obj)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="to_xyz-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_xyz</span>(<span class="ruby-identifier">obj</span>)
+  <span class="ruby-identifier">convert_to_xyz</span>(<span class="ruby-identifier">obj</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-centreOfGravity" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">centreOfGravity</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>calculates centre of gravitiy</p>
+          
+          
+
+          
+          <div class="method-source-code" id="centreOfGravity-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 91</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">centreOfGravity</span>()
+  <span class="ruby-identifier">x</span> = <span class="ruby-identifier">y</span> = <span class="ruby-identifier">z</span> = <span class="ruby-identifier">total</span> = <span class="ruby-value">0</span>
+  
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_atom</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">atom</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">element</span> = <span class="ruby-identifier">atom</span>.<span class="ruby-identifier">element</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>]
+    <span class="ruby-identifier">mass</span>    = <span class="ruby-constant">ElementMass</span>[<span class="ruby-identifier">element</span>]
+    <span class="ruby-identifier">total</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">mass</span>
+    <span class="ruby-identifier">x</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">atom</span>.<span class="ruby-identifier">x</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">mass</span>
+    <span class="ruby-identifier">y</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">atom</span>.<span class="ruby-identifier">y</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">mass</span>
+    <span class="ruby-identifier">z</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">atom</span>.<span class="ruby-identifier">z</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">mass</span>
+  }
+  
+  <span class="ruby-identifier">x</span> = <span class="ruby-identifier">x</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">total</span>
+  <span class="ruby-identifier">y</span> = <span class="ruby-identifier">y</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">total</span>
+  <span class="ruby-identifier">z</span> = <span class="ruby-identifier">z</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">total</span>
+  
+  <span class="ruby-constant">Coordinate</span>[<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">z</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-finder" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">finder</span><span
+            class="method-args">(findtype) { |obj| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Every class in the heirarchy implements finder, this takes  a class which
+determines which type of object to find, the associated block is then run
+in classic .find style.</p>
+
+<p>The method might be deprecated. You&#39;d better using find_XXX  directly.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="finder-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 201</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">finder</span>(<span class="ruby-identifier">findtype</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment">#:yields: obj</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">findtype</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Atom</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_atom</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">findtype</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Residue</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_residue</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">findtype</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Chain</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_chain</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">findtype</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Model</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_model</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-node">&quot;You can&#39;t find a #{findtype}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-geometricCentre" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">geometricCentre</span><span
+            class="method-args">(method = :each_atom)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the coordinates of the geometric centre (average co-ord) of any <a
+href="AtomFinder.html">AtomFinder</a> (or .atoms) implementing object</p>
+
+<p>If you want to get the geometric centre of hetatms, call
+geometricCentre(:each_hetatm).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="geometricCentre-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">geometricCentre</span>(<span class="ruby-identifier">method</span> = <span class="ruby-value">:each_atom</span>)
+  <span class="ruby-identifier">x</span> = <span class="ruby-identifier">y</span> = <span class="ruby-identifier">z</span> = <span class="ruby-identifier">count</span> = <span class="ruby-value">0</span>
+  
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">method</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">atom</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">x</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">atom</span>.<span class="ruby-identifier">x</span>
+    <span class="ruby-identifier">y</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">atom</span>.<span class="ruby-identifier">y</span>
+    <span class="ruby-identifier">z</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">atom</span>.<span class="ruby-identifier">z</span>
+    <span class="ruby-identifier">count</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">x</span> = (<span class="ruby-identifier">x</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">count</span>)
+  <span class="ruby-identifier">y</span> = (<span class="ruby-identifier">y</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">count</span>)
+  <span class="ruby-identifier">z</span> = (<span class="ruby-identifier">z</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">count</span>)
+ 
+  <span class="ruby-constant">Coordinate</span>[<span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span>,<span class="ruby-identifier">z</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

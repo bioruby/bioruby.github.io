@@ -1,0 +1,1900 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::KEGG::GENES - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::KEGG::GENES-label-Description">Description</a>
+    <li><a href="#class-Bio::KEGG::GENES-label-References">References</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../KEGGDB.html">Bio::KEGGDB</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="Common/DblinksAsHash.html">Bio::KEGG::Common::DblinksAsHash</a>
+  
+  
+  
+    <li><a class="include" href="Common/PathwaysAsHash.html">Bio::KEGG::Common::PathwaysAsHash</a>
+  
+  
+  
+    <li><a class="include" href="Common/OrthologsAsHash.html">Bio::KEGG::Common::OrthologsAsHash</a>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li class="calls-super" ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-aalen">#aalen</a>
+    
+    <li ><a href="#method-i-aaseq">#aaseq</a>
+    
+    <li ><a href="#method-i-chromosome">#chromosome</a>
+    
+    <li ><a href="#method-i-codon_usage">#codon_usage</a>
+    
+    <li ><a href="#method-i-cu_list">#cu_list</a>
+    
+    <li ><a href="#method-i-dblinks">#dblinks</a>
+    
+    <li class="calls-super" ><a href="#method-i-dblinks_as_hash">#dblinks_as_hash</a>
+    
+    <li ><a href="#method-i-dblinks_as_strings">#dblinks_as_strings</a>
+    
+    <li ><a href="#method-i-definition">#definition</a>
+    
+    <li ><a href="#method-i-division">#division</a>
+    
+    <li ><a href="#method-i-eclinks">#eclinks</a>
+    
+    <li ><a href="#method-i-entry">#entry</a>
+    
+    <li ><a href="#method-i-entry_id">#entry_id</a>
+    
+    <li ><a href="#method-i-gbposition">#gbposition</a>
+    
+    <li ><a href="#method-i-gene">#gene</a>
+    
+    <li ><a href="#method-i-genes">#genes</a>
+    
+    <li ><a href="#method-i-keggclass">#keggclass</a>
+    
+    <li ><a href="#method-i-keggclasses">#keggclasses</a>
+    
+    <li ><a href="#method-i-locations">#locations</a>
+    
+    <li ><a href="#method-i-motif">#motif</a>
+    
+    <li ><a href="#method-i-motifs">#motifs</a>
+    
+    <li ><a href="#method-i-motifs_as_hash">#motifs_as_hash</a>
+    
+    <li ><a href="#method-i-motifs_as_strings">#motifs_as_strings</a>
+    
+    <li ><a href="#method-i-nalen">#nalen</a>
+    
+    <li ><a href="#method-i-name">#name</a>
+    
+    <li ><a href="#method-i-names">#names</a>
+    
+    <li ><a href="#method-i-names_as_array">#names_as_array</a>
+    
+    <li ><a href="#method-i-naseq">#naseq</a>
+    
+    <li ><a href="#method-i-ntlen">#ntlen</a>
+    
+    <li ><a href="#method-i-ntseq">#ntseq</a>
+    
+    <li ><a href="#method-i-organism">#organism</a>
+    
+    <li ><a href="#method-i-orthologs">#orthologs</a>
+    
+    <li class="calls-super" ><a href="#method-i-orthologs_as_hash">#orthologs_as_hash</a>
+    
+    <li ><a href="#method-i-orthologs_as_strings">#orthologs_as_strings</a>
+    
+    <li ><a href="#method-i-pathway">#pathway</a>
+    
+    <li ><a href="#method-i-pathways">#pathways</a>
+    
+    <li class="calls-super" ><a href="#method-i-pathways_as_hash">#pathways_as_hash</a>
+    
+    <li ><a href="#method-i-pathways_as_strings">#pathways_as_strings</a>
+    
+    <li ><a href="#method-i-position">#position</a>
+    
+    <li ><a href="#method-i-structure">#structure</a>
+    
+    <li ><a href="#method-i-structures">#structures</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::KEGG::GENES">
+  <h1 id="class-Bio::KEGG::GENES" class="class">
+    class Bio::KEGG::GENES
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Bio::KEGG::GENES-label-Description">Description<span><a href="#class-Bio::KEGG::GENES-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p><a href="../KEGG.html">KEGG</a> <a href="GENES.html">GENES</a> entry
+parser.</p>
+
+<h2 id="class-Bio::KEGG::GENES-label-References"><a href="../References.html">References</a><span><a href="#class-Bio::KEGG::GENES-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a
+href="http://www.genome.jp/kegg/genes.html">www.genome.jp/kegg/genes.html</a></p>
+</li></ul>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DELIMITER">DELIMITER
+        
+        <dd>
+        
+      
+        <dt id="TAGSIZE">TAGSIZE
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(entry)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new <a href="GENES.html">Bio::KEGG::GENES</a> object.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>entry</em>: (String) single entry as a string</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="GENES.html">Bio::KEGG::GENES</a> object</p>
+</dd></dl>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="../NCBIDB.html#method-c-new">Bio::NCBIDB.new</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">entry</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-aalen" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">aalen</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns length of the amino acid sequence described in the AASEQ lines.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Integer</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="aalen-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 393</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">aalen</span>
+  <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;AASEQ&#39;</span>)[<span class="ruby-regexp">/\d+/</span>].<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-aaseq" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">aaseq</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns amino acid sequence described in the AASEQ lines.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../Sequence/AA.html">Bio::Sequence::AA</a> object</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="aaseq-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 383</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">aaseq</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;AASEQ&#39;</span>]
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;AASEQ&#39;</span>] = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;AASEQ&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\d+/</span>, <span class="ruby-string">&#39;&#39;</span>))
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;AASEQ&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-chromosome" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">chromosome</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Chromosome described in the POSITION line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a> or nil</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="chromosome-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 264</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">chromosome</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">position</span>[<span class="ruby-regexp">/:/</span>]
+    <span class="ruby-identifier">position</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/:.*/</span>, <span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">position</span>[<span class="ruby-regexp">/\.\./</span>]
+    <span class="ruby-identifier">position</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-codon_usage" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">codon_usage</span><span
+            class="method-args">(codon = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Codon usage data described in the CODON_USAGE lines. (Deprecated: no more
+exists)</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../Hash.html">Hash</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="codon_usage-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 350</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">codon_usage</span>(<span class="ruby-identifier">codon</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CODON_USAGE&#39;</span>]
+    <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">list</span> = <span class="ruby-identifier">cu_list</span>
+    <span class="ruby-identifier">base</span> = <span class="ruby-node">%w(t c a g)</span>
+    <span class="ruby-identifier">base</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">base</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span>, <span class="ruby-identifier">j</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">base</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">z</span>, <span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">hash</span>[<span class="ruby-node">&quot;#{x}#{y}#{z}&quot;</span>] = <span class="ruby-identifier">list</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">*</span><span class="ruby-value">16</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">j</span><span class="ruby-operator">*</span><span class="ruby-value">4</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">k</span>]
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CODON_USAGE&#39;</span>] = <span class="ruby-identifier">hash</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CODON_USAGE&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-cu_list" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cu_list</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Codon usage data described in the CODON_USAGE lines as an array.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="cu_list-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 370</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cu_list</span>
+  <span class="ruby-identifier">ary</span> = []
+  <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;CODON_USAGE&#39;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/.*/</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-comment"># cut 1st line</span>
+    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^.{11}/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/..../</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cu</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">cu</span>.<span class="ruby-identifier">to_i</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-dblinks" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">dblinks</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="GENES.html#method-i-dblinks_as_hash">dblinks_as_hash</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-dblinks_as_hash" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dblinks_as_hash</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a <a href="../../Hash.html">Hash</a> of the <a
+href="../DB.html">DB</a> name and an Array of entry IDs in DBLINKS field.</p>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Common/DblinksAsHash.html#method-i-dblinks_as_hash">Bio::KEGG::Common::DblinksAsHash#dblinks_as_hash</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="dblinks_as_hash-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 97</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dblinks_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="GENES.html#method-i-dblinks">dblinks</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-dblinks_as_strings" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dblinks_as_strings</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Links to other databases described in the DBLINKS lines.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array containing <a href="../../String.html">String</a> objects</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="dblinks_as_strings-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 332</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dblinks_as_strings</span>
+  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;DBLINKS&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-definition" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">definition</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Definition of the entry, described in the DEFINITION line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="definition-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">definition</span>
+  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;DEFINITION&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-division" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">division</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Division of the entry, described in the ENTRY line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="division-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 149</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">division</span>
+  <span class="ruby-identifier">entry</span>[<span class="ruby-string">&#39;division&#39;</span>]                   <span class="ruby-comment"># CDS, tRNA etc.</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-eclinks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">eclinks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Enzyme&#39;s EC numbers shown in the DEFINITION line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array containing <a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="eclinks-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 206</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">eclinks</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@eclinks</span>
+    <span class="ruby-identifier">ec_list</span> = 
+      <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-regexp">/\[EC\:([^\]]+)\]/</span>, <span class="ruby-value">1</span>) <span class="ruby-operator">||</span>
+      <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-regexp">/\(EC\:([^\)]+)\)/</span>, <span class="ruby-value">1</span>)
+    <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">ec_list</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">ec_list</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>) <span class="ruby-operator">:</span> []
+    <span class="ruby-ivar">@eclinks</span> = <span class="ruby-identifier">ary</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@eclinks</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-entry" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entry</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the “ENTRY” line content as a <a href="../../Hash.html">Hash</a>.
+For example,</p>
+
+<pre class="ruby">{<span class="ruby-string">&quot;organism&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;E.coli&quot;</span>, <span class="ruby-string">&quot;division&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;CDS&quot;</span>, <span class="ruby-string">&quot;id&quot;</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">&quot;b0356&quot;</span>}
+</pre>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../Hash.html">Hash</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="entry-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 125</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENTRY&#39;</span>]
+    <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;ENTRY&#39;</span>).<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">30</span>
+      <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;ENTRY&#39;</span>)
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;id&#39;</span>]       = <span class="ruby-identifier">e</span>[<span class="ruby-value">12</span><span class="ruby-operator">..</span><span class="ruby-value">29</span>].<span class="ruby-identifier">strip</span>
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;division&#39;</span>] = <span class="ruby-identifier">e</span>[<span class="ruby-value">30</span><span class="ruby-operator">..</span><span class="ruby-value">39</span>].<span class="ruby-identifier">strip</span>
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;organism&#39;</span>] = <span class="ruby-identifier">e</span>[<span class="ruby-value">40</span><span class="ruby-operator">..</span><span class="ruby-value">80</span>].<span class="ruby-identifier">strip</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENTRY&#39;</span>] = <span class="ruby-identifier">hash</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENTRY&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-entry_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entry_id</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>ID of the entry, described in the ENTRY line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="entry_id-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry_id</span>
+  <span class="ruby-identifier">entry</span>[<span class="ruby-string">&#39;id&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-gbposition" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gbposition</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The position in the genome described in the POSITION line as <a
+href="../GenBank.html">GenBank</a> feature table location formatted string.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="gbposition-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 278</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">gbposition</span>
+  <span class="ruby-identifier">position</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/.*?:/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-gene" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gene</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The method will be deprecated. Use <code>entry.names.first</code> instead.</p>
+
+<p>Returns the first gene name described in the NAME line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="gene-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">gene</span>
+  <span class="ruby-identifier">genes</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-genes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">genes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The method will be deprecated. Use <a
+href="GENES.html#method-i-names">#names</a>.</p>
+
+<p>Names of the entry as an Array, described in the NAME line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array containing <a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="genes-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">genes</span>
+  <span class="ruby-identifier">names_as_array</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-keggclass" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">keggclass</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns CLASS field of the entry.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="keggclass-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 242</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">keggclass</span>
+  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;CLASS&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-keggclasses" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">keggclasses</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an Array of biological classes in CLASS field.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="keggclasses-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 247</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">keggclasses</span>
+  <span class="ruby-identifier">keggclass</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/ \[[^\]]+/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\] ?/</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-locations" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">locations</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The position in the genome described in the POSITION line as <a
+href="../Locations.html">Bio::Locations</a> object.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../Locations.html">Bio::Locations</a> object</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="locations-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 286</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">locations</span>
+  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">gbposition</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-motif" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">motif</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The specification of the method will be changed in the future. Please use
+<a href="GENES.html#method-i-motifs">#motifs</a>.</p>
+
+<p>Motif information described in the MOTIF lines.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../Hash.html">Hash</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="motif-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 325</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">motif</span>
+  <span class="ruby-identifier">motifs</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-motifs" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">motifs</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="GENES.html#method-i-motifs_as_hash">motifs_as_hash</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-motifs_as_hash" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">motifs_as_hash</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Motif information described in the MOTIF lines.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../Hash.html">Hash</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="motifs_as_hash-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 300</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">motifs_as_hash</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;MOTIF&#39;</span>]
+    <span class="ruby-identifier">hash</span> = {}
+    <span class="ruby-identifier">db</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">motifs_as_strings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-regexp">/^\S+:/</span>]
+        <span class="ruby-identifier">db</span>, <span class="ruby-identifier">str</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/:/</span>, <span class="ruby-value">2</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">str</span> = <span class="ruby-identifier">line</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">db</span>] <span class="ruby-operator">||=</span> []
+      <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">db</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;MOTIF&#39;</span>] = <span class="ruby-identifier">hash</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;MOTIF&#39;</span>]              <span class="ruby-comment"># Hash of Array of IDs in MOTIF</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="GENES.html#method-i-motifs">motifs</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-motifs_as_strings" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">motifs_as_strings</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Motif information described in the MOTIF lines.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Strings</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="motifs_as_strings-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 293</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">motifs_as_strings</span>
+  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;MOTIF&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-nalen" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">nalen</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="GENES.html#method-i-ntlen">ntlen</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the NAME line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="name-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;NAME&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-names" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">names</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="GENES.html#method-i-names_as_array">names_as_array</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-names_as_array" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">names_as_array</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Names of the entry as an Array, described in the NAME line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array containing <a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="names_as_array-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">names_as_array</span>
+  <span class="ruby-identifier">name</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;, &#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="GENES.html#method-i-names">names</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-naseq" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">naseq</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="GENES.html#method-i-ntseq">ntseq</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-ntlen" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ntlen</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns nucleic acid sequence length.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Integer</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="ntlen-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 411</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ntlen</span>
+  <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;NTSEQ&#39;</span>)[<span class="ruby-regexp">/\d+/</span>].<span class="ruby-identifier">to_i</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="GENES.html#method-i-nalen">nalen</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-ntseq" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ntseq</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns nucleic acid sequence described in the NTSEQ lines.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../Sequence/NA.html">Bio::Sequence::NA</a> object</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="ntseq-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 400</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ntseq</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;NTSEQ&#39;</span>]
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;NTSEQ&#39;</span>] = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;NTSEQ&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\d+/</span>, <span class="ruby-string">&#39;&#39;</span>))
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;NTSEQ&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="GENES.html#method-i-naseq">naseq</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-organism" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">organism</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Organism name of the entry, described in the ENTRY line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="organism-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">organism</span>
+  <span class="ruby-identifier">entry</span>[<span class="ruby-string">&#39;organism&#39;</span>]                   <span class="ruby-comment"># H.sapiens etc.</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-orthologs" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">orthologs</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="GENES.html#method-i-orthologs_as_hash">orthologs_as_hash</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-orthologs_as_hash" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">orthologs_as_hash</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a <a href="../../Hash.html">Hash</a> of the orthology ID and
+definition in <a href="ORTHOLOGY.html">ORTHOLOGY</a> field.</p>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Common/OrthologsAsHash.html#method-i-orthologs_as_hash">Bio::KEGG::Common::OrthologsAsHash#orthologs_as_hash</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="orthologs_as_hash-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 107</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">orthologs_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="GENES.html#method-i-orthologs">orthologs</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-orthologs_as_strings" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">orthologs_as_strings</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Orthologs described in the <a href="ORTHOLOGY.html">ORTHOLOGY</a> lines.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array containing <a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="orthologs_as_strings-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 220</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">orthologs_as_strings</span>
+  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-pathway" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pathway</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the <a href="PATHWAY.html">PATHWAY</a> lines as a <a
+href="../../String.html">String</a>.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="pathway-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 227</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pathway</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@pathway</span>
+    <span class="ruby-ivar">@pathway</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;PATHWAY&#39;</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@pathway</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-pathways" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">pathways</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="GENES.html#method-i-pathways_as_hash">pathways_as_hash</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-pathways_as_hash" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pathways_as_hash</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a <a href="../../Hash.html">Hash</a> of the pathway ID and name in
+<a href="PATHWAY.html">PATHWAY</a> field.</p>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              <a href="Common/PathwaysAsHash.html#method-i-pathways_as_hash">Bio::KEGG::Common::PathwaysAsHash#pathways_as_hash</a>
+            </div>
+          
+
+          
+          <div class="method-source-code" id="pathways_as_hash-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pathways_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="GENES.html#method-i-pathways">pathways</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-pathways_as_strings" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pathways_as_strings</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Pathways described in the <a href="PATHWAY.html">PATHWAY</a> lines.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array containing <a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="pathways_as_strings-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 237</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pathways_as_strings</span>
+  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;PATHWAY&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-position" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">position</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The position in the genome described in the POSITION line.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="position-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 254</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">position</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;POSITION&#39;</span>]
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;POSITION&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;POSITION&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;POSITION&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-structure" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">structure</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns structure ID information described in the STRUCTURE lines.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array containing <a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="structure-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/genes.rb, line 339</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">structure</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;STRUCTURE&#39;</span>]
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;STRUCTURE&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;STRUCTURE&#39;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/(PDB: )*/</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;STRUCTURE&#39;</span>] <span class="ruby-comment"># [&#39;PDB:1A9X&#39;, ...]</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="GENES.html#method-i-structures">structures</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-structures" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">structures</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="GENES.html#method-i-structure">structure</a>
+        </div>
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

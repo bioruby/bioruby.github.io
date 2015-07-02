@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class String - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-fill">#fill</a>
+    
+    <li ><a href="#method-i-fold">#fold</a>
+    
+    <li ><a href="#method-i-skip">#skip</a>
+    
+    <li ><a href="#method-i-step">#step</a>
+    
+    <li ><a href="#method-i-to_aaseq">#to_aaseq</a>
+    
+    <li ><a href="#method-i-to_naseq">#to_naseq</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-String">
+  <h1 id="class-String" class="class">
+    class String
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-fill" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fill</span><span
+            class="method-args">(fill_column = 80, indent = 0, separater = ' ', prefix = '', first_line_only = true)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>folding with conscious about word boundaries with prefix string</p>
+          
+          
+
+          
+          <div class="method-source-code" id="fill-source">
+            <pre><span class="ruby-comment"># File lib/bio/shell/plugin/seq.rb, line 209</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">fill</span>(<span class="ruby-identifier">fill_column</span> = <span class="ruby-value">80</span>, <span class="ruby-identifier">indent</span> = <span class="ruby-value">0</span>, <span class="ruby-identifier">separater</span> = <span class="ruby-string">&#39; &#39;</span>, <span class="ruby-identifier">prefix</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">first_line_only</span> = <span class="ruby-keyword">true</span>)
+
+  <span class="ruby-comment"># size : allowed length of the actual text</span>
+  <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">size</span> = <span class="ruby-identifier">fill_column</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">indent</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Error: indent &gt; fill_column (indent is set to 0)&quot;</span>
+    <span class="ruby-identifier">size</span> = <span class="ruby-identifier">fill_column</span>
+    <span class="ruby-identifier">indent</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">n</span> = <span class="ruby-identifier">pos</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">ary</span> = []
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">pos</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">n</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">rindex</span>(<span class="ruby-identifier">separater</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">n</span>, <span class="ruby-identifier">size</span>].<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">size</span>    <span class="ruby-comment"># last line of the folded str</span>
+      <span class="ruby-identifier">pos</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span>
+      <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">n</span>, <span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-identifier">separater</span>.<span class="ruby-identifier">length</span>]
+      <span class="ruby-identifier">n</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">separater</span>.<span class="ruby-identifier">length</span>
+    <span class="ruby-keyword">else</span>                              <span class="ruby-comment"># line too long or the last line</span>
+      <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">n</span>, <span class="ruby-identifier">size</span>]
+      <span class="ruby-identifier">n</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">size</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+
+  <span class="ruby-identifier">str</span>[<span class="ruby-value">0</span>,<span class="ruby-value">0</span>] = <span class="ruby-identifier">prefix</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">indent</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">prefix</span>.<span class="ruby-identifier">length</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">first_line_only</span>
+    <span class="ruby-identifier">head</span> = <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">indent</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">head</span> = <span class="ruby-identifier">prefix</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">indent</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">prefix</span>.<span class="ruby-identifier">length</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-node">&quot;\n#{head}&quot;</span>)
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">chomp</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-fold" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">fold</span><span
+            class="method-args">(fill_column = 72, indent = 0)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>folding both line end justified</p>
+          
+          
+
+          
+          <div class="method-source-code" id="fold-source">
+            <pre><span class="ruby-comment"># File lib/bio/shell/plugin/seq.rb, line 191</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">fold</span>(<span class="ruby-identifier">fill_column</span> = <span class="ruby-value">72</span>, <span class="ruby-identifier">indent</span> = <span class="ruby-value">0</span>)
+  <span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;&#39;</span>
+
+  <span class="ruby-comment"># size : allowed length of the actual text</span>
+  <span class="ruby-keyword">unless</span> (<span class="ruby-identifier">size</span> = <span class="ruby-identifier">fill_column</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">indent</span>) <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Error: indent &gt; fill_column (indent is set to 0)&quot;</span>
+    <span class="ruby-identifier">size</span> = <span class="ruby-identifier">fill_column</span>
+    <span class="ruby-identifier">indent</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-value">0</span>.<span class="ruby-identifier">step</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">size</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">indent</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">n</span>, <span class="ruby-identifier">size</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">str</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-skip" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">skip</span><span
+            class="method-args">(window_size, step_size = 1) { |self, i + 1, i + window_size| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="skip-source">
+            <pre><span class="ruby-comment"># File lib/bio/shell/plugin/seq.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">skip</span>(<span class="ruby-identifier">window_size</span>, <span class="ruby-identifier">step_size</span> = <span class="ruby-value">1</span>)
+  <span class="ruby-identifier">j</span> = <span class="ruby-value">0</span>
+  <span class="ruby-value">0</span>.<span class="ruby-identifier">step</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">window_size</span>, <span class="ruby-identifier">step_size</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">yield</span> [<span class="ruby-keyword">self</span>[<span class="ruby-identifier">i</span>, <span class="ruby-identifier">window_size</span>], <span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">window_size</span>]
+    <span class="ruby-identifier">j</span> = <span class="ruby-identifier">i</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">from</span> = <span class="ruby-identifier">j</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">step_size</span>
+  <span class="ruby-identifier">to</span>  = [<span class="ruby-keyword">self</span>.<span class="ruby-identifier">length</span>, <span class="ruby-identifier">j</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">step_size</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">window_size</span>].<span class="ruby-identifier">min</span>
+  <span class="ruby-keyword">yield</span> [<span class="ruby-keyword">self</span>[<span class="ruby-identifier">from</span>, <span class="ruby-identifier">window_size</span>], <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">to</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">to</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-step" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">step</span><span
+            class="method-args">(window_size) { |self| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="step-source">
+            <pre><span class="ruby-comment"># File lib/bio/shell/plugin/seq.rb, line 162</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">step</span>(<span class="ruby-identifier">window_size</span>)
+  <span class="ruby-identifier">j</span> = <span class="ruby-value">0</span>
+  <span class="ruby-value">0</span>.<span class="ruby-identifier">step</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">window_size</span>, <span class="ruby-identifier">window_size</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">i</span>, <span class="ruby-identifier">window_size</span>]
+    <span class="ruby-identifier">j</span> = <span class="ruby-identifier">i</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">j</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">window_size</span> <span class="ruby-operator">..</span> <span class="ruby-value">-1</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">j</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">window_size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">length</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_aaseq" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_aaseq</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_aaseq-source">
+            <pre><span class="ruby-comment"># File lib/bio/shell/plugin/seq.rb, line 186</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_aaseq</span>
+  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_naseq" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_naseq</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="to_naseq-source">
+            <pre><span class="ruby-comment"># File lib/bio/shell/plugin/seq.rb, line 182</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_naseq</span>
+  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

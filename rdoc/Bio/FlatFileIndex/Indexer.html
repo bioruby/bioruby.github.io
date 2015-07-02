@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Bio::FlatFileIndex::Indexer - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-addindex_bdb">::addindex_bdb</a>
+    
+    <li ><a href="#method-c-addindex_flat">::addindex_flat</a>
+    
+    <li ><a href="#method-c-chose_sort_proc">::chose_sort_proc</a>
+    
+    <li ><a href="#method-c-makeindexBDB">::makeindexBDB</a>
+    
+    <li ><a href="#method-c-makeindexFlat">::makeindexFlat</a>
+    
+    <li ><a href="#method-c-update_index">::update_index</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Bio::FlatFileIndex::Indexer">
+  <h1 id="module-Bio::FlatFileIndex::Indexer" class="module">
+    module Bio::FlatFileIndex::Indexer
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DEFAULT_ENV">DEFAULT_ENV
+        
+        <dd><p>default env program (run a program in a modified environment)</p>
+        
+      
+        <dt id="DEFAULT_ENV_ARGS">DEFAULT_ENV_ARGS
+        
+        <dd><p>default arguments for env program</p>
+        
+      
+        <dt id="DEFAULT_SORT">DEFAULT_SORT
+        
+        <dd><p>default sort program</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-addindex_bdb" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">addindex_bdb</span><span
+            class="method-args">(db, flag, need_update, parser, options)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="addindex_bdb-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/indexer.rb, line 476</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">addindex_bdb</span>(<span class="ruby-identifier">db</span>, <span class="ruby-identifier">flag</span>, <span class="ruby-identifier">need_update</span>, <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;reading files...\n&quot;</span>
+
+  <span class="ruby-identifier">pn</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">primary</span>
+  <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">flag</span> = <span class="ruby-identifier">flag</span>
+
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">each_files</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">flag</span> = <span class="ruby-identifier">flag</span>
+    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">open</span>
+    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">need_update</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fileid</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>[<span class="ruby-identifier">fileid</span>].<span class="ruby-identifier">filename</span>
+    <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">open_flatfile</span>(<span class="ruby-identifier">fileid</span>, <span class="ruby-identifier">filename</span>)
+    <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span>, <span class="ruby-identifier">len</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">p</span> = <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">parse_primary</span>
+      <span class="ruby-comment">#pn.file.add_exclusive(p, [ fileid, pos, len ])</span>
+      <span class="ruby-identifier">pn</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">add_overwrite</span>(<span class="ruby-identifier">p</span>, [ <span class="ruby-identifier">fileid</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">len</span> ])
+      <span class="ruby-comment">#DEBUG.print &quot;#{p} #{fileid} #{pos} #{len}\n&quot;</span>
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">parse_secondary</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sn</span>, <span class="ruby-identifier">sp</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">db</span>.<span class="ruby-identifier">secondary</span>[<span class="ruby-identifier">sn</span>].<span class="ruby-identifier">file</span>.<span class="ruby-identifier">add_nr</span>(<span class="ruby-identifier">sp</span>, <span class="ruby-identifier">p</span>)
+        <span class="ruby-comment">#DEBUG.print &quot;#{sp} #{p}\n&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">close_flatfile</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-addindex_flat" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">addindex_flat</span><span
+            class="method-args">(db, mode, need_update, parser, options)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="addindex_flat-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/indexer.rb, line 525</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">addindex_flat</span>(<span class="ruby-identifier">db</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">need_update</span>, <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;tempfile&#39;</span>
+  <span class="ruby-identifier">prog</span> = <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;sort_program&#39;</span>]
+  <span class="ruby-identifier">env</span> = <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;env_program&#39;</span>]
+  <span class="ruby-identifier">env_args</span> = <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;env_program_arguments&#39;</span>]
+
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">need_update</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;prepare temporary files...\n&quot;</span>
+  <span class="ruby-identifier">tempbase</span> = <span class="ruby-node">&quot;bioflat#{rand(10000)}-&quot;</span>
+  <span class="ruby-identifier">pfile</span> = <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">tempbase</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;primary-&#39;</span>)
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;open temporary file #{pfile.path.inspect}\n&quot;</span>
+  <span class="ruby-identifier">sfiles</span> = {}
+  <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">sfiles</span>[<span class="ruby-identifier">x</span>] =  <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">tempbase</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;secondary-&#39;</span>)
+    <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;open temporary file #{sfiles[x].path.inspect}\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;reading files...\n&quot;</span>
+  <span class="ruby-identifier">need_update</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fileid</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">filename</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>[<span class="ruby-identifier">fileid</span>].<span class="ruby-identifier">filename</span>
+    <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">open_flatfile</span>(<span class="ruby-identifier">fileid</span>, <span class="ruby-identifier">filename</span>)
+    <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span>, <span class="ruby-identifier">len</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">p</span> = <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">parse_primary</span>
+      <span class="ruby-identifier">pfile</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{p}\t#{fileid}\t#{pos}\t#{len}\n&quot;</span>
+      <span class="ruby-comment">#DEBUG.print &quot;#{p} #{fileid} #{pos} #{len}\n&quot;</span>
+      <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">parse_secondary</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sn</span>, <span class="ruby-identifier">sp</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">sfiles</span>[<span class="ruby-identifier">sn</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{sp}\t#{p}\n&quot;</span>
+        <span class="ruby-comment">#DEBUG.print &quot;#{sp} #{p}\n&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">close_flatfile</span>
+    <span class="ruby-identifier">fileid</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">sort_proc</span> = <span class="ruby-identifier">chose_sort_proc</span>(<span class="ruby-identifier">prog</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">env</span>, <span class="ruby-identifier">env_args</span>)
+  <span class="ruby-identifier">pfile</span>.<span class="ruby-identifier">close</span>(<span class="ruby-keyword">false</span>)
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;sorting primary (#{parser.primary.name})...\n&quot;</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">primary</span>.<span class="ruby-identifier">file</span>.<span class="ruby-identifier">import_tsv_files</span>(<span class="ruby-keyword">true</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">sort_proc</span>, <span class="ruby-identifier">pfile</span>.<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">pfile</span>.<span class="ruby-identifier">close</span>(<span class="ruby-keyword">true</span>)
+
+  <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;sorting secondary (#{x})...\n&quot;</span>
+    <span class="ruby-identifier">sfiles</span>[<span class="ruby-identifier">x</span>].<span class="ruby-identifier">close</span>(<span class="ruby-keyword">false</span>)
+    <span class="ruby-identifier">db</span>.<span class="ruby-identifier">secondary</span>[<span class="ruby-identifier">x</span>].<span class="ruby-identifier">file</span>.<span class="ruby-identifier">import_tsv_files</span>(<span class="ruby-keyword">false</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">sort_proc</span>,
+                                          <span class="ruby-identifier">sfiles</span>[<span class="ruby-identifier">x</span>].<span class="ruby-identifier">path</span>)
+    <span class="ruby-identifier">sfiles</span>[<span class="ruby-identifier">x</span>].<span class="ruby-identifier">close</span>(<span class="ruby-keyword">true</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-chose_sort_proc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">chose_sort_proc</span><span
+            class="method-args">(prog, mode = :new, env = nil, env_args = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="chose_sort_proc-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/indexer.rb, line 585</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">chose_sort_proc</span>(<span class="ruby-identifier">prog</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-value">:new</span>,
+                         <span class="ruby-identifier">env</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">env_args</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">prog</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^builtin$/i</span>, <span class="ruby-regexp">/^hs$/i</span>, <span class="ruby-regexp">/^lm$/i</span>
+    <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;sort: internal sort routine\n&quot;</span>
+    <span class="ruby-identifier">sort_proc</span> = <span class="ruby-constant">Flat_1</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatMappingFile</span><span class="ruby-operator">::</span><span class="ruby-identifier">internal_sort_proc</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-constant">FileTest</span>.<span class="ruby-identifier">executable?</span>(<span class="ruby-constant">DEFAULT_SORT</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">chose_sort_proc</span>(<span class="ruby-constant">DEFAULT_SORT</span>, <span class="ruby-identifier">mode</span>, <span class="ruby-identifier">env</span>, <span class="ruby-identifier">env_args</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;sort: internal sort routine\n&quot;</span>
+      <span class="ruby-identifier">sort_proc</span> = <span class="ruby-constant">Flat_1</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatMappingFile</span><span class="ruby-operator">::</span><span class="ruby-identifier">internal_sort_proc</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">env_args</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">DEFAULT_ENV_ARGS</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">env</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">env</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">then</span> <span class="ruby-comment"># inhibit to use env program</span>
+      <span class="ruby-identifier">prefixes</span> = [ <span class="ruby-identifier">prog</span> ]
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">env</span> <span class="ruby-keyword">then</span> <span class="ruby-comment"># uses given env program</span>
+      <span class="ruby-identifier">prefixes</span> = [ <span class="ruby-identifier">env</span> ] <span class="ruby-operator">+</span> <span class="ruby-identifier">env_args</span> <span class="ruby-operator">+</span> [ <span class="ruby-identifier">prog</span> ]
+    <span class="ruby-keyword">else</span> <span class="ruby-comment"># env == nil; uses default env program if possible</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-constant">FileTest</span>.<span class="ruby-identifier">executable?</span>(<span class="ruby-constant">DEFAULT_ENV</span>)
+        <span class="ruby-identifier">prefixes</span> = [ <span class="ruby-constant">DEFAULT_ENV</span> ] <span class="ruby-operator">+</span> <span class="ruby-identifier">env_args</span> <span class="ruby-operator">+</span> [ <span class="ruby-identifier">prog</span> ]
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">prefixes</span> = [ <span class="ruby-identifier">prog</span> ]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;sort: #{prefixes.join(&#39; &#39;)}\n&quot;</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:new</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">sort_proc</span> = <span class="ruby-constant">Flat_1</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatMappingFile</span><span class="ruby-operator">::</span><span class="ruby-identifier">external_sort_proc</span>(<span class="ruby-identifier">prefixes</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">sort_proc</span> = <span class="ruby-constant">Flat_1</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatMappingFile</span><span class="ruby-operator">::</span><span class="ruby-identifier">external_merge_sort_proc</span>(<span class="ruby-identifier">prefixes</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sort_proc</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-makeindexBDB" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">makeindexBDB</span><span
+            class="method-args">(name, parser, options, *files)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="makeindexBDB-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/indexer.rb, line 451</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">makeindexBDB</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">files</span>)
+  <span class="ruby-comment"># options are not used in this method</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">BDB</span>)
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeError</span>, <span class="ruby-string">&quot;Berkeley DB support not found&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;makeing BDB DataBank...\n&quot;</span>
+  <span class="ruby-identifier">db</span> = <span class="ruby-constant">DataBank</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-constant">MAGIC_BDB</span>)
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">format</span> = <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">format</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">add</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">files</span>)
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">recalc</span>
+
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">primary</span> = <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">primary</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">secondary</span> = <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">names</span>
+
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;writing config.dat, config, fileids ...\n&quot;</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&#39;wb&#39;</span>, <span class="ruby-constant">BDBdefault</span><span class="ruby-operator">::</span><span class="ruby-identifier">flag_write</span>)
+
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;reading files...\n&quot;</span>
+
+  <span class="ruby-identifier">addindex_bdb</span>(<span class="ruby-identifier">db</span>, <span class="ruby-constant">BDBdefault</span><span class="ruby-operator">::</span><span class="ruby-identifier">flag_write</span>, (<span class="ruby-value">0</span><span class="ruby-operator">...</span>(<span class="ruby-identifier">files</span>.<span class="ruby-identifier">size</span>)),
+               <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-makeindexFlat" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">makeindexFlat</span><span
+            class="method-args">(name, parser, options, *files)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="makeindexFlat-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/indexer.rb, line 508</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">makeindexFlat</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">files</span>)
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;makeing flat/1 DataBank using temporary files...\n&quot;</span>
+
+  <span class="ruby-identifier">db</span> = <span class="ruby-constant">DataBank</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">format</span> = <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">format</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">add</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">files</span>)
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">primary</span> = <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">primary</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">secondary</span> = <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">names</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">recalc</span>
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;writing DabaBank...\n&quot;</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&#39;wb&#39;</span>)
+
+  <span class="ruby-identifier">addindex_flat</span>(<span class="ruby-identifier">db</span>, <span class="ruby-value">:new</span>, (<span class="ruby-value">0</span><span class="ruby-operator">...</span>(<span class="ruby-identifier">files</span>.<span class="ruby-identifier">size</span>)), <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-update_index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">update_index</span><span
+            class="method-args">(name, parser, options, *files)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="update_index-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/indexer.rb, line 621</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">update_index</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">files</span>)
+  <span class="ruby-identifier">db</span> = <span class="ruby-constant">DataBank</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">name</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parser</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;file format mismatch&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">format</span>
+  <span class="ruby-keyword">else</span>
+
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">dbclass_orig</span> =
+        <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatFile</span>.<span class="ruby-identifier">autodetect_file</span>(<span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">filename</span>)
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">dbclass_new</span> =
+        <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatFile</span>.<span class="ruby-identifier">autodetect_file</span>(<span class="ruby-identifier">files</span>[<span class="ruby-value">0</span>])
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">format</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;swiss&#39;</span>, <span class="ruby-string">&#39;embl&#39;</span>
+      <span class="ruby-identifier">parser</span> = <span class="ruby-constant">Parser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">db</span>.<span class="ruby-identifier">format</span>)
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">dbclass_new</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">dbclass_new</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">dbclass</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;file format mismatch&#39;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;genbank&#39;</span>
+      <span class="ruby-identifier">dbclass</span> = <span class="ruby-identifier">dbclass_orig</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">dbclass_new</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">dbclass</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">GenBank</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">dbclass</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">GenPept</span>
+        <span class="ruby-identifier">parser</span> = <span class="ruby-constant">Parser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dbclass_orig</span>)
+      <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">dbclass</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;cannnot determine format. please specify manually.&#39;</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;file format mismatch&#39;</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">dbclass_new</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">dbclass_new</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">dbclass</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;file format mismatch&#39;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;unsupported format&#39;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">set_primary_namespace</span>(<span class="ruby-identifier">db</span>.<span class="ruby-identifier">primary</span>.<span class="ruby-identifier">name</span>)
+  <span class="ruby-identifier">parser</span>.<span class="ruby-identifier">add_secondary_namespaces</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">db</span>.<span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">names</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;renew&#39;</span>] <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">newfiles</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">filenames</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">FileTest</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">x</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">newfiles</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">files</span>)
+    <span class="ruby-identifier">newfiles2</span> = <span class="ruby-identifier">newfiles</span>.<span class="ruby-identifier">sort</span>
+    <span class="ruby-identifier">newfiles2</span>.<span class="ruby-identifier">uniq!</span>
+    <span class="ruby-identifier">newfiles3</span> = []
+    <span class="ruby-identifier">newfiles</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">newfiles3</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">newfiles2</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">x</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">t</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">index_type</span>
+    <span class="ruby-identifier">db</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">t</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">MAGIC_BDB</span>
+      <span class="ruby-constant">Indexer</span><span class="ruby-operator">::</span><span class="ruby-identifier">makeindexBDB</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">newfiles3</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-constant">MAGIC_FLAT</span>
+      <span class="ruby-constant">Indexer</span><span class="ruby-operator">::</span><span class="ruby-identifier">makeindexFlat</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">newfiles3</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Unsupported index type&#39;</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">need_update</span> = []
+  <span class="ruby-identifier">newfiles</span> = <span class="ruby-identifier">files</span>.<span class="ruby-identifier">dup</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">cache_all</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">need_update</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">check</span>
+    <span class="ruby-identifier">newfiles</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">filename</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">b</span> = <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">recalc</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">evar</span>
+    <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;Error: #{evar}\n&quot;</span>
+    <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;assumed --renew option\n&quot;</span>
+    <span class="ruby-identifier">db</span>.<span class="ruby-identifier">close</span>
+    <span class="ruby-identifier">options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">dup</span>
+    <span class="ruby-identifier">options</span>[<span class="ruby-string">&#39;renew&#39;</span>] = <span class="ruby-keyword">true</span>
+    <span class="ruby-identifier">update_index</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">files</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># add new files</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">add</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">newfiles</span>)
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">recalc</span>
+
+  <span class="ruby-identifier">need_update</span>.<span class="ruby-identifier">concat</span>((<span class="ruby-identifier">b</span><span class="ruby-operator">...</span>(<span class="ruby-identifier">b</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">newfiles</span>.<span class="ruby-identifier">size</span>)).<span class="ruby-identifier">to_a</span>)
+
+  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;writing DabaBank...\n&quot;</span>
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">write</span>(<span class="ruby-string">&#39;wb&#39;</span>, <span class="ruby-constant">BDBdefault</span><span class="ruby-operator">::</span><span class="ruby-identifier">flag_append</span>)
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">index_type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">MAGIC_BDB</span>
+    <span class="ruby-identifier">addindex_bdb</span>(<span class="ruby-identifier">db</span>, <span class="ruby-constant">BDBdefault</span><span class="ruby-operator">::</span><span class="ruby-identifier">flag_append</span>,
+                 <span class="ruby-identifier">need_update</span>, <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-constant">MAGIC_FLAT</span>
+    <span class="ruby-identifier">addindex_flat</span>(<span class="ruby-identifier">db</span>, <span class="ruby-value">:add</span>, <span class="ruby-identifier">need_update</span>, <span class="ruby-identifier">parser</span>, <span class="ruby-identifier">options</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Unsupported index type&#39;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

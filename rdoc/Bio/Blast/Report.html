@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::Blast::Report - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-c-rexml">::rexml</a>
+    
+    <li ><a href="#method-c-tab">::tab</a>
+    
+    <li ><a href="#method-c-xmlparser">::xmlparser</a>
+    
+    <li ><a href="#method-i-db_len">#db_len</a>
+    
+    <li ><a href="#method-i-db_num">#db_num</a>
+    
+    <li ><a href="#method-i-each">#each</a>
+    
+    <li ><a href="#method-i-each_hit">#each_hit</a>
+    
+    <li ><a href="#method-i-each_iteration">#each_iteration</a>
+    
+    <li ><a href="#method-i-eff_space">#eff_space</a>
+    
+    <li ><a href="#method-i-entrez_query">#entrez_query</a>
+    
+    <li ><a href="#method-i-entropy">#entropy</a>
+    
+    <li ><a href="#method-i-expect">#expect</a>
+    
+    <li ><a href="#method-i-filter">#filter</a>
+    
+    <li ><a href="#method-i-gap_extend">#gap_extend</a>
+    
+    <li ><a href="#method-i-gap_open">#gap_open</a>
+    
+    <li ><a href="#method-i-hits">#hits</a>
+    
+    <li ><a href="#method-i-hsp_len">#hsp_len</a>
+    
+    <li ><a href="#method-i-inclusion">#inclusion</a>
+    
+    <li ><a href="#method-i-kappa">#kappa</a>
+    
+    <li ><a href="#method-i-lambda">#lambda</a>
+    
+    <li ><a href="#method-i-matrix">#matrix</a>
+    
+    <li ><a href="#method-i-message">#message</a>
+    
+    <li ><a href="#method-i-pattern">#pattern</a>
+    
+    <li ><a href="#method-i-sc_match">#sc_match</a>
+    
+    <li ><a href="#method-i-sc_mismatch">#sc_mismatch</a>
+    
+    <li ><a href="#method-i-statistics">#statistics</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::Blast::Report">
+  <h1 id="class-Bio::Blast::Report" class="class">
+    class Bio::Blast::Report
+  </h1>
+
+  <section class="description">
+    
+<h1 id="class-Bio::Blast::Report-label-Bio-3A-3ABlast-3A-3AReport"><a href="Report.html">Bio::Blast::Report</a><span><a href="#class-Bio::Blast::Report-label-Bio-3A-3ABlast-3A-3AReport">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>Parsed results of the blast execution for Tab-delimited and XML output
+format.  Tab-delimited reports are consists of</p>
+
+<pre>Query id,
+Subject id,
+percent of identity,
+alignment length,
+number of mismatches (not including gaps),
+number of gap openings,
+start of alignment in query,
+end of alignment in query,
+start of alignment in subject,
+end of alignment in subject,
+expected value,
+bit score.</pre>
+
+<p>according to the MEGABLAST document (README.mbl).  As for XML output, see
+the following DTDs.</p>
+
+<pre>* http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd
+* http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.mod
+* http://www.ncbi.nlm.nih.gov/dtd/NCBI_Entity.mod</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DELIMITER">DELIMITER
+        
+        <dd><p>for <a href="../FlatFile.html">Bio::FlatFile</a> support (only for XML
+data)</p>
+        
+      
+        <dt id="FLATFILE_SPLITTER">FLATFILE_SPLITTER
+        
+        <dd><p>Flatfile splitter for <a href="../NCBI.html">NCBI</a> BLAST XML format. It
+is internally used when reading BLAST XML. Normally, users do not need to
+use it directly.</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-db" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">db</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>database name or title (String)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-iterations" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">iterations</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Returns an Array of <a
+href="Report/Iteration.html">Bio::Blast::Report::Iteration</a> objects.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-parameters" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">parameters</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Returns a <a href="../../Hash.html">Hash</a> containing execution
+parameters.  Valid keys are: &#39;matrix&#39;, &#39;expect&#39;,
+&#39;include&#39;, &#39;sc-match&#39;, &#39;sc-mismatch&#39;,
+&#39;gap-open&#39;, &#39;gap-extend&#39;, &#39;filter&#39;</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-program" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">program</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>program name (e.g. “blastp”) (String)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-query_def" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">query_def</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>query definition line (String)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-query_id" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">query_id</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>query ID (String)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-query_len" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">query_len</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>query length (Integer)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-reference" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">reference</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>reference (String)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-reports" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">reports</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>When the report contains results for multiple query sequences, returns an
+array of <a href="Report.html">Bio::Blast::Report</a> objects corresponding
+to the multiple queries. Otherwise, returns nil.</p>
+
+<p>Note for “No hits found”: When no hits found for a query sequence, the
+result for the query is completely void and no information available in the
+result XML, including query ID and query definition. The only trace is that
+iteration number is skipped. This means that if the no-hit query is the
+last query, the query can not be detected, because the result XML is
+completely the same as the result XML without the query.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-version" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">version</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>BLAST version (e.g. “blastp 2.2.18 [Mar-02-2008]”) (String)</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(data, parser = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Passing a BLAST output from &#39;blastall -m 7&#39; or &#39;-m 8&#39; as a
+<a href="../../String.html">String</a>. Formats are auto detected.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">parser</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-ivar">@iterations</span> = []
+  <span class="ruby-ivar">@parameters</span> = {}
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">parser</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:xmlparser</span>             <span class="ruby-comment"># format 7</span>
+    <span class="ruby-identifier">xmlparser_parse</span>(<span class="ruby-identifier">data</span>)
+    <span class="ruby-ivar">@reports</span> = <span class="ruby-identifier">blastxml_split_reports</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:rexml</span>         <span class="ruby-comment"># format 7</span>
+    <span class="ruby-identifier">rexml_parse</span>(<span class="ruby-identifier">data</span>)
+    <span class="ruby-ivar">@reports</span> = <span class="ruby-identifier">blastxml_split_reports</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:tab</span>           <span class="ruby-comment"># format 8</span>
+    <span class="ruby-identifier">tab_parse</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">false</span>
+    <span class="ruby-comment"># do not parse, creates an empty object</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">auto_parse</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-rexml" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">rexml</span><span
+            class="method-args">(data)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Specify to use REXML to parse XML (-m 7) output.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="rexml-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rexml</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">:rexml</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-tab" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">tab</span><span
+            class="method-args">(data)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Specify to use tab delimited output parser.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="tab-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tab</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">:tab</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-c-xmlparser" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">xmlparser</span><span
+            class="method-args">(data)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Specify to use XMLParser to parse XML (-m 7) output.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="xmlparser-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">xmlparser</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">:xmlparser</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-db_len" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">db_len</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Length of BLAST db</p>
+          
+          
+
+          
+          <div class="method-source-code" id="db_len-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 191</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">db_len</span>;    <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;db-len&#39;</span>];    <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-db_num" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">db_num</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Number of sequences in BLAST db</p>
+          
+          
+
+          
+          <div class="method-source-code" id="db_num-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 189</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">db_num</span>;    <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;db-num&#39;</span>];    <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">each</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Report.html#method-i-each_hit">each_hit</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-each_hit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_hit</span><span
+            class="method-args">() { |x| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates on each <a href="Report/Hit.html">Bio::Blast::Report::Hit</a>
+object of the the last <a href="Report/Iteration.html">Iteration</a>.
+Shortcut for the last iteration&#39;s hits (for blastall)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="each_hit-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_hit</span>
+  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Report.html#method-i-each">each</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each_iteration" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_iteration</span><span
+            class="method-args">() { |x| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates on each <a
+href="Report/Iteration.html">Bio::Blast::Report::Iteration</a> object. (for
+blastpgp)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="each_iteration-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_iteration</span>
+  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-eff_space" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">eff_space</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Effective search space</p>
+          
+          
+
+          
+          <div class="method-source-code" id="eff_space-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 195</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">eff_space</span>; <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;eff-space&#39;</span>]; <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-entrez_query" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entrez_query</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Limit of request to Entrez : shortcuts for @parameters</p>
+          
+          
+
+          
+          <div class="method-source-code" id="entrez_query-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 156</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entrez_query</span>; <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;entrez-query&#39;</span>];     <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-entropy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entropy</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Karlin-Altschul parameter H</p>
+          
+          
+
+          
+          <div class="method-source-code" id="entropy-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 201</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entropy</span>;   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;entropy&#39;</span>];   <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-expect" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">expect</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Expectation threshold (-e) : shortcuts for @parameters</p>
+          
+          
+
+          
+          <div class="method-source-code" id="expect-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 140</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">expect</span>;       <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;expect&#39;</span>];           <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-filter" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">filter</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Filtering options (-F) : shortcuts for @parameters</p>
+          
+          
+
+          
+          <div class="method-source-code" id="filter-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 152</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter</span>;       <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;filter&#39;</span>];           <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-gap_extend" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gap_extend</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gap extension cost (-E) : shortcuts for @parameters</p>
+          
+          
+
+          
+          <div class="method-source-code" id="gap_extend-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 150</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">gap_extend</span>;   <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;gap-extend&#39;</span>];       <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-gap_open" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gap_open</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gap opening cost (-G) : shortcuts for @parameters</p>
+          
+          
+
+          
+          <div class="method-source-code" id="gap_open-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 148</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">gap_open</span>;     <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;gap-open&#39;</span>];         <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-hits" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hits</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a Array of Bio::Blast::Report::Hits of the last iteration. Shortcut
+for the last iteration&#39;s hits</p>
+          
+          
+
+          
+          <div class="method-source-code" id="hits-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 176</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hits</span>
+  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">hits</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-hsp_len" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hsp_len</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Effective HSP length</p>
+          
+          
+
+          
+          <div class="method-source-code" id="hsp_len-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hsp_len</span>;   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;hsp-len&#39;</span>];   <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-inclusion" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">inclusion</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Inclusion threshold (-h) : shortcuts for @parameters</p>
+          
+          
+
+          
+          <div class="method-source-code" id="inclusion-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 142</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">inclusion</span>;    <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;include&#39;</span>];          <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-kappa" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">kappa</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Karlin-Altschul parameter K</p>
+          
+          
+
+          
+          <div class="method-source-code" id="kappa-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">kappa</span>;     <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;kappa&#39;</span>];     <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-lambda" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">lambda</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Karlin-Altschul parameter Lamba</p>
+          
+          
+
+          
+          <div class="method-source-code" id="lambda-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 199</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">lambda</span>;    <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;lambda&#39;</span>];    <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-matrix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">matrix</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Matrix used (-M) : shortcuts for @parameters</p>
+          
+          
+
+          
+          <div class="method-source-code" id="matrix-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">matrix</span>;       <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;matrix&#39;</span>];           <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-message" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">message</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a <a href="../../String.html">String</a> (or nil) containing
+execution message of the last iteration (typically “CONVERGED”). Shortcut
+for the last iteration&#39;s message (for checking &#39;CONVERGED&#39;)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="message-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 206</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">message</span>
+  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">message</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-pattern" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">pattern</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>PHI-BLAST pattern : shortcuts for @parameters</p>
+          
+          
+
+          
+          <div class="method-source-code" id="pattern-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">pattern</span>;      <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;pattern&#39;</span>];          <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sc_match" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sc_match</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Match score for NT (-r) : shortcuts for @parameters</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sc_match-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sc_match</span>;     <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;sc-match&#39;</span>];         <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sc_mismatch" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sc_mismatch</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Mismatch score for NT (-q) : shortcuts for @parameters</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sc_mismatch-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sc_mismatch</span>;  <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;sc-mismatch&#39;</span>];      <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-statistics" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">statistics</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a <a href="../../Hash.html">Hash</a> containing execution
+statistics of the last iteration. Valid keys are: &#39;db-num&#39;,
+&#39;db-len&#39;, &#39;hsp-len&#39;, &#39;eff-space&#39;, &#39;kappa&#39;,
+&#39;lambda&#39;, &#39;entropy&#39; Shortcut for the last iteration&#39;s
+statistics.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="statistics-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 184</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">statistics</span>
+  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">statistics</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

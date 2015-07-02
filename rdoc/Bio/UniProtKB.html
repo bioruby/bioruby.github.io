@@ -1,0 +1,1898 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::UniProtKB - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::UniProtKB-label-Description">Description</a>
+    <li><a href="#class-Bio::UniProtKB-label-Examples">Examples</a>
+    <li><a href="#class-Bio::UniProtKB-label-References">References</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="EMBLDB.html">Bio::EMBLDB</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="EMBLDB/Common.html">Bio::EMBLDB::Common</a>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-aalen">#aalen</a>
+    
+    <li ><a href="#method-i-aaseq">#aaseq</a>
+    
+    <li ><a href="#method-i-cc">#cc</a>
+    
+    <li ><a href="#method-i-dr">#dr</a>
+    
+    <li ><a href="#method-i-dt">#dt</a>
+    
+    <li ><a href="#method-i-embl_dr">#embl_dr</a>
+    
+    <li ><a href="#method-i-entry">#entry</a>
+    
+    <li ><a href="#method-i-entry_id">#entry_id</a>
+    
+    <li ><a href="#method-i-entry_name">#entry_name</a>
+    
+    <li ><a href="#method-i-ft">#ft</a>
+    
+    <li ><a href="#method-i-gene_name">#gene_name</a>
+    
+    <li ><a href="#method-i-gene_names">#gene_names</a>
+    
+    <li ><a href="#method-i-gn">#gn</a>
+    
+    <li ><a href="#method-i-hi">#hi</a>
+    
+    <li ><a href="#method-i-id_line">#id_line</a>
+    
+    <li ><a href="#method-i-molecule">#molecule</a>
+    
+    <li ><a href="#method-i-molecule_type">#molecule_type</a>
+    
+    <li ><a href="#method-i-oh">#oh</a>
+    
+    <li ><a href="#method-i-os">#os</a>
+    
+    <li ><a href="#method-i-ox">#ox</a>
+    
+    <li ><a href="#method-i-protein_name">#protein_name</a>
+    
+    <li ><a href="#method-i-ref">#ref</a>
+    
+    <li ><a href="#method-i-references">#references</a>
+    
+    <li ><a href="#method-i-seq">#seq</a>
+    
+    <li ><a href="#method-i-sequence_length">#sequence_length</a>
+    
+    <li ><a href="#method-i-set_RN">#set_RN</a>
+    
+    <li ><a href="#method-i-sq">#sq</a>
+    
+    <li ><a href="#method-i-synonyms">#synonyms</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::UniProtKB">
+  <h1 id="class-Bio::UniProtKB" class="class">
+    class Bio::UniProtKB
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Bio::UniProtKB-label-Description">Description<span><a href="#class-Bio::UniProtKB-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Parser class for UniProtKB/SwissProt and <a href="TrEMBL.html">TrEMBL</a>
+database entry.</p>
+
+<p>See the <a href="UniProtKB.html">UniProtKB</a> document files and manuals.</p>
+
+<h2 id="class-Bio::UniProtKB-label-Examples">Examples<span><a href="#class-Bio::UniProtKB-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre class="ruby"><span class="ruby-identifier">str</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&quot;p53_human.swiss&quot;</span>)
+<span class="ruby-identifier">obj</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">UniProtKB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-identifier">obj</span>.<span class="ruby-identifier">entry_id</span> <span class="ruby-comment">#=&gt; &quot;P53_HUMAN&quot;</span>
+</pre>
+
+<h2 id="class-Bio::UniProtKB-label-References"><a href="References.html">References</a><span><a href="#class-Bio::UniProtKB-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p>The UniProt Knowledgebase (UniProtKB) <a
+href="http://www.uniprot.org/help/uniprotkb">www.uniprot.org/help/uniprotkb</a></p>
+</li><li>
+<p>The Universal Protein Resource (UniProt) <a
+href="http://uniprot.org">uniprot.org</a>/</p>
+</li><li>
+<p>The UniProtKB/SwissProt/TrEMBL User Manual <a
+href="http://www.uniprot.org/docs/userman.html">www.uniprot.org/docs/userman.html</a></p>
+</li></ul>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-aalen" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">aalen</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="UniProtKB.html#method-i-sequence_length">sequence_length</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-aaseq" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">aaseq</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="UniProtKB.html#method-i-seq">seq</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-cc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cc</span><span
+            class="method-args">(topic = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns contents in the CC lines.</p>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-cc">#cc</a> -&gt; <a
+href="../Hash.html">Hash</a></p>
+</li></ul>
+
+<p>returns an object of contents in the TOPIC.</p>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-cc">#cc</a> -&gt; Array w/in <a
+href="../Hash.html">Hash</a>, <a href="../Hash.html">Hash</a></p>
+</li></ul>
+
+<p>returns contents of the “ALTERNATIVE PRODUCTS”.</p>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-cc">#cc</a>(&#39;ALTERNATIVE
+PRODUCTS&#39;) -&gt; <a href="../Hash.html">Hash</a></p>
+
+<pre>{&#39;Event&#39; =&gt; str, 
+ &#39;Named isoforms&#39; =&gt; int,  
+ &#39;Comment&#39; =&gt; str,
+ &#39;Variants&#39;=&gt;[{&#39;Name&#39; =&gt; str, &#39;Synonyms&#39; =&gt; str, &#39;IsoId&#39; =&gt; str, &#39;Sequence&#39; =&gt; []}]}
+
+CC   -!- ALTERNATIVE PRODUCTS:
+CC       Event=Alternative splicing; Named isoforms=15;
+...
+CC         placentae isoforms. All tissues differentially splice exon 13;
+CC       Name=A; Synonyms=no del;
+CC         IsoId=P15529-1; Sequence=Displayed;</pre>
+</li></ul>
+
+<p>returns contents of the “DATABASE”.</p>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-cc">#cc</a>(&#39;DATABASE&#39;) -&gt;
+Array</p>
+
+<pre>[{&#39;NAME&#39;=&gt;str,&#39;NOTE&#39;=&gt;str, &#39;WWW&#39;=&gt;URI,&#39;FTP&#39;=&gt;URI}, ...]
+
+CC   -!- DATABASE: NAME=Text[; NOTE=Text][; WWW=&quot;Address&quot;][; FTP=&quot;Address&quot;].</pre>
+</li></ul>
+
+<p>returns contents of the “MASS SPECTROMETRY”.</p>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-cc">#cc</a>(&#39;MASS SPECTROMETRY&#39;)
+-&gt; Array</p>
+
+<pre>[{&#39;MW&quot;=&gt;float,&#39;MW_ERR&#39;=&gt;float, &#39;METHOD&#39;=&gt;str,&#39;RANGE&#39;=&gt;str}, ...]
+
+CC   -!- MASS SPECTROMETRY: MW=XXX[; MW_ERR=XX][; METHOD=XX][;RANGE=XX-XX].</pre>
+</li></ul>
+
+<h3 id="method-i-cc-label-CC+lines+-28-3E-3D0-2C+optional-29">CC lines (&gt;=0, optional)<span><a href="#method-i-cc-label-CC+lines+-28-3E-3D0-2C+optional-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>CC   -!- TISSUE SPECIFICITY: HIGHEST LEVELS FOUND IN TESTIS. ALSO PRESENT
+CC       IN LIVER, KIDNEY, LUNG AND BRAIN.
+
+CC   -!- TOPIC: FIRST LINE OF A COMMENT BLOCK;
+CC       SECOND AND SUBSEQUENT LINES OF A COMMENT BLOCK.</pre>
+
+<p>See also <a
+href="http://www.expasy.org/sprot/userman.html#CC_line">www.expasy.org/sprot/userman.html#CC_line</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="cc-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 774</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cc</span>(<span class="ruby-identifier">topic</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>]
+    <span class="ruby-identifier">cc</span>  = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">comment_border</span>= <span class="ruby-string">&#39;-&#39;</span> <span class="ruby-operator">*</span> (<span class="ruby-value">77</span> <span class="ruby-operator">-</span> <span class="ruby-value">4</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+    <span class="ruby-identifier">dlm</span> = <span class="ruby-regexp">/-!- /</span>
+
+    <span class="ruby-comment"># 12KD_MYCSM has no CC lines.</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;CC&#39;</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    
+    <span class="ruby-identifier">cc_raw</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;CC&#39;</span>)
+
+    <span class="ruby-comment"># Removing the copyright statement.</span>
+    <span class="ruby-identifier">cc_raw</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/ *---.+---/m</span>, <span class="ruby-string">&#39;&#39;</span>)
+
+    <span class="ruby-comment"># Not any CC Lines without the copyright statement.</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cc_raw</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span>
+
+    <span class="ruby-keyword">begin</span>
+      <span class="ruby-identifier">cc_raw</span>, <span class="ruby-identifier">copyright</span> = <span class="ruby-identifier">cc_raw</span>.<span class="ruby-identifier">split</span>(<span class="ruby-node">/#{comment_border}/</span>)[<span class="ruby-value">0</span>]
+      <span class="ruby-identifier">_</span> = <span class="ruby-identifier">copyright</span> <span class="ruby-comment">#dummy for suppress &quot;assigned but unused variable&quot;</span>
+      <span class="ruby-identifier">cc_raw</span> = <span class="ruby-identifier">cc_raw</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-identifier">dlm</span>,<span class="ruby-string">&#39;&#39;</span>)
+      <span class="ruby-identifier">cc_raw</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">dlm</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tmp</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">strip</span>
+
+        <span class="ruby-keyword">if</span> <span class="ruby-regexp">/(^[A-Z ]+[A-Z]): (.+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">tmp</span>
+          <span class="ruby-identifier">key</span>  = <span class="ruby-node">$1</span>
+          <span class="ruby-identifier">body</span> = <span class="ruby-node">$2</span>
+          <span class="ruby-identifier">body</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/- (?!AND)/</span>,<span class="ruby-string">&#39;-&#39;</span>)
+          <span class="ruby-identifier">body</span>.<span class="ruby-identifier">strip!</span>
+          <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cc</span>[<span class="ruby-identifier">key</span>]
+            <span class="ruby-identifier">cc</span>[<span class="ruby-identifier">key</span>] = [<span class="ruby-identifier">body</span>]
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">cc</span>[<span class="ruby-identifier">key</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">body</span>)
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">raise</span> [<span class="ruby-node">&quot;Error: [#{entry_id}]: CC Lines&quot;</span>, <span class="ruby-string">&#39;&quot;&#39;</span>, <span class="ruby-identifier">tmp</span>, <span class="ruby-string">&#39;&quot;&#39;</span>,
+                 <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;CC&#39;</span>),<span class="ruby-string">&#39;&#39;</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;CC&#39;</span>) <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span>
+        <span class="ruby-keyword">return</span> {}
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">raise</span> [<span class="ruby-node">&quot;Error: Invalid CC Lines: [#{entry_id}]: &quot;</span>,
+               <span class="ruby-node">&quot;\n&#39;#{self.get(&#39;CC&#39;)}&#39;\n&quot;</span>, <span class="ruby-node">&quot;(#{$!})&quot;</span>].<span class="ruby-identifier">join</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
+    <span class="ruby-keyword">end</span>
+    
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>] = <span class="ruby-identifier">cc</span>
+  <span class="ruby-keyword">end</span>
+
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">topic</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;ALLERGEN&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;ALTERNATIVE PRODUCTS&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc_alternative_products</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>])
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;BIOPHYSICOCHEMICAL PROPERTIES&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc_biophysiochemical_properties</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>])
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;BIOTECHNOLOGY&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;CATALITIC ACTIVITY&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc_catalytic_activity</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>])
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;CAUTION&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc_caution</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>])
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;COFACTOR&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;DEVELOPMENTAL STAGE&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;DISEASE&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;DOMAIN&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;ENZYME REGULATION&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;FUNCTION&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;INDUCTION&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;INTERACTION&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc_interaction</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>])
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;MASS SPECTROMETRY&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc_mass_spectrometry</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>])
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;MISCELLANEOUS&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;PATHWAY&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc_pathway</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>])
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;PHARMACEUTICAL&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;POLYMORPHISM&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;PTM&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RNA EDITING&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc_rna_editing</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>])
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;SIMILARITY&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;SUBCELLULAR LOCATION&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc_subcellular_location</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>])
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;SUBUNIT&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;TISSUE SPECIFICITY&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;TOXIC DOSE&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;WEB RESOURCE&#39;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cc_web_resource</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>])
+  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;DATABASE&#39;</span>
+    <span class="ruby-comment"># DATABASE: NAME=Text[; NOTE=Text][; WWW=&quot;Address&quot;][; FTP=&quot;Address&quot;].</span>
+    <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">db</span> = <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-string">&#39;DATABASE&#39;</span>]
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">db</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">db</span>
+
+    <span class="ruby-identifier">db</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">db</span> = {<span class="ruby-string">&#39;NAME&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;NOTE&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;WWW&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;FTP&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-keyword">nil</span>}
+      <span class="ruby-identifier">e</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/.$/</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/;/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">case</span> <span class="ruby-identifier">line</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/NAME=(.+)/</span>
+          <span class="ruby-identifier">db</span>[<span class="ruby-string">&#39;NAME&#39;</span>] = <span class="ruby-node">$1</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/NOTE=(.+)/</span>
+          <span class="ruby-identifier">db</span>[<span class="ruby-string">&#39;NOTE&#39;</span>] = <span class="ruby-node">$1</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/WWW=&quot;(.+)&quot;/</span>
+          <span class="ruby-identifier">db</span>[<span class="ruby-string">&#39;WWW&#39;</span>] = <span class="ruby-node">$1</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/FTP=&quot;(.+)&quot;/</span>
+          <span class="ruby-identifier">db</span>[<span class="ruby-string">&#39;FTP&#39;</span>] = <span class="ruby-node">$1</span>
+        <span class="ruby-keyword">end</span> 
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">db</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">tmp</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>][<span class="ruby-identifier">topic</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-dr" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dr</span><span
+            class="method-args">(key = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="UniProtKB.html#method-i-dr">#dr</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="dr-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 1131</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dr</span>(<span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span>
+    <span class="ruby-identifier">embl_dr</span>
+  <span class="ruby-keyword">else</span>
+    (<span class="ruby-identifier">embl_dr</span>[<span class="ruby-identifier">key</span>] <span class="ruby-keyword">or</span> []).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+      {<span class="ruby-string">&#39;Accession&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>],
+       <span class="ruby-string">&#39;Version&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>],
+       <span class="ruby-string">&#39; &#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">2</span>],
+       <span class="ruby-string">&#39;Molecular Type&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">3</span>]}
+    }
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="UniProtKB.html#method-i-embl_dr">embl_dr</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-dt" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dt</span><span
+            class="method-args">(key = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a <a href="../Hash.html">Hash</a> of information in the DT lines.</p>
+
+<pre class="ruby"><span class="ruby-identifier">hash</span> <span class="ruby-identifier">keys</span><span class="ruby-operator">:</span> 
+  [<span class="ruby-string">&#39;created&#39;</span>, <span class="ruby-string">&#39;sequence&#39;</span>, <span class="ruby-string">&#39;annotation&#39;</span>]
+</pre>
+
+<p>Since <a href="UniProtKB.html">UniProtKB</a> release 7.0 of 07-Feb-2006,
+the DT line format is changed, and the word “annotation” is no longer used
+in DT lines. Despite the change, the word “annotation” is still used for
+keeping compatibility.</p>
+
+<p>returns a <a href="../String.html">String</a> of information in the DT
+lines by a given key.</p>
+
+<h3 id="method-i-dt-label-DT+Line-3B+date+-283-2Fentry-29">DT Line; date (3/entry)<span><a href="#method-i-dt-label-DT+Line-3B+date+-283-2Fentry-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>DT DD-MMM-YYY (integrated into UniProtKB/XXXXX.)
+DT DD-MMM-YYY (sequence version NN)
+DT DD-MMM-YYY (entry version NN)</pre>
+
+<p>The format have been changed in <a href="UniProtKB.html">UniProtKB</a>
+release 7.0 of 07-Feb-2006. Below is the older format.</p>
+
+<h3 id="method-i-dt-label-Old+format+of+DT+Line-3B+date+-283-2Fentry-29">Old format of DT Line; date (3/entry)<span><a href="#method-i-dt-label-Old+format+of+DT+Line-3B+date+-283-2Fentry-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>DT DD-MMM-YYY (rel. NN, Created)
+DT DD-MMM-YYY (rel. NN, Last sequence update)
+DT DD-MMM-YYY (rel. NN, Last annotation update)</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="dt-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dt</span>(<span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">dt</span>[<span class="ruby-identifier">key</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>]
+
+  <span class="ruby-identifier">part</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;DT&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>)
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>] = {
+    <span class="ruby-string">&#39;created&#39;</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">part</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\w{2}   /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>,
+    <span class="ruby-string">&#39;sequence&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">part</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\w{2}   /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>,
+    <span class="ruby-string">&#39;annotation&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">part</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\w{2}   /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-embl_dr" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">embl_dr</span><span
+            class="method-args">(key = nil)</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Backup Bio::EMBLDB#dr as <a
+href="UniProtKB.html#method-i-embl_dr">#embl_dr</a></p>
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="UniProtKB.html#method-i-dr">dr</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-entry" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">entry</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="UniProtKB.html#method-i-entry_id">entry_id</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-entry_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entry_id</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a ENTRY_NAME in the ID line.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="entry_id-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry_id</span>
+  <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;ENTRY_NAME&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="UniProtKB.html#method-i-entry_name">entry_name</a>, <a href="UniProtKB.html#method-i-entry">entry</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-entry_name" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">entry_name</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="UniProtKB.html#method-i-entry_id">entry_id</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-ft" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ft</span><span
+            class="method-args">(feature_key = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns contents in the feature table.</p>
+
+<h2 id="method-i-ft-label-Examples">Examples<span><a href="#method-i-ft-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre class="ruby"><span class="ruby-identifier">sp</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">UniProtKB</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">entry</span>)
+<span class="ruby-identifier">ft</span> = <span class="ruby-identifier">sp</span>.<span class="ruby-identifier">ft</span>
+<span class="ruby-identifier">ft</span>.<span class="ruby-identifier">class</span> <span class="ruby-comment">#=&gt; Hash</span>
+<span class="ruby-identifier">ft</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">feature_key</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">ft</span>[<span class="ruby-identifier">feature_key</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">feature</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">feature</span>[<span class="ruby-string">&#39;From&#39;</span>] <span class="ruby-comment">#=&gt; &#39;1&#39;</span>
+    <span class="ruby-identifier">feature</span>[<span class="ruby-string">&#39;To&#39;</span>]   <span class="ruby-comment">#=&gt; &#39;21&#39;</span>
+    <span class="ruby-identifier">feature</span>[<span class="ruby-string">&#39;Description&#39;</span>] <span class="ruby-comment">#=&gt; &#39;&#39;</span>
+    <span class="ruby-identifier">feature</span>[<span class="ruby-string">&#39;FTId&#39;</span>] <span class="ruby-comment">#=&gt; &#39;&#39;</span>
+    <span class="ruby-identifier">feature</span>[<span class="ruby-string">&#39;diff&#39;</span>] <span class="ruby-comment">#=&gt; []</span>
+    <span class="ruby-identifier">feature</span>[<span class="ruby-string">&#39;original&#39;</span>] <span class="ruby-comment">#=&gt; [feature_key, &#39;1&#39;, &#39;21&#39;, &#39;&#39;, &#39;&#39;]</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-ft">#ft</a> -&gt; <a
+href="../Hash.html">Hash</a></p>
+
+<pre>{FEATURE_KEY =&gt; [{&#39;From&#39; =&gt; int, &#39;To&#39; =&gt; int, 
+                  &#39;Description&#39; =&gt; aStr, &#39;FTId&#39; =&gt; aStr,
+                  &#39;diff&#39; =&gt; [original_residues, changed_residues],
+                  &#39;original&#39; =&gt; aAry }],...}</pre>
+</li></ul>
+
+<p>returns an Array of the information about the feature_name in the feature
+table.</p>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-ft">#ft</a> -&gt; Array of <a
+href="../Hash.html">Hash</a></p>
+
+<pre>[{&#39;From&#39; =&gt; str, &#39;To&#39; =&gt; str, &#39;Description&#39; =&gt; str, &#39;FTId&#39; =&gt; str},...]</pre>
+</li></ul>
+
+<h2 id="method-i-ft-label-FT+Line-3B+feature+table+data+-28-3E-3D0-2C+optional-29">FT Line; feature table data (&gt;=0, optional)<span><a href="#method-i-ft-label-FT+Line-3B+feature+table+data+-28-3E-3D0-2C+optional-29">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre>Col     Data item
+-----   -----------------
+ 1- 2   FT
+ 6-13   Feature name 
+15-20   `FROM&#39; endpoint
+22-27   `TO&#39; endpoint
+35-75   Description (&gt;=0 per key)
+-----   -----------------</pre>
+
+<p>Note: &#39;FROM&#39; and &#39;TO&#39; endopoints are allowed to use
+non-numerial charactors  including &#39;&lt;&#39;, &#39;&gt;&#39; or
+&#39;?&#39;. (c.f. &#39;&lt;1&#39;, &#39;?42&#39;)</p>
+
+<p>See also <a
+href="http://www.expasy.org/sprot/userman.html#FT_line">www.expasy.org/sprot/userman.html#FT_line</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="ft-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 1196</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ft</span>(<span class="ruby-identifier">feature_key</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">ft</span>[<span class="ruby-identifier">feature_key</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">feature_key</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>]
+
+  <span class="ruby-identifier">table</span> = []
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;FT&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^FT   \w/</span>
+        <span class="ruby-identifier">feature</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">ljust</span>(<span class="ruby-value">74</span>)
+        <span class="ruby-identifier">table</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">feature</span>[ <span class="ruby-value">5</span><span class="ruby-operator">..</span><span class="ruby-value">12</span>].<span class="ruby-identifier">strip</span>,   <span class="ruby-comment"># Feature Name</span>
+                  <span class="ruby-identifier">feature</span>[<span class="ruby-value">14</span><span class="ruby-operator">..</span><span class="ruby-value">19</span>].<span class="ruby-identifier">strip</span>,   <span class="ruby-comment"># From</span>
+                  <span class="ruby-identifier">feature</span>[<span class="ruby-value">21</span><span class="ruby-operator">..</span><span class="ruby-value">26</span>].<span class="ruby-identifier">strip</span>,   <span class="ruby-comment"># To</span>
+                  <span class="ruby-identifier">feature</span>[<span class="ruby-value">34</span><span class="ruby-operator">..</span><span class="ruby-value">74</span>].<span class="ruby-identifier">strip</span> ]  <span class="ruby-comment"># Description</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">table</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/^FT +/</span>, <span class="ruby-string">&#39;&#39;</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Joining Description lines</span>
+    <span class="ruby-identifier">table</span> = <span class="ruby-identifier">table</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">feature</span><span class="ruby-operator">|</span> 
+      <span class="ruby-identifier">ftid</span> = <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/FTId=/</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
+        <span class="ruby-identifier">feature</span> = [<span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span>], 
+                   <span class="ruby-identifier">feature</span>[<span class="ruby-value">1</span>], 
+                   <span class="ruby-identifier">feature</span>[<span class="ruby-value">2</span>], 
+                   <span class="ruby-identifier">feature</span>[<span class="ruby-value">3</span>, <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span> <span class="ruby-value">3</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>)]
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">feature</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">ftid</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">ftid</span> <span class="ruby-keyword">else</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">end</span>
+    }
+
+    <span class="ruby-identifier">hash</span> = {}
+    <span class="ruby-identifier">table</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">feature</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span>]] = [] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span>]]
+      <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span>]] <span class="ruby-operator">&lt;&lt;</span> {
+        <span class="ruby-comment"># Removing &#39;&lt;&#39;, &#39;&gt;&#39; or &#39;?&#39; in FROM/TO endopoint.</span>
+        <span class="ruby-string">&#39;From&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">feature</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\D/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">to_i</span>,  
+        <span class="ruby-string">&#39;To&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">feature</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\D/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">to_i</span>, 
+        <span class="ruby-string">&#39;Description&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">feature</span>[<span class="ruby-value">3</span>], 
+        <span class="ruby-string">&#39;FTId&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">feature</span>[<span class="ruby-value">4</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\/FTId=/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\.$/</span>, <span class="ruby-string">&#39;&#39;</span>),
+        <span class="ruby-string">&#39;diff&#39;</span> =<span class="ruby-operator">&gt;</span> [],
+        <span class="ruby-string">&#39;original&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">feature</span>
+      }
+
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;VARSPLIC&#39;</span>, <span class="ruby-string">&#39;VARIANT&#39;</span>, <span class="ruby-string">&#39;VAR_SEQ&#39;</span>, <span class="ruby-string">&#39;CONFLICT&#39;</span>
+        <span class="ruby-keyword">case</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span>]].<span class="ruby-identifier">last</span>[<span class="ruby-string">&#39;Description&#39;</span>]
+        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/(\w[\w ]*\w*) - ?&gt; (\w[\w ]*\w*)/</span>
+          <span class="ruby-identifier">original_res</span> = <span class="ruby-node">$1</span>
+          <span class="ruby-identifier">changed_res</span> = <span class="ruby-node">$2</span>
+          <span class="ruby-identifier">original_res</span> = <span class="ruby-identifier">original_res</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/ /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>
+          <span class="ruby-identifier">chenged_res</span> = <span class="ruby-identifier">changed_res</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/ /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/Missing/i</span>
+          <span class="ruby-identifier">original_res</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span>]].<span class="ruby-identifier">last</span>[<span class="ruby-string">&#39;From&#39;</span>],
+                                    <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span>]].<span class="ruby-identifier">last</span>[<span class="ruby-string">&#39;To&#39;</span>])
+          <span class="ruby-identifier">changed_res</span> = <span class="ruby-string">&#39;&#39;</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">feature</span>[<span class="ruby-value">0</span>]].<span class="ruby-identifier">last</span>[<span class="ruby-string">&#39;diff&#39;</span>] = [<span class="ruby-identifier">original_res</span>, <span class="ruby-identifier">chenged_res</span>]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid FT Lines(#{$!}) in #{entry_id}:, \n&#39;#{self.get(&#39;FT&#39;)}&#39;\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>] = <span class="ruby-identifier">hash</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-gene_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gene_name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a <a href="../String.html">String</a> of the first gene name in the
+GN line.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="gene_name-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 437</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">gene_name</span>
+  (<span class="ruby-identifier">x</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">gene_names</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-gene_names" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gene_names</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a Array of gene names in the GN line.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="gene_names-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 426</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">gene_names</span>
+  <span class="ruby-identifier">gn</span> <span class="ruby-comment"># set @data[&#39;GN&#39;] if it hasn&#39;t been already done</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;GN&#39;</span>].<span class="ruby-identifier">first</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Hash</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;GN&#39;</span>].<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">element</span><span class="ruby-operator">|</span> <span class="ruby-identifier">element</span>[<span class="ruby-value">:name</span>] }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;GN&#39;</span>].<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-gn" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gn</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns gene names in the GN line.</p>
+
+<p>New UniProt/SwissProt format:</p>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-gn">#gn</a> -&gt; [ &lt;gene record&gt;* ]</p>
+</li></ul>
+
+<p>where &lt;gene record&gt; is:</p>
+
+<pre>{ :name =&gt; &#39;...&#39;, 
+  :synonyms =&gt; [ &#39;s1&#39;, &#39;s2&#39;, ... ],
+  :loci   =&gt; [ &#39;l1&#39;, &#39;l2&#39;, ... ],
+  :orfs     =&gt; [ &#39;o1&#39;, &#39;o2&#39;, ... ] 
+}</pre>
+
+<p>Old format:</p>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-gn">#gn</a> -&gt; Array      # AND</p>
+</li><li>
+<p><a href="UniProtKB.html#method-i-gn">#gn</a> -&gt; Array   # OR</p>
+</li></ul>
+
+<h3 id="method-i-gn-label-GN+Line-3A+Gene+name-28s-29+-28-3E-3D0-2C+optional-29">GN Line: Gene name(s) (&gt;=0, optional)<span><a href="#method-i-gn-label-GN+Line-3A+Gene+name-28s-29+-28-3E-3D0-2C+optional-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+          
+          
+
+          
+          <div class="method-source-code" id="gn-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 350</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">gn</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;GN&#39;</span>]
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;GN&#39;</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/Name=/</span>,<span class="ruby-regexp">/ORFNames=/</span>,<span class="ruby-regexp">/OrderedLocusNames=/</span>,<span class="ruby-regexp">/Synonyms=/</span>
+      <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;GN&#39;</span>] = <span class="ruby-identifier">gn_uniprot_parser</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;GN&#39;</span>] = <span class="ruby-identifier">gn_old_parser</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;GN&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-hi" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hi</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <h3 id="method-i-hi-label-The+HI+line">The HI line<span><a href="#method-i-hi-label-The+HI+line">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="UniProtKB.html#method-i-hi">#hi</a> #=&gt; hash</p>
+          
+          
+
+          
+          <div class="method-source-code" id="hi-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 690</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hi</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;HI&#39;</span>]
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;HI&#39;</span>] = []
+    <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;HI&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\. /</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hlist</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">hash</span> = {<span class="ruby-string">&#39;Category&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>,  <span class="ruby-string">&#39;Keywords&#39;</span> =<span class="ruby-operator">&gt;</span> [], <span class="ruby-string">&#39;Keyword&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>}
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;Category&#39;</span>], <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;Keywords&#39;</span>] = <span class="ruby-identifier">hlist</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;: &#39;</span>)
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;Keywords&#39;</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;Keywords&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;; &#39;</span>)
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;Keyword&#39;</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;Keywords&#39;</span>].<span class="ruby-identifier">pop</span>
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;Keyword&#39;</span>].<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\.$/</span>, <span class="ruby-string">&#39;&#39;</span>)
+      <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;HI&#39;</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hash</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;HI&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-id_line" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">id_line</span><span
+            class="method-args">(key = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a <a href="../Hash.html">Hash</a> of the ID line.</p>
+
+<p>returns a content (Int or <a href="../String.html">String</a>) of the ID
+line by a given key. <a href="../Hash.html">Hash</a> keys:
+[&#39;ENTRY_NAME&#39;, &#39;DATA_CLASS&#39;, &#39;MODECULE_TYPE&#39;,
+&#39;SEQUENCE_LENGTH&#39;]</p>
+
+<h3 id="method-i-id_line-label-ID+Line+-28since+UniProtKB+release+9.0+of+31-Oct-2006-29">ID Line (since <a href="UniProtKB.html">UniProtKB</a> release 9.0 of 31-Oct-2006)<span><a href="#method-i-id_line-label-ID+Line+-28since+UniProtKB+release+9.0+of+31-Oct-2006-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>ID   P53_HUMAN               Reviewed;         393 AA.
+#&quot;ID  #{ENTRY_NAME} #{DATA_CLASS}; #{SEQUENCE_LENGTH}.&quot;</pre>
+
+<h3 id="method-i-id_line-label-Examples">Examples<span><a href="#method-i-id_line-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>obj.id_line  #=&gt; {&quot;ENTRY_NAME&quot;=&gt;&quot;P53_HUMAN&quot;, &quot;DATA_CLASS&quot;=&gt;&quot;Reviewed&quot;, 
+                  &quot;SEQUENCE_LENGTH&quot;=&gt;393, &quot;MOLECULE_TYPE&quot;=&gt;nil}
+
+obj.id_line(&#39;ENTRY_NAME&#39;) #=&gt; &quot;P53_HUMAN&quot;</pre>
+
+<h3 id="method-i-id_line-label-ID+Line+-28older+style-29">ID Line (older style)<span><a href="#method-i-id_line-label-ID+Line+-28older+style-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>ID   P53_HUMAN      STANDARD;      PRT;   393 AA.
+#&quot;ID  #{ENTRY_NAME} #{DATA_CLASS}; #{MOLECULE_TYPE}; #{SEQUENCE_LENGTH}.&quot;</pre>
+
+<h3 id="method-i-id_line-label-Examples">Examples<span><a href="#method-i-id_line-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>obj.id_line  #=&gt; {&quot;ENTRY_NAME&quot;=&gt;&quot;P53_HUMAN&quot;, &quot;DATA_CLASS&quot;=&gt;&quot;STANDARD&quot;, 
+                  &quot;SEQUENCE_LENGTH&quot;=&gt;393, &quot;MOLECULE_TYPE&quot;=&gt;&quot;PRT&quot;}
+
+obj.id_line(&#39;ENTRY_NAME&#39;) #=&gt; &quot;P53_HUMAN&quot;</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="id_line-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">id_line</span>(<span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">id_line</span>[<span class="ruby-identifier">key</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>]
+
+  <span class="ruby-identifier">part</span> = <span class="ruby-ivar">@orig</span>[<span class="ruby-string">&#39;ID&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/ +/</span>)         
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">part</span>[<span class="ruby-value">4</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;AA.&#39;</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># after UniProtKB release 9.0 of 31-Oct-2006</span>
+    <span class="ruby-comment"># (http://www.uniprot.org/docs/sp_news.htm)</span>
+    <span class="ruby-identifier">molecule_type</span>   = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">sequence_length</span> = <span class="ruby-identifier">part</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">molecule_type</span>   = <span class="ruby-identifier">part</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/;/</span>,<span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-identifier">sequence_length</span> = <span class="ruby-identifier">part</span>[<span class="ruby-value">4</span>].<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>] = {
+    <span class="ruby-string">&#39;ENTRY_NAME&#39;</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">part</span>[<span class="ruby-value">1</span>],
+    <span class="ruby-string">&#39;DATA_CLASS&#39;</span>      =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">part</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/;/</span>,<span class="ruby-string">&#39;&#39;</span>),
+    <span class="ruby-string">&#39;MOLECULE_TYPE&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">molecule_type</span>,
+    <span class="ruby-string">&#39;SEQUENCE_LENGTH&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">sequence_length</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-molecule" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">molecule</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a MOLECULE_TYPE in the ID line.</p>
+
+<p>A short-cut for <a
+href="UniProtKB.html#method-i-id_line">#id_line</a>(&#39;MOLECULE_TYPE&#39;).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="molecule-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 108</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">molecule</span>
+  <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;MOLECULE_TYPE&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="UniProtKB.html#method-i-molecule_type">molecule_type</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-molecule_type" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">molecule_type</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="UniProtKB.html#method-i-molecule">molecule</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-oh" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">oh</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <h3 id="method-i-oh-label-The+OH+Line-3B++">The OH Line;  <span><a href="#method-i-oh-label-The+OH+Line-3B++">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>OH   NCBI_TaxID=TaxID; HostName. <a
+href="http://br.expasy.org/sprot/userman.html#OH_line">br.expasy.org/sprot/userman.html#OH_line</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="oh-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 520</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">oh</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OH&#39;</span>]
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OH&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;OH&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\. &quot;</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/NCBI_TaxID=(\d+);/</span>
+        <span class="ruby-identifier">taxid</span> = <span class="ruby-node">$1</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, [<span class="ruby-node">&quot;Error: Invalid OH line format (#{self.entry_id}):&quot;</span>,
+                              <span class="ruby-identifier">$!</span>, <span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;OH&#39;</span>), <span class="ruby-string">&quot;\n&quot;</span>].<span class="ruby-identifier">join</span>
+        
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/NCBI_TaxID=\d+; (.+)/</span> 
+        <span class="ruby-identifier">host_name</span> = <span class="ruby-node">$1</span>
+        <span class="ruby-identifier">host_name</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\.$/</span>, <span class="ruby-string">&#39;&#39;</span>)
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">host_name</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">end</span>
+      {<span class="ruby-string">&#39;NCBI_TaxID&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">taxid</span>, <span class="ruby-string">&#39;HostName&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">host_name</span>}
+    }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OH&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-os" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">os</span><span
+            class="method-args">(num = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a Array of Hashs or a <a href="../String.html">String</a> of the OS
+line when a key given.</p>
+<ul><li>
+<p>Bio::EMBLDB#os  -&gt; Array</p>
+</li></ul>
+
+<pre class="ruby">[{<span class="ruby-string">&#39;name&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;(Human)&#39;</span>, <span class="ruby-string">&#39;os&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Homo sapiens&#39;</span>}, 
+ {<span class="ruby-string">&#39;name&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;(Rat)&#39;</span>, <span class="ruby-string">&#39;os&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Rattus norveticus&#39;</span>}]
+</pre>
+<ul><li>
+<p><a href="0">Bio::EPTR#os</a> -&gt; <a href="../Hash.html">Hash</a></p>
+</li></ul>
+
+<pre class="ruby">{<span class="ruby-string">&#39;name&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&quot;(Human)&quot;</span>, <span class="ruby-string">&#39;os&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;Homo sapiens&#39;</span>}
+</pre>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-os">#os</a>[&#39;name&#39;] -&gt;
+“(Human)”</p>
+</li><li>
+<p>Bio::EPTR#os(0) -&gt; “Homo sapiens (Human)”</p>
+</li></ul>
+
+<h3 id="method-i-os-label-OS+Line-3B+organism+species+-28-3E-3D1-29">OS Line; organism species (&gt;=1)<span><a href="#method-i-os-label-OS+Line-3B+organism+species+-28-3E-3D1-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>OS   Genus species (name).
+OS   Genus species (name0) (name1).
+OS   Genus species (name0) (name1).
+OS   Genus species (name0), G s0 (name0), and G s (name0) (name1).
+OS   Homo sapiens (Human), and Rarrus norveticus (Rat)
+OS   Hippotis sp. Clark and Watts 825.
+OS   unknown cyperaceous sp.</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="os-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 459</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">os</span>(<span class="ruby-identifier">num</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OS&#39;</span>]
+    <span class="ruby-identifier">os</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;OS&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/, and|, /</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tmp</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">tmp</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(\w+ *[\w \:\\+\-\.]+[\w\.])/</span>
+        <span class="ruby-identifier">org</span> = <span class="ruby-node">$1</span>
+        <span class="ruby-identifier">tmp</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(\(.+\))/</span> 
+        <span class="ruby-identifier">os</span>.<span class="ruby-identifier">push</span>({<span class="ruby-string">&#39;name&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">$1</span>, <span class="ruby-string">&#39;os&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">org</span>})
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Error: OS Line. #{$!}\n#{fetch(&#39;OS&#39;)}\n&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OS&#39;</span>] = <span class="ruby-identifier">os</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">num</span>
+    <span class="ruby-comment"># EX. &quot;Trifolium repens (white clover)&quot;</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{@data[&#39;OS&#39;][num][&#39;os&#39;]} #{@data[&#39;OS&#39;][num][&#39;name&#39;]}&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OS&#39;</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-ox" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ox</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a <a href="../Hash.html">Hash</a> of oraganism taxonomy
+cross-references.</p>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-ox">#ox</a> -&gt; <a
+href="../Hash.html">Hash</a></p>
+
+<pre>{&#39;NCBI_TaxID&#39; =&gt; [&#39;1234&#39;,&#39;2345&#39;,&#39;3456&#39;,&#39;4567&#39;], ...}</pre>
+</li></ul>
+
+<h3 id="method-i-ox-label-OX+Line-3B+organism+taxonomy+cross-reference+-28-3E-3D1+per+entry-29">OX Line; organism taxonomy cross-reference (&gt;=1 per entry)<span><a href="#method-i-ox-label-OX+Line-3B+organism+taxonomy+cross-reference+-28-3E-3D1+per+entry-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-constant">OX</span>   <span class="ruby-constant">NCBI_TaxID</span>=<span class="ruby-value">1234</span>;
+<span class="ruby-constant">OX</span>   <span class="ruby-constant">NCBI_TaxID</span>=<span class="ruby-value">1234</span>, <span class="ruby-value">2345</span>, <span class="ruby-value">3456</span>, <span class="ruby-value">4567</span>;
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="ox-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 503</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ox</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OX&#39;</span>]
+    <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;OX&#39;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\.$/</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/;/</span>).<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">strip</span> }
+    <span class="ruby-identifier">hsh</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">db</span>,<span class="ruby-identifier">refs</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/=/</span>)
+      <span class="ruby-identifier">hsh</span>[<span class="ruby-identifier">db</span>] = <span class="ruby-identifier">refs</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/, */</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OX&#39;</span>] = <span class="ruby-identifier">hsh</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OX&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-protein_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">protein_name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns the proposed official name of the protein. Returns a <a
+href="../String.html">String</a>.</p>
+
+<p>Since <a href="UniProtKB.html">UniProtKB</a> release 14.0 of 22-Jul-2008,
+the DE line format have been changed. The method returns the full name
+which is taken from “RecName: Full=” or “SubName: Full=” line normally in
+the beginning of the DE lines.  Unlike parser for old format, no special
+treatments for fragment or precursor.</p>
+
+<p>For old format, the method parses the DE lines and returns the protein name
+as a <a href="../String.html">String</a>.</p>
+
+<h3 id="method-i-protein_name-label-DE+Line-3B+description+-28-3E-3D1-29">DE Line; description (&gt;=1)<span><a href="#method-i-protein_name-label-DE+Line-3B+description+-28-3E-3D1-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-node">&quot;DE #{OFFICIAL_NAME} (#{SYNONYM})&quot;</span>
+<span class="ruby-node">&quot;DE #{OFFICIAL_NAME} (#{SYNONYM}) [CONTEINS: #1; #2].&quot;</span>
+<span class="ruby-constant">OFFICIAL_NAME</span>  <span class="ruby-value">1</span><span class="ruby-operator">/</span><span class="ruby-identifier">entry</span>
+<span class="ruby-constant">SYNONYM</span>        <span class="ruby-operator">&gt;=</span><span class="ruby-value">0</span>
+<span class="ruby-constant">CONTEINS</span>       <span class="ruby-operator">&gt;=</span><span class="ruby-value">0</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="protein_name-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 250</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">protein_name</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DE&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">parse_DE_line_rel14</span>(<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;DE&#39;</span>))
+  <span class="ruby-identifier">parsed_de_line</span> = <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DE&#39;</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parsed_de_line</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># since UniProtKB release 14.0 of 22-Jul-2008</span>
+    <span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">parsed_de_line</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RecName&#39;</span>, <span class="ruby-string">&#39;SubName&#39;</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">name_pair</span> = <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Full&#39;</span> } <span class="ruby-keyword">then</span>
+          <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name_pair</span>[<span class="ruby-value">1</span>]
+          <span class="ruby-keyword">break</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># old format (before Rel. 13.x)</span>
+    <span class="ruby-identifier">name</span> = <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">de_line</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;DE&#39;</span>) <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">str</span> = <span class="ruby-identifier">de_line</span>[<span class="ruby-regexp">/^[^\[]*/</span>] <span class="ruby-comment"># everything preceding the first [ (the &quot;contains&quot; part)</span>
+      <span class="ruby-identifier">name</span> = <span class="ruby-identifier">str</span>[<span class="ruby-regexp">/^[^(]*/</span>].<span class="ruby-identifier">strip</span>
+      <span class="ruby-identifier">name</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39; (Fragment)&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/fragment/i</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-ref" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ref</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns contents in the R lines.</p>
+<ul><li>
+<p><a href="EMBLDB/Common.html#method-i-ref">Bio::EMBLDB::Common#ref</a> -&gt;
+[ &lt;refernece information Hash&gt;* ]</p>
+</li></ul>
+
+<p>where &lt;reference information Hash&gt; is:</p>
+
+<pre class="ruby">{<span class="ruby-string">&#39;RN&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RC&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RP&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RX&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, 
+ <span class="ruby-string">&#39;RA&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RT&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RL&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RG&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>}
+</pre>
+
+<p>R Lines</p>
+<ul><li>
+<p>RN RC RP RX RA RT RL RG</p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="ref-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 556</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ref</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;R&#39;</span>]
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;R&#39;</span>] = [<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;R&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\nRN   /</span>)].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">hash</span> = {<span class="ruby-string">&#39;RN&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RC&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RP&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RX&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, 
+             <span class="ruby-string">&#39;RA&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RT&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RL&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-string">&#39;RG&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;&#39;</span>}
+      <span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;RN   &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">unless</span> <span class="ruby-regexp">/^RN   /</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">str</span>
+
+      <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^(R[NPXARLCTG])   (.+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
+          <span class="ruby-identifier">hash</span>[<span class="ruby-node">$1</span>] <span class="ruby-operator">+=</span> <span class="ruby-node">$2</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39; &#39;</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid format in R lines, \n[#{line}]\n&quot;</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RN&#39;</span>] = <span class="ruby-identifier">set_RN</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RN&#39;</span>])
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RC&#39;</span>] = <span class="ruby-identifier">set_RC</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RC&#39;</span>])
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RP&#39;</span>] = <span class="ruby-identifier">set_RP</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RP&#39;</span>])
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RX&#39;</span>] = <span class="ruby-identifier">set_RX</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RX&#39;</span>])
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RA&#39;</span>] = <span class="ruby-identifier">set_RA</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RA&#39;</span>])
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RT&#39;</span>] = <span class="ruby-identifier">set_RT</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RT&#39;</span>])
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RL&#39;</span>] = <span class="ruby-identifier">set_RL</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RL&#39;</span>])
+      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RG&#39;</span>] = <span class="ruby-identifier">set_RG</span>(<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;RG&#39;</span>])
+
+      <span class="ruby-identifier">hash</span>
+    }
+
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;R&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-references" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">references</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns <a href="Reference.html">Bio::Reference</a> object from <a
+href="EMBLDB/Common.html#method-i-ref">Bio::EMBLDB::Common#ref</a>.</p>
+<ul><li>
+<p><a href="EMBLDB/Common.html#method-i-ref">Bio::EMBLDB::Common#ref</a> -&gt;
+<a href="References.html">Bio::References</a></p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="references-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 650</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">references</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;references&#39;</span>]
+    <span class="ruby-identifier">ary</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ref</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">ent</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
+      <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">case</span> <span class="ruby-identifier">key</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RA&#39;</span>
+          <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;authors&#39;</span>] = <span class="ruby-identifier">value</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/, /</span>)
+        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RT&#39;</span>
+          <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;title&#39;</span>] = <span class="ruby-identifier">value</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RL&#39;</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(.*) (\d+) \((\d+)\), (\d+-\d+) \((\d+)\)$/</span>
+            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-node">$1</span>
+            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;volume&#39;</span>]  = <span class="ruby-node">$2</span>
+            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;issue&#39;</span>]   = <span class="ruby-node">$3</span>
+            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pages&#39;</span>]   = <span class="ruby-node">$4</span>
+            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]    = <span class="ruby-node">$5</span>
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-identifier">value</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RX&#39;</span>  <span class="ruby-comment"># PUBMED, MEDLINE, DOI</span>
+          <span class="ruby-identifier">value</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>, <span class="ruby-identifier">xref</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">hash</span>[ <span class="ruby-identifier">tag</span>.<span class="ruby-identifier">downcase</span> ]  = <span class="ruby-identifier">xref</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      }
+      <span class="ruby-constant">Reference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">hash</span>)
+    }
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;references&#39;</span>] = <span class="ruby-constant">References</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ary</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;references&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-seq" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">seq</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a <a href="Sequence/AA.html">Bio::Sequence::AA</a> of the amino
+acid sequence.</p>
+<ul><li>
+<p><a href="UniProtKB.html#method-i-seq">#seq</a> -&gt; <a
+href="Sequence/AA.html">Bio::Sequence::AA</a></p>
+</li></ul>
+
+<p>blank Line; sequence data (&gt;=1)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="seq-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 1306</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">seq</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;&#39;</span>]
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;&#39;</span>] = <span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/ |\d+/</span>,<span class="ruby-string">&#39;&#39;</span>) )
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;&#39;</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="UniProtKB.html#method-i-aaseq">aaseq</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sequence_length" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sequence_length</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a SEQUENCE_LENGTH in the ID line.</p>
+
+<p>A short-cut for <a
+href="UniProtKB.html#method-i-id_line">#id_line</a>(&#39;SEQUENCE_LENGHT&#39;).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sequence_length-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sequence_length</span>
+  <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;SEQUENCE_LENGTH&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="UniProtKB.html#method-i-aalen">aalen</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_RN" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_RN</span><span
+            class="method-args">(data)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="set_RN-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 587</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_RN</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">data</span>.<span class="ruby-identifier">strip</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sq" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sq</span><span
+            class="method-args">(key = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a <a href="../Hash.html">Hash</a> of conteins in the SQ lines.</p>
+<ul><li>
+<p>Bio::UniProtKBL#sq  -&gt; hsh</p>
+</li></ul>
+
+<p>returns a value of a key given in the SQ lines.</p>
+<ul><li>
+<p>Bio::UniProtKBL#sq(key)  -&gt; int or str</p>
+</li><li>
+<p>Keys: [&#39;MW&#39;, &#39;mw&#39;, &#39;molecular&#39;, &#39;weight&#39;,
+&#39;aalen&#39;, &#39;len&#39;, &#39;length&#39;,</p>
+
+<pre>&#39;CRC64&#39;]</pre>
+</li></ul>
+
+<h3 id="method-i-sq-label-SQ+Line-3B+sequence+header+-281-2Fentry-29">SQ Line; sequence header (1/entry)<span><a href="#method-i-sq-label-SQ+Line-3B+sequence+header+-281-2Fentry-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>SQ   SEQUENCE   233 AA;  25630 MW;  146A1B48A1475C86 CRC64;
+SQ   SEQUENCE  \d+ AA; \d+ MW;  [0-9A-Z]+ CRC64;</pre>
+
+<p>MW, Dalton unit. CRC64 (64-bit Cyclic Redundancy Check, ISO 3309).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sq-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 1278</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sq</span>(<span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;SQ&#39;</span>) <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(\d+) AA\; (\d+) MW; (.+) CRC64;/</span>
+      <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>] = { <span class="ruby-string">&#39;aalen&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-string">&#39;MW&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-string">&#39;CRC64&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-node">$3</span> }
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Invalid SQ Line: \n&#39;#{fetch(&#39;SQ&#39;)}&#39;&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">key</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/mw/</span>, <span class="ruby-regexp">/molecular/</span>, <span class="ruby-regexp">/weight/</span>
+      <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>][<span class="ruby-string">&#39;MW&#39;</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/len/</span>, <span class="ruby-regexp">/length/</span>, <span class="ruby-regexp">/AA/</span>
+      <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>][<span class="ruby-string">&#39;aalen&#39;</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>][<span class="ruby-identifier">key</span>]
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span> 
+    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-synonyms" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">synonyms</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns synonyms (unofficial and/or alternative names). Returns an Array
+containing <a href="../String.html">String</a> objects.</p>
+
+<p>Since <a href="UniProtKB.html">UniProtKB</a> release 14.0 of 22-Jul-2008,
+the DE line format have been changed. The method returns the full or short
+names which are taken from “RecName: Short=”, “RecName: EC=”, and AltName
+lines, except after “Contains:” or “Includes:”. For keeping compatibility
+with old format parser, “RecName: EC=N.N.N.N” is reported as “EC N.N.N.N”.
+In addition, to prevent confusion, “Allergen=” and “CD_antigen=”  prefixes
+are added for the corresponding fields.</p>
+
+<p>For old format, the method parses the DE lines and returns synonyms.
+synonyms are each placed in () following the official name on the DE line.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="synonyms-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/embl/uniprotkb.rb, line 293</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">synonyms</span>
+  <span class="ruby-identifier">ary</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DE&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">parse_DE_line_rel14</span>(<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;DE&#39;</span>))
+  <span class="ruby-identifier">parsed_de_line</span> = <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DE&#39;</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">parsed_de_line</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-comment"># since UniProtKB release 14.0 of 22-Jul-2008</span>
+    <span class="ruby-identifier">parsed_de_line</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Includes&#39;</span>, <span class="ruby-string">&#39;Contains&#39;</span>
+        <span class="ruby-keyword">break</span> <span class="ruby-comment">#the each loop</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RecName&#39;</span>, <span class="ruby-string">&#39;SubName&#39;</span>, <span class="ruby-string">&#39;AltName&#39;</span>
+        <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">b</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> = <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">!=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">protein_name</span> <span class="ruby-keyword">then</span>
+            <span class="ruby-keyword">case</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">0</span>]
+            <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;EC&#39;</span>
+              <span class="ruby-identifier">name</span> = <span class="ruby-string">&quot;EC &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>]
+            <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Allergen&#39;</span>, <span class="ruby-string">&#39;CD_antigen&#39;</span>
+              <span class="ruby-identifier">name</span> = <span class="ruby-identifier">b</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;=&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>]
+            <span class="ruby-keyword">else</span>
+              <span class="ruby-identifier">name</span> = <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>]
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">name</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span> <span class="ruby-comment">#case a[0]</span>
+    <span class="ruby-keyword">end</span> <span class="ruby-comment">#parsed_de_line.each</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># old format (before Rel. 13.x)</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">de_line</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;DE&#39;</span>) <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">line</span> = <span class="ruby-identifier">de_line</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\[.*\]/</span>,<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-comment"># ignore stuff between [ and ].  That&#39;s the &quot;contains&quot; part</span>
+    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\([^)]+/</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">synonym</span><span class="ruby-operator">|</span> 
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">synonym</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/fragment/i</span> <span class="ruby-keyword">then</span> 
+        <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">synonym</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">strip</span> <span class="ruby-comment"># index to remove the leading (  </span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::KEGG::KGML - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::KEGG::KGML-label-KGML+-28KEGG+XML-29+parser">KGML (KEGG XML) parser</a>
+    <li><a href="#class-Bio::KEGG::KGML-label-Note+for+older+version+users">Note for older version users</a>
+    <li><a href="#class-Bio::KEGG::KGML-label-Incompatible+attribute+names+with+KGML+tags">Incompatible attribute names with KGML tags</a>
+    <li><a href="#class-Bio::KEGG::KGML-label-Examples">Examples</a>
+    <li><a href="#class-Bio::KEGG::KGML-label-References">References</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::KEGG::KGML">
+  <h1 id="class-Bio::KEGG::KGML" class="class">
+    class Bio::KEGG::KGML
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Bio::KEGG::KGML-label-KGML+-28KEGG+XML-29+parser"><a href="KGML.html">KGML</a> (KEGG XML) parser<span><a href="#class-Bio::KEGG::KGML-label-KGML+-28KEGG+XML-29+parser">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>See <a href="http://www.genome.jp/kegg/xml">www.genome.jp/kegg/xml</a>/ for
+more details on <a href="KGML.html">KGML</a>.</p>
+
+<h3 id="class-Bio::KEGG::KGML-label-Note+for+older+version+users">Note for older version users<span><a href="#class-Bio::KEGG::KGML-label-Note+for+older+version+users">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Most of incompatible attribute names with <a href="KGML.html">KGML</a> tags
+are now deprecated. Use the names of <a href="KGML.html">KGML</a> tags
+instead of old incompatible names that will be removed in the future.</p>
+<ul><li>
+<p>Bio::KGML::Entry#id (entry_id is deprecated)</p>
+</li><li>
+<p>Bio::KGML::Entry#type (category is deprecated)</p>
+</li><li>
+<p>Bio::KGML::Relation#entry1 (node1 is deprecated)</p>
+</li><li>
+<p>Bio::KGML::Relation#entry2 (node2 is deprecated)</p>
+</li><li>
+<p>Bio::KGML::Relation#type (rel is deprecated)</p>
+</li><li>
+<p>Bio::KGML::Reaction#name (entry_id is deprecated)</p>
+</li><li>
+<p>Bio::KGML::Reaction#type (direction is deprecated)</p>
+</li></ul>
+</li><li>
+<p>New class Bio::KGML::Graphics and new method Bio::KGML::Entry#graphics.
+Because two or more graphics elements may exist, following attribute
+methods in Bio::KGML::Entry are now deprecated and will be removed in the
+future. See rdoc of these methods for details.</p>
+<ul><li>
+<p><a href="KGML/Entry.html#method-i-label">Bio::KEGG::KGML::Entry#label</a></p>
+</li><li>
+<p><a href="KGML/Entry.html#method-i-shape">Bio::KEGG::KGML::Entry#shape</a></p>
+</li><li>
+<p><a href="KGML/Entry.html#method-i-x">Bio::KEGG::KGML::Entry#x</a></p>
+</li><li>
+<p><a href="KGML/Entry.html#method-i-y">Bio::KEGG::KGML::Entry#y</a></p>
+</li><li>
+<p><a href="KGML/Entry.html#method-i-width">Bio::KEGG::KGML::Entry#width</a></p>
+</li><li>
+<p><a href="KGML/Entry.html#method-i-height">Bio::KEGG::KGML::Entry#height</a></p>
+</li><li>
+<p><a
+href="KGML/Entry.html#method-i-fgcolor">Bio::KEGG::KGML::Entry#fgcolor</a></p>
+</li><li>
+<p><a
+href="KGML/Entry.html#method-i-bgcolor">Bio::KEGG::KGML::Entry#bgcolor</a></p>
+</li></ul>
+</li><li>
+<p>Incompatible changes: <a
+href="KGML/Reaction.html#attribute-i-substrates">Bio::KEGG::KGML::Reaction#substrates</a>
+now returns an array containing <a
+href="KGML/Substrate.html">Bio::KEGG::KGML::Substrate</a> objects, and  <a
+href="KGML/Reaction.html#attribute-i-products">Bio::KEGG::KGML::Reaction#products</a>
+now returns an array containing <a
+href="KGML/Product.html">Bio::KEGG::KGML::Product</a> objects. The changes
+enable us to get id of substrates and products.</p>
+</li></ul>
+
+<h3 id="class-Bio::KEGG::KGML-label-Incompatible+attribute+names+with+KGML+tags">Incompatible attribute names with <a href="KGML.html">KGML</a> tags<span><a href="#class-Bio::KEGG::KGML-label-Incompatible+attribute+names+with+KGML+tags">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre>&lt;entry&gt;
+:map -&gt; :pathway
+names()
+&lt;subtype&gt;
+edge()</pre>
+
+<h3 id="class-Bio::KEGG::KGML-label-Examples">Examples<span><a href="#class-Bio::KEGG::KGML-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<pre class="ruby"><span class="ruby-identifier">file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-string">&quot;kgml/hsa/hsa00010.xml&quot;</span>)
+<span class="ruby-identifier">kgml</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">KEGG</span><span class="ruby-operator">::</span><span class="ruby-constant">KGML</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">file</span>)
+
+<span class="ruby-comment"># &lt;pathway&gt; attributes</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">kgml</span>.<span class="ruby-identifier">name</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">kgml</span>.<span class="ruby-identifier">org</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">kgml</span>.<span class="ruby-identifier">number</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">kgml</span>.<span class="ruby-identifier">title</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">kgml</span>.<span class="ruby-identifier">image</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">kgml</span>.<span class="ruby-identifier">link</span>
+
+<span class="ruby-identifier">kgml</span>.<span class="ruby-identifier">entries</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># &lt;entry&gt; attributes</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">id</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">type</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">link</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">reaction</span>
+  <span class="ruby-comment"># &lt;graphics&gt; attributes</span>
+  <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">graphics</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">graphics</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">graphics</span>.<span class="ruby-identifier">name</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">graphics</span>.<span class="ruby-identifier">type</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">graphics</span>.<span class="ruby-identifier">x</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">graphics</span>.<span class="ruby-identifier">y</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">graphics</span>.<span class="ruby-identifier">width</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">graphics</span>.<span class="ruby-identifier">height</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">graphics</span>.<span class="ruby-identifier">fgcolor</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">graphics</span>.<span class="ruby-identifier">bgcolor</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># &lt;component&gt; attributes</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">components</span>
+  <span class="ruby-comment"># methood</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">names</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">kgml</span>.<span class="ruby-identifier">relations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">relation</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># &lt;relation&gt; attributes</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">entry1</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">entry2</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">type</span>
+  <span class="ruby-comment"># &lt;subtype&gt; attributes</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">relation</span>.<span class="ruby-identifier">value</span>
+<span class="ruby-keyword">end</span>
+
+<span class="ruby-identifier">kgml</span>.<span class="ruby-identifier">reactions</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">reaction</span><span class="ruby-operator">|</span>
+  <span class="ruby-comment"># &lt;reaction&gt; attributes</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">reaction</span>.<span class="ruby-identifier">name</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">reaction</span>.<span class="ruby-identifier">type</span>
+  <span class="ruby-comment"># &lt;substrate&gt; attributes</span>
+  <span class="ruby-identifier">reaction</span>.<span class="ruby-identifier">substrates</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">substrate</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">substrate</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">substrate</span>.<span class="ruby-identifier">name</span>
+    <span class="ruby-comment"># &lt;alt&gt; attributes</span>
+    <span class="ruby-identifier">altnames</span> = <span class="ruby-identifier">reaction</span>.<span class="ruby-identifier">alt</span>[<span class="ruby-identifier">entry_id</span>]
+    <span class="ruby-identifier">altnames</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># &lt;product&gt; attributes</span>
+  <span class="ruby-identifier">reaction</span>.<span class="ruby-identifier">products</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">product</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">id</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">product</span>.<span class="ruby-identifier">name</span>
+    <span class="ruby-comment"># &lt;alt&gt; attributes</span>
+    <span class="ruby-identifier">altnames</span> = <span class="ruby-identifier">reaction</span>.<span class="ruby-identifier">alt</span>[<span class="ruby-identifier">entry_id</span>]
+    <span class="ruby-identifier">altnames</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">name</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h3 id="class-Bio::KEGG::KGML-label-References"><a href="../References.html">References</a><span><a href="#class-Bio::KEGG::KGML-label-References">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><a
+href="http://www.genome.jp/kegg/xml/docs">www.genome.jp/kegg/xml/docs</a>/</p>
+</li></ul>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-entries" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">entries</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>entry elements (Array containing <a href="KGML/Entry.html">KGML::Entry</a>
+objects, or nil)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-image" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">image</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>image URL of this pathway map (String or nil) (&#39;pathway&#39; element)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-link" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">link</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>information URL of this pathway map (String or nil) (&#39;pathway&#39;
+element)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-name" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">name</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>KEGG-style ID string of this pathway map (String or nil) (&#39;pathway&#39;
+element)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-number" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">number</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>map number (String or nil) (&#39;pathway&#39; element)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-org" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">org</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>“ko” (KEGG Orthology), “ec” (KEGG <a href="ENZYME.html">ENZYME</a>), or the
+<a href="../KEGG.html">KEGG</a> 3-letter organism code (String or nil)
+(&#39;pathway&#39; element)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-reactions" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">reactions</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>reaction elements (Array containing KGML::Reactions objects, or nil)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-relations" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">relations</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>relation elements (Array containing KGML::Relations objects, or nil)</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-title" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">title</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>title (String or nil) (&#39;pathway&#39; element)</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(xml)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new <a href="KGML.html">KGML</a> object.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>str</em>: <a href="../../String.html">String</a> containing
+xml data</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="KGML.html">Bio::KEGG::KGML</a> object</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/kegg/kgml.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">xml</span>)
+  <span class="ruby-identifier">dom</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">xml</span>)
+  <span class="ruby-identifier">parse_root</span>(<span class="ruby-identifier">dom</span>)
+  <span class="ruby-identifier">parse_entry</span>(<span class="ruby-identifier">dom</span>)
+  <span class="ruby-identifier">parse_relation</span>(<span class="ruby-identifier">dom</span>)
+  <span class="ruby-identifier">parse_reaction</span>(<span class="ruby-identifier">dom</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

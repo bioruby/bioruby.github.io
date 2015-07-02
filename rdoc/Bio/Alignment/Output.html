@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Bio::Alignment::Output - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-__output_phylip_common">#__output_phylip_common</a>
+    
+    <li ><a href="#method-i-output">#output</a>
+    
+    <li ><a href="#method-i-output_clustal">#output_clustal</a>
+    
+    <li ><a href="#method-i-output_fasta">#output_fasta</a>
+    
+    <li ><a href="#method-i-output_molphy">#output_molphy</a>
+    
+    <li ><a href="#method-i-output_msf">#output_msf</a>
+    
+    <li ><a href="#method-i-output_phylip">#output_phylip</a>
+    
+    <li ><a href="#method-i-output_phylipnon">#output_phylipnon</a>
+    
+    <li ><a href="#method-i-to_clustal">#to_clustal</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Bio::Alignment::Output">
+  <h1 id="module-Bio::Alignment::Output" class="module">
+    module Bio::Alignment::Output
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-__output_phylip_common" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">__output_phylip_common</span><span
+            class="method-args">(options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>common routine for interleaved/non-interleaved phylip format</p>
+          
+          
+
+          
+          <div class="method-source-code" id="__output_phylip_common-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1099</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">__output_phylip_common</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">len</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">alignment_length</span>
+  <span class="ruby-identifier">aln</span> = [ <span class="ruby-node">&quot; #{self.number_of_sequences} #{len}\n&quot;</span> ]
+  <span class="ruby-identifier">sn</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sequence_names</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\r\n\x00]/</span>, <span class="ruby-string">&#39; &#39;</span>) }
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:replace_space</span>]
+    <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;_&#39;</span>) }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:escape</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:escape</span>]
+    <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\:\;\,\(\)]/</span>, <span class="ruby-string">&#39;_&#39;</span>) }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:split</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:split</span>]
+    <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s/</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span> }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:avoid_same_name</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:avoid_same_name</span>]
+    <span class="ruby-identifier">sn</span> = <span class="ruby-identifier">__clustal_avoid_same_name</span>(<span class="ruby-identifier">sn</span>, <span class="ruby-value">10</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">namewidth</span> = <span class="ruby-value">10</span>
+  <span class="ruby-identifier">seqwidth</span>  = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:width</span>] <span class="ruby-keyword">or</span> <span class="ruby-value">60</span>)
+  <span class="ruby-identifier">seqwidth</span> = <span class="ruby-identifier">seqwidth</span>.<span class="ruby-identifier">div</span>(<span class="ruby-value">10</span>) <span class="ruby-operator">*</span> <span class="ruby-value">10</span>
+  <span class="ruby-identifier">seqregexp</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;(.{1,#{seqwidth.div(10) * 11}})&quot;</span>)
+  <span class="ruby-identifier">gchar</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:gap_char</span>] <span class="ruby-keyword">or</span> <span class="ruby-string">&#39;-&#39;</span>)
+
+  <span class="ruby-identifier">aseqs</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">number_of_sequences</span>).<span class="ruby-identifier">clear</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">aseqs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">gap_regexp</span>, <span class="ruby-identifier">gchar</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:case</span>].<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/lower/i</span>
+    <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">downcase!</span> }
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/upper/i</span>
+    <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">upcase!</span> }
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">snx</span> = <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">shift</span>
+    <span class="ruby-identifier">head</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;%*s&quot;</span>, <span class="ruby-operator">-</span><span class="ruby-identifier">namewidth</span>, <span class="ruby-identifier">snx</span>.<span class="ruby-identifier">to_s</span>)[<span class="ruby-value">0</span>, <span class="ruby-identifier">namewidth</span>]
+    <span class="ruby-identifier">head2</span> = <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">namewidth</span>
+    <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">gchar</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">length</span>))
+    <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/(.{1,10})/n</span>, <span class="ruby-string">&quot; \\1&quot;</span>)
+    <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-identifier">seqregexp</span>, <span class="ruby-string">&quot;\\1\n&quot;</span>)
+    <span class="ruby-identifier">a</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/^/</span>)
+    <span class="ruby-identifier">head</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>
+    <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">head2</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span> }
+    <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">head</span>)
+    <span class="ruby-identifier">ret</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">lines</span> = (<span class="ruby-identifier">len</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seqwidth</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">div</span>(<span class="ruby-identifier">seqwidth</span>)
+  [ <span class="ruby-identifier">aln</span>, <span class="ruby-identifier">aseqs</span>, <span class="ruby-identifier">lines</span> ]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-output" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">output</span><span
+            class="method-args">(format, *arg)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="output-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 873</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">output</span>(<span class="ruby-identifier">format</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:clustal</span>
+    <span class="ruby-identifier">output_clustal</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:fasta</span>
+    <span class="ruby-identifier">output_fasta</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:phylip</span>
+    <span class="ruby-identifier">output_phylip</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:phylipnon</span>
+    <span class="ruby-identifier">output_phylipnon</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:msf</span>
+    <span class="ruby-identifier">output_msf</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:molphy</span>
+    <span class="ruby-identifier">output_molphy</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Unknown format: #{format.inspect}&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-output_clustal" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">output_clustal</span><span
+            class="method-args">(options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generates ClustalW-formatted text</p>
+<dl class="rdoc-list note-list"><dt>seqs
+<dd>
+<p>sequences (must be an alignment object)</p>
+</dd><dt>names
+<dd>
+<p>names of the sequences</p>
+</dd><dt>options
+<dd>
+<p>options</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="output_clustal-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1045</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_clustal</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">__clustal_formatter</span>(<span class="ruby-keyword">self</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sequence_names</span>, <span class="ruby-identifier">options</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-output_fasta" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">output_fasta</span><span
+            class="method-args">(options={})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generates fasta format text and returns a string.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="output_fasta-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1059</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_fasta</span>(<span class="ruby-identifier">options</span>={})
+  <span class="ruby-comment">#(original)</span>
+  <span class="ruby-identifier">width</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:width</span>] <span class="ruby-keyword">or</span> <span class="ruby-value">70</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:avoid_same_name</span>] <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">na</span> = <span class="ruby-identifier">__clustal_avoid_same_name</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">sequence_names</span>, <span class="ruby-value">30</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sequence_names</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\r\n\x00]/</span>, <span class="ruby-string">&#39; &#39;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">width</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">width</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">w_reg</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;.{1,#{width}}&quot;</span>)
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+      <span class="ruby-node">&quot;&gt;#{na.shift}\n&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">w_reg</span>, <span class="ruby-string">&quot;\\0\n&quot;</span>)
+    <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+      <span class="ruby-node">&quot;&gt;#{na.shift}\n&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-output_molphy" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">output_molphy</span><span
+            class="method-args">(options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generates Molphy alignment format text as a string</p>
+          
+          
+
+          
+          <div class="method-source-code" id="output_molphy-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_molphy</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">len</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">alignment_length</span>
+  <span class="ruby-identifier">header</span> = <span class="ruby-node">&quot;#{self.number_of_sequences} #{len}\n&quot;</span>
+  <span class="ruby-identifier">sn</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sequence_names</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\r\n\x00]/</span>, <span class="ruby-string">&#39; &#39;</span>) }
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:replace_space</span>]
+    <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;_&#39;</span>) }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:escape</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:escape</span>]
+    <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\:\;\,\(\)]/</span>, <span class="ruby-string">&#39;_&#39;</span>) }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:split</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:split</span>]
+    <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s/</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span> }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:avoid_same_name</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:avoid_same_name</span>]
+    <span class="ruby-identifier">sn</span> = <span class="ruby-identifier">__clustal_avoid_same_name</span>(<span class="ruby-identifier">sn</span>, <span class="ruby-value">30</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">seqwidth</span>  = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:width</span>] <span class="ruby-keyword">or</span> <span class="ruby-value">60</span>)
+  <span class="ruby-identifier">seqregexp</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;(.{1,#{seqwidth}})&quot;</span>)
+  <span class="ruby-identifier">gchar</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:gap_char</span>] <span class="ruby-keyword">or</span> <span class="ruby-string">&#39;-&#39;</span>)
+
+  <span class="ruby-identifier">aseqs</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">len</span>).<span class="ruby-identifier">clear</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">aseqs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">gap_regexp</span>, <span class="ruby-identifier">gchar</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:case</span>].<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/lower/i</span>
+    <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">downcase!</span> }
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/upper/i</span>
+    <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">upcase!</span> }
+  <span class="ruby-keyword">end</span>
+  
+  <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">gchar</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">length</span>))
+    <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-identifier">seqregexp</span>, <span class="ruby-string">&quot;\\1\n&quot;</span>)
+    <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">shift</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">s</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">header</span>)
+  <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-output_msf" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">output_msf</span><span
+            class="method-args">(options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Generates msf formatted text as a string</p>
+          
+          
+
+          
+          <div class="method-source-code" id="output_msf-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_msf</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">len</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">seq_length</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:avoid_same_name</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:avoid_same_name</span>]
+    <span class="ruby-identifier">sn</span> = <span class="ruby-identifier">__clustal_avoid_same_name</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">sequence_names</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">sn</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sequence_names</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\r\n\x00]/</span>, <span class="ruby-string">&#39; &#39;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:replace_space</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:replace_space</span>]
+    <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;_&#39;</span>) }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:escape</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:escape</span>]
+    <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\:\;\,\(\)]/</span>, <span class="ruby-string">&#39;_&#39;</span>) }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:split</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:split</span>]
+    <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s/</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">seqwidth</span> = <span class="ruby-value">50</span>
+  <span class="ruby-identifier">namewidth</span> = [<span class="ruby-value">31</span>, <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> }.<span class="ruby-identifier">max</span> ].<span class="ruby-identifier">min</span>
+  <span class="ruby-identifier">sep</span> = <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">*</span> <span class="ruby-value">2</span>
+
+  <span class="ruby-identifier">seqregexp</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;(.{1,#{seqwidth}})&quot;</span>)
+  <span class="ruby-identifier">gchar</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:gap_char</span>]  <span class="ruby-keyword">or</span> <span class="ruby-string">&#39;.&#39;</span>)
+  <span class="ruby-identifier">pchar</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:padding_char</span>] <span class="ruby-keyword">or</span> <span class="ruby-string">&#39;~&#39;</span>)
+
+  <span class="ruby-identifier">aseqs</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">number_of_sequences</span>).<span class="ruby-identifier">clear</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">aseqs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">gap_regexp</span>, <span class="ruby-identifier">gchar</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">s</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-node">/\A#{Regexp.escape(gchar)}+/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">pchar</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> }
+    <span class="ruby-identifier">s</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-node">/#{Regexp.escape(gchar)}+\z/</span>, <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">pchar</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">length</span>))
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:case</span>].<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/lower/i</span>
+    <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">downcase!</span> }
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/upper/i</span>
+    <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">upcase!</span> }
+  <span class="ruby-keyword">else</span> <span class="ruby-comment">#default upcase</span>
+    <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">upcase!</span> }
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:type</span>].<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/protein/i</span>, <span class="ruby-regexp">/aa/i</span>
+    <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/na/i</span>
+    <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">seqclass</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">seqclass</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># if we can&#39;t determine, we asuume as protein.</span>
+      <span class="ruby-identifier">amino</span> = <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">size</span>
+      <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">amino</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\A[acgt]\z/i</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">x</span> }
+      <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">amino</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">seq_type</span> = (<span class="ruby-identifier">amino</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;P&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;N&#39;</span>)
+
+  <span class="ruby-identifier">fn</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:entry_id</span>] <span class="ruby-keyword">or</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">__id__</span>.<span class="ruby-identifier">abs</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;.msf&#39;</span>)
+  <span class="ruby-identifier">dt</span> = (<span class="ruby-identifier">options</span>[<span class="ruby-value">:time</span>] <span class="ruby-keyword">or</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>).<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%B %d, %Y %H:%M&#39;</span>)
+
+  <span class="ruby-identifier">sums</span> = <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-constant">GCG</span><span class="ruby-operator">::</span><span class="ruby-constant">Seq</span>.<span class="ruby-identifier">calc_checksum</span>(<span class="ruby-identifier">s</span>) }
+  <span class="ruby-comment">#sums = aseqs.collect { |s| 0 }</span>
+  <span class="ruby-identifier">sum</span> = <span class="ruby-value">0</span>; <span class="ruby-identifier">sums</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">x</span> }; <span class="ruby-identifier">sum</span> <span class="ruby-operator">=</span> <span class="ruby-value">10000</span>
+  <span class="ruby-identifier">msf</span> =
+    [
+     <span class="ruby-node">&quot;#{seq_type == &#39;N&#39; ? &#39;N&#39; : &#39;A&#39; }A_MULTIPLE_ALIGNMENT 1.0\n&quot;</span>,
+     <span class="ruby-string">&quot;\n&quot;</span>,
+     <span class="ruby-string">&quot;\n&quot;</span>,
+     <span class="ruby-node">&quot; #{fn}  MSF: #{len}  Type: #{seq_type}  #{dt}  Check: #{sum} ..\n&quot;</span>,
+     <span class="ruby-string">&quot;\n&quot;</span>
+    ]
+
+  <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">snx</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">msf</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39; Name: &#39;</span> <span class="ruby-operator">+</span>
+      <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&#39;%*s&#39;</span>, <span class="ruby-operator">-</span><span class="ruby-identifier">namewidth</span>, <span class="ruby-identifier">snx</span>.<span class="ruby-identifier">to_s</span>)[<span class="ruby-value">0</span>, <span class="ruby-identifier">namewidth</span>] <span class="ruby-operator">+</span>
+      <span class="ruby-node">&quot;  Len: #{len}  Check: #{sums.shift}  Weight: 1.00\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">msf</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n//\n&quot;</span>
+
+  <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">snx</span> = <span class="ruby-identifier">sn</span>.<span class="ruby-identifier">shift</span>
+    <span class="ruby-identifier">head</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;%*s&quot;</span>, <span class="ruby-identifier">namewidth</span>, <span class="ruby-identifier">snx</span>.<span class="ruby-identifier">to_s</span>)[<span class="ruby-value">0</span>, <span class="ruby-identifier">namewidth</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">sep</span>
+    <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-identifier">seqregexp</span>, <span class="ruby-string">&quot;\\1\n&quot;</span>)
+    <span class="ruby-identifier">a</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/^/</span>)
+    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">head</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span> }
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">lines</span> = (<span class="ruby-identifier">len</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seqwidth</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">div</span>(<span class="ruby-identifier">seqwidth</span>)
+  <span class="ruby-identifier">i</span> = <span class="ruby-value">1</span>
+  <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">msf</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span>
+    <span class="ruby-identifier">n_l</span> = <span class="ruby-identifier">i</span>
+    <span class="ruby-identifier">n_r</span> = [ <span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">seqwidth</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>, <span class="ruby-identifier">len</span> ].<span class="ruby-identifier">min</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">n_l</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">n_r</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">w</span> = [ <span class="ruby-identifier">n_r</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">n_l</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">n_l</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">n_r</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span>, <span class="ruby-value">1</span> ].<span class="ruby-identifier">max</span>
+      <span class="ruby-identifier">msf</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">namewidth</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sep</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n_l</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> 
+              <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n_r</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">msf</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">namewidth</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sep</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">n_l</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">msf</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span> }
+    <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">seqwidth</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">msf</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span>
+  <span class="ruby-identifier">msf</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-output_phylip" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">output_phylip</span><span
+            class="method-args">(options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>generates phylip interleaved alignment format as a string</p>
+          
+          
+
+          
+          <div class="method-source-code" id="output_phylip-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1082</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_phylip</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">aln</span>, <span class="ruby-identifier">aseqs</span>, <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">__output_phylip_common</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">aln</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span> }
+    <span class="ruby-identifier">aln</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">aln</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;\n&quot;</span>
+  <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-output_phylipnon" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">output_phylipnon</span><span
+            class="method-args">(options = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>generates Phylip3.2 (old) non-interleaved format as a string</p>
+          
+          
+
+          
+          <div class="method-source-code" id="output_phylipnon-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1093</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_phylipnon</span>(<span class="ruby-identifier">options</span> = {})
+  <span class="ruby-identifier">aln</span>, <span class="ruby-identifier">aseqs</span>, <span class="ruby-identifier">_</span> = <span class="ruby-identifier">__output_phylip_common</span>(<span class="ruby-identifier">options</span>)
+  <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">aseqs</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_clustal" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_clustal</span><span
+            class="method-args">(*arg)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p># <a href="Output.html#method-i-to_clustal">#to_clustal</a> is deprecated.
+Instead, please use output_clustal. +</p>
+          
+          
+
+          
+          <div class="method-source-code" id="to_clustal-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1053</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_clustal</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;to_clustal is deprecated. Please use output_clustal.&quot;</span>
+  <span class="ruby-identifier">output_clustal</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>RELEASE_NOTES - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="file">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#label-BioRuby+1.5.0+RELEASE+NOTES">BioRuby 1.5.0 RELEASE NOTES</a>
+    <li><a href="#label-NEWS">NEWS</a>
+    <li><a href="#label-Full+support+of+Ruby+2.0.0-2C+2.1-2C+and+2.2">Full support of Ruby 2.0.0, 2.1, and 2.2</a>
+    <li><a href="#label-Support+of+Ruby+1.8+will+be+stopped">Support of Ruby 1.8 will be stopped</a>
+    <li><a href="#label-License+is+updated+to+the+new+Ruby-27s+License">License is updated to the new Ruby&#39;s License</a>
+    <li><a href="#label-Semantic+Versioning+will+be+introduced">Semantic Versioning will be introduced</a>
+    <li><a href="#label-New+features+and+improvements">New features and improvements</a>
+    <li><a href="#label-New+method+Bio-3A-3AFastaFormat-23first_name">New method Bio::FastaFormat#first_name</a>
+    <li><a href="#label-Accuracy+of+Bio-3A-3ASiRNA">Accuracy of Bio::SiRNA</a>
+    <li><a href="#label-Speed+up+of+Bio-3A-3AClustalW-3A-3AReport">Speed up of Bio::ClustalW::Report</a>
+    <li><a href="#label-Many+warning+messages+are+squashed">Many warning messages are squashed</a>
+    <li><a href="#label-Refactoring+of+codes">Refactoring of codes</a>
+    <li><a href="#label-Bug+fixes">Bug fixes</a>
+    <li><a href="#label-Bugs+due+to+remote+server+changes">Bugs due to remote server changes</a>
+    <li><a href="#label-Bio-3A-3APubMed">Bio::PubMed</a>
+    <li><a href="#label-Bio-3A-3AHinv">Bio::Hinv</a>
+    <li><a href="#label-Bio-3A-3ATogoWS-3A-3AREST">Bio::TogoWS::REST</a>
+    <li><a href="#label-Bio-3A-3AFetch">Bio::Fetch</a>
+    <li><a href="#label-BioSQL">BioSQL</a>
+    <li><a href="#label-Bugs+found+in+data+format+parsers">Bugs found in data format parsers</a>
+    <li><a href="#label-Other+bugs">Other bugs</a>
+    <li><a href="#label-Renamed+features">Renamed features</a>
+    <li><a href="#label-Bio-3A-3ASPTR-2C+Bio-3A-3AUniProt-2C+Bio-3A-3ASwissProt-2C+and+Bio-3A-3ATrEMBL+-3D-3E+Bio-3A-3AUniProtKB">Bio::SPTR, Bio::UniProt, Bio::SwissProt, and Bio::TrEMBL =&gt; Bio::UniProtKB</a>
+    <li><a href="#label-Deprecated+features">Deprecated features</a>
+    <li><a href="#label-Bio-3A-3ARefSeq-2C+Bio-3A-3ADDBJ">Bio::RefSeq, Bio::DDBJ</a>
+    <li><a href="#label-Removed+features">Removed features</a>
+    <li><a href="#label-Bio-3A-3ASOAPWSDL">Bio::SOAPWSDL</a>
+    <li><a href="#label-Bio-3A-3AEBI-3A-3ASOAP">Bio::EBI::SOAP</a>
+    <li><a href="#label-Bio-3A-3AKEGG-3A-3AAPI">Bio::KEGG::API</a>
+    <li><a href="#label-Bio-3A-3ADBGET">Bio::DBGET</a>
+    <li><a href="#label-Bio-3A-3AEnsembl">Bio::Ensembl</a>
+    <li><a href="#label-Bio-3A-3ADDBJ-3A-3AXML-2C+Bio-3A-3ADDBJ-3A-3AREST">Bio::DDBJ::XML, Bio::DDBJ::REST</a>
+    <li><a href="#label-Bio-3A-3AHGC-3A-3AHiGet">Bio::HGC::HiGet</a>
+    <li><a href="#label-Bio-3A-3ANCBI-3A-3ASOAP">Bio::NCBI::SOAP</a>
+    <li><a href="#label-Bio-3A-3AKEGG-3A-3ATaxonomy">Bio::KEGG::Taxonomy</a>
+    <li><a href="#label-Bio.method_missing">Bio.method_missing</a>
+    <li><a href="#label-extconf.rb">extconf.rb</a>
+    <li><a href="#label-Incompatible+changes">Incompatible changes</a>
+    <li><a href="#label-Bio-3A-3AFetch">Bio::Fetch</a>
+    <li><a href="#label-Known+issues">Known issues</a>
+    <li><a href="#label-Bio-3A-3APDB">Bio::PDB</a>
+    <li><a href="#label-Bio-3A-3ABlast-3A-3AReport">Bio::Blast::Report</a>
+    <li><a href="#label-Bio-3A-3ABlast-3A-3ADefault-3A-3AReport">Bio::Blast::Default::Report</a>
+  </ul>
+</div>
+
+
+  <div id="project-metadata">
+    <div id="fileindex-section" class="nav-section">
+  <h3>Pages</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES</a>
+  
+    <li><a href="./README_rdoc.html">README</a>
+  
+    <li><a href="./README_DEV_rdoc.html">README_DEV</a>
+  
+    <li><a href="./RELEASE_NOTES_rdoc.html">RELEASE_NOTES</a>
+  
+    <li><a href="./doc/Changes-1_3_rdoc.html">Changes-1.3</a>
+  
+    <li><a href="./doc/RELEASE_NOTES-1_4_0_rdoc.html">RELEASE_NOTES-1.4.0</a>
+  
+    <li><a href="./doc/RELEASE_NOTES-1_4_1_rdoc.html">RELEASE_NOTES-1.4.1</a>
+  
+    <li><a href="./doc/RELEASE_NOTES-1_4_2_rdoc.html">RELEASE_NOTES-1.4.2</a>
+  
+    <li><a href="./doc/RELEASE_NOTES-1_4_3_rdoc.html">RELEASE_NOTES-1.4.3</a>
+  
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-label="Page RELEASE_NOTES.rdoc">
+
+<h1 id="label-BioRuby+1.5.0+RELEASE+NOTES">BioRuby 1.5.0 RELEASE NOTES<span><a href="#label-BioRuby+1.5.0+RELEASE+NOTES">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>A lot of changes have been made to the BioRuby 1.5.0 after the version
+1.4.3 is released. This document describes important and/or incompatible
+changes since the BioRuby 1.4.3 release.</p>
+
+<p>For known problems, see <a
+href="KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a>.</p>
+
+<h2 id="label-NEWS">NEWS<span><a href="#label-NEWS">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Full+support+of+Ruby+2.0.0-2C+2.1-2C+and+2.2">Full support of Ruby 2.0.0, 2.1, and 2.2<span><a href="#label-Full+support+of+Ruby+2.0.0-2C+2.1-2C+and+2.2">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Ruby 2.0.0, 2.1, and 2.2 are now recommended Ruby versions for running
+BioRuby codes.</p>
+
+<h3 id="label-Support+of+Ruby+1.8+will+be+stopped">Support of Ruby 1.8 will be stopped<span><a href="#label-Support+of+Ruby+1.8+will+be+stopped">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>This release is the final BioRuby version that can be run on Ruby 1.8.</p>
+
+<h3 id="label-License+is+updated+to+the+new+Ruby-27s+License">License is updated to the new Ruby&#39;s License<span><a href="#label-License+is+updated+to+the+new+Ruby-27s+License">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>BioRuby is distributed under the same license as Ruby&#39;s. In October
+2011, Ruby&#39;s License was changed from a dual license with GPLv2 to a
+dual license with 2-clause BSDL.available. Since BioRuby 1.5.0, we have
+updated to the new version of Ruby&#39;s License. For details about the
+license, see COPYING or COPYING.ja and BSDL. In addition, please do not
+forget to see LEGAL for exception files that are subjected to different
+licenses.</p>
+
+<h3 id="label-Semantic+Versioning+will+be+introduced">Semantic Versioning will be introduced<span><a href="#label-Semantic+Versioning+will+be+introduced">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>We will adopt the Semantic Versioning since the next release version, which
+will be BioRuby 1.5.1. This means that BioRuby 1.5.0 are NOT subject to the
+Semantic Versioning.</p>
+
+<h2 id="label-New+features+and+improvements">New features and improvements<span><a href="#label-New+features+and+improvements">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-New+method+Bio-3A-3AFastaFormat-23first_name">New method <a href="Bio/FastaFormat.html#method-i-first_name">Bio::FastaFormat#first_name</a><span><a href="#label-New+method+Bio-3A-3AFastaFormat-23first_name">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a
+href="Bio/FastaFormat.html#method-i-first_name">Bio::FastaFormat#first_name</a>
+method is added to get the first word in the definition line. This method
+was proposed by Ben J. Woodcroft.</p>
+
+<h3 id="label-Accuracy+of+Bio-3A-3ASiRNA">Accuracy of <a href="Bio/SiRNA.html">Bio::SiRNA</a><span><a href="#label-Accuracy+of+Bio-3A-3ASiRNA">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Accuracy of siRNA designing algorithms in <a
+href="Bio/SiRNA.html">Bio::SiRNA</a> is improved, contributed by
+meso_cacase.</p>
+
+<h3 id="label-Speed+up+of+Bio-3A-3AClustalW-3A-3AReport">Speed up of <a href="Bio/ClustalW/Report.html">Bio::ClustalW::Report</a><span><a href="#label-Speed+up+of+Bio-3A-3AClustalW-3A-3AReport">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Running speed of <a
+href="Bio/ClustalW/Report.html">Bio::ClustalW::Report</a> is optimized,
+contributed by Andrew Grimm.</p>
+
+<h3 id="label-Many+warning+messages+are+squashed">Many warning messages are squashed<span><a href="#label-Many+warning+messages+are+squashed">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Most warning messages when running ruby with “-w” option, e.g. “assigned
+but unused variable”, “instance variable @xxx not initialized”, are
+suppressed. Fixes are contributed by Kenichi Kamiya, Andrew Grimm, and
+BioRuby core members.</p>
+
+<h3 id="label-Refactoring+of+codes">Refactoring of codes<span><a href="#label-Refactoring+of+codes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Many existing codes are reviewed and refactored. Patches are contributed by
+Iain Barnett, Kenichi Kamiya, and BioRuby core members.</p>
+
+<h2 id="label-Bug+fixes">Bug fixes<span><a href="#label-Bug+fixes">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Bugs+due+to+remote+server+changes">Bugs due to remote server changes<span><a href="#label-Bugs+due+to+remote+server+changes">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<h4 id="label-Bio-3A-3APubMed"><a href="Bio/PubMed.html">Bio::PubMed</a><span><a href="#label-Bio-3A-3APubMed">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p><a href="Bio/PubMed.html#method-i-search">Bio::PubMed#search</a>, query,
+and pmfetch are re-implemented by using NCBI E-Utilities. They were broken
+because unofficial API was used. Paul Leader reported the bug and gave
+discussion.</p>
+
+<h4 id="label-Bio-3A-3AHinv"><a href="Bio/Hinv.html">Bio::Hinv</a><span><a href="#label-Bio-3A-3AHinv">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p><a href="Bio/Hinv.html">Bio::Hinv</a> did not work because of the API
+server URL is changed.</p>
+
+<h4 id="label-Bio-3A-3ATogoWS-3A-3AREST"><a href="Bio/TogoWS/REST.html">Bio::TogoWS::REST</a><span><a href="#label-Bio-3A-3ATogoWS-3A-3AREST">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<ul><li>
+<p><a href="Bio/TogoWS/REST.html#method-i-search">Bio::TogoWS::REST#search</a>
+with offset and limit did not work due to TogoWS server spec change about
+URI escape.</p>
+</li><li>
+<p><a
+href="Bio/TogoWS/REST.html#method-i-convert">Bio::TogoWS::REST#convert</a>
+did not work because of the spec change of TogoWS REST API.</p>
+</li></ul>
+
+<h3 id="label-Bio-3A-3AFetch"><a href="Bio/Fetch.html">Bio::Fetch</a><span><a href="#label-Bio-3A-3AFetch">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Bio/Fetch.html">Bio::Fetch</a> with default parameters did not
+work because BioRuby&#39;s default BioFetch server had been down. We have
+decided not to restore the service. For smooth migration of codes using
+BioRuby&#39;s BioFetch server, we provide “bio-old-biofetch-emulator” gem.
+See below “Imcompatible changes” for details.</p>
+
+<p>The bug was reported and discussed by Jose Irizarry, Robert A. Heiler, and
+others.</p>
+
+<h3 id="label-BioSQL">BioSQL<span><a href="#label-BioSQL">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>Only do gsub on bio_ref.reference.authors if it exists.</p>
+</li><li>
+<p>Missing require when generating genbank output for BioSQL sequence.</p>
+</li></ul>
+
+<p>Contributed by Brynjar Smari Bjarnason.</p>
+
+<h3 id="label-Bugs+found+in+data+format+parsers">Bugs found in data format parsers<span><a href="#label-Bugs+found+in+data+format+parsers">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p><a href="Bio/PDB.html#method-i-seqres">Bio::PDB#seqres</a> SEQRES serNum
+digits were extended in PDB v3.2 (2008). Thanks to a researcher who sent
+the patch.</p>
+</li><li>
+<p><a href="Bio/Blast/Default/Report.html">Bio::Blast::Default::Report</a>
+parse error when subject sequence contains spaces. Edward Rice reported the
+bug.</p>
+</li><li>
+<p><a
+href="Bio/UniProtKB.html#method-i-gene_name">Bio::UniProtKB#gene_name</a>
+raised NoMethodError when gene_names method returns nil. It should return
+nil. Candidate fix sent by Jose Irizarry.</p>
+</li><li>
+<p><a
+href="Bio/PhyloXML/Parser.html#method-c-open_uri">Bio::PhyloXML::Parser.open_uri</a>
+did not return block return value when giving a block.</p>
+</li></ul>
+
+<h3 id="label-Other+bugs">Other bugs<span><a href="#label-Other+bugs">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>lib/bio/shell/plugin/seq.rb: <a
+href="String.html#method-i-step">String#step</a> and skip (extended by
+bioruby shell) did not yield the last part of the string due to a change
+from Ruby 1.8 to 1.9.</p>
+</li><li>
+<p>Documentation and typo fixes. Contributed by many persons, including Iain
+Barnett and ctSkennerton.</p>
+</li></ul>
+
+<h2 id="label-Renamed+features">Renamed features<span><a href="#label-Renamed+features">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Bio-3A-3ASPTR-2C+Bio-3A-3AUniProt-2C+Bio-3A-3ASwissProt-2C+and+Bio-3A-3ATrEMBL+-3D-3E+Bio-3A-3AUniProtKB">Bio::SPTR, Bio::UniProt, <a href="Bio/SwissProt.html">Bio::SwissProt</a>, and <a href="Bio/TrEMBL.html">Bio::TrEMBL</a> =&gt; <a href="Bio/UniProtKB.html">Bio::UniProtKB</a><span><a href="#label-Bio-3A-3ASPTR-2C+Bio-3A-3AUniProt-2C+Bio-3A-3ASwissProt-2C+and+Bio-3A-3ATrEMBL+-3D-3E+Bio-3A-3AUniProtKB">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>The classes for parsing UniProtKB (former SwissProt and TrEMBL) data,
+Bio::SPTR, Bio::UniProt, <a href="Bio/SwissProt.html">Bio::SwissProt</a>,
+and <a href="Bio/TrEMBL.html">Bio::TrEMBL</a>, are unified into the new
+class name <a href="Bio/UniProtKB.html">Bio::UniProtKB</a>, and old names
+are deprecated.</p>
+
+<p>For keeping backward compatibility, old class names Bio::SPTR,
+Bio::UniProt, <a href="Bio/SwissProt.html">Bio::SwissProt</a>, and <a
+href="Bio/TrEMBL.html">Bio::TrEMBL</a> are still available, but warning
+message will be shown when using the old class names. These old class names
+will be deleted in the future.</p>
+
+<p>The file contatining <a href="Bio/UniProtKB.html">Bio::UniProtKB</a> class
+definition is also changed to lib/bio/db/embl/uniprotkb.rb. For keeping
+backward compatibility, old files sptr.rb, uniprot.rb, tremble.rb are still
+kept, but they will be removed in the future.</p>
+
+<h2 id="label-Deprecated+features">Deprecated features<span><a href="#label-Deprecated+features">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Bio-3A-3ARefSeq-2C+Bio-3A-3ADDBJ"><a href="Bio/RefSeq.html">Bio::RefSeq</a>, <a href="Bio/DDBJ.html">Bio::DDBJ</a><span><a href="#label-Bio-3A-3ARefSeq-2C+Bio-3A-3ADDBJ">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Bio/RefSeq.html">Bio::RefSeq</a> and <a
+href="Bio/DDBJ.html">Bio::DDBJ</a> are deprecated because they are only an
+alias of <a href="Bio/GenBank.html">Bio::GenBank</a>. Warning message will
+be shown when loading the classes and initializing new instances. Please
+use <a href="Bio/GenBank.html">Bio::GenBank</a> instead.</p>
+
+<p>lib/bio/db/genbank/ddbj.rb and lib/bio/db/genbank/refseq.rb which contain
+<a href="Bio/DDBJ.html">Bio::DDBJ</a> and <a
+href="Bio/RefSeq.html">Bio::RefSeq</a>, respectively, are also deprecated.
+For keeping backward compatibility, old file are still kept, but they will
+be removed in the future.</p>
+
+<h2 id="label-Removed+features">Removed features<span><a href="#label-Removed+features">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<h3 id="label-Bio-3A-3ASOAPWSDL">Bio::SOAPWSDL<span><a href="#label-Bio-3A-3ASOAPWSDL">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Bio::SOAPWSDL (lib/bio/io/soapwsdl.rb) is removed because SOAP4R (SOAP/WSDL
+library in Ruby) is no longer bundled with Ruby since Ruby 1.9. For Ruby
+1.9 or later, some gems of SOAP4R are available, but we think they are not
+well-maintained. Moreover, many SOAP servers have been retired (see below).
+So, we give up maintaining Bio::SOAPWSDL and all SOAP client classes in
+BioRuby.</p>
+
+<h3 id="label-Bio-3A-3AEBI-3A-3ASOAP">Bio::EBI::SOAP<span><a href="#label-Bio-3A-3AEBI-3A-3ASOAP">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Bio::EBI::SOAP (lib/bio/io/ebisoap.rb) is removed because Bio::SOAPWSDL is
+removed.</p>
+
+<h3 id="label-Bio-3A-3AKEGG-3A-3AAPI">Bio::KEGG::API<span><a href="#label-Bio-3A-3AKEGG-3A-3AAPI">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Bio::KEGG::API is removed because KEGG API SOAP service was discontinued in
+December 31, 2012. See <a
+href="http://www.kegg.jp/kegg/rest">www.kegg.jp/kegg/rest</a>/ for the
+announcement of service discontinuation.</p>
+
+<h3 id="label-Bio-3A-3ADBGET">Bio::DBGET<span><a href="#label-Bio-3A-3ADBGET">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Bio::DBGET is removed because it only supports old original DBGET protocols
+that was discontinued in 2004. Note that the DBGET is still available via
+the web. See <a
+href="http://www.genome.jp/en/gn_dbget.html">www.genome.jp/en/gn_dbget.html</a>
+for details.</p>
+
+<h3 id="label-Bio-3A-3AEnsembl">Bio::Ensembl<span><a href="#label-Bio-3A-3AEnsembl">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Bio::Ensembl is removed because it does not work after the renewal of
+Ensembl web site in 2008. Instead, bio-ensembl gem which supports recent
+ensembl API is available.</p>
+
+<h3 id="label-Bio-3A-3ADDBJ-3A-3AXML-2C+Bio-3A-3ADDBJ-3A-3AREST">Bio::DDBJ::XML, Bio::DDBJ::REST<span><a href="#label-Bio-3A-3ADDBJ-3A-3AXML-2C+Bio-3A-3ADDBJ-3A-3AREST">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Bio::DDBJ::XML and Bio::DDBJ::REST are removed because DDBJ Web API (WABI)
+web services were suspended in 2012 and then they were completely renewed
+with incompatible APIs in 2013.</p>
+
+<h3 id="label-Bio-3A-3AHGC-3A-3AHiGet">Bio::HGC::HiGet<span><a href="#label-Bio-3A-3AHGC-3A-3AHiGet">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Bio::HGC::HiGet (lib/bio/io/higet.rb) is removed because the HiGet web
+server <a href="http://higet.hgc.jp">higet.hgc.jp</a>/ have been down since
+2011, and we think that the server will not be restored again.</p>
+
+<h3 id="label-Bio-3A-3ANCBI-3A-3ASOAP">Bio::NCBI::SOAP<span><a href="#label-Bio-3A-3ANCBI-3A-3ASOAP">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Bio::NCBI::SOAP is removed because it always raises error during the
+parsing of WSDL files provided by NCBI. In addition, NCBI announced that
+the SOAP web service for the E-utilities will be terminated on July 1,
+2015. Instead, <a href="Bio/NCBI/REST.html">Bio::NCBI::REST</a>, REST
+client for the NCBI E-utility web service, is available.</p>
+
+<h3 id="label-Bio-3A-3AKEGG-3A-3ATaxonomy">Bio::KEGG::Taxonomy<span><a href="#label-Bio-3A-3AKEGG-3A-3ATaxonomy">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Bio::KEGG::Taxonomy is removed because it does not work correctly. It
+raises error, it falls into infinite loop, or it returns apparently broken
+data. Moreover, KEGG closed public FTP site and the file “taxonomy” could
+only be obtained by paid subscribers.</p>
+
+<h3 id="label-Bio.method_missing">Bio.method_missing<span><a href="#label-Bio.method_missing">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>Bio.method_missing, that aims to provide shortcuts of <a
+href="Bio/Shell.html">Bio::Shell</a> methods with shorter name without
+typing “Shell”, is removed because most of the methods raises error mainly
+due to bypassing of initialization procedure. In addition, we now think
+that the use of method_missing should generally be avoid unless it is
+really necessary.</p>
+
+<h3 id="label-extconf.rb">extconf.rb<span><a href="#label-extconf.rb">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>extconf.rb, an alternative way to install BioRuby to the system, is removed
+because of avoiding potential confusions. Nowadays, extconf.rb is usually
+only used for building native extensions, but no native extensions are
+included in this release. Use gem or setup.rb to install BioRuby.</p>
+
+<h2 id="label-Incompatible+changes">Incompatible changes<span><a href="#label-Incompatible+changes">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Also see the above “Renamed features”, “Deprecated features”, and “Removed
+features” sections.</p>
+
+<h3 id="label-Bio-3A-3AFetch"><a href="Bio/Fetch.html">Bio::Fetch</a><span><a href="#label-Bio-3A-3AFetch">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>The BioRuby default BioFetch server <a
+href="http://bioruby.org/cgi-bin/biofetch.rb">bioruby.org/cgi-bin/biofetch.rb</a>,
+that was the default server for <a href="Bio/Fetch.html">Bio::Fetch</a>
+before BioRuby 1.4, is deprecated. Due to the service stop, default server
+URL in <a href="Bio/Fetch.html">Bio::Fetch</a> is removed, and we decide
+not to give any server URL by default for <a
+href="Bio/Fetch.html">Bio::Fetch</a>.</p>
+
+<p>As an alternative, new class <a
+href="Bio/Fetch/EBI.html">Bio::Fetch::EBI</a> which uses the EBI Dbfetch
+server is added. When changing codes form <a
+href="Bio/Fetch.html">Bio::Fetch</a> to <a
+href="Bio/Fetch/EBI.html">Bio::Fetch::EBI</a>, be careful of the
+differences of database names, default and available data formats between
+the former BioRuby BioFetch server and the EBI Dbfetch server.</p>
+
+<p>Methods directly affected are:</p>
+<ul><li>
+<p><a href="Bio/Fetch.html#method-c-new">Bio::Fetch.new</a>
+(Bio::Fetch#initialize) does not have default server URL, and URL of a
+server must always be explicitly given as the first argument.</p>
+</li><li>
+<p>Bio::Fetch.query is removed.</p>
+</li></ul>
+
+<p>For the purpose running old codes, it is recommended to install
+bio-old-biofetch-emulator gem. The bio-old-biofetch-emulator gem emulates
+old BioRuby&#39;s default BioFetch server by using other existing web
+services. See <a
+href="https://rubygems.org/gems/bio-old-biofetch-emulator">rubygems.org/gems/bio-old-biofetch-emulator</a>
+for details. We think many codes can run with no changes by simply
+installing the gem and adding “-r bio-old-biofetch-emulator” into the
+command-line when executing ruby.</p>
+
+<h2 id="label-Known+issues">Known issues<span><a href="#label-Known+issues">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The following issues are added or updated. See <a
+href="KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a> for other already known
+issues.</p>
+
+<h3 id="label-Bio-3A-3APDB"><a href="Bio/PDB.html">Bio::PDB</a><span><a href="#label-Bio-3A-3APDB">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Bio/PDB.html">Bio::PDB</a> should be updated to follow PDB format
+version 3.3.</p>
+
+<h3 id="label-Bio-3A-3ABlast-3A-3AReport"><a href="Bio/Blast/Report.html">Bio::Blast::Report</a><span><a href="#label-Bio-3A-3ABlast-3A-3AReport">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p>NCBI announces that that they are makeing a new version of BLAST XML data
+format. BioRuby should support it.</p>
+
+<h3 id="label-Bio-3A-3ABlast-3A-3ADefault-3A-3AReport"><a href="Bio/Blast/Default/Report.html">Bio::Blast::Default::Report</a><span><a href="#label-Bio-3A-3ABlast-3A-3ADefault-3A-3AReport">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<p><a href="Bio/Blast/Default/Report.html">Bio::Blast::Default::Report</a>
+currently supports legacy BLAST only. It may be better to support BLAST+
+text output format, although NCBI do not recommend to do so because the
+format is unstable.</p>
+</main>
+
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

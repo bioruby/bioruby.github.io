@@ -1,0 +1,1317 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::PDB - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../Object.html">Object</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="PDB/Utils.html">Bio::PDB::Utils</a>
+  
+  
+  
+    <li><a class="include" href="PDB/AtomFinder.html">Bio::PDB::AtomFinder</a>
+  
+  
+  
+    <li><a class="include" href="PDB/ResidueFinder.html">Bio::PDB::ResidueFinder</a>
+  
+  
+  
+    <li><a class="include" href="PDB/ChainFinder.html">Bio::PDB::ChainFinder</a>
+  
+  
+  
+    <li><a class="include" href="PDB/ModelFinder.html">Bio::PDB::ModelFinder</a>
+  
+  
+  
+    <li><a class="include" href="PDB/HetatmFinder.html">Bio::PDB::HetatmFinder</a>
+  
+  
+  
+    <li><a class="include" href="PDB/HeterogenFinder.html">Bio::PDB::HeterogenFinder</a>
+  
+  
+  
+    <li><span class="include">Enumerable</span>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    
+    <li ><a href="#method-i-accession">#accession</a>
+    
+    <li ><a href="#method-i-addModel">#addModel</a>
+    
+    <li ><a href="#method-i-authors">#authors</a>
+    
+    <li ><a href="#method-i-classification">#classification</a>
+    
+    <li ><a href="#method-i-dbref">#dbref</a>
+    
+    <li ><a href="#method-i-definition">#definition</a>
+    
+    <li ><a href="#method-i-each">#each</a>
+    
+    <li ><a href="#method-i-each_model">#each_model</a>
+    
+    <li ><a href="#method-i-entry_id">#entry_id</a>
+    
+    <li ><a href="#method-i-helix">#helix</a>
+    
+    <li ><a href="#method-i-inspect">#inspect</a>
+    
+    <li ><a href="#method-i-jrnl">#jrnl</a>
+    
+    <li ><a href="#method-i-keywords">#keywords</a>
+    
+    <li ><a href="#method-i-record">#record</a>
+    
+    <li ><a href="#method-i-remark">#remark</a>
+    
+    <li ><a href="#method-i-seqres">#seqres</a>
+    
+    <li ><a href="#method-i-sheet">#sheet</a>
+    
+    <li ><a href="#method-i-ssbond">#ssbond</a>
+    
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
+    <li ><a href="#method-i-turn">#turn</a>
+    
+    <li ><a href="#method-i-version">#version</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::PDB">
+  <h1 id="class-Bio::PDB" class="class">
+    class Bio::PDB
+  </h1>
+
+  <section class="description">
+    
+<p>This is the main <a href="PDB.html">PDB</a> class which takes care of
+parsing, annotations and is the entry way to the co-ordinate data held in
+models.</p>
+
+<p>There are many related classes.</p>
+
+<p><a href="PDB/Model.html">Bio::PDB::Model</a> <a
+href="PDB/Chain.html">Bio::PDB::Chain</a> <a
+href="PDB/Residue.html">Bio::PDB::Residue</a> <a
+href="PDB/Heterogen.html">Bio::PDB::Heterogen</a> <a
+href="PDB/Record/ATOM.html">Bio::PDB::Record::ATOM</a> <a
+href="PDB/Record/HETATM.html">Bio::PDB::Record::HETATM</a>
+Bio::PDB::Record::* <a href="PDB/Coordinate.html">Bio::PDB::Coordinate</a></p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="Coordinate_fileds">Coordinate_fileds
+        
+        <dd>
+        
+      
+        <dt id="DELIMITER">DELIMITER
+        
+        <dd><p>delimiter for reading via <a href="FlatFile.html">Bio::FlatFile</a></p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-data" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">data</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>all records in this entry as an array.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-hash" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">hash</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>all records in this entry as an hash accessed by record names.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-models" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">models</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>models in this entry (array).</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(str)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new <a href="PDB.html">Bio::PDB</a> object from given
+<em>str</em>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1445</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-comment">#Aha! Our entry into the world of PDB parsing, we initialise a PDB</span>
+  <span class="ruby-comment">#object with the whole PDB file as a string</span>
+  <span class="ruby-comment">#each PDB has an array of the lines of the original file</span>
+  <span class="ruby-comment">#a bit memory-tastic! A hash of records and an array of models</span>
+  <span class="ruby-comment">#also has an id</span>
+
+  <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/[\r\n]+/</span>)
+  <span class="ruby-ivar">@hash</span> = {}
+  <span class="ruby-ivar">@models</span> = []
+  <span class="ruby-ivar">@id</span> = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-comment">#Flag to say whether the current line is part of a continuation</span>
+  <span class="ruby-identifier">cont</span> = <span class="ruby-keyword">false</span>
+
+  <span class="ruby-comment">#Empty current model</span>
+  <span class="ruby-identifier">cModel</span>    = <span class="ruby-constant">Model</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">cChain</span>    = <span class="ruby-keyword">nil</span> <span class="ruby-comment">#Chain.new</span>
+  <span class="ruby-identifier">cResidue</span>  = <span class="ruby-keyword">nil</span> <span class="ruby-comment">#Residue.new</span>
+  <span class="ruby-identifier">cLigand</span>   = <span class="ruby-keyword">nil</span> <span class="ruby-comment">#Heterogen.new</span>
+  <span class="ruby-identifier">c_atom</span>    = <span class="ruby-keyword">nil</span>
+
+  <span class="ruby-comment">#Goes through each line and replace that line with a PDB::Record</span>
+  <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment">#Go to next if the previous line was contiunation able, and</span>
+    <span class="ruby-comment">#add_continuation returns true. Line is added by add_continuation</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cont</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">cont</span> = <span class="ruby-identifier">cont</span>.<span class="ruby-identifier">add_continuation</span>(<span class="ruby-identifier">line</span>)
+
+    <span class="ruby-comment">#Make the new record</span>
+    <span class="ruby-identifier">f</span> = <span class="ruby-constant">Record</span>.<span class="ruby-identifier">get_record_class</span>(<span class="ruby-identifier">line</span>).<span class="ruby-identifier">new</span>.<span class="ruby-identifier">initialize_from_string</span>(<span class="ruby-identifier">line</span>)
+    <span class="ruby-comment">#p f</span>
+    <span class="ruby-comment">#Set cont</span>
+    <span class="ruby-identifier">cont</span> = <span class="ruby-identifier">f</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">continue?</span>
+    <span class="ruby-comment">#Set the hash to point to this record either by adding to an</span>
+    <span class="ruby-comment">#array, or on it&#39;s own</span>
+    <span class="ruby-identifier">key</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">record_name</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">key</span>] <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">f</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">key</span>] = [ <span class="ruby-identifier">f</span> ]
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-comment"># Do something for ATOM and HETATM</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;ATOM&#39;</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;HETATM&#39;</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">cChain</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">chainID</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cChain</span>.<span class="ruby-identifier">id</span>
+        <span class="ruby-identifier">chain</span> = <span class="ruby-identifier">cChain</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">chain</span> = <span class="ruby-identifier">cModel</span>[<span class="ruby-identifier">f</span>.<span class="ruby-identifier">chainID</span>]
+          <span class="ruby-identifier">cChain</span> = <span class="ruby-identifier">chain</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cChain</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-comment"># If we don&#39;t have chain, add a new chain</span>
+          <span class="ruby-identifier">newChain</span> = <span class="ruby-constant">Chain</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">chainID</span>, <span class="ruby-identifier">cModel</span>)
+          <span class="ruby-identifier">cModel</span>.<span class="ruby-identifier">addChain</span>(<span class="ruby-identifier">newChain</span>)
+          <span class="ruby-identifier">cChain</span> = <span class="ruby-identifier">newChain</span>
+          <span class="ruby-identifier">chain</span> = <span class="ruby-identifier">newChain</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-comment"># chain might be changed, clearing cResidue and cLigand</span>
+        <span class="ruby-identifier">cResidue</span> = <span class="ruby-keyword">nil</span>
+        <span class="ruby-identifier">cLigand</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">key</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;ATOM&#39;</span>
+      <span class="ruby-identifier">c_atom</span> = <span class="ruby-identifier">f</span>
+      <span class="ruby-identifier">residueID</span> = <span class="ruby-constant">Residue</span>.<span class="ruby-identifier">get_residue_id_from_atom</span>(<span class="ruby-identifier">f</span>)
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">cResidue</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">residueID</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cResidue</span>.<span class="ruby-identifier">id</span>
+        <span class="ruby-identifier">residue</span> = <span class="ruby-identifier">cResidue</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">residue</span> = <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">get_residue_by_id</span>(<span class="ruby-identifier">residueID</span>)
+          <span class="ruby-identifier">cResidue</span> = <span class="ruby-identifier">residue</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cResidue</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-comment"># add a new residue</span>
+          <span class="ruby-identifier">newResidue</span> = <span class="ruby-constant">Residue</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">resName</span>, <span class="ruby-identifier">f</span>.<span class="ruby-identifier">resSeq</span>, <span class="ruby-identifier">f</span>.<span class="ruby-identifier">iCode</span>, <span class="ruby-identifier">chain</span>)
+          <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">addResidue</span>(<span class="ruby-identifier">newResidue</span>)
+          <span class="ruby-identifier">cResidue</span> = <span class="ruby-identifier">newResidue</span>
+          <span class="ruby-identifier">residue</span> = <span class="ruby-identifier">newResidue</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+      
+      <span class="ruby-identifier">f</span>.<span class="ruby-identifier">residue</span> = <span class="ruby-identifier">residue</span>
+      <span class="ruby-identifier">residue</span>.<span class="ruby-identifier">addAtom</span>(<span class="ruby-identifier">f</span>)
+
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;HETATM&#39;</span>
+      <span class="ruby-identifier">c_atom</span> = <span class="ruby-identifier">f</span>
+      <span class="ruby-identifier">residueID</span> = <span class="ruby-constant">Heterogen</span>.<span class="ruby-identifier">get_residue_id_from_atom</span>(<span class="ruby-identifier">f</span>)
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">cLigand</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">residueID</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cLigand</span>.<span class="ruby-identifier">id</span>
+        <span class="ruby-identifier">ligand</span> = <span class="ruby-identifier">cLigand</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">ligand</span> = <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">get_heterogen_by_id</span>(<span class="ruby-identifier">residueID</span>)
+          <span class="ruby-identifier">cLigand</span> = <span class="ruby-identifier">ligand</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">cLigand</span>
+        <span class="ruby-keyword">else</span>
+          <span class="ruby-comment"># add a new heterogen</span>
+          <span class="ruby-identifier">newLigand</span> = <span class="ruby-constant">Heterogen</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">resName</span>, <span class="ruby-identifier">f</span>.<span class="ruby-identifier">resSeq</span>, <span class="ruby-identifier">f</span>.<span class="ruby-identifier">iCode</span>, <span class="ruby-identifier">chain</span>)
+          <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">addLigand</span>(<span class="ruby-identifier">newLigand</span>)
+          <span class="ruby-identifier">cLigand</span> = <span class="ruby-identifier">newLigand</span>
+          <span class="ruby-identifier">ligand</span> = <span class="ruby-identifier">newLigand</span>
+          <span class="ruby-comment">#Each model has a special solvent chain. (for compatibility)</span>
+          <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">resName</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;HOH&#39;</span>
+            <span class="ruby-identifier">cModel</span>.<span class="ruby-identifier">addSolvent</span>(<span class="ruby-identifier">newLigand</span>)
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+
+      <span class="ruby-identifier">f</span>.<span class="ruby-identifier">residue</span> = <span class="ruby-identifier">ligand</span>
+      <span class="ruby-identifier">ligand</span>.<span class="ruby-identifier">addAtom</span>(<span class="ruby-identifier">f</span>)
+
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;MODEL&#39;</span>
+      <span class="ruby-identifier">c_atom</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">cChain</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">cResidue</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">cLigand</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">cModel</span>.<span class="ruby-identifier">model_serial</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">cModel</span>.<span class="ruby-identifier">chains</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">addModel</span>(<span class="ruby-identifier">cModel</span>)
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">cModel</span> = <span class="ruby-constant">Model</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">serial</span>)
+
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;TER&#39;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">c_atom</span>
+        <span class="ruby-identifier">c_atom</span>.<span class="ruby-identifier">ter</span> = <span class="ruby-identifier">f</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment">#$stderr.puts &quot;Warning: stray TER?&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;SIGATM&#39;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">c_atom</span>
+        <span class="ruby-comment">#$stderr.puts &quot;Warning: duplicated SIGATM?&quot; if c_atom.sigatm</span>
+        <span class="ruby-identifier">c_atom</span>.<span class="ruby-identifier">sigatm</span> = <span class="ruby-identifier">f</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment">#$stderr.puts &quot;Warning: stray SIGATM?&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;ANISOU&#39;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">c_atom</span>
+        <span class="ruby-comment">#$stderr.puts &quot;Warning: duplicated ANISOU?&quot; if c_atom.anisou</span>
+        <span class="ruby-identifier">c_atom</span>.<span class="ruby-identifier">anisou</span> = <span class="ruby-identifier">f</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment">#$stderr.puts &quot;Warning: stray ANISOU?&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;SIGUIJ&#39;</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">c_atom</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">c_atom</span>.<span class="ruby-identifier">anisou</span>
+        <span class="ruby-comment">#$stderr.puts &quot;Warning: duplicated SIGUIJ?&quot; if c_atom.anisou.siguij</span>
+        <span class="ruby-identifier">c_atom</span>.<span class="ruby-identifier">anisou</span>.<span class="ruby-identifier">siguij</span> = <span class="ruby-identifier">f</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment">#$stderr.puts &quot;Warning: stray SIGUIJ?&quot;</span>
+      <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">c_atom</span> = <span class="ruby-keyword">nil</span>
+
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">f</span>
+  <span class="ruby-keyword">end</span> <span class="ruby-comment">#each</span>
+  <span class="ruby-comment">#At the end we need to add the final model</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">addModel</span>(<span class="ruby-identifier">cModel</span>)
+  <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">compact!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-5B-5D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">[]</span><span
+            class="method-args">(key)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Provides keyed access to the models based on serial number returns nil if
+it&#39;s not there</p>
+          
+          
+
+          
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1633</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">find</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">model_serial</span> }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-accession" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">accession</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Same as <code>Bio::PDB#entry_id</code>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="accession-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1887</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">accession</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry_id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-addModel" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">addModel</span><span
+            class="method-args">(model)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Adds a <code>Bio::Model</code> object to the current strucutre. Adds a
+model to the current structure. Returns self.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="addModel-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1615</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">addModel</span>(<span class="ruby-identifier">model</span>)
+  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Expecting a Bio::PDB::Model&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Model</span>
+  <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">model</span>)
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-authors" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">authors</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get authors in “AUTHOR”.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="authors-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1869</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">authors</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;AUTHOR&#39;</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">authorList</span> }.<span class="ruby-identifier">flatten</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-classification" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">classification</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Classification in “HEADER”.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="classification-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1863</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">classification</span>
+  <span class="ruby-identifier">f</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;HEADER&#39;</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">f</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">classification</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-dbref" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dbref</span><span
+            class="method-args">(chainID = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets DBREF records. Returns an array of Bio::PDB::Record::DBREF objects.</p>
+
+<p>If <em>chainID</em> is given, it returns corresponding DBREF records.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="dbref-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1848</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dbref</span>(<span class="ruby-identifier">chainID</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">chainID</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;DBREF&#39;</span>).<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">chainID</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">chainID</span> }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;DBREF&#39;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-definition" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">definition</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Title of this entry in “TITLE”.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="definition-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1892</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">definition</span>
+  <span class="ruby-identifier">f</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;TITLE&#39;</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">f</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">title</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each</span><span
+            class="method-args">() { |model| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over each model. Iterates over each of the models in the
+structure. Returns <code>self</code>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="each-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1624</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>
+  <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">model</span> }
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="PDB.html#method-i-each_model">each_model</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each_model" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">each_model</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Alias needed for <a href="PDB/ModelFinder.html">Bio::PDB::ModelFinder</a></p>
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="PDB.html#method-i-each">each</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-entry_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entry_id</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="PDB.html">PDB</a> identifier written in “HEADER”. (e.g. 1A00)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="entry_id-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1878</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry_id</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@id</span>
+    <span class="ruby-identifier">f</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;HEADER&#39;</span>).<span class="ruby-identifier">first</span>
+    <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">f</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">idCode</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@id</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-helix" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">helix</span><span
+            class="method-args">(helixID = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets HELIX records. If no arguments are given, it returns all HELIX
+records. (Returns an array of <code>Bio::PDB::Record::HELIX</code>
+instances.) If <em>helixID</em> is given, it only returns records
+corresponding to given <em>helixID</em>. (Returns an
+<code>Bio::PDB::Record::HELIX</code> instance.)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="helix-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1749</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">helix</span>(<span class="ruby-identifier">helixID</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">helixID</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;HELIX&#39;</span>).<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">helixID</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">helixID</span> }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;HELIX&#39;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-inspect" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">inspect</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>returns a string containing human-readable representation of this object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="inspect-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1905</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">inspect</span>
+  <span class="ruby-node">&quot;#&lt;#{self.class.to_s} entry_id=#{entry_id.inspect}&gt;&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-jrnl" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">jrnl</span><span
+            class="method-args">(sub_record = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets JRNL records. If no arguments, it returns all JRNL records as a hash.
+If sub record name is specified, it returns only corresponding records as
+an array of <a href="PDB/Record.html">Bio::PDB::Record</a> instances.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="jrnl-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1730</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">jrnl</span>(<span class="ruby-identifier">sub_record</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@jrnl</span>)
+    <span class="ruby-ivar">@jrnl</span> = <span class="ruby-identifier">make_hash</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;JRNL&#39;</span>), <span class="ruby-value">:sub_record</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">sub_record</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@jrnl</span>[<span class="ruby-identifier">sub_record</span>] <span class="ruby-operator">:</span> <span class="ruby-ivar">@jrnl</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-keywords" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">keywords</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Keywords in “KEYWDS”. Returns an array of string.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="keywords-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1858</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">keywords</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;KEYWDS&#39;</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">keywds</span> }.<span class="ruby-identifier">flatten</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-record" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">record</span><span
+            class="method-args">(name = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets all records whose record type is <em>name</em>. Returns an array of
+<code>Bio::PDB::Record::*</code> objects.</p>
+
+<p>if <em>name</em> is nil, returns hash storing all record data.</p>
+
+<p>Example: p pdb.record(&#39;HETATM&#39;) p <a href="'HETATM'">pdb.record</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="record-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1696</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">record</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> (<span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> []) <span class="ruby-operator">:</span> <span class="ruby-ivar">@hash</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-remark" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">remark</span><span
+            class="method-args">(nn = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets REMARK records. If no arguments, it returns all REMARK records as a
+hash. If remark number is specified, returns only corresponding REMARK
+records. If number == 1 or 2 (“REMARK   1” or “REMARK   2”), returns an
+array of <a href="PDB/Record.html">Bio::PDB::Record</a> instances.
+Otherwise, returns an array of strings.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="remark-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1711</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">remark</span>(<span class="ruby-identifier">nn</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@remark</span>)
+    <span class="ruby-identifier">h</span> = <span class="ruby-identifier">make_hash</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;REMARK&#39;</span>), <span class="ruby-value">:remarkNum</span>)
+    <span class="ruby-identifier">h</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span>, <span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span> <span class="ruby-comment"># remove first record (= space only)</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">!=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">text</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s+\z/</span>, <span class="ruby-string">&#39;&#39;</span>) }
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@remark</span> = <span class="ruby-identifier">h</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">nn</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@remark</span>[<span class="ruby-identifier">nn</span>] <span class="ruby-operator">:</span> <span class="ruby-ivar">@remark</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-seqres" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">seqres</span><span
+            class="method-args">(chainID = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Amino acid or nucleic acid sequence of backbone residues in “SEQRES”. If
+<em>chainID</em> is given, it returns corresponding sequence as an array of
+string. Otherwise, returns a hash which contains all sequences.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="seqres-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1802</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">seqres</span>(<span class="ruby-identifier">chainID</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@seqres</span>)
+    <span class="ruby-identifier">h</span> = <span class="ruby-identifier">make_hash</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;SEQRES&#39;</span>), <span class="ruby-value">:chainID</span>)
+    <span class="ruby-identifier">newHash</span> = {}
+    <span class="ruby-identifier">h</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">resName</span> }
+      <span class="ruby-identifier">a</span>.<span class="ruby-identifier">flatten!</span>
+      <span class="ruby-comment"># determine nuc or aa?</span>
+      <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+      <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>,<span class="ruby-value">13</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">tmp</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">size</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> }
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">tmp</span>[<span class="ruby-value">3</span>] <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">tmp</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword">then</span>
+        <span class="ruby-comment"># amino acid sequence</span>
+        <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">aa</span><span class="ruby-operator">|</span>
+          <span class="ruby-comment">#aa is three letter code: i.e. ALA</span>
+          <span class="ruby-comment">#need to look up with Ala</span>
+          <span class="ruby-identifier">aa</span> = <span class="ruby-identifier">aa</span>.<span class="ruby-identifier">capitalize</span>
+          (<span class="ruby-keyword">begin</span>
+             <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AminoAcid</span>.<span class="ruby-identifier">three2one</span>(<span class="ruby-identifier">aa</span>)
+           <span class="ruby-keyword">rescue</span> <span class="ruby-constant">ArgumentError</span>
+             <span class="ruby-keyword">nil</span>
+           <span class="ruby-keyword">end</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;X&#39;</span>)
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>))
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-comment"># nucleic acid sequence</span>
+        <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">na</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">na</span> = <span class="ruby-identifier">na</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-string">&#39;^a-zA-Z&#39;</span>)
+          <span class="ruby-identifier">na</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">na</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;n&#39;</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>))
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">newHash</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">seq</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@seqres</span> = <span class="ruby-identifier">newHash</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">chainID</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-ivar">@seqres</span>[<span class="ruby-identifier">chainID</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@seqres</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sheet" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sheet</span><span
+            class="method-args">(sheetID = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets SHEET records. If no arguments are given, it returns all SHEET records
+as an array of arrays of <code>Bio::PDB::Record::SHEET</code> instances. If
+<em>sheetID</em> is given, it returns an array of
+<code>Bio::PDB::Record::SHEET</code> instances.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sheet-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1777</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sheet</span>(<span class="ruby-identifier">sheetID</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@sheet</span>)
+    <span class="ruby-ivar">@sheet</span> = <span class="ruby-identifier">make_grouping</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;SHEET&#39;</span>), <span class="ruby-value">:sheetID</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">sheetID</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-ivar">@sheet</span>.<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">sheetID</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">sheetID</span> }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@sheet</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-ssbond" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">ssbond</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets SSBOND records.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="ssbond-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1789</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">ssbond</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;SSBOND&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a string of Bio::PDB::Models. This propogates down the heirarchy
+till you get to <a href="PDB/Record/ATOM.html">Bio::PDB::Record::ATOM</a>
+which are outputed in <a href="PDB.html">PDB</a> format</p>
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1647</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-identifier">string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">to_s</span> }
+  <span class="ruby-identifier">string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;END\n&quot;</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">string</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-turn" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">turn</span><span
+            class="method-args">(turnId = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets TURN records. If no arguments are given, it returns all TURN records. 
+(Returns an array of <code>Bio::PDB::Record::TURN</code> instances.) If
+<em>turnId</em> is given, it only returns a record corresponding to given
+<em>turnId</em>. (Returns an <code>Bio::PDB::Record::TURN</code> instance.)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="turn-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1764</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">turn</span>(<span class="ruby-identifier">turnId</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">turnId</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;TURN&#39;</span>).<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">turnId</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">turnId</span> }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;TURN&#39;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-version" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">version</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Current modification number in “REVDAT”.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="version-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1898</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">version</span>
+  <span class="ruby-identifier">f</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;REVDAT&#39;</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-identifier">f</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">modNum</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

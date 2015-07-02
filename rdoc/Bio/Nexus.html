@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::Nexus - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::Nexus-label-DESCRIPTION">DESCRIPTION</a>
+    <li><a href="#class-Bio::Nexus-label-USAGE">USAGE</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-get_blocks">#get_blocks</a>
+    
+    <li ><a href="#method-i-get_blocks_by_name">#get_blocks_by_name</a>
+    
+    <li ><a href="#method-i-get_characters_blocks">#get_characters_blocks</a>
+    
+    <li ><a href="#method-i-get_data_blocks">#get_data_blocks</a>
+    
+    <li ><a href="#method-i-get_distances_blocks">#get_distances_blocks</a>
+    
+    <li ><a href="#method-i-get_taxa_blocks">#get_taxa_blocks</a>
+    
+    <li ><a href="#method-i-get_trees_blocks">#get_trees_blocks</a>
+    
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
+    <li ><a href="#method-i-to_str">#to_str</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::Nexus">
+  <h1 id="class-Bio::Nexus" class="class">
+    class Bio::Nexus
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Bio::Nexus-label-DESCRIPTION">DESCRIPTION<span><a href="#class-Bio::Nexus-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p><a href="Nexus.html">Bio::Nexus</a> is a parser for nexus formatted data.
+It contains classes and constants enabling the representation and
+processing of nexus data.</p>
+
+<h2 id="class-Bio::Nexus-label-USAGE">USAGE<span><a href="#class-Bio::Nexus-label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre class="ruby"><span class="ruby-comment"># Parsing a nexus formatted string str:</span>
+<span class="ruby-identifier">nexus</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Nexus</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">nexus_str</span> )
+
+<span class="ruby-comment"># Obtaining of the nexus blocks as array of GenericBlock or</span>
+<span class="ruby-comment"># any of its subclasses (such as DistancesBlock):</span>
+<span class="ruby-identifier">blocks</span> = <span class="ruby-identifier">nexus</span>.<span class="ruby-identifier">get_blocks</span>
+
+<span class="ruby-comment"># Getting a block by name:</span>
+<span class="ruby-identifier">my_blocks</span> = <span class="ruby-identifier">nexus</span>.<span class="ruby-identifier">get_blocks_by_name</span>( <span class="ruby-string">&quot;my_block&quot;</span> )
+
+<span class="ruby-comment"># Getting distance blocks:</span>
+<span class="ruby-identifier">distances_blocks</span> = <span class="ruby-identifier">nexus</span>.<span class="ruby-identifier">get_distances_blocks</span>
+
+<span class="ruby-comment"># Getting trees blocks:</span>
+<span class="ruby-identifier">trees_blocks</span> = <span class="ruby-identifier">nexus</span>.<span class="ruby-identifier">get_trees_blocks</span>
+
+<span class="ruby-comment"># Getting data blocks:</span>
+<span class="ruby-identifier">data_blocks</span> = <span class="ruby-identifier">nexus</span>.<span class="ruby-identifier">get_data_blocks</span>
+
+<span class="ruby-comment"># Getting characters blocks: </span>
+<span class="ruby-identifier">character_blocks</span> = <span class="ruby-identifier">nexus</span>.<span class="ruby-identifier">get_characters_blocks</span>
+
+<span class="ruby-comment"># Getting taxa blocks: </span>
+<span class="ruby-identifier">taxa_blocks</span> = <span class="ruby-identifier">nexus</span>.<span class="ruby-identifier">get_taxa_blocks</span>
+</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="BEGIN_BLOCK">BEGIN_BLOCK
+        
+        <dd>
+        
+      
+        <dt id="BEGIN_COMMENT">BEGIN_COMMENT
+        
+        <dd>
+        
+      
+        <dt id="BEGIN_NEXUS">BEGIN_NEXUS
+        
+        <dd>
+        
+      
+        <dt id="CHARACTERS">CHARACTERS
+        
+        <dd>
+        
+      
+        <dt id="CHARACTERS_BLOCK">CHARACTERS_BLOCK
+        
+        <dd>
+        
+      
+        <dt id="DATA">DATA
+        
+        <dd>
+        
+      
+        <dt id="DATATYPE">DATATYPE
+        
+        <dd>
+        
+      
+        <dt id="DATA_BLOCK">DATA_BLOCK
+        
+        <dd>
+        
+      
+        <dt id="DELIMITER">DELIMITER
+        
+        <dd>
+        
+      
+        <dt id="DIMENSIONS">DIMENSIONS
+        
+        <dd>
+        
+      
+        <dt id="DISTANCES">DISTANCES
+        
+        <dd>
+        
+      
+        <dt id="DISTANCES_BLOCK">DISTANCES_BLOCK
+        
+        <dd>
+        
+      
+        <dt id="DOUBLE_QUOTE">DOUBLE_QUOTE
+        
+        <dd>
+        
+      
+        <dt id="END_BLOCK">END_BLOCK
+        
+        <dd>
+        
+      
+        <dt id="END_COMMENT">END_COMMENT
+        
+        <dd>
+        
+      
+        <dt id="END_OF_LINE">END_OF_LINE
+        
+        <dd>
+        
+      
+        <dt id="FORMAT">FORMAT
+        
+        <dd>
+        
+      
+        <dt id="INDENTENTION">INDENTENTION
+        
+        <dd>
+        
+      
+        <dt id="MATRIX">MATRIX
+        
+        <dd>
+        
+      
+        <dt id="NCHAR">NCHAR
+        
+        <dd>
+        
+      
+        <dt id="NTAX">NTAX
+        
+        <dd>
+        
+      
+        <dt id="SINGLE_QUOTE">SINGLE_QUOTE
+        
+        <dd>
+        
+      
+        <dt id="TAXA">TAXA
+        
+        <dd>
+        
+      
+        <dt id="TAXA_BLOCK">TAXA_BLOCK
+        
+        <dd>
+        
+      
+        <dt id="TAXLABELS">TAXLABELS
+        
+        <dd>
+        
+      
+        <dt id="TREES">TREES
+        
+        <dd>
+        
+      
+        <dt id="TREES_BLOCK">TREES_BLOCK
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">( nexus_str )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new nexus parser for &#39;nexus_str&#39;.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>nexus_str</em>: <a href="../String.html">String</a> - nexus
+formatted data</p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 177</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">nexus_str</span> )
+  <span class="ruby-ivar">@blocks</span>             = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@current_cmd</span>        = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@current_subcmd</span>     = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@current_block_name</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@current_block</span>      = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">parse</span>( <span class="ruby-identifier">nexus_str</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-get_blocks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_blocks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an Array of all blocks found in the <a
+href="../String.html">String</a> &#39;nexus_str&#39; set via <a
+href="Nexus.html#method-c-new">::new</a>( nexus_str ).</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array of GenericBlocks or any of its subclasses</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_blocks-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 192</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_blocks</span>
+  <span class="ruby-ivar">@blocks</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_blocks_by_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_blocks_by_name</span><span
+            class="method-args">( name )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A convenience methods which returns an array of all nexus blocks for which
+the name equals &#39;name&#39; found in the <a
+href="../String.html">String</a> &#39;nexus_str&#39; set via <a
+href="Nexus.html#method-c-new">::new</a>( nexus_str ).</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>name</em>: <a href="../String.html">String</a></p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array of GenericBlocks or any of its subclasses</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_blocks_by_name-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 204</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_blocks_by_name</span>( <span class="ruby-identifier">name</span> )
+  <span class="ruby-identifier">found_blocks</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@blocks</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">block</span> <span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> ( <span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">get_name</span> )
+      <span class="ruby-identifier">found_blocks</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">block</span> )
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">found_blocks</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_characters_blocks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_characters_blocks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A convenience methods which returns an array of all characters blocks.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array of CharactersBlocks</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_characters_blocks-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 228</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_characters_blocks</span>
+  <span class="ruby-identifier">get_blocks_by_name</span>( <span class="ruby-constant">CHARACTERS_BLOCK</span>.<span class="ruby-identifier">chomp</span>( <span class="ruby-string">&quot;;&quot;</span>).<span class="ruby-identifier">downcase</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_data_blocks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_data_blocks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A convenience methods which returns an array of all data blocks.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array of DataBlocks</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_data_blocks-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 219</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_data_blocks</span>
+  <span class="ruby-identifier">get_blocks_by_name</span>( <span class="ruby-constant">DATA_BLOCK</span>.<span class="ruby-identifier">chomp</span>( <span class="ruby-string">&quot;;&quot;</span>).<span class="ruby-identifier">downcase</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_distances_blocks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_distances_blocks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A convenience methods which returns an array of all distances blocks.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array of <a href="Nexus/DistancesBlock.html">DistancesBlock</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_distances_blocks-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 246</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_distances_blocks</span>
+  <span class="ruby-identifier">get_blocks_by_name</span>( <span class="ruby-constant">DISTANCES_BLOCK</span>.<span class="ruby-identifier">chomp</span>( <span class="ruby-string">&quot;;&quot;</span>).<span class="ruby-identifier">downcase</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_taxa_blocks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_taxa_blocks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A convenience methods which returns an array of all taxa blocks.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array of TaxaBlocks</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_taxa_blocks-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 255</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_taxa_blocks</span>
+  <span class="ruby-identifier">get_blocks_by_name</span>( <span class="ruby-constant">TAXA_BLOCK</span>.<span class="ruby-identifier">chomp</span>( <span class="ruby-string">&quot;;&quot;</span>).<span class="ruby-identifier">downcase</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_trees_blocks" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_trees_blocks</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A convenience methods which returns an array of all trees blocks.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array of TreesBlocks</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_trees_blocks-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 237</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_trees_blocks</span>
+  <span class="ruby-identifier">get_blocks_by_name</span>( <span class="ruby-constant">TREES_BLOCK</span>.<span class="ruby-identifier">chomp</span>( <span class="ruby-string">&quot;;&quot;</span>).<span class="ruby-identifier">downcase</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a <a href="../String.html">String</a> listing how many of each
+blocks it parsed.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 263</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">str</span> = <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">get_blocks</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;empty&quot;</span>
+  <span class="ruby-keyword">else</span> 
+    <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;number of blocks: &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_blocks</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">get_characters_blocks</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; [characters blocks: &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_characters_blocks</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;] &quot;</span>
+    <span class="ruby-keyword">end</span>  
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">get_data_blocks</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; [data blocks: &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_data_blocks</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;] &quot;</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">get_distances_blocks</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; [distances blocks: &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_distances_blocks</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;] &quot;</span>
+    <span class="ruby-keyword">end</span>  
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">get_taxa_blocks</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; [taxa blocks: &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_taxa_blocks</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;] &quot;</span>
+    <span class="ruby-keyword">end</span>    
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">get_trees_blocks</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot; [trees blocks: &quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">get_trees_blocks</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;] &quot;</span>
+    <span class="ruby-keyword">end</span>        
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">str</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Nexus.html#method-i-to_str">to_str</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_str" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">to_str</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Nexus.html#method-i-to_s">to_s</a>
+        </div>
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

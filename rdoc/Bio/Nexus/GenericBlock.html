@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::Nexus::GenericBlock - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::Nexus::GenericBlock-label-DESCRIPTION">DESCRIPTION</a>
+    <li><a href="#class-Bio::Nexus::GenericBlock-label-USAGE">USAGE</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-add_token">#add_token</a>
+    
+    <li ><a href="#method-i-get_name">#get_name</a>
+    
+    <li ><a href="#method-i-get_tokens">#get_tokens</a>
+    
+    <li ><a href="#method-i-to_nexus">#to_nexus</a>
+    
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
+    <li ><a href="#method-i-to_str">#to_str</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::Nexus::GenericBlock">
+  <h1 id="class-Bio::Nexus::GenericBlock" class="class">
+    class Bio::Nexus::GenericBlock
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Bio::Nexus::GenericBlock-label-DESCRIPTION">DESCRIPTION<span><a href="#class-Bio::Nexus::GenericBlock-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p><a href="GenericBlock.html">Bio::Nexus::GenericBlock</a> represents a
+generic nexus block. It is mainly intended to be extended into more
+specific classes, although it is used for blocks not represented by more
+specific block classes. It has a name and a array for the tokenized content
+of a nexus block.</p>
+
+<h2 id="class-Bio::Nexus::GenericBlock-label-USAGE">USAGE<span><a href="#class-Bio::Nexus::GenericBlock-label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre>require &#39;bio/db/nexus&#39;
+
+# Create a new parser:
+nexus = Bio::Nexus.new( nexus_data_as_string )
+
+# Get blocks for which no class exists (private blocks)
+as Nexus::GenericBlock:
+private_blocks = nexus.get_blocks_by_name( &quot;my_block&quot; )
+# Get first block names &quot;my_block&quot;:
+my_block_0 = private_blocks[ 0 ]
+# Get first token in first block names &quot;my_block&quot;:
+first_token = my_block_0.get_tokens[ 0 ]
+# Get name of block (would return &quot;my_block&quot; in this case):
+name = my_block_0.get_name
+# Return data of block as nexus formatted String:
+name = my_block_0.to_nexus</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">( name )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new <a href="GenericBlock.html">GenericBlock</a> object named
+&#39;name&#39;.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>name</em>: <a href="../../String.html">String</a></p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 775</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">name</span> )
+  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&quot;;&quot;</span>) 
+  <span class="ruby-ivar">@tokens</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add_token" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_token</span><span
+            class="method-args">( token )</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Adds a token to this.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>token</em>: <a href="../../String.html">String</a></p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="add_token-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 818</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_token</span>( <span class="ruby-identifier">token</span> )
+  <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">token</span> )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_name" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_name</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets the name of this block.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_name-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 784</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_name</span>
+  <span class="ruby-ivar">@name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_tokens" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_tokens</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns contents as Array of Strings.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>Array</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="get_tokens-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 792</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_tokens</span>
+  <span class="ruby-ivar">@tokens</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_nexus" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_nexus</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Should return a <a href="../../String.html">String</a> describing this
+block as nexus formatted data.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="to_nexus-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 808</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_nexus</span>
+  <span class="ruby-identifier">str</span> = <span class="ruby-string">&quot;generic block \&quot;&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\&quot; [do not know how to write in nexus format]&quot;</span>
+  <span class="ruby-identifier">str</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Same as to_nexus.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 800</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">to_nexus</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="GenericBlock.html#method-i-to_str">to_str</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_str" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">to_str</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="GenericBlock.html#method-i-to_s">to_s</a>
+        </div>
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::PDB::ChemicalComponent - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-conect">#conect</a>
+    
+    <li ><a href="#method-i-entry_id">#entry_id</a>
+    
+    <li ><a href="#method-i-formul">#formul</a>
+    
+    <li ><a href="#method-i-hetnam">#hetnam</a>
+    
+    <li ><a href="#method-i-hetsyn">#hetsyn</a>
+    
+    <li ><a href="#method-i-record">#record</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::PDB::ChemicalComponent">
+  <h1 id="class-Bio::PDB::ChemicalComponent" class="class">
+    class Bio::PDB::ChemicalComponent
+  </h1>
+
+  <section class="description">
+    
+<p>Bio::PDB::ChemicalComponet is a parser for a entry of the <a
+href="../PDB.html">PDB</a> Chemical Component Dictionary.</p>
+
+<p>The <a href="../PDB.html">PDB</a> Chemical Component Dictionary is
+available in <a
+href="http://deposit.pdb.org/het_dictionary.txt">deposit.pdb.org/het_dictionary.txt</a></p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DELIMITER">DELIMITER
+        
+        <dd><p>delimiter for reading via <a href="../FlatFile.html">Bio::FlatFile</a></p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-data" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">data</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>all records in this entry as an array.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-hash" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">hash</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>all records in this entry as an hash accessed by record names.</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(str)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/[\r\n]+/</span>)
+  <span class="ruby-ivar">@hash</span> = {}
+
+  <span class="ruby-comment">#Flag to say whether the current line is part of a continuation</span>
+  <span class="ruby-identifier">cont</span> = <span class="ruby-keyword">false</span>
+  
+  <span class="ruby-comment">#Goes through each line and replace that line with a PDB::Record</span>
+  <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment">#Go to next if the previous line was contiunation able, and</span>
+    <span class="ruby-comment">#add_continuation returns true. Line is added by add_continuation</span>
+    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cont</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">cont</span> = <span class="ruby-identifier">cont</span>.<span class="ruby-identifier">add_continuation</span>(<span class="ruby-identifier">line</span>)
+
+    <span class="ruby-comment">#Make the new record</span>
+    <span class="ruby-identifier">f</span> = <span class="ruby-constant">Record</span>.<span class="ruby-identifier">get_record_class</span>(<span class="ruby-identifier">line</span>).<span class="ruby-identifier">new</span>.<span class="ruby-identifier">initialize_from_string</span>(<span class="ruby-identifier">line</span>)
+    <span class="ruby-comment">#p f</span>
+    <span class="ruby-comment">#Set cont</span>
+    <span class="ruby-identifier">cont</span> = <span class="ruby-identifier">f</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">continue?</span>
+    <span class="ruby-comment">#Set the hash to point to this record either by adding to an</span>
+    <span class="ruby-comment">#array, or on it&#39;s own</span>
+    <span class="ruby-identifier">key</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">record_name</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">key</span>] <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">f</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">key</span>] = [ <span class="ruby-identifier">f</span> ]
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">f</span>
+  <span class="ruby-keyword">end</span> <span class="ruby-comment">#each</span>
+  <span class="ruby-comment">#At the end we need to add the final model</span>
+  <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">compact!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-conect" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">conect</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an hash of bindings of atoms. Note that each white spaces are
+stripped for atom symbols.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="conect-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 193</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">conect</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@conect</span>
+    <span class="ruby-identifier">c</span> = {}
+    <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;CONECT&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">key</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
+      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">empty?</span>
+        <span class="ruby-identifier">val</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">other_atoms</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">strip</span> }
+        <span class="ruby-comment">#warn &quot;Warning: #{key}: atom name conflict?&quot; if c[key]</span>
+        <span class="ruby-identifier">c</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@conect</span> = <span class="ruby-identifier">c</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@conect</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-entry_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entry_id</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Identifier written in the first line “RESIDUE” record. (e.g. CMP)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="entry_id-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry_id</span>
+  <span class="ruby-ivar">@data</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">hetID</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-formul" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">formul</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The chemical formula of the chemical component. Returns a string  (or nil,
+if the entry is something wrong).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="formul-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 187</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">formul</span>
+  <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;FORMUL&quot;</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">text</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-hetnam" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hetnam</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>The name of the chemical component. Returns a string (or nil, if the entry
+is something wrong).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="hetnam-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hetnam</span>
+  <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;HETNAM&quot;</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">text</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-hetsyn" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">hetsyn</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Synonyms for the comical component. Returns an array of strings.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="hetsyn-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 168</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">hetsyn</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@hetsyn</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;HETSYN&quot;</span>]
+      <span class="ruby-ivar">@hetsyn</span> = <span class="ruby-identifier">r</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">hetSynonyms</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\;\s*/</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">return</span> []
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@hetsyn</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-record" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">record</span><span
+            class="method-args">(name = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets all records whose record type is <em>name</em>. Returns an array of
+<code>Bio::PDB::Record::*</code> objects.</p>
+
+<p>if <em>name</em> is nil, returns hash storing all record data.</p>
+
+<p>Example: p pdb.record(&#39;CONECT&#39;) p <a href="'CONECT'">pdb.record</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="record-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 218</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">record</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">:</span> <span class="ruby-ivar">@hash</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

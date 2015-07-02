@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::Locations - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::Locations-label-Description">Description</a>
+    <li><a href="#class-Bio::Locations-label-Usage">Usage</a>
+    <li><a href="#class-Bio::Locations-label-GenBank+location+descriptor+classification">GenBank location descriptor classification</a>
+    <li><a href="#class-Bio::Locations-label-Definition+of+the+position+notation+of+the+GenBank+location+format">Definition of the position notation of the GenBank location format</a>
+    <li><a href="#class-Bio::Locations-label-Description+commented+with+pattern+IDs.">Description commented with pattern IDs.</a>
+    <li><a href="#class-Bio::Locations-label-Reduction+strategy+of+the+position+notations">Reduction strategy of the position notations</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../Object.html">Object</a>
+  
+</div>
+
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><span class="include">Enumerable</span>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li class="calls-super" ><a href="#method-i-3D-3D">#==</a>
+    
+    <li ><a href="#method-i-5B-5D">#[]</a>
+    
+    <li ><a href="#method-i-absolute">#absolute</a>
+    
+    <li ><a href="#method-i-each">#each</a>
+    
+    <li ><a href="#method-i-equals-3F">#equals?</a>
+    
+    <li ><a href="#method-i-first">#first</a>
+    
+    <li ><a href="#method-i-last">#last</a>
+    
+    <li ><a href="#method-i-length">#length</a>
+    
+    <li ><a href="#method-i-range">#range</a>
+    
+    <li ><a href="#method-i-relative">#relative</a>
+    
+    <li ><a href="#method-i-size">#size</a>
+    
+    <li ><a href="#method-i-span">#span</a>
+    
+    <li ><a href="#method-i-to_s">#to_s</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::Locations">
+  <h1 id="class-Bio::Locations" class="class">
+    class Bio::Locations
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Bio::Locations-label-Description">Description<span><a href="#class-Bio::Locations-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>The <a href="Locations.html">Bio::Locations</a> class is a container for <a
+href="Location.html">Bio::Location</a> objects: creating a <a
+href="Locations.html">Bio::Locations</a> object (based on a <a
+href="GenBank.html">GenBank</a> style position string) will spawn an array
+of <a href="Location.html">Bio::Location</a> objects.</p>
+
+<h2 id="class-Bio::Locations-label-Usage">Usage<span><a href="#class-Bio::Locations-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre class="ruby"> <span class="ruby-identifier">locations</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;join(complement(500..550), 600..625)&#39;</span>)
+ <span class="ruby-identifier">locations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
+   <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;class = &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span>
+   <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;range = #{loc.from}..#{loc.to} (strand = #{loc.strand})&quot;</span>
+ <span class="ruby-keyword">end</span>
+ <span class="ruby-comment"># Output would be:</span>
+ <span class="ruby-comment">#   class = Bio::Location</span>
+ <span class="ruby-comment">#   range = 500..550 (strand = -1)</span>
+ <span class="ruby-comment">#   class = Bio::Location</span>
+ <span class="ruby-comment">#   range = 600..625 (strand = 1)</span>
+
+<span class="ruby-comment"># For the following three location strings, print the span and range</span>
+[<span class="ruby-string">&#39;one-of(898,900)..983&#39;</span>,
+ <span class="ruby-string">&#39;one-of(5971..6308,5971..6309)&#39;</span>,
+ <span class="ruby-string">&#39;8050..one-of(10731,10758,10905,11242)&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">location</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">loc</span>)
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">span</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">range</span>
+<span class="ruby-keyword">end</span>
+</pre>
+
+<h3 id="class-Bio::Locations-label-GenBank+location+descriptor+classification"><a href="GenBank.html">GenBank</a> location descriptor classification<span><a href="#class-Bio::Locations-label-GenBank+location+descriptor+classification">&para;</a> <a href="#top">&uarr;</a></span></h3>
+
+<h4 id="class-Bio::Locations-label-Definition+of+the+position+notation+of+the+GenBank+location+format">Definition of the position notation of the <a href="GenBank.html">GenBank</a> location format<span><a href="#class-Bio::Locations-label-Definition+of+the+position+notation+of+the+GenBank+location+format">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<p>According to the <a href="GenBank.html">GenBank</a> manual
+&#39;gbrel.txt&#39;, position notations were classified into 10 patterns -
+(A) to (J).</p>
+
+<pre>3.4.12.2 Feature Location
+
+  The second column of the feature descriptor line designates the
+location of the feature in the sequence. The location descriptor
+begins at position 22. Several conventions are used to indicate
+sequence location.
+
+  Base numbers in location descriptors refer to numbering in the entry,
+which is not necessarily the same as the numbering scheme used in the
+published report. The first base in the presented sequence is numbered
+base 1. Sequences are presented in the 5 to 3 direction.
+
+Location descriptors can be one of the following:
+
+(A) 1. A single base;
+
+(B) 2. A contiguous span of bases;
+
+(C) 3. A site between two bases;
+
+(D) 4. A single base chosen from a range of bases;
+
+(E) 5. A single base chosen from among two or more specified bases;
+
+(F) 6. A joining of sequence spans;
+
+(G) 7. A reference to an entry other than the one to which the feature
+     belongs (i.e., a remote entry), followed by a location descriptor
+     referring to the remote sequence;
+
+(H) 8. A literal sequence (a string of bases enclosed in quotation marks).</pre>
+
+<h4 id="class-Bio::Locations-label-Description+commented+with+pattern+IDs.">Description commented with pattern IDs.<span><a href="#class-Bio::Locations-label-Description+commented+with+pattern+IDs.">&para;</a> <a href="#top">&uarr;</a></span></h4>
+
+<pre>(C)   A site between two residues, such as an endonuclease cleavage site, is
+    indicated by listing the two bases separated by a carat (e.g., 23^24).
+
+(D)   A single residue chosen from a range of residues is indicated by the
+    number of the first and last bases in the range separated by a single
+    period (e.g., 23.79). The symbols &lt; and &gt; indicate that the end point
+(I) of the range is beyond the specified base number.
+
+(B)   A contiguous span of bases is indicated by the number of the first and
+    last bases in the range separated by two periods (e.g., 23..79). The
+(I) symbols &lt; and &gt; indicate that the end point of the range is beyond the
+    specified base number. Starting and ending positions can be indicated
+    by base number or by one of the operators described below.
+
+      Operators are prefixes that specify what must be done to the indicated
+    sequence to locate the feature. The following are the operators
+    available, along with their most common format and a description.
+
+(J) complement (location): The feature is complementary to the location
+    indicated. Complementary strands are read 5 to 3.
+
+(F) join (location, location, .. location): The indicated elements should
+    be placed end to end to form one contiguous sequence.
+
+(F) order (location, location, .. location): The elements are found in the
+    specified order in the 5 to 3 direction, but nothing is implied about
+    the rationality of joining them.
+
+(F) group (location, location, .. location): The elements are related and
+    should be grouped together, but no order is implied.
+
+(E) one-of (location, location, .. location): The element can be any one,
+  but only one, of the items listed.</pre>
+
+<h3 id="class-Bio::Locations-label-Reduction+strategy+of+the+position+notations">Reduction strategy of the position notations<span><a href="#class-Bio::Locations-label-Reduction+strategy+of+the+position+notations">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<ul><li>
+<p>(A) <a href="Location.html">Location</a> n</p>
+</li><li>
+<p>(B) <a href="Location.html">Location</a> n..m</p>
+</li><li>
+<p>(C) <a href="Location.html">Location</a> n^m</p>
+</li><li>
+<p>(D) (n.m)                   =&gt; <a href="Location.html">Location</a> n</p>
+</li><li>
+<p>(E)</p>
+<ul><li>
+<p>one-of(n,m,..)            =&gt; <a href="Location.html">Location</a> n</p>
+</li><li>
+<p>one-of(n..m,..)           =&gt; <a href="Location.html">Location</a> n..m</p>
+</li></ul>
+</li><li>
+<p>(F)</p>
+<ul><li>
+<p>order(loc,loc,..)         =&gt; join(loc, loc,..)</p>
+</li><li>
+<p>group(loc,loc,..)         =&gt; join(loc, loc,..)</p>
+</li><li>
+<p>join(loc,loc,..)          =&gt; <a href="Sequence.html">Sequence</a></p>
+</li></ul>
+</li><li>
+<p>(G) ID:loc                  =&gt; <a href="Location.html">Location</a> with
+ID</p>
+</li><li>
+<p>(H) “atgc”                  =&gt; <a href="Location.html">Location</a> only
+with <a href="Sequence.html">Sequence</a></p>
+</li><li>
+<p>(I)</p>
+<ul><li>
+<p>&lt;n                        =&gt; <a href="Location.html">Location</a> n
+with lt flag</p>
+</li><li>
+<p>&gt;n                        =&gt; <a href="Location.html">Location</a> n
+with gt flag</p>
+</li><li>
+<p>&lt;n..m                     =&gt; <a href="Location.html">Location</a>
+n..m with lt flag</p>
+</li><li>
+<p>n..&gt;m                     =&gt; <a href="Location.html">Location</a>
+n..m with gt flag</p>
+</li><li>
+<p>&lt;n..&gt;m                    =&gt; <a href="Location.html">Location</a>
+n..m with lt, gt flag</p>
+</li></ul>
+</li><li>
+<p>(J) complement(loc)         =&gt; <a href="Sequence.html">Sequence</a></p>
+</li><li>
+<p>(K) replace(loc, str)       =&gt; <a href="Location.html">Location</a> with
+replacement <a href="Sequence.html">Sequence</a></p>
+</li></ul>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-locations" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">locations</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>(Array) An Array of <a href="Location.html">Bio::Location</a> objects</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-operator" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">operator</span><span
+            class="attribute-access-type">[RW]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>(Symbol or nil) Operator. nil (means :join), :order, or :group (obsolete).</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(position)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Parses a <a href="GenBank.html">GenBank</a> style position string and
+returns a <a href="Locations.html">Bio::Locations</a> object, which
+contains a list of <a href="Location.html">Bio::Location</a> objects.</p>
+
+<pre class="ruby"><span class="ruby-identifier">locations</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;join(complement(500..550), 600..625)&#39;</span>)
+</pre>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>str</em>: <a href="GenBank.html">GenBank</a> style position
+string</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="Locations.html">Bio::Locations</a> object</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 346</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">position</span>)
+  <span class="ruby-ivar">@operator</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">position</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>
+    <span class="ruby-ivar">@locations</span> = <span class="ruby-identifier">position</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">position</span>   = <span class="ruby-identifier">gbl_cleanup</span>(<span class="ruby-identifier">position</span>)        <span class="ruby-comment"># preprocessing</span>
+    <span class="ruby-ivar">@locations</span> = <span class="ruby-identifier">gbl_pos2loc</span>(<span class="ruby-identifier">position</span>)        <span class="ruby-comment"># create an Array of Bio::Location objects</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-3D-3D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">==</span><span
+            class="method-args">(other)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If <em>other</em> is equal with the self, returns true. Otherwise, returns
+false.</p>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>other</em>: any object</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>true or false</p>
+</dd></dl>
+          
+          
+            <div class="method-calls-super">
+              Calls superclass method
+              
+            </div>
+          
+
+          
+          <div class="method-source-code" id="3D-3D-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 381</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">==</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">locations</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">locations</span> <span class="ruby-keyword">and</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">operator</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">operator</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-5B-5D" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">[]</span><span
+            class="method-args">(n)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns nth <a href="Location.html">Bio::Location</a> object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="5B-5D-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 400</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">n</span>)
+  <span class="ruby-ivar">@locations</span>[<span class="ruby-identifier">n</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-absolute" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">absolute</span><span
+            class="method-args">(n, type = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Converts relative position in the locus to position in the whole of the DNA
+sequence.</p>
+
+<p>This method can for example be used to relate positions in a DNA-sequence
+with those in RNA. In this use, the optional &#39;:aa&#39;-flag returns the
+position of the associated amino-acid rather than the nucleotide.</p>
+
+<pre class="ruby"><span class="ruby-identifier">loc</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;complement(12838..13533)&#39;</span>)
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">absolute</span>(<span class="ruby-value">10</span>)          <span class="ruby-comment"># =&gt; 13524</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">absolute</span>(<span class="ruby-value">10</span>, :<span class="ruby-identifier">aa</span>)     <span class="ruby-comment"># =&gt; 13506</span>
+</pre>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>position</em>: nucleotide position within locus</p>
+</li><li>
+<p><em>:aa</em>: flag to be used if <em>position</em> is a aminoacid position
+rather than a nucleotide position</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>position within the whole of the sequence</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="absolute-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 490</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">absolute</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:location</span>
+    ;
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:aa</span>
+    <span class="ruby-identifier">n</span> = (<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">*</span> <span class="ruby-value">3</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">rel2abs</span>(<span class="ruby-identifier">n</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">rel2abs</span>(<span class="ruby-identifier">n</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each</span><span
+            class="method-args">() { |x| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates on each <a href="Location.html">Bio::Location</a> object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="each-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 393</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>
+  <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">x</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-equals-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">equals?</span><span
+            class="method-args">(other)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Evaluate equality of <a href="Locations.html">Bio::Locations</a> object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="equals-3F-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 364</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">equals?</span>(<span class="ruby-identifier">other</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>)
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sort</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">sort</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-first" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">first</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns first <a href="Location.html">Bio::Location</a> object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="first-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 405</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">first</span>
+  <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-last" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">last</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns last <a href="Location.html">Bio::Location</a> object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="last-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 410</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">last</span>
+  <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">last</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-length" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">length</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a length of the spliced RNA.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="length-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 429</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">length</span>
+  <span class="ruby-identifier">len</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sequence</span>
+      <span class="ruby-identifier">len</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">len</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">x</span>.<span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">len</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Locations.html#method-i-size">size</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-range" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">range</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Similar to span, but returns a Range object min..max</p>
+          
+          
+
+          
+          <div class="method-source-code" id="range-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 423</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">range</span>
+  <span class="ruby-identifier">min</span>, <span class="ruby-identifier">max</span> = <span class="ruby-identifier">span</span>
+  <span class="ruby-identifier">min</span><span class="ruby-operator">..</span><span class="ruby-identifier">max</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-relative" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">relative</span><span
+            class="method-args">(n, type = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Converts absolute position in the whole of the DNA sequence to relative 
+position in the locus.</p>
+
+<p>This method can for example be used to relate positions in a DNA-sequence
+with those in RNA. In this use, the optional &#39;:aa&#39;-flag returns the
+position of the associated amino-acid rather than the nucleotide.</p>
+
+<pre class="ruby"><span class="ruby-identifier">loc</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;complement(12838..13533)&#39;</span>)
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">relative</span>(<span class="ruby-value">13524</span>)        <span class="ruby-comment"># =&gt; 10</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">relative</span>(<span class="ruby-value">13506</span>, :<span class="ruby-identifier">aa</span>)   <span class="ruby-comment"># =&gt; 3</span>
+</pre>
+<hr>
+
+<p><strong>Arguments</strong>:</p>
+<ul><li>
+<p>(required) <em>position</em>: nucleotide position within whole of the
+sequence</p>
+</li><li>
+<p><em>:aa</em>: flag that lets method return position in aminoacid
+coordinates</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p>position within the location</p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="relative-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 458</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">relative</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:location</span>
+    ;
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:aa</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span> = <span class="ruby-identifier">abs2rel</span>(<span class="ruby-identifier">n</span>)
+      (<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">/</span> <span class="ruby-value">3</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">abs2rel</span>(<span class="ruby-identifier">n</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-size" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">size</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Locations.html#method-i-length">length</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-span" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">span</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an Array containing overall min and max position [min, max] of this
+<a href="Locations.html">Bio::Locations</a> object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="span-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 416</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">span</span>
+  <span class="ruby-identifier">span_min</span> = <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">min</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">from</span> }
+  <span class="ruby-identifier">span_max</span> = <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">max</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">to</span>   <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">to</span>   }
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">span_min</span>.<span class="ruby-identifier">from</span>, <span class="ruby-identifier">span_max</span>.<span class="ruby-identifier">to</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-to_s" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">to_s</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="../String.html">String</a> representation.</p>
+
+<p>Note: In some cases, it fails to detect whether “complement(join(…))” or
+“join(complement(..))”, and whether “complement(order(…))” or
+“order(complement(..))”.</p>
+<hr>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><a href="../String.html">String</a></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="to_s-source">
+            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 511</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">empty?</span>
+  <span class="ruby-identifier">complement_join</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">locs</span> = <span class="ruby-ivar">@locations</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">flag</span>, <span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
+      <span class="ruby-comment"># check if each location is complement</span>
+      (<span class="ruby-identifier">flag</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">loc</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">loc</span>.<span class="ruby-identifier">xref_id</span>)
+    <span class="ruby-keyword">end</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-identifier">locs</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">from</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span>, <span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> <span class="ruby-keyword">then</span>
+        (<span class="ruby-identifier">pos</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">from</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-keyword">false</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">locs</span> = <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">reverse</span>
+    <span class="ruby-identifier">complement_join</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">locs</span> = <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">lt</span> = <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">lt</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&lt;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">gt</span> = <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">gt</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&gt;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
+    <span class="ruby-identifier">str</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">to</span> <span class="ruby-keyword">then</span>
+            <span class="ruby-node">&quot;#{lt}#{gt}#{loc.from.to_i}&quot;</span>
+          <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">carat</span> <span class="ruby-keyword">then</span>
+            <span class="ruby-node">&quot;#{lt}#{loc.from.to_i}^#{gt}#{loc.to.to_i}&quot;</span>
+          <span class="ruby-keyword">else</span>
+            <span class="ruby-node">&quot;#{lt}#{loc.from.to_i}..#{gt}#{loc.to.to_i}&quot;</span>
+          <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">xref_id</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">loc</span>.<span class="ruby-identifier">xref_id</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;#{loc.xref_id}:#{str}&quot;</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">complement_join</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;complement(#{str})&quot;</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">sequence</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;replace(#{str},\&quot;#{loc.sequence}\&quot;)&quot;</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">str</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">op</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">operator</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;join&#39;</span>).<span class="ruby-identifier">to_s</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-node">&quot;#{op}(#{locs.join(&#39;,&#39;)})&quot;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">locs</span>[<span class="ruby-value">0</span>]
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">complement_join</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">result</span> = <span class="ruby-node">&quot;complement(#{result})&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Bio::Alignment::SiteMethods - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="PropertyMethods.html">Bio::Alignment::PropertyMethods</a>
+  
+  
+  </ul>
+</div>
+
+    <div id="extends-section" class="nav-section">
+  <h3>Extended With Modules</h3>
+
+  <ul class="link-list">
+    
+  
+    <li><a class="extend" href="SiteMethods.html">Bio::Alignment::SiteMethods</a>
+  
+  
+  
+    <li><a class="extend" href="SiteMethods.html">Bio::Alignment::SiteMethods</a>
+  
+  
+  </ul>
+</div>
+
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-consensus_iupac">#consensus_iupac</a>
+    
+    <li ><a href="#method-i-consensus_string">#consensus_string</a>
+    
+    <li ><a href="#method-i-has_gap-3F">#has_gap?</a>
+    
+    <li ><a href="#method-i-match_line_amino">#match_line_amino</a>
+    
+    <li ><a href="#method-i-match_line_nuc">#match_line_nuc</a>
+    
+    <li ><a href="#method-i-remove_gaps-21">#remove_gaps!</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Bio::Alignment::SiteMethods">
+  <h1 id="module-Bio::Alignment::SiteMethods" class="module">
+    module Bio::Alignment::SiteMethods
+  </h1>
+
+  <section class="description">
+    
+<p><a href="SiteMethods.html">Bio::Alignment::SiteMethods</a> is a set of
+methods for <a href="Site.html">Bio::Alignment::Site</a>. It can also be
+used for extending an array of single-letter strings.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="IUPAC_NUC">IUPAC_NUC
+        
+        <dd><p>IUPAC nucleotide groups. Internal use only.</p>
+        
+      
+        <dt id="StrongConservationGroups">StrongConservationGroups
+        
+        <dd><p>Table of strongly conserved amino-acid groups.</p>
+
+<p>The value of the tables are taken from BioPerl (Bio/SimpleAlign.pm in
+BioPerl 1.0), and the BioPerl&#39;s document says that it is taken from
+Clustalw documentation and</p>
+
+<pre>These are all the positively scoring groups that occur in the 
+Gonnet Pam250 matrix. The strong and weak groups are 
+defined as strong score &gt;0.5 and weak score =&lt;0.5 respectively.</pre>
+        
+      
+        <dt id="WeakConservationGroups">WeakConservationGroups
+        
+        <dd><p>Table of weakly conserved amino-acid groups.</p>
+
+<p>Please refer <a
+href="SiteMethods.html#StrongConservationGroups">StrongConservationGroups</a>
+document for the origin of the table.</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-consensus_iupac" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">consensus_iupac</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an IUPAC consensus base for the site. If consensus is found, eturns
+a single-letter string. If not, returns nil.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="consensus_iupac-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 218</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">consensus_iupac</span>
+  <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">downcase</span> }.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;a&#39;</span>, <span class="ruby-string">&#39;c&#39;</span>, <span class="ruby-string">&#39;g&#39;</span>, <span class="ruby-string">&#39;t&#39;</span>
+      <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
+    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;u&#39;</span>
+      <span class="ruby-string">&#39;t&#39;</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-constant">IUPAC_NUC</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] } <span class="ruby-operator">?</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">r</span> = <span class="ruby-constant">IUPAC_NUC</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span>).<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span> } <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">r</span>[<span class="ruby-value">0</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-consensus_string" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">consensus_string</span><span
+            class="method-args">(threshold = 1.0)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns consensus character of the site. If consensus is found, eturns a
+single-letter string. If not, returns nil.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="consensus_string-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">consensus_string</span>(<span class="ruby-identifier">threshold</span> = <span class="ruby-value">1.0</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">h</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">x</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> }
+  <span class="ruby-identifier">total</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-identifier">b</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>,<span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">z</span> = (<span class="ruby-identifier">y</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>])
+    <span class="ruby-identifier">z</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]) <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">y</span>[<span class="ruby-value">0</span>])) <span class="ruby-keyword">if</span> <span class="ruby-identifier">z</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+    <span class="ruby-identifier">z</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">threshold</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">0</span>][<span class="ruby-value">1</span>] <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">b</span>[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-has_gap-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">has_gap?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>If there are gaps, returns true. Otherwise, returns false.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="has_gap-3F-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 164</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">has_gap?</span>
+  (<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">is_gap?</span>(<span class="ruby-identifier">x</span>) }) <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-match_line_amino" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">match_line_amino</span><span
+            class="method-args">(opt = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the match-line character for the site. This is amino-acid version.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="match_line_amino-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 258</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">match_line_amino</span>(<span class="ruby-identifier">opt</span> = {})
+  <span class="ruby-comment"># opt[:match_line_char]   ==&gt; 100% equal    default: &#39;*&#39;</span>
+  <span class="ruby-comment"># opt[:strong_match_char] ==&gt; strong match  default: &#39;:&#39;</span>
+  <span class="ruby-comment"># opt[:weak_match_char]   ==&gt; weak match    default: &#39;.&#39;</span>
+  <span class="ruby-comment"># opt[:mismatch_char]     ==&gt; mismatch      default: &#39; &#39;</span>
+  <span class="ruby-identifier">mlc</span> = (<span class="ruby-identifier">opt</span>[<span class="ruby-value">:match_line_char</span>]   <span class="ruby-keyword">or</span> <span class="ruby-string">&#39;*&#39;</span>)
+  <span class="ruby-identifier">smc</span> = (<span class="ruby-identifier">opt</span>[<span class="ruby-value">:strong_match_char</span>] <span class="ruby-keyword">or</span> <span class="ruby-string">&#39;:&#39;</span>)
+  <span class="ruby-identifier">wmc</span> = (<span class="ruby-identifier">opt</span>[<span class="ruby-value">:weak_match_char</span>]   <span class="ruby-keyword">or</span> <span class="ruby-string">&#39;.&#39;</span>)
+  <span class="ruby-identifier">mmc</span> = (<span class="ruby-identifier">opt</span>[<span class="ruby-value">:mismatch_char</span>]     <span class="ruby-keyword">or</span> <span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">upcase</span> }.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">SiteMethods</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">has_gap?</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">mmc</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">mlc</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-constant">StrongConservationGroups</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span>).<span class="ruby-identifier">empty?</span> } <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">smc</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-constant">WeakConservationGroups</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span>).<span class="ruby-identifier">empty?</span> } <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">wmc</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">mmc</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-match_line_nuc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">match_line_nuc</span><span
+            class="method-args">(opt = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the match-line character for the site. This is nucleic-acid
+version.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="match_line_nuc-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 284</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">match_line_nuc</span>(<span class="ruby-identifier">opt</span> = {})
+  <span class="ruby-comment"># opt[:match_line_char]   ==&gt; 100% equal    default: &#39;*&#39;</span>
+  <span class="ruby-comment"># opt[:mismatch_char]     ==&gt; mismatch      default: &#39; &#39;</span>
+  <span class="ruby-identifier">mlc</span> = (<span class="ruby-identifier">opt</span>[<span class="ruby-value">:match_line_char</span>]   <span class="ruby-keyword">or</span> <span class="ruby-string">&#39;*&#39;</span>)
+  <span class="ruby-identifier">mmc</span> = (<span class="ruby-identifier">opt</span>[<span class="ruby-value">:mismatch_char</span>]     <span class="ruby-keyword">or</span> <span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">upcase</span> }.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">SiteMethods</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">has_gap?</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">mmc</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">mlc</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">mmc</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-remove_gaps-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">remove_gaps!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Removes gaps in the site. (destructive method)</p>
+          
+          
+
+          
+          <div class="method-source-code" id="remove_gaps-21-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 169</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_gaps!</span>
+  <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">is_gap?</span>(<span class="ruby-identifier">x</span>) <span class="ruby-keyword">then</span> <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">self</span>; <span class="ruby-keyword">nil</span>; <span class="ruby-keyword">else</span> <span class="ruby-identifier">x</span>; <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">compact!</span>
+  <span class="ruby-identifier">flag</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::Probcons::DEFAULT_PARSER - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-alignment">#alignment</a>
+    
+    <li ><a href="#method-i-entries">#entries</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::Probcons::DEFAULT_PARSER">
+  <h1 id="class-Bio::Probcons::DEFAULT_PARSER" class="class">
+    class Bio::Probcons::DEFAULT_PARSER
+  </h1>
+
+  <section class="description">
+    
+<p>Data class for fasta-formatted multiple sequence alignment data, which is
+simply multiple entiries of fasta formatted sequences.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DELIMITER">DELIMITER
+        
+        <dd><p>delimiter for flatfile</p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(str)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new data object. <code>str</code> should be a (multi-)fasta
+formatted string.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/mafft/report.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-identifier">ff</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatFile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>, <span class="ruby-constant">StringIO</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>))
+  <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">ff</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-ivar">@alignment</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@seq_method</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-alignment" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment</span><span
+            class="method-args">(method = nil)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets an multiple alignment. Returns a <a
+href="../Alignment.html">Bio::Alignment</a> object. <code>method</code>
+should be one of :naseq, :aaseq, :seq, or nil (default). nil means to
+automatically determine nucleotide or amino acid.</p>
+
+<p>This method returns previously parsed object if the same method is given
+(or guessed method is the same).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/mafft/report.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment</span>(<span class="ruby-identifier">method</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">m</span> = <span class="ruby-identifier">determine_seq_method</span>(<span class="ruby-ivar">@data</span>, <span class="ruby-identifier">method</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@alignment</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">m</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@seq_method</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-ivar">@seq_method</span> = <span class="ruby-identifier">m</span>
+    <span class="ruby-ivar">@alignment</span> = <span class="ruby-identifier">do_parse</span>(<span class="ruby-ivar">@data</span>, <span class="ruby-ivar">@seq_method</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@alignment</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-entries" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entries</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets an array of the fasta formatted sequence objects. Returns an array of
+<a href="../FastaFormat.html">Bio::FastaFormat</a> objects.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="entries-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/mafft/report.rb, line 71</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entries</span>
+  <span class="ruby-ivar">@data</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

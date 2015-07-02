@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::Blat::Report - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-add_header_line">#add_header_line</a>
+    
+    <li ><a href="#method-i-add_line">#add_line</a>
+    
+    <li ><a href="#method-i-each">#each</a>
+    
+    <li ><a href="#method-i-each_hit">#each_hit</a>
+    
+    <li ><a href="#method-i-num_hits">#num_hits</a>
+    
+    <li ><a href="#method-i-query_def">#query_def</a>
+    
+    <li ><a href="#method-i-query_id">#query_id</a>
+    
+    <li ><a href="#method-i-query_len">#query_len</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::Blat::Report">
+  <h1 id="class-Bio::Blat::Report" class="class">
+    class Bio::Blat::Report
+  </h1>
+
+  <section class="description">
+    
+<p><a href="Report.html">Bio::Blat::Report</a> is a BLAT report parser class.
+Its object may contain some Bio::Blat::Report::Hits objects.</p>
+
+<p>In BLAT results, the start position of a sequnece is numbered as 0. On the
+other hand, in many other homology search programs, the start position of a
+sequence is numbered as 1. To keep compatibility, the BLAT parser adds 1 to
+every position number except Bio::Blat::Report::Seqdesc and some <a
+href="../Blat.html">Bio::Blat</a> specific methods.</p>
+
+<p>Note that <a href="Report.html#method-i-query_def">#query_def</a>, <a
+href="Report.html#method-i-query_id">query_id</a>, <a
+href="Report.html#method-i-query_len">query_len</a>  methods simply return
+first hit&#39;s query_*. If multiple query sequences are given, these
+values will be incorrect.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DELIMITER">DELIMITER
+        
+        <dd><p>Delimiter of each entry. <a href="../FlatFile.html">Bio::FlatFile</a> uses
+it. In <a href="Report.html">Bio::Blat::Report</a>, it it nil (1 entry 1
+file).</p>
+        
+      
+        <dt id="FLATFILE_SPLITTER">FLATFILE_SPLITTER
+        
+        <dd><p>Splitter for <a href="../FlatFile.html">Bio::FlatFile</a></p>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-columns" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">columns</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Returns descriptions of columns. Returns an Array. This would be a <a
+href="../Blat.html">Bio::Blat</a> specific method.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-hits" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">hits</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>hits of the result. Returns an Array of <a
+href="Report/Hit.html">Bio::Blat::Report::Hit</a> objects.</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-psl_version" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">psl_version</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>version of the psl format (String or nil).</p>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(text = '')</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Creates a new <a href="Report.html">Bio::Blat::Report</a> object from BLAT
+result text (String). You can use <a
+href="../FlatFile.html">Bio::FlatFile</a> to read a file. Currently,
+results created with options -out=psl (default) or -out=pslx are supported.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 56</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">text</span> = <span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">head</span> = []
+  <span class="ruby-ivar">@hits</span> = []
+  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">flag</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-ivar">@hits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-comment"># for headerless data</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\d/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
+        <span class="ruby-keyword">redo</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\A\-+\s*\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
+        <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">head</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@columns</span> = <span class="ruby-identifier">parse_header</span>(<span class="ruby-identifier">head</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">head</span>.<span class="ruby-identifier">empty?</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add_header_line" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_header_line</span><span
+            class="method-args">(line)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Adds a header line if the header data is not yet given and the given line
+is suitable for header. Returns self if adding header line is succeeded.
+Otherwise, returns false (the line is not added).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="add_header_line-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 84</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_header_line</span>(<span class="ruby-identifier">line</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@columns</span>
+  <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">line</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^\d/</span>
+    <span class="ruby-ivar">@columns</span> = (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">parse_header</span>(<span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">:</span> []
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A\-+\s*\z/</span>
+    <span class="ruby-ivar">@columns</span> = (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">parse_header</span>(<span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">:</span> []
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@header_lines</span> <span class="ruby-operator">||=</span> []
+    <span class="ruby-ivar">@header_lines</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">line</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-add_line" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_line</span><span
+            class="method-args">(line)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Adds a line to the entry if the given line is regarded as a part of the
+current entry. If the current entry (self) is empty, or the line has the
+same query name, the line is added and returns self. Otherwise, returns
+false (the line is not added).</p>
+          
+          
+
+          
+          <div class="method-source-code" id="add_line-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 105</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_line</span>(<span class="ruby-identifier">line</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\A\s*\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">hit</span> = <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">hit</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">name</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">hit</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">each</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Report.html#method-i-each_hit">each_hit</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-each_hit" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_hit</span><span
+            class="method-args">() { |hit| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over each <a href="Report/Hit.html">Bio::Blat::Report::Hit</a>
+object. Same as hits.each.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="each_hit-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 496</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_hit</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: hit</span>
+  <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Report.html#method-i-each">each</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-num_hits" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">num_hits</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns number of hits. Same as hits.size.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="num_hits-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 492</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">num_hits</span>;     <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">size</span>;     <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-query_def" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">query_def</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the name of query sequence. CAUTION: query_* methods simply return
+first hit&#39;s query_*. If multiple query sequences are given, these
+values will be incorrect.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="query_def-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 505</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_def</span>; (<span class="ruby-identifier">x</span> = <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">query_def</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>; <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="Report.html#method-i-query_id">query_id</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-query_id" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">query_id</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="Report.html#method-i-query_def">query_def</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-query_len" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">query_len</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the length of query sequence. CAUTION: query_* methods simply
+return first hit&#39;s query_*. If multiple query sequences are given,
+these values will be incorrect.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="query_len-source">
+            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 511</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_len</span>; (<span class="ruby-identifier">x</span> = <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">query_len</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>; <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

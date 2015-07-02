@@ -1,0 +1,1746 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Bio::Alignment::EnumerableExtension - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="PropertyMethods.html">Bio::Alignment::PropertyMethods</a>
+  
+  
+  
+    <li><a class="include" href="Output.html">Bio::Alignment::Output</a>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-alignment_collect">#alignment_collect</a>
+    
+    <li ><a href="#method-i-alignment_concat">#alignment_concat</a>
+    
+    <li ><a href="#method-i-alignment_length">#alignment_length</a>
+    
+    <li ><a href="#method-i-alignment_lstrip-21">#alignment_lstrip!</a>
+    
+    <li ><a href="#method-i-alignment_normalize-21">#alignment_normalize!</a>
+    
+    <li ><a href="#method-i-alignment_rstrip-21">#alignment_rstrip!</a>
+    
+    <li ><a href="#method-i-alignment_site">#alignment_site</a>
+    
+    <li ><a href="#method-i-alignment_slice">#alignment_slice</a>
+    
+    <li ><a href="#method-i-alignment_strip-21">#alignment_strip!</a>
+    
+    <li ><a href="#method-i-alignment_subseq">#alignment_subseq</a>
+    
+    <li ><a href="#method-i-alignment_window">#alignment_window</a>
+    
+    <li ><a href="#method-i-collect_each_site">#collect_each_site</a>
+    
+    <li ><a href="#method-i-consensus_each_site">#consensus_each_site</a>
+    
+    <li ><a href="#method-i-consensus_iupac">#consensus_iupac</a>
+    
+    <li ><a href="#method-i-consensus_string">#consensus_string</a>
+    
+    <li ><a href="#method-i-convert_match">#convert_match</a>
+    
+    <li ><a href="#method-i-convert_unmatch">#convert_unmatch</a>
+    
+    <li ><a href="#method-i-each_seq">#each_seq</a>
+    
+    <li ><a href="#method-i-each_site">#each_site</a>
+    
+    <li ><a href="#method-i-each_site_step">#each_site_step</a>
+    
+    <li ><a href="#method-i-each_window">#each_window</a>
+    
+    <li ><a href="#method-i-lstrip-21">#lstrip!</a>
+    
+    <li ><a href="#method-i-match_line">#match_line</a>
+    
+    <li ><a href="#method-i-match_line_amino">#match_line_amino</a>
+    
+    <li ><a href="#method-i-match_line_nuc">#match_line_nuc</a>
+    
+    <li ><a href="#method-i-normalize-21">#normalize!</a>
+    
+    <li ><a href="#method-i-number_of_sequences">#number_of_sequences</a>
+    
+    <li ><a href="#method-i-remove_all_gaps-21">#remove_all_gaps!</a>
+    
+    <li ><a href="#method-i-rstrip-21">#rstrip!</a>
+    
+    <li ><a href="#method-i-seq_length">#seq_length</a>
+    
+    <li ><a href="#method-i-seqclass">#seqclass</a>
+    
+    <li ><a href="#method-i-sequence_names">#sequence_names</a>
+    
+    <li ><a href="#method-i-slice">#slice</a>
+    
+    <li ><a href="#method-i-strip-21">#strip!</a>
+    
+    <li ><a href="#method-i-subseq">#subseq</a>
+    
+    <li ><a href="#method-i-window">#window</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Bio::Alignment::EnumerableExtension">
+  <h1 id="module-Bio::Alignment::EnumerableExtension" class="module">
+    module Bio::Alignment::EnumerableExtension
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-alignment_collect" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_collect</span><span
+            class="method-args">() { |str| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over each sequence and results running blocks are collected and
+returns a new alignment as a <a
+href="SequenceArray.html">Bio::Alignment::SequenceArray</a> object.</p>
+
+<p>Note that it would be redefined if you want to change return value&#39;s
+class.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_collect-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 445</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_collect</span>
+  <span class="ruby-identifier">a</span> = <span class="ruby-constant">SequenceArray</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">set_all_property</span>(<span class="ruby-identifier">get_all_property</span>)
+  <span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">a</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_concat" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_concat</span><span
+            class="method-args">(align)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Concatenates the given alignment. <em>align</em> must have
+<code>each_seq</code> or <code>each</code> method.</p>
+
+<p>Returns self.</p>
+
+<p>Note that it is a destructive method.</p>
+
+<p>For <a href="../../Hash.html">Hash</a>, please use it carefully because the
+order of the sequences is inconstant and key information is completely
+ignored.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_concat-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 849</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_concat</span>(<span class="ruby-identifier">align</span>)
+  <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">a</span> = []
+  <span class="ruby-identifier">each_seq</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">s</span> }
+  <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">align</span>.<span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">a</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">seq</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>[<span class="ruby-identifier">i</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">seq</span>
+      <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>, <span class="ruby-constant">ArgumentError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">evar</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-identifier">evar</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">flag</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">align</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">seq</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>[<span class="ruby-identifier">i</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">seq</span>
+    <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_length" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_length</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the alignment length. Returns the longest length of the sequence in
+the alignment.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_length-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 366</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_length</span>
+  <span class="ruby-identifier">maxlen</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">x</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">maxlen</span> = <span class="ruby-identifier">x</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">maxlen</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">maxlen</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="EnumerableExtension.html#method-i-seq_length">seq_length</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_lstrip-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_lstrip!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Removes excess gaps in the head of the sequences. If removes nothing,
+returns nil. Otherwise, returns self.</p>
+
+<p>Note that it is a destructive method.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_lstrip-21-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 752</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_lstrip!</span>
+  <span class="ruby-comment">#(String-like)</span>
+  <span class="ruby-identifier">pos</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">each_site</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">remove_gaps!</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">pos</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">break</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+  <span class="ruby-identifier">each_seq</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">0</span>, <span class="ruby-identifier">pos</span>] = <span class="ruby-string">&#39;&#39;</span> }
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="EnumerableExtension.html#method-i-lstrip-21">lstrip!</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_normalize-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_normalize!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Fills gaps to the tail of each sequence if the length of the sequence is
+shorter than the alignment length.</p>
+
+<p>Note that it is a destructive method.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_normalize-21-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 712</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_normalize!</span>
+  <span class="ruby-comment">#(original)</span>
+  <span class="ruby-identifier">len</span> = <span class="ruby-identifier">alignment_length</span>
+  <span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> (<span class="ruby-identifier">gap_char</span> <span class="ruby-operator">*</span> (<span class="ruby-identifier">len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">length</span>)) <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">len</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="EnumerableExtension.html#method-i-normalize-21">normalize!</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_rstrip-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_rstrip!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Removes excess gaps in the tail of the sequences. If removes nothing,
+returns nil. Otherwise, returns self.</p>
+
+<p>Note that it is a destructive method.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_rstrip-21-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 727</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_rstrip!</span>
+  <span class="ruby-comment">#(String-like)</span>
+  <span class="ruby-identifier">len</span> = <span class="ruby-identifier">alignment_length</span>
+  <span class="ruby-identifier">newlen</span> = <span class="ruby-identifier">len</span>
+  <span class="ruby-identifier">each_site_step</span>(<span class="ruby-identifier">len</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>, <span class="ruby-value">0</span>, <span class="ruby-value">-1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">remove_gaps!</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">newlen</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-keyword">break</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">newlen</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">len</span>
+  <span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">s</span>[<span class="ruby-identifier">newlen</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>] = <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">newlen</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="EnumerableExtension.html#method-i-rstrip-21">rstrip!</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_site" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_site</span><span
+            class="method-args">(position)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Gets a site of the position. Returns a <a
+href="Site.html">Bio::Alignment::Site</a> object.</p>
+
+<p>If the position is out of range, it returns the site of which all are gaps.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_site-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 403</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_site</span>(<span class="ruby-identifier">position</span>)
+  <span class="ruby-identifier">site</span> = <span class="ruby-identifier">_alignment_site</span>(<span class="ruby-identifier">position</span>)
+  <span class="ruby-identifier">site</span>.<span class="ruby-identifier">set_all_property</span>(<span class="ruby-identifier">get_all_property</span>)
+  <span class="ruby-identifier">site</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_slice" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_slice</span><span
+            class="method-args">(*arg)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the specified range of the alignment. For each sequence, the
+&#39;slice&#39; method (it may be String#slice, which is the same as
+String#[]) is executed, and returns a new alignment as a <a
+href="SequenceArray.html">Bio::Alignment::SequenceArray</a> object.</p>
+
+<p>Unlike <a
+href="EnumerableExtension.html#method-i-alignment_window">#alignment_window</a>
+method, the result alignment might contain nil.</p>
+
+<p>If you want to change return value&#39;s class, you should redefine <a
+href="EnumerableExtension.html#method-i-alignment_collect">#alignment_collect</a>
+method.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_slice-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 807</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_slice</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-comment">#(String-like)</span>
+  <span class="ruby-comment">#(BioPerl) AlignI::slice like method</span>
+  <span class="ruby-identifier">alignment_collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">s</span>.<span class="ruby-identifier">slice</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="EnumerableExtension.html#method-i-slice">slice</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_strip-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_strip!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Removes excess gaps in the sequences. If removes nothing, returns nil.
+Otherwise, returns self.</p>
+
+<p>Note that it is a destructive method.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_strip-21-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 774</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_strip!</span>
+  <span class="ruby-comment">#(String-like)</span>
+  <span class="ruby-identifier">r</span> = <span class="ruby-identifier">alignment_rstrip!</span>
+  <span class="ruby-identifier">l</span> = <span class="ruby-identifier">alignment_lstrip!</span>
+  (<span class="ruby-identifier">r</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">l</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="EnumerableExtension.html#method-i-strip-21">strip!</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_subseq" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_subseq</span><span
+            class="method-args">(*arg)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>For each sequence, the &#39;subseq&#39; method
+(Bio::Seqeunce::Common#subseq is expected) is executed, and returns a new
+alignment as a <a
+href="SequenceArray.html">Bio::Alignment::SequenceArray</a> object.</p>
+
+<p>All sequences in the alignment are expected to be kind of <a
+href="../Sequence/NA.html">Bio::Sequence::NA</a> or <a
+href="../Sequence/AA.html">Bio::Sequence::AA</a> objects.</p>
+
+<p>Unlike <a
+href="EnumerableExtension.html#method-i-alignment_window">#alignment_window</a>
+method, the result alignment might contain nil.</p>
+
+<p>If you want to change return value&#39;s class, you should redefine <a
+href="EnumerableExtension.html#method-i-alignment_collect">#alignment_collect</a>
+method.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_subseq-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 829</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_subseq</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-comment">#(original)</span>
+  <span class="ruby-identifier">alignment_collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">s</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="EnumerableExtension.html#method-i-subseq">subseq</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_window" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_window</span><span
+            class="method-args">(*arg)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns specified range of the alignment. For each sequence, the
+&#39;[]&#39; method (it may be String#[]) is executed, and returns a new
+alignment as a <a
+href="SequenceArray.html">Bio::Alignment::SequenceArray</a> object.</p>
+
+<p>Unlike <a
+href="EnumerableExtension.html#method-i-alignment_slice">#alignment_slice</a>
+method, the result alignment are guaranteed to contain <a
+href="../../String.html">String</a> object if the range specified is out of
+range.</p>
+
+<p>If you want to change return value&#39;s class, you should redefine <a
+href="EnumerableExtension.html#method-i-alignment_collect">#alignment_collect</a>
+method.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_window-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 466</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_window</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+  <span class="ruby-identifier">alignment_collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">s</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">seqclass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+        <div class="aliases">
+          Also aliased as: <a href="EnumerableExtension.html#method-i-window">window</a>
+        </div>
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-collect_each_site" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">collect_each_site</span><span
+            class="method-args">() { |site| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over each site of the alignment and results running the block are
+collected and returns an array. It yields a <a
+href="Site.html">Bio::Alignment::Site</a> object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="collect_each_site-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 503</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">collect_each_site</span>
+  <span class="ruby-identifier">ary</span> = []
+  <span class="ruby-identifier">each_site</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">ary</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-consensus_each_site" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">consensus_each_site</span><span
+            class="method-args">(opt = {}) { |a| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Helper method for calculating consensus sequence. It iterates over each
+site of the alignment. In each site, gaps will be removed if specified with
+opt. It yields a <a href="Site.html">Bio::Alignment::Site</a> object.
+Results running the block (String objects are expected) are joined to a
+string and it returns the string.</p>
+
+<pre>opt[:gap_mode] ==&gt; 0 -- gaps are regarded as normal characters
+                   1 -- a site within gaps is regarded as a gap
+                  -1 -- gaps are eliminated from consensus calculation
+    default: 0</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="consensus_each_site-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 523</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">consensus_each_site</span>(<span class="ruby-identifier">opt</span> = {})
+  <span class="ruby-identifier">mchar</span> = (<span class="ruby-identifier">opt</span>[<span class="ruby-value">:missing_char</span>] <span class="ruby-keyword">or</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">missing_char</span>)
+  <span class="ruby-identifier">gap_mode</span> = <span class="ruby-identifier">opt</span>[<span class="ruby-value">:gap_mode</span>]
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">gap_mode</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">0</span>, <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">collect_each_site</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">a</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">mchar</span>
+    <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">1</span>
+    <span class="ruby-identifier">collect_each_site</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">a</span>.<span class="ruby-identifier">has_gap?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">gap_char</span> <span class="ruby-operator">:</span> (<span class="ruby-keyword">yield</span>(<span class="ruby-identifier">a</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">mchar</span>)
+    <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">when</span> <span class="ruby-value">-1</span>
+    <span class="ruby-identifier">collect_each_site</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">a</span>.<span class="ruby-identifier">remove_gaps!</span>
+      <span class="ruby-identifier">a</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">gap_char</span> <span class="ruby-operator">:</span> (<span class="ruby-keyword">yield</span>(<span class="ruby-identifier">a</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">mchar</span>)
+    <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;:gap_mode must be 0, 1 or -1&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-consensus_iupac" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">consensus_iupac</span><span
+            class="method-args">(opt = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the IUPAC consensus string of the alignment of nucleic-acid
+sequences.</p>
+
+<p>It resembles the BioPerl&#39;s AlignI::consensus_iupac method.</p>
+
+<p>Please refer to the <a
+href="EnumerableExtension.html#method-i-consensus_each_site">#consensus_each_site</a>
+method for opt.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="consensus_iupac-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 565</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">consensus_iupac</span>(<span class="ruby-identifier">opt</span> = {})
+  <span class="ruby-identifier">consensus_each_site</span>(<span class="ruby-identifier">opt</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">consensus_iupac</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-consensus_string" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">consensus_string</span><span
+            class="method-args">(threshold = 1.0, opt = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the consensus string of the alignment. 0.0 &lt;= threshold &lt;=
+1.0 is expected.</p>
+
+<p>It resembles the BioPerl&#39;s AlignI::consensus_string method.</p>
+
+<p>Please refer to the <a
+href="EnumerableExtension.html#method-i-consensus_each_site">#consensus_each_site</a>
+method for opt.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="consensus_string-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 552</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">consensus_string</span>(<span class="ruby-identifier">threshold</span> = <span class="ruby-value">1.0</span>, <span class="ruby-identifier">opt</span> = {})
+  <span class="ruby-identifier">consensus_each_site</span>(<span class="ruby-identifier">opt</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">consensus_string</span>(<span class="ruby-identifier">threshold</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-convert_match" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">convert_match</span><span
+            class="method-args">(match_char = '.')</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This is the BioPerl&#39;s AlignI::match like method.</p>
+
+<p>Changes second to last sequences&#39; sites to match_char(default:
+&#39;.&#39;) when a site is equeal to the first sequence&#39;s
+corresponding site.</p>
+
+<p>Note that it is a destructive method.</p>
+
+<p>For <a href="../../Hash.html">Hash</a>, please use it carefully because the
+order of the sequences is inconstant.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="convert_match-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 662</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_match</span>(<span class="ruby-identifier">match_char</span> = <span class="ruby-string">&#39;.&#39;</span>)
+  <span class="ruby-comment">#(BioPerl) AlignI::match like method</span>
+  <span class="ruby-identifier">len</span> = <span class="ruby-identifier">alignment_length</span>
+  <span class="ruby-identifier">firstseq</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">firstseq</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">firstseq</span> = <span class="ruby-identifier">s</span>
+    <span class="ruby-keyword">else</span>
+      (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">len</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>[<span class="ruby-identifier">i</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">firstseq</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">s</span>[<span class="ruby-identifier">i</span>] <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">is_gap?</span>(<span class="ruby-identifier">firstseq</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">..</span><span class="ruby-identifier">i</span>])
+          <span class="ruby-identifier">s</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">..</span><span class="ruby-identifier">i</span>] = <span class="ruby-identifier">match_char</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-convert_unmatch" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">convert_unmatch</span><span
+            class="method-args">(match_char = '.')</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>This is the BioPerl&#39;s AlignI::unmatch like method.</p>
+
+<p>Changes second to last sequences&#39; sites match_char(default:
+&#39;.&#39;) to original sites&#39; characters.</p>
+
+<p>Note that it is a destructive method.</p>
+
+<p>For <a href="../../Hash.html">Hash</a>, please use it carefully because the
+order of the sequences is inconstant.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="convert_unmatch-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 690</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">convert_unmatch</span>(<span class="ruby-identifier">match_char</span> = <span class="ruby-string">&#39;.&#39;</span>)
+  <span class="ruby-comment">#(BioPerl) AlignI::unmatch like method</span>
+  <span class="ruby-identifier">len</span> = <span class="ruby-identifier">alignment_length</span>
+  <span class="ruby-identifier">firstseq</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">firstseq</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">firstseq</span> = <span class="ruby-identifier">s</span>
+    <span class="ruby-keyword">else</span>
+      (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">len</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">..</span><span class="ruby-identifier">i</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">match_char</span> <span class="ruby-keyword">then</span>
+          <span class="ruby-identifier">s</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">..</span><span class="ruby-identifier">i</span>] = (<span class="ruby-identifier">firstseq</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">..</span><span class="ruby-identifier">i</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">match_char</span>)
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each_seq" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_seq</span><span
+            class="method-args">() { |seq| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over each sequences. Yields a sequence. It acts the same as
+Enumerable#each.</p>
+
+<p>You would redefine the method suitable for the class/object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="each_seq-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 340</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_seq</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment">#:yields: seq</span>
+  <span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each_site" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_site</span><span
+            class="method-args">() { |site| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over each site of the alignment. It yields a <a
+href="Site.html">Bio::Alignment::Site</a> object (which inherits Array). It
+returns self.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="each_site-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 412</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_site</span>
+  <span class="ruby-identifier">cp</span> = <span class="ruby-identifier">get_all_property</span>
+  (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">alignment_length</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">site</span> = <span class="ruby-identifier">_alignment_site</span>(<span class="ruby-identifier">i</span>)
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">set_all_property</span>(<span class="ruby-identifier">cp</span>)
+    <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each_site_step" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_site_step</span><span
+            class="method-args">(start, stop, step = 1) { |site| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over each site of the alignment, with specifying start, stop
+positions and step. It yields <a href="Site.html">Bio::Alignment::Site</a>
+object (which inherits Array). It returns self. It is same as
+<code>start.step(stop, step) { |i| yield alignment_site(i) }</code>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="each_site_step-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 428</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_site_step</span>(<span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>, <span class="ruby-identifier">step</span> = <span class="ruby-value">1</span>)
+  <span class="ruby-identifier">cp</span> = <span class="ruby-identifier">get_all_property</span>
+  <span class="ruby-identifier">start</span>.<span class="ruby-identifier">step</span>(<span class="ruby-identifier">stop</span>, <span class="ruby-identifier">step</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">site</span> = <span class="ruby-identifier">_alignment_site</span>(<span class="ruby-identifier">i</span>)
+    <span class="ruby-identifier">site</span>.<span class="ruby-identifier">set_all_property</span>(<span class="ruby-identifier">cp</span>)
+    <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">site</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each_window" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_window</span><span
+            class="method-args">(window_size, step_size = 1) { |alignment_window(i, window_size)| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over each sliding window of the alignment. window_size is the size
+of sliding window. step is the step of each sliding. It yields a <a
+href="SequenceArray.html">Bio::Alignment::SequenceArray</a> object which
+contains each sliding window. It returns a <a
+href="SequenceArray.html">Bio::Alignment::SequenceArray</a> object which
+contains remainder alignment at the terminal end. If window_size is smaller
+than 0, it returns nil.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="each_window-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 481</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_window</span>(<span class="ruby-identifier">window_size</span>, <span class="ruby-identifier">step_size</span> = <span class="ruby-value">1</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">window_size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">step_size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">last_step</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-value">0</span>.<span class="ruby-identifier">step</span>(<span class="ruby-identifier">alignment_length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">window_size</span>, <span class="ruby-identifier">step_size</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">alignment_window</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">window_size</span>)
+      <span class="ruby-identifier">last_step</span> = <span class="ruby-identifier">i</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">alignment_window</span>((<span class="ruby-identifier">last_step</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">window_size</span>)<span class="ruby-operator">..</span><span class="ruby-value">-1</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">i</span> = <span class="ruby-identifier">alignment_length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">window_size</span>
+    <span class="ruby-keyword">while</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">0</span>
+      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">alignment_window</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">window_size</span>)
+      <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">step_size</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">alignment_window</span>(<span class="ruby-value">0</span><span class="ruby-operator">...</span>(<span class="ruby-identifier">i</span><span class="ruby-operator">-</span><span class="ruby-identifier">step_size</span>))
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-lstrip-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">lstrip!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="EnumerableExtension.html#method-i-alignment_lstrip-21">alignment_lstrip!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-match_line" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">match_line</span><span
+            class="method-args">(opt = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the match line stirng of the alignment of nucleic- or amino-acid
+sequences. The type of the sequence is automatically determined or you can
+specify with <a href=":type">opt</a>.</p>
+
+<p>It resembles the BioPerl&#39;s AlignI::match_line method.</p>
+
+<pre>opt[:type] ==&gt; :na or :aa (or determined by sequence class)
+opt[:match_line_char]   ==&gt; 100% equal    default: &#39;*&#39;
+opt[:strong_match_char] ==&gt; strong match  default: &#39;:&#39;
+opt[:weak_match_char]   ==&gt; weak match    default: &#39;.&#39;
+opt[:mismatch_char]     ==&gt; mismatch      default: &#39; &#39;
+  :strong_ and :weak_match_char are used only in amino mode (:aa)</pre>
+
+<p>More opt can be accepted. Please refer to the <a
+href="EnumerableExtension.html#method-i-consensus_each_site">#consensus_each_site</a>
+method for opt.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="match_line-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 624</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">match_line</span>(<span class="ruby-identifier">opt</span> = {})
+  <span class="ruby-keyword">case</span> <span class="ruby-identifier">opt</span>[<span class="ruby-value">:type</span>]
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:aa</span>
+    <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:na</span>, <span class="ruby-value">:dna</span>, <span class="ruby-value">:rna</span>
+    <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">seqclass</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">seqclass</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span> <span class="ruby-keyword">then</span>
+      <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">nil</span>
+      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-regexp">/[EFILPQ]/i</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">x</span>
+          <span class="ruby-identifier">amino</span> = <span class="ruby-keyword">true</span>
+          <span class="ruby-keyword">break</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">amino</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-identifier">match_line_amino</span>(<span class="ruby-identifier">opt</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">match_line_nuc</span>(<span class="ruby-identifier">opt</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-match_line_amino" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">match_line_amino</span><span
+            class="method-args">(opt = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the match line stirng of the alignment of amino-acid sequences.</p>
+
+<p>It resembles the BioPerl&#39;s AlignI::match_line method.</p>
+
+<pre>opt[:match_line_char]   ==&gt; 100% equal    default: &#39;*&#39;
+opt[:strong_match_char] ==&gt; strong match  default: &#39;:&#39;
+opt[:weak_match_char]   ==&gt; weak match    default: &#39;.&#39;
+opt[:mismatch_char]     ==&gt; mismatch      default: &#39; &#39;</pre>
+
+<p>More opt can be accepted. Please refer to the <a
+href="EnumerableExtension.html#method-i-consensus_each_site">#consensus_each_site</a>
+method for opt.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="match_line_amino-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 584</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">match_line_amino</span>(<span class="ruby-identifier">opt</span> = {})
+  <span class="ruby-identifier">collect_each_site</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">match_line_amino</span>(<span class="ruby-identifier">opt</span>)
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-match_line_nuc" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">match_line_nuc</span><span
+            class="method-args">(opt = {})</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns the match line stirng of the alignment of nucleic-acid sequences.</p>
+
+<p>It resembles the BioPerl&#39;s AlignI::match_line method.</p>
+
+<pre>opt[:match_line_char]   ==&gt; 100% equal    default: &#39;*&#39;
+opt[:mismatch_char]     ==&gt; mismatch      default: &#39; &#39;</pre>
+
+<p>More opt can be accepted. Please refer to the <a
+href="EnumerableExtension.html#method-i-consensus_each_site">#consensus_each_site</a>
+method for opt.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="match_line_nuc-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 601</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">match_line_nuc</span>(<span class="ruby-identifier">opt</span> = {})
+  <span class="ruby-identifier">collect_each_site</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">match_line_nuc</span>(<span class="ruby-identifier">opt</span>)
+  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-normalize-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">normalize!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="EnumerableExtension.html#method-i-alignment_normalize-21">alignment_normalize!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-number_of_sequences" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">number_of_sequences</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns number of sequences in this alignment.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="number_of_sequences-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1315</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">number_of_sequences</span>
+  <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_seq</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> }
+  <span class="ruby-identifier">i</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-remove_all_gaps-21" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">remove_all_gaps!</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Completely removes ALL gaps in the sequences. If removes nothing, returns
+nil. Otherwise, returns self.</p>
+
+<p>Note that it is a destructive method.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="remove_all_gaps-21-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 787</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_all_gaps!</span>
+  <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">x</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-identifier">gap_regexp</span>, <span class="ruby-string">&#39;&#39;</span>)
+    <span class="ruby-identifier">ret</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">x</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">ret</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-rstrip-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">rstrip!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="EnumerableExtension.html#method-i-alignment_rstrip-21">alignment_rstrip!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-seq_length" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">seq_length</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="EnumerableExtension.html#method-i-alignment_length">alignment_length</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-seqclass" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">seqclass</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns class of the sequence. If instance variable @seqclass (which can be
+set by &#39;seqclass=&#39; method) is set, simply returns the value.
+Otherwise, returns the first sequence&#39;s class. If no sequences are
+found, returns nil.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="seqclass-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 349</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">seqclass</span>
+  <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@seqclass</span>) <span class="ruby-keyword">and</span> <span class="ruby-ivar">@seqclass</span> <span class="ruby-keyword">then</span>
+    <span class="ruby-ivar">@seqclass</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">klass</span> = <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span> <span class="ruby-keyword">then</span>
+        <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">class</span>
+        <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">klass</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    (<span class="ruby-identifier">klass</span> <span class="ruby-keyword">or</span> <span class="ruby-constant">String</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sequence_names" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sequence_names</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array of sequence names. The order of the names must be the same
+as the order of <code>each_seq</code>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sequence_names-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1324</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sequence_names</span>
+  (<span class="ruby-value">0</span><span class="ruby-operator">...</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">number_of_sequences</span>)).<span class="ruby-identifier">to_a</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-slice" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">slice</span><span
+            class="method-args">(*arg)</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="EnumerableExtension.html#method-i-alignment_slice">alignment_slice</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-strip-21" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">strip!</span><span
+            class="method-args">()</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="EnumerableExtension.html#method-i-alignment_strip-21">alignment_strip!</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-subseq" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">subseq</span><span
+            class="method-args">(*arg)</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="EnumerableExtension.html#method-i-alignment_subseq">alignment_subseq</a>
+        </div>
+        
+      </div>
+
+    
+      <div id="method-i-window" class="method-detail method-alias">
+        
+        <div class="method-heading">
+          <span class="method-name">window</span><span
+            class="method-args">(*arg)</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+        </div>
+
+        
+
+        
+        <div class="aliases">
+          Alias for: <a href="EnumerableExtension.html#method-i-alignment_window">alignment_window</a>
+        </div>
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

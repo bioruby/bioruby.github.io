@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::Lasergene - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::Lasergene-label-Description">Description</a>
+    <li><a href="#class-Bio::Lasergene-label-Usage">Usage</a>
+    <li><a href="#class-Bio::Lasergene-label-Comments">Comments</a>
+  </ul>
+</div>
+
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-entry_id">#entry_id</a>
+    
+    <li ><a href="#method-i-process">#process</a>
+    
+    <li ><a href="#method-i-seq">#seq</a>
+    
+    <li ><a href="#method-i-standard_comment-3F">#standard_comment?</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::Lasergene">
+  <h1 id="class-Bio::Lasergene" class="class">
+    class Bio::Lasergene
+  </h1>
+
+  <section class="description">
+    
+<p>bio/db/lasergene.rb - Interface for DNAStar <a
+href="Lasergene.html">Lasergene</a> sequence file format</p>
+<dl class="rdoc-list note-list"><dt>Author
+<dd>
+<p>Trevor Wennblom  &lt;<a
+href="mailto:trevor@corevx.com">trevor@corevx.com</a>&gt;</p>
+</dd><dt>Copyright
+<dd>
+<p>Copyright © 2007 Center for Biomedical Research Informatics, University of
+Minnesota (<a href="http://cbri.umn.edu">cbri.umn.edu</a>)</p>
+</dd><dt>License
+<dd>
+<p>The Ruby License</p>
+</dd></dl>
+
+<h1 id="class-Bio::Lasergene-label-Description">Description<span><a href="#class-Bio::Lasergene-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p><a href="Lasergene.html">Bio::Lasergene</a> reads DNAStar <a
+href="Lasergene.html">Lasergene</a> formatted sequence files, or
+<code>.seq</code>  files.  It only expects to find one sequence per file.</p>
+
+<h1 id="class-Bio::Lasergene-label-Usage">Usage<span><a href="#class-Bio::Lasergene-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio&#39;</span>
+<span class="ruby-identifier">filename</span> = <span class="ruby-string">&#39;MyFile.seq&#39;</span>
+<span class="ruby-identifier">lseq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Lasergene</span>.<span class="ruby-identifier">new</span>( <span class="ruby-constant">IO</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-identifier">filename</span>) )
+<span class="ruby-identifier">lseq</span>.<span class="ruby-identifier">entry_id</span>  <span class="ruby-comment"># =&gt; &quot;Contig 1&quot;</span>
+<span class="ruby-identifier">lseq</span>.<span class="ruby-identifier">seq</span>  <span class="ruby-comment"># =&gt; ATGACGTATCCAAAGAGGCGTTACC</span>
+</pre>
+
+<h1 id="class-Bio::Lasergene-label-Comments">Comments<span><a href="#class-Bio::Lasergene-label-Comments">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<p>I&#39;m only aware of the following three kinds of <a
+href="Lasergene.html">Lasergene</a> file formats.  Feel free to send me
+other examples that may not currently be accounted for.</p>
+
+<p>File format 1:</p>
+
+<pre>## begin ##
+&quot;Contig 1&quot; (1,934)
+  Contig Length:                  934 bases
+  Average Length/Sequence:        467 bases
+  Total Sequence Length:         1869 bases
+  Top Strand:                       2 sequences
+  Bottom Strand:                    2 sequences
+  Total:                            4 sequences
+^^
+ATGACGTATCCAAAGAGGCGTTACCGGAGAAGAAGACACCGCCCCCGCAGTCCTCTTGGCCAGATCCTCCGCCGCCGCCCCTGGCTCGTCCACCCCCGCCACAGTTACCGCTGGAGAAGGAAAAATGGCATCTTCAWCACCCGCCTATCCCGCAYCTTCGGAWRTACTATCAAGCGAACCACAGTCAGAACGCCCTCCTGGGCGGTGGACATGATGAGATTCAATATTAATGACTTTCTTCCCCCAGGAGGGGGCTCAAACCCCCGCTCTGTGCCCTTTGAATACTACAGAATAAGAAAGGTTAAGGTTGAATTCTGGCCCTGCTCCCCGATCACCCAGGGTGACAGGGGAATGGGCTCCAGTGCTGWTATTCTAGMTGATRRCTTKGTAACAAAGRCCACAGCCCTCACCTATGACCCCTATGTAAACTTCTCCTCCCGCCATACCATAACCCAGCCCTTCTCCTACCRCTCCCGYTACTTTACCCCCAAACCTGTCCTWGATKCCACTATKGATKACTKCCAACCAAACAACAAAAGAAACCAGCTGTGGSTGAGACTACAWACTGCTGGAAATGTAGACCWCGTAGGCCTSGGCACTGCGTKCGAAAACAGTATATACGACCAGGAATACAATATCCGTGTMACCATGTATGTACAATTCAGAGAATTTAATCTTAAAGACCCCCCRCTTMACCCKTAATGAATAATAAMAACCATTACGAAGTGATAAAAWAGWCTCAGTAATTTATTYCATATGGAAATTCWSGGCATGGGGGGGAAAGGGTGACGAACKKGCCCCCTTCCTCCSTSGMYTKTTCYGTAGCATTCYTCCAMAAYACCWAGGCAGYAMTCCTCCSATCAAGAGcYTSYACAGCTGGGACAGCAGTTGAGGAGGACCATTCAAAGGGGGTCGGATTGCTGGTAATCAGA
+## end ##</pre>
+
+<p>File format 2:</p>
+
+<pre>## begin ##
+^^:                                  350,935
+Contig 1 (1,935)
+  Contig Length:                  935 bases
+  Average Length/Sequence:        580 bases
+  Total Sequence Length:         2323 bases
+  Top Strand:                       2 sequences
+  Bottom Strand:                    2 sequences
+  Total:                            4 sequences
+^^
+ATGTCGGGGAAATGCTTGACCGCGGGCTACTGCTCATCATTGCTTTCTTTGTGGTATATCGTGCCGTTCTGTTTTGCTGTGCTCGTCAACGCCAGCGGCGACAGCAGCTCTCATTTTCAGTCGATTTATAACTTGACGTTATGTGAGCTGAATGGCACGAACTGGCTGGCAGACAACTTTAACTGGGCTGTGGAGACTTTTGTCATCTTCCCCGTGTTGACTCACATTGTTTCCTATGGTGCACTCACTACCAGTCATTTTCTTGACACAGTTGGTCTAGTTACTGTGTCTACCGCCGGGTTTTATCACGGGCGGTACGTCTTGAGTAGCATCTACGCGGTCTGTGCTCTGGCTGCGTTGATTTGCTTCGCCATCAGGTTTGCGAAGAACTGCATGTCCTGGCGCTACTCTTGCACTAGATACACCAACTTCCTCCTGGACACCAAGGGCAGACTCTATCGTTGGCGGTCGCCTGTCATCATAGAGAAAGGGGGTAAGGTTGAGGTCGAAGGTCATCTGATCGATCTCAAAAGAGTTGTGCTTGATGGCTCTGTGGCGACACCTTTAACCAGAGTTTCAGCGGAACAATGGGGTCGTCCCTAGACGACTTTTGCCATGATAGTACAGCCCCACAGAAGGTGCTCTTGGCGTTTTCCATCACCTACACGCCAGTGATGATATATGCCCTAAAGGTAAGCCGCGGCCGACTTTTGGGGCTTCTGCACCTTTTGATTTTTTTGAACTGTGCCTTTACTTTCGGGTACATGACATTCGTGCACTTTCGGAGCACGAACAAGGTCGCGCTCACTATGGGAGCAGTAGTCGCACTCCTTTGGGGGGTGTACTCAGCCATAGAAACCTGGAAATTCATCACCTCCAGATGCCGTTGTGCTTGCTAGGCCGCAAGTACATTCTGGCCCCTGCCCACCACGTTG
+## end ##</pre>
+
+<p>File format 3 (non-standard <a href="Lasergene.html">Lasergene</a> header):</p>
+
+<pre>## begin ##
+LOCUS       PRU87392               15411 bp    RNA     linear   VRL 17-NOV-2000
+DEFINITION  Porcine reproductive and respiratory syndrome virus strain VR-2332,
+            complete genome.
+ACCESSION   U87392 AF030244 U00153
+VERSION     U87392.3  GI:11192298
+[...cut...]
+     3&#39;UTR           15261..15411
+     polyA_site      15409
+ORIGIN      
+^^
+atgacgtataggtgttggctctatgccttggcatttgtattgtcaggagctgtgaccattggcacagcccaaaacttgctgcacagaaacacccttctgtgatagcctccttcaggggagcttagggtttgtccctagcaccttgcttccggagttgcactgctttacggtctctccacccctttaaccatgtctgggatacttgatcggtgcacgtgtacccccaatgccagggtgtttatggcggagggccaagtctactgcacacgatgcctcagtgcacggtctctccttcccctgaacctccaagtttctgagctcggggtgctaggcctattctacaggcccgaagagccactccggtggacgttgccacgtgcattccccactgttgagtgctcccccgccggggcctgctggctttctgcaatctttccaatcgcacgaatgaccagtggaaacctgaacttccaacaaagaatggtacgggtcgcagctgagctttacagagccggccagctcacccctgcagtcttgaaggctctacaagtttatgaacggggttgccgctggtaccccattgttggacctgtccctggagtggccgttttcgccaattccctacatgtgagtgataaacctttcccgggagcaactcacgtgttgaccaacctgccgctcccgcagagacccaagcctgaagacttttgcccctttgagtgtgctatggctactgtctatgacattggtcatgacgccgtcatgtatgtggccgaaaggaaagtctcctgggcccctcgtggcggggatgaagtgaaatttgaagctgtccccggggagttgaagttgattgcgaaccggctccgcacctccttcccgccccaccacacagtggacatgtctaagttcgccttcacagcccctgggtgtggtgtttctatgcgggtcgaacgccaacacggctgccttcccgctgacactgtccctgaaggcaactgctggtggagcttgtttgacttgcttccactggaagttcagaacaaagaaattcgccatgctaaccaatttggctaccagaccaagcatggtgtctctggcaagtacctacagcggaggctgca[...cut...]
+## end ##</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+    <section class="constants-list">
+      <header>
+        <h3>Constants</h3>
+      </header>
+      <dl>
+      
+        <dt id="DELIMITER_1">DELIMITER_1
+        
+        <dd>
+        
+      
+        <dt id="DELIMITER_2">DELIMITER_2
+        
+        <dd>
+        
+      
+      </dl>
+    </section>
+    
+
+    
+    <section class="attribute-method-details" class="method-section">
+      <header>
+        <h3>Attributes</h3>
+      </header>
+
+      
+      <div id="attribute-i-average_length" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">average_length</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Average length per sequence</p>
+<ul><li>
+<p>Parsed from standard <a href="Lasergene.html">Lasergene</a> header</p>
+</li></ul>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-bottom_strand_sequences" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">bottom_strand_sequences</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Number of bottom strand sequences</p>
+<ul><li>
+<p>Parsed from standard <a href="Lasergene.html">Lasergene</a> header</p>
+</li></ul>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-comments" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">comments</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Entire header before the sequence</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-contig_length" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">contig_length</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Contig length, length of present sequence</p>
+<ul><li>
+<p>Parsed from standard <a href="Lasergene.html">Lasergene</a> header</p>
+</li></ul>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-name" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">name</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Name of sequence</p>
+<ul><li>
+<p>Parsed from standard <a href="Lasergene.html">Lasergene</a> header</p>
+</li></ul>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-sequence" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">sequence</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p><a href="Sequence.html">Sequence</a></p>
+
+<p><a href="Sequence/NA.html">Bio::Sequence::NA</a> or <a
+href="Sequence/AA.html">Bio::Sequence::AA</a> object</p>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-top_strand_sequences" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">top_strand_sequences</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Number of top strand sequences</p>
+<ul><li>
+<p>Parsed from standard <a href="Lasergene.html">Lasergene</a> header</p>
+</li></ul>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-total_length" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">total_length</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Length of parent sequence</p>
+<ul><li>
+<p>Parsed from standard <a href="Lasergene.html">Lasergene</a> header</p>
+</li></ul>
+        
+        </div>
+      </div>
+      
+      <div id="attribute-i-total_sequences" class="method-detail">
+        <div class="method-heading attribute-method-heading">
+          <span class="method-name">total_sequences</span><span
+            class="attribute-access-type">[R]</span>
+        </div>
+
+        <div class="method-description">
+        
+        <p>Number of sequences</p>
+<ul><li>
+<p>Parsed from standard <a href="Lasergene.html">Lasergene</a> header</p>
+</li></ul>
+        
+        </div>
+      </div>
+      
+    </section>
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(lines)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/lasergene.rb, line 124</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">lines</span>)
+  <span class="ruby-identifier">process</span>(<span class="ruby-identifier">lines</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-entry_id" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">entry_id</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Name of sequence</p>
+<ul><li>
+<p>Parsed from standard <a href="Lasergene.html">Lasergene</a> header</p>
+</li></ul>
+          
+          
+
+          
+          <div class="method-source-code" id="entry_id-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/lasergene.rb, line 147</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry_id</span>
+  <span class="ruby-ivar">@name</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-seq" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">seq</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p><a href="Sequence.html">Sequence</a></p>
+
+<p><a href="Sequence/NA.html">Bio::Sequence::NA</a> or <a
+href="Sequence/AA.html">Bio::Sequence::AA</a> object</p>
+          
+          
+
+          
+          <div class="method-source-code" id="seq-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/lasergene.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">seq</span>
+  <span class="ruby-ivar">@sequence</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-standard_comment-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">standard_comment?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Is the comment header recognized as standard <a
+href="Lasergene.html">Lasergene</a> format?</p>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><em>none</em></p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><code>true</code> <em>or</em> <code>false</code></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="standard_comment-3F-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/lasergene.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">standard_comment?</span>
+  <span class="ruby-ivar">@standard_comment</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="protected-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Protected Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-process" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">process</span><span
+            class="method-args">(lines)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="process-source">
+            <pre><span class="ruby-comment"># File lib/bio/db/lasergene.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">process</span>(<span class="ruby-identifier">lines</span>)
+  <span class="ruby-identifier">delimiter_1_indices</span> = []
+  <span class="ruby-identifier">delimiter_2_indices</span> = []
+  
+  <span class="ruby-comment"># If the data from the file is passed as one big String instead of</span>
+  <span class="ruby-comment"># broken into an Array, convert lines to an Array</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">String</span>
+    <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&quot;\r&quot;</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span> <span class="ruby-constant">DELIMITER_1</span>
+      <span class="ruby-identifier">delimiter_1_indices</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">match</span> <span class="ruby-constant">DELIMITER_2</span>
+      <span class="ruby-identifier">delimiter_2_indices</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">InputError</span>, <span class="ruby-node">&quot;More than one delimiter of type &#39;#{DELIMITER_1}&#39;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">delimiter_1_indices</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">InputError</span>, <span class="ruby-node">&quot;More than one delimiter of type &#39;#{DELIMITER_2}&#39;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">delimiter_2_indices</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+  <span class="ruby-identifier">raise</span> <span class="ruby-constant">InputError</span>, <span class="ruby-node">&quot;No comment to data separator of type &#39;#{DELIMITER_2}&#39;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">delimiter_2_indices</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">1</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">delimiter_1_indices</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-comment"># toss out DELIMETER_1 and anything preceding it</span>
+    <span class="ruby-ivar">@comments</span> = <span class="ruby-identifier">lines</span>[ (<span class="ruby-identifier">delimiter_1_indices</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-value">1</span>) <span class="ruby-operator">..</span> (<span class="ruby-identifier">delimiter_2_indices</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) ]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@comments</span> = <span class="ruby-identifier">lines</span>[ <span class="ruby-value">0</span> <span class="ruby-operator">..</span> (<span class="ruby-identifier">delimiter_2_indices</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) ]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@standard_comment</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@comments</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{(.+)\s+\(\d+,\d+\)}</span> <span class="ruby-comment"># if we have a standard Lasergene comment</span>
+    <span class="ruby-ivar">@standard_comment</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-ivar">@name</span> = <span class="ruby-node">$1</span>
+    <span class="ruby-identifier">comments</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">comment</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">match</span>(<span class="ruby-string">&#39;Contig Length:\s+(\d+)&#39;</span>)
+        <span class="ruby-ivar">@contig_length</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">match</span>(<span class="ruby-string">&#39;Average Length/Sequence:\s+(\d+)&#39;</span>)
+        <span class="ruby-ivar">@average_length</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">match</span>(<span class="ruby-string">&#39;Total Sequence Length:\s+(\d+)&#39;</span>)
+        <span class="ruby-ivar">@total_length</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">match</span>(<span class="ruby-string">&#39;Top Strand:\s+(\d+)&#39;</span>)
+        <span class="ruby-ivar">@top_strand_sequences</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">match</span>(<span class="ruby-string">&#39;Bottom Strand:\s+(\d+)&#39;</span>)
+        <span class="ruby-ivar">@bottom_strand_sequences</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">comment</span>.<span class="ruby-identifier">match</span>(<span class="ruby-string">&#39;Total:\s+(\d+)&#39;</span>)
+        <span class="ruby-ivar">@total_sequences</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@comments</span> = <span class="ruby-ivar">@comments</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-ivar">@sequence</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">auto</span>( <span class="ruby-identifier">lines</span>[ (<span class="ruby-identifier">delimiter_2_indices</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-value">1</span>) <span class="ruby-operator">..</span> <span class="ruby-value">-1</span> ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>) )
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

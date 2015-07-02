@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Bio::Alignment::HashExtension - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    <div id="includes-section" class="nav-section">
+  <h3>Included Modules</h3>
+
+  <ul class="link-list">
+  
+  
+    <li><a class="include" href="EnumerableExtension.html">Bio::Alignment::EnumerableExtension</a>
+  
+  
+  </ul>
+</div>
+
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-alignment_collect">#alignment_collect</a>
+    
+    <li ><a href="#method-i-alignment_concat">#alignment_concat</a>
+    
+    <li ><a href="#method-i-each_seq">#each_seq</a>
+    
+    <li ><a href="#method-i-number_of_sequences">#number_of_sequences</a>
+    
+    <li ><a href="#method-i-sequence_names">#sequence_names</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Bio::Alignment::HashExtension">
+  <h1 id="module-Bio::Alignment::HashExtension" class="module">
+    module Bio::Alignment::HashExtension
+  </h1>
+
+  <section class="description">
+    
+<p><a href="HashExtension.html">Bio::Alignment::HashExtension</a> is a set of
+useful methods for multiple sequence alignment. It is designed to be
+extended to hash objects or included in your own classes which inherit <a
+href="../../Hash.html">Hash</a>. (It can also be included in <a
+href="../../Hash.html">Hash</a>, though not recommended.)</p>
+
+<p>It possesses all methods defined in <a
+href="EnumerableExtension.html">EnumerableExtension</a>. For usage of
+methods, please refer to <a
+href="EnumerableExtension.html">EnumerableExtension</a>.</p>
+
+<p>Because <a
+href="HashExtension.html#method-i-alignment_collect">#alignment_collect</a>
+is redefined, some methods&#39; return value&#39;s class are changed to <a
+href="SequenceHash.html">SequenceHash</a> instead of <a
+href="SequenceArray.html">SequenceArray</a>.</p>
+
+<p>Because the order of the objects in a hash is inconstant, some methods
+strictly affected with the order of objects might not work correctly, e.g.
+<a
+href="EnumerableExtension.html#method-i-convert_match">Bio::Alignment::EnumerableExtension#convert_match</a>
+and <a
+href="EnumerableExtension.html#method-i-convert_unmatch">convert_unmatch</a>.</p>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-alignment_collect" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_collect</span><span
+            class="method-args">() { |str| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over each sequence and each results running block are collected
+and returns a new alignment as a <a
+href="SequenceHash.html">Bio::Alignment::SequenceHash</a> object.</p>
+
+<p>Note that it would be redefined if you want to change return value&#39;s
+class.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_collect-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1390</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_collect</span>
+  <span class="ruby-identifier">a</span> = <span class="ruby-constant">SequenceHash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">set_all_property</span>(<span class="ruby-identifier">get_all_property</span>)
+  <span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">str</span>))
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">a</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-alignment_concat" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">alignment_concat</span><span
+            class="method-args">(align)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Concatenates the given alignment. If <em>align</em> is a <a
+href="../../Hash.html">Hash</a> (or <a
+href="SequenceHash.html">SequenceHash</a>), sequences of same keys are
+concatenated. Otherwise, <em>align</em> must have <code>each_seq</code> or
+<code>each</code> method and works same as <a
+href="EnumerableExtension.html#method-i-alignment_concat">Bio::Alignment::EnumerableExtension#alignment_concat</a>.</p>
+
+<p>Returns self.</p>
+
+<p>Note that it is a destructive method.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="alignment_concat-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1410</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">alignment_concat</span>(<span class="ruby-identifier">align</span>)
+  <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">align</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">origseq</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">key</span>]
+        <span class="ruby-identifier">origseq</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">seq</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>, <span class="ruby-constant">ArgumentError</span> =<span class="ruby-operator">&gt;</span><span class="ruby-identifier">evar</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-identifier">evar</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">flag</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">values</span>
+  <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">align</span>.<span class="ruby-identifier">each_seq</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
+      <span class="ruby-identifier">a</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">seq</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>[<span class="ruby-identifier">i</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">seq</span>
+      <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>, <span class="ruby-constant">ArgumentError</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">evar</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-identifier">evar</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">flag</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">align</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">a</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">seq</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>[<span class="ruby-identifier">i</span>] <span class="ruby-keyword">and</span> <span class="ruby-identifier">seq</span>
+    <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">self</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-each_seq" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">each_seq</span><span
+            class="method-args">() { |seq| ... }</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Iterates over each sequences. Yields a sequence.</p>
+
+<p>It works the same as Hash#each_value.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="each_seq-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1378</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_seq</span> <span class="ruby-comment">#:yields: seq</span>
+  <span class="ruby-comment">#each_value(&amp;block)</span>
+  <span class="ruby-identifier">each_key</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>] }
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-number_of_sequences" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">number_of_sequences</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns number of sequences in this alignment.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="number_of_sequences-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1443</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">number_of_sequences</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">size</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sequence_names" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sequence_names</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an array of sequence names. The order of the names must be the same
+as the order of <code>each_seq</code>.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="sequence_names-source">
+            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1450</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sequence_names</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">keys</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

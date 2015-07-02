@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>module Bio::RestrictionEnzyme::CutSymbol - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script src="../../js/jquery.js"></script>
+<script src="../../js/darkfish.js"></script>
+
+<link href="../../css/fonts.css" rel="stylesheet">
+<link href="../../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="module">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../../table_of_contents.html#pages">Pages</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-cut_symbol">#cut_symbol</a>
+    
+    <li ><a href="#method-i-escaped_cut_symbol">#escaped_cut_symbol</a>
+    
+    <li ><a href="#method-i-re_cut_symbol">#re_cut_symbol</a>
+    
+    <li ><a href="#method-i-re_cut_symbol_adjacent">#re_cut_symbol_adjacent</a>
+    
+    <li ><a href="#method-i-set_cut_symbol">#set_cut_symbol</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="module-Bio::RestrictionEnzyme::CutSymbol">
+  <h1 id="module-Bio::RestrictionEnzyme::CutSymbol" class="module">
+    module Bio::RestrictionEnzyme::CutSymbol
+  </h1>
+
+  <section class="description">
+    
+<h1 id="module-Bio::RestrictionEnzyme::CutSymbol-label-Usage">Usage<span><a href="#module-Bio::RestrictionEnzyme::CutSymbol-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h1>
+
+<pre class="ruby"><span class="ruby-comment">#require &#39;bio/util/restriction_enzyme/cut_symbol&#39;</span>
+<span class="ruby-identifier">require</span> <span class="ruby-string">&#39;cut_symbol&#39;</span>
+<span class="ruby-identifier">include</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">RestrictionEnzyme</span><span class="ruby-operator">::</span><span class="ruby-constant">CutSymbol</span>
+
+<span class="ruby-identifier">cut_symbol</span>                            <span class="ruby-comment"># =&gt; &quot;^&quot;</span>
+<span class="ruby-identifier">set_cut_symbol</span>(<span class="ruby-string">&#39;|&#39;</span>)                   <span class="ruby-comment"># =&gt; &quot;|&quot;</span>
+<span class="ruby-identifier">cut_symbol</span>                            <span class="ruby-comment"># =&gt; &quot;|&quot;</span>
+<span class="ruby-identifier">escaped_cut_symbol</span>                    <span class="ruby-comment"># =&gt; &quot;\\|&quot;</span>
+<span class="ruby-identifier">re_cut_symbol</span>                         <span class="ruby-comment"># =&gt; /\|/</span>
+<span class="ruby-identifier">set_cut_symbol</span>(<span class="ruby-string">&#39;^&#39;</span>)                   <span class="ruby-comment"># =&gt; &quot;^&quot;</span>
+<span class="ruby-string">&quot;abc^de&quot;</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">re_cut_symbol</span>             <span class="ruby-comment"># =&gt; 3</span>
+<span class="ruby-string">&quot;abc^de&quot;</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">re_cut_symbol_adjacent</span>    <span class="ruby-comment"># =&gt; nil</span>
+<span class="ruby-string">&quot;abc^^de&quot;</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">re_cut_symbol_adjacent</span>   <span class="ruby-comment"># =&gt; 3</span>
+<span class="ruby-string">&quot;a^bc^^de&quot;</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">re_cut_symbol_adjacent</span>  <span class="ruby-comment"># =&gt; 4</span>
+<span class="ruby-string">&quot;a^bc^de&quot;</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">re_cut_symbol_adjacent</span>   <span class="ruby-comment"># =&gt; nil</span>
+</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-cut_symbol" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cut_symbol</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get the token that&#39;s used as the cut symbol in a restriction enzyme
+sequece</p>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><em>none</em></p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><code>glyph</code></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="cut_symbol-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/cut_symbol.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cut_symbol</span>; <span class="ruby-constant">CutSymbol__</span>.<span class="ruby-identifier">cut_symbol</span>; <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-escaped_cut_symbol" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">escaped_cut_symbol</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Get the token that&#39;s used as the cut symbol in a restriction enzyme
+sequece with a back-slash preceding it.</p>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><em>none</em></p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><code>\glyph</code></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="escaped_cut_symbol-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/cut_symbol.rb, line 62</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">escaped_cut_symbol</span>; <span class="ruby-constant">CutSymbol__</span>.<span class="ruby-identifier">escaped_cut_symbol</span>; <span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-re_cut_symbol" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">re_cut_symbol</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>A Regexp of the cut_symbol.</p>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><em>none</em></p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><code>RegExp</code></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="re_cut_symbol-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/cut_symbol.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">re_cut_symbol</span>
+  <span class="ruby-node">%r&quot;#{escaped_cut_symbol}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-re_cut_symbol_adjacent" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">re_cut_symbol_adjacent</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Used to check if multiple cut symbols are next to each other.</p>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><em>none</em></p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><code>RegExp</code></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="re_cut_symbol_adjacent-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/cut_symbol.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">re_cut_symbol_adjacent</span>
+  <span class="ruby-node">%r&quot;#{escaped_cut_symbol}{2}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_cut_symbol" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_cut_symbol</span><span
+            class="method-args">(glyph)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Set the token to be used as the cut symbol in a restriction enzyme sequece</p>
+
+<p>Starts as +^+ character</p>
+<hr>
+
+<p><strong>Arguments</strong></p>
+<ul><li>
+<p><code>glyph</code>: The single character to be used as the cut symbol in an
+enzyme sequence</p>
+</li></ul>
+<dl class="rdoc-list note-list"><dt><strong>Returns</strong>
+<dd>
+<p><code>glyph</code></p>
+</dd></dl>
+          
+          
+
+          
+          <div class="method-source-code" id="set_cut_symbol-source">
+            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/cut_symbol.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_cut_symbol</span>(<span class="ruby-identifier">glyph</span>)
+  <span class="ruby-constant">CutSymbol__</span>.<span class="ruby-identifier">cut_symbol</span> = <span class="ruby-identifier">glyph</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

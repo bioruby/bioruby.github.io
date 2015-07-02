@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="UTF-8">
+
+<title>class Bio::DAS - BioRuby API documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="../Object.html">Object</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-c-new">::new</a>
+    
+    <li ><a href="#method-i-dna">#dna</a>
+    
+    <li ><a href="#method-i-features">#features</a>
+    
+    <li ><a href="#method-i-get_dna">#get_dna</a>
+    
+    <li ><a href="#method-i-get_dsn">#get_dsn</a>
+    
+    <li ><a href="#method-i-get_entry_points">#get_entry_points</a>
+    
+    <li ><a href="#method-i-get_features">#get_features</a>
+    
+    <li ><a href="#method-i-get_sequence">#get_sequence</a>
+    
+    <li ><a href="#method-i-get_types">#get_types</a>
+    
+    <li ><a href="#method-i-list_sequences">#list_sequences</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Bio::DAS">
+  <h1 id="class-Bio::DAS" class="class">
+    class Bio::DAS
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Class Methods</h3>
+       </header>
+
+    
+      <div id="method-c-new" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new</span><span
+            class="method-args">(url = 'http://www.wormbase.org:80/db/')</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Specify <a href="DAS.html">DAS</a> server to connect</p>
+          
+          
+
+          
+          <div class="method-source-code" id="new-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/das.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">url</span> = <span class="ruby-string">&#39;http://www.wormbase.org:80/db/&#39;</span>)
+  <span class="ruby-ivar">@server</span> = <span class="ruby-identifier">url</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;/&#39;</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-dna" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">dna</span><span
+            class="method-args">(dsn, entry_point, start, stop)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="dna-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/das.rb, line 35</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">dna</span>(<span class="ruby-identifier">dsn</span>, <span class="ruby-identifier">entry_point</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>)
+  <span class="ruby-identifier">seg</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">DAS</span><span class="ruby-operator">::</span><span class="ruby-constant">SEGMENT</span>.<span class="ruby-identifier">region</span>(<span class="ruby-identifier">entry_point</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_dna</span>(<span class="ruby-identifier">dsn</span>, <span class="ruby-identifier">seg</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">sequence</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-features" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">features</span><span
+            class="method-args">(dsn, entry_point, start, stop)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="features-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/das.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">features</span>(<span class="ruby-identifier">dsn</span>, <span class="ruby-identifier">entry_point</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>)
+  <span class="ruby-identifier">seg</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">DAS</span><span class="ruby-operator">::</span><span class="ruby-constant">SEGMENT</span>.<span class="ruby-identifier">region</span>(<span class="ruby-identifier">entry_point</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_features</span>(<span class="ruby-identifier">dsn</span>, <span class="ruby-identifier">seg</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_dna" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_dna</span><span
+            class="method-args">(dsn, segments)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an Array of <a href="DAS/DNA.html">Bio::DAS::DNA</a>. The
+&#39;dsn&#39; can be a <a href="../String.html">String</a> or a <a
+href="DAS/DSN.html">Bio::DAS::DSN</a> object. The &#39;segments&#39; can be
+a <a href="DAS/SEGMENT.html">Bio::DAS::SEGMENT</a> object or an Array of <a
+href="DAS/SEGMENT.html">Bio::DAS::SEGMENT</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="get_dna-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/das.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_dna</span>(<span class="ruby-identifier">dsn</span>, <span class="ruby-identifier">segments</span>)
+  <span class="ruby-identifier">ary</span> = []
+
+  <span class="ruby-identifier">dsn</span> = <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">source</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">DSN</span>)
+  <span class="ruby-identifier">segments</span> = [<span class="ruby-identifier">segments</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">SEGMENT</span>)
+
+  <span class="ruby-identifier">opts</span> = []
+  <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">opts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;segment=#{s.entry_id}:#{s.start},#{s.stop}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">post_form</span>(<span class="ruby-node">&quot;#{@server}/das/#{dsn}/dna&quot;</span>, <span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">doc</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&#39;/descendant::SEQUENCE&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">sequence</span> = <span class="ruby-constant">DNA</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+    <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;start&#39;</span>]
+    <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;stop&#39;</span>]
+    <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">version</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;version&#39;</span>]
+    <span class="ruby-identifier">e</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">el</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">el</span>.<span class="ruby-identifier">text</span>)
+      <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">length</span> = <span class="ruby-identifier">el</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;length&#39;</span>].<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sequence</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">ary</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_dsn" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_dsn</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an Array of <a href="DAS/DSN.html">Bio::DAS::DSN</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="get_dsn-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/das.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_dsn</span>
+  <span class="ruby-identifier">ary</span> = []
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">post_form</span>(<span class="ruby-node">&quot;#{@server}/das/dsn&quot;</span>)
+  <span class="ruby-identifier">doc</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&#39;/descendant::DSN&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ee</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">dsn</span> = <span class="ruby-constant">DSN</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-keyword">case</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;SOURCE&#39;</span>
+        <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">source</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+        <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">source_id</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+        <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">source_version</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;version&#39;</span>]
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;MAPMASTER&#39;</span>
+        <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">mapmaster</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;DESCRIPTION&#39;</span>
+        <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">description</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+        <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">description_href</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;href&#39;</span>]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">dsn</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">ary</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_entry_points" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_entry_points</span><span
+            class="method-args">(dsn)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns <a href="DAS/ENTRY_POINT.html">Bio::DAS::ENTRY_POINT</a>. The
+&#39;dsn&#39; can be a <a href="../String.html">String</a> or a <a
+href="DAS/DSN.html">Bio::DAS::DSN</a> object.</p>
+          
+          
+
+          
+          <div class="method-source-code" id="get_entry_points-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/das.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_entry_points</span>(<span class="ruby-identifier">dsn</span>)
+  <span class="ruby-identifier">entry_point</span> = <span class="ruby-constant">ENTRY_POINT</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">DAS</span><span class="ruby-operator">::</span><span class="ruby-constant">DSN</span>)
+    <span class="ruby-identifier">src</span> = <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">source</span> 
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">src</span> = <span class="ruby-identifier">dsn</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">post_form</span>(<span class="ruby-node">&quot;#{@server}/das/#{src}/entry_points&quot;</span>)
+  <span class="ruby-identifier">doc</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&#39;/descendant::ENTRY_POINTS&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ee</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">entry_point</span>.<span class="ruby-identifier">href</span> = <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;href&#39;</span>]
+    <span class="ruby-identifier">entry_point</span>.<span class="ruby-identifier">version</span> = <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;version&#39;</span>]
+    <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">segment</span> = <span class="ruby-constant">SEGMENT</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;start&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;stop&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;size&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">orientation</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;orientation&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">subparts</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;subparts&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">description</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+      <span class="ruby-identifier">entry_point</span>.<span class="ruby-identifier">segments</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">segment</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">entry_point</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_features" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_features</span><span
+            class="method-args">(dsn, segments = [], categorize = false, feature_ids = [], group_ids = [])</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a <a href="DAS/GFF.html">Bio::DAS::GFF</a> object. The
+&#39;dsn&#39; can be a <a href="../String.html">String</a> or a <a
+href="DAS/DSN.html">Bio::DAS::DSN</a> object. The &#39;segments&#39; is
+optional and can be a <a href="DAS/SEGMENT.html">Bio::DAS::SEGMENT</a>
+object or an Array of <a href="DAS/SEGMENT.html">Bio::DAS::SEGMENT</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="get_features-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/das.rb, line 213</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_features</span>(<span class="ruby-identifier">dsn</span>, <span class="ruby-identifier">segments</span> = [], <span class="ruby-identifier">categorize</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">feature_ids</span> = [], <span class="ruby-identifier">group_ids</span> = [])
+  <span class="ruby-comment"># arguments &#39;type&#39; and &#39;category&#39; are deprecated</span>
+  <span class="ruby-identifier">gff</span> = <span class="ruby-constant">GFF</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-identifier">dsn</span> = <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">source</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">DSN</span>)
+  <span class="ruby-identifier">segments</span> = [<span class="ruby-identifier">segments</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">SEGMENT</span>)
+
+  <span class="ruby-identifier">opts</span> = []
+  <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">opts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;segment=#{s.entry_id}:#{s.start},#{s.stop}&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">categorize</span>
+    <span class="ruby-identifier">opts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;categorize=yes&quot;</span>  <span class="ruby-comment"># default is &#39;no&#39;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">feature_ids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fid</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">opts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;feature_id=#{fid}&quot;</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">group_ids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gid</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">opts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;group_id=#{gid}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">post_form</span>(<span class="ruby-node">&quot;#{@server}/das/#{dsn}/features&quot;</span>, <span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">doc</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&#39;/descendant::GFF&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">elem</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">gff</span>.<span class="ruby-identifier">version</span> = <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;version&#39;</span>]
+    <span class="ruby-identifier">gff</span>.<span class="ruby-identifier">href</span> = <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;href&#39;</span>]
+    <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&#39;SEGMENT&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ele</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">segment</span> = <span class="ruby-constant">SEGMENT</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">ele</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">ele</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;start&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-identifier">ele</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;stop&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">version</span> = <span class="ruby-identifier">ele</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;version&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">label</span> = <span class="ruby-identifier">ele</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;label&#39;</span>]
+      <span class="ruby-identifier">ele</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">el</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">feature</span> = <span class="ruby-constant">FEATURE</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">el</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+        <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">label</span> = <span class="ruby-identifier">el</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;label&#39;</span>]
+        <span class="ruby-identifier">el</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+          <span class="ruby-keyword">case</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;TYPE&#39;</span>
+            <span class="ruby-identifier">type</span> = <span class="ruby-constant">TYPE</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">type</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+            <span class="ruby-identifier">type</span>.<span class="ruby-identifier">category</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;category&#39;</span>]
+            <span class="ruby-identifier">type</span>.<span class="ruby-identifier">reference</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;referrence&#39;</span>]
+            <span class="ruby-identifier">type</span>.<span class="ruby-identifier">label</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">types</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">type</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;METHOD&#39;</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">method_id</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">method</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;START&#39;</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;STOP&#39;</span>, <span class="ruby-string">&#39;END&#39;</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;SCORE&#39;</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">score</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;ORIENTATION&#39;</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">orientation</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;PHASE&#39;</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">phase</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;NOTE&#39;</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">notes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;LINK&#39;</span>
+            <span class="ruby-identifier">link</span> = <span class="ruby-constant">LINK</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">link</span>.<span class="ruby-identifier">href</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;href&#39;</span>]
+            <span class="ruby-identifier">link</span>.<span class="ruby-identifier">text</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">links</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;TARGET&#39;</span>
+            <span class="ruby-identifier">target</span> = <span class="ruby-constant">TARGET</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">target</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+            <span class="ruby-identifier">target</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;start&#39;</span>]
+            <span class="ruby-identifier">target</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;stop&#39;</span>]
+            <span class="ruby-identifier">target</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">targets</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">target</span>
+          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;GROUP&#39;</span>
+            <span class="ruby-identifier">group</span> = <span class="ruby-constant">GROUP</span>.<span class="ruby-identifier">new</span>
+            <span class="ruby-identifier">group</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+            <span class="ruby-identifier">group</span>.<span class="ruby-identifier">label</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;label&#39;</span>]
+            <span class="ruby-identifier">group</span>.<span class="ruby-identifier">type</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;type&#39;</span>]
+            <span class="ruby-identifier">e</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ee</span><span class="ruby-operator">|</span>
+              <span class="ruby-keyword">case</span> <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">name</span>
+              <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;NOTE&#39;</span>             <span class="ruby-comment"># in GROUP</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">notes</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">text</span>
+              <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;LINK&#39;</span>             <span class="ruby-comment"># in GROUP</span>
+                <span class="ruby-identifier">link</span> = <span class="ruby-constant">LINK</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">link</span>.<span class="ruby-identifier">href</span> = <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;href&#39;</span>]
+                <span class="ruby-identifier">link</span>.<span class="ruby-identifier">text</span> = <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">text</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">links</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">link</span>
+              <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;TARGET&#39;</span>           <span class="ruby-comment"># in GROUP</span>
+                <span class="ruby-identifier">target</span> = <span class="ruby-constant">TARGET</span>.<span class="ruby-identifier">new</span>
+                <span class="ruby-identifier">target</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+                <span class="ruby-identifier">target</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;start&#39;</span>]
+                <span class="ruby-identifier">target</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;stop&#39;</span>]
+                <span class="ruby-identifier">target</span>.<span class="ruby-identifier">name</span> = <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">text</span>
+                <span class="ruby-identifier">group</span>.<span class="ruby-identifier">targets</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">target</span>
+              <span class="ruby-keyword">end</span>
+            <span class="ruby-keyword">end</span>
+            <span class="ruby-identifier">feature</span>.<span class="ruby-identifier">groups</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">group</span>
+          <span class="ruby-keyword">end</span>
+        <span class="ruby-keyword">end</span>
+        <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">features</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">feature</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">gff</span>.<span class="ruby-identifier">segments</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">segment</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">gff</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_sequence" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_sequence</span><span
+            class="method-args">(dsn, segments)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns an Array of <a href="DAS/SEQUENCE.html">Bio::DAS::SEQUENCE</a>. The
+&#39;dsn&#39; can be a <a href="../String.html">String</a> or a <a
+href="DAS/DSN.html">Bio::DAS::DSN</a> object. The &#39;segments&#39; can be
+a <a href="DAS/SEGMENT.html">Bio::DAS::SEGMENT</a> object or an Array of <a
+href="DAS/SEGMENT.html">Bio::DAS::SEGMENT</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="get_sequence-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/das.rb, line 135</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_sequence</span>(<span class="ruby-identifier">dsn</span>, <span class="ruby-identifier">segments</span>)
+  <span class="ruby-identifier">ary</span> = []
+
+  <span class="ruby-identifier">dsn</span> = <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">source</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">DSN</span>)
+  <span class="ruby-identifier">segments</span> = [<span class="ruby-identifier">segments</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">SEGMENT</span>)
+
+  <span class="ruby-identifier">opts</span> = []
+  <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">opts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;segment=#{s.entry_id}:#{s.start},#{s.stop}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">post_form</span>(<span class="ruby-node">&quot;#{@server}/das/#{dsn}/sequence&quot;</span>, <span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">doc</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&#39;/descendant::SEQUENCE&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">sequence</span> = <span class="ruby-constant">SEQUENCE</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+    <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;start&#39;</span>]
+    <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;stop&#39;</span>]
+    <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">moltype</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;moltype&#39;</span>]
+    <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">version</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;version&#39;</span>]
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">moltype</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/dna|rna/i</span>           <span class="ruby-comment"># &#39;DNA&#39;, &#39;ssRNA&#39;, &#39;dsRNA&#39;</span>
+      <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>)
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/protein/i</span>           <span class="ruby-comment"># &#39;Protein</span>
+      <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>)
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sequence</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">ary</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-get_types" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">get_types</span><span
+            class="method-args">(dsn, segments = [])</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Returns a <a href="DAS/TYPES.html">Bio::DAS::TYPES</a> object. The
+&#39;dsn&#39; can be a <a href="../String.html">String</a> or a <a
+href="DAS/DSN.html">Bio::DAS::DSN</a> object. The &#39;segments&#39; is
+optional and can be a <a href="DAS/SEGMENT.html">Bio::DAS::SEGMENT</a>
+object or an Array of <a href="DAS/SEGMENT.html">Bio::DAS::SEGMENT</a></p>
+          
+          
+
+          
+          <div class="method-source-code" id="get_types-source">
+            <pre><span class="ruby-comment"># File lib/bio/io/das.rb, line 172</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_types</span>(<span class="ruby-identifier">dsn</span>, <span class="ruby-identifier">segments</span> = [])     <span class="ruby-comment"># argument &#39;type&#39; is deprecated</span>
+  <span class="ruby-identifier">types</span> = <span class="ruby-constant">TYPES</span>.<span class="ruby-identifier">new</span>
+
+  <span class="ruby-identifier">dsn</span> = <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">source</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">DSN</span>)
+  <span class="ruby-identifier">segments</span> = [<span class="ruby-identifier">segments</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-constant">SEGMENT</span>)
+
+  <span class="ruby-identifier">opts</span> = []
+  <span class="ruby-identifier">segments</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">opts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;segment=#{s.entry_id}:#{s.start},#{s.stop}&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">result</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">post_form</span>(<span class="ruby-node">&quot;#{@server}/das/#{dsn}/types&quot;</span>, <span class="ruby-identifier">opts</span>)
+  <span class="ruby-identifier">doc</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">doc</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&#39;/descendant::GFF&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ee</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">types</span>.<span class="ruby-identifier">version</span> = <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;version&#39;</span>]
+    <span class="ruby-identifier">types</span>.<span class="ruby-identifier">href</span> = <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;href&#39;</span>]
+    <span class="ruby-identifier">ee</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">segment</span> = <span class="ruby-constant">SEGMENT</span>.<span class="ruby-identifier">new</span>
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">start</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;start&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">stop</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;stop&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">version</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;version&#39;</span>]
+      <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">label</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;label&#39;</span>]
+      <span class="ruby-identifier">e</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">el</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">t</span> = <span class="ruby-constant">TYPE</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">t</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">el</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;id&#39;</span>]
+        <span class="ruby-identifier">t</span>.<span class="ruby-identifier">method</span> = <span class="ruby-identifier">el</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;method&#39;</span>]
+        <span class="ruby-identifier">t</span>.<span class="ruby-identifier">category</span> = <span class="ruby-identifier">el</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;category&#39;</span>]
+        <span class="ruby-identifier">t</span>.<span class="ruby-identifier">count</span> = <span class="ruby-identifier">el</span>.<span class="ruby-identifier">text</span>.<span class="ruby-identifier">to_i</span>
+        <span class="ruby-identifier">segment</span>.<span class="ruby-identifier">types</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">t</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-identifier">types</span>.<span class="ruby-identifier">segments</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">segment</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">types</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-list_sequences" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_sequences</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="list_sequences-source">
+            <pre><span class="ruby-comment"># File lib/bio/shell/plugin/das.rb, line 14</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list_sequences</span>
+  <span class="ruby-identifier">result</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_dsn</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">dsn</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">src</span> = <span class="ruby-identifier">dsn</span>.<span class="ruby-identifier">source_id</span>
+    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_entry_points</span>(<span class="ruby-identifier">src</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ep</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">data</span> = [<span class="ruby-identifier">src</span>, <span class="ruby-identifier">ep</span>.<span class="ruby-identifier">entry_id</span>, <span class="ruby-identifier">ep</span>.<span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">ep</span>.<span class="ruby-identifier">stop</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-node">&quot;# #{ep.description}&quot;</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-identifier">data</span>
+      <span class="ruby-identifier">result</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">result</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
