@@ -1,0 +1,119 @@
+ALDH2 タンパク質の 487 残基目がグルタミン酸 (E) ではなくリシン (K) に
+なっている場合、（タンパク質分解の半減期が短くなることなどから）酒に
+弱くなるといわれているようです。
+
+  % bioruby rubykaigi
+  bioruby> aldh2 = seq("hsa:aldh2)
+  bioruby> config :color
+  bioruby> seqstat aldh2
+  bioruby> doublehelix aldh2
+
+デモムービー中、この残基を確かめるため
+
+  bioruby> protein = aldh2.translate
+  bioruby> p protein[485,5]
+  "KMSGS"
+
+としている部分がありますが、487 残基目には E も K も見つかって
+いませんでした。
+
+この理由は、ALDH2 の先頭 17 残基がミトコンドリアへの移行シグナルで、
+機能する成熟タンパク質になる際には切り取られるからでした。そこで
+
+  bioruby> aldh2.translate.splice("18..517")
+
+のようにして、DNA 配列を翻訳した後で 18 残基目から後を取り出せば、
+成熟 ALDH2 タンパク質のアミノ酸配列が得られます。この 487 残基目を
+
+  bioruby> p aldh2.translate.splice("18..517")[486,1]
+  "E"
+
+と表示すれば、この残基がグルタミン酸 (E) であることが分かります。
+
+実際には、aldh2 遺伝子の (17 + 486) * 3 = 1509 塩基の次のコドンは
+
+  bioruby> p aldh2[1509, 3]
+  "gaa"
+
+ですが、たった１塩基、グアニン (g) がアデニン (a) に変異すると
+対応するアミノ酸がグルタミン酸 (E) からリシン (K) に変わります。
+DNA 配列に変異を入れてアミノ酸が変化するかどうか確認してみましょう。
+
+  bioruby> aldh2_2 = aldh2.dup
+  bioruby> aldh2_2[1509, 1] = "a"
+
+1510 塩基目の g を a に置き換えました。
+
+  bioruby> p aldh2[1509, 3]
+  "gaa"
+  bioruby> p aldh2_2[1509, 3]
+  "aaa"
+
+元の遺伝子は "gaa" のままですが、変異遺伝子は "aaa" になっています。
+ここで、コドン（３塩基）を１アミノ酸に変換する対応表
+
+  bioruby> codontable
+  
+   = Codon table 1 : Standard (Eukaryote)
+  
+     hydrophilic: H K R (basic), S T Y Q N S (polar), D E (acidic)
+     hydrophobic: F L I M V P A C W G (nonpolar)
+  
+   *---------------------------------------------*
+   |       |              2nd              |     |
+   |  1st  |-------------------------------| 3rd |
+   |       |  U    |  C    |  A    |  G    |     |
+   |-------+-------+-------+-------+-------+-----|
+   | U   U | Phe F | Ser S | Tyr Y | Cys C |  u  |
+   | U   U | Phe F | Ser S | Tyr Y | Cys C |  c  |
+   | U   U | Leu L | Ser S | STOP  | STOP  |  a  |
+   |  UUU  | Leu L | Ser S | STOP  | Trp W |  g  |
+   |-------+-------+-------+-------+-------+-----|
+   |  CCCC | Leu L | Pro P | His H | Arg R |  u  |
+   | C     | Leu L | Pro P | His H | Arg R |  c  |
+   | C     | Leu L | Pro P | Gln Q | Arg R |  a  |
+   |  CCCC | Leu L | Pro P | Gln Q | Arg R |  g  |
+   |-------+-------+-------+-------+-------+-----|
+   |   A   | Ile I | Thr T | Asn N | Ser S |  u  |
+   |  A A  | Ile I | Thr T | Asn N | Ser S |  c  |
+   | AAAAA | Ile I | Thr T | Lys K | Arg R |  a  |
+   | A   A | Met M | Thr T | Lys K | Arg R |  g  |
+   |-------+-------+-------+-------+-------+-----|
+   |  GGGG | Val V | Ala A | Asp D | Gly G |  u  |
+   | G     | Val V | Ala A | Asp D | Gly G |  c  |
+   | G GGG | Val V | Ala A | Glu E | Gly G |  a  |
+   |  GG G | Val V | Ala A | Glu E | Gly G |  g  |
+   *---------------------------------------------*
+
+を表示すると、"gaa" は Glu E に "aaa" は Lys K に対応することが
+分かります。
+
+では正常遺伝子と変異遺伝子をそれぞれタンパク質に翻訳してみましょう。
+以下のように 481 残基目からの 10 残基を表示すると
+
+  bioruby> p aldh2.translate.splice("18..517")[480,10]
+  "GLQAYTEVKT"
+  bioruby> p aldh2_2.translate.splice("18..517")[480,10]
+  "GLQAYTKVKT"
+
+７文字目の 487 残基目だけが変異しているのが分かります。
+
+以下おまけですが、
+
+  bioruby> nucleicacids
+  bioruby> aminoacids
+
+とすると DNA を構成する塩基や、タンパク質を構成するアミノ酸の
+名前の一覧が表示されます。
+
+  bioruby> keggapi.mark_pathway_by_objects("path:hsa00010", ["hsa:aldh2"])
+
+とすると、ヒト (hsa) の Glycolysis パスウェイ (00010) で ALDH2 が
+働いている箇所が赤くマークされた画像の URL が返ります。
+
+  bioruby> midifile "aldh2_1.mid", aldh2[1500, 30]
+  bioruby> midifile "aldh2_2.mid", aldh2_2[1500, 30]
+
+とすると ALDH2*1, ALDH2*2 の DNA 変異部分周辺から生成された
+MIDI ファイルを聞き比べることができます。
+

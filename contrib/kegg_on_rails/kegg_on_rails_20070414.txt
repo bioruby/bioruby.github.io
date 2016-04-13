@@ -1,0 +1,90 @@
+= KEGG on Rails
+
+This directory contains a snapshot of an experimental project 'KEGG on Rails'
+which enhances KEGG's pathway view by Rails and AJAX.
+
+== Requirements
+
+* BioRuby 1.1.0-pre3 (or newer)
+* Ruby on Rails 1.2.3
+* SQLite3 (or MySQL)
+
+  % gem install rails -y
+  % gem install sqlite3-ruby
+  (% gem install mysql)
+
+== Installation
+
+Download files from
+
+  http://bioruby.org/archive/contrib/kegg_on_rails/
+
+=== Rails application
+
+Unpack KEGG on Rails application.
+
+  % tar zxvf kegg_on_rails_20070414.tar.gz
+
+=== KEGG data
+
+Sample data file which only contains E. coli data is provided
+(Note that this file is licenced under the same terms as KEGG).
+
+  % tar zxvf kegg_on_rails_data_20070414.tar.gz
+
+== Setup
+
+Load sample data with rake command.
+
+  % cd kegg
+  % rake db:migrate
+  % rake kegg:load_all > data/linkdbs.txt
+
+Or you can use pre-loaded 'db/development.sqlite3' file downloaded from
+
+  http://bioruby.org/archive/contrib/kegg_on_rails/supplement/development.sqlite3
+
+If you want to use MySQL instead of SQLite3, change the symbolic link of
+database.yml file in config directory to database.yml.mysql file and modify.
+
+== Run
+
+Start the webrick server
+
+  % ./script/server
+
+and open
+
+  http://localhost:3000/pathway/
+
+then select a pathway from the list (e.g. map00010)
+
+  http://localhost:3000/pathway/show/map00010
+
+and click on the rectangles or circles to get popup window by AJAX.
+
+You can also change organism and/or pathways via hierarchical selector
+if you have loaded relevant data.
+
+  http://localhost:3000/pathway/show/eco00020
+
+== Customize
+
+You can mirror the KEGG database for other organisms from
+
+  ftp://ftp.genome.jp/pub/kegg
+
+and put it into the 'data/kegg' subdirectory instead of E. coli sample data.
+You need to modify 'lib/kegg_config.rb' file to load them.
+
+The pathway view is in Japanese mode by default but you can change it
+to English mode by replacing 'app/controllers/pathway_controller.rb' with
+
+  http://bioruby.org/archive/contrib/kegg_on_rails/supplement/pathway_controller.rb.en
+
+== Copyright
+
+Copyright (C) 2006, 2007 Eri Kibukawa
+Copyright (C) 2006, 2007 Toshiaki Katayama <k@bioruby.org>
+
+

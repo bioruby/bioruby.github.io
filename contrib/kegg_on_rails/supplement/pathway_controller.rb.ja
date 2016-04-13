@@ -1,0 +1,215 @@
+class PathwayController < ApplicationController
+
+  def index
+    #@pathway_root = Category.root("Pathway")
+    @pathway_root = Category.root("Pathway_jp")
+    @nodes = @pathway_root.direct_children
+  end
+
+  def show
+    @entry = params[:id]
+    session[:entry] = @entry
+    pathway = Pathway.dbentry("path:#{@entry}")
+
+    unless pathway
+      redirect_to :action => "index"
+      return
+    end
+
+    @title = pathway.title
+    @org = @entry[/[a-z]+/]
+    #@organism = "Reference pathways"
+    @organism = "リファレンスパスウェイ".toutf8
+    @ortholog_table = "http://www.kegg.jp/kegg/ortholog/tab#{pathway.number}.html"
+
+    Category.find_all_by_target("path:map#{@entry[/\d+/]}").each do |category|
+      #if category.ancestors.last.level == "Pathway"
+      if category.ancestors.last.level == "Pathway_jp"
+        @hierarchy = category.hierarchy
+        @title = category.definition
+      end
+    end
+
+    Category.find_all_by_anchor(pathway.org).each do |category|
+      #if category.ancestors.last.level == "Organism"
+      if category.ancestors.last.level == "Organism_jp"
+        @organism = category.definition
+      elsif organism = Genome.dbentry("gn:#{pathway.org}").definition
+        @organism = organism
+      end
+    end
+
+    @pathway_image = pathway.image  # "/kegg/pathways/#{@org}/#{@entry}.gif"
+    @graphics = pathway.graphics
+  end
+
+  def organisms
+    @title = "Select organism:"
+    #@root = Category.root("Organism")
+    @root = Category.root("Organism_jp")
+    @nodes = @root.direct_children
+    render :update do |page|
+      page.replace_html "category_panel", :partial => "category"
+      page["category_panel"].set_style :position => "absolute"
+      page["category_panel"].set_style :left => "40px", :top => "120px"
+      page["category_panel"].set_opacity 0.9
+      page["category_panel"].show
+      page.draggable "category_panel"
+    end
+  end
+
+  def pathways
+    @title = "Select pathway:"
+    #@root = Category.root("Pathway")
+    @root = Category.root("Pathway_jp")
+    @nodes = @root.direct_children
+    render :update do |page|
+      page.replace_html "category_panel", :partial => "category"
+      page["category_panel"].set_style :position => "absolute"
+      page["category_panel"].set_style :left => "40px", :top => "120px"
+      page["category_panel"].set_opacity 0.9
+      page["category_panel"].show
+      page.draggable "category_panel"
+    end
+  end
+
+  def category_link
+    @selected = params[:id]
+    if @selected[/^map/]        # selected from Pathway
+      org = session[:entry][/\D+/]
+      number = @selected[/\d+/]
+    else                        # selected from Organism
+      org = @selected[/^\D+/]
+      number = session[:entry][/\d+/]
+    end
+    entry = "#{org}#{number}"
+    render :update do |page|
+      if pathway = Pathway.dbentry("path:#{entry}")
+        page.redirect_to :action => "show", :id => "#{entry}"
+      else
+        page.redirect_to "http://www.kegg.jp/kegg/pathway/#{org}/#{entry}.html"
+      end
+    end
+  end
+
+  def expand
+    @parent = Category.find(params[:id])
+    render :update do |page|
+      @nodes = @parent.direct_children
+      page.replace_html "node_#{@parent.id}", :partial => "expand"
+      page.visual_effect :highlight, "node_#{@parent.id}", :duration => 0.5
+    end
+  end
+
+  def collapse
+    @parent = Category.find(params[:id])
+    render :update do |page|
+      page.replace_html "node_#{@parent.id}", :partial => "collapse"
+      page.visual_effect :pulsate, "node_#{@parent.id}", :duration => 0.3
+    end
+  end
+
+  def popup
+    entry = params[:entry]
+    @link = params[:link]
+
+    # TODO: not only the first one... -> utilize Linkdb
+    @dbentry = entry.split(/\s+/).first
+    case @dbentry
+    when /^cpd:/
+      popup_compound
+    when /^ec:/
+      popup_enzyme
+    when /^path:/
+      org = @dbentry[/^path:(\D+)/,1]
+      num = @dbentry[/(\d+)/]
+      render :update do |page|
+        #page.redirect_to "http://www.kegg.jp/kegg/pathway/#{org}/#{org}#{num}.html"
+        page.redirect_to :controller => "pathway", :action => "show", :id => "#{org}#{num}"
+      end
+      return                    # need to exit from this method
+    else
+      popup_gene
+    end
+
+    @popup_id = "popup_" + @dbentry.gsub(/[^A-z0-9]/, '_')
+    render :update do |page|
+      # to avoid showing identical popups (especially for Safari)
+      page.select("##{@popup_id}").each do |element|
+        page.remove element
+      end
+
+      page['pathway'].make_positioned
+      x = params[:x].to_i
+      y = params[:y].to_i
+
+      page.insert_html :bottom, "pathway", :partial => "popup"
+      page[@popup_id].set_style :position => "absolute"
+      page[@popup_id].set_style :left => "#{x}px", :top => "#{y}px"
+      page[@popup_id].set_opacity 0.9
+      page.draggable @popup_id
+    end
+  end
+
+  def popup_off
+    @popup_id = params[:popup_id]
+    render :update do |page|
+      #page.visual_effect :squish, @popup_id
+      #page.visual_effect :puff, @popup_id
+      page.visual_effect :switch_off, @popup_id
+    end
+  end
+
+  private
+
+  def popup_compound
+    cpd = Compound.dbentry(@dbentry)
+    name = cpd.name.sub(/\---/, '').strip.split(/\s*;\s*/).join("<br>")
+    @data = {
+      "NAME" => name,
+      "FORMULA" => cpd.formula,
+      "MASS" => cpd.mass,
+    }
+    if cpd.comment
+      @data["COMMENT"] = cpd.comment
+    end
+    @image = cpd.image
+  end
+
+  def popup_enzyme
+    enzyme = Enzyme.dbentry(@dbentry)
+    desc = enzyme.name.sub(/\---/, '').strip.split(/\s*;\s*/).join("<br>")
+    @data = [
+      ["NAME", enzyme.sysname],
+      ["DESCRIPTION", desc],
+      #["REACTION", enzyme.reaction],
+      ["- IUBMB", enzyme.iubmb_reaction],
+      ["- KEGG", enzyme.kegg_reaction],
+    ]
+    #unless enzyme.comment.empty?
+    #  @data << ["COMMENT", enzyme.comment]
+    #end
+  end
+
+  def popup_gene
+    gene = Gene.dbentry(@dbentry)
+    @data = [
+      ["NAME", gene.name],
+      ["DEFINITION", gene.definition],
+    ]
+    pathways = gene.pathways
+    if pathways.size > 0
+      links = ""
+      gene.pathways.each do |path|
+        title = Pathway.dbentry(path).title
+        links << "#{link_pathway(path)} #{title}<br>"
+      end
+      @data << ["PATHWAYS", links]
+    end
+  end
+
+  def link_pathway(path_id)
+    %Q[<a href="/pathway/show/#{path_id.sub(/path:/, '')}">#{path_id}</a>]
+  end
+end
+

@@ -1,0 +1,327 @@
+= Setting up bioinformatics web service in 15 min
+
+1. Create your own database by specific organism entries extracted from GenBank.
+
+2. Generate Rails scaffold to view and edit its contents in the browser.
+
+3. Add SOAP/WSDL interface to the database and try it from BioRuby shell.
+
+== Setup database
+
+% rails kumamushi -d sqlite3
+% cd kumamushi
+% ls
+
+=== Check database configuration (nothing to do)
+
+% emacs -nw config/database.yml
+------------------------------------------------------------
+development:
+  adapter: sqlite3
+  database: db/development.sqlite3
+  timeout: 5000
+
+test:
+  adapter: sqlite3
+  database: db/test.sqlite3
+  timeout: 5000
+
+production:
+  adapter: sqlite3
+  database: db/production.sqlite3
+  timeout: 5000
+------------------------------------------------------------
+
+=== Generate database schema for GenBank records
+
+% script/generate migration create_genbank_table
+
+% emacs -nw db/migrate/001_create_genbank_table.rb
+------------------------------------------------------------
+class CreateGenbankTable < ActiveRecord::Migration
+  def self.up
+    create_table "genbanks" do |t|
+      t.column "entry",         :string
+      t.column "bp",            :integer
+      t.column "strand",        :string
+      t.column "natype",        :string
+      t.column "circular",      :string
+      t.column "division",      :string
+      t.column "date",          :string
+      t.column "definition",    :text
+      t.column "accession",     :string
+      t.column "version",       :string
+      t.column "gi",            :string
+      t.column "keyword",       :text
+      t.column "source",        :text
+      t.column "organism",      :text
+      t.column "taxonomy",      :text
+      t.column "comment",       :text
+      t.column "references",    :text
+      t.column "features",      :text
+      t.column "naseq",         :text
+    end
+    add_index :genbanks, :entry
+  end
+
+  def self.down
+    drop_table "genbanks"
+  end
+end
+------------------------------------------------------------
+
+% rake db:migrate
+
+=== Loading GenBank entries into the database
+
+Prepare your organism specific data file in GenBank format.
+I extracted 'water bear' entries by HiGet (http://higet.hgc.jp/)
+service and saved them in 'data/kumamushi.gb'.
+Of cource, you can also use BioRuby for this purpose.
+
+% emacs -nw lib/tasks/bio/load_genbank.rake
+------------------------------------------------------------
+namespace "bio" do
+
+  require 'bio'
+
+  desc "Load GenBank database"
+  task :load_genbank => :environment do
+    STDERR.puts "€n>>> begin (load_genbank)"
+    ActiveRecord::Base.transaction do
+      task_name = ARGV.shift
+      Bio::FlatFile.auto(ARGF).each do |gb|
+        STDERR.puts "€n#{gb.entry_id}"
+
+        hash = {
+          :entry          => gb.entry_id,
+          :bp             => gb.length,
+          :strand         => gb.strand,
+          :natype         => gb.natype,
+          :circular       => gb.circular,
+          :division       => gb.division,
+          :date           => gb.date,
+          :definition     => gb.definition,
+          :accession      => gb.accession,
+          :version        => gb.version,
+          :gi             => gb.gi,
+          :keyword        => gb.keywords,
+          :source         => gb.source,
+          :organism       => gb.organism,
+          :taxonomy       => gb.taxonomy,
+          :comment        => gb.comment,
+          :references     => gb.references,
+          :features       => gb.features,
+          :naseq          => gb.naseq,
+        }
+        Genbank.create(hash)
+      end
+    end
+    STDERR.puts "€n>>> end (load_genbank)"
+  end
+end
+------------------------------------------------------------
+
+% emacs -nw app/models/genbank.rb
+------------------------------------------------------------
+class Genbank < ActiveRecord::Base
+end
+------------------------------------------------------------
+
+% rake bio:load_genbank data/kumamushi.gb
+------------------------------------------------------------
+rake bio:load_genbank data/kumamushi.gb  130.58s user 2.93s system 94% cpu 2:21.85 total
+------------------------------------------------------------
+
+=== Generate scaffold web interface
+
+% ./script/generate scaffold genbank
+
+% ./script/server webrick
+
+open http://localhost:3000/genbanks/
+
+% emacs -nw public/stylesheets/scaffold.css
+------------------------------------------------------------
+table, th, td {
+  border: 1px solid #cccccc;
+  border-collapse: collapse;
+}
+
+textarea {
+  font-family: monospace;
+  overflow: auto;
+  width: 80%;
+}
+------------------------------------------------------------
+
+re-open http://localhost:3000/genbanks/ and try followings
+
+  http://localhost:3000/genbanks/show/1
+  http://localhost:3000/genbanks/edit/1
+
+== Adding web service
+
+% ./script/generate webservice kumamushi list_organisms
+
+% emacs -nw app/apis/kumamushi_api.rb
+------------------------------------------------------------
+class KumamushiApi < ActionWebService::API::Base
+  api_method :list_organisms,
+    :returns => [[:string]]
+end
+------------------------------------------------------------
+
+% emacs -nw app/controllers/kumamushi_controller.rb
+------------------------------------------------------------
+class KumamushiController < ApplicationController
+  wsdl_service_name 'Kumamushi'
+
+  def list_organisms
+    Genbank.find(:all, :group => "organism").map {|x| x.organism}
+  end
+end
+------------------------------------------------------------
+
+% ./script/server
+
+=== Check auto-generated WSDL file
+
+open http://localhost:3000/kumamushi/wsdl
+
+=== Try the web service with BioRuby shell
+
+% bioruby
+bioruby> ws = Bio::SOAPWSDL.new("http://localhost:3000/kumamushi/wsdl")
+bioruby> ws.list_methods
+bioruby> ws.listOrganisms
+bioruby> ws.listOrganisms.size
+
+=== Add keyword search capability
+
+% emacs -nw app/apis/kumamushi_api.rb
+------------------------------------------------------------
+class KumamushiApi < ActionWebService::API::Base
+  api_method :list_organisms,
+    :returns => [[{:organism => :string}]]
+
+  api_method :search_entry,
+    :expects => [{:keyword => :string}],
+    :returns => [[:result => :string]]
+
+  api_method :get_entry,
+    :expects => [{:entry_id => :string}],
+    :returns => [{:result => Genbank}]
+end
+------------------------------------------------------------
+
+% emacs -nw app/controllers/kumamushi_controller.rb
+------------------------------------------------------------
+class KumamushiController < ApplicationController
+  wsdl_service_name 'Kumamushi'
+
+  def list_organisms
+    Genbank.find(:all, :group => "organism").map {|x| x.organism}
+  end
+
+  def search_entry(keyword)
+    list = Genbank.find(:all, :conditions => ["definition LIKE ?", "%#{keyword}%"])
+    list.map {|e| "#{e.entry}€t#{e.definition}"}
+  end
+
+  def get_entry(entry_id)
+    Genbank.find(:first, :conditions => ["entry LIKE ?", entry_id])
+  end
+end
+------------------------------------------------------------
+
+% ./script/server
+
+% bioruby
+bioruby> ws = Bio::SOAPWSDL.new("http://localhost:3000/kumamushi/wsdl")
+bioruby> puts ws.searchEntry("fushi")
+bioruby> puts ws.searchEntry("Milnesium")
+bioruby> ws.getEntry("AF063419")
+bioruby> entry = ws.getEntry("AF063419")
+bioruby> puts entry.definition
+bioruby> puts entry.naseq
+
+=== Add BLAST search functionality
+
+% cd data
+% emacs -nw data/gb2fasta.rb
+------------------------------------------------------------
+#!/usr/bin/env ruby
+
+require 'bio'
+
+Bio::FlatFile.auto(ARGF) do |flat|
+  flat.each do |entry|
+    header = "#{entry.entry_id} #{entry.definition}"
+    puts entry.seq.to_fasta(header, 60) if entry.seq.length > 0
+  end
+end
+------------------------------------------------------------
+
+% ruby gb2fasta.rb kumamushi.gb > kumamushi.fa
+% formatdb -p F -o T -i kumamushi.fa
+% cd ..
+
+% emacs -nw app/apis/kumamushi_api.rb
+------------------------------------------------------------
+  api_method :blast_naseq,
+    :expects => [{:query => :string}],
+    :returns => [{:result => :string}]
+
+  api_method :blast_aaseq,
+    :expects => [{:query => :string}],
+    :returns => [{:result => :string}]
+------------------------------------------------------------
+
+% emacs -nw app/controllers/kumamushi_controller.rb
+------------------------------------------------------------
+  def blast_naseq(query)
+    exec_blast('blastn', query)
+  end
+
+  def blast_aaseq(query)
+    exec_blast('tblastn', query)
+  end
+
+  private
+
+  def exec_blast(program, query)
+    output = ""
+    IO.popen("blastall -p #{program} -d data/kumamushi.fa", "w+") do |io|
+      io.sync = true
+      io.print query if query
+      io.close_write
+      output = io.read
+    end
+    return output
+  end
+------------------------------------------------------------
+
+% ./script/server
+
+=== Try the blast search with arbitrarily query
+
+Open http://www.genome.jp/ and search sequence with keyword 'trehalase'.
+
+% bioruby
+bioruby> ws = Bio::SOAPWSDL.new("http://localhost:3000/kumamushi/wsdl")
+bioruby> ws.list_methods
+bioruby> aaseq = <<END
+(input amino acid sequence of your query in fasta format here)
+END
+naseq = <<END
+(input nucleic acid sequence of your query in fasta format here)
+END
+bioruby> puts ws.blastAaseq(aaseq)
+bioruby> puts ws.blastNaseq(naseq)
+
+That's all. You can extend this template as you like.
+
+Copyrght (C) 2007 Toshiaki Katayama <k@bioruby.org>
+
+
