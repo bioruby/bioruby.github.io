@@ -4,12 +4,18 @@
 
    include ERB::Util
 
-   cur_dir = Pathname.new(Dir.pwd).cleanpath.to_s
+   cur_dir = Pathname.new(File.expand_path(Dir.pwd)).cleanpath.to_s
    script_dir = Pathname.new(File.expand_path(__dir__)).cleanpath.to_s
    a_c = cur_dir.split(File::Separator)
    a_s = script_dir.split(File::Separator)
-   raise "invalid directory structure" if a_s[-1] != 'archive'
-   dir = a_c.slice((a_s.size - 1)..(-1)).join('/')
+   a_r = a_c.slice((a_s.size)..(-1))
+   dir = a_r.join('/')
+   case a_r[0]
+   when 'archive', 'contrib'
+     # nothing to do
+   else
+     raise "unknown target directory: #{dir}"
+   end
 %><html>
 <head>
 <title>bioruby.org/<%= dir %></title>
