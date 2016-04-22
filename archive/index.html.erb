@@ -1,0 +1,57 @@
+<%
+   require 'pathname'
+   require 'cgi'
+
+   include ERB::Util
+
+   cur_dir = Pathname.new(Dir.pwd).cleanpath.to_s
+   script_dir = Pathname.new(File.expand_path(__dir__)).cleanpath.to_s
+   a_c = cur_dir.split(File::Separator)
+   a_s = script_dir.split(File::Separator)
+   raise "invalid directory structure" if a_s[-1] != 'archive'
+   dir = a_c.slice((a_s.size - 1)..(-1)).join('/')
+%><html>
+<head>
+<title>bioruby.org/<%= dir %></title>
+<style type="text/css">
+<!--
+td { padding-right: 1em; padding-left: 1em; }
+-->
+</style>
+</head>
+<body>
+<table>
+<%
+
+   child_dirs = []
+   files = []
+   Dir.glob('*').sort.each do |fn|
+     if File.directory?(fn) then
+       child_dirs.push fn
+     elsif File.file?(fn) then
+       case fn
+       when 'index.html',
+            'index.html.erb',
+	    'Rakefile',
+            /\~/, /\s/, /\A[^a-zA-Z0-9]/
+         # files which should be excluded
+         # do nothing
+       else
+         files.push fn
+       end
+     end
+   end
+%>
+<tr><th>filename</th><th>sha256sum</th></tr>
+<% child_dirs.each do |fn|
+%><tr><td><a href="<%= h(fn) %>/"><%= h(fn) %>/</td><td><br></td></tr>
+<% end %>
+<% files.each do |fn|
+     line = `sha256sum #{fn}`
+     a = line.chomp.split(/\s+/, 2)
+     sha256 = a[0].to_s
+%><tr><td><a href="<%= h(fn) %>"><%= h(fn) %></td><td><%= h(sha256) %></td></tr>
+<% end %>
+</table>
+</body>
+</html>
