@@ -129,8 +129,6 @@ class of given data.</p>
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -186,7 +184,7 @@ class of given data.</p>
           
           <div class="method-source-code" id="5B-5D-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 361</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-operator">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
   <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">e</span>) }
   <span class="ruby-identifier">a</span>
@@ -221,7 +219,7 @@ class of given data.</p>
           
           <div class="method-source-code" id="default-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 348</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@default</span> <span class="ruby-keyword">then</span>
     <span class="ruby-ivar">@default</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">make_default</span>
   <span class="ruby-keyword">end</span>
@@ -257,7 +255,7 @@ class of given data.</p>
           
           <div class="method-source-code" id="default-3D-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 356</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default=</span>(<span class="ruby-identifier">ad</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default=</span>(<span class="ruby-identifier">ad</span>)
   <span class="ruby-ivar">@default</span> = <span class="ruby-identifier">ad</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -290,7 +288,7 @@ class of given data.</p>
           
           <div class="method-source-code" id="make_default-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 368</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">make_default</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">make_default</span>
   <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>[
     <span class="ruby-identifier">genbank</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::GenBank&#39;</span>,
       <span class="ruby-regexp">/^LOCUS       .+ bp .*[a-z]*[DR]?NA/</span> ],
@@ -416,7 +414,7 @@ class of given data.</p>
         <span class="ruby-keyword">case</span> <span class="ruby-identifier">text</span>
         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&gt;([PF]1|[DR][LC]|N[13]|XX)\;.+/</span>
           <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NBRF</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-node">/^&gt;.+$\s+(^\#.*$\s*)*^\s*\d*\s*[-a-zA-Z_\.\[\]\(\)\*\+\$]+/</span>
+        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&gt;.+$\s+(^\#.*$\s*)*^\s*\d*\s*[-a-zA-Z_\.\[\]\(\)\*\+\$]+/</span>
             <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>
         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&gt;.+$\s+^\s*\d+(\s+\d+)*\s*$/</span>
           <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaNumericFormat</span>
@@ -472,6 +470,11 @@ class of given data.</p>
   <span class="ruby-comment">#BottomRule.is_prior_to(debug_last)</span>
   <span class="ruby-comment">#fastaformat.is_prior_to(debug_last)</span>
 
+  <span class="ruby-comment">## for suppressing warnings</span>
+  <span class="ruby-identifier">p</span> <span class="ruby-identifier">medline</span>, <span class="ruby-identifier">aaindex</span>, <span class="ruby-identifier">litdb</span>, <span class="ruby-identifier">fantom</span>, <span class="ruby-identifier">clustal</span>,
+    <span class="ruby-identifier">gcg_msf</span>, <span class="ruby-identifier">gcg_seq</span>, <span class="ruby-identifier">blastxml</span>, <span class="ruby-identifier">rpsblast</span>, <span class="ruby-identifier">blat</span>,
+    <span class="ruby-identifier">spidey</span>, <span class="ruby-identifier">hmmer</span>, <span class="ruby-identifier">sim4</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">false</span>
+
   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">rehash</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">a</span>
 <span class="ruby-keyword">end</span></pre>
@@ -505,7 +508,7 @@ class of given data.</p>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 226</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
   <span class="ruby-comment"># stores autodetection rules.</span>
   <span class="ruby-ivar">@rules</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-comment"># stores elements (cache)</span>
@@ -551,7 +554,7 @@ class of given data.</p>
           
           <div class="method-source-code" id="add-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 237</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add</span>(<span class="ruby-identifier">elem</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add</span>(<span class="ruby-identifier">elem</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;element name conflicts&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@rules</span>[<span class="ruby-identifier">elem</span>.<span class="ruby-identifier">name</span>]
   <span class="ruby-ivar">@elements</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@rules</span>[<span class="ruby-identifier">elem</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">elem</span>
@@ -588,7 +591,7 @@ nil if failed.</p>
           
           <div class="method-source-code" id="autodetect-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 305</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">autodetect</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">meta</span> = {})
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">autodetect</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">meta</span> = {})
   <span class="ruby-identifier">r</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
     <span class="ruby-comment">#$stderr.puts e.name</span>
@@ -628,7 +631,7 @@ a database class if succeeded. Returns nil if failed.</p>
           
           <div class="method-source-code" id="autodetect_flatfile-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 318</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">autodetect_flatfile</span>(<span class="ruby-identifier">ff</span>, <span class="ruby-identifier">lines</span> = <span class="ruby-value">31</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">autodetect_flatfile</span>(<span class="ruby-identifier">ff</span>, <span class="ruby-identifier">lines</span> = <span class="ruby-value">31</span>)
   <span class="ruby-identifier">meta</span> = {}
   <span class="ruby-identifier">stream</span> = <span class="ruby-identifier">ff</span>.<span class="ruby-identifier">instance_eval</span> { <span class="ruby-ivar">@stream</span> }
   <span class="ruby-keyword">begin</span>
@@ -683,7 +686,7 @@ a database class if succeeded. Returns nil if failed.</p>
           
           <div class="method-source-code" id="each_rule-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 298</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_rule</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: elem</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_rule</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: elem</span>
   <span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -717,7 +720,7 @@ priorities.</p>
           
           <div class="method-source-code" id="elements-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 275</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">elements</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">elements</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@elements</span>
     <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">tsort</span>
     <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">reverse!</span>
@@ -755,7 +758,7 @@ priorities.</p>
           
           <div class="method-source-code" id="inspect-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 291</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">inspect</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-node">&quot;&lt;#{self.class.to_s} &quot;</span> <span class="ruby-operator">+</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">inspect</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>) <span class="ruby-operator">+</span>
     <span class="ruby-string">&quot;&gt;&quot;</span>
@@ -790,7 +793,7 @@ priorities.</p>
           
           <div class="method-source-code" id="rehash-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 285</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">rehash</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rehash</span>
   <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">rehash</span>
   <span class="ruby-ivar">@elements</span> = <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -825,7 +828,7 @@ priority elements) of the element.</p>
           
           <div class="method-source-code" id="tsort_each_child-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 253</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tsort_each_child</span>(<span class="ruby-identifier">elem</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tsort_each_child</span>(<span class="ruby-identifier">elem</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">elem</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TopRule</span> <span class="ruby-keyword">then</span>
     <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">e</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TopRule</span> <span class="ruby-keyword">or</span> 
@@ -858,7 +861,7 @@ priority elements) of the element.</p>
         
         <div class="method-heading">
           <span class="method-name">tsort_each_node</span><span
-            class="method-args">(&x)</span>
+            class="method-args">(&amp;x)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -874,7 +877,7 @@ priority elements) of the element.</p>
           
           <div class="method-source-code" id="tsort_each_node-source">
             <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 246</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tsort_each_node</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tsort_each_node</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
   <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">each_value</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -894,8 +897,8 @@ priority elements) of the element.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

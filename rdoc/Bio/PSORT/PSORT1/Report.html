@@ -108,8 +108,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -258,7 +256,7 @@
           
           <div class="method-source-code" id="default_parser-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_parser</span>(<span class="ruby-identifier">output_report</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default_parser</span>(<span class="ruby-identifier">output_report</span>)
   <span class="ruby-identifier">rpt</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">raw</span> = <span class="ruby-identifier">output_report</span>
   <span class="ruby-identifier">query_info</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^Query Information\n\n(.+?)\n\n/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>)
@@ -274,9 +272,9 @@
 
   <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">final_result</span> = <span class="ruby-identifier">final_result</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">x</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/---/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">strip</span> }
-    { <span class="ruby-string">&#39;prediction&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>], 
-      <span class="ruby-string">&#39;certainty&#39;</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/Certainty= (\d\.\d{3})/</span>).<span class="ruby-identifier">to_s</span>,
-      <span class="ruby-string">&#39;comment&#39;</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\((\w+)\)/</span>).<span class="ruby-identifier">to_s</span>
+    { <span class="ruby-string">&#39;prediction&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>], 
+      <span class="ruby-string">&#39;certainty&#39;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/Certainty= (\d\.\d{3})/</span>).<span class="ruby-identifier">to_s</span>,
+      <span class="ruby-string">&#39;comment&#39;</span>    <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\((\w+)\)/</span>).<span class="ruby-identifier">to_s</span>
     }
   }
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">rpt</span>
@@ -295,7 +293,7 @@
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(entry_id = '', origin = '', title = '', sequence = '', result_info = '', reasoning = {}, final_result = [])</span>
+            class="method-args">(entry_id = &#39;&#39;, origin = &#39;&#39;, title = &#39;&#39;, sequence = &#39;&#39;, result_info = &#39;&#39;, reasoning = {}, final_result = [])</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -311,7 +309,7 @@
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">entry_id</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">origin</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">title</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">sequence</span> = <span class="ruby-string">&#39;&#39;</span>,
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry_id</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">origin</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">title</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">sequence</span> = <span class="ruby-string">&#39;&#39;</span>,
                <span class="ruby-identifier">result_info</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">reasoning</span> = {}, <span class="ruby-identifier">final_result</span> = [])
   <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">entry_id</span>
   <span class="ruby-ivar">@origin</span> = <span class="ruby-identifier">origin</span>
@@ -352,7 +350,7 @@
           
           <div class="method-source-code" id="parser-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parser</span>(<span class="ruby-identifier">output_report</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parser</span>(<span class="ruby-identifier">output_report</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_parser</span>(<span class="ruby-identifier">output_report</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -372,8 +370,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -186,8 +186,6 @@ Bio::PDB::Record::* <a href="PDB/Coordinate.html">Bio::PDB::Coordinate</a></p>
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -291,7 +289,7 @@ Bio::PDB::Record::* <a href="PDB/Coordinate.html">Bio::PDB::Coordinate</a></p>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1445</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-comment">#Aha! Our entry into the world of PDB parsing, we initialise a PDB</span>
   <span class="ruby-comment">#object with the whole PDB file as a string</span>
   <span class="ruby-comment">#each PDB has an array of the lines of the original file</span>
@@ -487,7 +485,7 @@ it&#39;s not there</p>
           
           <div class="method-source-code" id="5B-5D-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1633</span>
-<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">key</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">find</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">model_serial</span> }
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -520,7 +518,7 @@ it&#39;s not there</p>
           
           <div class="method-source-code" id="accession-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1887</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">accession</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accession</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry_id</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -554,7 +552,7 @@ model to the current structure. Returns self.</p>
           
           <div class="method-source-code" id="addModel-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1615</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">addModel</span>(<span class="ruby-identifier">model</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">addModel</span>(<span class="ruby-identifier">model</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Expecting a Bio::PDB::Model&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Model</span>
   <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">model</span>)
   <span class="ruby-keyword">self</span>
@@ -589,7 +587,7 @@ model to the current structure. Returns self.</p>
           
           <div class="method-source-code" id="authors-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1869</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">authors</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">authors</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;AUTHOR&#39;</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">authorList</span> }.<span class="ruby-identifier">flatten</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -622,7 +620,7 @@ model to the current structure. Returns self.</p>
           
           <div class="method-source-code" id="classification-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1863</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">classification</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">classification</span>
   <span class="ruby-identifier">f</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;HEADER&#39;</span>).<span class="ruby-identifier">first</span>
   <span class="ruby-identifier">f</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">classification</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -658,7 +656,7 @@ model to the current structure. Returns self.</p>
           
           <div class="method-source-code" id="dbref-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1848</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">dbref</span>(<span class="ruby-identifier">chainID</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dbref</span>(<span class="ruby-identifier">chainID</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">chainID</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;DBREF&#39;</span>).<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">chainID</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">chainID</span> }
   <span class="ruby-keyword">else</span>
@@ -695,7 +693,7 @@ model to the current structure. Returns self.</p>
           
           <div class="method-source-code" id="definition-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1892</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">definition</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">definition</span>
   <span class="ruby-identifier">f</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;TITLE&#39;</span>).<span class="ruby-identifier">first</span>
   <span class="ruby-identifier">f</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">title</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -730,7 +728,7 @@ structure. Returns <code>self</code>.</p>
           
           <div class="method-source-code" id="each-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1624</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
   <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">model</span> }
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -796,7 +794,7 @@ structure. Returns <code>self</code>.</p>
           
           <div class="method-source-code" id="entry_id-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1878</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry_id</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@id</span>
     <span class="ruby-identifier">f</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;HEADER&#39;</span>).<span class="ruby-identifier">first</span>
     <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">f</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">idCode</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
@@ -837,7 +835,7 @@ corresponding to given <em>helixID</em>. (Returns an
           
           <div class="method-source-code" id="helix-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1749</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">helix</span>(<span class="ruby-identifier">helixID</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">helix</span>(<span class="ruby-identifier">helixID</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">helixID</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;HELIX&#39;</span>).<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">helixID</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">helixID</span> }
   <span class="ruby-keyword">else</span>
@@ -874,7 +872,7 @@ corresponding to given <em>helixID</em>. (Returns an
           
           <div class="method-source-code" id="inspect-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1905</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">inspect</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
   <span class="ruby-node">&quot;#&lt;#{self.class.to_s} entry_id=#{entry_id.inspect}&gt;&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -909,7 +907,7 @@ an array of <a href="PDB/Record.html">Bio::PDB::Record</a> instances.</p>
           
           <div class="method-source-code" id="jrnl-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1730</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">jrnl</span>(<span class="ruby-identifier">sub_record</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">jrnl</span>(<span class="ruby-identifier">sub_record</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@jrnl</span>)
     <span class="ruby-ivar">@jrnl</span> = <span class="ruby-identifier">make_hash</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;JRNL&#39;</span>), <span class="ruby-value">:sub_record</span>)
   <span class="ruby-keyword">end</span>
@@ -945,7 +943,7 @@ an array of <a href="PDB/Record.html">Bio::PDB::Record</a> instances.</p>
           
           <div class="method-source-code" id="keywords-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1858</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">keywords</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keywords</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;KEYWDS&#39;</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">keywds</span> }.<span class="ruby-identifier">flatten</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -983,7 +981,7 @@ an array of <a href="PDB/Record.html">Bio::PDB::Record</a> instances.</p>
           
           <div class="method-source-code" id="record-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1696</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">record</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">record</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> (<span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> []) <span class="ruby-operator">:</span> <span class="ruby-ivar">@hash</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1020,7 +1018,7 @@ Otherwise, returns an array of strings.</p>
           
           <div class="method-source-code" id="remark-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1711</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">remark</span>(<span class="ruby-identifier">nn</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remark</span>(<span class="ruby-identifier">nn</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@remark</span>)
     <span class="ruby-identifier">h</span> = <span class="ruby-identifier">make_hash</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;REMARK&#39;</span>), <span class="ruby-value">:remarkNum</span>)
     <span class="ruby-identifier">h</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span>, <span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
@@ -1065,7 +1063,7 @@ string. Otherwise, returns a hash which contains all sequences.</p>
           
           <div class="method-source-code" id="seqres-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1802</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">seqres</span>(<span class="ruby-identifier">chainID</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seqres</span>(<span class="ruby-identifier">chainID</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@seqres</span>)
     <span class="ruby-identifier">h</span> = <span class="ruby-identifier">make_hash</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;SEQRES&#39;</span>), <span class="ruby-value">:chainID</span>)
     <span class="ruby-identifier">newHash</span> = {}
@@ -1139,7 +1137,7 @@ as an array of arrays of <code>Bio::PDB::Record::SHEET</code> instances. If
           
           <div class="method-source-code" id="sheet-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1777</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">sheet</span>(<span class="ruby-identifier">sheetID</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sheet</span>(<span class="ruby-identifier">sheetID</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@sheet</span>)
     <span class="ruby-ivar">@sheet</span> = <span class="ruby-identifier">make_grouping</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;SHEET&#39;</span>), <span class="ruby-value">:sheetID</span>)
   <span class="ruby-keyword">end</span>
@@ -1179,7 +1177,7 @@ as an array of arrays of <code>Bio::PDB::Record::SHEET</code> instances. If
           
           <div class="method-source-code" id="ssbond-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1789</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">ssbond</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ssbond</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;SSBOND&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1214,7 +1212,7 @@ which are outputed in <a href="PDB.html">PDB</a> format</p>
           
           <div class="method-source-code" id="to_s-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1647</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-identifier">string</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">each</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-identifier">string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">to_s</span> }
   <span class="ruby-identifier">string</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;END\n&quot;</span>
@@ -1253,7 +1251,7 @@ which are outputed in <a href="PDB.html">PDB</a> format</p>
           
           <div class="method-source-code" id="turn-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1764</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">turn</span>(<span class="ruby-identifier">turnId</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">turn</span>(<span class="ruby-identifier">turnId</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">turnId</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;TURN&#39;</span>).<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">turnId</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">turnId</span> }
   <span class="ruby-keyword">else</span>
@@ -1290,7 +1288,7 @@ which are outputed in <a href="PDB.html">PDB</a> format</p>
           
           <div class="method-source-code" id="version-source">
             <pre><span class="ruby-comment"># File lib/bio/db/pdb/pdb.rb, line 1898</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">version</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>
   <span class="ruby-identifier">f</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">record</span>(<span class="ruby-string">&#39;REVDAT&#39;</span>).<span class="ruby-identifier">first</span>
   <span class="ruby-identifier">f</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">modNum</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1311,8 +1309,8 @@ which are outputed in <a href="PDB.html">PDB</a> format</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

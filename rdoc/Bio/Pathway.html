@@ -164,8 +164,6 @@ href="Pathway.html#method-i-to_relations">#to_relations</a> method.</p>
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -220,7 +218,7 @@ href="Pathway.html#method-i-to_matrix">#to_matrix</a> method.</p>
 label some of the nodes in the graph by passing a hash to the label and
 select subgraphs which contain labeled nodes only by subgraph method.</p>
 
-<pre class="ruby"><span class="ruby-identifier">hash</span> = { <span class="ruby-value">1</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;red&#39;</span>, <span class="ruby-value">2</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;green&#39;</span>, <span class="ruby-value">5</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;black&#39;</span> }
+<pre class="ruby"><span class="ruby-identifier">hash</span> = { <span class="ruby-value">1</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;red&#39;</span>, <span class="ruby-value">2</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;green&#39;</span>, <span class="ruby-value">5</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;black&#39;</span> }
 <span class="ruby-identifier">g</span>.<span class="ruby-identifier">label</span> = <span class="ruby-identifier">hash</span>
 <span class="ruby-identifier">g</span>.<span class="ruby-identifier">label</span>
 <span class="ruby-identifier">g</span>.<span class="ruby-identifier">subgraph</span>    <span class="ruby-comment"># =&gt; new graph consists of the node 1, 2, 5 only</span>
@@ -237,7 +235,8 @@ select subgraphs which contain labeled nodes only by subgraph method.</p>
 
         <div class="method-description">
         
-        <p>Read-only accessor for the internal list of the Bio::Relation objects</p>
+        <p>Read-only accessor for the internal list of the <a
+href="Relation.html">Bio::Relation</a> objects</p>
         
         </div>
       </div>
@@ -265,11 +264,12 @@ select subgraphs which contain labeled nodes only by subgraph method.</p>
 
         <div class="method-description">
           
-          <p>Initial graph (adjacency list) generation from the list of Relation.</p>
+          <p>Initial graph (adjacency list) generation from the list of <a
+href="Relation.html">Relation</a>.</p>
 
-<p>Generate <a href="Pathway.html">Bio::Pathway</a> object from the list of
-Bio::Relation objects. If the second argument is true, undirected graph is
-generated.</p>
+<p>Generate <a href="Pathway.html">Bio::Pathway</a> object from the list of <a
+href="Relation.html">Bio::Relation</a> objects. If the second argument is
+true, undirected graph is generated.</p>
 
 <pre class="ruby"><span class="ruby-identifier">r1</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Relation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;a&#39;</span>, <span class="ruby-string">&#39;b&#39;</span>, <span class="ruby-value">1</span>)
 <span class="ruby-identifier">r2</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Relation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;a&#39;</span>, <span class="ruby-string">&#39;c&#39;</span>, <span class="ruby-value">5</span>)
@@ -283,7 +283,7 @@ generated.</p>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 41</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">relations</span>, <span class="ruby-identifier">undirected</span> = <span class="ruby-keyword">false</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">relations</span>, <span class="ruby-identifier">undirected</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-ivar">@undirected</span> = <span class="ruby-identifier">undirected</span>
   <span class="ruby-ivar">@relations</span> = <span class="ruby-identifier">relations</span>
   <span class="ruby-ivar">@graph</span> = {}         <span class="ruby-comment"># adjacency list expression of the graph</span>
@@ -322,16 +322,17 @@ generated.</p>
 
         <div class="method-description">
           
-          <p>Add an Bio::Relation object &#39;rel&#39; to the @graph and @relations. If
-the second argument is false, @relations is not modified (only useful when
-genarating @graph from @relations internally).</p>
+          <p>Add an <a href="Relation.html">Bio::Relation</a> object &#39;rel&#39; to
+the @graph and @relations. If the second argument is false, @relations is
+not modified (only useful when genarating @graph from @relations
+internally).</p>
           
           
 
           
           <div class="method-source-code" id="append-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 144</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">append</span>(<span class="ruby-identifier">rel</span>, <span class="ruby-identifier">add_rel</span> = <span class="ruby-keyword">true</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">append</span>(<span class="ruby-identifier">rel</span>, <span class="ruby-identifier">add_rel</span> = <span class="ruby-keyword">true</span>)
   <span class="ruby-ivar">@relations</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">rel</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">add_rel</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@graph</span>[<span class="ruby-identifier">rel</span>.<span class="ruby-identifier">from</span>].<span class="ruby-identifier">nil?</span>
     <span class="ruby-ivar">@graph</span>[<span class="ruby-identifier">rel</span>.<span class="ruby-identifier">from</span>] = {}
@@ -373,7 +374,7 @@ the graph in which edge weights can be negative.</p>
           
           <div class="method-source-code" id="bellman_ford-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 592</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">bellman_ford</span>(<span class="ruby-identifier">root</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bellman_ford</span>(<span class="ruby-identifier">root</span>)
   <span class="ruby-identifier">distance</span>, <span class="ruby-identifier">predecessor</span> = <span class="ruby-identifier">initialize_single_source</span>(<span class="ruby-identifier">root</span>)
   (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">nodes</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>).<span class="ruby-identifier">times</span> <span class="ruby-keyword">do</span>
     <span class="ruby-ivar">@graph</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">u</span><span class="ruby-operator">|</span>
@@ -458,7 +459,7 @@ method and returns steps and the path as Array.</p>
           
           <div class="method-source-code" id="bfs_shortest_path-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 450</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">bfs_shortest_path</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bfs_shortest_path</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>)
   <span class="ruby-identifier">distance</span>, <span class="ruby-identifier">route</span> = <span class="ruby-identifier">breadth_first_search</span>(<span class="ruby-identifier">node1</span>)
   <span class="ruby-identifier">step</span> = <span class="ruby-identifier">distance</span>[<span class="ruby-identifier">node2</span>]
   <span class="ruby-identifier">node</span> = <span class="ruby-identifier">node2</span>
@@ -504,7 +505,7 @@ returns the result in 2 hashes - 1st one shows the steps from root node and
           
           <div class="method-source-code" id="breadth_first_search-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 419</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">breadth_first_search</span>(<span class="ruby-identifier">root</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">breadth_first_search</span>(<span class="ruby-identifier">root</span>)
   <span class="ruby-identifier">visited</span> = {}
   <span class="ruby-identifier">distance</span> = {}
   <span class="ruby-identifier">predecessor</span> = {}
@@ -562,7 +563,7 @@ returns the result in 2 hashes - 1st one shows the steps from root node and
           
           <div class="method-source-code" id="clear_relations-21-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 114</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">clear_relations!</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clear_relations!</span>
   <span class="ruby-ivar">@relations</span>.<span class="ruby-identifier">clear</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -595,7 +596,7 @@ returns the result in 2 hashes - 1st one shows the steps from root node and
           
           <div class="method-source-code" id="clique-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 370</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">clique</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clique</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -639,7 +640,7 @@ be changed in the future.</p>
           
           <div class="method-source-code" id="cliquishness-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 388</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">cliquishness</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cliquishness</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-identifier">neighbors</span> = <span class="ruby-ivar">@graph</span>[<span class="ruby-identifier">node</span>].<span class="ruby-identifier">keys</span>
   <span class="ruby-identifier">sg</span> = <span class="ruby-identifier">subgraph</span>(<span class="ruby-identifier">neighbors</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">sg</span>.<span class="ruby-identifier">graph</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">0</span>
@@ -681,7 +682,7 @@ be changed in the future.</p>
           
           <div class="method-source-code" id="common_subgraph-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 364</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">common_subgraph</span>(<span class="ruby-identifier">graph</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">common_subgraph</span>(<span class="ruby-identifier">graph</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -707,15 +708,15 @@ be changed in the future.</p>
 
         <div class="method-description">
           
-          <p>Remove an edge indicated by the Bio::Relation object &#39;rel&#39; from the
-@graph and the @relations.</p>
+          <p>Remove an edge indicated by the <a href="Relation.html">Bio::Relation</a>
+object &#39;rel&#39; from the @graph and the @relations.</p>
           
           
 
           
           <div class="method-source-code" id="delete-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 158</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">delete</span>(<span class="ruby-identifier">rel</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">rel</span>)
   <span class="ruby-ivar">@relations</span>.<span class="ruby-identifier">delete_if</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">x</span> <span class="ruby-operator">===</span> <span class="ruby-identifier">rel</span>
   <span class="ruby-keyword">end</span>
@@ -760,16 +761,15 @@ search.</p>
 <p>Note: The result of this method depends on the order of Hash#each (and
 each_key, etc.), which may be variable with Ruby version and Ruby
 interpreter variations (JRuby, etc.). For a workaround to remove such
-dependency, you can use @index  to set order of <a
-href="../Hash.html">Hash</a> keys. Note that this bahavior might be changed
-in the future.</p>
+dependency, you can use @index  to set order of Hash keys. Note that this
+bahavior might be changed in the future.</p>
           
           
 
           
           <div class="method-source-code" id="depth_first_search-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 481</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">depth_first_search</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">depth_first_search</span>
   <span class="ruby-identifier">visited</span> = {}
   <span class="ruby-identifier">timestamp</span> = {}
   <span class="ruby-identifier">tree_edges</span> = {}
@@ -904,7 +904,7 @@ depth_first_search.</p>
           
           <div class="method-source-code" id="dfs_topological_sort-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 558</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">dfs_topological_sort</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dfs_topological_sort</span>
   <span class="ruby-comment"># sorted by finished time reversely and collect node names only</span>
   <span class="ruby-identifier">timestamp</span>, = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">depth_first_search</span>
   <span class="ruby-identifier">timestamp</span>.<span class="ruby-identifier">sort</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>][<span class="ruby-value">1</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>][<span class="ruby-value">1</span>]}.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">first</span> }
@@ -939,7 +939,7 @@ depth_first_search.</p>
           
           <div class="method-source-code" id="dijkstra-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 566</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">dijkstra</span>(<span class="ruby-identifier">root</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dijkstra</span>(<span class="ruby-identifier">root</span>)
   <span class="ruby-identifier">distance</span>, <span class="ruby-identifier">predecessor</span> = <span class="ruby-identifier">initialize_single_source</span>(<span class="ruby-identifier">root</span>)
   <span class="ruby-ivar">@graph</span>[<span class="ruby-identifier">root</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">distance</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>
@@ -990,17 +990,17 @@ depth_first_search.</p>
 can be converted to directed graph, however, the edge between two nodes
 will be simply doubled to both ends.</p>
 
-<p>Note: this method can not be used without the list of the Bio::Relation
-objects (internally stored in @relations variable). Thus if you already
-called clear_relations! method, call <a
-href="Pathway.html#method-i-to_relations">#to_relations</a> first.</p>
+<p>Note: this method can not be used without the list of the <a
+href="Relation.html">Bio::Relation</a> objects (internally stored in
+@relations variable). Thus if you already called clear_relations! method,
+call <a href="Pathway.html#method-i-to_relations">#to_relations</a> first.</p>
           
           
 
           
           <div class="method-source-code" id="directed-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 92</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">directed</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">directed</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">undirected?</span>
     <span class="ruby-ivar">@undirected</span> = <span class="ruby-keyword">false</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_list</span>
@@ -1036,7 +1036,7 @@ href="Pathway.html#method-i-to_relations">#to_relations</a> first.</p>
           
           <div class="method-source-code" id="directed-3F-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 74</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">directed?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">directed?</span>
   <span class="ruby-ivar">@undirected</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">false</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1070,15 +1070,15 @@ debug purpose etc.) easily.</p>
 <p>The result of this method depends on the order of Hash#each (and each_key,
 etc.), which may be variable with Ruby version and Ruby interpreter
 variations (JRuby, etc.). For a workaround to remove such dependency, you
-can use @index  to set order of <a href="../Hash.html">Hash</a> keys. Note
-that this behavior might be changed in the future.</p>
+can use @index  to set order of Hash keys. Note that this behavior might be
+changed in the future.</p>
           
           
 
           
           <div class="method-source-code" id="dump_list-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 293</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">dump_list</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dump_list</span>
   <span class="ruby-comment"># begin workaround removing depencency to order of Hash#each</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@index</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">pref</span> = <span class="ruby-keyword">nil</span>
@@ -1152,10 +1152,10 @@ important informations.</p>
           
           <div class="method-source-code" id="dump_matrix-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 274</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">dump_matrix</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dump_matrix</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
   <span class="ruby-identifier">matrix</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_matrix</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
   <span class="ruby-identifier">sorted</span> = <span class="ruby-ivar">@index</span>.<span class="ruby-identifier">sort</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>]}
-  <span class="ruby-node">&quot;[# &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sorted</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">+</span>
+  <span class="ruby-string">&quot;[# &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">sorted</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;, &quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">+</span>
     <span class="ruby-identifier">matrix</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">collect</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">row</span>.<span class="ruby-identifier">inspect</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;,\n&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n]&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1188,7 +1188,7 @@ important informations.</p>
           
           <div class="method-source-code" id="edges-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 172</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">edges</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">edges</span>
   <span class="ruby-identifier">edges</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@graph</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">edges</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">size</span>
@@ -1255,7 +1255,7 @@ on a directed graph G = (V, E).</p>
           
           <div class="method-source-code" id="floyd_warshall-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 619</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">floyd_warshall</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">floyd_warshall</span>
   <span class="ruby-identifier">inf</span> = <span class="ruby-value">1</span> <span class="ruby-operator">/</span> <span class="ruby-value">0.0</span>
 
   <span class="ruby-identifier">m</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_matrix</span>(<span class="ruby-identifier">inf</span>, <span class="ruby-value">0</span>)
@@ -1306,7 +1306,7 @@ on a directed graph G = (V, E).</p>
           
           <div class="method-source-code" id="kruskal-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 641</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">kruskal</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">kruskal</span>
   <span class="ruby-comment"># initialize</span>
   <span class="ruby-identifier">rel</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_relations</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>}
   <span class="ruby-identifier">index</span> = []
@@ -1315,7 +1315,44 @@ on a directed graph G = (V, E).</p>
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">rel</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">rel</span>[<span class="ruby-identifier">j</span>]
         <span class="ruby-identifier">index</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">j</span>
       <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span></pre>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">index</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span> <span class="ruby-identifier">y</span><span class="ruby-operator">&lt;=&gt;</span><span class="ruby-identifier">x</span>}.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">idx</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">rel</span>[<span class="ruby-identifier">idx</span>, <span class="ruby-value">1</span>] = []
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">mst</span> = []
+  <span class="ruby-identifier">seen</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>()
+  <span class="ruby-ivar">@graph</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">x</span>] = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">i</span> = <span class="ruby-value">1</span>
+  <span class="ruby-comment"># initialize end</span>
+
+  <span class="ruby-identifier">rel</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">0</span>]] <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">0</span>]] = <span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">1</span>]] <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">1</span>]] = <span class="ruby-value">0</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">0</span>]] <span class="ruby-operator">==</span> <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">1</span>]] <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">0</span>]] <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">mst</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
+      <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">0</span>]] = <span class="ruby-identifier">i</span>
+      <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">1</span>]] = <span class="ruby-identifier">i</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">0</span>]] <span class="ruby-operator">!=</span> <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">1</span>]]
+      <span class="ruby-identifier">mst</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
+      <span class="ruby-identifier">v1</span> = <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">0</span>]].<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">v2</span> = <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">r</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">1</span>]].<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">seen</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+        <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">v1</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">v2</span>
+          <span class="ruby-identifier">seen</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">i</span>
+        <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Pathway</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">mst</span>)
+<span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1346,7 +1383,7 @@ on a directed graph G = (V, E).</p>
           
           <div class="method-source-code" id="nodes-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 167</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">nodes</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nodes</span>
   <span class="ruby-ivar">@graph</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">length</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1375,14 +1412,14 @@ on a directed graph G = (V, E).</p>
           <p>Returns frequency of the nodes having same number of edges as hash</p>
 
 <p>Calculates the frequency of the nodes having the same number of edges and
-returns the value as <a href="../Hash.html">Hash</a>.</p>
+returns the value as Hash.</p>
           
           
 
           
           <div class="method-source-code" id="small_world-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 405</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">small_world</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">small_world</span>
   <span class="ruby-identifier">freq</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
   <span class="ruby-ivar">@graph</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">freq</span>[<span class="ruby-identifier">v</span>.<span class="ruby-identifier">size</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
@@ -1420,7 +1457,7 @@ only.  If the list of the nodes (as Array) is assigned as the argument, use
 the list to select the nodes from the graph.  If no argument is assigned,
 internal property of the graph @label is used to select the nodes.</p>
 
-<pre class="ruby"><span class="ruby-identifier">hash</span> = { <span class="ruby-string">&#39;a&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;secret&#39;</span>, <span class="ruby-string">&#39;b&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;important&#39;</span>, <span class="ruby-string">&#39;c&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;important&#39;</span> }
+<pre class="ruby"><span class="ruby-identifier">hash</span> = { <span class="ruby-string">&#39;a&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;secret&#39;</span>, <span class="ruby-string">&#39;b&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;important&#39;</span>, <span class="ruby-string">&#39;c&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;important&#39;</span> }
 <span class="ruby-identifier">g</span>.<span class="ruby-identifier">label</span> = <span class="ruby-identifier">hash</span>
 <span class="ruby-identifier">g</span>.<span class="ruby-identifier">subgraph</span>
 <span class="ruby-identifier">list</span> = [ <span class="ruby-string">&#39;a&#39;</span>, <span class="ruby-string">&#39;b&#39;</span>, <span class="ruby-string">&#39;c&#39;</span> ]
@@ -1432,7 +1469,7 @@ internal property of the graph @label is used to select the nodes.</p>
           
           <div class="method-source-code" id="subgraph-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 343</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">subgraph</span>(<span class="ruby-identifier">list</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subgraph</span>(<span class="ruby-identifier">list</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">list</span>
     <span class="ruby-ivar">@label</span>.<span class="ruby-identifier">clear</span>
     <span class="ruby-identifier">list</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
@@ -1483,7 +1520,7 @@ and in some other cases when @relations has been changed).</p>
           
           <div class="method-source-code" id="to_list-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 134</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_list</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_list</span>
   <span class="ruby-ivar">@graph</span>.<span class="ruby-identifier">clear</span>
   <span class="ruby-ivar">@relations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">append</span>(<span class="ruby-identifier">rel</span>, <span class="ruby-keyword">false</span>)        <span class="ruby-comment"># append to @graph without push to @relations</span>
@@ -1522,16 +1559,16 @@ constituents of the matrix besides the above.</p>
 <p>The result of this method depends on the order of Hash#each (and each_key,
 etc.), which may be variable with Ruby version and Ruby interpreter
 variations (JRuby, etc.). For a workaround to remove such dependency, you
-can use @index  to set order of <a href="../Hash.html">Hash</a> keys. Note
-that this behavior might be changed in the future. Be careful that @index
-is overwritten by this method.</p>
+can use @index  to set order of Hash keys. Note that this behavior might be
+changed in the future. Be careful that @index is overwritten by this
+method.</p>
           
           
 
           
           <div class="method-source-code" id="to_matrix-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 196</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_matrix</span>(<span class="ruby-identifier">default_value</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">diagonal_value</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_matrix</span>(<span class="ruby-identifier">default_value</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">diagonal_value</span> = <span class="ruby-keyword">nil</span>)
 
   <span class="ruby-comment">#--</span>
   <span class="ruby-comment"># Note: following code only fills the outer Array with the reference</span>
@@ -1628,7 +1665,7 @@ is overwritten by this method.</p>
           
           <div class="method-source-code" id="to_relations-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 119</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_relations</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_relations</span>
   <span class="ruby-ivar">@relations</span>.<span class="ruby-identifier">clear</span>
   <span class="ruby-ivar">@graph</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">from</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@graph</span>[<span class="ruby-identifier">from</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">to</span>, <span class="ruby-identifier">w</span><span class="ruby-operator">|</span>
@@ -1663,17 +1700,17 @@ is overwritten by this method.</p>
           <p>Changes the internal state of the graph from &#39;directed&#39; to
 &#39;undirected&#39; and re-generate adjacency list.</p>
 
-<p>Note: this method can not be used without the list of the Bio::Relation
-objects (internally stored in @relations variable). Thus if you already
-called clear_relations! method, call <a
-href="Pathway.html#method-i-to_relations">#to_relations</a> first.</p>
+<p>Note: this method can not be used without the list of the <a
+href="Relation.html">Bio::Relation</a> objects (internally stored in
+@relations variable). Thus if you already called clear_relations! method,
+call <a href="Pathway.html#method-i-to_relations">#to_relations</a> first.</p>
           
           
 
           
           <div class="method-source-code" id="undirected-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 106</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">undirected</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">undirected</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">directed?</span>
     <span class="ruby-ivar">@undirected</span> = <span class="ruby-keyword">true</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_list</span>
@@ -1709,7 +1746,7 @@ href="Pathway.html#method-i-to_relations">#to_relations</a> first.</p>
           
           <div class="method-source-code" id="undirected-3F-source">
             <pre><span class="ruby-comment"># File lib/bio/pathway.rb, line 79</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">undirected?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">undirected?</span>
   <span class="ruby-ivar">@undirected</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1729,8 +1766,8 @@ href="Pathway.html#method-i-to_relations">#to_relations</a> first.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

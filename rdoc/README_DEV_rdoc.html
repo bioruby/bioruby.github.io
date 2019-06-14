@@ -111,6 +111,8 @@
   
     <li><a href="./doc/RELEASE_NOTES-1_4_3_rdoc.html">RELEASE_NOTES-1.4.3</a>
   
+    <li><a href="./doc/RELEASE_NOTES-1_5_0_rdoc.html">RELEASE_NOTES-1.5.0</a>
+  
   </ul>
 </div>
 
@@ -128,7 +130,7 @@
 <p>Copyright (C) 2006, 2008 Jan Aerts &lt;jandot@bioruby.org&gt;</p>
 </dd><dt>Copyright
 <dd>
-<p>Copyright (C) 2011       Naohisa Goto &lt;ng@bioruby.org&gt;</p>
+<p>Copyright (C) 2011, 2019 Naohisa Goto &lt;ng@bioruby.org&gt;</p>
 </dd></dl>
 
 <h1 id="label-HOW+TO+CONTRIBUTE+TO+THE+BIORUBY+PROJECT-3F">HOW TO CONTRIBUTE TO THE BIORUBY PROJECT?<span><a href="#label-HOW+TO+CONTRIBUTE+TO+THE+BIORUBY+PROJECT-3F">&para;</a> <a href="#top">&uarr;</a></span></h1>
@@ -309,30 +311,30 @@ the following example (from lib/bio/sequence.rb):</p>
 <pre class="ruby"><span class="ruby-comment"># == Description</span>
 <span class="ruby-comment">#</span>
 <span class="ruby-comment"># Bio::Sequence objects represent annotated sequences in bioruby.</span>
-<span class="ruby-comment"># A Bio::Sequence object is a wrapper around the actual sequence, </span>
+<span class="ruby-comment"># A Bio::Sequence object is a wrapper around the actual sequence,</span>
 <span class="ruby-comment"># represented as either a Bio::Sequence::NA or a Bio::Sequence::AA object.</span>
 <span class="ruby-comment"># For most users, this encapsulation will be completely transparent.</span>
 <span class="ruby-comment"># Bio::Sequence responds to all methods defined for Bio::Sequence::NA/AA</span>
-<span class="ruby-comment"># objects using the same arguments and returning the same values (even though </span>
+<span class="ruby-comment"># objects using the same arguments and returning the same values (even though</span>
 <span class="ruby-comment"># these methods are not documented specifically for Bio::Sequence).</span>
 <span class="ruby-comment">#</span>
 <span class="ruby-comment"># == Usage</span>
-<span class="ruby-comment"># </span>
+<span class="ruby-comment">#</span>
 <span class="ruby-comment">#   require &#39;bio&#39;</span>
-<span class="ruby-comment">#   </span>
+<span class="ruby-comment">#</span>
 <span class="ruby-comment">#   # Create a nucleic or amino acid sequence</span>
 <span class="ruby-comment">#   dna = Bio::Sequence.auto(&#39;atgcatgcATGCATGCAAAA&#39;)</span>
 <span class="ruby-comment">#   rna = Bio::Sequence.auto(&#39;augcaugcaugcaugcaaaa&#39;)</span>
 <span class="ruby-comment">#   aa = Bio::Sequence.auto(&#39;ACDEFGHIKLMNPQRSTVWYU&#39;)</span>
-<span class="ruby-comment"># </span>
+<span class="ruby-comment">#</span>
 <span class="ruby-comment">#   # Print in FASTA format</span>
 <span class="ruby-comment">#   puts dna.output(:fasta)</span>
-<span class="ruby-comment"># </span>
+<span class="ruby-comment">#</span>
 <span class="ruby-comment">#   # Print all codons</span>
 <span class="ruby-comment">#   dna.window_search(3,3) do |codon|</span>
 <span class="ruby-comment">#     puts codon</span>
 <span class="ruby-comment">#   end</span>
-<span class="ruby-comment"># </span>
+<span class="ruby-comment">#</span>
 <span class="ruby-keyword">class</span> <span class="ruby-constant">Sequence</span>
 
   <span class="ruby-comment"># Create a new Bio::Sequence object</span>
@@ -345,23 +347,23 @@ the following example (from lib/bio/sequence.rb):</p>
   <span class="ruby-comment">#</span>
   <span class="ruby-comment">#   puts s.seq.class                        # =&gt; String</span>
   <span class="ruby-comment">#</span>
-  <span class="ruby-comment"># See Bio::Sequence#na, Bio::Sequence#aa, and Bio::Sequence#auto </span>
-  <span class="ruby-comment"># for methods to transform the basic String of a just created </span>
+  <span class="ruby-comment"># See Bio::Sequence#na, Bio::Sequence#aa, and Bio::Sequence#auto</span>
+  <span class="ruby-comment"># for methods to transform the basic String of a just created</span>
   <span class="ruby-comment"># Bio::Sequence object to a proper bioruby object</span>
   <span class="ruby-comment"># ---</span>
   <span class="ruby-comment"># *Arguments*:</span>
   <span class="ruby-comment"># * (required) _str_: String or Bio::Sequence::NA/AA object</span>
   <span class="ruby-comment"># *Returns*:: Bio::Sequence object</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>)
+  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
     <span class="ruby-ivar">@seq</span> = <span class="ruby-identifier">str</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-comment"># The sequence identifier.  For example, for a sequence</span>
   <span class="ruby-comment"># of Genbank origin, this is the accession number.</span>
-  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">entry_id</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:entry_id</span>
 
   <span class="ruby-comment"># An Array of Bio::Feature objects</span>
-  <span class="ruby-identifier">attr_accessor</span> :<span class="ruby-identifier">features</span>
+  <span class="ruby-identifier">attr_accessor</span> <span class="ruby-value">:features</span>
 <span class="ruby-keyword">end</span> <span class="ruby-comment"># Sequence</span>
 </pre>
 
@@ -401,7 +403,7 @@ is returned by the method. The format of this information is as follows:</p>
 <p>Attribute accessors can be preceded by a short description.</p>
 
 <pre class="ruby"><span class="ruby-comment"># P-value (Float)</span>
-<span class="ruby-identifier">attr_reader</span> :<span class="ruby-identifier">pvalue</span>
+<span class="ruby-identifier">attr_reader</span> <span class="ruby-value">:pvalue</span>
 </pre>
 
 <p>For writing rdoc documentation, putting two or more attributes in a line
@@ -411,12 +413,12 @@ discouraged.</p>
 <p>Methods looks like attributes can also be preceded by a short description.</p>
 
 <pre class="ruby"><span class="ruby-comment"># Scientific name (String)</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">scientific_name</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">scientific_name</span>
   <span class="ruby-comment">#...</span>
 <span class="ruby-keyword">end</span>
 
 <span class="ruby-comment"># Scientific name (String)</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">scientific_name=</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">scientific_name=</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-comment">#...</span>
 <span class="ruby-keyword">end</span>
 </pre>
@@ -435,7 +437,7 @@ errors, use <code>raise</code> with an appropriate message.</p>
 Typically it may be used for deprecated or obsolete usage of a method. For
 example,</p>
 
-<pre class="ruby"><span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;The Foo#bar method is obsoleted. Use Foo#baz instead.&quot;</span>
+<pre class="ruby"><span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;The Foo#bar method is obsoleted. Use Foo#baz instead.&quot;</span>
 </pre>
 
 <h2 id="label-Testing+code+should+use+-27test-2Funit-27">Testing code should use &#39;test/unit&#39;<span><a href="#label-Testing+code+should+use+-27test-2Funit-27">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -464,7 +466,7 @@ resolve the dependencies (including the load order) yourself.</p>
 Bio::Foo::Bar in &#39;bio/foo/bar.rb&#39; add the following line in the
 &#39;bio/foo.rb&#39; file:</p>
 
-<pre class="ruby"><span class="ruby-identifier">autoload</span> :<span class="ruby-constant">Bar</span>, <span class="ruby-string">&#39;bio/foo/bar&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">autoload</span> <span class="ruby-value">:Bar</span>, <span class="ruby-string">&#39;bio/foo/bar&#39;</span>
 </pre>
 </li></ul>
 
@@ -473,16 +475,16 @@ Bio::Foo::Bar in &#39;bio/foo/bar.rb&#39; add the following line in the
 <p>For example, if you have Bio::A, Bio::B and Bio::C in the file
 &#39;bio/foo.rb&#39;, you need</p>
 
-<pre class="ruby"><span class="ruby-identifier">autoload</span> :<span class="ruby-constant">A</span>, <span class="ruby-string">&#39;bio/foo&#39;</span>
-<span class="ruby-identifier">autoload</span> :<span class="ruby-constant">B</span>, <span class="ruby-string">&#39;bio/foo&#39;</span>
-<span class="ruby-identifier">autoload</span> :<span class="ruby-constant">C</span>, <span class="ruby-string">&#39;bio/foo&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">autoload</span> <span class="ruby-value">:A</span>, <span class="ruby-string">&#39;bio/foo&#39;</span>
+<span class="ruby-identifier">autoload</span> <span class="ruby-value">:B</span>, <span class="ruby-string">&#39;bio/foo&#39;</span>
+<span class="ruby-identifier">autoload</span> <span class="ruby-value">:C</span>, <span class="ruby-string">&#39;bio/foo&#39;</span>
 </pre>
 
 <p>to load the module automatically (instead of require &#39;bio/foo&#39;). In
 this case, you should put them under the new namespace like Bio::Foo::A,
 Bio::Foo::B and Bio::Foo::C in the file &#39;bio/foo&#39;, then use</p>
 
-<pre class="ruby"><span class="ruby-identifier">autoload</span> :<span class="ruby-constant">Foo</span>, <span class="ruby-string">&#39;bio/foo&#39;</span>
+<pre class="ruby"><span class="ruby-identifier">autoload</span> <span class="ruby-value">:Foo</span>, <span class="ruby-string">&#39;bio/foo&#39;</span>
 </pre>
 
 <p>so autoload can be written in 1 line.</p>
@@ -521,10 +523,7 @@ the change.</p>
 Ruby Interpreter).  Please confirm that your code is running on current
 stable release versions of Ruby MRI.</p>
 
-<p>We are very happy if your code can run on both Ruby 1.8.x and 1.9.x. Note
-that Ruby 1.9.0 should be ignored because it was discontinued. Ruby 1.8.5
-or earlier versions can also be ignored. See <a
-href="README_rdoc.html">README.rdoc</a> and <a
+<p>See <a href="README_rdoc.html">README.rdoc</a> and <a
 href="RELEASE_NOTES_rdoc.html">RELEASE_NOTES.rdoc</a> for recommended Ruby
 versions.</p>
 
@@ -533,6 +532,9 @@ versions.</p>
 <p>Of course, it is strongly encouraged to write code that is not affected by
 differences between Ruby versions and/or implementations, as far as
 possible.</p>
+
+<p>Although we no longer support Ruby 1.8, it might be useful if your code
+could also run on Ruby 1.8.7 in addition to supported Ruby versions.</p>
 
 <h1 id="label-OS+and+ARCHITECTURE">OS and ARCHITECTURE<span><a href="#label-OS+and+ARCHITECTURE">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
@@ -543,8 +545,8 @@ Windows.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

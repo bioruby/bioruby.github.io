@@ -150,8 +150,6 @@ href="http://www.ddbj.nig.ac.jp/FT/full_index.html">www.ddbj.nig.ac.jp/FT/full_i
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -174,8 +172,7 @@ href="http://www.ddbj.nig.ac.jp/FT/full_index.html">www.ddbj.nig.ac.jp/FT/full_i
 
         <div class="method-description">
         
-        <p>Returns type of feature in <a href="../String.html">String</a> (e.g
-&#39;CDS&#39;, &#39;gene&#39;)</p>
+        <p>Returns type of feature in String (e.g &#39;CDS&#39;, &#39;gene&#39;)</p>
         
         </div>
       </div>
@@ -188,8 +185,8 @@ href="http://www.ddbj.nig.ac.jp/FT/full_index.html">www.ddbj.nig.ac.jp/FT/full_i
 
         <div class="method-description">
         
-        <p>Returns position of the feature in <a href="../String.html">String</a>
-(e.g. &#39;complement(123..146)&#39;)</p>
+        <p>Returns position of the feature in String (e.g.
+&#39;complement(123..146)&#39;)</p>
         
         </div>
       </div>
@@ -221,7 +218,7 @@ href="http://www.ddbj.nig.ac.jp/FT/full_index.html">www.ddbj.nig.ac.jp/FT/full_i
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(feature = '', position = '', qualifiers = [])</span>
+            class="method-args">(feature = &#39;&#39;, position = &#39;&#39;, qualifiers = [])</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -252,7 +249,7 @@ href="Feature/Qualifier.html">Bio::Feature::Qualifier</a> objects (default:
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/feature.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">feature</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">position</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">qualifiers</span> = [])
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">feature</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">position</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">qualifiers</span> = [])
   <span class="ruby-ivar">@feature</span>, <span class="ruby-ivar">@position</span>, <span class="ruby-ivar">@qualifiers</span> = <span class="ruby-identifier">feature</span>, <span class="ruby-identifier">position</span>, <span class="ruby-identifier">qualifiers</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -293,7 +290,7 @@ href="Feature/Qualifier.html">Bio::Feature::Qualifier</a> objects (default:
           
           <div class="method-source-code" id="5B-5D-source">
             <pre><span class="ruby-comment"># File lib/bio/feature.rb, line 111</span>
-<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">key</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_hash</span>[<span class="ruby-identifier">key</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -337,7 +334,7 @@ href="Feature/Qualifier.html">Bio::Feature::Qualifier</a> object</p>
           
           <div class="method-source-code" id="append-source">
             <pre><span class="ruby-comment"># File lib/bio/feature.rb, line 74</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">append</span>(<span class="ruby-identifier">a</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">append</span>(<span class="ruby-identifier">a</span>)
   <span class="ruby-ivar">@qualifiers</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">a</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Qualifier</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -364,16 +361,15 @@ href="Feature/Qualifier.html">Bio::Feature::Qualifier</a> object</p>
 
         <div class="method-description">
           
-          <p>Returns a <a href="../Hash.html">Hash</a> constructed from qualifier
-objects.</p>
+          <p>Returns a Hash constructed from qualifier objects.</p>
           
           
 
           
           <div class="method-source-code" id="assoc-source">
             <pre><span class="ruby-comment"># File lib/bio/feature.rb, line 91</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">assoc</span>
-  <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;Bio::Feature#assoc is deprecated, use Bio::Feature#to_hash instead&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">assoc</span>
+  <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Bio::Feature#assoc is deprecated, use Bio::Feature#to_hash instead&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
   <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@qualifiers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">qualifier</span>] = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">value</span>
@@ -416,7 +412,7 @@ this key</p>
           
           <div class="method-source-code" id="each-source">
             <pre><span class="ruby-comment"># File lib/bio/feature.rb, line 83</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>(<span class="ruby-identifier">arg</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-identifier">arg</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@qualifiers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">qualifier</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">arg</span>
     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
@@ -453,7 +449,7 @@ from the position string.</p>
           
           <div class="method-source-code" id="locations-source">
             <pre><span class="ruby-comment"># File lib/bio/feature.rb, line 65</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">locations</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">locations</span>
   <span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@position</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -479,15 +475,14 @@ from the position string.</p>
 
         <div class="method-description">
           
-          <p>Returns a <a href="../Hash.html">Hash</a> constructed from qualifier
-objects.</p>
+          <p>Returns a Hash constructed from qualifier objects.</p>
           
           
 
           
           <div class="method-source-code" id="to_hash-source">
             <pre><span class="ruby-comment"># File lib/bio/feature.rb, line 101</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_hash</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_hash</span>
   <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@qualifiers</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">qualifier</span>] <span class="ruby-operator">||=</span> []
@@ -512,8 +507,8 @@ objects.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

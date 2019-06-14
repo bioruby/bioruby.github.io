@@ -129,10 +129,10 @@ report and rates files respectively.</p>
 <span class="ruby-comment"># Creates a Codeml object</span>
 <span class="ruby-identifier">codeml</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PAML</span><span class="ruby-operator">::</span><span class="ruby-constant">Codeml</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-comment"># Sets parameters</span>
-<span class="ruby-identifier">codeml</span>.<span class="ruby-identifier">parameters</span>[:<span class="ruby-identifier">runmode</span>] = <span class="ruby-value">0</span>
-<span class="ruby-identifier">codeml</span>.<span class="ruby-identifier">parameters</span>[:<span class="ruby-constant">RateAncestor</span>] = <span class="ruby-value">1</span>
+<span class="ruby-identifier">codeml</span>.<span class="ruby-identifier">parameters</span>[<span class="ruby-value">:runmode</span>] = <span class="ruby-value">0</span>
+<span class="ruby-identifier">codeml</span>.<span class="ruby-identifier">parameters</span>[<span class="ruby-value">:RateAncestor</span>] = <span class="ruby-value">1</span>
 <span class="ruby-comment"># You can also set many parameters at a time.</span>
-<span class="ruby-identifier">codeml</span>.<span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">update</span>({ :<span class="ruby-identifier">alpha</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0.5</span>, :<span class="ruby-identifier">fix_alpha</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> })
+<span class="ruby-identifier">codeml</span>.<span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">update</span>({ <span class="ruby-value">:alpha</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0.5</span>, <span class="ruby-value">:fix_alpha</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0</span> })
 <span class="ruby-comment"># Executes codeml with the alignment and the tree</span>
 <span class="ruby-identifier">report</span> = <span class="ruby-identifier">codeml</span>.<span class="ruby-identifier">query</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span>)
 </pre>
@@ -149,12 +149,12 @@ report and rates files respectively.</p>
 <span class="ruby-identifier">output_file</span> = <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;codeml_test&#39;</span>)
 <span class="ruby-identifier">output_file</span>.<span class="ruby-identifier">close</span>(<span class="ruby-keyword">false</span>)
 <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PAML</span><span class="ruby-operator">::</span><span class="ruby-constant">Codeml</span>.<span class="ruby-identifier">create_control_file</span>(<span class="ruby-identifier">config_file</span>.<span class="ruby-identifier">path</span>, {
-  :<span class="ruby-identifier">model</span>       =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>,
-  :<span class="ruby-identifier">fix_kappa</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>,
-  :<span class="ruby-identifier">aaRatefile</span>  =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">TEST_DATA</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/wag.dat&#39;</span>,
-  :<span class="ruby-identifier">seqfile</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">TEST_DATA</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/abglobin.aa&#39;</span>,
-  :<span class="ruby-identifier">treefile</span>    =<span class="ruby-operator">&gt;</span> <span class="ruby-constant">TEST_DATA</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/abglobin.trees&#39;</span>,
-  :<span class="ruby-identifier">outfile</span>     =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">output_file</span>.<span class="ruby-identifier">path</span>,
+  <span class="ruby-value">:model</span>       <span class="ruby-operator">=&gt;</span> <span class="ruby-value">1</span>,
+  <span class="ruby-value">:fix_kappa</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-value">1</span>,
+  <span class="ruby-value">:aaRatefile</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">TEST_DATA</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/wag.dat&#39;</span>,
+  <span class="ruby-value">:seqfile</span>     <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">TEST_DATA</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/abglobin.aa&#39;</span>,
+  <span class="ruby-value">:treefile</span>    <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">TEST_DATA</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/abglobin.trees&#39;</span>,
+  <span class="ruby-value">:outfile</span>     <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">output_file</span>.<span class="ruby-identifier">path</span>,
 })
 
 <span class="ruby-comment"># Create an instance of Codeml specifying where the codeml binary is</span>
@@ -167,8 +167,6 @@ report and rates files respectively.</p>
 
   </section>
 
-  
-  
   
   <section id="5Buntitled-5D" class="documentation-section">
     
@@ -232,7 +230,7 @@ filename).</p>
           
           <div class="method-source-code" id="create_config_file-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 160</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_config_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">create_config_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;The method Codeml.create_config_file(parameters, filename) will soon be removed. Instead, use Codeml.create_control_file(filename, parameters).&quot;</span>
   <span class="ruby-identifier">create_control_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -268,7 +266,7 @@ automatically merged.</p>
           
           <div class="method-source-code" id="create_control_file-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">create_control_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">create_control_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
   <span class="ruby-identifier">parameters</span> = <span class="ruby-constant">DEFAULT_PARAMETERS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">parameters</span>)
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
@@ -315,7 +313,7 @@ automatically merged.</p>
           
           <div class="method-source-code" id="options-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 133</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">options</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">options</span>
   <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;The method Codeml#options will be changed to be used for command line arguments in the future. Instead, use Codeml#parameters.&#39;</span>
   <span class="ruby-identifier">parameters</span>
 <span class="ruby-keyword">end</span></pre>
@@ -349,7 +347,7 @@ automatically merged.</p>
           
           <div class="method-source-code" id="options-3D-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 140</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">options=</span>(<span class="ruby-identifier">hash</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">options=</span>(<span class="ruby-identifier">hash</span>)
   <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;The method Codeml#options=() will be changed to be used for command line arguments in the future. Instead, use Codeml#parameters=().&#39;</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parameters</span>=(<span class="ruby-identifier">hash</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -395,7 +393,7 @@ href="../Alignment.html">Bio::Alignment</a> object or similar object</p>
 </li><li>
 <p>(optional) <em>tree</em>: <a href="../Tree.html">Bio::Tree</a> object</p>
 </li><li>
-<p>(optional) <em>aarate</em>: <a href="../../String.html">String</a> or nil</p>
+<p>(optional) <em>aarate</em>: String or nil</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -412,7 +410,7 @@ href="../Alignment.html">Bio::Alignment</a> object or similar object</p>
           
           <div class="method-source-code" id="query-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 183</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aarate</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aarate</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">aaratefile</span> = <span class="ruby-identifier">prepare_aaratefile</span>(<span class="ruby-identifier">aarate</span>)
     <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span>)
@@ -460,11 +458,11 @@ the parameter.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(optional) <em>alignment</em>: <a href="../../String.html">String</a></p>
+<p>(optional) <em>alignment</em>: String</p>
 </li><li>
-<p>(optional) <em>tree</em>: <a href="../../String.html">String</a> or nil</p>
+<p>(optional) <em>tree</em>: String or nil</p>
 </li><li>
-<p>(optional) <em>aarate</em>: <a href="../../String.html">String</a> or nil</p>
+<p>(optional) <em>aarate</em>: String or nil</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -481,7 +479,7 @@ the parameter.</p>
           
           <div class="method-source-code" id="query_by_string-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 212</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_by_string</span>(<span class="ruby-identifier">alignment</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aarate</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_by_string</span>(<span class="ruby-identifier">alignment</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aarate</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">aaratefile</span> = <span class="ruby-identifier">prepare_aaratefile</span>(<span class="ruby-identifier">aarate</span>)
     <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span>)
@@ -507,8 +505,8 @@ the parameter.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

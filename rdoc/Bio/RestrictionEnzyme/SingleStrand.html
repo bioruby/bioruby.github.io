@@ -124,8 +124,6 @@ create the sequence pattern with cuts on both strands.</p>
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -244,7 +242,7 @@ locations - ambiguous.</p>
 
 <p><code>sequence</code> must be a kind of:</p>
 <ul><li>
-<p><a href="../../String.html">String</a></p>
+<p>String</p>
 </li><li>
 <p><a href="../Sequence/NA.html">Bio::Sequence::NA</a></p>
 </li><li>
@@ -275,7 +273,7 @@ href="SingleStrand/CutLocationsInEnzymeNotation.html">Bio::RestrictionEnzyme::Si
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand.rb, line 69</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>( <span class="ruby-identifier">sequence</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">c</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>( <span class="ruby-identifier">sequence</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">c</span> )
   <span class="ruby-identifier">c</span>.<span class="ruby-identifier">flatten!</span> <span class="ruby-comment"># if an array was supplied as an argument</span>
 <span class="ruby-comment"># NOTE t| 2009-09-19 commented out for library efficiency</span>
   <span class="ruby-comment"># validate_args(sequence, c)</span>
@@ -330,7 +328,7 @@ href="SingleStrand/CutLocationsInEnzymeNotation.html">Bio::RestrictionEnzyme::Si
           
           <div class="method-source-code" id="orientation-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">orientation</span>; [<span class="ruby-value">5</span>,<span class="ruby-value">3</span>]; <span class="ruby-keyword">end</span></pre>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">orientation</span>; [<span class="ruby-value">5</span>,<span class="ruby-value">3</span>]; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -385,7 +383,7 @@ Does not report if the <code>cut_locations</code> are palindromic or not.</p>
           
           <div class="method-source-code" id="palindromic-3F-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand.rb, line 103</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">palindromic?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">palindromic?</span>
   <span class="ruby-ivar">@stripped</span>.<span class="ruby-identifier">reverse_complement</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@stripped</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -434,11 +432,11 @@ than the sequence.</p>
           
           <div class="method-source-code" id="pattern-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand.rb, line 131</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">pattern</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">stripped</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@cut_locations_in_enzyme_notation</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">left</span> = (<span class="ruby-ivar">@cut_locations_in_enzyme_notation</span>.<span class="ruby-identifier">min</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;n&#39;</span> <span class="ruby-operator">*</span> <span class="ruby-ivar">@cut_locations_in_enzyme_notation</span>.<span class="ruby-identifier">min</span>.<span class="ruby-identifier">abs</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>)
 
-  <span class="ruby-comment"># Add one more &#39;n&#39; if a cut is at the last position </span>
+  <span class="ruby-comment"># Add one more &#39;n&#39; if a cut is at the last position</span>
   <span class="ruby-identifier">right</span> = ( (<span class="ruby-ivar">@cut_locations_in_enzyme_notation</span>.<span class="ruby-identifier">max</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@stripped</span>.<span class="ruby-identifier">length</span>) <span class="ruby-operator">?</span> (<span class="ruby-string">&#39;n&#39;</span> <span class="ruby-operator">*</span> (<span class="ruby-ivar">@cut_locations_in_enzyme_notation</span>.<span class="ruby-identifier">max</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@stripped</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)) <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>)
   [<span class="ruby-identifier">left</span>, <span class="ruby-identifier">stripped</span>, <span class="ruby-identifier">right</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -486,9 +484,9 @@ than the sequence.</p>
           
           <div class="method-source-code" id="with_cut_symbols-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand.rb, line 118</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">with_cut_symbols</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_cut_symbols</span>
   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">pattern</span>
-  <span class="ruby-ivar">@cut_locations_in_enzyme_notation</span>.<span class="ruby-identifier">to_array_index</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">c</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>, <span class="ruby-identifier">cut_symbol</span>) }
+  <span class="ruby-ivar">@cut_locations_in_enzyme_notation</span>.<span class="ruby-identifier">to_array_index</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">insert</span>(<span class="ruby-identifier">c</span><span class="ruby-value">+1</span>, <span class="ruby-identifier">cut_symbol</span>) }
   <span class="ruby-identifier">s</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -535,7 +533,7 @@ than the sequence.</p>
           
           <div class="method-source-code" id="with_spaces-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand.rb, line 147</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">with_spaces</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">with_spaces</span>
   <span class="ruby-identifier">add_spacing</span>( <span class="ruby-identifier">with_cut_symbols</span> )
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -576,7 +574,7 @@ than the sequence.</p>
           
           <div class="method-source-code" id="validate_args-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand.rb, line 155</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_args</span>( <span class="ruby-identifier">input_pattern</span>, <span class="ruby-identifier">input_cut_locations</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_args</span>( <span class="ruby-identifier">input_pattern</span>, <span class="ruby-identifier">input_cut_locations</span> )
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input_pattern</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">String</span>)
     <span class="ruby-identifier">err</span> = <span class="ruby-string">&quot;input_pattern is not a String, Bio::Sequence::NA, or Bio::RestrictionEnzyme::SingleStrand object\n&quot;</span>
     <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;pattern: #{input_pattern}\n&quot;</span>
@@ -620,8 +618,8 @@ than the sequence.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

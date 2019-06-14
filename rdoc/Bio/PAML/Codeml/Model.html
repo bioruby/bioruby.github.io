@@ -115,8 +115,6 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -154,7 +152,7 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 405</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">buf</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span> <span class="ruby-identifier">buf</span>
   <span class="ruby-ivar">@buf</span> = <span class="ruby-identifier">buf</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -195,7 +193,7 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
           
           <div class="method-source-code" id="alpha-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 438</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">alpha</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">alpha</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buf</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/alpha/</span>
   <span class="ruby-ivar">@buf</span>[<span class="ruby-regexp">/alpha .+ =\s+(-?\d+(\.\d+)?)/</span>,<span class="ruby-value">1</span>].<span class="ruby-identifier">to_f</span>
 <span class="ruby-keyword">end</span></pre>
@@ -227,7 +225,7 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
 <p>dN/dS (w) for site classes (K=3) p:   0.56413  0.35613  0.07974 w:  
 0.00928  1.98252 23.44160</p>
 
-<p>and turns it into an array of <a href="../../../Hash.html">Hash</a></p>
+<p>and turns it into an array of Hash</p>
 
 <pre>&gt;&gt; m3.classes[0]
 =&gt; {:w=&gt;0.00928, :p=&gt;0.56413}</pre>
@@ -237,14 +235,14 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
           
           <div class="method-source-code" id="classes-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 463</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">classes</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">classes</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buf</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/classes/</span>
   <span class="ruby-comment"># probs = @buf.scan(/\np:\s+(\w+)\s+(\S+)\s+(\S+)/)</span>
   <span class="ruby-identifier">probs</span> = <span class="ruby-ivar">@buf</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\np:.*?\n/</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_f</span> }
   <span class="ruby-identifier">ws</span> = <span class="ruby-ivar">@buf</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\nw:.*?\n/</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">3</span>].<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_f</span> }
   <span class="ruby-identifier">ret</span> = []
   <span class="ruby-identifier">probs</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">prob</span>, <span class="ruby-identifier">i</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">push</span>  <span class="ruby-value">:p</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">prob</span>, <span class="ruby-value">:w</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">ws</span>[<span class="ruby-identifier">i</span>] 
+    <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">push</span>  <span class="ruby-value">:p</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">prob</span>, <span class="ruby-value">:w</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ws</span>[<span class="ruby-identifier">i</span>] 
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">ret</span>
 <span class="ruby-keyword">end</span></pre>
@@ -306,7 +304,7 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
           
           <div class="method-source-code" id="kappa-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 432</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">kappa</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">kappa</span>
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buf</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/kappa/</span>
   <span class="ruby-ivar">@buf</span>[<span class="ruby-regexp">/kappa \(ts\/tv\)\s+=\s+ (-?\d+(\.\d+)?)/</span>,<span class="ruby-value">1</span>].<span class="ruby-identifier">to_f</span>
 <span class="ruby-keyword">end</span></pre>
@@ -340,7 +338,7 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
           
           <div class="method-source-code" id="lnL-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 420</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">lnL</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lnL</span>
   <span class="ruby-ivar">@buf</span>[<span class="ruby-regexp">/lnL\(.+\):\s+(-?\d+(\.\d+)?)/</span>,<span class="ruby-value">1</span>].<span class="ruby-identifier">to_f</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -373,7 +371,7 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
           
           <div class="method-source-code" id="modelnum-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 410</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">modelnum</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">modelnum</span>
   <span class="ruby-ivar">@buf</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span>].<span class="ruby-identifier">to_i</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -406,7 +404,7 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
           
           <div class="method-source-code" id="name-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 415</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">name</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>
   <span class="ruby-string">&#39;M&#39;</span>.<span class="ruby-identifier">to_s</span><span class="ruby-operator">+</span><span class="ruby-identifier">modelnum</span>.<span class="ruby-identifier">to_s</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -439,7 +437,7 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
           
           <div class="method-source-code" id="omega-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 425</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">omega</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">omega</span>
   <span class="ruby-ivar">@buf</span>[<span class="ruby-regexp">/omega \(dN\/dS\)\s+=\s+ (-?\d+(\.\d+)?)/</span>,<span class="ruby-value">1</span>].<span class="ruby-identifier">to_f</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -469,14 +467,14 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
 
         <div class="method-description">
           
-          <p>Return the model information as a <a href="../../../String.html">String</a></p>
+          <p>Return the model information as a String</p>
           
           
 
           
           <div class="method-source-code" id="to_s-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 476</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-ivar">@buf</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -509,7 +507,7 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
           
           <div class="method-source-code" id="tree-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 449</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tree</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tree</span>
   <span class="ruby-ivar">@buf</span>[<span class="ruby-regexp">/([^\n]+)\n\nDetailed/m</span>,<span class="ruby-value">1</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -542,7 +540,7 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
           
           <div class="method-source-code" id="tree_length-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 444</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">tree_length</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tree_length</span>
   <span class="ruby-ivar">@buf</span>[<span class="ruby-regexp">/tree length\s+=\s+ (-?\d+(\.\d+)?)/</span>,<span class="ruby-value">1</span>].<span class="ruby-identifier">to_f</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -562,8 +560,8 @@ This class is used by <a href="Report.html">Codeml::Report</a>.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

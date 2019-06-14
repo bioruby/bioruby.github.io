@@ -159,8 +159,6 @@ href="DoubleStranded.html">DoubleStranded</a> and they will be passed to
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -289,7 +287,7 @@ p, [p,  c], [p, c],   p</pre>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 70</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">erp</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">raw_cut_pairs</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">erp</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">raw_cut_pairs</span>)
   <span class="ruby-comment"># &#39;erp&#39; : &#39;E&#39;nzyme / &#39;R&#39;ebase / &#39;P&#39;attern</span>
   <span class="ruby-identifier">k</span> = <span class="ruby-identifier">erp</span>.<span class="ruby-identifier">class</span>
 
@@ -315,7 +313,7 @@ p, [p,  c], [p, c],   p</pre>
 
       <span class="ruby-comment"># Try harder to find the enzyme</span>
       <span class="ruby-keyword">unless</span> <span class="ruby-identifier">known_enzyme</span>
-        <span class="ruby-identifier">re</span> = <span class="ruby-node">%r&quot;^#{erp}$&quot;i</span>
+        <span class="ruby-identifier">re</span> = <span class="ruby-regexp">%r&quot;^#{erp}$&quot;i</span>
         <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">RestrictionEnzyme</span>.<span class="ruby-identifier">rebase</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">known_enzyme</span> = <span class="ruby-keyword">true</span>; <span class="ruby-identifier">erp</span> = <span class="ruby-identifier">name</span>; <span class="ruby-keyword">break</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">re</span> }
       <span class="ruby-keyword">end</span>
 
@@ -384,7 +382,7 @@ href="DoubleStranded/AlignedStrands.html#method-c-align">Bio::RestrictionEnzyme:
           
           <div class="method-source-code" id="aligned_strands-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 128</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">aligned_strands</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aligned_strands</span>
   <span class="ruby-constant">AlignedStrands</span>.<span class="ruby-identifier">align</span>(<span class="ruby-ivar">@primary</span>.<span class="ruby-identifier">pattern</span>, <span class="ruby-ivar">@complement</span>.<span class="ruby-identifier">pattern</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -418,7 +416,7 @@ href="DoubleStranded/AlignedStrands.html#method-c-align_with_cuts">Bio::Restrict
           
           <div class="method-source-code" id="aligned_strands_with_cuts-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 133</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">aligned_strands_with_cuts</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aligned_strands_with_cuts</span>
   <span class="ruby-constant">AlignedStrands</span>.<span class="ruby-identifier">align_with_cuts</span>(<span class="ruby-ivar">@primary</span>.<span class="ruby-identifier">pattern</span>, <span class="ruby-ivar">@complement</span>.<span class="ruby-identifier">pattern</span>, <span class="ruby-ivar">@primary</span>.<span class="ruby-identifier">cut_locations</span>, <span class="ruby-ivar">@complement</span>.<span class="ruby-identifier">cut_locations</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -452,7 +450,7 @@ href="DoubleStranded/AlignedStrands.html#method-c-align_with_cuts">Bio::Restrict
           
           <div class="method-source-code" id="blunt-3F-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 139</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">blunt?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">blunt?</span>
   <span class="ruby-identifier">as</span> = <span class="ruby-identifier">aligned_strands_with_cuts</span>
   <span class="ruby-identifier">ary</span> = [<span class="ruby-identifier">as</span>.<span class="ruby-identifier">primary</span>, <span class="ruby-identifier">as</span>.<span class="ruby-identifier">complement</span>]
   <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">split</span>( <span class="ruby-identifier">cut_symbol</span> ) }
@@ -499,15 +497,15 @@ href="DoubleStranded/EnzymeAction.html">EnzymeAction</a></p>
           
           <div class="method-source-code" id="create_action_at-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 159</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_action_at</span>( <span class="ruby-identifier">offset</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_action_at</span>( <span class="ruby-identifier">offset</span> )
   <span class="ruby-comment"># x is the size of the fully aligned sequence with maximum padding needed</span>
   <span class="ruby-comment"># to make a match on the primary and complement strand.</span>
   <span class="ruby-comment">#</span>
   <span class="ruby-comment"># For example -</span>
   <span class="ruby-comment"># Note how EcoRII needs extra padding on the beginning and ending of the</span>
-  <span class="ruby-comment"># sequence &#39;ccagg&#39; to make the match since the cut must occur between </span>
+  <span class="ruby-comment"># sequence &#39;ccagg&#39; to make the match since the cut must occur between</span>
   <span class="ruby-comment"># two nucleotides and can not occur on the very end of the sequence.</span>
-  <span class="ruby-comment">#   </span>
+  <span class="ruby-comment">#</span>
   <span class="ruby-comment">#   EcoRII:</span>
   <span class="ruby-comment">#     :blunt: &quot;0&quot;</span>
   <span class="ruby-comment">#     :c2: &quot;5&quot;</span>
@@ -518,19 +516,19 @@ href="DoubleStranded/EnzymeAction.html">EnzymeAction</a></p>
   <span class="ruby-comment">#     :name: EcoRII</span>
   <span class="ruby-comment">#     :c3: &quot;0&quot;</span>
   <span class="ruby-comment">#     :ncuts: &quot;2&quot;</span>
-  <span class="ruby-comment">#   </span>
+  <span class="ruby-comment">#</span>
   <span class="ruby-comment">#        -1 1 2 3 4 5</span>
   <span class="ruby-comment">#   5&#39; - n^c c w g g n - 3&#39;</span>
   <span class="ruby-comment">#   3&#39; - n g g w c c^n - 5&#39;</span>
-  <span class="ruby-comment">#   </span>
+  <span class="ruby-comment">#</span>
   <span class="ruby-comment">#   (w == [at])</span>
   
   <span class="ruby-identifier">x</span> = <span class="ruby-identifier">aligned_strands</span>.<span class="ruby-identifier">primary</span>.<span class="ruby-identifier">size</span>
   
   <span class="ruby-identifier">enzyme_action</span> = <span class="ruby-constant">EnzymeAction</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">offset</span>,
-                                    <span class="ruby-identifier">offset</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>,
+                                    <span class="ruby-identifier">offset</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span><span class="ruby-value">-1</span>,
                                     <span class="ruby-identifier">offset</span>,
-                                    <span class="ruby-identifier">offset</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>)
+                                    <span class="ruby-identifier">offset</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span><span class="ruby-value">-1</span>)
 
   <span class="ruby-ivar">@cut_locations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cut_location_pair</span><span class="ruby-operator">|</span>
     <span class="ruby-comment"># cut_pair is a DoubleStranded::CutLocationPair</span>
@@ -575,7 +573,7 @@ href="DoubleStranded/EnzymeAction.html">EnzymeAction</a></p>
           
           <div class="method-source-code" id="sticky-3F-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 150</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">sticky?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sticky?</span>
   <span class="ruby-operator">!</span><span class="ruby-identifier">blunt?</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -616,7 +614,7 @@ href="DoubleStranded/EnzymeAction.html">EnzymeAction</a></p>
           
           <div class="method-source-code" id="create_cut_locations-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 301</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_cut_locations</span>(<span class="ruby-identifier">raw_cl</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_cut_locations</span>(<span class="ruby-identifier">raw_cl</span>)
   <span class="ruby-ivar">@cut_locations_in_enzyme_notation</span> = <span class="ruby-constant">CutLocationsInEnzymeNotation</span>.<span class="ruby-identifier">new</span>( <span class="ruby-operator">*</span><span class="ruby-identifier">raw_cl</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">cl</span><span class="ruby-operator">|</span> <span class="ruby-constant">CutLocationPairInEnzymeNotation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">cl</span>)} )
   <span class="ruby-ivar">@cut_locations</span> = <span class="ruby-ivar">@cut_locations_in_enzyme_notation</span>.<span class="ruby-identifier">to_array_index</span>
 <span class="ruby-keyword">end</span></pre>
@@ -650,7 +648,7 @@ href="DoubleStranded/EnzymeAction.html">EnzymeAction</a></p>
           
           <div class="method-source-code" id="create_primary_and_complement-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 296</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">create_primary_and_complement</span>(<span class="ruby-identifier">primary_seq</span>, <span class="ruby-identifier">p_cuts</span>, <span class="ruby-identifier">c_cuts</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">create_primary_and_complement</span>(<span class="ruby-identifier">primary_seq</span>, <span class="ruby-identifier">p_cuts</span>, <span class="ruby-identifier">c_cuts</span>)
   <span class="ruby-ivar">@primary</span> = <span class="ruby-constant">SingleStrand</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">primary_seq</span>, <span class="ruby-identifier">p_cuts</span> )
   <span class="ruby-ivar">@complement</span> = <span class="ruby-constant">SingleStrandComplement</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">primary_seq</span>.<span class="ruby-identifier">forward_complement</span>, <span class="ruby-identifier">c_cuts</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -684,7 +682,7 @@ href="DoubleStranded/EnzymeAction.html">EnzymeAction</a></p>
           
           <div class="method-source-code" id="initialize_with_pattern_and_cut_locations-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 291</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize_with_pattern_and_cut_locations</span>( <span class="ruby-identifier">s</span>, <span class="ruby-identifier">raw_cl</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize_with_pattern_and_cut_locations</span>( <span class="ruby-identifier">s</span>, <span class="ruby-identifier">raw_cl</span> )
   <span class="ruby-identifier">create_cut_locations</span>(<span class="ruby-identifier">raw_cl</span>)
   <span class="ruby-identifier">create_primary_and_complement</span>( <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>), <span class="ruby-ivar">@cut_locations_in_enzyme_notation</span>.<span class="ruby-identifier">primary</span>, <span class="ruby-ivar">@cut_locations_in_enzyme_notation</span>.<span class="ruby-identifier">complement</span> )
 <span class="ruby-keyword">end</span></pre>
@@ -718,7 +716,7 @@ href="DoubleStranded/EnzymeAction.html">EnzymeAction</a></p>
           
           <div class="method-source-code" id="initialize_with_pattern_and_cut_symbols-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 279</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize_with_pattern_and_cut_symbols</span>( <span class="ruby-identifier">s</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize_with_pattern_and_cut_symbols</span>( <span class="ruby-identifier">s</span> )
   <span class="ruby-identifier">p_cl</span> = <span class="ruby-constant">SingleStrand</span><span class="ruby-operator">::</span><span class="ruby-constant">CutLocationsInEnzymeNotation</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">strip_padding</span>(<span class="ruby-identifier">s</span>) )
   <span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">strip_cuts_and_padding</span>(<span class="ruby-identifier">s</span>) )
 
@@ -759,7 +757,7 @@ href="DoubleStranded/EnzymeAction.html">EnzymeAction</a></p>
           
           <div class="method-source-code" id="initialize_with_rebase-source">
             <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded.rb, line 306</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize_with_rebase</span>( <span class="ruby-identifier">e</span> )
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize_with_rebase</span>( <span class="ruby-identifier">e</span> )
   <span class="ruby-identifier">p_cl</span> = [<span class="ruby-identifier">e</span>.<span class="ruby-identifier">primary_strand_cut1</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">primary_strand_cut2</span>]
   <span class="ruby-identifier">c_cl</span> = [<span class="ruby-identifier">e</span>.<span class="ruby-identifier">complementary_strand_cut1</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">complementary_strand_cut2</span>]
 
@@ -787,8 +785,8 @@ href="DoubleStranded/EnzymeAction.html">EnzymeAction</a></p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

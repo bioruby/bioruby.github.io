@@ -199,8 +199,6 @@ directly.</p>
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -289,7 +287,7 @@ objects with the given tree.</p>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 258</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-comment"># creates an undirected adjacency list graph</span>
   <span class="ruby-ivar">@pathway</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Pathway</span>.<span class="ruby-identifier">new</span>([], <span class="ruby-keyword">true</span>)
   <span class="ruby-ivar">@root</span> = <span class="ruby-keyword">nil</span>
@@ -336,7 +334,7 @@ already exists, it is overwritten with new one.</p>
           
           <div class="method-source-code" id="add_edge-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 380</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_edge</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>, <span class="ruby-identifier">edge</span> = <span class="ruby-constant">Edge</span>.<span class="ruby-identifier">new</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_edge</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>, <span class="ruby-identifier">edge</span> = <span class="ruby-constant">Edge</span>.<span class="ruby-identifier">new</span>)
   <span class="ruby-identifier">_clear_cache</span>
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">append</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Relation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>, <span class="ruby-identifier">edge</span>))
   <span class="ruby-identifier">edge</span>
@@ -372,7 +370,7 @@ nothing.</p>
           
           <div class="method-source-code" id="add_node-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 402</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_node</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_node</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-identifier">_clear_cache</span>
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>[<span class="ruby-identifier">node</span>] <span class="ruby-operator">||=</span> {}
   <span class="ruby-keyword">self</span>
@@ -412,7 +410,7 @@ object.</p>
           
           <div class="method-source-code" id="adjacency_matrix-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 822</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">adjacency_matrix</span>(<span class="ruby-identifier">nodes</span> = <span class="ruby-keyword">nil</span>,
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">adjacency_matrix</span>(<span class="ruby-identifier">nodes</span> = <span class="ruby-keyword">nil</span>,
                      <span class="ruby-identifier">default_value</span> = <span class="ruby-keyword">nil</span>,
                      <span class="ruby-identifier">diagonal_value</span> = <span class="ruby-keyword">nil</span>) <span class="ruby-comment">#:yields: source, target, edge</span>
   <span class="ruby-identifier">nodes</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">nodes</span>
@@ -465,7 +463,7 @@ object.</p>
           
           <div class="method-source-code" id="adjacent_nodes-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 331</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">adjacent_nodes</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">adjacent_nodes</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>[<span class="ruby-identifier">node</span>]
   <span class="ruby-identifier">h</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">:</span> []
 <span class="ruby-keyword">end</span></pre>
@@ -501,7 +499,7 @@ array of <code>Node</code>s. The result is unspecified for cyclic trees.</p>
           
           <div class="method-source-code" id="ancestors-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 757</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">ancestors</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ancestors</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">root</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@root</span>
   (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">path</span>(<span class="ruby-identifier">root</span>, <span class="ruby-identifier">node</span>) <span class="ruby-operator">-</span> [ <span class="ruby-identifier">node</span> ]).<span class="ruby-identifier">reverse</span>
 <span class="ruby-keyword">end</span></pre>
@@ -538,7 +536,7 @@ cyclic trees.</p>
           
           <div class="method-source-code" id="children-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 701</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">children</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">children</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">root</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@root</span>
   <span class="ruby-identifier">c</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">adjacent_nodes</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-identifier">c</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">parent</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">root</span>))
@@ -575,7 +573,7 @@ also cleared.</p>
           
           <div class="method-source-code" id="clear-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 289</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">clear</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clear</span>
   <span class="ruby-identifier">initialize</span>
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -610,7 +608,7 @@ not exist, raises IndexError.</p>
           
           <div class="method-source-code" id="clear_node-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 417</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">clear_node</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">clear_node</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">node</span>)
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">IndexError</span>, <span class="ruby-string">&#39;the node does not exist&#39;</span>
   <span class="ruby-keyword">end</span>
@@ -654,7 +652,7 @@ not exist, raises IndexError.</p>
           
           <div class="method-source-code" id="collect_edge-21-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 527</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">collect_edge!</span> <span class="ruby-comment">#:yields: source, target, edge</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">collect_edge!</span> <span class="ruby-comment">#:yields: source, target, edge</span>
   <span class="ruby-identifier">_clear_cache</span>
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">relations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">newedge</span> = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">rel</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">rel</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">rel</span>.<span class="ruby-identifier">relation</span>
@@ -693,7 +691,7 @@ not exist, raises IndexError.</p>
           
           <div class="method-source-code" id="collect_node-21-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 506</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">collect_node!</span> <span class="ruby-comment">#:yields: node</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">collect_node!</span> <span class="ruby-comment">#:yields: node</span>
   <span class="ruby-identifier">_clear_cache</span>
   <span class="ruby-identifier">tr</span> = {}
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_node</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
@@ -745,7 +743,7 @@ objects in the <em>other</em> tree are shared in the concatinated tree.</p>
           
           <div class="method-source-code" id="concat-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 595</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">concat</span>(<span class="ruby-identifier">other</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">concat</span>(<span class="ruby-identifier">other</span>)
   <span class="ruby-comment">#raise TypeError unless other.kind_of?(self.class)</span>
   <span class="ruby-identifier">_clear_cache</span>
   <span class="ruby-identifier">other</span>.<span class="ruby-identifier">each_node</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
@@ -788,7 +786,7 @@ array of <code>Node</code>s. The result is unspecified for cyclic trees.</p>
           
           <div class="method-source-code" id="descendents-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 712</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">descendents</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">descendents</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">root</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@root</span>
   <span class="ruby-identifier">distance</span>, <span class="ruby-identifier">route</span> = <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">breadth_first_search</span>(<span class="ruby-identifier">root</span>)
   <span class="ruby-identifier">d</span> = <span class="ruby-identifier">distance</span>[<span class="ruby-identifier">node</span>]
@@ -839,7 +837,7 @@ trees.</p>
           
           <div class="method-source-code" id="distance-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 640</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">distance</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">distance</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>)
   <span class="ruby-identifier">distance</span> = <span class="ruby-value">0</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_edge_in_path</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>, <span class="ruby-identifier">edge</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">distance</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">get_edge_distance</span>(<span class="ruby-identifier">edge</span>)
@@ -880,7 +878,7 @@ calculated, nil will be set.</p>
           
           <div class="method-source-code" id="distance_matrix-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 793</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">distance_matrix</span>(<span class="ruby-identifier">nodes</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">distance_matrix</span>(<span class="ruby-identifier">nodes</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">nodes</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">leaves</span>
   <span class="ruby-identifier">matrix</span> = []
   <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
@@ -929,7 +927,7 @@ calculated, nil will be set.</p>
           
           <div class="method-source-code" id="each_edge-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 311</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_edge</span> <span class="ruby-comment">#:yields: source, target, edge</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_edge</span> <span class="ruby-comment">#:yields: source, target, edge</span>
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">relations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">rel</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">rel</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">rel</span>.<span class="ruby-identifier">relation</span>
   <span class="ruby-keyword">end</span>
@@ -966,7 +964,7 @@ cyclic trees.</p>
           
           <div class="method-source-code" id="each_edge_in_path-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 626</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_edge_in_path</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_edge_in_path</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>)
   <span class="ruby-identifier">path</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">path</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>)
   <span class="ruby-identifier">source</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">shift</span>
   <span class="ruby-identifier">path</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">target</span><span class="ruby-operator">|</span>
@@ -1006,7 +1004,7 @@ cyclic trees.</p>
           
           <div class="method-source-code" id="each_node-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 305</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_node</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: node</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_node</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: node</span>
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>.<span class="ruby-identifier">each_key</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
   <span class="ruby-keyword">self</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1043,7 +1041,7 @@ Boost Graph Library.</p>
           
           <div class="method-source-code" id="each_out_edge-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 355</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each_out_edge</span>(<span class="ruby-identifier">source</span>) <span class="ruby-comment">#:yields: source, target, edge</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_out_edge</span>(<span class="ruby-identifier">source</span>) <span class="ruby-comment">#:yields: source, target, edge</span>
   <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>[<span class="ruby-identifier">source</span>]
   <span class="ruby-identifier">h</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">source</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span> } <span class="ruby-keyword">if</span> <span class="ruby-identifier">h</span>
   <span class="ruby-keyword">self</span>
@@ -1078,7 +1076,7 @@ Boost Graph Library.</p>
           
           <div class="method-source-code" id="edges-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 319</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">edges</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">edges</span>
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">relations</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span>
     [ <span class="ruby-identifier">rel</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">rel</span>.<span class="ruby-identifier">node</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">rel</span>.<span class="ruby-identifier">relation</span> ]
   <span class="ruby-keyword">end</span>
@@ -1114,7 +1112,7 @@ adjacent nodes, returns nil.</p>
           
           <div class="method-source-code" id="get_edge-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 372</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_edge</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_edge</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>)
   <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>[<span class="ruby-identifier">source</span>]
   <span class="ruby-identifier">h</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">target</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1149,7 +1147,7 @@ value or nil.</p>
           
           <div class="method-source-code" id="get_edge_distance-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 100</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_edge_distance</span>(<span class="ruby-identifier">edge</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_edge_distance</span>(<span class="ruby-identifier">edge</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">dist</span> = <span class="ruby-identifier">edge</span>.<span class="ruby-identifier">distance</span>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
@@ -1187,7 +1185,7 @@ value or nil.</p>
           
           <div class="method-source-code" id="get_edge_distance_string-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 111</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_edge_distance_string</span>(<span class="ruby-identifier">edge</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_edge_distance_string</span>(<span class="ruby-identifier">edge</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">dist</span> = <span class="ruby-identifier">edge</span>.<span class="ruby-identifier">distance_string</span>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
@@ -1225,7 +1223,7 @@ value or nil.</p>
           
           <div class="method-source-code" id="get_edge_merged-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 121</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_edge_merged</span>(<span class="ruby-identifier">edge1</span>, <span class="ruby-identifier">edge2</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_edge_merged</span>(<span class="ruby-identifier">edge1</span>, <span class="ruby-identifier">edge2</span>)
   <span class="ruby-identifier">dist1</span> = <span class="ruby-identifier">get_edge_distance</span>(<span class="ruby-identifier">edge1</span>)
   <span class="ruby-identifier">dist2</span> = <span class="ruby-identifier">get_edge_distance</span>(<span class="ruby-identifier">edge2</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">dist1</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">dist2</span> <span class="ruby-keyword">then</span>
@@ -1268,7 +1266,7 @@ value or nil.</p>
           
           <div class="method-source-code" id="get_node_bootstrap-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 237</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_node_bootstrap</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_node_bootstrap</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">node</span>.<span class="ruby-identifier">bootstrap</span>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
@@ -1305,7 +1303,7 @@ value or nil.</p>
           
           <div class="method-source-code" id="get_node_bootstrap_string-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 245</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_node_bootstrap_string</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_node_bootstrap_string</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">node</span>.<span class="ruby-identifier">bootstrap_string</span>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
@@ -1344,7 +1342,7 @@ the result would be one of those (unspecified).</p>
           
           <div class="method-source-code" id="get_node_by_name-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 390</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_node_by_name</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_node_by_name</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_node</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">get_node_name</span>(<span class="ruby-identifier">node</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">str</span>
       <span class="ruby-keyword">return</span> <span class="ruby-identifier">node</span>
@@ -1382,7 +1380,7 @@ the result would be one of those (unspecified).</p>
           
           <div class="method-source-code" id="get_node_name-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 229</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">get_node_name</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_node_name</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-identifier">node</span>.<span class="ruby-identifier">name</span>
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
@@ -1419,7 +1417,7 @@ the result would be one of those (unspecified).</p>
           
           <div class="method-source-code" id="include-3F-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 410</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">include?</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">include?</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>[<span class="ruby-identifier">node</span>] <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1464,7 +1462,7 @@ it will be erased.</p>
           
           <div class="method-source-code" id="insert_node-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 890</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">insert_node</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>, <span class="ruby-identifier">new_node</span>, <span class="ruby-identifier">new_distance</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">insert_node</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>, <span class="ruby-identifier">new_node</span>, <span class="ruby-identifier">new_distance</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">edge</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_edge</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>) <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">IndexError</span>, <span class="ruby-string">&#39;nodes not found or two nodes are not adjacent&#39;</span>
   <span class="ruby-keyword">end</span>
@@ -1517,7 +1515,7 @@ The result is unspecified for cyclic trees.</p>
           
           <div class="method-source-code" id="leaves-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 738</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">leaves</span>(<span class="ruby-identifier">node</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">leaves</span>(<span class="ruby-identifier">node</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">node</span> <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">nodes</span> = []
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_node</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
@@ -1564,7 +1562,7 @@ cyclic trees.</p>
           
           <div class="method-source-code" id="lowest_common_ancestor-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 766</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">lowest_common_ancestor</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lowest_common_ancestor</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">root</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@root</span>
   <span class="ruby-identifier">_</span>, <span class="ruby-identifier">route</span> = <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">breadth_first_search</span>(<span class="ruby-identifier">root</span>)
   <span class="ruby-identifier">x</span> = <span class="ruby-identifier">node1</span>; <span class="ruby-identifier">r1</span> = []
@@ -1631,7 +1629,7 @@ cyclic trees.</p>
           
           <div class="method-source-code" id="nodes-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 295</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">nodes</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nodes</span>
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>.<span class="ruby-identifier">keys</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1664,7 +1662,7 @@ cyclic trees.</p>
           
           <div class="method-source-code" id="number_of_edges-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 326</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">number_of_edges</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">number_of_edges</span>
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">relations</span>.<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1697,7 +1695,7 @@ cyclic trees.</p>
           
           <div class="method-source-code" id="number_of_nodes-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 300</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">number_of_nodes</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">number_of_nodes</span>
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">nodes</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1733,7 +1731,7 @@ Boost Graph Library.</p>
           
           <div class="method-source-code" id="out_degree-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 365</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">out_degree</span>(<span class="ruby-identifier">source</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">out_degree</span>(<span class="ruby-identifier">source</span>)
   <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>[<span class="ruby-identifier">source</span>]
   <span class="ruby-identifier">h</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">:</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
@@ -1771,7 +1769,7 @@ Boost Graph Library.</p>
           
           <div class="method-source-code" id="out_edges-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 341</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">out_edges</span>(<span class="ruby-identifier">source</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">out_edges</span>(<span class="ruby-identifier">source</span>)
   <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>[<span class="ruby-identifier">source</span>]
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">h</span>
     <span class="ruby-identifier">h</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span> [ <span class="ruby-identifier">source</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span> ] }
@@ -1793,7 +1791,7 @@ Boost Graph Library.</p>
         
         <div class="method-heading">
           <span class="method-name">output</span><span
-            class="method-args">(format, *arg, &block)</span>
+            class="method-args">(format, *arg, &amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -1810,7 +1808,7 @@ format is: :newick, :nhx</p>
           
           <div class="method-source-code" id="output-source">
             <pre><span class="ruby-comment"># File lib/bio/tree/output.rb, line 230</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">output</span>(<span class="ruby-identifier">format</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output</span>(<span class="ruby-identifier">format</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
   <span class="ruby-keyword">when</span> <span class="ruby-value">:newick</span>
     <span class="ruby-identifier">output_newick</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -1864,7 +1862,7 @@ Molphy style (default).</p>
           
           <div class="method-source-code" id="output_newick-source">
             <pre><span class="ruby-comment"># File lib/bio/tree/output.rb, line 198</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_newick</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment">#:yields: node1, node2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_newick</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment">#:yields: node1, node2</span>
   <span class="ruby-identifier">root</span> = <span class="ruby-ivar">@root</span>
   <span class="ruby-identifier">root</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">first</span>
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;();&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">root</span>
@@ -1913,7 +1911,7 @@ the order of the node is sorted (as the same manner as Enumerable#sort).</p>
           
           <div class="method-source-code" id="output_nhx-source">
             <pre><span class="ruby-comment"># File lib/bio/tree/output.rb, line 218</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_nhx</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment">#:yields: node1, node2</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_nhx</span>(<span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment">#:yields: node1, node2</span>
   <span class="ruby-identifier">root</span> = <span class="ruby-ivar">@root</span>
   <span class="ruby-identifier">root</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">first</span>
   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;();&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">root</span>
@@ -1955,7 +1953,7 @@ generated.</p>
           
           <div class="method-source-code" id="output_phylip_distance_matrix-source">
             <pre><span class="ruby-comment"># File lib/bio/tree/output.rb, line 251</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_phylip_distance_matrix</span>(<span class="ruby-identifier">nodes</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_phylip_distance_matrix</span>(<span class="ruby-identifier">nodes</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">nodes</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">leaves</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">nodes</span>
   <span class="ruby-identifier">names</span> = <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">y</span> = <span class="ruby-identifier">get_node_name</span>(<span class="ruby-identifier">x</span>)
@@ -1998,7 +1996,7 @@ trees.</p>
           
           <div class="method-source-code" id="parent-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 687</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">parent</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parent</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">root</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">root</span> <span class="ruby-operator">||=</span> <span class="ruby-ivar">@root</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">IndexError</span>, <span class="ruby-string">&#39;can not get parent for unrooted tree&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">root</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">_get_cached_parent</span>(<span class="ruby-identifier">node</span>, <span class="ruby-identifier">root</span>) <span class="ruby-keyword">then</span>
@@ -2041,7 +2039,7 @@ unspecified for cyclic trees.</p>
           
           <div class="method-source-code" id="path-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 612</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">path</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>(<span class="ruby-identifier">node1</span>, <span class="ruby-identifier">node2</span>)
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">IndexError</span>, <span class="ruby-string">&#39;node1 not found&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>[<span class="ruby-identifier">node1</span>]
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">IndexError</span>, <span class="ruby-string">&#39;node2 not found&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>[<span class="ruby-identifier">node2</span>]
   <span class="ruby-keyword">return</span> [ <span class="ruby-identifier">node1</span> ] <span class="ruby-keyword">if</span> <span class="ruby-identifier">node1</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">node2</span>
@@ -2083,7 +2081,7 @@ does not exist, raises IndexError. +</p>
           
           <div class="method-source-code" id="remove_edge-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 465</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_edge</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_edge</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get_edge</span>(<span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>) <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">IndexError</span>, <span class="ruby-string">&#39;edge not found&#39;</span>
   <span class="ruby-keyword">end</span>
@@ -2129,7 +2127,7 @@ does not exist, raises IndexError. +</p>
           
           <div class="method-source-code" id="remove_edge_if-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 484</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_edge_if</span> <span class="ruby-comment">#:yields: source, target, edge</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_edge_if</span> <span class="ruby-comment">#:yields: source, target, edge</span>
   <span class="ruby-identifier">_clear_cache</span>
   <span class="ruby-identifier">removed_rel</span> = []
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">relations</span>.<span class="ruby-identifier">delete_if</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span>
@@ -2179,7 +2177,7 @@ also removed. Returns self. If the node does not exist, raises IndexError.</p>
           
           <div class="method-source-code" id="remove_node-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 436</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_node</span>(<span class="ruby-identifier">node</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_node</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-comment">#_clear_cache #done in clear_node(node)</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">clear_node</span>(<span class="ruby-identifier">node</span>)
   <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">node</span>)
@@ -2216,7 +2214,7 @@ the removed nodes are also removed. Returns self.</p>
           
           <div class="method-source-code" id="remove_node_if-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 446</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_node_if</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_node_if</span>
   <span class="ruby-comment">#_clear_cache #done in clear_node(node)</span>
   <span class="ruby-identifier">all</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">nodes</span>
   <span class="ruby-identifier">all</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
@@ -2260,7 +2258,7 @@ orphan nodes are still kept unchanged.</p>
           
           <div class="method-source-code" id="remove_nonsense_nodes-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 852</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_nonsense_nodes</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_nonsense_nodes</span>
   <span class="ruby-identifier">_clear_cache</span>
   <span class="ruby-identifier">hash</span> = {}
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_node</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">node</span><span class="ruby-operator">|</span>
@@ -2315,7 +2313,7 @@ objects with the original tree.</p>
           
           <div class="method-source-code" id="subtree-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 543</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">subtree</span>(<span class="ruby-identifier">nodes</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subtree</span>(<span class="ruby-identifier">nodes</span>)
   <span class="ruby-identifier">nodes</span> = <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@pathway</span>.<span class="ruby-identifier">graph</span>[<span class="ruby-identifier">x</span>]
   <span class="ruby-keyword">end</span>
@@ -2367,7 +2365,7 @@ trees. Note that the sub-tree shares <a href="Tree/Node.html">Node</a> and
           
           <div class="method-source-code" id="subtree_with_all_paths-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 569</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">subtree_with_all_paths</span>(<span class="ruby-identifier">nodes</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subtree_with_all_paths</span>(<span class="ruby-identifier">nodes</span>)
   <span class="ruby-identifier">hash</span> = {}
   <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">x</span>] = <span class="ruby-keyword">true</span> }
   <span class="ruby-identifier">nodes</span>.<span class="ruby-identifier">each_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
@@ -2417,7 +2415,7 @@ didn&#39;t contain distance values.</p>
           
           <div class="method-source-code" id="total_distance-source">
             <pre><span class="ruby-comment"># File lib/bio/tree.rb, line 778</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">total_distance</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">total_distance</span>
   <span class="ruby-identifier">distance</span> = <span class="ruby-value">0</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_edge</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">source</span>, <span class="ruby-identifier">target</span>, <span class="ruby-identifier">edge</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">distance</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">get_edge_distance</span>(<span class="ruby-identifier">edge</span>)
@@ -2441,8 +2439,8 @@ didn&#39;t contain distance values.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

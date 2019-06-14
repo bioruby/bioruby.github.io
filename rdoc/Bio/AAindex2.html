@@ -52,6 +52,16 @@
   </div>
 
   
+<div class="nav-section">
+  <h3>Table of Contents</h3>
+
+  <ul class="link-list" role="directory">
+    <li><a href="#class-Bio::AAindex2-label-Description">Description</a>
+    <li><a href="#class-Bio::AAindex2-label-Examples">Examples</a>
+    <li><a href="#class-Bio::AAindex2-label-References">References</a>
+  </ul>
+</div>
+
 
   <div id="class-metadata">
     
@@ -96,12 +106,36 @@
 
   <section class="description">
     
-<p>Class for <a href="AAindex2.html">AAindex2</a> format.</p>
+<h2 id="class-Bio::AAindex2-label-Description">Description<span><a href="#class-Bio::AAindex2-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Parser class for <a href="AAindex2.html">AAindex2</a>, Amino Acid Index
+Database.</p>
+<ul><li>
+<p><a href="AAindex.html">AAindex</a> Help: <a
+href="https://www.genome.jp/aaindex/aaindex_help.html">www.genome.jp/aaindex/aaindex_help.html</a></p>
+</li></ul>
+
+<h2 id="class-Bio::AAindex2-label-Examples">Examples<span><a href="#class-Bio::AAindex2-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<pre class="ruby"><span class="ruby-comment"># auto-detection of data format by using Bio::AAindex class</span>
+<span class="ruby-identifier">aax2</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AAindex</span>.<span class="ruby-identifier">auto</span>(<span class="ruby-string">&quot;DAYM780301.aaindex2&quot;</span>)
+
+<span class="ruby-comment"># parse a file and get contents</span>
+<span class="ruby-identifier">aax2</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AAindex2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;DAYM780301.aaindex2&quot;</span>)
+<span class="ruby-identifier">aax2</span>.<span class="ruby-identifier">entry_id</span>
+<span class="ruby-identifier">aax2</span>.<span class="ruby-identifier">matrix</span>
+<span class="ruby-identifier">aax2</span>.<span class="ruby-identifier">matrix</span>[<span class="ruby-value">2</span>,<span class="ruby-value">2</span>]
+<span class="ruby-identifier">aax2</span>.<span class="ruby-identifier">matrix</span>(<span class="ruby-string">&#39;R&#39;</span>, <span class="ruby-string">&#39;A&#39;</span>)
+<span class="ruby-identifier">aax2</span>[<span class="ruby-string">&#39;R&#39;</span>, <span class="ruby-string">&#39;A&#39;</span>]
+</pre>
+
+<h2 id="class-Bio::AAindex2-label-References"><a href="References.html">References</a><span><a href="#class-Bio::AAindex2-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<ul><li>
+<p><a href="http://www.genome.jp/aaindex">www.genome.jp/aaindex</a>/</p>
+</li></ul>
 
   </section>
 
-  
-  
   
   <section id="5Buntitled-5D" class="documentation-section">
     
@@ -143,8 +177,8 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 217</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">entry</span>)
+            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 286</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -184,8 +218,8 @@
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 242</span>
-<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">aa1</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aa2</span> = <span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 311</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">aa1</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aa2</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">matrix</span>[<span class="ruby-identifier">cols</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">aa1</span>), <span class="ruby-identifier">rows</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">aa2</span>)]
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -217,8 +251,8 @@
 
           
           <div class="method-source-code" id="cols-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 232</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">cols</span>
+            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 301</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cols</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;cols&#39;</span>]
     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;cols&#39;</span>]
   <span class="ruby-keyword">else</span> 
@@ -255,8 +289,8 @@
 
           
           <div class="method-source-code" id="matrix-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 247</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">matrix</span>(<span class="ruby-identifier">aa1</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aa2</span> = <span class="ruby-keyword">nil</span>)
+            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 316</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">matrix</span>(<span class="ruby-identifier">aa1</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aa2</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">aa1</span>, <span class="ruby-identifier">aa2</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">aa1</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">aa2</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;matrix&#39;</span>] 
@@ -270,8 +304,8 @@
     <span class="ruby-identifier">ma</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">row</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">row_size</span> = <span class="ruby-identifier">row</span>.<span class="ruby-identifier">size</span>
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">row_size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">ma_len</span>
-        (<span class="ruby-identifier">row_size</span><span class="ruby-operator">..</span><span class="ruby-identifier">ma_len</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">row</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">ma</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">row_size</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]
+        (<span class="ruby-identifier">row_size</span><span class="ruby-operator">..</span><span class="ruby-identifier">ma_len</span><span class="ruby-value">-1</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">row</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">ma</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">row_size</span><span class="ruby-value">-1</span>]
         <span class="ruby-keyword">end</span>
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
@@ -308,8 +342,8 @@
 
           
           <div class="method-source-code" id="old_matrix-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 272</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">old_matrix</span> <span class="ruby-comment"># for AAindex &lt;= ver 5.0</span>
+            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 341</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">old_matrix</span> <span class="ruby-comment"># for AAindex &lt;= ver 5.0</span>
   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;matrix&#39;</span>] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;matrix&#39;</span>]
 
   <span class="ruby-ivar">@aa</span> = {} 
@@ -336,7 +370,7 @@
 
     <span class="ruby-keyword">for</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">in</span> <span class="ruby-value">0</span> <span class="ruby-operator">..</span> <span class="ruby-value">19</span> <span class="ruby-keyword">do</span>
       <span class="ruby-keyword">for</span> <span class="ruby-identifier">j</span> <span class="ruby-keyword">in</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">..</span> <span class="ruby-value">19</span> <span class="ruby-keyword">do</span>
-        <span class="ruby-identifier">ma</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>] = <span class="ruby-identifier">values</span>[<span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">j</span><span class="ruby-operator">*</span>(<span class="ruby-identifier">j</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)<span class="ruby-operator">/</span><span class="ruby-value">2</span>].<span class="ruby-identifier">to_f</span>
+        <span class="ruby-identifier">ma</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>] = <span class="ruby-identifier">values</span>[<span class="ruby-identifier">i</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">j</span><span class="ruby-operator">*</span>(<span class="ruby-identifier">j</span><span class="ruby-value">+1</span>)<span class="ruby-operator">/</span><span class="ruby-value">2</span>].<span class="ruby-identifier">to_f</span>
         <span class="ruby-identifier">ma</span>[<span class="ruby-identifier">j</span>][<span class="ruby-identifier">i</span>] = <span class="ruby-identifier">ma</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>]
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
@@ -376,8 +410,8 @@
 
           
           <div class="method-source-code" id="rows-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 222</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">rows</span>
+            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 291</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rows</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;rows&#39;</span>]
     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;rows&#39;</span>]
   <span class="ruby-keyword">else</span> 
@@ -402,8 +436,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

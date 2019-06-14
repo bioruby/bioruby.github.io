@@ -105,8 +105,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -398,10 +396,11 @@
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/hmmer/report.rb, line 483</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">hsp_data</span>, <span class="ruby-identifier">is_hmmsearch</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">hsp_data</span>, <span class="ruby-identifier">is_hmmsearch</span>)
   <span class="ruby-ivar">@is_hmmsearch</span> = <span class="ruby-identifier">is_hmmsearch</span>
 
-  <span class="ruby-ivar">@accession</span>, <span class="ruby-ivar">@domain</span>, <span class="ruby-identifier">seq_f</span>, <span class="ruby-identifier">seq_t</span>, <span class="ruby-ivar">@seq_ft</span>, <span class="ruby-identifier">hmm_f</span>, <span class="ruby-identifier">hmm_t</span>, <span class="ruby-ivar">@hmm_ft</span>,         <span class="ruby-identifier">score</span>, <span class="ruby-identifier">evalue</span> = <span class="ruby-identifier">hsp_data</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)
+  <span class="ruby-ivar">@accession</span>, <span class="ruby-ivar">@domain</span>, <span class="ruby-identifier">seq_f</span>, <span class="ruby-identifier">seq_t</span>, <span class="ruby-ivar">@seq_ft</span>, <span class="ruby-identifier">hmm_f</span>, <span class="ruby-identifier">hmm_t</span>, <span class="ruby-ivar">@hmm_ft</span>,\
+  <span class="ruby-identifier">score</span>, <span class="ruby-identifier">evalue</span> = <span class="ruby-identifier">hsp_data</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)
   <span class="ruby-ivar">@seq_f</span> = <span class="ruby-identifier">seq_f</span>.<span class="ruby-identifier">to_i</span>
   <span class="ruby-ivar">@seq_t</span> = <span class="ruby-identifier">seq_t</span>.<span class="ruby-identifier">to_i</span>
   <span class="ruby-ivar">@hmm_f</span> = <span class="ruby-identifier">hmm_f</span>.<span class="ruby-identifier">to_i</span>
@@ -455,7 +454,7 @@
           
           <div class="method-source-code" id="query_from-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/hmmer/report.rb, line 550</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_from</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_from</span>
   <span class="ruby-ivar">@is_hmmsearch</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@hmm_f</span>   <span class="ruby-operator">:</span> <span class="ruby-ivar">@seq_f</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -488,7 +487,7 @@
           
           <div class="method-source-code" id="query_seq-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/hmmer/report.rb, line 530</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_seq</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_seq</span>
   <span class="ruby-ivar">@is_hmmsearch</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@hmmseq</span>  <span class="ruby-operator">:</span> <span class="ruby-ivar">@flatseq</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -521,7 +520,7 @@
           
           <div class="method-source-code" id="query_to-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/hmmer/report.rb, line 555</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_to</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_to</span>
   <span class="ruby-ivar">@is_hmmsearch</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@hmm_t</span>   <span class="ruby-operator">:</span> <span class="ruby-ivar">@seq_t</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -554,10 +553,10 @@
           
           <div class="method-source-code" id="set_alignment-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/hmmer/report.rb, line 505</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_alignment</span>(<span class="ruby-identifier">alignment</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_alignment</span>(<span class="ruby-identifier">alignment</span>)
   <span class="ruby-comment"># First, split the input alignment into an array of</span>
   <span class="ruby-comment"># &quot;alignment blocks.&quot; One block usually has three lines,</span>
-  <span class="ruby-comment"># i.e. hmmseq, midline and flatseq. </span>
+  <span class="ruby-comment"># i.e. hmmseq, midline and flatseq.</span>
   <span class="ruby-comment"># However, although infrequent, it can contain CS or RF lines.</span>
   <span class="ruby-identifier">alignment</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/ (?:\d+|-)\s*\n\n/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">blk</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">blk</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>)   
@@ -606,7 +605,7 @@
           
           <div class="method-source-code" id="target_from-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/hmmer/report.rb, line 540</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">target_from</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_from</span>
   <span class="ruby-ivar">@is_hmmsearch</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@seq_f</span>   <span class="ruby-operator">:</span> <span class="ruby-ivar">@hmm_f</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -639,7 +638,7 @@
           
           <div class="method-source-code" id="target_seq-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/hmmer/report.rb, line 535</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">target_seq</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_seq</span>
   <span class="ruby-ivar">@is_hmmsearch</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@flatseq</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@hmmseq</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -672,7 +671,7 @@
           
           <div class="method-source-code" id="target_to-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/hmmer/report.rb, line 545</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">target_to</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_to</span>
   <span class="ruby-ivar">@is_hmmsearch</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@seq_t</span>   <span class="ruby-operator">:</span> <span class="ruby-ivar">@hmm_t</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -692,8 +691,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

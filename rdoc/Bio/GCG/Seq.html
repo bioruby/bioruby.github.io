@@ -136,8 +136,6 @@ href="http://docs.bioperl.org/releases/bioperl-1.2.3/Bio/SeqIO/gcg.html">docs.bi
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -289,7 +287,7 @@ sequence, “P” means protein sequence.</p>
           
           <div class="method-source-code" id="calc_checksum-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 141</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">calc_checksum</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">calc_checksum</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-comment"># Reference: Bio::SeqIO::gcg of BioPerl-1.2.3</span>
   <span class="ruby-identifier">idx</span> = <span class="ruby-value">0</span>
   <span class="ruby-identifier">sum</span> = <span class="ruby-value">0</span>
@@ -331,7 +329,7 @@ href="../GCG.html">GCG</a> seq formatted string.</p>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-ivar">@heading</span> = <span class="ruby-identifier">str</span>[<span class="ruby-regexp">/.*/</span>] <span class="ruby-comment"># &#39;!!NA_SEQUENCE 1.0&#39; or like this</span>
   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/.*/</span>, <span class="ruby-string">&#39;&#39;</span>)
   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/.*\.\.$/m</span>, <span class="ruby-string">&#39;&#39;</span>)
@@ -376,9 +374,9 @@ Parameters can be omitted.</p>
 
 <p>Examples:</p>
 
-<pre class="ruby"><span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">GCG</span><span class="ruby-operator">::</span><span class="ruby-constant">Seq</span>.<span class="ruby-identifier">to_gcg</span>(:<span class="ruby-identifier">definition=</span><span class="ruby-operator">&gt;</span><span class="ruby-string">&#39;H.sapiens DNA&#39;</span>,
-                     :<span class="ruby-identifier">seq_type=</span><span class="ruby-operator">&gt;</span><span class="ruby-string">&#39;N&#39;</span>, :<span class="ruby-identifier">entry_id=</span><span class="ruby-operator">&gt;</span><span class="ruby-string">&#39;gi-1234567&#39;</span>,
-                     :<span class="ruby-identifier">seq=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">seq</span>, :<span class="ruby-identifier">date=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">date</span>)
+<pre class="ruby"><span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">GCG</span><span class="ruby-operator">::</span><span class="ruby-constant">Seq</span>.<span class="ruby-identifier">to_gcg</span>(<span class="ruby-value">:definition</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&#39;H.sapiens DNA&#39;</span>,
+                     <span class="ruby-value">:seq_type</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&#39;N&#39;</span>, <span class="ruby-value">:entry_id</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&#39;gi-1234567&#39;</span>,
+                     <span class="ruby-value">:seq</span><span class="ruby-operator">=&gt;</span><span class="ruby-identifier">seq</span>, <span class="ruby-value">:date</span><span class="ruby-operator">=&gt;</span><span class="ruby-identifier">date</span>)
 </pre>
           
           
@@ -386,7 +384,7 @@ Parameters can be omitted.</p>
           
           <div class="method-source-code" id="to_gcg-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 161</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_gcg</span>(<span class="ruby-identifier">hash</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_gcg</span>(<span class="ruby-identifier">hash</span>)
   <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:seq</span>]
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>) <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">seq_type</span> = <span class="ruby-string">&#39;N&#39;</span>
@@ -412,7 +410,8 @@ Parameters can be omitted.</p>
   <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;\n%*d &quot;</span>, <span class="ruby-identifier">w</span>, <span class="ruby-identifier">i</span>); <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">50</span>; <span class="ruby-identifier">s</span> }
 
   [ <span class="ruby-identifier">head</span>, <span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-identifier">definition</span>, <span class="ruby-string">&quot;\n\n&quot;</span>,
-    <span class="ruby-node">&quot;#{entry_id}  Length: #{len}  #{date}  &quot;</span>            <span class="ruby-node">&quot;Type: #{seq_type}  Check: #{checksum}  ..\n&quot;</span>,
+    <span class="ruby-node">&quot;#{entry_id}  Length: #{len}  #{date}  &quot;</span> \
+    <span class="ruby-node">&quot;Type: #{seq_type}  Check: #{checksum}  ..\n&quot;</span>,
     <span class="ruby-identifier">seq</span>, <span class="ruby-string">&quot;\n&quot;</span> ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -457,11 +456,11 @@ RuntimeError will be raised.</p>
           
           <div class="method-source-code" id="aaseq-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 108</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">aaseq</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aaseq</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>) <span class="ruby-keyword">then</span>
     <span class="ruby-ivar">@seq</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;seq_type != \P\&#39;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;seq_type != \&#39;P\&#39;&#39;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -498,11 +497,11 @@ RuntimeError will be raised.</p>
           
           <div class="method-source-code" id="naseq-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 121</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">naseq</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">naseq</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>) <span class="ruby-keyword">then</span>
     <span class="ruby-ivar">@seq</span>
   <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;seq_type != \N\&#39;</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;seq_type != \&#39;N\&#39;&#39;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -538,7 +537,7 @@ according to the sequence type.</p>
           
           <div class="method-source-code" id="seq-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">seq</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@seq</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">case</span> <span class="ruby-ivar">@seq_type</span>
     <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;N&#39;</span>, <span class="ruby-string">&#39;n&#39;</span>
@@ -583,7 +582,7 @@ returns false.</p>
           
           <div class="method-source-code" id="validate_checksum-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 132</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_checksum</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_checksum</span>
   <span class="ruby-identifier">checksum</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">calc_checksum</span>(<span class="ruby-identifier">seq</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -603,8 +602,8 @@ returns false.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

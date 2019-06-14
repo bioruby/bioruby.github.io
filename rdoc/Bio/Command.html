@@ -96,6 +96,8 @@
     
     <li ><a href="#method-i-new_http">#new_http</a>
     
+    <li ><a href="#method-i-new_https">#new_https</a>
+    
     <li ><a href="#method-i-no_fork-3F">#no_fork?</a>
     
     <li ><a href="#method-i-post">#post</a>
@@ -145,8 +147,6 @@ for applications shall use this class.</p>
 
   </section>
 
-  
-  
   
   <section id="5Buntitled-5D" class="documentation-section">
     
@@ -212,10 +212,9 @@ passed to the block.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>cmd</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>cmd</em>: Array containing String objects</p>
 </li><li>
-<p>(optional) <em>options</em>: <a href="../Hash.html">Hash</a></p>
+<p>(optional) <em>options</em>: Hash</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -227,7 +226,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="call_command-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 196</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">call_command</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment">#:yields: io</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call_command</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>) <span class="ruby-comment">#:yields: io</span>
   <span class="ruby-keyword">if</span> <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;1.9.0&quot;</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">call_command_popen</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">no_fork?</span> <span class="ruby-keyword">then</span>
@@ -291,10 +290,9 @@ improved to get a command-line as an array without calling shell.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>cmd</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>cmd</em>: Array containing String objects</p>
 </li><li>
-<p>(optional) <em>options</em>: <a href="../Hash.html">Hash</a></p>
+<p>(optional) <em>options</em>: Hash</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -306,7 +304,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="call_command_fork-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 373</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">call_command_fork</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">options</span> = {})
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call_command_fork</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">dir</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:chdir</span>]
   <span class="ruby-identifier">cmd</span> = <span class="ruby-identifier">safe_command_line_array</span>(<span class="ruby-identifier">cmd</span>)
   <span class="ruby-keyword">begin</span>
@@ -373,8 +371,7 @@ passed to the block.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>cmd</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>cmd</em>: Array containing String objects</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -386,7 +383,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="call_command_open3-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 419</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">call_command_open3</span>(<span class="ruby-identifier">cmd</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call_command_open3</span>(<span class="ruby-identifier">cmd</span>)
   <span class="ruby-identifier">cmd</span> = <span class="ruby-identifier">safe_command_line_array</span>(<span class="ruby-identifier">cmd</span>)
   <span class="ruby-constant">Open3</span>.<span class="ruby-identifier">popen3</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">cmd</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pin</span>, <span class="ruby-identifier">pout</span>, <span class="ruby-identifier">perr</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">pin</span>, <span class="ruby-identifier">pout</span>, <span class="ruby-identifier">perr</span>
@@ -406,7 +403,7 @@ href="../String.html">String</a> objects</p>
         
         <div class="method-heading">
           <span class="method-name">call_command_popen</span><span
-            class="method-args">(cmd, options = {}, &block)</span>
+            class="method-args">(cmd, options = {}, &amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -441,10 +438,9 @@ improved to get a command-line as an array without calling shell.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>cmd</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>cmd</em>: Array containing String objects</p>
 </li><li>
-<p>(optional) <em>options</em>: <a href="../Hash.html">Hash</a></p>
+<p>(optional) <em>options</em>: Hash</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -456,7 +452,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="call_command_popen-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 235</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">call_command_popen</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call_command_popen</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">options</span> = {}, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;1.9.0&quot;</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">if</span> <span class="ruby-constant">RUBY_ENGINE</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;jruby&#39;</span> <span class="ruby-keyword">then</span>
       <span class="ruby-identifier">_call_command_popen_jruby19</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">options</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
@@ -495,11 +491,11 @@ href="../String.html">String</a> objects</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>str</em>: <a href="../String.html">String</a></p>
+<p>(required) <em>str</em>: String</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a> object</p>
+<p>String object</p>
 </dd></dl>
           
           
@@ -507,7 +503,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="escape_shell-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 121</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">escape_shell</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">escape_shell</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">windows_platform?</span> <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">escape_shell_windows</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-keyword">else</span>
@@ -542,11 +538,11 @@ href="../String.html">String</a> objects</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>str</em>: <a href="../String.html">String</a></p>
+<p>(required) <em>str</em>: String</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a> object</p>
+<p>String object</p>
 </dd></dl>
           
           
@@ -554,7 +550,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="escape_shell_unix-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 110</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">escape_shell_unix</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">escape_shell_unix</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;cannot escape control characters&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">UNESCAPABLE_CHARS</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">str</span>
   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">UNSAFE_CHARS_UNIX</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;\\#{x}&quot;</span> }
@@ -587,11 +583,11 @@ href="../String.html">String</a> objects</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>str</em>: <a href="../String.html">String</a></p>
+<p>(required) <em>str</em>: String</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a> object</p>
+<p>String object</p>
 </dd></dl>
           
           
@@ -599,7 +595,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="escape_shell_windows-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 95</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">escape_shell_windows</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">escape_shell_windows</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;cannot escape control characters&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">UNESCAPABLE_CHARS</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">str</span>
   <span class="ruby-keyword">if</span> <span class="ruby-constant">QUOTE_CHARS_WINDOWS</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">then</span>
@@ -646,13 +642,11 @@ and <code>header</code> must be a hash.</p>
 <ul><li>
 <p>(required) <em>http</em>: Net::HTTP object or compatible object</p>
 </li><li>
-<p>(required) <em>path</em>: <a href="../String.html">String</a></p>
+<p>(required) <em>path</em>: String</p>
 </li><li>
-<p>(required) <em>data</em>: <a href="../String.html">String</a> containing
-data</p>
+<p>(required) <em>data</em>: String containing data</p>
 </li><li>
-<p>(optional) <em>header</em>: <a href="../Hash.html">Hash</a> containing
-header strings</p>
+<p>(optional) <em>header</em>: Hash containing header strings</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -663,11 +657,11 @@ header strings</p>
 
           
           <div class="method-source-code" id="http_post-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 940</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">http_post</span>(<span class="ruby-identifier">http</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">header</span> = {})
+            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 950</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">http_post</span>(<span class="ruby-identifier">http</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">header</span> = {})
   <span class="ruby-identifier">hash</span> = {
-    <span class="ruby-string">&#39;Content-Type&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;application/octet-stream&#39;</span>,
-    <span class="ruby-string">&#39;Content-Length&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-string">&#39;Content-Type&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;application/octet-stream&#39;</span>,
+    <span class="ruby-string">&#39;Content-Length&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
   }
   <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">header</span>)
 
@@ -711,13 +705,11 @@ be a URI object, <code>params</code> must be a hash, and
 <ul><li>
 <p>(required) <em>http</em>: Net::HTTP object or compatible object</p>
 </li><li>
-<p>(required) <em>path</em>: <a href="../String.html">String</a></p>
+<p>(required) <em>path</em>: String</p>
 </li><li>
-<p>(optional) <em>params</em>: <a href="../Hash.html">Hash</a> containing
-parameters</p>
+<p>(optional) <em>params</em>: Hash containing parameters</p>
 </li><li>
-<p>(optional) <em>header</em>: <a href="../Hash.html">Hash</a> containing
-header strings</p>
+<p>(optional) <em>header</em>: Hash containing header strings</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -728,13 +720,13 @@ header strings</p>
 
           
           <div class="method-source-code" id="http_post_form-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 812</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">http_post_form</span>(<span class="ruby-identifier">http</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">header</span> = {})
+            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 822</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">http_post_form</span>(<span class="ruby-identifier">http</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">header</span> = {})
   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">make_cgi_params</span>(<span class="ruby-identifier">params</span>)
 
   <span class="ruby-identifier">hash</span> = {
-    <span class="ruby-string">&#39;Content-Type&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;application/x-www-form-urlencoded&#39;</span>,
-    <span class="ruby-string">&#39;Content-Length&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-string">&#39;Content-Type&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;application/x-www-form-urlencoded&#39;</span>,
+    <span class="ruby-string">&#39;Content-Length&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
   }
   <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">header</span>)
 
@@ -763,26 +755,25 @@ header strings</p>
 
         <div class="method-description">
           
-          <p>Builds parameter string for from <a href="../Hash.html">Hash</a> of
-parameters for application/x-www-form-urlencoded.</p>
+          <p>Builds parameter string for from Hash of parameters for
+application/x-www-form-urlencoded.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>params</em>: <a href="../Hash.html">Hash</a> containing
-parameters</p>
+<p>(required) <em>params</em>: Hash containing parameters</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a></p>
+<p>String</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="make_cgi_params-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 866</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">make_cgi_params</span>(<span class="ruby-identifier">params</span>)
+            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 876</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">make_cgi_params</span>(<span class="ruby-identifier">params</span>)
   <span class="ruby-identifier">data</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">params</span>
   <span class="ruby-keyword">when</span> <span class="ruby-constant">Hash</span>
@@ -845,22 +836,21 @@ application/x-www-form-urlencoded.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>key</em>: <a href="../String.html">String</a></p>
+<p>(required) <em>key</em>: String</p>
 </li><li>
-<p>(required) <em>value</em>: <a href="../String.html">String</a> or Array
-containing <a href="../String.html">String</a></p>
+<p>(required) <em>value</em>: String or Array containing String</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a></p>
+<p>String</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="make_cgi_params_key_value-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 909</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">make_cgi_params_key_value</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
+            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 919</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">make_cgi_params_key_value</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span>)
   <span class="ruby-identifier">result</span> = []
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">value</span>
   <span class="ruby-keyword">when</span> <span class="ruby-constant">Array</span>
@@ -900,12 +890,11 @@ containing <a href="../String.html">String</a></p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>ary</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>ary</em>: Array containing String objects</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a> object</p>
+<p>String object</p>
 </dd></dl>
           
           
@@ -913,7 +902,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="make_command_line-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 134</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">make_command_line</span>(<span class="ruby-identifier">ary</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">make_command_line</span>(<span class="ruby-identifier">ary</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">windows_platform?</span> <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">make_command_line_windows</span>(<span class="ruby-identifier">ary</span>)
   <span class="ruby-keyword">else</span>
@@ -949,12 +938,11 @@ shells.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>ary</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>ary</em>: Array containing String objects</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a> object</p>
+<p>String object</p>
 </dd></dl>
           
           
@@ -962,7 +950,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="make_command_line_unix-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 158</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">make_command_line_unix</span>(<span class="ruby-identifier">ary</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">make_command_line_unix</span>(<span class="ruby-identifier">ary</span>)
   <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span> <span class="ruby-identifier">escape_shell_unix</span>(<span class="ruby-identifier">str</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -994,12 +982,11 @@ Windows.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>ary</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>ary</em>: Array containing String objects</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a> object</p>
+<p>String object</p>
 </dd></dl>
           
           
@@ -1007,7 +994,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="make_command_line_windows-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">make_command_line_windows</span>(<span class="ruby-identifier">ary</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">make_command_line_windows</span>(<span class="ruby-identifier">ary</span>)
   <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span> <span class="ruby-identifier">escape_shell_windows</span>(<span class="ruby-identifier">str</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot; &quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1040,8 +1027,7 @@ href="../String.html">String</a> objects</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(optional) <em>prefix_suffix</em>: <a href="../String.html">String</a> (or
-Array, etc.)</p>
+<p>(optional) <em>prefix_suffix</em>: String (or Array, etc.)</p>
 </li><li>
 <p>(optional) <em>tmpdir</em>: String: temporary directory&#39;s path</p>
 </li></ul>
@@ -1051,7 +1037,7 @@ Array, etc.)</p>
           
           <div class="method-source-code" id="mktmpdir-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 573</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">mktmpdir</span>(<span class="ruby-identifier">prefix_suffix</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tmpdir</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mktmpdir</span>(<span class="ruby-identifier">prefix_suffix</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tmpdir</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mktmpdir</span>(<span class="ruby-identifier">prefix_suffix</span>, <span class="ruby-identifier">tmpdir</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
@@ -1131,8 +1117,7 @@ set.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>address</em>: <a href="../String.html">String</a> containing
-host name or IP address</p>
+<p>(required) <em>address</em>: String containing host name or IP address</p>
 </li><li>
 <p>(optional) <em>port</em>: port (sanme as Net::HTTP::start)</p>
 </li></ul>
@@ -1146,7 +1131,7 @@ host name or IP address</p>
           
           <div class="method-source-code" id="new_http-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 782</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_http</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">port</span> = <span class="ruby-value">80</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new_http</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">port</span> = <span class="ruby-value">80</span>)
   <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;http://#{address}:#{port}&quot;</span>)
   <span class="ruby-comment"># Note: URI#find_proxy is an unofficial method defined in open-uri.rb.</span>
   <span class="ruby-comment"># If the spec of open-uri.rb would be changed, we should change below.</span>
@@ -1156,6 +1141,46 @@ host name or IP address</p>
   <span class="ruby-keyword">else</span>
     <span class="ruby-constant">Net</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">port</span>)
   <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-new_https" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">new_https</span><span
+            class="method-args">(address, port = 443)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Same as:</p>
+
+<pre class="ruby"><span class="ruby-identifier">h</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">new_http</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">port</span>)
+<span class="ruby-identifier">h</span>.<span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-identifier">h</span>
+</pre>
+          
+          
+
+          
+          <div class="method-source-code" id="new_https-source">
+            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 798</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new_https</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">port</span> = <span class="ruby-value">443</span>)
+  <span class="ruby-identifier">connection</span> = <span class="ruby-identifier">new_http</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">port</span>)
+  <span class="ruby-identifier">connection</span>.<span class="ruby-identifier">use_ssl</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">connection</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -1202,7 +1227,7 @@ it returns true. When supported or unknown, it returns false or nil.</p>
           
           <div class="method-source-code" id="no_fork-3F-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 80</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">no_fork?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">no_fork?</span>
   <span class="ruby-keyword">if</span> (<span class="ruby-keyword">defined?</span>(<span class="ruby-identifier">@@no_fork</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">@@no_fork</span>) <span class="ruby-keyword">or</span>
       <span class="ruby-identifier">windows_platform?</span> <span class="ruby-keyword">or</span> <span class="ruby-regexp">/java/i</span> <span class="ruby-operator">=~</span> <span class="ruby-constant">RUBY_PLATFORM</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">true</span>
@@ -1237,19 +1262,17 @@ it returns true. When supported or unknown, it returns false or nil.</p>
 variable (same as OpenURI.open_uri) is set. In addition,
 <code>header</code> can be set. (Default Content-Type is
 application/octet-stream. Content-Length is automatically set by default.)
-<code>uri</code> must be a URI object, <code>data</code> must be a <a
-href="../String.html">String</a>, and <code>header</code> must be a hash.</p>
+<code>uri</code> must be a URI object, <code>data</code> must be a String,
+and <code>header</code> must be a hash.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>uri</em>: URI object or <a href="../String.html">String</a></p>
+<p>(required) <em>uri</em>: URI object or String</p>
 </li><li>
-<p>(optional) <em>data</em>: <a href="../String.html">String</a> containing
-data</p>
+<p>(optional) <em>data</em>: String containing data</p>
 </li><li>
-<p>(optional) <em>header</em>: <a href="../Hash.html">Hash</a> containing
-header strings</p>
+<p>(optional) <em>header</em>: Hash containing header strings</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -1260,15 +1283,15 @@ header strings</p>
 
           
           <div class="method-source-code" id="post-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 967</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">post</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">header</span> = {})
+            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 977</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">header</span> = {})
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">URI</span>)
     <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">uri</span>)
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-identifier">hash</span> = {
-    <span class="ruby-string">&#39;Content-Type&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;application/octet-stream&#39;</span>,
-    <span class="ruby-string">&#39;Content-Length&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-string">&#39;Content-Type&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;application/octet-stream&#39;</span>,
+    <span class="ruby-string">&#39;Content-Length&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
   }
   <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">header</span>)
 
@@ -1308,13 +1331,11 @@ are automatically set by default.) <code>uri</code> must be a URI object,
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>uri</em>: URI object or <a href="../String.html">String</a></p>
+<p>(required) <em>uri</em>: URI object or String</p>
 </li><li>
-<p>(optional) <em>params</em>: <a href="../Hash.html">Hash</a> containing
-parameters</p>
+<p>(optional) <em>params</em>: Hash containing parameters</p>
 </li><li>
-<p>(optional) <em>header</em>: <a href="../Hash.html">Hash</a> containing
-header strings</p>
+<p>(optional) <em>header</em>: Hash containing header strings</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -1325,8 +1346,8 @@ header strings</p>
 
           
           <div class="method-source-code" id="post_form-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 841</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">post_form</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">header</span> = {})
+            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 851</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">post_form</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-identifier">params</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">header</span> = {})
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">URI</span>)
     <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">uri</span>)
   <span class="ruby-keyword">end</span>
@@ -1334,8 +1355,8 @@ header strings</p>
   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">make_cgi_params</span>(<span class="ruby-identifier">params</span>)
 
   <span class="ruby-identifier">hash</span> = {
-    <span class="ruby-string">&#39;Content-Type&#39;</span>   =<span class="ruby-operator">&gt;</span> <span class="ruby-string">&#39;application/x-www-form-urlencoded&#39;</span>,
-    <span class="ruby-string">&#39;Content-Length&#39;</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-string">&#39;Content-Type&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;application/x-www-form-urlencoded&#39;</span>,
+    <span class="ruby-string">&#39;Content-Length&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_s</span>
   }
   <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">header</span>)
 
@@ -1380,16 +1401,15 @@ the others.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>cmd</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>cmd</em>: Array containing String objects</p>
 </li><li>
-<p>(optional) <em>query</em>: <a href="../String.html">String</a></p>
+<p>(optional) <em>query</em>: String</p>
 </li><li>
-<p>(optional) <em>options</em>: <a href="../Hash.html">Hash</a></p>
+<p>(optional) <em>options</em>: Hash</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a> or nil</p>
+<p>String or nil</p>
 </dd></dl>
           
           
@@ -1397,7 +1417,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="query_command-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 442</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_command</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">query</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_command</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">query</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-keyword">if</span> <span class="ruby-constant">RUBY_VERSION</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-string">&quot;1.9.0&quot;</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">query_command_popen</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">query</span>, <span class="ruby-identifier">options</span>)
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">no_fork?</span> <span class="ruby-keyword">then</span>
@@ -1458,16 +1478,15 @@ the security and Ruby version specific issues.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>cmd</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>cmd</em>: Array containing String objects</p>
 </li><li>
-<p>(optional) <em>query</em>: <a href="../String.html">String</a></p>
+<p>(optional) <em>query</em>: String</p>
 </li><li>
-<p>(optional) <em>options</em>: <a href="../Hash.html">Hash</a></p>
+<p>(optional) <em>options</em>: Hash</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a> or nil</p>
+<p>String or nil</p>
 </dd></dl>
           
           
@@ -1475,7 +1494,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="query_command_fork-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 507</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_command_fork</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">query</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_command_fork</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">query</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">call_command_fork</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">io</span>.<span class="ruby-identifier">sync</span> = <span class="ruby-keyword">true</span>
@@ -1517,10 +1536,9 @@ stderr as an array of the strings.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>cmd</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>cmd</em>: Array containing String objects</p>
 </li><li>
-<p>(optional) <em>query</em>: <a href="../String.html">String</a></p>
+<p>(optional) <em>query</em>: String</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -1533,7 +1551,7 @@ nil)</p>
           
           <div class="method-source-code" id="query_command_open3-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 529</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_command_open3</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">query</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_command_open3</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">query</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">errorlog</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">cmd</span> = <span class="ruby-identifier">safe_command_line_array</span>(<span class="ruby-identifier">cmd</span>)
   <span class="ruby-constant">Open3</span>.<span class="ruby-identifier">popen3</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">cmd</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pin</span>, <span class="ruby-identifier">pout</span>, <span class="ruby-identifier">perr</span><span class="ruby-operator">|</span>
@@ -1593,16 +1611,15 @@ the security and Ruby version specific issues.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>cmd</em>: Array containing <a
-href="../String.html">String</a> objects</p>
+<p>(required) <em>cmd</em>: Array containing String objects</p>
 </li><li>
-<p>(optional) <em>query</em>: <a href="../String.html">String</a></p>
+<p>(optional) <em>query</em>: String</p>
 </li><li>
-<p>(optional) <em>options</em>: <a href="../Hash.html">Hash</a></p>
+<p>(optional) <em>options</em>: Hash</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a> or nil</p>
+<p>String or nil</p>
 </dd></dl>
           
           
@@ -1610,7 +1627,7 @@ href="../String.html">String</a> objects</p>
           
           <div class="method-source-code" id="query_command_popen-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 476</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">query_command_popen</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">query</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_command_popen</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">query</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-identifier">call_command_popen</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-identifier">options</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">io</span>.<span class="ruby-identifier">sync</span> = <span class="ruby-keyword">true</span>
@@ -1649,11 +1666,11 @@ variable (same as OpenURI.open_uri) is set.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>uri</em>: URI object or <a href="../String.html">String</a></p>
+<p>(required) <em>uri</em>: URI object or String</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../String.html">String</a></p>
+<p>String</p>
 </dd></dl>
           
           
@@ -1661,7 +1678,7 @@ variable (same as OpenURI.open_uri) is set.</p>
           
           <div class="method-source-code" id="read_uri-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 706</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">read_uri</span>(<span class="ruby-identifier">uri</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read_uri</span>(<span class="ruby-identifier">uri</span>)
   <span class="ruby-constant">OpenURI</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-identifier">uri</span>).<span class="ruby-identifier">read</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -1695,7 +1712,7 @@ previous version, it only shows warning message and does nothing.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>path</em>: <a href="../String.html">String</a></p>
+<p>(required) <em>path</em>: String</p>
 </li><li>
 <p>(optional) <em>force</em>: boolean</p>
 </li></ul>
@@ -1705,7 +1722,7 @@ previous version, it only shows warning message and does nothing.</p>
           
           <div class="method-source-code" id="remove_entry_secure-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 555</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">remove_entry_secure</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">force</span> = <span class="ruby-keyword">false</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_entry_secure</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">force</span> = <span class="ruby-keyword">false</span>)
   <span class="ruby-keyword">begin</span>
     <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">remove_entry_secure</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">force</span>)
   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
@@ -1755,7 +1772,7 @@ returns the given array.</p>
           
           <div class="method-source-code" id="safe_command_line_array-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 169</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">safe_command_line_array</span>(<span class="ruby-identifier">ary</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">safe_command_line_array</span>(<span class="ruby-identifier">ary</span>)
   <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">to_ary</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">empty?</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
@@ -1783,7 +1800,7 @@ returns the given array.</p>
         
         <div class="method-heading">
           <span class="method-name">start_http</span><span
-            class="method-args">(address, port = 80, &block)</span>
+            class="method-args">(address, port = 80, &amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -1803,8 +1820,7 @@ set.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>address</em>: <a href="../String.html">String</a> containing
-host name or IP address</p>
+<p>(required) <em>address</em>: String containing host name or IP address</p>
 </li><li>
 <p>(optional) <em>port</em>: port (sanme as Net::HTTP::start)</p>
 </li></ul>
@@ -1818,7 +1834,7 @@ host name or IP address</p>
           
           <div class="method-source-code" id="start_http-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 758</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">start_http</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">port</span> = <span class="ruby-value">80</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">start_http</span>(<span class="ruby-identifier">address</span>, <span class="ruby-identifier">port</span> = <span class="ruby-value">80</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-node">&quot;http://#{address}:#{port}&quot;</span>)
   <span class="ruby-comment"># Note: URI#find_proxy is an unofficial method defined in open-uri.rb.</span>
   <span class="ruby-comment"># If the spec of open-uri.rb would be changed, we should change below.</span>
@@ -1844,7 +1860,7 @@ host name or IP address</p>
         
         <div class="method-heading">
           <span class="method-name">start_http_uri</span><span
-            class="method-args">(uri, &block)</span>
+            class="method-args">(uri, &amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -1866,8 +1882,7 @@ set. It supports https.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>uri</em>: URI object or <a href="../String.html">String</a>
-containing URI</p>
+<p>(required) <em>uri</em>: URI object or String containing URI</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -1879,7 +1894,7 @@ containing URI</p>
           
           <div class="method-source-code" id="start_http_uri-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 724</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">start_http_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">start_http_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">URI</span>)
     <span class="ruby-identifier">uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">uri</span>)
   <span class="ruby-keyword">end</span>
@@ -1948,7 +1963,7 @@ true. Otherwise, returns false. Note that Cygwin is not treated as Windows.</p>
           
           <div class="method-source-code" id="windows_platform-3F-source">
             <pre><span class="ruby-comment"># File lib/bio/command.rb, line 50</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">windows_platform?</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">windows_platform?</span>
   <span class="ruby-keyword">case</span> <span class="ruby-constant">RUBY_PLATFORM</span>
   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/(?:mswin|bccwin|mingw)(?:32|64)/i</span>
     <span class="ruby-keyword">true</span>
@@ -1981,8 +1996,8 @@ true. Otherwise, returns false. Note that Cygwin is not treated as Windows.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

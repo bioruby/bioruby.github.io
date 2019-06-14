@@ -194,13 +194,13 @@ analyzing results from a clustal alignment.</p>
 <span class="ruby-identifier">correlations</span> = {}
 
 <span class="ruby-value">0</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">max_length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-  (<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">max_length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span>
+  (<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>).<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">max_length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">ctable</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">ContingencyTable</span>.<span class="ruby-identifier">new</span>()
     <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">each_value</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ctable</span>.<span class="ruby-identifier">table</span>[ <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">chr</span> ][ <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">j</span>].<span class="ruby-identifier">chr</span> ] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> }
 
     <span class="ruby-identifier">chi_square</span> = <span class="ruby-identifier">ctable</span>.<span class="ruby-identifier">chi_square</span>
     <span class="ruby-identifier">contingency_coefficient</span> = <span class="ruby-identifier">ctable</span>.<span class="ruby-identifier">contingency_coefficient</span>
-    <span class="ruby-identifier">puts</span> [(<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>), (<span class="ruby-identifier">j</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>), <span class="ruby-identifier">chi_square</span>, <span class="ruby-identifier">contingency_coefficient</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-constant">VERBOSE</span>
+    <span class="ruby-identifier">puts</span> [(<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>), (<span class="ruby-identifier">j</span><span class="ruby-value">+1</span>), <span class="ruby-identifier">chi_square</span>, <span class="ruby-identifier">contingency_coefficient</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-constant">VERBOSE</span>
 
     <span class="ruby-identifier">correlations</span>[<span class="ruby-node">&quot;#{i+1},#{j+1}&quot;</span>] = <span class="ruby-identifier">contingency_coefficient</span>
     <span class="ruby-identifier">correlations</span>[<span class="ruby-node">&quot;#{j+1},#{i+1}&quot;</span>] = <span class="ruby-identifier">contingency_coefficient</span>  <span class="ruby-comment"># Both ways are accurate</span>
@@ -220,13 +220,13 @@ your alignment compares to one another you must set this up yourself.
 Hopefully the provided examples will help you get started without too much
 trouble.</p>
 
-<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier">lite_example</span>(<span class="ruby-identifier">sequences</span>, <span class="ruby-identifier">max_length</span>, <span class="ruby-identifier">characters</span>)
+<pre class="ruby"><span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lite_example</span>(<span class="ruby-identifier">sequences</span>, <span class="ruby-identifier">max_length</span>, <span class="ruby-identifier">characters</span>)
 
   <span class="ruby-node">%w{i j chi_square contingency_coefficient}</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">print</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">ljust</span>(<span class="ruby-value">12</span>) }
   <span class="ruby-identifier">puts</span>
 
   <span class="ruby-value">0</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">max_length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-    (<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>).<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">max_length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span>
+    (<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>).<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">max_length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">ctable</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">ContingencyTable</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">characters</span> )
       <span class="ruby-identifier">sequences</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">seq</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">i_char</span> = <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">chr</span>
@@ -235,7 +235,7 @@ trouble.</p>
       <span class="ruby-keyword">end</span>
       <span class="ruby-identifier">chi_square</span> = <span class="ruby-identifier">ctable</span>.<span class="ruby-identifier">chi_square</span>
       <span class="ruby-identifier">contingency_coefficient</span> = <span class="ruby-identifier">ctable</span>.<span class="ruby-identifier">contingency_coefficient</span>
-      [(<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>), (<span class="ruby-identifier">j</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>), <span class="ruby-identifier">chi_square</span>, <span class="ruby-identifier">contingency_coefficient</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">print</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">ljust</span>(<span class="ruby-value">12</span>) }
+      [(<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>), (<span class="ruby-identifier">j</span><span class="ruby-value">+1</span>), <span class="ruby-identifier">chi_square</span>, <span class="ruby-identifier">contingency_coefficient</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">print</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">ljust</span>(<span class="ruby-value">12</span>) }
       <span class="ruby-identifier">puts</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
@@ -361,8 +361,6 @@ version will likely be created.</p>
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -455,7 +453,7 @@ calculated upon</p>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/util/contingency_table.rb, line 256</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">characters_in_sequences</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">characters_in_sequences</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@characters</span> = ( <span class="ruby-identifier">characters_in_sequences</span> <span class="ruby-keyword">or</span> <span class="ruby-node">%w{a c d e f g h i k l m n p q r s t v w y - x u}</span> )
   <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Hash</span>[<span class="ruby-operator">*</span><span class="ruby-ivar">@characters</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">v</span>, <span class="ruby-value">0</span>] }.<span class="ruby-identifier">flatten</span>]
   <span class="ruby-ivar">@table</span> = <span class="ruby-constant">Hash</span>[<span class="ruby-operator">*</span><span class="ruby-ivar">@characters</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">v</span>, <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">dup</span>] }.<span class="ruby-identifier">flatten</span>]
@@ -508,7 +506,7 @@ calculated upon</p>
           
           <div class="method-source-code" id="chi_square-source">
             <pre><span class="ruby-comment"># File lib/bio/util/contingency_table.rb, line 332</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">chi_square</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">chi_square</span>
   <span class="ruby-identifier">total</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@characters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>    <span class="ruby-comment"># Loop through every row in the ContingencyTable</span>
     <span class="ruby-ivar">@characters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span>  <span class="ruby-comment"># Loop through every column in the ContingencyTable</span>
@@ -559,7 +557,7 @@ calculated upon</p>
           
           <div class="method-source-code" id="chi_square_element-source">
             <pre><span class="ruby-comment"># File lib/bio/util/contingency_table.rb, line 349</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">chi_square_element</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">j</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">chi_square_element</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">j</span>)
   <span class="ruby-identifier">eij</span> = <span class="ruby-identifier">expected</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">j</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">eij</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
   ( <span class="ruby-ivar">@table</span>[<span class="ruby-identifier">i</span>][<span class="ruby-identifier">j</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">eij</span> )<span class="ruby-operator">**</span><span class="ruby-value">2</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">eij</span>
@@ -604,7 +602,7 @@ calculated upon</p>
           
           <div class="method-source-code" id="column_sum-source">
             <pre><span class="ruby-comment"># File lib/bio/util/contingency_table.rb, line 280</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_sum</span>(<span class="ruby-identifier">j</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">column_sum</span>(<span class="ruby-identifier">j</span>)
   <span class="ruby-identifier">total</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">row_key</span>, <span class="ruby-identifier">column</span><span class="ruby-operator">|</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">column</span>[<span class="ruby-identifier">j</span>] }
   <span class="ruby-identifier">total</span>
@@ -652,7 +650,7 @@ calculated upon</p>
           
           <div class="method-source-code" id="column_sum_all-source">
             <pre><span class="ruby-comment"># File lib/bio/util/contingency_table.rb, line 294</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">column_sum_all</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">column_sum_all</span>
   <span class="ruby-identifier">total</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@characters</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">column_sum</span>(<span class="ruby-identifier">j</span>) }
   <span class="ruby-identifier">total</span>
@@ -699,7 +697,7 @@ of the table</p>
           
           <div class="method-source-code" id="contingency_coefficient-source">
             <pre><span class="ruby-comment"># File lib/bio/util/contingency_table.rb, line 361</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">contingency_coefficient</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">contingency_coefficient</span>
   <span class="ruby-identifier">c_s</span> = <span class="ruby-identifier">chi_square</span>
   <span class="ruby-constant">Math</span>.<span class="ruby-identifier">sqrt</span>(<span class="ruby-identifier">c_s</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">table_sum_all</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">c_s</span>) )
 <span class="ruby-keyword">end</span></pre>
@@ -745,7 +743,7 @@ of the table</p>
           
           <div class="method-source-code" id="expected-source">
             <pre><span class="ruby-comment"># File lib/bio/util/contingency_table.rb, line 322</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">expected</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">j</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">expected</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">j</span>)
   (<span class="ruby-identifier">row_sum</span>(<span class="ruby-identifier">i</span>).<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">table_sum_all</span>) <span class="ruby-operator">*</span> <span class="ruby-identifier">column_sum</span>(<span class="ruby-identifier">j</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -788,7 +786,7 @@ of the table</p>
           
           <div class="method-source-code" id="row_sum-source">
             <pre><span class="ruby-comment"># File lib/bio/util/contingency_table.rb, line 268</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">row_sum</span>(<span class="ruby-identifier">i</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">row_sum</span>(<span class="ruby-identifier">i</span>)
   <span class="ruby-identifier">total</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@table</span>[<span class="ruby-identifier">i</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">v</span> }
   <span class="ruby-identifier">total</span>
@@ -836,7 +834,7 @@ of the table</p>
           
           <div class="method-source-code" id="row_sum_all-source">
             <pre><span class="ruby-comment"># File lib/bio/util/contingency_table.rb, line 308</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">row_sum_all</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">row_sum_all</span>
   <span class="ruby-identifier">total</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@characters</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">row_sum</span>(<span class="ruby-identifier">i</span>) }
   <span class="ruby-identifier">total</span>
@@ -890,8 +888,8 @@ of the table</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

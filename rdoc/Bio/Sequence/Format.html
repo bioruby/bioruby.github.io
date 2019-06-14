@@ -102,15 +102,13 @@ isolation.</p>
 <h1 id="module-Bio::Sequence::Format-label-USAGE">USAGE<span><a href="#module-Bio::Sequence::Format-label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <pre class="ruby"><span class="ruby-comment"># Given a Bio::Sequence object,</span>
-<span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">output</span>(:<span class="ruby-identifier">fasta</span>)
-<span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">output</span>(:<span class="ruby-identifier">genbank</span>)
-<span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">output</span>(:<span class="ruby-identifier">embl</span>)
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">output</span>(<span class="ruby-value">:fasta</span>)
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">output</span>(<span class="ruby-value">:genbank</span>)
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">output</span>(<span class="ruby-value">:embl</span>)
 </pre>
 
   </section>
 
-  
-  
   
   <section id="5Buntitled-5D" class="documentation-section">
     
@@ -155,7 +153,7 @@ isolation.</p>
           
           <div class="method-source-code" id="list_output_formats-source">
             <pre><span class="ruby-comment"># File lib/bio/sequence/format.rb, line 173</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">list_output_formats</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_output_formats</span>
   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">get_formatter_repositories</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mod</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">constants</span> }
   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">flatten!</span>
   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">intern</span> }
@@ -184,16 +182,15 @@ isolation.</p>
 
         <div class="method-description">
           
-          <p>Using <a href="Format.html">Bio::Sequence::Format</a>, return a <a
-href="../../String.html">String</a> with the <a
-href="../Sequence.html">Bio::Sequence</a> object formatted in the given
-style.</p>
+          <p>Using <a href="Format.html">Bio::Sequence::Format</a>, return a String with
+the <a href="../Sequence.html">Bio::Sequence</a> object formatted in the
+given style.</p>
 
 <p>Formats currently implemented are: &#39;fasta&#39;, &#39;genbank&#39;, and
 &#39;embl&#39;</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
-<span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">output</span>(:<span class="ruby-identifier">fasta</span>)                   <span class="ruby-comment">#=&gt; &quot;&gt; \natgc\n&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">output</span>(<span class="ruby-value">:fasta</span>)                   <span class="ruby-comment">#=&gt; &quot;&gt; \natgc\n&quot;</span>
 </pre>
 
 <p>The style argument is given as a Ruby  Symbol(<a
@@ -206,7 +203,7 @@ href="http://www.ruby-doc.org/core/classes/Symbol.html">www.ruby-doc.org/core/cl
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../../String.html">String</a> object</p>
+<p>String object</p>
 </dd></dl>
           
           
@@ -214,7 +211,7 @@ href="http://www.ruby-doc.org/core/classes/Symbol.html">www.ruby-doc.org/core/cl
           
           <div class="method-source-code" id="output-source">
             <pre><span class="ruby-comment"># File lib/bio/sequence/format.rb, line 151</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">output</span>(<span class="ruby-identifier">format</span> = <span class="ruby-value">:fasta</span>, <span class="ruby-identifier">options</span> = {})
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output</span>(<span class="ruby-identifier">format</span> = <span class="ruby-value">:fasta</span>, <span class="ruby-identifier">options</span> = {})
   <span class="ruby-identifier">formatter_const</span> = <span class="ruby-identifier">format</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">capitalize</span>.<span class="ruby-identifier">intern</span>
 
   <span class="ruby-identifier">formatter_class</span> = <span class="ruby-keyword">nil</span>
@@ -270,7 +267,7 @@ method is intended to replace Bio::Sequence#to_fasta.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../../String.html">String</a> object</p>
+<p>String object</p>
 </dd></dl>
           
           
@@ -278,8 +275,8 @@ method is intended to replace Bio::Sequence#to_fasta.</p>
           
           <div class="method-source-code" id="output_fasta-source">
             <pre><span class="ruby-comment"># File lib/bio/sequence/format.rb, line 190</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">output_fasta</span>(<span class="ruby-identifier">definition</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">width</span> = <span class="ruby-value">70</span>)
-  <span class="ruby-identifier">output</span>(<span class="ruby-value">:fasta</span>, <span class="ruby-value">:header=</span><span class="ruby-operator">&gt;</span> <span class="ruby-identifier">definition</span>, <span class="ruby-value">:width</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">width</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_fasta</span>(<span class="ruby-identifier">definition</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">width</span> = <span class="ruby-value">70</span>)
+  <span class="ruby-identifier">output</span>(<span class="ruby-value">:fasta</span>, <span class="ruby-value">:header</span><span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">definition</span>, <span class="ruby-value">:width</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">width</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -298,8 +295,8 @@ method is intended to replace Bio::Sequence#to_fasta.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

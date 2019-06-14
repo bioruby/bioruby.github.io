@@ -123,8 +123,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -228,7 +226,7 @@
 
         <div class="method-description">
         
-        <p>raw sequence data as a <a href="../String.html">String</a> object</p>
+        <p>raw sequence data as a String object</p>
         
         </div>
       </div>
@@ -273,7 +271,7 @@ string.</p>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 383</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">str</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">str</span>
   <span class="ruby-identifier">sc</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-keyword">while</span> <span class="ruby-operator">!</span><span class="ruby-identifier">sc</span>.<span class="ruby-identifier">eos?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/.*(?:\n|\r|\r\n)?/</span>)
@@ -330,7 +328,7 @@ Otherwise, returns false (the line is not added).</p>
           
           <div class="method-source-code" id="add_header_line-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 324</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_header_line</span>(<span class="ruby-identifier">line</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_header_line</span>(<span class="ruby-identifier">line</span>)
   <span class="ruby-ivar">@header</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;@&quot;</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">false</span>
@@ -370,7 +368,7 @@ current entry.</p>
           
           <div class="method-source-code" id="add_line-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 339</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_line</span>(<span class="ruby-identifier">line</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_line</span>(<span class="ruby-identifier">line</span>)
   <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@definition</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;@&quot;</span> <span class="ruby-keyword">then</span>
@@ -432,7 +430,7 @@ current entry.</p>
           
           <div class="method-source-code" id="entry_id-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 446</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">entry_id</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@entry_id</span> <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">eid</span> = <span class="ruby-ivar">@definition</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@definition</span>
     <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">eid</span>
@@ -474,7 +472,7 @@ current entry.</p>
           
           <div class="method-source-code" id="error_probabilities-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 529</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">error_probabilities</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">error_probabilities</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@error_probabilities</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultFormatName</span>
     <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">q2p</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">quality_scores</span>)
@@ -518,7 +516,7 @@ nil (when not specified).</p>
           
           <div class="method-source-code" id="format-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 497</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">format</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format</span>
   ((<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@format</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@format</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -548,9 +546,9 @@ nil (when not specified).</p>
 
 <p>Available formats are:</p>
 
-<pre class="ruby"><span class="ruby-string">&quot;fastq-sanger&quot;</span> <span class="ruby-keyword">or</span> :<span class="ruby-identifier">fastq_sanger</span>
-<span class="ruby-string">&quot;fastq-solexa&quot;</span> <span class="ruby-keyword">or</span> :<span class="ruby-identifier">fastq_solexa</span>
-<span class="ruby-string">&quot;fastq-illumina&quot;</span> <span class="ruby-keyword">or</span> :<span class="ruby-identifier">fastq_illumina</span>
+<pre class="ruby"><span class="ruby-string">&quot;fastq-sanger&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-value">:fastq_sanger</span>
+<span class="ruby-string">&quot;fastq-solexa&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-value">:fastq_solexa</span>
+<span class="ruby-string">&quot;fastq-illumina&quot;</span> <span class="ruby-keyword">or</span> <span class="ruby-value">:fastq_illumina</span>
 </pre>
 <hr>
 
@@ -568,7 +566,7 @@ nil (when not specified).</p>
           
           <div class="method-source-code" id="format-3D-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 476</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">format=</span>(<span class="ruby-identifier">name</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format=</span>(<span class="ruby-identifier">name</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-keyword">then</span>
     <span class="ruby-identifier">f</span> = <span class="ruby-constant">FormatNames</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Formats</span>[<span class="ruby-identifier">name</span>]
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span> <span class="ruby-keyword">then</span>
@@ -597,7 +595,7 @@ nil (when not specified).</p>
         
         <div class="method-heading">
           <span class="method-name">mask</span><span
-            class="method-args">(threshold, mask_char = 'n')</span>
+            class="method-args">(threshold, mask_char = &#39;n&#39;)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -629,7 +627,7 @@ is replaced with <em>mask_char</em>.</p>
           
           <div class="method-source-code" id="mask-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 668</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">mask</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span> = <span class="ruby-string">&#39;n&#39;</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mask</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span> = <span class="ruby-string">&#39;n&#39;</span>)
   <span class="ruby-identifier">to_biosequence</span>.<span class="ruby-identifier">mask_with_quality_score</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -662,7 +660,7 @@ is replaced with <em>mask_char</em>.</p>
           
           <div class="method-source-code" id="nalen-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 433</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">nalen</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nalen</span>
   <span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">length</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -695,7 +693,7 @@ is replaced with <em>mask_char</em>.</p>
           
           <div class="method-source-code" id="naseq-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 425</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">naseq</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">naseq</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@naseq</span> <span class="ruby-keyword">then</span>
     <span class="ruby-ivar">@naseq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sequence_string</span>)
   <span class="ruby-keyword">end</span>
@@ -760,7 +758,7 @@ nil.</p>
           
           <div class="method-source-code" id="quality_score_type-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 504</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">quality_score_type</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quality_score_type</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultFormatName</span>
   <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">quality_score_type</span>
 <span class="ruby-keyword">end</span></pre>
@@ -800,7 +798,7 @@ PHRED score. For “fastq-solexa”, it is Solexa score.</p>
           
           <div class="method-source-code" id="quality_scores-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 515</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">quality_scores</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quality_scores</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@quality_scores</span> <span class="ruby-keyword">then</span>
     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultFormatName</span>
     <span class="ruby-identifier">s</span> = <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">str2scores</span>(<span class="ruby-ivar">@quality_string</span>)
@@ -842,7 +840,7 @@ PHRED score. For “fastq-solexa”, it is Solexa score.</p>
           
           <div class="method-source-code" id="seq-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 438</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">seq</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@seq</span> <span class="ruby-keyword">then</span>
     <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Generic</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sequence_string</span>)
   <span class="ruby-keyword">end</span>
@@ -883,7 +881,7 @@ efficiency.</p>
           
           <div class="method-source-code" id="to_biosequence-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 653</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_biosequence</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_biosequence</span>
   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">adapter</span>(<span class="ruby-keyword">self</span>, <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Adapter</span><span class="ruby-operator">::</span><span class="ruby-constant">Fastq</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -926,7 +924,7 @@ href="Sequence/Format.html#method-i-output">Bio::Sequence::Format#output</a>(:fa
           
           <div class="method-source-code" id="to_s-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 420</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
   <span class="ruby-node">&quot;@#{@definition}\n#{@sequence_string}\n+\n#{@quality_string}\n&quot;</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -996,7 +994,7 @@ messages. The array should be empty.</p>
           
           <div class="method-source-code" id="validate_format-source">
             <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 562</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">validate_format</span>(<span class="ruby-identifier">errors</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_format</span>(<span class="ruby-identifier">errors</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">err</span> = []
 
   <span class="ruby-comment"># if header exists, the format might be broken.</span>
@@ -1096,8 +1094,8 @@ messages. The array should be empty.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

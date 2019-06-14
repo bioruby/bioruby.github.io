@@ -135,7 +135,6 @@
     <li><a href="#module-Bio-label-References">References</a>
     <li><a href="#module-Bio-label-bio-2Fsequence-2Fsequence_masker.rb+-+Sequence+masking+helper+methods">bio/sequence/sequence_masker.rb - Sequence masking helper methods</a>
     <li><a href="#module-Bio-label-Description">Description</a>
-    <li><a href="#module-Bio-label-bio-2Fshell-2Fplugin-2Fkeggdas.rb+-+plugin+for+KEGG+DAS">bio/shell/plugin/keggdas.rb - plugin for KEGG DAS</a>
     <li><a href="#module-Bio-label-bio-2Ftree-2Foutput.rb+-+Phylogenetic+tree+formatter">bio/tree/output.rb - Phylogenetic tree formatter</a>
     <li><a href="#module-Bio-label-Description">Description</a>
     <li><a href="#module-Bio-label-References">References</a>
@@ -521,9 +520,9 @@ a seleno cystein (&#39;U&#39;) to the &#39;tga&#39; codon.</p>
 <span class="ruby-identifier">table</span>[<span class="ruby-string">&#39;tga&#39;</span>] = <span class="ruby-string">&#39;U&#39;</span>
 </pre>
 
-<p>Create a new codon table by your own from the <a href="Hash.html">Hash</a>
-which contains pairs of codon and amino acid.  You can also define the
-table name in the second argument.</p>
+<p>Create a new codon table by your own from the Hash which contains pairs of
+codon and amino acid.  You can also define the table name in the second
+argument.</p>
 
 <pre>hash = { &#39;ttt&#39; =&gt; &#39;F&#39;, &#39;ttc&#39; =&gt; &#39;ttc&#39;, ... }
 table = Bio::CodonTable.new(hash, &quot;my codon table&quot;)</pre>
@@ -562,29 +561,27 @@ related to nucleic acids.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio&#39;</span>
 
-<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;### na = Bio::NucleicAcid.new&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;### na = Bio::NucleicAcid.new&quot;</span>
 <span class="ruby-identifier">na</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">new</span>
 
-<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;# na.to_re(&#39;yrwskmbdhvnatgc&#39;)&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;# na.to_re(&#39;yrwskmbdhvnatgc&#39;)&quot;</span>
 <span class="ruby-identifier">p</span> <span class="ruby-identifier">na</span>.<span class="ruby-identifier">to_re</span>(<span class="ruby-string">&#39;yrwskmbdhvnatgc&#39;</span>)
 
-<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;# Bio::NucleicAcid.to_re(&#39;yrwskmbdhvnatgc&#39;)&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;# Bio::NucleicAcid.to_re(&#39;yrwskmbdhvnatgc&#39;)&quot;</span>
 <span class="ruby-identifier">p</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">to_re</span>(<span class="ruby-string">&#39;yrwskmbdhvnatgc&#39;</span>)
 
-<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;# na.weight(&#39;A&#39;)&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;# na.weight(&#39;A&#39;)&quot;</span>
 <span class="ruby-identifier">p</span> <span class="ruby-identifier">na</span>.<span class="ruby-identifier">weight</span>(<span class="ruby-string">&#39;A&#39;</span>)
 
-<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;# Bio::NucleicAcid.weight(&#39;A&#39;)&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;# Bio::NucleicAcid.weight(&#39;A&#39;)&quot;</span>
 <span class="ruby-identifier">p</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">weight</span>(<span class="ruby-string">&#39;A&#39;</span>)
 
-<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;# na.weight(&#39;atgc&#39;)&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;# na.weight(&#39;atgc&#39;)&quot;</span>
 <span class="ruby-identifier">p</span> <span class="ruby-identifier">na</span>.<span class="ruby-identifier">weight</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 
-<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;# Bio::NucleicAcid.weight(&#39;atgc&#39;)&quot;</span>
+<span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;# Bio::NucleicAcid.weight(&#39;atgc&#39;)&quot;</span>
 <span class="ruby-identifier">p</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">weight</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 </pre>
-
-<p>TODO save on db reading from a genbank or embl object</p>
 
 <p>require &#39;bio/sequence&#39;</p>
 
@@ -889,19 +886,6 @@ to read a biological data file. It acts like a IO object. It can
 automatically detect data format, and users do not need to tell the class
 what the data is.</p>
 
-<p>Ok Hilmar gives to me some clarification 1) “EMBL/GenBank/SwissProt” name
-in term table, is only a convention assuming data loaded by genbank embl
-ans swissprot formats.</p>
-
-<pre>If your features come from others ways for example blast or alignment ... whatever.. the user as to take care about the source.</pre>
-
-<p>TODO: 1) source_term_id =&gt; surce_term and check before if the source
-term is present or not and the level, the root should always be something
-“EMBL/GenBank/SwissProt” or contestualized. 2) Into DummyBase class delete
-connection there and use Bio::ArSQL.establish_connection which reads info
-from a yml file. 3) Chk <a href="Bio/Locations.html">Locations</a> in
-Biofeatures ArSQL</p>
-
 <h1 id="module-Bio-label-bio-2Flocation.rb+-+Locations-2FLocation+class+-28GenBank+location+format-29">bio/location.rb - Locations/Location class (GenBank location format)<span><a href="#module-Bio-label-bio-2Flocation.rb+-+Locations-2FLocation+class+-28GenBank+location+format-29">&para;</a> <a href="#top">&uarr;</a></span></h1>
 <dl class="rdoc-list note-list"><dt>Copyright
 <dd>
@@ -1032,17 +1016,6 @@ is a mix-in module to provide helpful methods for masking a sequence.</p>
 
 <p>For details, see documentation of <a
 href="Bio/Sequence/SequenceMasker.html">Bio::Sequence::SequenceMasker</a>.</p>
-
-<h1 id="module-Bio-label-bio-2Fshell-2Fplugin-2Fkeggdas.rb+-+plugin+for+KEGG+DAS">bio/shell/plugin/keggdas.rb - plugin for <a href="Bio/KEGG.html">KEGG</a> <a href="Bio/DAS.html">DAS</a><span><a href="#module-Bio-label-bio-2Fshell-2Fplugin-2Fkeggdas.rb+-+plugin+for+KEGG+DAS">&para;</a> <a href="#top">&uarr;</a></span></h1>
-<dl class="rdoc-list note-list"><dt>Copyright
-<dd>
-<p>Copyright (C) 2006 Toshiaki Katayama &lt;k@bioruby.org&gt;</p>
-</dd><dt>License
-<dd>
-<p>The Ruby License</p>
-</dd></dl>
-
-<p>$Id: das.rb,v 1.3 2007/04/05 23:35:41 trevor Exp $</p>
 
 <h1 id="module-Bio-label-bio-2Ftree-2Foutput.rb+-+Phylogenetic+tree+formatter">bio/tree/output.rb - Phylogenetic tree formatter<span><a href="#module-Bio-label-bio-2Ftree-2Foutput.rb+-+Phylogenetic+tree+formatter">&para;</a> <a href="#top">&uarr;</a></span></h1>
 <dl class="rdoc-list note-list"><dt>Copyright
@@ -1431,8 +1404,6 @@ Goto &lt;ng@bioruby.org&gt;</p>
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -1449,20 +1420,16 @@ Goto &lt;ng@bioruby.org&gt;</p>
         
         <dd><p>Extra version specifier (String or nil). Existance of the value indicates
 development version.</p>
-<dl class="rdoc-list note-list"><dt>nil                 
+<dl class="rdoc-list note-list"><dt>nil             
 <dd>
 <p>Release version.</p>
-</dd><dt>“-dev”              
+</dd><dt>“.pre           
 <dd>
-<p>Development version (with YYYYMMDD digits).</p>
-</dd><dt>“.20150630”         
-<dd>
-<p>Development version (specify the date digits).</p>
+<p>Pre-release version.</p>
 </dd></dl>
 
-<p>By default, if the third digit (teeny) of <a
-href="Bio.html#BIORUBY_VERSION">BIORUBY_VERSION</a> is 0, the version is
-regarded as a development version.</p>
+<p>References: <a
+href="https://guides.rubygems.org/patterns/#prerelease-gems">guides.rubygems.org/patterns/#prerelease-gems</a></p>
         
       
         <dt id="BIORUBY_VERSION">BIORUBY_VERSION
@@ -1508,8 +1475,8 @@ href="Bio/UniProtKB.html">Bio::UniProtKB</a>.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

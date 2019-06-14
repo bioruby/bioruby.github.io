@@ -111,8 +111,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -209,13 +207,13 @@
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">entry</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
   <span class="ruby-ivar">@orf2val</span>   = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
   <span class="ruby-ivar">@orf2rgb</span>   = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
   <span class="ruby-ivar">@orf2ratio</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
   <span class="ruby-ivar">@max_intensity</span> = <span class="ruby-value">10000</span>
   <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-node">/^#/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-regexp">/^#/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
       <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>)
       <span class="ruby-identifier">orf</span> = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">shift</span>
       <span class="ruby-identifier">val</span> = <span class="ruby-identifier">ary</span>[<span class="ruby-value">2</span>, <span class="ruby-value">4</span>].<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_f</span>}
@@ -261,7 +259,7 @@
           
           <div class="method-source-code" id="control_avg-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control_avg</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">control_avg</span>
   <span class="ruby-identifier">sum</span> = <span class="ruby-value">0.0</span>
   <span class="ruby-ivar">@orf2val</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">v</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">v</span>[<span class="ruby-value">1</span>]
@@ -298,7 +296,7 @@
           
           <div class="method-source-code" id="control_sd-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 74</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control_sd</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">control_sd</span>
   <span class="ruby-identifier">var</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">control_var</span>
   <span class="ruby-constant">Math</span>.<span class="ruby-identifier">sqrt</span>(<span class="ruby-identifier">var</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -332,7 +330,7 @@
           
           <div class="method-source-code" id="control_var-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 54</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">control_var</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">control_var</span>
   <span class="ruby-identifier">sum</span> = <span class="ruby-value">0.0</span>
   <span class="ruby-identifier">avg</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">control_avg</span>
   <span class="ruby-ivar">@orf2val</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
@@ -371,7 +369,7 @@
           
           <div class="method-source-code" id="down_regulated-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 98</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">down_regulated</span>(<span class="ruby-identifier">num</span>=<span class="ruby-value">20</span>, <span class="ruby-identifier">threshold</span>=<span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">down_regulated</span>(<span class="ruby-identifier">num</span>=<span class="ruby-value">20</span>, <span class="ruby-identifier">threshold</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">logy_minus_logx</span>
   <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@orf2ratio</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>]}
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">threshold</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
@@ -381,7 +379,7 @@
     <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">i</span>]
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">num</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">num</span><span class="ruby-value">-1</span>]
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -414,7 +412,7 @@
           
           <div class="method-source-code" id="logy_minus_logx-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 126</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">logy_minus_logx</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">logy_minus_logx</span>
   <span class="ruby-ivar">@orf2val</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-ivar">@orf2ratio</span>[<span class="ruby-identifier">k</span>] = (<span class="ruby-value">1.0</span><span class="ruby-operator">/</span><span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-value">2</span>))<span class="ruby-operator">*</span>(<span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-identifier">v</span>[<span class="ruby-value">2</span>]<span class="ruby-operator">-</span><span class="ruby-identifier">v</span>[<span class="ruby-value">3</span>]) <span class="ruby-operator">-</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-identifier">v</span>[<span class="ruby-value">0</span>]<span class="ruby-operator">-</span><span class="ruby-identifier">v</span>[<span class="ruby-value">1</span>]))
   <span class="ruby-keyword">end</span>
@@ -449,7 +447,7 @@
           
           <div class="method-source-code" id="regulated-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 112</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">regulated</span>(<span class="ruby-identifier">num</span>=<span class="ruby-value">20</span>, <span class="ruby-identifier">threshold</span>=<span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">regulated</span>(<span class="ruby-identifier">num</span>=<span class="ruby-value">20</span>, <span class="ruby-identifier">threshold</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">logy_minus_logx</span>
   <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@orf2ratio</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">abs</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">abs</span>}
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">threshold</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
@@ -459,7 +457,7 @@
     <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">i</span>]
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">num</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">num</span><span class="ruby-value">-1</span>]
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -492,7 +490,7 @@
           
           <div class="method-source-code" id="target_avg-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">target_avg</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_avg</span>
   <span class="ruby-identifier">sum</span> = <span class="ruby-value">0.0</span>
   <span class="ruby-ivar">@orf2val</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">v</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">v</span>[<span class="ruby-value">3</span>]
@@ -529,7 +527,7 @@
           
           <div class="method-source-code" id="target_sd-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 79</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">target_sd</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_sd</span>
   <span class="ruby-identifier">var</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target_var</span>
   <span class="ruby-constant">Math</span>.<span class="ruby-identifier">sqrt</span>(<span class="ruby-identifier">var</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -563,7 +561,7 @@
           
           <div class="method-source-code" id="target_var-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 64</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">target_var</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_var</span>
   <span class="ruby-identifier">sum</span> = <span class="ruby-value">0.0</span>
   <span class="ruby-identifier">avg</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target_avg</span>
   <span class="ruby-ivar">@orf2val</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
@@ -602,7 +600,7 @@
           
           <div class="method-source-code" id="up_regulated-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 84</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">up_regulated</span>(<span class="ruby-identifier">num</span>=<span class="ruby-value">20</span>, <span class="ruby-identifier">threshold</span>=<span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">up_regulated</span>(<span class="ruby-identifier">num</span>=<span class="ruby-value">20</span>, <span class="ruby-identifier">threshold</span>=<span class="ruby-keyword">nil</span>)
   <span class="ruby-identifier">logy_minus_logx</span>
   <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@orf2ratio</span>.<span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">sort</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">b</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>]}
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">threshold</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
@@ -612,7 +610,7 @@
     <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">i</span>]
   <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">num</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>]
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">num</span><span class="ruby-value">-1</span>]
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -645,7 +643,7 @@
           
           <div class="method-source-code" id="val2rgb-source">
             <pre><span class="ruby-comment"># File lib/bio/db/kegg/expression.rb, line 132</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">val2rgb</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">val2rgb</span>
   <span class="ruby-identifier">col_unit</span> = <span class="ruby-ivar">@max_intensity</span><span class="ruby-operator">/</span><span class="ruby-value">255</span>
   <span class="ruby-ivar">@orf2val</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">tmp_val</span> = ((<span class="ruby-identifier">v</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">v</span>[<span class="ruby-value">1</span>])<span class="ruby-operator">/</span><span class="ruby-identifier">col_unit</span>).<span class="ruby-identifier">to_i</span>
@@ -681,8 +679,8 @@
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

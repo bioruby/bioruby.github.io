@@ -122,8 +122,6 @@ href="http://www.geneontology.org/doc/GO.annotation.html#file">www.geneontology.
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -382,16 +380,16 @@ href="http://www.geneontology.org/doc/GO.annotation.html#file">www.geneontology.
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 260</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">entry</span>) 
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>) 
   <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\t/</span>)
   <span class="ruby-ivar">@db</span>                = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">0</span>] 
   <span class="ruby-ivar">@db_object_id</span>      = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">1</span>]
   <span class="ruby-ivar">@db_object_symbol</span>  = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">2</span>]
-  <span class="ruby-ivar">@qualifier</span>         = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">3</span>]  <span class="ruby-comment"># </span>
+  <span class="ruby-ivar">@qualifier</span>         = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">3</span>]  <span class="ruby-comment">#</span>
   <span class="ruby-ivar">@goid</span>              = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">4</span>]
   <span class="ruby-ivar">@db_reference</span>      = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">5</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\|/</span>)  <span class="ruby-comment">#</span>
   <span class="ruby-ivar">@evidence</span>          = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">6</span>]
-  <span class="ruby-ivar">@with</span>              = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">7</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\|/</span>)  <span class="ruby-comment"># </span>
+  <span class="ruby-ivar">@with</span>              = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">7</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\|/</span>)  <span class="ruby-comment">#</span>
   <span class="ruby-ivar">@aspect</span>            = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">8</span>]
   <span class="ruby-ivar">@db_object_name</span>    = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">9</span>]  <span class="ruby-comment">#</span>
   <span class="ruby-ivar">@db_object_synonym</span> = <span class="ruby-identifier">tmp</span>[<span class="ruby-value">10</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\|/</span>) <span class="ruby-comment">#</span>
@@ -430,7 +428,7 @@ href="http://www.geneontology.org/doc/GO.annotation.html#file">www.geneontology.
           
           <div class="method-source-code" id="parser-source">
             <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 198</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parser</span>(<span class="ruby-identifier">str</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parser</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-constant">DELIMITER</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
       <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^!/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
@@ -489,7 +487,7 @@ style.</p>
           
           <div class="method-source-code" id="goid-source">
             <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 285</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">goid</span>(<span class="ruby-identifier">org</span> = <span class="ruby-keyword">nil</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">goid</span>(<span class="ruby-identifier">org</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">org</span>
     <span class="ruby-ivar">@goid</span>
   <span class="ruby-keyword">else</span>
@@ -527,7 +525,7 @@ gene_association file.</p>
           
           <div class="method-source-code" id="to_str-source">
             <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 294</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">to_str</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_str</span>
   <span class="ruby-keyword">return</span> [<span class="ruby-ivar">@db</span>, <span class="ruby-ivar">@db_object_id</span>, <span class="ruby-ivar">@db_object_symbol</span>, <span class="ruby-ivar">@qualifier</span>, <span class="ruby-ivar">@goid</span>, 
           <span class="ruby-ivar">@db_reference</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;|&quot;</span>), <span class="ruby-ivar">@evidence</span>, <span class="ruby-ivar">@with</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;|&quot;</span>), <span class="ruby-ivar">@aspect</span>,
           <span class="ruby-ivar">@db_object_name</span>, <span class="ruby-ivar">@db_object_synonym</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;|&quot;</span>), <span class="ruby-ivar">@db_object_type</span>,
@@ -550,8 +548,8 @@ gene_association file.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -83,6 +83,8 @@
     
     <li ><a href="#method-i-each">#each</a>
     
+    <li ><a href="#method-i-gen_ambiguity_map">#gen_ambiguity_map</a>
+    
     <li ><a href="#method-i-revtrans">#revtrans</a>
     
     <li ><a href="#method-i-start_codon-3F">#start_codon?</a>
@@ -105,8 +107,6 @@
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -118,6 +118,11 @@
         <h3>Constants</h3>
       </header>
       <dl>
+      
+        <dt id="AMBIGUITY_CODON_TABLES">AMBIGUITY_CODON_TABLES
+        
+        <dd>
+        
       
         <dt id="DEFINITIONS">DEFINITIONS
         
@@ -199,8 +204,7 @@ respectively.</p>
 
         <div class="method-description">
         
-        <p>Accessor methods for a <a href="../Hash.html">Hash</a> of the currently
-selected codon table.</p>
+        <p>Accessor methods for a Hash of the currently selected codon table.</p>
         
         </div>
       </div>
@@ -237,13 +241,18 @@ href="CodonTable.html">Bio::CodonTable</a> object.</p>
           
           <div class="method-source-code" id="5B-5D-source">
             <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-operator">[]</span>(<span class="ruby-identifier">i</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">i</span>)
   <span class="ruby-identifier">hash</span> = <span class="ruby-constant">TABLES</span>[<span class="ruby-identifier">i</span>]
   <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;ERROR: Unknown codon table No.#{i}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">hash</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">AMBIGUITY_CODON_TABLES</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">atable</span> = <span class="ruby-constant">AMBIGUITY_CODON_TABLES</span>[<span class="ruby-identifier">i</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">atable</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">definition</span> = <span class="ruby-constant">DEFINITIONS</span>[<span class="ruby-identifier">i</span>]
   <span class="ruby-identifier">start</span> = <span class="ruby-constant">STARTS</span>[<span class="ruby-identifier">i</span>]
   <span class="ruby-identifier">stop</span> = <span class="ruby-constant">STOPS</span>[<span class="ruby-identifier">i</span>]
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">definition</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>)
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">definition</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>, <span class="ruby-identifier">atable</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -276,8 +285,8 @@ tables.</p>
 
           
           <div class="method-source-code" id="copy-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 62</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">copy</span>(<span class="ruby-identifier">i</span>)
+            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">copy</span>(<span class="ruby-identifier">i</span>)
   <span class="ruby-identifier">ct</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">i</span>]
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">load</span>(<span class="ruby-constant">Marshal</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-identifier">ct</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -295,7 +304,7 @@ tables.</p>
         
         <div class="method-heading">
           <span class="method-name">new</span><span
-            class="method-args">(hash, definition = nil, start = [], stop = [])</span>
+            class="method-args">(hash, definition = nil, start = [], stop = [], atable = nil)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -304,9 +313,9 @@ tables.</p>
 
         <div class="method-description">
           
-          <p>Create your own codon table by giving a <a href="../Hash.html">Hash</a>
-table of codons and relevant amino acids.  You can also able to define the
-table&#39;s name as a second argument.</p>
+          <p>Create your own codon table by giving a Hash table of codons and relevant
+amino acids.  You can also able to define the table&#39;s name as a second
+argument.</p>
 
 <p>Two Arrays &#39;start&#39; and &#39;stop&#39; can be specified which
 contains a list of start and stop codons used by &#39;start_codon?&#39; and
@@ -316,9 +325,14 @@ contains a list of start and stop codons used by &#39;start_codon?&#39; and
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">definition</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">start</span> = [], <span class="ruby-identifier">stop</span> = [])
+            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 78</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">hash</span>, <span class="ruby-identifier">definition</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">start</span> = [], <span class="ruby-identifier">stop</span> = [], <span class="ruby-identifier">atable</span> = <span class="ruby-keyword">nil</span>)
   <span class="ruby-ivar">@table</span> = <span class="ruby-identifier">hash</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">atable</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-ivar">@atable</span> = <span class="ruby-identifier">gen_ambiguity_map</span>(<span class="ruby-identifier">hash</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@atable</span> = <span class="ruby-identifier">atable</span>
+  <span class="ruby-keyword">end</span>
   <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">definition</span>
   <span class="ruby-ivar">@start</span> = <span class="ruby-identifier">start</span>
   <span class="ruby-ivar">@stop</span> = <span class="ruby-identifier">stop</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">generate_stop</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">stop</span>
@@ -361,9 +375,10 @@ translating a DNA sequence into amino acid sequence.</p>
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 92</span>
-<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">codon</span>)
-  <span class="ruby-ivar">@table</span>[<span class="ruby-identifier">codon</span>]
+            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 146</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">codon</span>)
+  <span class="ruby-ivar">@atable</span>=<span class="ruby-identifier">gen_ambiguity_map</span>(<span class="ruby-ivar">@table</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@atable</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@atable</span>[<span class="ruby-identifier">codon</span>]
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -406,9 +421,10 @@ object to be modified.</p>
 
           
           <div class="method-source-code" id="5B-5D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 108</span>
-<span class="ruby-keyword">def</span> <span class="ruby-operator">[]=</span>(<span class="ruby-identifier">codon</span>, <span class="ruby-identifier">aa</span>)
+            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 163</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-identifier">codon</span>, <span class="ruby-identifier">aa</span>)
   <span class="ruby-ivar">@table</span>[<span class="ruby-identifier">codon</span>] = <span class="ruby-identifier">aa</span>
+  <span class="ruby-ivar">@atable</span> = <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -424,7 +440,7 @@ object to be modified.</p>
         
         <div class="method-heading">
           <span class="method-name">each</span><span
-            class="method-args">(&block)</span>
+            class="method-args">(&amp;block)</span>
           
           <span class="method-click-advice">click to toggle source</span>
           
@@ -445,9 +461,81 @@ object to be modified.</p>
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 119</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 175</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-gen_ambiguity_map" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">gen_ambiguity_map</span><span
+            class="method-args">(hash)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Compute possible ambiguity nucleotide code to amino acid conversion the
+codon is defined when all decomposed codon translates to the same amino
+acid / stop codon</p>
+          
+          
+
+          
+          <div class="method-source-code" id="gen_ambiguity_map-source">
+            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 103</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gen_ambiguity_map</span>(<span class="ruby-identifier">hash</span>)
+  <span class="ruby-identifier">nucleotide_sets</span>={
+    <span class="ruby-string">&#39;a&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;a&#39;</span>],
+    <span class="ruby-string">&#39;t&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;t&#39;</span>],
+    <span class="ruby-string">&#39;g&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;g&#39;</span>],
+    <span class="ruby-string">&#39;c&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;c&#39;</span>],
+
+    <span class="ruby-string">&#39;y&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;t&#39;</span>,<span class="ruby-string">&#39;c&#39;</span>],
+    <span class="ruby-string">&#39;r&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;a&#39;</span>,<span class="ruby-string">&#39;g&#39;</span>],
+    <span class="ruby-string">&#39;w&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;a&#39;</span>,<span class="ruby-string">&#39;t&#39;</span>],
+    <span class="ruby-string">&#39;s&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;g&#39;</span>,<span class="ruby-string">&#39;c&#39;</span>],
+    <span class="ruby-string">&#39;k&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;t&#39;</span>,<span class="ruby-string">&#39;g&#39;</span>],
+    <span class="ruby-string">&#39;m&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;a&#39;</span>,<span class="ruby-string">&#39;c&#39;</span>],
+
+    <span class="ruby-string">&#39;b&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;t&#39;</span>,<span class="ruby-string">&#39;g&#39;</span>,<span class="ruby-string">&#39;c&#39;</span>],
+    <span class="ruby-string">&#39;d&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;a&#39;</span>,<span class="ruby-string">&#39;t&#39;</span>,<span class="ruby-string">&#39;g&#39;</span>],
+    <span class="ruby-string">&#39;h&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;a&#39;</span>,<span class="ruby-string">&#39;t&#39;</span>,<span class="ruby-string">&#39;c&#39;</span>],
+    <span class="ruby-string">&#39;v&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;a&#39;</span>,<span class="ruby-string">&#39;g&#39;</span>,<span class="ruby-string">&#39;c&#39;</span>],
+
+    <span class="ruby-string">&#39;n&#39;</span>       <span class="ruby-operator">=&gt;</span> [<span class="ruby-string">&#39;a&#39;</span>,<span class="ruby-string">&#39;t&#39;</span>,<span class="ruby-string">&#39;g&#39;</span>,<span class="ruby-string">&#39;c&#39;</span>],
+  }
+  <span class="ruby-identifier">atable</span>=<span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-identifier">nucleotide_sets</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n1</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">nucleotide_sets</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n2</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">nucleotide_sets</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">n3</span><span class="ruby-operator">|</span>
+        <span class="ruby-identifier">a</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">nucleotide_sets</span>[<span class="ruby-identifier">n1</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c1</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">nucleotide_sets</span>[<span class="ruby-identifier">n2</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c2</span><span class="ruby-operator">|</span>
+            <span class="ruby-identifier">nucleotide_sets</span>[<span class="ruby-identifier">n3</span>].<span class="ruby-identifier">each</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">c3</span><span class="ruby-operator">|</span>
+              <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">hash</span>[<span class="ruby-node">&quot;#{c1}#{c2}#{c3}&quot;</span>]
+            }
+          }
+        }
+        <span class="ruby-identifier">a</span>.<span class="ruby-identifier">uniq!</span>
+        <span class="ruby-identifier">atable</span>[<span class="ruby-node">&quot;#{n1}#{n2}#{n3}&quot;</span>] = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">to_a</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+      }
+    }
+  }
+  <span class="ruby-identifier">atable</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
           
@@ -482,8 +570,8 @@ object to be modified.</p>
 
           
           <div class="method-source-code" id="revtrans-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 128</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">revtrans</span>(<span class="ruby-identifier">aa</span>)
+            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 184</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">revtrans</span>(<span class="ruby-identifier">aa</span>)
   <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@reverse</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@reverse</span>
     <span class="ruby-ivar">@reverse</span> = {}
     <span class="ruby-ivar">@table</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
@@ -523,8 +611,8 @@ table, otherwise false.</p>
 
           
           <div class="method-source-code" id="start_codon-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 141</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">start_codon?</span>(<span class="ruby-identifier">codon</span>)
+            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 197</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">start_codon?</span>(<span class="ruby-identifier">codon</span>)
   <span class="ruby-ivar">@start</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">codon</span>.<span class="ruby-identifier">downcase</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -557,8 +645,8 @@ table, otherwise false.</p>
 
           
           <div class="method-source-code" id="stop_codon-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 147</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">stop_codon?</span>(<span class="ruby-identifier">codon</span>)
+            <pre><span class="ruby-comment"># File lib/bio/data/codontable.rb, line 203</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">stop_codon?</span>(<span class="ruby-identifier">codon</span>)
   <span class="ruby-ivar">@stop</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">codon</span>.<span class="ruby-identifier">downcase</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -578,8 +666,8 @@ table, otherwise false.</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

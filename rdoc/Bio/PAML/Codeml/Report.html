@@ -116,8 +116,8 @@ returned by <a
 href="../Codeml.html#method-i-query">Bio::PAML::Codeml#query</a>. For
 example</p>
 
-<pre class="ruby"><span class="ruby-identifier">codeml</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PAML</span><span class="ruby-operator">::</span><span class="ruby-constant">Codeml</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;codeml&#39;</span>, :<span class="ruby-identifier">runmode</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>, 
-    :<span class="ruby-constant">RateAncestor</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>, :<span class="ruby-identifier">alpha</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0.5</span>, :<span class="ruby-identifier">fix_alpha</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>)
+<pre class="ruby"><span class="ruby-identifier">codeml</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PAML</span><span class="ruby-operator">::</span><span class="ruby-constant">Codeml</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;codeml&#39;</span>, <span class="ruby-value">:runmode</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0</span>, 
+    <span class="ruby-value">:RateAncestor</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">1</span>, <span class="ruby-value">:alpha</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0.5</span>, <span class="ruby-value">:fix_alpha</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0</span>)
 <span class="ruby-identifier">result</span> = <span class="ruby-identifier">codeml</span>.<span class="ruby-identifier">query</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span>)
 </pre>
 
@@ -300,8 +300,6 @@ naive Bayesian result:</p>
   </section>
 
   
-  
-  
   <section id="5Buntitled-5D" class="documentation-section">
     
 
@@ -386,10 +384,10 @@ the content of a codeml result file</p>
           
           <div class="method-source-code" id="new-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 222</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span> <span class="ruby-identifier">buf</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span> <span class="ruby-identifier">buf</span>
   <span class="ruby-comment"># split the main buffer into sections for each model, header and footer.</span>
   <span class="ruby-identifier">sections</span> = <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\nModel &quot;</span>)
-  <span class="ruby-identifier">model_num</span> = <span class="ruby-identifier">sections</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+  <span class="ruby-identifier">model_num</span> = <span class="ruby-identifier">sections</span>.<span class="ruby-identifier">size</span><span class="ruby-value">-1</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReportError</span>,<span class="ruby-node">&quot;Incorrect codeml data models=#{model_num}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">model_num</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>
   <span class="ruby-identifier">foot2</span> = <span class="ruby-identifier">sections</span>[<span class="ruby-identifier">model_num</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\nNaive &quot;</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">foot2</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
@@ -402,8 +400,8 @@ the content of a codeml result file</p>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-comment"># A single model is run</span>
-    <span class="ruby-identifier">sections</span> = <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">split</span>(<span class="ruby-node">&quot;\nTREE #&quot;</span>)
-    <span class="ruby-identifier">model_num</span> = <span class="ruby-identifier">sections</span>.<span class="ruby-identifier">size</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>
+    <span class="ruby-identifier">sections</span> = <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\nTREE #&quot;</span>)
+    <span class="ruby-identifier">model_num</span> = <span class="ruby-identifier">sections</span>.<span class="ruby-identifier">size</span><span class="ruby-value">-1</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReportError</span>,<span class="ruby-string">&quot;Can not parse single model file&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">model_num</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
     <span class="ruby-ivar">@models</span> = []
     <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">sections</span>[<span class="ruby-value">1</span>]
@@ -450,7 +448,7 @@ the content of a codeml result file</p>
           
           <div class="method-source-code" id="descr-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 250</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">descr</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">descr</span>
   <span class="ruby-identifier">num</span> = <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">size</span>
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">num</span>
     <span class="ruby-keyword">when</span> <span class="ruby-value">0</span> 
@@ -492,7 +490,7 @@ bayesian) object</p>
           
           <div class="method-source-code" id="nb_sites-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 273</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">nb_sites</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nb_sites</span>
   <span class="ruby-constant">PositiveSites</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Naive Empirical Bayes (NEB)&quot;</span>,<span class="ruby-ivar">@footer</span>,<span class="ruby-identifier">num_codons</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -525,7 +523,7 @@ bayesian) object</p>
           
           <div class="method-source-code" id="num_codons-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 263</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">num_codons</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">num_codons</span>
   <span class="ruby-ivar">@header</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/seed used = \d+\n\s+\d+\s+\d+/</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>[<span class="ruby-value">5</span>].<span class="ruby-identifier">to_i</span><span class="ruby-operator">/</span><span class="ruby-value">3</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -558,7 +556,7 @@ bayesian) object</p>
           
           <div class="method-source-code" id="num_sequences-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 268</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">num_sequences</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">num_sequences</span>
   <span class="ruby-ivar">@header</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/seed used = \d+\n\s+\d+\s+\d+/</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>[<span class="ruby-value">4</span>].<span class="ruby-identifier">to_i</span>
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -602,7 +600,7 @@ error</p>
           
           <div class="method-source-code" id="significant-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 294</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">significant</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">significant</span>
   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReportError</span>,<span class="ruby-node">&quot;Wrong number of models #{@models.size}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@models</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">!=</span> <span class="ruby-value">2</span>
   <span class="ruby-identifier">lnL1</span> = <span class="ruby-ivar">@models</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">lnL</span>
   <span class="ruby-identifier">model1</span> = <span class="ruby-ivar">@models</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">modelnum</span>
@@ -650,7 +648,7 @@ Bayes (BEB) analysis</p>
           
           <div class="method-source-code" id="sites-source">
             <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 278</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">sites</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sites</span>
   <span class="ruby-constant">PositiveSites</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;Bayes Empirical Bayes (BEB)&quot;</span>,<span class="ruby-ivar">@footer</span>,<span class="ruby-identifier">num_codons</span>)
 <span class="ruby-keyword">end</span></pre>
           </div>
@@ -670,8 +668,8 @@ Bayes (BEB) analysis</p>
 
 
 <footer id="validator-badges" role="contentinfo">
-  <p><a href="http://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://rdoc.github.io/rdoc">RDoc</a> 5.0.0.
+  <p><a href="https://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
