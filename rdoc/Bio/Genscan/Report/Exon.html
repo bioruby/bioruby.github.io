@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -312,34 +316,28 @@
 
         <div class="method-description">
           
-          <p>Bio::Genescan::Report::Exon.new(gene_number, <a
-href="Exon.html#attribute-i-exon_type">#exon_type</a>, strand, first,  end,
-length, frame, phase, <a
-href="Exon.html#method-i-acceptor_score">#acceptor_score</a>, <a
-href="Exon.html#method-i-donor_score">#donor_score</a>, score, <a
-href="Exon.html#attribute-i-p_value">#p_value</a>,  <a
-href="Exon.html#attribute-i-t_score">#t_score</a>)</p>
+          <p>Bio::Genescan::Report::Exon.new(gene_number, <a href="Exon.html#attribute-i-exon_type"><code>exon_type</code></a>, strand, first,  end, length, frame, phase, <a href="Exon.html#method-i-acceptor_score"><code>acceptor_score</code></a>, <a href="Exon.html#method-i-donor_score"><code>donor_score</code></a>, score, <a href="Exon.html#attribute-i-p_value"><code>p_value</code></a>,  <a href="Exon.html#attribute-i-t_score"><code>t_score</code></a>)</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/genscan/report.rb, line 317</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">gnex</span>, <span class="ruby-identifier">t</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">b</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">len</span>, <span class="ruby-identifier">fr</span>, <span class="ruby-identifier">ph</span>, <span class="ruby-identifier">iac</span>, <span class="ruby-identifier">dot</span>, <span class="ruby-identifier">cr</span>, <span class="ruby-identifier">prob</span>, <span class="ruby-identifier">ts</span>)
-  <span class="ruby-ivar">@gene_number</span>, <span class="ruby-ivar">@number</span> = <span class="ruby-identifier">gnex</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;.&quot;</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_i</span> }
-  <span class="ruby-ivar">@exon_type</span> = <span class="ruby-identifier">t</span>
-  <span class="ruby-ivar">@strand</span>    = <span class="ruby-identifier">s</span>
-  <span class="ruby-ivar">@first</span>     = <span class="ruby-identifier">b</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@last</span>      = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@length</span>    = <span class="ruby-identifier">len</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@frame</span>     = <span class="ruby-identifier">fr</span>
-  <span class="ruby-ivar">@phase</span>     = <span class="ruby-identifier">ph</span>
-  <span class="ruby-ivar">@i_ac</span>      = <span class="ruby-identifier">iac</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@do_t</span>      = <span class="ruby-identifier">dot</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@score</span>     = <span class="ruby-identifier">cr</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@p_value</span>   = <span class="ruby-identifier">prob</span>.<span class="ruby-identifier">to_f</span>
-  <span class="ruby-ivar">@t_score</span>   = <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">to_f</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/genscan/report.rb</span>
+<span class="line-num">317</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">gnex</span>, <span class="ruby-identifier">t</span>, <span class="ruby-identifier">s</span>, <span class="ruby-identifier">b</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">len</span>, <span class="ruby-identifier">fr</span>, <span class="ruby-identifier">ph</span>, <span class="ruby-identifier">iac</span>, <span class="ruby-identifier">dot</span>, <span class="ruby-identifier">cr</span>, <span class="ruby-identifier">prob</span>, <span class="ruby-identifier">ts</span>)
+<span class="line-num">318</span>   <span class="ruby-ivar">@gene_number</span>, <span class="ruby-ivar">@number</span> = <span class="ruby-identifier">gnex</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;.&quot;</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_i</span> }
+<span class="line-num">319</span>   <span class="ruby-ivar">@exon_type</span> = <span class="ruby-identifier">t</span>
+<span class="line-num">320</span>   <span class="ruby-ivar">@strand</span>    = <span class="ruby-identifier">s</span>
+<span class="line-num">321</span>   <span class="ruby-ivar">@first</span>     = <span class="ruby-identifier">b</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">322</span>   <span class="ruby-ivar">@last</span>      = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">323</span>   <span class="ruby-ivar">@length</span>    = <span class="ruby-identifier">len</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">324</span>   <span class="ruby-ivar">@frame</span>     = <span class="ruby-identifier">fr</span>
+<span class="line-num">325</span>   <span class="ruby-ivar">@phase</span>     = <span class="ruby-identifier">ph</span>
+<span class="line-num">326</span>   <span class="ruby-ivar">@i_ac</span>      = <span class="ruby-identifier">iac</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">327</span>   <span class="ruby-ivar">@do_t</span>      = <span class="ruby-identifier">dot</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">328</span>   <span class="ruby-ivar">@score</span>     = <span class="ruby-identifier">cr</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">329</span>   <span class="ruby-ivar">@p_value</span>   = <span class="ruby-identifier">prob</span>.<span class="ruby-identifier">to_f</span>
+<span class="line-num">330</span>   <span class="ruby-ivar">@t_score</span>   = <span class="ruby-identifier">ts</span>.<span class="ruby-identifier">to_f</span>
+<span class="line-num">331</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -369,18 +367,18 @@ href="Exon.html#attribute-i-t_score">#t_score</a>)</p>
 
           
           <div class="method-source-code" id="parser-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/genscan/report.rb, line 266</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parser</span>(<span class="ruby-identifier">line</span>)
-  <span class="ruby-identifier">e</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/ +/</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">line</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/PlyA/</span>, <span class="ruby-regexp">/Prom/</span>
-    <span class="ruby-identifier">e</span>[<span class="ruby-value">12</span>] = <span class="ruby-identifier">e</span>[<span class="ruby-value">6</span>].<span class="ruby-identifier">clone</span>
-    <span class="ruby-identifier">e</span>[<span class="ruby-value">11</span>] = <span class="ruby-value">0</span>
-    [<span class="ruby-value">6</span>,<span class="ruby-value">7</span>,<span class="ruby-value">8</span>,<span class="ruby-value">9</span>,<span class="ruby-value">10</span>].<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-keyword">nil</span> }
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">2</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">3</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">4</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">5</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">6</span>], 
-           <span class="ruby-identifier">e</span>[<span class="ruby-value">7</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">8</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">9</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">10</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">11</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">12</span>])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/genscan/report.rb</span>
+<span class="line-num">266</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parser</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">267</span>   <span class="ruby-identifier">e</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/ +/</span>)
+<span class="line-num">268</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">line</span>
+<span class="line-num">269</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/PlyA/</span>, <span class="ruby-regexp">/Prom/</span>
+<span class="line-num">270</span>     <span class="ruby-identifier">e</span>[<span class="ruby-value">12</span>] = <span class="ruby-identifier">e</span>[<span class="ruby-value">6</span>].<span class="ruby-identifier">clone</span>
+<span class="line-num">271</span>     <span class="ruby-identifier">e</span>[<span class="ruby-value">11</span>] = <span class="ruby-value">0</span>
+<span class="line-num">272</span>     [<span class="ruby-value">6</span>,<span class="ruby-value">7</span>,<span class="ruby-value">8</span>,<span class="ruby-value">9</span>,<span class="ruby-value">10</span>].<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-keyword">nil</span> }
+<span class="line-num">273</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">274</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">1</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">2</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">3</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">4</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">5</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">6</span>], 
+<span class="line-num">275</span>            <span class="ruby-identifier">e</span>[<span class="ruby-value">7</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">8</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">9</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">10</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">11</span>], <span class="ruby-identifier">e</span>[<span class="ruby-value">12</span>])
+<span class="line-num">276</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -420,10 +418,10 @@ href="Exon.html#attribute-i-t_score">#t_score</a>)</p>
 
           
           <div class="method-source-code" id="acceptor_score-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/genscan/report.rb, line 354</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">acceptor_score</span>
-  <span class="ruby-ivar">@i_ac</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/genscan/report.rb</span>
+<span class="line-num">354</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">acceptor_score</span>
+<span class="line-num">355</span>   <span class="ruby-ivar">@i_ac</span>
+<span class="line-num">356</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -459,10 +457,10 @@ href="Exon.html#attribute-i-t_score">#t_score</a>)</p>
 
           
           <div class="method-source-code" id="donor_score-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/genscan/report.rb, line 363</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">donor_score</span>
-  <span class="ruby-ivar">@do_t</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/genscan/report.rb</span>
+<span class="line-num">363</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">donor_score</span>
+<span class="line-num">364</span>   <span class="ruby-ivar">@do_t</span>
+<span class="line-num">365</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -490,7 +488,7 @@ href="Exon.html#attribute-i-t_score">#t_score</a>)</p>
 
         <div class="method-description">
           
-          <p>Bio::Genescan::Report::Exon#exon_type_long</p>
+          <p>Bio::Genescan::Report::Exon#exon_type_long   </p>
 
 <p>Returns a human-readable “Type” of exon.</p>
           
@@ -498,10 +496,10 @@ href="Exon.html#attribute-i-t_score">#t_score</a>)</p>
 
           
           <div class="method-source-code" id="exon_type_long-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/genscan/report.rb, line 338</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">exon_type_long</span>
-  <span class="ruby-constant">TYPES</span>[<span class="ruby-identifier">exon_type</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/genscan/report.rb</span>
+<span class="line-num">338</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">exon_type_long</span>
+<span class="line-num">339</span>   <span class="ruby-constant">TYPES</span>[<span class="ruby-identifier">exon_type</span>]
+<span class="line-num">340</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -561,10 +559,10 @@ href="Exon.html#attribute-i-t_score">#t_score</a>)</p>
 
           
           <div class="method-source-code" id="range-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/genscan/report.rb, line 346</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">range</span> 
-  <span class="ruby-constant">Range</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@first</span>, <span class="ruby-ivar">@last</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/genscan/report.rb</span>
+<span class="line-num">346</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">range</span> 
+<span class="line-num">347</span>   <span class="ruby-constant">Range</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@first</span>, <span class="ruby-ivar">@last</span>)
+<span class="line-num">348</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -606,12 +604,13 @@ href="Exon.html#attribute-i-t_score">#t_score</a>)</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

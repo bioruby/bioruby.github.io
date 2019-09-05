@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../../";
 </script>
 
-<script src="../../../../js/jquery.js"></script>
-<script src="../../../../js/darkfish.js"></script>
+<script src="../../../../js/navigation.js" defer></script>
+<script src="../../../../js/search.js" defer></script>
+<script src="../../../../js/search_index.js" defer></script>
+<script src="../../../../js/searcher.js" defer></script>
+<script src="../../../../js/darkfish.js" defer></script>
 
 <link href="../../../../css/fonts.css" rel="stylesheet">
 <link href="../../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -88,9 +92,7 @@
 
   <section class="description">
     
-<p>INTERNAL USE ONLY, YOU SHOULD NOT USE THIS CLASS. Simple <a
-href="Fasta.html">Fasta</a> format output class for <a
-href="../../../Sequence.html">Bio::Sequence</a>.</p>
+<p>INTERNAL USE ONLY, YOU SHOULD NOT USE THIS CLASS. Simple <a href="Fasta.html"><code>Fasta</code></a> format output class for <a href="../../../Sequence.html"><code>Bio::Sequence</code></a>.</p>
 
   </section>
 
@@ -126,14 +128,12 @@ href="../../../Sequence.html">Bio::Sequence</a>.</p>
           
           <p>INTERNAL USE ONLY, YOU SHOULD NOT CALL THIS METHOD.</p>
 
-<p>Creates a new <a href="Fasta.html">Fasta</a> format generater object from
-the sequence.</p>
+<p>Creates a new <a href="Fasta.html"><code>Fasta</code></a> format generater object from the sequence.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>sequence</em>: <a href="../../../Sequence.html">Bio::Sequence</a>
-object</p>
+<p><em>sequence</em>: <a href="../../../Sequence.html"><code>Bio::Sequence</code></a> object</p>
 </li><li>
 <p>(optional) :header =&gt; <em>header</em>: String (default nil)</p>
 </li><li>
@@ -144,8 +144,8 @@ object</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/format_fasta.rb, line 26</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/fasta/format_fasta.rb</span>
+<span class="line-num">26</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -181,9 +181,7 @@ object</p>
 
 <p>Output the FASTA format string of the sequence.</p>
 
-<p>Currently, this method is used in <a
-href="../../Format.html#method-i-output">Bio::Sequence::Format#output</a>
-like so,</p>
+<p>Currently, this method is used in <a href="../../Format.html#method-i-output"><code>Bio::Sequence#output</code></a> like so,</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">output</span>(<span class="ruby-value">:fasta</span>)                   <span class="ruby-comment">#=&gt; &quot;&gt; \natgc\n&quot;</span>
@@ -198,23 +196,23 @@ like so,</p>
 
           
           <div class="method-source-code" id="output-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/format_fasta.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output</span>
-  <span class="ruby-identifier">header</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:header</span>]
-  <span class="ruby-identifier">width</span> = <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:width</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:width</span>] <span class="ruby-operator">:</span> <span class="ruby-value">70</span>
-  <span class="ruby-identifier">seq</span> = <span class="ruby-ivar">@sequence</span>.<span class="ruby-identifier">seq</span>
-  <span class="ruby-identifier">entry_id</span> = <span class="ruby-ivar">@sequence</span>.<span class="ruby-identifier">entry_id</span> <span class="ruby-operator">||</span> 
-    <span class="ruby-node">&quot;#{@sequence.primary_accession}.#{@sequence.sequence_version}&quot;</span>
-  <span class="ruby-identifier">definition</span> = <span class="ruby-ivar">@sequence</span>.<span class="ruby-identifier">definition</span>
-  <span class="ruby-identifier">header</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;#{entry_id} #{definition}&quot;</span>
-
-  <span class="ruby-node">&quot;&gt;#{header}\n&quot;</span> <span class="ruby-operator">+</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">width</span>
-      <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;.{1,#{width}}&quot;</span>), <span class="ruby-string">&quot;\\0\n&quot;</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-    <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/fasta/format_fasta.rb</span>
+<span class="line-num">38</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output</span>
+<span class="line-num">39</span>   <span class="ruby-identifier">header</span> = <span class="ruby-ivar">@options</span>[<span class="ruby-value">:header</span>]
+<span class="line-num">40</span>   <span class="ruby-identifier">width</span> = <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-value">:width</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:width</span>] <span class="ruby-operator">:</span> <span class="ruby-value">70</span>
+<span class="line-num">41</span>   <span class="ruby-identifier">seq</span> = <span class="ruby-ivar">@sequence</span>.<span class="ruby-identifier">seq</span>
+<span class="line-num">42</span>   <span class="ruby-identifier">entry_id</span> = <span class="ruby-ivar">@sequence</span>.<span class="ruby-identifier">entry_id</span> <span class="ruby-operator">||</span> 
+<span class="line-num">43</span>     <span class="ruby-node">&quot;#{@sequence.primary_accession}.#{@sequence.sequence_version}&quot;</span>
+<span class="line-num">44</span>   <span class="ruby-identifier">definition</span> = <span class="ruby-ivar">@sequence</span>.<span class="ruby-identifier">definition</span>
+<span class="line-num">45</span>   <span class="ruby-identifier">header</span> <span class="ruby-operator">||=</span> <span class="ruby-node">&quot;#{entry_id} #{definition}&quot;</span>
+<span class="line-num">46</span> 
+<span class="line-num">47</span>   <span class="ruby-node">&quot;&gt;#{header}\n&quot;</span> <span class="ruby-operator">+</span>
+<span class="line-num">48</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">width</span>
+<span class="line-num">49</span>       <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;.{1,#{width}}&quot;</span>), <span class="ruby-string">&quot;\\0\n&quot;</span>)
+<span class="line-num">50</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">51</span>       <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">52</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">53</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -228,12 +226,13 @@ like so,</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

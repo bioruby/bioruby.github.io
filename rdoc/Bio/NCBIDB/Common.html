@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -66,22 +70,7 @@
     
     
     
-    <div id="extends-section" class="nav-section">
-  <h3>Extended With Modules</h3>
-
-  <ul class="link-list">
     
-  
-    <li><span class="extend">Bio::References::BackwardCompatibility</span>
-  
-  
-  
-    <li><span class="extend">Bio::Features::BackwardCompatibility</span>
-  
-  
-  </ul>
-</div>
-
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
@@ -145,18 +134,13 @@
     
 <h2 id="module-Bio::NCBIDB::Common-label-Description">Description<span><a href="#module-Bio::NCBIDB::Common-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>This module defines a common framework among <a
-href="../GenBank.html">GenBank</a>, <a href="../GenPept.html">GenPept</a>,
-<a href="../RefSeq.html">RefSeq</a>, and <a href="../DDBJ.html">DDBJ</a>. 
-For more details, see the documentations in each genbank/*.rb files.</p>
+<p>This module defines a common framework among <a href="../GenBank.html"><code>GenBank</code></a>, <a href="../GenPept.html"><code>GenPept</code></a>, <a href="../RefSeq.html"><code>RefSeq</code></a>, and <a href="../DDBJ.html"><code>DDBJ</code></a>.  For more details, see the documentations in each genbank/*.rb files.</p>
 
-<h2 id="module-Bio::NCBIDB::Common-label-References"><a href="../References.html">References</a><span><a href="#module-Bio::NCBIDB::Common-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<h2 id="module-Bio::NCBIDB::Common-label-References"><a href="../References.html"><code>References</code></a><span><a href="#module-Bio::NCBIDB::Common-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
-<p><a
-href="ftp://ftp.ncbi.nih.gov/genbank/gbrel.txt">ftp.ncbi.nih.gov/genbank/gbrel.txt</a></p>
+<p><a href="ftp://ftp.ncbi.nih.gov/genbank/gbrel.txt">ftp.ncbi.nih.gov/genbank/gbrel.txt</a></p>
 </li><li>
-<p><a
-href="http://www.ncbi.nlm.nih.gov/collab/FT/index.html">www.ncbi.nlm.nih.gov/collab/FT/index.html</a></p>
+<p><a href="http://www.ncbi.nlm.nih.gov/collab/FT/index.html">www.ncbi.nlm.nih.gov/collab/FT/index.html</a></p>
 </li></ul>
 
   </section>
@@ -221,10 +205,10 @@ href="http://www.ncbi.nlm.nih.gov/collab/FT/index.html">www.ncbi.nlm.nih.gov/col
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 30</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">30</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">31</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
+<span class="line-num">32</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -262,10 +246,10 @@ href="http://www.ncbi.nlm.nih.gov/collab/FT/index.html">www.ncbi.nlm.nih.gov/col
 
           
           <div class="method-source-code" id="acc_version-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 57</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">acc_version</span>
-  <span class="ruby-identifier">versions</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">57</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">acc_version</span>
+<span class="line-num">58</span>   <span class="ruby-identifier">versions</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">59</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -295,10 +279,10 @@ href="http://www.ncbi.nlm.nih.gov/collab/FT/index.html">www.ncbi.nlm.nih.gov/col
 
           
           <div class="method-source-code" id="accession-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 62</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accession</span>
-  <span class="ruby-identifier">acc_version</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\./</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">62</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accession</span>
+<span class="line-num">63</span>   <span class="ruby-identifier">acc_version</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\./</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">64</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -328,10 +312,10 @@ href="http://www.ncbi.nlm.nih.gov/collab/FT/index.html">www.ncbi.nlm.nih.gov/col
 
           
           <div class="method-source-code" id="accessions-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accessions</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;ACCESSION&#39;</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">46</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accessions</span>
+<span class="line-num">47</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;ACCESSION&#39;</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
+<span class="line-num">48</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -361,13 +345,13 @@ href="http://www.ncbi.nlm.nih.gov/collab/FT/index.html">www.ncbi.nlm.nih.gov/col
 
           
           <div class="method-source-code" id="comment-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 199</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comment</span>
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;COMMENT&#39;</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\ACOMMENT     /</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^ {12}/</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">chomp!</span>
-  <span class="ruby-identifier">str</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">199</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comment</span>
+<span class="line-num">200</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;COMMENT&#39;</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\ACOMMENT     /</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">201</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^ {12}/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">202</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">chomp!</span>
+<span class="line-num">203</span>   <span class="ruby-identifier">str</span>
+<span class="line-num">204</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -397,10 +381,10 @@ href="http://www.ncbi.nlm.nih.gov/collab/FT/index.html">www.ncbi.nlm.nih.gov/col
 
           
           <div class="method-source-code" id="common_name-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 120</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">common_name</span>
-  <span class="ruby-identifier">source</span>[<span class="ruby-string">&#39;common_name&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">120</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">common_name</span>
+<span class="line-num">121</span>   <span class="ruby-identifier">source</span>[<span class="ruby-string">&#39;common_name&#39;</span>]
+<span class="line-num">122</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -434,10 +418,10 @@ href="http://www.ncbi.nlm.nih.gov/collab/FT/index.html">www.ncbi.nlm.nih.gov/col
 
           
           <div class="method-source-code" id="definition-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">definition</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;DEFINITION&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">40</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">definition</span>
+<span class="line-num">41</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;DEFINITION&#39;</span>)
+<span class="line-num">42</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -461,65 +445,64 @@ href="http://www.ncbi.nlm.nih.gov/collab/FT/index.html">www.ncbi.nlm.nih.gov/col
 
         <div class="method-description">
           
-          <p>FEATURES – Returns contents of the FEATURES record as an array of <a
-href="../Feature.html">Bio::Feature</a> objects.</p>
+          <p>FEATURES – Returns contents of the FEATURES record as an array of <a href="../Feature.html"><code>Bio::Feature</code></a> objects.</p>
           
           
 
           
           <div class="method-source-code" id="features-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 209</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">features</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FEATURES&#39;</span>]
-    <span class="ruby-identifier">ary</span> = []
-    <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">false</span>
-    <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;FEATURES&#39;</span>).<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^FEATURES/</span>
-
-      <span class="ruby-comment"># feature type  (source, CDS, ...)</span>
-      <span class="ruby-identifier">head</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>,<span class="ruby-value">20</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
-
-      <span class="ruby-comment"># feature value (position or /qualifier=)</span>
-      <span class="ruby-identifier">body</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">20</span>,<span class="ruby-value">60</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span>
-
-      <span class="ruby-comment"># sub-array [ feature type, position, /q=&quot;data&quot;, ... ]</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^ {5}\S/</span>
-        <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>([ <span class="ruby-identifier">head</span>, <span class="ruby-identifier">body</span> ])
-
-      <span class="ruby-comment"># feature qualifier start (/q=&quot;data..., /q=&quot;data...&quot;, /q=data, /q)</span>
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^ \//</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">in_quote</span>           <span class="ruby-comment"># gb:IRO125195</span>
-        <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">body</span>)
-        
-        <span class="ruby-comment"># flag for open quote (/q=&quot;data...)</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/=&quot;/</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/&quot;$/</span>
-          <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">true</span>
-        <span class="ruby-keyword">end</span>
-
-      <span class="ruby-comment"># feature qualifier continued (...data..., ...data...&quot;)</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">body</span>
-
-        <span class="ruby-comment"># flag for closing quote (/q=&quot;data... lines  ...&quot;)</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/&quot;$/</span>
-          <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">false</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subary</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">parse_qualifiers</span>(<span class="ruby-identifier">subary</span>)
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FEATURES&#39;</span>] = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Features</span><span class="ruby-operator">::</span><span class="ruby-constant">BackwardCompatibility</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FEATURES&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">f</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FEATURES&#39;</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">209</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">features</span>
+<span class="line-num">210</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FEATURES&#39;</span>]
+<span class="line-num">211</span>     <span class="ruby-identifier">ary</span> = []
+<span class="line-num">212</span>     <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">213</span>     <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;FEATURES&#39;</span>).<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">214</span>       <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^FEATURES/</span>
+<span class="line-num">215</span> 
+<span class="line-num">216</span>       <span class="ruby-comment"># feature type  (source, CDS, ...)</span>
+<span class="line-num">217</span>       <span class="ruby-identifier">head</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>,<span class="ruby-value">20</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
+<span class="line-num">218</span> 
+<span class="line-num">219</span>       <span class="ruby-comment"># feature value (position or /qualifier=)</span>
+<span class="line-num">220</span>       <span class="ruby-identifier">body</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">20</span>,<span class="ruby-value">60</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">chomp</span>
+<span class="line-num">221</span> 
+<span class="line-num">222</span>       <span class="ruby-comment"># sub-array [ feature type, position, /q=&quot;data&quot;, ... ]</span>
+<span class="line-num">223</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^ {5}\S/</span>
+<span class="line-num">224</span>         <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>([ <span class="ruby-identifier">head</span>, <span class="ruby-identifier">body</span> ])
+<span class="line-num">225</span> 
+<span class="line-num">226</span>       <span class="ruby-comment"># feature qualifier start (/q=&quot;data..., /q=&quot;data...&quot;, /q=data, /q)</span>
+<span class="line-num">227</span>       <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^ \//</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">in_quote</span>           <span class="ruby-comment"># gb:IRO125195</span>
+<span class="line-num">228</span>         <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">body</span>)
+<span class="line-num">229</span>         
+<span class="line-num">230</span>         <span class="ruby-comment"># flag for open quote (/q=&quot;data...)</span>
+<span class="line-num">231</span>         <span class="ruby-keyword">if</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/=&quot;/</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/&quot;$/</span>
+<span class="line-num">232</span>           <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">233</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">234</span> 
+<span class="line-num">235</span>       <span class="ruby-comment"># feature qualifier continued (...data..., ...data...&quot;)</span>
+<span class="line-num">236</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">237</span>         <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">body</span>
+<span class="line-num">238</span> 
+<span class="line-num">239</span>         <span class="ruby-comment"># flag for closing quote (/q=&quot;data... lines  ...&quot;)</span>
+<span class="line-num">240</span>         <span class="ruby-keyword">if</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/&quot;$/</span>
+<span class="line-num">241</span>           <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">242</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">243</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">244</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">245</span> 
+<span class="line-num">246</span>     <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subary</span><span class="ruby-operator">|</span>
+<span class="line-num">247</span>       <span class="ruby-identifier">parse_qualifiers</span>(<span class="ruby-identifier">subary</span>)
+<span class="line-num">248</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">249</span> 
+<span class="line-num">250</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FEATURES&#39;</span>] = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Features</span><span class="ruby-operator">::</span><span class="ruby-constant">BackwardCompatibility</span>)
+<span class="line-num">251</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">252</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+<span class="line-num">253</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FEATURES&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+<span class="line-num">254</span>       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">f</span>
+<span class="line-num">255</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">256</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">257</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FEATURES&#39;</span>]
+<span class="line-num">258</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">259</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -549,10 +532,10 @@ href="../Feature.html">Bio::Feature</a> objects.</p>
 
           
           <div class="method-source-code" id="gi-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gi</span>
-  <span class="ruby-identifier">versions</span>.<span class="ruby-identifier">last</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">72</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gi</span>
+<span class="line-num">73</span>   <span class="ruby-identifier">versions</span>.<span class="ruby-identifier">last</span>
+<span class="line-num">74</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -582,10 +565,10 @@ href="../Feature.html">Bio::Feature</a> objects.</p>
 
           
           <div class="method-source-code" id="keywords-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 84</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keywords</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;KEYWORDS&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;KEYWORDS&#39;</span>).<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;.&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/; /</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">84</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keywords</span>
+<span class="line-num">85</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;KEYWORDS&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;KEYWORDS&#39;</span>).<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;.&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/; /</span>)
+<span class="line-num">86</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -615,10 +598,10 @@ href="../Feature.html">Bio::Feature</a> objects.</p>
 
           
           <div class="method-source-code" id="locus-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">locus</span>
-  <span class="ruby-comment"># must be overrided in each subclass</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">35</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">locus</span>
+<span class="line-num">36</span>   <span class="ruby-comment"># must be overrided in each subclass</span>
+<span class="line-num">37</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -648,10 +631,10 @@ href="../Feature.html">Bio::Feature</a> objects.</p>
 
           
           <div class="method-source-code" id="nid-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 78</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nid</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;NID&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">78</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nid</span>
+<span class="line-num">79</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;NID&#39;</span>)
+<span class="line-num">80</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -681,10 +664,10 @@ href="../Feature.html">Bio::Feature</a> objects.</p>
 
           
           <div class="method-source-code" id="organism-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 125</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">organism</span>
-  <span class="ruby-identifier">source</span>[<span class="ruby-string">&#39;organism&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">125</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">organism</span>
+<span class="line-num">126</span>   <span class="ruby-identifier">source</span>[<span class="ruby-string">&#39;organism&#39;</span>]
+<span class="line-num">127</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -714,16 +697,16 @@ href="../Feature.html">Bio::Feature</a> objects.</p>
 
           
           <div class="method-source-code" id="origin-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 263</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">origin</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORIGIN&#39;</span>]
-    <span class="ruby-identifier">ori</span>, <span class="ruby-identifier">seqstr</span> = <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;ORIGIN&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-value">2</span>)
-    <span class="ruby-identifier">seqstr</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;&quot;</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORIGIN&#39;</span>] = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">ori</span>))
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SEQUENCE&#39;</span>] = <span class="ruby-identifier">seqstr</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&quot;0-9 \t\n\r\/&quot;</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORIGIN&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">263</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">origin</span>
+<span class="line-num">264</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORIGIN&#39;</span>]
+<span class="line-num">265</span>     <span class="ruby-identifier">ori</span>, <span class="ruby-identifier">seqstr</span> = <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;ORIGIN&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-value">2</span>)
+<span class="line-num">266</span>     <span class="ruby-identifier">seqstr</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;&quot;</span>
+<span class="line-num">267</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORIGIN&#39;</span>] = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">ori</span>))
+<span class="line-num">268</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SEQUENCE&#39;</span>] = <span class="ruby-identifier">seqstr</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&quot;0-9 \t\n\r\/&quot;</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">269</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">270</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORIGIN&#39;</span>]
+<span class="line-num">271</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -747,74 +730,73 @@ href="../Feature.html">Bio::Feature</a> objects.</p>
 
         <div class="method-description">
           
-          <p>REFERENCE – Returns contents of the REFERENCE records as an Array of <a
-href="../Reference.html">Bio::Reference</a> objects.</p>
+          <p>REFERENCE – Returns contents of the REFERENCE records as an Array of <a href="../Reference.html"><code>Bio::Reference</code></a> objects.</p>
           
           
 
           
           <div class="method-source-code" id="references-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 136</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">references</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
-    <span class="ruby-identifier">ary</span> = []
-    <span class="ruby-identifier">toptag2array</span>(<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;REFERENCE&#39;</span>)).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ref</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-      <span class="ruby-identifier">subtag2array</span>(<span class="ruby-identifier">ref</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">case</span> <span class="ruby-identifier">tag_get</span>(<span class="ruby-identifier">field</span>)
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/REFERENCE/</span>
-          <span class="ruby-keyword">if</span> <span class="ruby-regexp">/(\d+)(\s*\((.+)\))?/m</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>) <span class="ruby-keyword">then</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;embl_gb_record_number&#39;</span>] = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
-            <span class="ruby-keyword">if</span> <span class="ruby-node">$3</span> <span class="ruby-keyword">and</span> <span class="ruby-node">$3</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;sites&#39;</span> <span class="ruby-keyword">then</span>
-              <span class="ruby-identifier">seqpos</span> = <span class="ruby-node">$3</span>
-              <span class="ruby-identifier">seqpos</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\A\s*bases\s+/</span>, <span class="ruby-string">&#39;&#39;</span>)
-              <span class="ruby-identifier">seqpos</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/(\d+)\s+to\s+(\d+)/</span>, <span class="ruby-string">&quot;\\1-\\2&quot;</span>)
-              <span class="ruby-identifier">seqpos</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\s*\;\s*/</span>, <span class="ruby-string">&#39;, &#39;</span>)
-              <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;sequence_position&#39;</span>] = <span class="ruby-identifier">seqpos</span>
-            <span class="ruby-keyword">end</span>
-          <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/AUTHORS/</span>
-          <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
-          <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/, /</span>)
-          <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>] = <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+and\s+/</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>]
-          <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/,/</span>, <span class="ruby-string">&#39;, &#39;</span>) }
-          <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;authors&#39;</span>]     = <span class="ruby-identifier">authors</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/TITLE/</span>
-          <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;title&#39;</span>]       = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
-          <span class="ruby-comment"># CHECK Actually GenBank is not demanding for dot at the end of TITLE</span>
-          <span class="ruby-comment">#+ &#39;.&#39;</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/JOURNAL/</span>
-          <span class="ruby-identifier">journal</span> = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
-          <span class="ruby-keyword">if</span> <span class="ruby-identifier">journal</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(.*) (\d+) \((\d+)\), (\d+-\d+) \((\d+)\)$/</span>
-      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>]  = <span class="ruby-node">$1</span>
-      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;volume&#39;</span>]   = <span class="ruby-node">$2</span>
-      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;issue&#39;</span>]    = <span class="ruby-node">$3</span>
-      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pages&#39;</span>]    = <span class="ruby-node">$4</span>
-      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]     = <span class="ruby-node">$5</span>
-          <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-identifier">journal</span>
-          <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/MEDLINE/</span>
-          <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;medline&#39;</span>]     = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/PUBMED/</span>
-          <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pubmed&#39;</span>]      = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/REMARK/</span>
-          <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;comments&#39;</span>] <span class="ruby-operator">||=</span> []
-          <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;comments&#39;</span>].<span class="ruby-identifier">push</span> <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Reference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">hash</span>))
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>] = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">References</span><span class="ruby-operator">::</span><span class="ruby-constant">BackwardCompatibility</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">r</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">136</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">references</span>
+<span class="line-num">137</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
+<span class="line-num">138</span>     <span class="ruby-identifier">ary</span> = []
+<span class="line-num">139</span>     <span class="ruby-identifier">toptag2array</span>(<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;REFERENCE&#39;</span>)).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ref</span><span class="ruby-operator">|</span>
+<span class="line-num">140</span>       <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">141</span>       <span class="ruby-identifier">subtag2array</span>(<span class="ruby-identifier">ref</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
+<span class="line-num">142</span>         <span class="ruby-keyword">case</span> <span class="ruby-identifier">tag_get</span>(<span class="ruby-identifier">field</span>)
+<span class="line-num">143</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/REFERENCE/</span>
+<span class="line-num">144</span>           <span class="ruby-keyword">if</span> <span class="ruby-regexp">/(\d+)(\s*\((.+)\))?/m</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">145</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;embl_gb_record_number&#39;</span>] = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">146</span>             <span class="ruby-keyword">if</span> <span class="ruby-node">$3</span> <span class="ruby-keyword">and</span> <span class="ruby-node">$3</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;sites&#39;</span> <span class="ruby-keyword">then</span>
+<span class="line-num">147</span>               <span class="ruby-identifier">seqpos</span> = <span class="ruby-node">$3</span>
+<span class="line-num">148</span>               <span class="ruby-identifier">seqpos</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\A\s*bases\s+/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">149</span>               <span class="ruby-identifier">seqpos</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/(\d+)\s+to\s+(\d+)/</span>, <span class="ruby-string">&quot;\\1-\\2&quot;</span>)
+<span class="line-num">150</span>               <span class="ruby-identifier">seqpos</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\s*\;\s*/</span>, <span class="ruby-string">&#39;, &#39;</span>)
+<span class="line-num">151</span>               <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;sequence_position&#39;</span>] = <span class="ruby-identifier">seqpos</span>
+<span class="line-num">152</span>             <span class="ruby-keyword">end</span>
+<span class="line-num">153</span>           <span class="ruby-keyword">end</span>
+<span class="line-num">154</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/AUTHORS/</span>
+<span class="line-num">155</span>           <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
+<span class="line-num">156</span>           <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/, /</span>)
+<span class="line-num">157</span>           <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>] = <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+and\s+/</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>]
+<span class="line-num">158</span>           <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/,/</span>, <span class="ruby-string">&#39;, &#39;</span>) }
+<span class="line-num">159</span>           <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;authors&#39;</span>]     = <span class="ruby-identifier">authors</span>
+<span class="line-num">160</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/TITLE/</span>
+<span class="line-num">161</span>           <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;title&#39;</span>]       = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
+<span class="line-num">162</span>           <span class="ruby-comment"># CHECK Actually GenBank is not demanding for dot at the end of TITLE</span>
+<span class="line-num">163</span>           <span class="ruby-comment">#+ &#39;.&#39;</span>
+<span class="line-num">164</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/JOURNAL/</span>
+<span class="line-num">165</span>           <span class="ruby-identifier">journal</span> = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
+<span class="line-num">166</span>           <span class="ruby-keyword">if</span> <span class="ruby-identifier">journal</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/(.*) (\d+) \((\d+)\), (\d+-\d+) \((\d+)\)$/</span>
+<span class="line-num">167</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>]  = <span class="ruby-node">$1</span>
+<span class="line-num">168</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;volume&#39;</span>]   = <span class="ruby-node">$2</span>
+<span class="line-num">169</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;issue&#39;</span>]    = <span class="ruby-node">$3</span>
+<span class="line-num">170</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pages&#39;</span>]    = <span class="ruby-node">$4</span>
+<span class="line-num">171</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]     = <span class="ruby-node">$5</span>
+<span class="line-num">172</span>           <span class="ruby-keyword">else</span>
+<span class="line-num">173</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-identifier">journal</span>
+<span class="line-num">174</span>           <span class="ruby-keyword">end</span>
+<span class="line-num">175</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/MEDLINE/</span>
+<span class="line-num">176</span>           <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;medline&#39;</span>]     = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
+<span class="line-num">177</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/PUBMED/</span>
+<span class="line-num">178</span>           <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pubmed&#39;</span>]      = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
+<span class="line-num">179</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/REMARK/</span>
+<span class="line-num">180</span>           <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;comments&#39;</span>] <span class="ruby-operator">||=</span> []
+<span class="line-num">181</span>           <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;comments&#39;</span>].<span class="ruby-identifier">push</span> <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
+<span class="line-num">182</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">183</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">184</span>       <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Reference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">hash</span>))
+<span class="line-num">185</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">186</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>] = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">References</span><span class="ruby-operator">::</span><span class="ruby-constant">BackwardCompatibility</span>)
+<span class="line-num">187</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">188</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+<span class="line-num">189</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
+<span class="line-num">190</span>       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">r</span>
+<span class="line-num">191</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">192</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">193</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
+<span class="line-num">194</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">195</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -844,10 +826,10 @@ href="../Reference.html">Bio::Reference</a> objects.</p>
 
           
           <div class="method-source-code" id="segment-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 90</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">segment</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SEGMENT&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;SEGMENT&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\d+/</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;/&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">90</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">segment</span>
+<span class="line-num">91</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SEGMENT&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;SEGMENT&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\d+/</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;/&quot;</span>)
+<span class="line-num">92</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -877,30 +859,30 @@ href="../Reference.html">Bio::Reference</a> objects.</p>
 
           
           <div class="method-source-code" id="source-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 96</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">source</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SOURCE&#39;</span>]
-    <span class="ruby-identifier">name</span>, <span class="ruby-identifier">org</span> = <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;SOURCE&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;ORGANISM&#39;</span>)
-    <span class="ruby-identifier">org</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;&quot;</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">org</span>[<span class="ruby-regexp">/\S+;/</span>]
-      <span class="ruby-identifier">organism</span> = <span class="ruby-node">$`</span>
-      <span class="ruby-identifier">taxonomy</span> = <span class="ruby-node">$&amp;</span> <span class="ruby-operator">+</span> <span class="ruby-node">$&#39;</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">org</span>[<span class="ruby-regexp">/\S+\./</span>]                                <span class="ruby-comment"># rs:NC_001741</span>
-      <span class="ruby-identifier">organism</span> = <span class="ruby-node">$`</span>
-      <span class="ruby-identifier">taxonomy</span> = <span class="ruby-node">$&amp;</span> <span class="ruby-operator">+</span> <span class="ruby-node">$&#39;</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">organism</span> = <span class="ruby-identifier">org</span>
-      <span class="ruby-identifier">taxonomy</span> = <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SOURCE&#39;</span>] = {
-      <span class="ruby-string">&#39;common_name&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">name</span>)),
-      <span class="ruby-string">&#39;organism&#39;</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">organism</span>),
-      <span class="ruby-string">&#39;taxonomy&#39;</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">taxonomy</span>),
-    }
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SOURCE&#39;</span>].<span class="ruby-identifier">default</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SOURCE&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num"> 96</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">source</span>
+<span class="line-num"> 97</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SOURCE&#39;</span>]
+<span class="line-num"> 98</span>     <span class="ruby-identifier">name</span>, <span class="ruby-identifier">org</span> = <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;SOURCE&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;ORGANISM&#39;</span>)
+<span class="line-num"> 99</span>     <span class="ruby-identifier">org</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;&quot;</span>
+<span class="line-num">100</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">org</span>[<span class="ruby-regexp">/\S+;/</span>]
+<span class="line-num">101</span>       <span class="ruby-identifier">organism</span> = <span class="ruby-node">$`</span>
+<span class="line-num">102</span>       <span class="ruby-identifier">taxonomy</span> = <span class="ruby-node">$&amp;</span> <span class="ruby-operator">+</span> <span class="ruby-node">$&#39;</span>
+<span class="line-num">103</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">org</span>[<span class="ruby-regexp">/\S+\./</span>]                                <span class="ruby-comment"># rs:NC_001741</span>
+<span class="line-num">104</span>       <span class="ruby-identifier">organism</span> = <span class="ruby-node">$`</span>
+<span class="line-num">105</span>       <span class="ruby-identifier">taxonomy</span> = <span class="ruby-node">$&amp;</span> <span class="ruby-operator">+</span> <span class="ruby-node">$&#39;</span>
+<span class="line-num">106</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">107</span>       <span class="ruby-identifier">organism</span> = <span class="ruby-identifier">org</span>
+<span class="line-num">108</span>       <span class="ruby-identifier">taxonomy</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">109</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">110</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SOURCE&#39;</span>] = {
+<span class="line-num">111</span>       <span class="ruby-string">&#39;common_name&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">name</span>)),
+<span class="line-num">112</span>       <span class="ruby-string">&#39;organism&#39;</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">organism</span>),
+<span class="line-num">113</span>       <span class="ruby-string">&#39;taxonomy&#39;</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">taxonomy</span>),
+<span class="line-num">114</span>     }
+<span class="line-num">115</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SOURCE&#39;</span>].<span class="ruby-identifier">default</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">116</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">117</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SOURCE&#39;</span>]
+<span class="line-num">118</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -930,10 +912,10 @@ href="../Reference.html">Bio::Reference</a> objects.</p>
 
           
           <div class="method-source-code" id="taxonomy-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 129</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxonomy</span>
-  <span class="ruby-identifier">source</span>[<span class="ruby-string">&#39;taxonomy&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">129</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxonomy</span>
+<span class="line-num">130</span>   <span class="ruby-identifier">source</span>[<span class="ruby-string">&#39;taxonomy&#39;</span>]
+<span class="line-num">131</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -985,17 +967,16 @@ href="../Reference.html">Bio::Reference</a> objects.</p>
 
         <div class="method-description">
           
-          <p>Returns the VERSION part of the <a
-href="Common.html#method-i-acc_version">#acc_version</a> as a Fixnum</p>
+          <p>Returns the VERSION part of the <a href="Common.html#method-i-acc_version"><code>acc_version</code></a> as a Fixnum</p>
           
           
 
           
           <div class="method-source-code" id="version-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 67</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>
-  <span class="ruby-identifier">acc_version</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\./</span>).<span class="ruby-identifier">last</span>.<span class="ruby-identifier">to_i</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">67</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>
+<span class="line-num">68</span>   <span class="ruby-identifier">acc_version</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\./</span>).<span class="ruby-identifier">last</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">69</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1025,10 +1006,10 @@ href="Common.html#method-i-acc_version">#acc_version</a> as a Fixnum</p>
 
           
           <div class="method-source-code" id="versions-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/genbank/common.rb, line 52</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">versions</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;VERSION&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;VERSION&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/genbank/common.rb</span>
+<span class="line-num">52</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">versions</span>
+<span class="line-num">53</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;VERSION&#39;</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;VERSION&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
+<span class="line-num">54</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1042,12 +1023,13 @@ href="Common.html#method-i-acc_version">#acc_version</a> as a Fixnum</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

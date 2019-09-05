@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -87,17 +91,14 @@
     
 <h2 id="module-Bio::Map::ActsLikeMarker-label-Description">Description<span><a href="#module-Bio::Map::ActsLikeMarker-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>The <a href="ActsLikeMarker.html">Bio::Map::ActsLikeMarker</a> module
-contains methods that are typical for marker-like things:</p>
+<p>The <a href="ActsLikeMarker.html"><code>Bio::Map::ActsLikeMarker</code></a> module contains methods that are typical for marker-like things:</p>
 <ul><li>
 <p>map it to one or more maps</p>
 </li><li>
-<p>check if it&#39;s mapped to a given map and can be mixed into other classes
-(e.g. <a href="Marker.html">Bio::Map::Marker</a>)</p>
+<p>check if it&#39;s mapped to a given map and can be mixed into other classes (e.g. <a href="Marker.html"><code>Bio::Map::Marker</code></a>)</p>
 </li></ul>
 
-<p>Classes that include this mixin should provide an array property called
-mappings_as_marker.</p>
+<p>Classes that include this mixin should provide an array property called mappings_as_marker.</p>
 
 <p>For example:</p>
 
@@ -157,11 +158,9 @@ mappings_as_marker.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>map</em> (required): <a href="SimpleMap.html">Bio::Map::SimpleMap</a>
-object</p>
+<p><em>map</em> (required): <a href="SimpleMap.html"><code>Bio::Map::SimpleMap</code></a> object</p>
 </li><li>
-<p><em>location</em>: location of mapping. Should be a <em>string</em>, not a
-<em>number</em>.</p>
+<p><em>location</em>: location of mapping. Should be a <em>string</em>, not a <em>number</em>.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -172,28 +171,28 @@ object</p>
 
           
           <div class="method-source-code" id="add_mapping_as_marker-source">
-            <pre><span class="ruby-comment"># File lib/bio/map.rb, line 203</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_mapping_as_marker</span>(<span class="ruby-identifier">map</span>, <span class="ruby-identifier">location</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">map</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">ActsLikeMap</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] map is not object that implements Bio::Map::ActsLikeMap&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">my_mapping</span> = (<span class="ruby-identifier">location</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">Mappings</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">map</span>, <span class="ruby-keyword">self</span>, <span class="ruby-keyword">nil</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">Mapping</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">map</span>, <span class="ruby-keyword">self</span>, <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">location</span>))
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mapped_to?</span>(<span class="ruby-identifier">map</span>)
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mappings_as_marker</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">my_mapping</span>)
-    <span class="ruby-identifier">map</span>.<span class="ruby-identifier">mappings_as_map</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">my_mapping</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">already_mapped</span> = <span class="ruby-keyword">false</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">positions_on</span>(<span class="ruby-identifier">map</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">equals?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">location</span>))
-        <span class="ruby-identifier">already_mapped</span> = <span class="ruby-keyword">true</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">already_mapped</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mappings_as_marker</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">my_mapping</span>)
-      <span class="ruby-identifier">map</span>.<span class="ruby-identifier">mappings_as_map</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">my_mapping</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/map.rb</span>
+<span class="line-num">203</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_mapping_as_marker</span>(<span class="ruby-identifier">map</span>, <span class="ruby-identifier">location</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">204</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">map</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">ActsLikeMap</span>)
+<span class="line-num">205</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] map is not object that implements Bio::Map::ActsLikeMap&quot;</span>
+<span class="line-num">206</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">207</span>   <span class="ruby-identifier">my_mapping</span> = (<span class="ruby-identifier">location</span>.<span class="ruby-identifier">nil?</span>) <span class="ruby-operator">?</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">Mappings</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">map</span>, <span class="ruby-keyword">self</span>, <span class="ruby-keyword">nil</span>) <span class="ruby-operator">:</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">Mapping</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">map</span>, <span class="ruby-keyword">self</span>, <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">location</span>))
+<span class="line-num">208</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mapped_to?</span>(<span class="ruby-identifier">map</span>)
+<span class="line-num">209</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mappings_as_marker</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">my_mapping</span>)
+<span class="line-num">210</span>     <span class="ruby-identifier">map</span>.<span class="ruby-identifier">mappings_as_map</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">my_mapping</span>)
+<span class="line-num">211</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">212</span>     <span class="ruby-identifier">already_mapped</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">213</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">positions_on</span>(<span class="ruby-identifier">map</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
+<span class="line-num">214</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">equals?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">location</span>))
+<span class="line-num">215</span>         <span class="ruby-identifier">already_mapped</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">216</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">217</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">218</span>     <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">already_mapped</span>
+<span class="line-num">219</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mappings_as_marker</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">my_mapping</span>)
+<span class="line-num">220</span>       <span class="ruby-identifier">map</span>.<span class="ruby-identifier">mappings_as_map</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">my_mapping</span>)
+<span class="line-num">221</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">222</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">223</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -217,13 +216,12 @@ object</p>
 
         <div class="method-description">
           
-          <p>Check whether this marker is mapped to a given <a
-href="SimpleMap.html">Bio::Map::SimpleMap</a>.</p>
+          <p>Check whether this marker is mapped to a given <a href="SimpleMap.html"><code>Bio::Map::SimpleMap</code></a>.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>map</em>: a <a href="SimpleMap.html">Bio::Map::SimpleMap</a> object</p>
+<p><em>map</em>: a <a href="SimpleMap.html"><code>Bio::Map::SimpleMap</code></a> object</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -234,22 +232,22 @@ href="SimpleMap.html">Bio::Map::SimpleMap</a>.</p>
 
           
           <div class="method-source-code" id="mapped_to-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/map.rb, line 230</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mapped_to?</span>(<span class="ruby-identifier">map</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">map</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">ActsLikeMap</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] map is not object that implements Bio::Map::ActsLikeMap&quot;</span>
-  <span class="ruby-keyword">end</span>
-          
-  <span class="ruby-identifier">mapped</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mappings_as_marker</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mapping</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">map</span>
-      <span class="ruby-identifier">mapped</span> = <span class="ruby-keyword">true</span>
-      <span class="ruby-keyword">return</span> <span class="ruby-identifier">mapped</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">mapped</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/map.rb</span>
+<span class="line-num">230</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mapped_to?</span>(<span class="ruby-identifier">map</span>)
+<span class="line-num">231</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">map</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">ActsLikeMap</span>)
+<span class="line-num">232</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] map is not object that implements Bio::Map::ActsLikeMap&quot;</span>
+<span class="line-num">233</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">234</span>           
+<span class="line-num">235</span>   <span class="ruby-identifier">mapped</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">236</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mappings_as_marker</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mapping</span><span class="ruby-operator">|</span>
+<span class="line-num">237</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">map</span>
+<span class="line-num">238</span>       <span class="ruby-identifier">mapped</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">239</span>       <span class="ruby-keyword">return</span> <span class="ruby-identifier">mapped</span>
+<span class="line-num">240</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">241</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">242</span> 
+<span class="line-num">243</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">mapped</span>
+<span class="line-num">244</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -278,33 +276,32 @@ href="SimpleMap.html">Bio::Map::SimpleMap</a>.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>map</em>: an object that mixes in <a
-href="ActsLikeMap.html">Bio::Map::ActsLikeMap</a></p>
+<p><em>map</em>: an object that mixes in <a href="ActsLikeMap.html"><code>Bio::Map::ActsLikeMap</code></a></p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>array of <a href="Mapping.html">Bio::Map::Mapping</a> objects</p>
+<p>array of <a href="Mapping.html"><code>Bio::Map::Mapping</code></a> objects</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="mappings_on-source">
-            <pre><span class="ruby-comment"># File lib/bio/map.rb, line 271</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mappings_on</span>(<span class="ruby-identifier">map</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">map</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">ActsLikeMap</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] map is not object that implements Bio::Map::ActsLikeMap&quot;</span>
-  <span class="ruby-keyword">end</span>
-  
-  <span class="ruby-identifier">m</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mappings_as_marker</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mapping</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">map</span>
-      <span class="ruby-identifier">m</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">mapping</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">m</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/map.rb</span>
+<span class="line-num">271</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mappings_on</span>(<span class="ruby-identifier">map</span>)
+<span class="line-num">272</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">map</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">ActsLikeMap</span>)
+<span class="line-num">273</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] map is not object that implements Bio::Map::ActsLikeMap&quot;</span>
+<span class="line-num">274</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">275</span>   
+<span class="line-num">276</span>   <span class="ruby-identifier">m</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">277</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mappings_as_marker</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mapping</span><span class="ruby-operator">|</span>
+<span class="line-num">278</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">map</span>
+<span class="line-num">279</span>       <span class="ruby-identifier">m</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">mapping</span>)
+<span class="line-num">280</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">281</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">282</span>   
+<span class="line-num">283</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">m</span>
+<span class="line-num">284</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -333,33 +330,32 @@ href="ActsLikeMap.html">Bio::Map::ActsLikeMap</a></p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>map</em>: an object that mixes in <a
-href="ActsLikeMap.html">Bio::Map::ActsLikeMap</a></p>
+<p><em>map</em>: an object that mixes in <a href="ActsLikeMap.html"><code>Bio::Map::ActsLikeMap</code></a></p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>array of <a href="../Location.html">Bio::Location</a> objects</p>
+<p>array of <a href="../Location.html"><code>Bio::Location</code></a> objects</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="positions_on-source">
-            <pre><span class="ruby-comment"># File lib/bio/map.rb, line 251</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">positions_on</span>(<span class="ruby-identifier">map</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">map</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">ActsLikeMap</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] map is not object that implements Bio::Map::ActsLikeMap&quot;</span>
-  <span class="ruby-keyword">end</span>
-  
-  <span class="ruby-identifier">positions</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mappings_as_marker</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mapping</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">map</span>
-      <span class="ruby-identifier">positions</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">location</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">positions</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/map.rb</span>
+<span class="line-num">251</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">positions_on</span>(<span class="ruby-identifier">map</span>)
+<span class="line-num">252</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">map</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">ActsLikeMap</span>)
+<span class="line-num">253</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] map is not object that implements Bio::Map::ActsLikeMap&quot;</span>
+<span class="line-num">254</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">255</span>   
+<span class="line-num">256</span>   <span class="ruby-identifier">positions</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">257</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mappings_as_marker</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mapping</span><span class="ruby-operator">|</span>
+<span class="line-num">258</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">map</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">map</span>
+<span class="line-num">259</span>       <span class="ruby-identifier">positions</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">mapping</span>.<span class="ruby-identifier">location</span>)
+<span class="line-num">260</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">261</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">262</span>   
+<span class="line-num">263</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">positions</span>
+<span class="line-num">264</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -373,12 +369,13 @@ href="ActsLikeMap.html">Bio::Map::ActsLikeMap</a></p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

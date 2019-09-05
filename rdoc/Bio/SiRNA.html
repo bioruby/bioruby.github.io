@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -96,12 +100,11 @@
 
   <section class="description">
     
-<h1 id="class-Bio::SiRNA-label-Bio-3A-3ASiRNA"><a href="SiRNA.html">Bio::SiRNA</a><span><a href="#class-Bio::SiRNA-label-Bio-3A-3ASiRNA">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::SiRNA-label-Bio-3A-3ASiRNA"><a href="SiRNA.html"><code>Bio::SiRNA</code></a><span><a href="#class-Bio::SiRNA-label-Bio-3A-3ASiRNA">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p>Designing siRNA.</p>
 
-<p>This class implements the selection rules described by Kumiko Ui-Tei et al.
-(2004) and Reynolds et al. (2004).</p>
+<p>This class implements the selection rules described by Kumiko Ui-Tei et al. (2004) and Reynolds et al. (2004).</p>
 
   </section>
 
@@ -182,22 +185,20 @@
 
         <div class="method-description">
           
-          <p>Input is a <a href="Sequence/NA.html">Bio::Sequence::NA</a> object (the
-target sequence). Output is a list of <a
-href="SiRNA/Pair.html">Bio::SiRNA::Pair</a> object.</p>
+          <p>Input is a <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a> object (the target sequence). Output is a list of <a href="SiRNA/Pair.html"><code>Bio::SiRNA::Pair</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 65</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">antisense_size</span> = <span class="ruby-value">21</span>, <span class="ruby-identifier">max_gc_percent</span> = <span class="ruby-value">60.0</span>, <span class="ruby-identifier">min_gc_percent</span> = <span class="ruby-value">40.0</span>)
-  <span class="ruby-ivar">@seq</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">rna!</span>
-  <span class="ruby-ivar">@pairs</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@antisense_size</span> = <span class="ruby-identifier">antisense_size</span>
-  <span class="ruby-ivar">@max_gc_percent</span> = <span class="ruby-identifier">max_gc_percent</span>
-  <span class="ruby-ivar">@min_gc_percent</span> = <span class="ruby-identifier">min_gc_percent</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">65</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">antisense_size</span> = <span class="ruby-value">21</span>, <span class="ruby-identifier">max_gc_percent</span> = <span class="ruby-value">60.0</span>, <span class="ruby-identifier">min_gc_percent</span> = <span class="ruby-value">40.0</span>)
+<span class="line-num">66</span>   <span class="ruby-ivar">@seq</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">rna!</span>
+<span class="line-num">67</span>   <span class="ruby-ivar">@pairs</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">68</span>   <span class="ruby-ivar">@antisense_size</span> = <span class="ruby-identifier">antisense_size</span>
+<span class="line-num">69</span>   <span class="ruby-ivar">@max_gc_percent</span> = <span class="ruby-identifier">max_gc_percent</span>
+<span class="line-num">70</span>   <span class="ruby-ivar">@min_gc_percent</span> = <span class="ruby-identifier">min_gc_percent</span>
+<span class="line-num">71</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -235,36 +236,36 @@ href="SiRNA/Pair.html">Bio::SiRNA::Pair</a> object.</p>
 
           
           <div class="method-source-code" id="design-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 146</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">design</span>(<span class="ruby-identifier">rule</span> = <span class="ruby-string">&#39;uitei&#39;</span>)
-  <span class="ruby-ivar">@target_size</span> = <span class="ruby-ivar">@antisense_size</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>
-
-  <span class="ruby-identifier">target_start</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@seq</span>.<span class="ruby-identifier">window_search</span>(<span class="ruby-ivar">@target_size</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">target</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">antisense</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-value">1</span>, <span class="ruby-ivar">@target_size</span> <span class="ruby-operator">-</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">complement</span>.<span class="ruby-identifier">rna</span>
-    <span class="ruby-identifier">sense</span>     = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-value">3</span>, <span class="ruby-ivar">@target_size</span>)
-
-    <span class="ruby-identifier">target_start</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">target_stop</span>  = <span class="ruby-identifier">target_start</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@target_size</span>
-
-    <span class="ruby-identifier">antisense_gc_percent</span> = <span class="ruby-identifier">antisense</span>.<span class="ruby-identifier">gc_percent</span>
-    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">antisense_gc_percent</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@max_gc_percent</span>
-    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">antisense_gc_percent</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@min_gc_percent</span>
-    
-    <span class="ruby-keyword">case</span> <span class="ruby-identifier">rule</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;uitei&#39;</span>
-      <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">uitei?</span>(<span class="ruby-identifier">target</span>)
-    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;reynolds&#39;</span>
-      <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">reynolds?</span>(<span class="ruby-identifier">target</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-identifier">pair</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">SiRNA</span><span class="ruby-operator">::</span><span class="ruby-constant">Pair</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">sense</span>, <span class="ruby-identifier">antisense</span>, <span class="ruby-identifier">target_start</span>, <span class="ruby-identifier">target_stop</span>, <span class="ruby-identifier">rule</span>, <span class="ruby-identifier">antisense_gc_percent</span>)
-    <span class="ruby-ivar">@pairs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">pair</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@pairs</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">146</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">design</span>(<span class="ruby-identifier">rule</span> = <span class="ruby-string">&#39;uitei&#39;</span>)
+<span class="line-num">147</span>   <span class="ruby-ivar">@target_size</span> = <span class="ruby-ivar">@antisense_size</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>
+<span class="line-num">148</span> 
+<span class="line-num">149</span>   <span class="ruby-identifier">target_start</span> = <span class="ruby-value">0</span>
+<span class="line-num">150</span>   <span class="ruby-ivar">@seq</span>.<span class="ruby-identifier">window_search</span>(<span class="ruby-ivar">@target_size</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">target</span><span class="ruby-operator">|</span>
+<span class="line-num">151</span>     <span class="ruby-identifier">antisense</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-value">1</span>, <span class="ruby-ivar">@target_size</span> <span class="ruby-operator">-</span> <span class="ruby-value">2</span>).<span class="ruby-identifier">complement</span>.<span class="ruby-identifier">rna</span>
+<span class="line-num">152</span>     <span class="ruby-identifier">sense</span>     = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-value">3</span>, <span class="ruby-ivar">@target_size</span>)
+<span class="line-num">153</span> 
+<span class="line-num">154</span>     <span class="ruby-identifier">target_start</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+<span class="line-num">155</span>     <span class="ruby-identifier">target_stop</span>  = <span class="ruby-identifier">target_start</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@target_size</span>
+<span class="line-num">156</span> 
+<span class="line-num">157</span>     <span class="ruby-identifier">antisense_gc_percent</span> = <span class="ruby-identifier">antisense</span>.<span class="ruby-identifier">gc_percent</span>
+<span class="line-num">158</span>     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">antisense_gc_percent</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@max_gc_percent</span>
+<span class="line-num">159</span>     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">antisense_gc_percent</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@min_gc_percent</span>
+<span class="line-num">160</span>     
+<span class="line-num">161</span>     <span class="ruby-keyword">case</span> <span class="ruby-identifier">rule</span>
+<span class="line-num">162</span>     <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;uitei&#39;</span>
+<span class="line-num">163</span>       <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">uitei?</span>(<span class="ruby-identifier">target</span>)
+<span class="line-num">164</span>     <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;reynolds&#39;</span>
+<span class="line-num">165</span>       <span class="ruby-keyword">next</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">reynolds?</span>(<span class="ruby-identifier">target</span>)
+<span class="line-num">166</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">167</span>       <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="line-num">168</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">169</span> 
+<span class="line-num">170</span>     <span class="ruby-identifier">pair</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">SiRNA</span><span class="ruby-operator">::</span><span class="ruby-constant">Pair</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">sense</span>, <span class="ruby-identifier">antisense</span>, <span class="ruby-identifier">target_start</span>, <span class="ruby-identifier">target_stop</span>, <span class="ruby-identifier">rule</span>, <span class="ruby-identifier">antisense_gc_percent</span>)
+<span class="line-num">171</span>     <span class="ruby-ivar">@pairs</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">pair</span>)
+<span class="line-num">172</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">173</span>   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@pairs</span>
+<span class="line-num">174</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -294,10 +295,10 @@ href="SiRNA/Pair.html">Bio::SiRNA::Pair</a> object.</p>
 
           
           <div class="method-source-code" id="reynolds-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 141</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reynolds</span>
-  <span class="ruby-identifier">design</span>(<span class="ruby-string">&#39;reynolds&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">141</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reynolds</span>
+<span class="line-num">142</span>   <span class="ruby-identifier">design</span>(<span class="ruby-string">&#39;reynolds&#39;</span>)
+<span class="line-num">143</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -327,45 +328,45 @@ href="SiRNA/Pair.html">Bio::SiRNA::Pair</a> object.</p>
 
           
           <div class="method-source-code" id="reynolds-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 96</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reynolds?</span>(<span class="ruby-identifier">target</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">23</span>  <span class="ruby-comment"># 21 nt target + 2 nt overhang</span>
-
-  <span class="ruby-identifier">seq19</span> = <span class="ruby-identifier">target</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">20</span>]  <span class="ruby-comment"># 19 nt double-stranded region of siRNA</span>
-  <span class="ruby-identifier">score</span> = <span class="ruby-value">0</span>
-
-  <span class="ruby-comment"># criteria I</span>
-  <span class="ruby-identifier">gc_number</span> = <span class="ruby-identifier">seq19</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/[GC]/i</span>).<span class="ruby-identifier">size</span>
-  <span class="ruby-identifier">score</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> (<span class="ruby-value">7</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">gc_number</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">gc_number</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">10</span>)
-
-  <span class="ruby-comment"># criteria II</span>
-  <span class="ruby-identifier">au_number</span> = <span class="ruby-identifier">seq19</span>[<span class="ruby-value">14</span><span class="ruby-operator">..</span><span class="ruby-value">18</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/[AU]/i</span>).<span class="ruby-identifier">size</span>
-  <span class="ruby-identifier">score</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">au_number</span>
-
-  <span class="ruby-comment"># criteria III</span>
-  <span class="ruby-comment"># NotImpremented: Tm</span>
-
-  <span class="ruby-comment"># criteria IV</span>
-  <span class="ruby-identifier">score</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">18</span><span class="ruby-operator">..</span><span class="ruby-value">18</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/A/i</span>)
-
-  <span class="ruby-comment"># criteria V</span>
-  <span class="ruby-identifier">score</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/A/i</span>)
-
-  <span class="ruby-comment"># criteria VI</span>
-  <span class="ruby-identifier">score</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">9</span><span class="ruby-operator">..</span><span class="ruby-value">9</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/[U]/i</span>)
-
-  <span class="ruby-comment"># criteria VII</span>
-  <span class="ruby-identifier">score</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">18</span><span class="ruby-operator">..</span><span class="ruby-value">18</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/[GC]/i</span>)
-
-  <span class="ruby-comment"># criteria VIII</span>
-  <span class="ruby-identifier">score</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">12</span><span class="ruby-operator">..</span><span class="ruby-value">12</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/G/i</span>)
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">score</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">6</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">score</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num"> 96</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reynolds?</span>(<span class="ruby-identifier">target</span>)
+<span class="line-num"> 97</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">23</span>  <span class="ruby-comment"># 21 nt target + 2 nt overhang</span>
+<span class="line-num"> 98</span> 
+<span class="line-num"> 99</span>   <span class="ruby-identifier">seq19</span> = <span class="ruby-identifier">target</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">20</span>]  <span class="ruby-comment"># 19 nt double-stranded region of siRNA</span>
+<span class="line-num">100</span>   <span class="ruby-identifier">score</span> = <span class="ruby-value">0</span>
+<span class="line-num">101</span> 
+<span class="line-num">102</span>   <span class="ruby-comment"># criteria I</span>
+<span class="line-num">103</span>   <span class="ruby-identifier">gc_number</span> = <span class="ruby-identifier">seq19</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/[GC]/i</span>).<span class="ruby-identifier">size</span>
+<span class="line-num">104</span>   <span class="ruby-identifier">score</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> (<span class="ruby-value">7</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-identifier">gc_number</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">gc_number</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">10</span>)
+<span class="line-num">105</span> 
+<span class="line-num">106</span>   <span class="ruby-comment"># criteria II</span>
+<span class="line-num">107</span>   <span class="ruby-identifier">au_number</span> = <span class="ruby-identifier">seq19</span>[<span class="ruby-value">14</span><span class="ruby-operator">..</span><span class="ruby-value">18</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/[AU]/i</span>).<span class="ruby-identifier">size</span>
+<span class="line-num">108</span>   <span class="ruby-identifier">score</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">au_number</span>
+<span class="line-num">109</span> 
+<span class="line-num">110</span>   <span class="ruby-comment"># criteria III</span>
+<span class="line-num">111</span>   <span class="ruby-comment"># NotImpremented: Tm</span>
+<span class="line-num">112</span> 
+<span class="line-num">113</span>   <span class="ruby-comment"># criteria IV</span>
+<span class="line-num">114</span>   <span class="ruby-identifier">score</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">18</span><span class="ruby-operator">..</span><span class="ruby-value">18</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/A/i</span>)
+<span class="line-num">115</span> 
+<span class="line-num">116</span>   <span class="ruby-comment"># criteria V</span>
+<span class="line-num">117</span>   <span class="ruby-identifier">score</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">2</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/A/i</span>)
+<span class="line-num">118</span> 
+<span class="line-num">119</span>   <span class="ruby-comment"># criteria VI</span>
+<span class="line-num">120</span>   <span class="ruby-identifier">score</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">9</span><span class="ruby-operator">..</span><span class="ruby-value">9</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/[U]/i</span>)
+<span class="line-num">121</span> 
+<span class="line-num">122</span>   <span class="ruby-comment"># criteria VII</span>
+<span class="line-num">123</span>   <span class="ruby-identifier">score</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">18</span><span class="ruby-operator">..</span><span class="ruby-value">18</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/[GC]/i</span>)
+<span class="line-num">124</span> 
+<span class="line-num">125</span>   <span class="ruby-comment"># criteria VIII</span>
+<span class="line-num">126</span>   <span class="ruby-identifier">score</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">12</span><span class="ruby-operator">..</span><span class="ruby-value">12</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/G/i</span>)
+<span class="line-num">127</span> 
+<span class="line-num">128</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">score</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">6</span>
+<span class="line-num">129</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">score</span>
+<span class="line-num">130</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">131</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+<span class="line-num">132</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">133</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -395,10 +396,10 @@ href="SiRNA/Pair.html">Bio::SiRNA::Pair</a> object.</p>
 
           
           <div class="method-source-code" id="uitei-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 136</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uitei</span>
-  <span class="ruby-identifier">design</span>(<span class="ruby-string">&#39;uitei&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">136</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uitei</span>
+<span class="line-num">137</span>   <span class="ruby-identifier">design</span>(<span class="ruby-string">&#39;uitei&#39;</span>)
+<span class="line-num">138</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -428,27 +429,27 @@ href="SiRNA/Pair.html">Bio::SiRNA::Pair</a> object.</p>
 
           
           <div class="method-source-code" id="uitei-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 74</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uitei?</span>(<span class="ruby-identifier">target</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">23</span>  <span class="ruby-comment"># 21 nt target + 2 nt overhang</span>
-
-  <span class="ruby-identifier">seq19</span> = <span class="ruby-identifier">target</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">20</span>]  <span class="ruby-comment"># 19 nt double-stranded region of siRNA</span>
-
-  <span class="ruby-comment"># criteria i</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">18</span><span class="ruby-operator">..</span><span class="ruby-value">18</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/[AU]/i</span>)
-
-  <span class="ruby-comment"># criteria ii</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/[GC]/i</span>)
-
-  <span class="ruby-comment"># criteria iii</span>
-  <span class="ruby-identifier">au_number</span> = <span class="ruby-identifier">seq19</span>[<span class="ruby-value">12</span><span class="ruby-operator">..</span><span class="ruby-value">18</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/[AU]/i</span>).<span class="ruby-identifier">size</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">au_number</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">4</span>
-
-  <span class="ruby-comment"># criteria iv</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/[GC]{10}/i</span>)
-
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">74</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uitei?</span>(<span class="ruby-identifier">target</span>)
+<span class="line-num">75</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">target</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">23</span>  <span class="ruby-comment"># 21 nt target + 2 nt overhang</span>
+<span class="line-num">76</span> 
+<span class="line-num">77</span>   <span class="ruby-identifier">seq19</span> = <span class="ruby-identifier">target</span>[<span class="ruby-value">2</span><span class="ruby-operator">..</span><span class="ruby-value">20</span>]  <span class="ruby-comment"># 19 nt double-stranded region of siRNA</span>
+<span class="line-num">78</span> 
+<span class="line-num">79</span>   <span class="ruby-comment"># criteria i</span>
+<span class="line-num">80</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">18</span><span class="ruby-operator">..</span><span class="ruby-value">18</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/[AU]/i</span>)
+<span class="line-num">81</span> 
+<span class="line-num">82</span>   <span class="ruby-comment"># criteria ii</span>
+<span class="line-num">83</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">seq19</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">0</span>].<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/[GC]/i</span>)
+<span class="line-num">84</span> 
+<span class="line-num">85</span>   <span class="ruby-comment"># criteria iii</span>
+<span class="line-num">86</span>   <span class="ruby-identifier">au_number</span> = <span class="ruby-identifier">seq19</span>[<span class="ruby-value">12</span><span class="ruby-operator">..</span><span class="ruby-value">18</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/[AU]/i</span>).<span class="ruby-identifier">size</span>
+<span class="line-num">87</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">au_number</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">4</span>
+<span class="line-num">88</span> 
+<span class="line-num">89</span>   <span class="ruby-comment"># criteria iv</span>
+<span class="line-num">90</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq19</span>.<span class="ruby-identifier">match</span>(<span class="ruby-regexp">/[GC]{10}/i</span>)
+<span class="line-num">91</span> 
+<span class="line-num">92</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+<span class="line-num">93</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -462,12 +463,13 @@ href="SiRNA/Pair.html">Bio::SiRNA::Pair</a> object.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

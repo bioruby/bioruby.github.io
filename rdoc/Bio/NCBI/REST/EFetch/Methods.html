@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../../";
 </script>
 
-<script src="../../../../js/jquery.js"></script>
-<script src="../../../../js/darkfish.js"></script>
+<script src="../../../../js/navigation.js" defer></script>
+<script src="../../../../js/search.js" defer></script>
+<script src="../../../../js/search_index.js" defer></script>
+<script src="../../../../js/searcher.js" defer></script>
+<script src="../../../../js/darkfish.js" defer></script>
 
 <link href="../../../../css/fonts.css" rel="stylesheet">
 <link href="../../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -127,8 +131,7 @@
           
           <p>Retrieve journal entries by given IDs using E-Utils (efetch).</p>
 <ul><li>
-<p><a
-href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
 </li></ul>
 
 <h2 id="method-i-journal-label-Usage">Usage<span><a href="#method-i-journal-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -160,19 +163,19 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 
           
           <div class="method-source-code" id="journal-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/ncbirest.rb, line 801</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">journal</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;full&quot;</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
-    <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;full&quot;</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;xml&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;journals&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span>, <span class="ruby-string">&quot;retmode&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mode</span> }
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/ncbirest.rb</span>
+<span class="line-num">801</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">journal</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;full&quot;</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">802</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
+<span class="line-num">803</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">804</span>     <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;full&quot;</span>
+<span class="line-num">805</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">806</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">807</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
+<span class="line-num">808</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">809</span>   <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;journals&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span>, <span class="ruby-string">&quot;retmode&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mode</span> }
+<span class="line-num">810</span>   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">811</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
+<span class="line-num">812</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -198,8 +201,7 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
           
           <p>Retrieve nucleotide sequence entries by given IDs using E-Utils (efetch).</p>
 <ul><li>
-<p><a
-href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
 </li></ul>
 
 <pre class="ruby"><span class="ruby-identifier">nucleotide</span> = <span class="ruby-identifier">nuccore</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">nucest</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">nucgss</span>
@@ -211,20 +213,17 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 </li><li>
 <p>fasta        all sequence    FASTA view of a sequence</p>
 </li><li>
-<p>gb           NA sequence     <a href="../../../GenBank.html">GenBank</a>
-view for sequences</p>
+<p>gb           NA sequence     <a href="../../../GenBank.html"><code>GenBank</code></a> view for sequences</p>
 </li><li>
 <p>gbc          NA sequence     INSDSeq structured flat file</p>
 </li><li>
-<p>gbwithparts  NA sequence     <a href="../../../GenBank.html">GenBank</a>
-CON division with sequences</p>
+<p>gbwithparts  NA sequence     <a href="../../../GenBank.html"><code>GenBank</code></a> CON division with sequences</p>
 </li><li>
 <p>est          dbEST sequence  EST Report</p>
 </li><li>
 <p>gss          dbGSS sequence  GSS Report</p>
 </li><li>
-<p>gp           AA sequence     <a href="../../../GenPept.html">GenPept</a>
-view</p>
+<p>gp           AA sequence     <a href="../../../GenPept.html"><code>GenPept</code></a> view</p>
 </li><li>
 <p>gpc          AA sequence     INSDSeq structured flat file</p>
 </li><li>
@@ -269,8 +268,7 @@ view</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>ids</em>: list of <a href="../../../NCBI.html">NCBI</a> entry IDs
-(required)</p>
+<p><em>ids</em>: list of <a href="../../../NCBI.html"><code>NCBI</code></a> entry IDs (required)</p>
 </li><li>
 <p><em>format</em>: “gb”, “gbc”, “fasta”, “acc”, “xml” etc.</p>
 </li></ul>
@@ -283,16 +281,16 @@ view</p>
 
           
           <div class="method-source-code" id="nucleotide-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/ncbirest.rb, line 635</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nucleotide</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gb&quot;</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
-    <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gbc&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;nucleotide&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span> }
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/ncbirest.rb</span>
+<span class="line-num">635</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nucleotide</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gb&quot;</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">636</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
+<span class="line-num">637</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">638</span>     <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gbc&quot;</span>
+<span class="line-num">639</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">640</span>   <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;nucleotide&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span> }
+<span class="line-num">641</span>   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">642</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
+<span class="line-num">643</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -318,8 +316,7 @@ view</p>
           
           <p>Retrieve OMIM entries by given IDs using E-Utils (efetch).</p>
 <ul><li>
-<p><a
-href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
 </li></ul>
 
 <h2 id="method-i-omim-label-Usage">Usage<span><a href="#method-i-omim-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -340,8 +337,7 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 <ul><li>
 <p><em>ids</em>: list of OMIM entry IDs (required)</p>
 </li><li>
-<p><em>format</em>: “docsum”, “synopsis”, “variants”, “detailed”, “linkout”,
-“xml”</p>
+<p><em>format</em>: “docsum”, “synopsis”, “variants”, “detailed”, “linkout”, “xml”</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -352,22 +348,22 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 
           
           <div class="method-source-code" id="omim-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/ncbirest.rb, line 836</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">omim</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;detailed&quot;</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
-    <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;full&quot;</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;xml&quot;</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;linkout&quot;</span>
-    <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;ExternalLink&quot;</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;omim&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span>, <span class="ruby-string">&quot;retmode&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mode</span> }
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/ncbirest.rb</span>
+<span class="line-num">836</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">omim</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;detailed&quot;</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">837</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
+<span class="line-num">838</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">839</span>     <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;full&quot;</span>
+<span class="line-num">840</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">841</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;linkout&quot;</span>
+<span class="line-num">842</span>     <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;ExternalLink&quot;</span>
+<span class="line-num">843</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
+<span class="line-num">844</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">845</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
+<span class="line-num">846</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">847</span>   <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;omim&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span>, <span class="ruby-string">&quot;retmode&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mode</span> }
+<span class="line-num">848</span>   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">849</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
+<span class="line-num">850</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -391,11 +387,9 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 
         <div class="method-description">
           
-          <p>Retrieve <a href="../../../PubMed.html">PubMed</a> Central entries by given
-IDs using E-Utils (efetch).</p>
+          <p>Retrieve <a href="../../../PubMed.html"><code>PubMed</code></a> Central entries by given IDs using E-Utils (efetch).</p>
 <ul><li>
-<p><a
-href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
 </li></ul>
 
 <h2 id="method-i-pmc-label-Usage">Usage<span><a href="#method-i-pmc-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -415,8 +409,7 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>ids</em>: list of <a href="../../../PubMed.html">PubMed</a> Central
-entry IDs (required)</p>
+<p><em>ids</em>: list of <a href="../../../PubMed.html"><code>PubMed</code></a> Central entry IDs (required)</p>
 </li><li>
 <p><em>format</em>: “docsum”, “xml”</p>
 </li></ul>
@@ -429,18 +422,18 @@ entry IDs (required)</p>
 
           
           <div class="method-source-code" id="pmc-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/ncbirest.rb, line 767</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pmc</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;docsum&quot;</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
-    <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;medline&quot;</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;xml&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pmc&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span>, <span class="ruby-string">&quot;retmode&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mode</span> }
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/ncbirest.rb</span>
+<span class="line-num">767</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pmc</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;docsum&quot;</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">768</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
+<span class="line-num">769</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">770</span>     <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;medline&quot;</span>
+<span class="line-num">771</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">772</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">773</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
+<span class="line-num">774</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">775</span>   <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pmc&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span>, <span class="ruby-string">&quot;retmode&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mode</span> }
+<span class="line-num">776</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
+<span class="line-num">777</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -466,8 +459,7 @@ entry IDs (required)</p>
           
           <p>Retrieve protein sequence entries by given IDs using E-Utils (efetch).</p>
 <ul><li>
-<p><a
-href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
 </li></ul>
 
 <pre class="ruby"><span class="ruby-identifier">protein</span>
@@ -479,20 +471,17 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 </li><li>
 <p>fasta        all sequence    FASTA view of a sequence</p>
 </li><li>
-<p>gb           NA sequence     <a href="../../../GenBank.html">GenBank</a>
-view for sequences</p>
+<p>gb           NA sequence     <a href="../../../GenBank.html"><code>GenBank</code></a> view for sequences</p>
 </li><li>
 <p>gbc          NA sequence     INSDSeq structured flat file</p>
 </li><li>
-<p>gbwithparts  NA sequence     <a href="../../../GenBank.html">GenBank</a>
-CON division with sequences</p>
+<p>gbwithparts  NA sequence     <a href="../../../GenBank.html"><code>GenBank</code></a> CON division with sequences</p>
 </li><li>
 <p>est          dbEST sequence  EST Report</p>
 </li><li>
 <p>gss          dbGSS sequence  GSS Report</p>
 </li><li>
-<p>gp           AA sequence     <a href="../../../GenPept.html">GenPept</a>
-view</p>
+<p>gp           AA sequence     <a href="../../../GenPept.html"><code>GenPept</code></a> view</p>
 </li><li>
 <p>gpc          AA sequence     INSDSeq structured flat file</p>
 </li><li>
@@ -532,8 +521,7 @@ view</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>ids</em>: list of <a href="../../../NCBI.html">NCBI</a> entry IDs
-(required)</p>
+<p><em>ids</em>: list of <a href="../../../NCBI.html"><code>NCBI</code></a> entry IDs (required)</p>
 </li><li>
 <p><em>format</em>: “gp”, “gpc”, “fasta”, “acc”, “xml” etc.</p>
 </li></ul>
@@ -546,16 +534,16 @@ view</p>
 
           
           <div class="method-source-code" id="protein-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/ncbirest.rb, line 692</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">protein</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gp&quot;</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
-    <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gpc&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;protein&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span> }
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/ncbirest.rb</span>
+<span class="line-num">692</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">protein</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gp&quot;</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">693</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
+<span class="line-num">694</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">695</span>     <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gpc&quot;</span>
+<span class="line-num">696</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">697</span>   <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;protein&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span> }
+<span class="line-num">698</span>   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">699</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
+<span class="line-num">700</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -579,11 +567,9 @@ view</p>
 
         <div class="method-description">
           
-          <p>Retrieve <a href="../../../PubMed.html">PubMed</a> entries by given IDs
-using E-Utils (efetch).</p>
+          <p>Retrieve <a href="../../../PubMed.html"><code>PubMed</code></a> entries by given IDs using E-Utils (efetch).</p>
 <ul><li>
-<p><a
-href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
 </li></ul>
 
 <h2 id="method-i-pubmed-label-Usage">Usage<span><a href="#method-i-pubmed-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -609,8 +595,7 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>ids</em>: list of <a href="../../../PubMed.html">PubMed</a> entry IDs
-(required)</p>
+<p><em>ids</em>: list of <a href="../../../PubMed.html"><code>PubMed</code></a> entry IDs (required)</p>
 </li><li>
 <p><em>format</em>: “abstract”, “citation”, “medline”, “xml”</p>
 </li></ul>
@@ -623,19 +608,19 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 
           
           <div class="method-source-code" id="pubmed-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/ncbirest.rb, line 731</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pubmed</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;medline&quot;</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
-    <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;medline&quot;</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;xml&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pubmed&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span>, <span class="ruby-string">&quot;retmode&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mode</span> }
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/ncbirest.rb</span>
+<span class="line-num">731</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pubmed</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;medline&quot;</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">732</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
+<span class="line-num">733</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">734</span>     <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;medline&quot;</span>
+<span class="line-num">735</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">736</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">737</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
+<span class="line-num">738</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">739</span>   <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pubmed&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span>, <span class="ruby-string">&quot;retmode&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mode</span> }
+<span class="line-num">740</span>   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">741</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
+<span class="line-num">742</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -661,8 +646,7 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
           
           <p>Retrieve sequence entries by given IDs using E-Utils (efetch).</p>
 <ul><li>
-<p><a
-href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
 </li></ul>
 
 <pre class="ruby"><span class="ruby-identifier">sequences</span> = <span class="ruby-identifier">gene</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">genome</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">nucleotide</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">protein</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">popset</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">snp</span>
@@ -675,20 +659,17 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 </li><li>
 <p>fasta        all sequence    FASTA view of a sequence</p>
 </li><li>
-<p>gb           NA sequence     <a href="../../../GenBank.html">GenBank</a>
-view for sequences</p>
+<p>gb           NA sequence     <a href="../../../GenBank.html"><code>GenBank</code></a> view for sequences</p>
 </li><li>
 <p>gbc          NA sequence     INSDSeq structured flat file</p>
 </li><li>
-<p>gbwithparts  NA sequence     <a href="../../../GenBank.html">GenBank</a>
-CON division with sequences</p>
+<p>gbwithparts  NA sequence     <a href="../../../GenBank.html"><code>GenBank</code></a> CON division with sequences</p>
 </li><li>
 <p>est          dbEST sequence  EST Report</p>
 </li><li>
 <p>gss          dbGSS sequence  GSS Report</p>
 </li><li>
-<p>gp           AA sequence     <a href="../../../GenPept.html">GenPept</a>
-view</p>
+<p>gp           AA sequence     <a href="../../../GenPept.html"><code>GenPept</code></a> view</p>
 </li><li>
 <p>gpc          AA sequence     INSDSeq structured flat file</p>
 </li><li>
@@ -733,8 +714,7 @@ view</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>ids</em>: list of <a href="../../../NCBI.html">NCBI</a> entry IDs
-(required)</p>
+<p><em>ids</em>: list of <a href="../../../NCBI.html"><code>NCBI</code></a> entry IDs (required)</p>
 </li><li>
 <p><em>format</em>: “gb”, “gbc”, “fasta”, “acc”, “xml” etc.</p>
 </li></ul>
@@ -747,16 +727,16 @@ view</p>
 
           
           <div class="method-source-code" id="sequence-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/ncbirest.rb, line 573</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sequence</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gb&quot;</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
-    <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gbc&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;sequences&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span> }
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/ncbirest.rb</span>
+<span class="line-num">573</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sequence</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gb&quot;</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">574</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
+<span class="line-num">575</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">576</span>     <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;gbc&quot;</span>
+<span class="line-num">577</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">578</span>   <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;sequences&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span> }
+<span class="line-num">579</span>   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">580</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
+<span class="line-num">581</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -782,8 +762,7 @@ view</p>
           
           <p>Retrieve taxonomy entries by given IDs using E-Utils (efetch).</p>
 <ul><li>
-<p><a
-href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
+<p><a href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch</a></p>
 </li></ul>
 
 <h2 id="method-i-taxonomy-label-Usage">Usage<span><a href="#method-i-taxonomy-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -815,18 +794,18 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
 
           
           <div class="method-source-code" id="taxonomy-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/ncbirest.rb, line 874</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxonomy</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;docsum&quot;</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
-    <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;full&quot;</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;xml&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;taxonomy&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span>, <span class="ruby-string">&quot;retmode&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mode</span> }
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/ncbirest.rb</span>
+<span class="line-num">874</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxonomy</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;docsum&quot;</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">875</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">format</span>
+<span class="line-num">876</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">877</span>     <span class="ruby-identifier">format</span> = <span class="ruby-string">&quot;full&quot;</span>
+<span class="line-num">878</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;xml&quot;</span>
+<span class="line-num">879</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">880</span>     <span class="ruby-identifier">mode</span> = <span class="ruby-string">&quot;text&quot;</span>
+<span class="line-num">881</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">882</span>   <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;taxonomy&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">format</span>, <span class="ruby-string">&quot;retmode&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">mode</span> }
+<span class="line-num">883</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NCBI</span><span class="ruby-operator">::</span><span class="ruby-constant">REST</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
+<span class="line-num">884</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -840,12 +819,13 @@ href="https://www.ncbi.nlm.nih.gov/books/NBK25499/#chapter4.EFetch">www.ncbi.nlm
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -167,14 +171,14 @@
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 302</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>])
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">to_a</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">302</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">303</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
+<span class="line-num">304</span>     <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>])
+<span class="line-num">305</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">306</span>     <span class="ruby-identifier">to_a</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>]
+<span class="line-num">307</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">308</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -204,14 +208,14 @@
 
           
           <div class="method-source-code" id="cds_start-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 310</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cds_start</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@cds_start</span>)
-    <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-string">&#39;cds_start&#39;</span>)
-    <span class="ruby-ivar">@cds_start</span> = <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">anntext</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@cds_start</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">310</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cds_start</span>
+<span class="line-num">311</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@cds_start</span>)
+<span class="line-num">312</span>     <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-string">&#39;cds_start&#39;</span>)
+<span class="line-num">313</span>     <span class="ruby-ivar">@cds_start</span> = <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">anntext</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">314</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">315</span>   <span class="ruby-ivar">@cds_start</span>
+<span class="line-num">316</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -241,14 +245,14 @@
 
           
           <div class="method-source-code" id="cds_stop-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 318</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cds_stop</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@cds_stop</span>)
-    <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-string">&#39;cds_stop&#39;</span>)
-    <span class="ruby-ivar">@cds_stop</span> = <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">anntext</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@cds_stop</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">318</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cds_stop</span>
+<span class="line-num">319</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@cds_stop</span>)
+<span class="line-num">320</span>     <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-string">&#39;cds_stop&#39;</span>)
+<span class="line-num">321</span>     <span class="ruby-ivar">@cds_stop</span> = <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">anntext</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">322</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">323</span>   <span class="ruby-ivar">@cds_stop</span>
+<span class="line-num">324</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -278,14 +282,14 @@
 
           
           <div class="method-source-code" id="data_source-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 334</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">data_source</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@data_source</span>)
-    <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-string">&#39;gene_name&#39;</span>)
-    <span class="ruby-ivar">@data_source</span> = <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">datasrc</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data_source</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">334</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">data_source</span>
+<span class="line-num">335</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@data_source</span>)
+<span class="line-num">336</span>     <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-string">&#39;gene_name&#39;</span>)
+<span class="line-num">337</span>     <span class="ruby-ivar">@data_source</span> = <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">datasrc</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">338</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">339</span>   <span class="ruby-ivar">@data_source</span>
+<span class="line-num">340</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -315,10 +319,10 @@
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 273</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
-  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span> }
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">273</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
+<span class="line-num">274</span>   <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span> }
+<span class="line-num">275</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -348,14 +352,14 @@
 
           
           <div class="method-source-code" id="evidence-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 342</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">evidence</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@evidence</span>)
-    <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-string">&#39;gene_name&#39;</span>)
-    <span class="ruby-ivar">@evidence</span> = <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">evidence</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@evidence</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">342</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">evidence</span>
+<span class="line-num">343</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@evidence</span>)
+<span class="line-num">344</span>     <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-string">&#39;gene_name&#39;</span>)
+<span class="line-num">345</span>     <span class="ruby-ivar">@evidence</span> = <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">evidence</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">346</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">347</span>   <span class="ruby-ivar">@evidence</span>
+<span class="line-num">348</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -385,14 +389,14 @@
 
           
           <div class="method-source-code" id="gene_name-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 326</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gene_name</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@gene_name</span>)
-    <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-string">&#39;gene_name&#39;</span>)
-    <span class="ruby-ivar">@gene_name</span> = <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">anntext</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@gene_name</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">326</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gene_name</span>
+<span class="line-num">327</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@gene_name</span>)
+<span class="line-num">328</span>     <span class="ruby-identifier">e</span> = <span class="ruby-identifier">get_by_qualifier</span>(<span class="ruby-string">&#39;gene_name&#39;</span>)
+<span class="line-num">329</span>     <span class="ruby-ivar">@gene_name</span> = <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">anntext</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">330</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">331</span>   <span class="ruby-ivar">@gene_name</span>
+<span class="line-num">332</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -422,18 +426,18 @@
 
           
           <div class="method-source-code" id="get_all_by_qualifier-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 285</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_all_by_qualifier</span>(<span class="ruby-identifier">qstr</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@hash</span>)
-    <span class="ruby-ivar">@hash</span> = {}
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">qstr</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">qstr</span>] = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">x</span>.<span class="ruby-identifier">qualifier</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">qstr</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">qstr</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">285</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_all_by_qualifier</span>(<span class="ruby-identifier">qstr</span>)
+<span class="line-num">286</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@hash</span>)
+<span class="line-num">287</span>     <span class="ruby-ivar">@hash</span> = {}
+<span class="line-num">288</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">289</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">qstr</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">290</span>     <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">qstr</span>] = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">291</span>       <span class="ruby-identifier">x</span>.<span class="ruby-identifier">qualifier</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">qstr</span>
+<span class="line-num">292</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">293</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">294</span>   <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">qstr</span>]
+<span class="line-num">295</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -463,11 +467,11 @@
 
           
           <div class="method-source-code" id="get_by_qualifier-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 297</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_by_qualifier</span>(<span class="ruby-identifier">qstr</span>)
-  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">get_all_by_qualifier</span>(<span class="ruby-identifier">qstr</span>)
-  <span class="ruby-identifier">a</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">297</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_by_qualifier</span>(<span class="ruby-identifier">qstr</span>)
+<span class="line-num">298</span>   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">get_all_by_qualifier</span>(<span class="ruby-identifier">qstr</span>)
+<span class="line-num">299</span>   <span class="ruby-identifier">a</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">300</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -497,14 +501,14 @@
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 277</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@a</span>)
-    <span class="ruby-ivar">@a</span> = <span class="ruby-ivar">@elem</span>.<span class="ruby-identifier">get_elements</span>(<span class="ruby-string">&#39;annotation&#39;</span>)
-    <span class="ruby-ivar">@a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Annotation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>) }
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@a</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">277</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
+<span class="line-num">278</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@a</span>)
+<span class="line-num">279</span>     <span class="ruby-ivar">@a</span> = <span class="ruby-ivar">@elem</span>.<span class="ruby-identifier">get_elements</span>(<span class="ruby-string">&#39;annotation&#39;</span>)
+<span class="line-num">280</span>     <span class="ruby-ivar">@a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Annotation</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>) }
+<span class="line-num">281</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">282</span>   <span class="ruby-ivar">@a</span>
+<span class="line-num">283</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -518,12 +522,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

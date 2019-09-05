@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -113,10 +117,9 @@
 
   <section class="description">
     
-<h1 id="class-Bio::PSORT::PSORT2::Report-label-Bio-3A-3APSORT-3A-3APSORT2-3A-3AReport"><a href="Report.html">Bio::PSORT::PSORT2::Report</a><span><a href="#class-Bio::PSORT::PSORT2::Report-label-Bio-3A-3APSORT-3A-3APSORT2-3A-3AReport">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::PSORT::PSORT2::Report-label-Bio-3A-3APSORT-3A-3APSORT2-3A-3AReport"><a href="Report.html"><code>Bio::PSORT::PSORT2::Report</code></a><span><a href="#class-Bio::PSORT::PSORT2::Report-label-Bio-3A-3APSORT-3A-3APSORT2-3A-3AReport">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p><a href="Report.html">Report</a> parser classe for <a
-href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
+<p><a href="Report.html"><code>Report</code></a> parser classe for <a href="../../PSORT.html"><code>PSORT</code></a> II(PSORT2).</p>
 
 <h2 id="class-Bio::PSORT::PSORT2::Report-label-Example">Example<span><a href="#class-Bio::PSORT::PSORT2::Report-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -137,12 +140,12 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
       
         <dt id="BOUNDARY">BOUNDARY
         
-        <dd><p><a href="Report.html">Report</a> boundary string.</p>
+        <dd><p><a href="Report.html"><code>Report</code></a> boundary string.</p>
         
       
         <dt id="RS">RS
         
-        <dd><p><a href="Report.html">Report</a> delimiter.</p>
+        <dd><p><a href="Report.html"><code>Report</code></a> delimiter.</p>
         
       
       </dl>
@@ -177,7 +180,7 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
 
         <div class="method-description">
         
-        <p><a href="Report.html#attribute-i-entry_id">#entry_id</a> of query sequence.</p>
+        <p><a href="Report.html#attribute-i-entry_id"><code>entry_id</code></a> of query sequence.</p>
         
         </div>
       </div>
@@ -190,7 +193,7 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
 
         <div class="method-description">
         
-        <p><a href="../../Feature.html">Feature</a> vector used the kNN prediction.</p>
+        <p><a href="../../Feature.html"><code>Feature</code></a> vector used the kNN prediction.</p>
         
         </div>
       </div>
@@ -268,7 +271,7 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
 
         <div class="method-description">
         
-        <p><a href="../../Sequence.html">Sequence</a> of query sequence.</p>
+        <p><a href="../../Sequence.html"><code>Sequence</code></a> of query sequence.</p>
         
         </div>
       </div>
@@ -302,24 +305,24 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
 
           
           <div class="method-source-code" id="default_parser-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 273</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default_parser</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span>)
-  <span class="ruby-identifier">ent</span> = <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n\n/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">chomp</span> }
-
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">set_header_line</span>(<span class="ruby-identifier">ent</span>[<span class="ruby-value">0</span>])
-
-  <span class="ruby-comment"># feature matrix</span>
-  <span class="ruby-identifier">ent</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\n/</span>,<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/  /</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">fe</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">pair</span> = <span class="ruby-identifier">fe</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/: /</span>)
-    <span class="ruby-identifier">report</span>.<span class="ruby-identifier">features</span>[<span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strip</span>] = <span class="ruby-identifier">pair</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">to_f</span>
-  }
-
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">prob</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_kNN_prob</span>(<span class="ruby-identifier">ent</span>[<span class="ruby-value">2</span>])
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">set_prediction</span>(<span class="ruby-identifier">ent</span>[<span class="ruby-value">3</span>])         
-
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">report</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">273</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default_parser</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">274</span>   <span class="ruby-identifier">report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span>)
+<span class="line-num">275</span>   <span class="ruby-identifier">ent</span> = <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n\n/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">chomp</span> }
+<span class="line-num">276</span> 
+<span class="line-num">277</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">set_header_line</span>(<span class="ruby-identifier">ent</span>[<span class="ruby-value">0</span>])
+<span class="line-num">278</span> 
+<span class="line-num">279</span>   <span class="ruby-comment"># feature matrix</span>
+<span class="line-num">280</span>   <span class="ruby-identifier">ent</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\n/</span>,<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/  /</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">fe</span><span class="ruby-operator">|</span>
+<span class="line-num">281</span>     <span class="ruby-identifier">pair</span> = <span class="ruby-identifier">fe</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/: /</span>)
+<span class="line-num">282</span>     <span class="ruby-identifier">report</span>.<span class="ruby-identifier">features</span>[<span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strip</span>] = <span class="ruby-identifier">pair</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">to_f</span>
+<span class="line-num">283</span>   }
+<span class="line-num">284</span> 
+<span class="line-num">285</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">prob</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_kNN_prob</span>(<span class="ruby-identifier">ent</span>[<span class="ruby-value">2</span>])
+<span class="line-num">286</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">set_prediction</span>(<span class="ruby-identifier">ent</span>[<span class="ruby-value">3</span>])         
+<span class="line-num">287</span> 
+<span class="line-num">288</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">report</span>
+<span class="line-num">289</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -349,11 +352,11 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
 
           
           <div class="method-source-code" id="divent-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 392</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">divent</span>(<span class="ruby-identifier">entry</span>)
-  <span class="ruby-identifier">boundary</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">index</span>(<span class="ruby-constant">BOUNDARY</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">entry</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">boundary</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>)], <span class="ruby-identifier">entry</span>[(<span class="ruby-identifier">boundary</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>)<span class="ruby-operator">..</span>(<span class="ruby-identifier">entry</span>.<span class="ruby-identifier">length</span>)]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">392</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">divent</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">393</span>   <span class="ruby-identifier">boundary</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">index</span>(<span class="ruby-constant">BOUNDARY</span>)
+<span class="line-num">394</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">entry</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span>(<span class="ruby-identifier">boundary</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>)], <span class="ruby-identifier">entry</span>[(<span class="ruby-identifier">boundary</span> <span class="ruby-operator">+</span> <span class="ruby-value">2</span>)<span class="ruby-operator">..</span>(<span class="ruby-identifier">entry</span>.<span class="ruby-identifier">length</span>)]
+<span class="line-num">395</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -383,19 +386,19 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 227</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">raw</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">entry_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scl</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">definition</span> = <span class="ruby-keyword">nil</span>, 
-               <span class="ruby-identifier">seq</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">k</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">features</span> = {}, <span class="ruby-identifier">prob</span> = {}, <span class="ruby-identifier">pred</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@entry_id</span>   = <span class="ruby-identifier">entry_id</span>
-  <span class="ruby-ivar">@scl</span>        = <span class="ruby-identifier">scl</span>
-  <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">definition</span>
-  <span class="ruby-ivar">@seq</span>        = <span class="ruby-identifier">seq</span>
-  <span class="ruby-ivar">@features</span>   = <span class="ruby-identifier">features</span>
-  <span class="ruby-ivar">@prob</span>       = <span class="ruby-identifier">prob</span>
-  <span class="ruby-ivar">@pred</span>       = <span class="ruby-identifier">pred</span>
-  <span class="ruby-ivar">@k</span>          = <span class="ruby-identifier">k</span>
-  <span class="ruby-ivar">@raw</span>        = <span class="ruby-identifier">raw</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">227</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">raw</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">entry_id</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">scl</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">definition</span> = <span class="ruby-keyword">nil</span>, 
+<span class="line-num">228</span>                <span class="ruby-identifier">seq</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">k</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">features</span> = {}, <span class="ruby-identifier">prob</span> = {}, <span class="ruby-identifier">pred</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">229</span>   <span class="ruby-ivar">@entry_id</span>   = <span class="ruby-identifier">entry_id</span>
+<span class="line-num">230</span>   <span class="ruby-ivar">@scl</span>        = <span class="ruby-identifier">scl</span>
+<span class="line-num">231</span>   <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">definition</span>
+<span class="line-num">232</span>   <span class="ruby-ivar">@seq</span>        = <span class="ruby-identifier">seq</span>
+<span class="line-num">233</span>   <span class="ruby-ivar">@features</span>   = <span class="ruby-identifier">features</span>
+<span class="line-num">234</span>   <span class="ruby-ivar">@prob</span>       = <span class="ruby-identifier">prob</span>
+<span class="line-num">235</span>   <span class="ruby-ivar">@pred</span>       = <span class="ruby-identifier">pred</span>
+<span class="line-num">236</span>   <span class="ruby-ivar">@k</span>          = <span class="ruby-identifier">k</span>
+<span class="line-num">237</span>   <span class="ruby-ivar">@raw</span>        = <span class="ruby-identifier">raw</span>
+<span class="line-num">238</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -425,21 +428,21 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
 
           
           <div class="method-source-code" id="parser-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 242</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parser</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">entry_id</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^ psg:/</span>   <span class="ruby-comment"># default report</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_parser</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">entry_id</span>)
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^PSG:/</span>    <span class="ruby-comment"># -v report</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">v_parser</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">entry_id</span>)
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/: too short length /</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">too_short_parser</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">entry_id</span>)
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/PSORT II server/</span>
-    <span class="ruby-identifier">tmp</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;invalid format\n[#{str}]&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">242</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parser</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">entry_id</span>)
+<span class="line-num">243</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
+<span class="line-num">244</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^ psg:/</span>   <span class="ruby-comment"># default report</span>
+<span class="line-num">245</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_parser</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">entry_id</span>)
+<span class="line-num">246</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^PSG:/</span>    <span class="ruby-comment"># -v report</span>
+<span class="line-num">247</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">v_parser</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">entry_id</span>)
+<span class="line-num">248</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/: too short length /</span>
+<span class="line-num">249</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">too_short_parser</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">entry_id</span>)
+<span class="line-num">250</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/PSORT II server/</span>
+<span class="line-num">251</span>     <span class="ruby-identifier">tmp</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span>)
+<span class="line-num">252</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">253</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;invalid format\n[#{str}]&quot;</span>
+<span class="line-num">254</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">255</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -469,19 +472,19 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
 
           
           <div class="method-source-code" id="set_kNN_prob-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 309</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">set_kNN_prob</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">prob</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT2</span><span class="ruby-operator">::</span><span class="ruby-constant">SclNames</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> 
-    <span class="ruby-identifier">prob</span>.<span class="ruby-identifier">update</span>( {<span class="ruby-identifier">a</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0.0</span>} )
-  }
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\t/</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">val</span>,<span class="ruby-identifier">scl</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/ %: /</span>)
-    <span class="ruby-identifier">key</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT2</span><span class="ruby-operator">::</span><span class="ruby-constant">SclNames</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">scl</span>)
-    <span class="ruby-identifier">prob</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_f</span>
-  }
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">prob</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">309</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">set_kNN_prob</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">310</span>   <span class="ruby-identifier">prob</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">311</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT2</span><span class="ruby-operator">::</span><span class="ruby-constant">SclNames</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> 
+<span class="line-num">312</span>     <span class="ruby-identifier">prob</span>.<span class="ruby-identifier">update</span>( {<span class="ruby-identifier">a</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0.0</span>} )
+<span class="line-num">313</span>   }
+<span class="line-num">314</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\t/</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+<span class="line-num">315</span>     <span class="ruby-identifier">val</span>,<span class="ruby-identifier">scl</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/ %: /</span>)
+<span class="line-num">316</span>     <span class="ruby-identifier">key</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT2</span><span class="ruby-operator">::</span><span class="ruby-constant">SclNames</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">scl</span>)
+<span class="line-num">317</span>     <span class="ruby-identifier">prob</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_f</span>
+<span class="line-num">318</span>   }
+<span class="line-num">319</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">prob</span>
+<span class="line-num">320</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -513,16 +516,16 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
 
           
           <div class="method-source-code" id="too_short_parser-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 260</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">too_short_parser</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ent</span>)
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">entry_id</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">ent</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^(.+)?: too short length/</span>
-    <span class="ruby-identifier">report</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-node">$1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">report</span>.<span class="ruby-identifier">entry_id</span>
-    <span class="ruby-identifier">report</span>.<span class="ruby-identifier">scl</span> = <span class="ruby-string">&#39;---&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">report</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">260</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">too_short_parser</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">261</span>   <span class="ruby-identifier">report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ent</span>)
+<span class="line-num">262</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">entry_id</span>
+<span class="line-num">263</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">ent</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^(.+)?: too short length/</span>
+<span class="line-num">264</span>     <span class="ruby-identifier">report</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-node">$1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">report</span>.<span class="ruby-identifier">entry_id</span>
+<span class="line-num">265</span>     <span class="ruby-identifier">report</span>.<span class="ruby-identifier">scl</span> = <span class="ruby-string">&#39;---&#39;</span>
+<span class="line-num">266</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">267</span>   <span class="ruby-identifier">report</span>
+<span class="line-num">268</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -546,51 +549,50 @@ href="../../PSORT.html">PSORT</a> II(PSORT2).</p>
 
         <div class="method-description">
           
-          <p>Parser for the verbose output report format. “psort -v report&#39;&#39; and
-WWW server output.</p>
+          <p>Parser for the verbose output report format. “psort -v report&#39;&#39; and WWW server output.</p>
           
           
 
           
           <div class="method-source-code" id="v_parser-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 338</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">v_parser</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">report</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT2</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span>)
-
-  <span class="ruby-identifier">ent</span> = <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n\n/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">chomp</span> }
-  <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">each_with_index</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-regexp">/^(\w|-|\&gt;|\t)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">e</span>
-      <span class="ruby-identifier">j</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-value">:search_j</span>, <span class="ruby-identifier">i</span>, <span class="ruby-identifier">ent</span>)
-      <span class="ruby-identifier">ent</span>[<span class="ruby-identifier">i</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">j</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">e</span>
-      <span class="ruby-identifier">ent</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^none/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">e</span>    <span class="ruby-comment"># psort output bug</span>
-      <span class="ruby-identifier">j</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-value">:search_j</span>, <span class="ruby-identifier">i</span>, <span class="ruby-identifier">ent</span>)
-      <span class="ruby-identifier">ent</span>[<span class="ruby-identifier">i</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">j</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">e</span>
-      <span class="ruby-identifier">ent</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">end</span>
-  }
-  <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">compact!</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^ PSORT II server/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">ent</span>[<span class="ruby-value">0</span>] <span class="ruby-comment"># for WWW version</span>
-    <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">shift</span> 
-    <span class="ruby-identifier">delline</span> = <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">delline</span> = <span class="ruby-identifier">e</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^Results of Subprograms/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">e</span> }
-    <span class="ruby-identifier">i</span> = <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">delline</span>)
-    <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">delline</span>)
-    <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-identifier">i</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>)
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">set_header_line</span>(<span class="ruby-identifier">ent</span>.<span class="ruby-identifier">shift</span>)  
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ent</span>.<span class="ruby-identifier">shift</span>)
-
-  <span class="ruby-identifier">fent</span>, <span class="ruby-identifier">pent</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">divent</span>(<span class="ruby-identifier">ent</span>)
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">set_features</span>(<span class="ruby-identifier">fent</span>)          
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">prob</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_kNN_prob</span>(<span class="ruby-identifier">pent</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strip</span>)  
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">set_prediction</span>(<span class="ruby-identifier">pent</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strip</span>)
-
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">report</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">338</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">v_parser</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">339</span>   <span class="ruby-identifier">report</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT</span><span class="ruby-operator">::</span><span class="ruby-constant">PSORT2</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ent</span>, <span class="ruby-identifier">entry_id</span>)
+<span class="line-num">340</span> 
+<span class="line-num">341</span>   <span class="ruby-identifier">ent</span> = <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n\n/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">chomp</span> }
+<span class="line-num">342</span>   <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">each_with_index</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+<span class="line-num">343</span>     <span class="ruby-keyword">unless</span> <span class="ruby-regexp">/^(\w|-|\&gt;|\t)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">e</span>
+<span class="line-num">344</span>       <span class="ruby-identifier">j</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-value">:search_j</span>, <span class="ruby-identifier">i</span>, <span class="ruby-identifier">ent</span>)
+<span class="line-num">345</span>       <span class="ruby-identifier">ent</span>[<span class="ruby-identifier">i</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">j</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">e</span>
+<span class="line-num">346</span>       <span class="ruby-identifier">ent</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-keyword">nil</span>
+<span class="line-num">347</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">348</span>     <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^none/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">e</span>    <span class="ruby-comment"># psort output bug</span>
+<span class="line-num">349</span>       <span class="ruby-identifier">j</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-value">:search_j</span>, <span class="ruby-identifier">i</span>, <span class="ruby-identifier">ent</span>)
+<span class="line-num">350</span>       <span class="ruby-identifier">ent</span>[<span class="ruby-identifier">i</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">j</span>] <span class="ruby-operator">+=</span> <span class="ruby-identifier">e</span>
+<span class="line-num">351</span>       <span class="ruby-identifier">ent</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-keyword">nil</span>
+<span class="line-num">352</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">353</span>   }
+<span class="line-num">354</span>   <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">compact!</span>
+<span class="line-num">355</span> 
+<span class="line-num">356</span>   <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^ PSORT II server/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">ent</span>[<span class="ruby-value">0</span>] <span class="ruby-comment"># for WWW version</span>
+<span class="line-num">357</span>     <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">shift</span> 
+<span class="line-num">358</span>     <span class="ruby-identifier">delline</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">359</span>     <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">delline</span> = <span class="ruby-identifier">e</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^Results of Subprograms/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">e</span> }
+<span class="line-num">360</span>     <span class="ruby-identifier">i</span> = <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">delline</span>)
+<span class="line-num">361</span>     <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">delline</span>)
+<span class="line-num">362</span>     <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-identifier">i</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>)
+<span class="line-num">363</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">364</span> 
+<span class="line-num">365</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">set_header_line</span>(<span class="ruby-identifier">ent</span>.<span class="ruby-identifier">shift</span>)  
+<span class="line-num">366</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ent</span>.<span class="ruby-identifier">shift</span>)
+<span class="line-num">367</span> 
+<span class="line-num">368</span>   <span class="ruby-identifier">fent</span>, <span class="ruby-identifier">pent</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">divent</span>(<span class="ruby-identifier">ent</span>)
+<span class="line-num">369</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">set_features</span>(<span class="ruby-identifier">fent</span>)          
+<span class="line-num">370</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">prob</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">set_kNN_prob</span>(<span class="ruby-identifier">pent</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">strip</span>)  
+<span class="line-num">371</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">set_prediction</span>(<span class="ruby-identifier">pent</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">strip</span>)
+<span class="line-num">372</span> 
+<span class="line-num">373</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">report</span>
+<span class="line-num">374</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -628,14 +630,14 @@ WWW server output.</p>
 
           
           <div class="method-source-code" id="set_features-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 398</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_features</span>(<span class="ruby-identifier">features_ary</span>)
-  <span class="ruby-identifier">features_ary</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">fent</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">key</span> = <span class="ruby-identifier">fent</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\:( |\n)/</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">strip</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">features</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">fent</span> <span class="ruby-comment"># unless /^\&gt;/ =~ key</span>
-  }
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">features</span>[<span class="ruby-string">&#39;AA&#39;</span>] = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">398</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_features</span>(<span class="ruby-identifier">features_ary</span>)
+<span class="line-num">399</span>   <span class="ruby-identifier">features_ary</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">fent</span><span class="ruby-operator">|</span>
+<span class="line-num">400</span>     <span class="ruby-identifier">key</span> = <span class="ruby-identifier">fent</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\:( |\n)/</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">strip</span>
+<span class="line-num">401</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">features</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">fent</span> <span class="ruby-comment"># unless /^\&gt;/ =~ key</span>
+<span class="line-num">402</span>   }
+<span class="line-num">403</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">features</span>[<span class="ruby-string">&#39;AA&#39;</span>] = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">404</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -665,22 +667,22 @@ WWW server output.</p>
 
           
           <div class="method-source-code" id="set_header_line-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 292</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_header_line</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/^-+\n/</span>,<span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\t| /</span>)
-  <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^-+/</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@entry_id</span>
-
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">chomp</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\(\d+ aa\) (.+)$/</span>
-    <span class="ruby-ivar">@definition</span> = <span class="ruby-node">$1</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">chomp</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">scl</span> = <span class="ruby-ivar">@definition</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)[<span class="ruby-value">0</span>]
-
-  <span class="ruby-ivar">@scl</span> = <span class="ruby-identifier">scl</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">SclNames</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">scl</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">292</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_header_line</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">293</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/^-+\n/</span>,<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">294</span>   <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\t| /</span>)
+<span class="line-num">295</span>   <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^-+/</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@entry_id</span>
+<span class="line-num">296</span> 
+<span class="line-num">297</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">chomp</span>
+<span class="line-num">298</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\(\d+ aa\) (.+)$/</span>
+<span class="line-num">299</span>     <span class="ruby-ivar">@definition</span> = <span class="ruby-node">$1</span>
+<span class="line-num">300</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">301</span>     <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">chomp</span>
+<span class="line-num">302</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">303</span>   <span class="ruby-identifier">scl</span> = <span class="ruby-ivar">@definition</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)[<span class="ruby-value">0</span>]
+<span class="line-num">304</span> 
+<span class="line-num">305</span>   <span class="ruby-ivar">@scl</span> = <span class="ruby-identifier">scl</span> <span class="ruby-keyword">if</span> <span class="ruby-constant">SclNames</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">scl</span>)
+<span class="line-num">306</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -710,18 +712,18 @@ WWW server output.</p>
 
           
           <div class="method-source-code" id="set_prediction-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 323</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_prediction</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/prediction for (\S+?) is (\w{3}) \(k=(\d+)\)/</span>
-    <span class="ruby-ivar">@entry_id</span> <span class="ruby-operator">||=</span> <span class="ruby-node">$1</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@entry_id</span>
-    <span class="ruby-ivar">@pred</span> = <span class="ruby-node">$2</span>
-    <span class="ruby-ivar">@k</span>    = <span class="ruby-node">$3</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, 
-      <span class="ruby-node">&quot;Invalid format at(#{self.entry_id}):\n[#{str}]\n&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">323</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_prediction</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">324</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
+<span class="line-num">325</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/prediction for (\S+?) is (\w{3}) \(k=(\d+)\)/</span>
+<span class="line-num">326</span>     <span class="ruby-ivar">@entry_id</span> <span class="ruby-operator">||=</span> <span class="ruby-node">$1</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@entry_id</span>
+<span class="line-num">327</span>     <span class="ruby-ivar">@pred</span> = <span class="ruby-node">$2</span>
+<span class="line-num">328</span>     <span class="ruby-ivar">@k</span>    = <span class="ruby-node">$3</span>
+<span class="line-num">329</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">330</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, 
+<span class="line-num">331</span>       <span class="ruby-node">&quot;Invalid format at(#{self.entry_id}):\n[#{str}]\n&quot;</span>
+<span class="line-num">332</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">333</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -735,12 +737,13 @@ WWW server output.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

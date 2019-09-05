@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -107,14 +111,7 @@
     
 <h2 id="class-Bio::PAML::Codeml-label-Description">Description<span><a href="#class-Bio::PAML::Codeml-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p><a href="Codeml.html">Bio::PAML::Codeml</a> is a wrapper for estimating
-evolutionary rate using the CODEML  tool. The class provides methods for
-generating the necessary configuration  file, and running codeml with the
-specified binary. <a href="Codeml.html">Codeml</a> output is  returned when
-codeml is run. <a href="Codeml/Report.html">Bio::PAML::Codeml::Report</a>
-and <a href="Codeml/Rates.html">Bio::PAML::Codeml::Rates</a> provide simple
-classes for parsing and accessing the <a href="Codeml.html">Codeml</a>
-report and rates files respectively.</p>
+<p><a href="Codeml.html"><code>Bio::PAML::Codeml</code></a> is a wrapper for estimating evolutionary rate using the CODEML  tool. The class provides methods for generating the necessary configuration  file, and running codeml with the specified binary. <a href="Codeml.html"><code>Codeml</code></a> output is  returned when codeml is run. <a href="Codeml/Report.html"><code>Bio::PAML::Codeml::Report</code></a> and <a href="Codeml/Rates.html"><code>Bio::PAML::Codeml::Rates</code></a> provide simple classes for parsing and accessing the <a href="Codeml.html"><code>Codeml</code></a> report and rates files respectively.</p>
 
 <h2 id="class-Bio::PAML::Codeml-label-Examples">Examples<span><a href="#class-Bio::PAML::Codeml-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -184,8 +181,7 @@ report and rates files respectively.</p>
         
         <dd><p>Default parameters when running codeml.</p>
 
-<p>The parameters whose values are different from the codeml defalut value
-(described in pamlDOC.pdf) in <a href="../PAML.html">PAML</a> 4.1 are:</p>
+<p>The parameters whose values are different from the codeml defalut value (described in pamlDOC.pdf) in <a href="../PAML.html"><code>PAML</code></a> 4.1 are:</p>
 
 <pre>seqfile, outfile, treefile, ndata, noisy, verbose, cleandata</pre>
         
@@ -221,19 +217,17 @@ report and rates files respectively.</p>
 
         <div class="method-description">
           
-          <p>OBSOLETE. This method will soon be removed. Instead, use <a
-href="Codeml.html#method-c-create_control_file">::create_control_file</a>(parameters,
-filename).</p>
+          <p>OBSOLETE. This method will soon be removed. Instead, use <a href="Codeml.html#method-c-create_control_file"><code>create_control_file</code></a>(parameters, filename).</p>
           
           
 
           
           <div class="method-source-code" id="create_config_file-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 160</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">create_config_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;The method Codeml.create_config_file(parameters, filename) will soon be removed. Instead, use Codeml.create_control_file(filename, parameters).&quot;</span>
-  <span class="ruby-identifier">create_control_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb</span>
+<span class="line-num">160</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">create_config_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
+<span class="line-num">161</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;The method Codeml.create_config_file(parameters, filename) will soon be removed. Instead, use Codeml.create_control_file(filename, parameters).&quot;</span>
+<span class="line-num">162</span>   <span class="ruby-identifier">create_control_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
+<span class="line-num">163</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -257,24 +251,22 @@ filename).</p>
 
         <div class="method-description">
           
-          <p>Obsolete. This method will be removed in the future. Helper method for
-creating a codeml control file. Note that default parameters are
-automatically merged.</p>
+          <p>Obsolete. This method will be removed in the future. Helper method for creating a codeml control file. Note that default parameters are automatically merged.</p>
           
           
 
           
           <div class="method-source-code" id="create_control_file-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">create_control_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
-  <span class="ruby-identifier">parameters</span> = <span class="ruby-constant">DEFAULT_PARAMETERS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">parameters</span>)
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">file</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{key.to_s} = #{value.to_s}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">filename</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb</span>
+<span class="line-num">148</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">create_control_file</span>(<span class="ruby-identifier">parameters</span>, <span class="ruby-identifier">filename</span>)
+<span class="line-num">149</span>   <span class="ruby-identifier">parameters</span> = <span class="ruby-constant">DEFAULT_PARAMETERS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">parameters</span>)
+<span class="line-num">150</span>   <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-string">&#39;w&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">file</span><span class="ruby-operator">|</span>
+<span class="line-num">151</span>     <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+<span class="line-num">152</span>       <span class="ruby-identifier">file</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{key.to_s} = #{value.to_s}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>
+<span class="line-num">153</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">154</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">155</span>   <span class="ruby-identifier">filename</span>
+<span class="line-num">156</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -312,11 +304,11 @@ automatically merged.</p>
 
           
           <div class="method-source-code" id="options-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 133</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">options</span>
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;The method Codeml#options will be changed to be used for command line arguments in the future. Instead, use Codeml#parameters.&#39;</span>
-  <span class="ruby-identifier">parameters</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb</span>
+<span class="line-num">133</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">options</span>
+<span class="line-num">134</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;The method Codeml#options will be changed to be used for command line arguments in the future. Instead, use Codeml#parameters.&#39;</span>
+<span class="line-num">135</span>   <span class="ruby-identifier">parameters</span>
+<span class="line-num">136</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -346,11 +338,11 @@ automatically merged.</p>
 
           
           <div class="method-source-code" id="options-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 140</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">options=</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;The method Codeml#options=() will be changed to be used for command line arguments in the future. Instead, use Codeml#parameters=().&#39;</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parameters</span>=(<span class="ruby-identifier">hash</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb</span>
+<span class="line-num">140</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">options=</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">141</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;The method Codeml#options=() will be changed to be used for command line arguments in the future. Instead, use Codeml#parameters=().&#39;</span>
+<span class="line-num">142</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parameters</span>=(<span class="ruby-identifier">hash</span>)
+<span class="line-num">143</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -374,30 +366,24 @@ automatically merged.</p>
 
         <div class="method-description">
           
-          <p>Runs the program on the internal parameters with the specified sequence
-alignment and tree.</p>
+          <p>Runs the program on the internal parameters with the specified sequence alignment and tree.</p>
 
-<p>Note that <a href=":seqfile">parameters</a> and <a
-href=":outfile">parameters</a> are always modified, and <a
-href=":treefile">parameters</a> and <a href=":aaRatefile">parameters</a>
-are modified when tree and aarate are specified respectively.</p>
+<p>Note that <a href=":seqfile">parameters</a> and <a href=":outfile">parameters</a> are always modified, and <a href=":treefile">parameters</a> and <a href=":aaRatefile">parameters</a> are modified when tree and aarate are specified respectively.</p>
 
-<p>For other important information, see the document of <a
-href="Common.html#method-i-query">Bio::PAML::Common#query</a>.</p>
+<p>For other important information, see the document of <a href="Common.html#method-i-query"><code>Bio::PAML::Common#query</code></a>.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>alignment</em>: <a
-href="../Alignment.html">Bio::Alignment</a> object or similar object</p>
+<p>(required) <em>alignment</em>: <a href="../Alignment.html"><code>Bio::Alignment</code></a> object or similar object</p>
 </li><li>
-<p>(optional) <em>tree</em>: <a href="../Tree.html">Bio::Tree</a> object</p>
+<p>(optional) <em>tree</em>: <a href="../Tree.html"><code>Bio::Tree</code></a> object</p>
 </li><li>
 <p>(optional) <em>aarate</em>: String or nil</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Codeml/Report.html">Report</a> object</p>
+<p><a href="Codeml/Report.html"><code>Report</code></a> object</p>
 </dd></dl>
           
           
@@ -409,16 +395,16 @@ href="../Alignment.html">Bio::Alignment</a> object or similar object</p>
 
           
           <div class="method-source-code" id="query-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 183</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aarate</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">aaratefile</span> = <span class="ruby-identifier">prepare_aaratefile</span>(<span class="ruby-identifier">aarate</span>)
-    <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span>)
-  <span class="ruby-keyword">ensure</span>
-    <span class="ruby-identifier">finalize_aaratefile</span>(<span class="ruby-identifier">aaratefile</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">ret</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb</span>
+<span class="line-num">183</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aarate</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">184</span>   <span class="ruby-keyword">begin</span>
+<span class="line-num">185</span>     <span class="ruby-identifier">aaratefile</span> = <span class="ruby-identifier">prepare_aaratefile</span>(<span class="ruby-identifier">aarate</span>)
+<span class="line-num">186</span>     <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span>)
+<span class="line-num">187</span>   <span class="ruby-keyword">ensure</span>
+<span class="line-num">188</span>     <span class="ruby-identifier">finalize_aaratefile</span>(<span class="ruby-identifier">aaratefile</span>)
+<span class="line-num">189</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">190</span>   <span class="ruby-identifier">ret</span>
+<span class="line-num">191</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -442,16 +428,11 @@ href="../Alignment.html">Bio::Alignment</a> object or similar object</p>
 
         <div class="method-description">
           
-          <p>Runs the program on the internal parameters with the specified sequence
-alignment data string and tree data string.</p>
+          <p>Runs the program on the internal parameters with the specified sequence alignment data string and tree data string.</p>
 
-<p>Note that <a href=":outfile">parameters</a> is always modified, and <a
-href=":seqfile">parameters</a>, <a href=":treefile">parameters</a>, and <a
-href=":aaRatefile">parameters</a> are modified when alignment, tree, and
-aarate are specified respectively.</p>
+<p>Note that <a href=":outfile">parameters</a> is always modified, and <a href=":seqfile">parameters</a>, <a href=":treefile">parameters</a>, and <a href=":aaRatefile">parameters</a> are modified when alignment, tree, and aarate are specified respectively.</p>
 
-<p>It raises RuntimeError if seqfile is not specified in the argument or in
-the parameter.</p>
+<p>It raises RuntimeError if seqfile is not specified in the argument or in the parameter.</p>
 
 <p>For other important information, see the document of query method.</p>
 <hr>
@@ -478,16 +459,16 @@ the parameter.</p>
 
           
           <div class="method-source-code" id="query_by_string-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb, line 212</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_by_string</span>(<span class="ruby-identifier">alignment</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aarate</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">aaratefile</span> = <span class="ruby-identifier">prepare_aaratefile</span>(<span class="ruby-identifier">aarate</span>)
-    <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span>)
-  <span class="ruby-keyword">ensure</span>
-    <span class="ruby-identifier">finalize_aaratefile</span>(<span class="ruby-identifier">aaratefile</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">ret</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml.rb</span>
+<span class="line-num">212</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_by_string</span>(<span class="ruby-identifier">alignment</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aarate</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">213</span>   <span class="ruby-keyword">begin</span>
+<span class="line-num">214</span>     <span class="ruby-identifier">aaratefile</span> = <span class="ruby-identifier">prepare_aaratefile</span>(<span class="ruby-identifier">aarate</span>)
+<span class="line-num">215</span>     <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span>)
+<span class="line-num">216</span>   <span class="ruby-keyword">ensure</span>
+<span class="line-num">217</span>     <span class="ruby-identifier">finalize_aaratefile</span>(<span class="ruby-identifier">aaratefile</span>)
+<span class="line-num">218</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">219</span>   <span class="ruby-identifier">ret</span>
+<span class="line-num">220</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -501,12 +482,13 @@ the parameter.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

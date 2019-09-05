@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -114,8 +118,7 @@
     
 <p>Stores the cut location in thier enzyme index notation</p>
 
-<p>May be initialized with a series of cuts or an enzyme pattern marked with
-cut symbols.</p>
+<p>May be initialized with a series of cuts or an enzyme pattern marked with cut symbols.</p>
 <dl class="rdoc-list note-list"><dt>Enzyme index notation
 <dd>
 <p>1..<em>n</em>, value before 1 is -1</p>
@@ -124,21 +127,15 @@ cut symbols.</p>
 <dd></dd></dl>
 </dd></dl>
 
-<p>Negative values are used to indicate when a cut may occur at a specified
-distance before the sequence begins.  This would be padded with &#39;n&#39;
-nucleotides to represent wildcards.</p>
+<p>Negative values are used to indicate when a cut may occur at a specified distance before the sequence begins.  This would be padded with &#39;n&#39; nucleotides to represent wildcards.</p>
 
 <p>Notes:</p>
 <ul><li>
-<p><code>0</code> is invalid as it does not refer to any index</p>
+<p><code>0</code> is invalid as it does not refer to any index </p>
 </li><li>
 <p><code>nil</code> is not allowed here as it has no meaning</p>
 </li><li>
-<p><code>nil</code> values are kept track of in <a
-href="../DoubleStranded/CutLocations.html">DoubleStranded::CutLocations</a>
-as they need a reference point on the correlating strand.  In  <a
-href="../DoubleStranded/CutLocations.html">DoubleStranded::CutLocations</a>
-<code>nil</code> represents no cut or a partial  digestion.</p>
+<p><code>nil</code> values are kept track of in <a href="../DoubleStranded/CutLocations.html"><code>DoubleStranded::CutLocations</code></a> as they need a reference point on the correlating strand.  In  <a href="../DoubleStranded/CutLocations.html"><code>DoubleStranded::CutLocations</code></a> <code>nil</code> represents no cut or a partial  digestion.</p>
 </li></ul>
 
   </section>
@@ -207,14 +204,12 @@ href="../DoubleStranded/CutLocations.html">DoubleStranded::CutLocations</a>
 
         <div class="method-description">
           
-          <p>Constructor for <a
-href="CutLocationsInEnzymeNotation.html">CutLocationsInEnzymeNotation</a></p>
+          <p>Constructor for <a href="CutLocationsInEnzymeNotation.html"><code>CutLocationsInEnzymeNotation</code></a></p>
 <hr>
 
 <p><strong>Arguments</strong></p>
 <ul><li>
-<p><code>a</code>: <a href="../../Locations.html">Locations</a> of cuts
-represented as a string with cuts or an array of values</p>
+<p><code>a</code>: <a href="../../Locations.html"><code>Locations</code></a> of cuts represented as a string with cuts or an array of values</p>
 </li></ul>
 
 <p>Examples:</p>
@@ -241,28 +236,28 @@ represented as a string with cuts or an array of values</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand/cut_locations_in_enzyme_notation.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">a</span>)
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">flatten!</span> <span class="ruby-comment"># in case an array was passed as an argument</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">String</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">=~</span> <span class="ruby-identifier">re_cut_symbol</span>
-    <span class="ruby-comment"># Initialize with a cut symbol pattern such as &#39;n^ng^arraxt^n&#39;</span>
-    <span class="ruby-identifier">s</span> = <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
-    <span class="ruby-identifier">a</span> = []
-    <span class="ruby-identifier">i</span> = <span class="ruby-operator">-</span>( <span class="ruby-identifier">s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-identifier">cut_symbol</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{[^n]}</span> )  <span class="ruby-comment"># First character that&#39;s not &#39;n&#39;</span>
-    <span class="ruby-identifier">s</span>.<span class="ruby-identifier">each_byte</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">i</span>; <span class="ruby-keyword">next</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cut_symbol</span>; <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> }
-    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">n</span><span class="ruby-value">-1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">n</span> } <span class="ruby-comment"># 0 is not a valid enzyme index, decrement from 0 and all negative</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_i</span> } <span class="ruby-comment"># Cut locations are always integers</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">validate_cut_locations</span>( <span class="ruby-identifier">a</span> )
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">a</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sort!</span>
-  <span class="ruby-ivar">@min</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">first</span>
-  <span class="ruby-ivar">@max</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">last</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">freeze</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand/cut_locations_in_enzyme_notation.rb</span>
+<span class="line-num">58</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">a</span>)
+<span class="line-num">59</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">flatten!</span> <span class="ruby-comment"># in case an array was passed as an argument</span>
+<span class="line-num">60</span> 
+<span class="line-num">61</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">String</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">=~</span> <span class="ruby-identifier">re_cut_symbol</span>
+<span class="line-num">62</span>     <span class="ruby-comment"># Initialize with a cut symbol pattern such as &#39;n^ng^arraxt^n&#39;</span>
+<span class="line-num">63</span>     <span class="ruby-identifier">s</span> = <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
+<span class="line-num">64</span>     <span class="ruby-identifier">a</span> = []
+<span class="line-num">65</span>     <span class="ruby-identifier">i</span> = <span class="ruby-operator">-</span>( <span class="ruby-identifier">s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-identifier">cut_symbol</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{[^n]}</span> )  <span class="ruby-comment"># First character that&#39;s not &#39;n&#39;</span>
+<span class="line-num">66</span>     <span class="ruby-identifier">s</span>.<span class="ruby-identifier">each_byte</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">i</span>; <span class="ruby-keyword">next</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cut_symbol</span>; <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span> }
+<span class="line-num">67</span>     <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">n</span><span class="ruby-value">-1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">n</span> } <span class="ruby-comment"># 0 is not a valid enzyme index, decrement from 0 and all negative</span>
+<span class="line-num">68</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">69</span>     <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_i</span> } <span class="ruby-comment"># Cut locations are always integers</span>
+<span class="line-num">70</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">71</span> 
+<span class="line-num">72</span>   <span class="ruby-identifier">validate_cut_locations</span>( <span class="ruby-identifier">a</span> )
+<span class="line-num">73</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">a</span>)
+<span class="line-num">74</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sort!</span>
+<span class="line-num">75</span>   <span class="ruby-ivar">@min</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">76</span>   <span class="ruby-ivar">@max</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">last</span>
+<span class="line-num">77</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">freeze</span>
+<span class="line-num">78</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -294,8 +289,7 @@ represented as a string with cuts or an array of values</p>
 
         <div class="method-description">
           
-          <p>Transform the cut locations from enzyme index notation to 0-based index
-notation.</p>
+          <p>Transform the cut locations from enzyme index notation to 0-based index notation.</p>
 
 <pre>input -&gt; output
 [  1, 2, 3 ] -&gt; [ 0, 1, 2 ]
@@ -317,19 +311,19 @@ notation.</p>
 
           
           <div class="method-source-code" id="to_array_index-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand/cut_locations_in_enzyme_notation.rb, line 93</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_array_index</span>
-  <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@min</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@min</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
-    <span class="ruby-identifier">calc</span> = <span class="ruby-identifier">lambda</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> 
-      <span class="ruby-identifier">n</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
-      <span class="ruby-identifier">n</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@min</span>.<span class="ruby-identifier">abs</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">calc</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span> }
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">calc</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand/cut_locations_in_enzyme_notation.rb</span>
+<span class="line-num"> 93</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_array_index</span>
+<span class="line-num"> 94</span>   <span class="ruby-keyword">return</span> [] <span class="ruby-keyword">if</span> <span class="ruby-ivar">@min</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+<span class="line-num"> 95</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@min</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+<span class="line-num"> 96</span>     <span class="ruby-identifier">calc</span> = <span class="ruby-identifier">lambda</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> 
+<span class="line-num"> 97</span>       <span class="ruby-identifier">n</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+<span class="line-num"> 98</span>       <span class="ruby-identifier">n</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@min</span>.<span class="ruby-identifier">abs</span>
+<span class="line-num"> 99</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">100</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">101</span>     <span class="ruby-identifier">calc</span> = <span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span> <span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span> }
+<span class="line-num">102</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">103</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">calc</span>)
+<span class="line-num">104</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -367,28 +361,28 @@ notation.</p>
 
           
           <div class="method-source-code" id="validate_cut_locations-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand/cut_locations_in_enzyme_notation.rb, line 110</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_cut_locations</span>( <span class="ruby-identifier">input_cut_locations</span> )
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input_cut_locations</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">input_cut_locations</span>.<span class="ruby-identifier">uniq</span>
-    <span class="ruby-identifier">err</span> = <span class="ruby-string">&quot;The cut locations supplied contain duplicate values.  Redundant / undefined meaning.\n&quot;</span>
-    <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;cuts: #{input_cut_locations.inspect}\n&quot;</span>
-    <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;unique: #{input_cut_locations.uniq.inspect}&quot;</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">err</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">input_cut_locations</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword">nil</span>)
-    <span class="ruby-identifier">err</span> = <span class="ruby-string">&quot;The cut locations supplied contained a nil.  nil has no index for enzyme notation, alternative meaning is &#39;no cut&#39;.\n&quot;</span>
-    <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;cuts: #{input_cut_locations.inspect}&quot;</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">err</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">input_cut_locations</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">0</span>)
-    <span class="ruby-identifier">err</span> = <span class="ruby-string">&quot;The cut locations supplied contained a &#39;0&#39;.  &#39;0&#39; has no index for enzyme notation, alternative meaning is &#39;no cut&#39;.\n&quot;</span>
-    <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;cuts: #{input_cut_locations.inspect}&quot;</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">err</span>
-  <span class="ruby-keyword">end</span>
-
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/single_strand/cut_locations_in_enzyme_notation.rb</span>
+<span class="line-num">110</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_cut_locations</span>( <span class="ruby-identifier">input_cut_locations</span> )
+<span class="line-num">111</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">input_cut_locations</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">input_cut_locations</span>.<span class="ruby-identifier">uniq</span>
+<span class="line-num">112</span>     <span class="ruby-identifier">err</span> = <span class="ruby-string">&quot;The cut locations supplied contain duplicate values.  Redundant / undefined meaning.\n&quot;</span>
+<span class="line-num">113</span>     <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;cuts: #{input_cut_locations.inspect}\n&quot;</span>
+<span class="line-num">114</span>     <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;unique: #{input_cut_locations.uniq.inspect}&quot;</span>
+<span class="line-num">115</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">err</span>
+<span class="line-num">116</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">117</span> 
+<span class="line-num">118</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">input_cut_locations</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-keyword">nil</span>)
+<span class="line-num">119</span>     <span class="ruby-identifier">err</span> = <span class="ruby-string">&quot;The cut locations supplied contained a nil.  nil has no index for enzyme notation, alternative meaning is &#39;no cut&#39;.\n&quot;</span>
+<span class="line-num">120</span>     <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;cuts: #{input_cut_locations.inspect}&quot;</span>
+<span class="line-num">121</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">err</span>
+<span class="line-num">122</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">123</span> 
+<span class="line-num">124</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">input_cut_locations</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-value">0</span>)
+<span class="line-num">125</span>     <span class="ruby-identifier">err</span> = <span class="ruby-string">&quot;The cut locations supplied contained a &#39;0&#39;.  &#39;0&#39; has no index for enzyme notation, alternative meaning is &#39;no cut&#39;.\n&quot;</span>
+<span class="line-num">126</span>     <span class="ruby-identifier">err</span> <span class="ruby-operator">+=</span> <span class="ruby-node">&quot;cuts: #{input_cut_locations.inspect}&quot;</span>
+<span class="line-num">127</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-identifier">err</span>
+<span class="line-num">128</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">129</span> 
+<span class="line-num">130</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -402,12 +396,13 @@ notation.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

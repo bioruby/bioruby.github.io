@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -90,15 +94,9 @@
 
   <section class="description">
     
-<p><a href="Fragments.html">Bio::RestrictionEnzyme::Fragments</a> inherits
-from <code>Array</code>.</p>
+<p><a href="Fragments.html"><code>Bio::RestrictionEnzyme::Fragments</code></a> inherits from <code>Array</code>.</p>
 
-<p><a href="Fragments.html">Bio::RestrictionEnzyme::Fragments</a> is a
-container for Fragment objects.  It adds the methods <code>primary</code>
-and <code>complement</code> which returns an <code>Array</code> of all
-respective strands from it&#39;s Fragment members in alphabetically sorted 
-order.  Note that it will not return duplicate items and does not return
-the spacing/padding  that you would find by accessing the members directly.</p>
+<p><a href="Fragments.html"><code>Bio::RestrictionEnzyme::Fragments</code></a> is a container for Fragment objects.  It adds the methods <code>primary</code> and <code>complement</code> which returns an <code>Array</code> of all respective strands from it&#39;s Fragment members in alphabetically sorted  order.  Note that it will not return duplicate items and does not return the spacing/padding  that you would find by accessing the members directly.</p>
 
 <p>Example:</p>
 
@@ -106,8 +104,7 @@ the spacing/padding  that you would find by accessing the members directly.</p>
 <span class="ruby-identifier">complement</span> = [<span class="ruby-string">&#39;atga&#39;</span>, <span class="ruby-string">&#39;cta&#39;</span>]
 </pre>
 
-<p>Note: unrelated to <a
-href="Range/SequenceRange/Fragments.html">Bio::RestrictionEnzyme::Range::SequenceRange::Fragments</a></p>
+<p>Note: unrelated to <a href="Range/SequenceRange/Fragments.html"><code>Bio::RestrictionEnzyme::Range::SequenceRange::Fragments</code></a></p>
 
   </section>
 
@@ -147,8 +144,8 @@ href="Range/SequenceRange/Fragments.html">Bio::RestrictionEnzyme::Range::Sequenc
 
           
           <div class="method-source-code" id="complement-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb, line 220</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">complement</span>; <span class="ruby-identifier">strip_and_sort</span>(<span class="ruby-value">:complement</span>); <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb</span>
+<span class="line-num">220</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">complement</span>; <span class="ruby-identifier">strip_and_sort</span>(<span class="ruby-value">:complement</span>); <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -178,8 +175,8 @@ href="Range/SequenceRange/Fragments.html">Bio::RestrictionEnzyme::Range::Sequenc
 
           
           <div class="method-source-code" id="primary-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb, line 219</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">primary</span>; <span class="ruby-identifier">strip_and_sort</span>(<span class="ruby-value">:primary</span>); <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb</span>
+<span class="line-num">219</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">primary</span>; <span class="ruby-identifier">strip_and_sort</span>(<span class="ruby-value">:primary</span>); <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -217,10 +214,10 @@ href="Range/SequenceRange/Fragments.html">Bio::RestrictionEnzyme::Range::Sequenc
 
           
           <div class="method-source-code" id="strip_and_sort-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb, line 224</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strip_and_sort</span>( <span class="ruby-identifier">sym_strand</span> )
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">uf</span><span class="ruby-operator">|</span> <span class="ruby-identifier">uf</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">sym_strand</span> ).<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39; &#39;</span>, <span class="ruby-string">&#39;&#39;</span>) }.<span class="ruby-identifier">sort</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb</span>
+<span class="line-num">224</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strip_and_sort</span>( <span class="ruby-identifier">sym_strand</span> )
+<span class="line-num">225</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">uf</span><span class="ruby-operator">|</span> <span class="ruby-identifier">uf</span>.<span class="ruby-identifier">send</span>( <span class="ruby-identifier">sym_strand</span> ).<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39; &#39;</span>, <span class="ruby-string">&#39;&#39;</span>) }.<span class="ruby-identifier">sort</span>
+<span class="line-num">226</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -234,12 +231,13 @@ href="Range/SequenceRange/Fragments.html">Bio::RestrictionEnzyme::Range::Sequenc
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

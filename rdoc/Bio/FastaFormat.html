@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -149,8 +153,7 @@ ATGCATGCATGCATGCATGCATGCATGCATGCATGC        &lt;== sequence lines
 ATGCATGCATGCATGCATGCATGCATGCATGCATGC
 ATGCATGCATGC</pre>
 
-<p>The precedent &#39;&gt;&#39; can be omitted and the trailing &#39;&gt;&#39;
-will be removed automatically.</p>
+<p>The precedent &#39;&gt;&#39; can be omitted and the trailing &#39;&gt;&#39; will be removed automatically.</p>
 
 <h3 id="class-Bio::FastaFormat-label-Examples">Examples<span><a href="#class-Bio::FastaFormat-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -175,10 +178,7 @@ INRISARRAAIHPYFQES
 
 <h4 id="class-Bio::FastaFormat-label-Methods+related+to+the+name+of+the+sequence">Methods related to the name of the sequence<span><a href="#class-Bio::FastaFormat-label-Methods+related+to+the+name+of+the+sequence">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
-<p>A larger range of methods for dealing with <a href="Fasta.html">Fasta</a>
-definition lines can be found in <a
-href="FastaDefline.html">FastaDefline</a>, accessed through the <a
-href="FastaFormat.html#method-i-identifiers">#identifiers</a> method.</p>
+<p>A larger range of methods for dealing with <a href="Fasta.html"><code>Fasta</code></a> definition lines can be found in <a href="FastaDefline.html"><code>FastaDefline</code></a>, accessed through the <a href="FastaFormat.html#method-i-identifiers"><code>FastaFormat#identifiers</code></a> method.</p>
 
 <pre class="ruby"><span class="ruby-identifier">f</span>.<span class="ruby-identifier">entry_id</span> <span class="ruby-comment">#=&gt; &quot;gi|398365175&quot;</span>
 <span class="ruby-identifier">f</span>.<span class="ruby-identifier">first_name</span> <span class="ruby-comment">#=&gt; &quot;gi|398365175|ref|NP_009718.3|&quot;</span>
@@ -220,10 +220,9 @@ href="FastaFormat.html#method-i-identifiers">#identifiers</a> method.</p>
 <span class="ruby-identifier">f</span>.<span class="ruby-identifier">aalen</span> <span class="ruby-comment">#=&gt; 4</span>
 </pre>
 
-<h3 id="class-Bio::FastaFormat-label-References"><a href="References.html">References</a><span><a href="#class-Bio::FastaFormat-label-References">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h3 id="class-Bio::FastaFormat-label-References"><a href="References.html"><code>References</code></a><span><a href="#class-Bio::FastaFormat-label-References">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p>FASTA format (WikiPedia)  <a
-href="http://en.wikipedia.org/wiki/FASTA_format">en.wikipedia.org/wiki/FASTA_format</a></p>
+<p>FASTA format (WikiPedia)  <a href="http://en.wikipedia.org/wiki/FASTA_format">en.wikipedia.org/wiki/FASTA_format</a></p>
 </li></ul>
 
   </section>
@@ -248,8 +247,7 @@ href="http://en.wikipedia.org/wiki/FASTA_format">en.wikipedia.org/wiki/FASTA_for
       
         <dt id="DELIMITER_OVERRUN">DELIMITER_OVERRUN
         
-        <dd><p>(Integer) excess read size included in <a
-href="FastaFormat.html#DELIMITER">DELIMITER</a>.</p>
+        <dd><p>(Integer) excess read size included in <a href="FastaFormat.html#DELIMITER"><code>DELIMITER</code></a>.</p>
         
       
       </dl>
@@ -325,21 +323,19 @@ href="FastaFormat.html#DELIMITER">DELIMITER</a>.</p>
 
         <div class="method-description">
           
-          <p>Stores the comment and sequence information from one entry of the FASTA
-format string.  If the argument contains more than one entry, only the
-first entry is used.</p>
+          <p>Stores the comment and sequence information from one entry of the FASTA format string.  If the argument contains more than one entry, only the first entry is used.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 133</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">str</span>[<span class="ruby-regexp">/.*/</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^&gt;/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>       <span class="ruby-comment"># 1st line</span>
-  <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/.*/</span>, <span class="ruby-string">&#39;&#39;</span>)                         <span class="ruby-comment"># rests</span>
-  <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/^&gt;.*/m</span>, <span class="ruby-string">&#39;&#39;</span>)   <span class="ruby-comment"># remove trailing entries for sure</span>
-  <span class="ruby-ivar">@entry_overrun</span> = <span class="ruby-node">$&amp;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">133</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">134</span>   <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">str</span>[<span class="ruby-regexp">/.*/</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^&gt;/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>       <span class="ruby-comment"># 1st line</span>
+<span class="line-num">135</span>   <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/.*/</span>, <span class="ruby-string">&#39;&#39;</span>)                         <span class="ruby-comment"># rests</span>
+<span class="line-num">136</span>   <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/^&gt;.*/m</span>, <span class="ruby-string">&#39;&#39;</span>)   <span class="ruby-comment"># remove trailing entries for sure</span>
+<span class="line-num">137</span>   <span class="ruby-ivar">@entry_overrun</span> = <span class="ruby-node">$&amp;</span>
+<span class="line-num">138</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -371,16 +367,16 @@ first entry is used.</p>
 
         <div class="method-description">
           
-          <p>Returens the length of <a href="Sequence/AA.html">Bio::Sequence::AA</a>.</p>
+          <p>Returens the length of <a href="Sequence/AA.html"><code>Bio::Sequence::AA</code></a>.</p>
           
           
 
           
           <div class="method-source-code" id="aalen-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 223</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aalen</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">aaseq</span>.<span class="ruby-identifier">length</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">223</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aalen</span>
+<span class="line-num">224</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">aaseq</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">225</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -404,16 +400,16 @@ first entry is used.</p>
 
         <div class="method-description">
           
-          <p>Returens the <a href="Sequence/AA.html">Bio::Sequence::AA</a>.</p>
+          <p>Returens the <a href="Sequence/AA.html"><code>Bio::Sequence::AA</code></a>.</p>
           
           
 
           
           <div class="method-source-code" id="aaseq-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 218</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aaseq</span>
-  <span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">218</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aaseq</span>
+<span class="line-num">219</span>   <span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">220</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -443,10 +439,10 @@ first entry is used.</p>
 
           
           <div class="method-source-code" id="acc_version-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 279</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">acc_version</span>
-  <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">acc_version</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">279</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">acc_version</span>
+<span class="line-num">280</span>   <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">acc_version</span>
+<span class="line-num">281</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -476,10 +472,10 @@ first entry is used.</p>
 
           
           <div class="method-source-code" id="accession-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 267</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accession</span>
-  <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">accession</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">267</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accession</span>
+<span class="line-num">268</span>   <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">accession</span>
+<span class="line-num">269</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -503,18 +499,16 @@ first entry is used.</p>
 
         <div class="method-description">
           
-          <p>Parsing FASTA Defline (using <a
-href="FastaFormat.html#method-i-identifiers">identifiers</a> method), and
-shows accession numbers. It returns an array of strings.</p>
+          <p>Parsing FASTA Defline (using <a href="FastaFormat.html#method-i-identifiers"><code>identifiers</code></a> method), and shows accession numbers. It returns an array of strings.</p>
           
           
 
           
           <div class="method-source-code" id="accessions-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 274</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accessions</span>
-  <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">accessions</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">274</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accessions</span>
+<span class="line-num">275</span>   <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">accessions</span>
+<span class="line-num">276</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -572,11 +566,11 @@ shows accession numbers. It returns an array of strings.</p>
 
           
           <div class="method-source-code" id="comment-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 197</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comment</span>
-  <span class="ruby-identifier">seq</span>
-  <span class="ruby-ivar">@comment</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">197</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comment</span>
+<span class="line-num">198</span>   <span class="ruby-identifier">seq</span>
+<span class="line-num">199</span>   <span class="ruby-ivar">@comment</span>
+<span class="line-num">200</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -600,17 +594,16 @@ shows accession numbers. It returns an array of strings.</p>
 
         <div class="method-description">
           
-          <p>Returns the stored one entry as a FASTA format. (same as <a
-href="FastaFormat.html#method-i-to_s">#to_s</a>)</p>
+          <p>Returns the stored one entry as a FASTA format. (same as <a href="FastaFormat.html#method-i-to_s"><code>to_s</code></a>)</p>
           
           
 
           
           <div class="method-source-code" id="entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 141</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry</span>
-  <span class="ruby-ivar">@entry</span> = <span class="ruby-node">&quot;&gt;#{@definition}\n#{@data.strip}\n&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">141</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry</span>
+<span class="line-num">142</span>   <span class="ruby-ivar">@entry</span> = <span class="ruby-node">&quot;&gt;#{@definition}\n#{@data.strip}\n&quot;</span>
+<span class="line-num">143</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -638,18 +631,16 @@ href="FastaFormat.html#method-i-to_s">#to_s</a>)</p>
 
         <div class="method-description">
           
-          <p>Parsing FASTA Defline (using <a
-href="FastaFormat.html#method-i-identifiers">identifiers</a> method), and
-shows a possibly unique identifier. It returns a string.</p>
+          <p>Parsing FASTA Defline (using <a href="FastaFormat.html#method-i-identifiers"><code>identifiers</code></a> method), and shows a possibly unique identifier. It returns a string.</p>
           
           
 
           
           <div class="method-source-code" id="entry_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 253</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
-  <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">entry_id</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">253</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
+<span class="line-num">254</span>   <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">entry_id</span>
+<span class="line-num">255</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -701,8 +692,7 @@ shows a possibly unique identifier. It returns a string.</p>
 
         <div class="method-description">
           
-          <p>Returns the first name (word) of the definition line - everything before
-the first whitespace.</p>
+          <p>Returns the first name (word) of the definition line - everything before the first whitespace.</p>
 
 <pre>&gt;abc def #=&gt; &#39;abc&#39;
 &gt;gi|398365175|ref|NP_009718.3| Cdc28p [Saccharomyces cerevisiae S288c] #=&gt; &#39;gi|398365175|ref|NP_009718.3|&#39;
@@ -712,15 +702,15 @@ the first whitespace.</p>
 
           
           <div class="method-source-code" id="first_name-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 294</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">first_name</span>
-  <span class="ruby-identifier">index</span> = <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">index</span>(<span class="ruby-regexp">/\s/</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span>.<span class="ruby-identifier">nil?</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@definition</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@definition</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">index</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">294</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">first_name</span>
+<span class="line-num">295</span>   <span class="ruby-identifier">index</span> = <span class="ruby-identifier">definition</span>.<span class="ruby-identifier">index</span>(<span class="ruby-regexp">/\s/</span>)
+<span class="line-num">296</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span>.<span class="ruby-identifier">nil?</span>
+<span class="line-num">297</span>     <span class="ruby-keyword">return</span> <span class="ruby-ivar">@definition</span>
+<span class="line-num">298</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">299</span>     <span class="ruby-keyword">return</span> <span class="ruby-ivar">@definition</span>[<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">index</span>]
+<span class="line-num">300</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">301</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -744,20 +734,16 @@ the first whitespace.</p>
 
         <div class="method-description">
           
-          <p>Parsing FASTA Defline (using <a
-href="FastaFormat.html#method-i-identifiers">identifiers</a> method), and
-shows GI/locus/accession/accession with version number. If a entry has more
-than two of such IDs, only the first ID are shown. It returns a string or
-nil.</p>
+          <p>Parsing FASTA Defline (using <a href="FastaFormat.html#method-i-identifiers"><code>identifiers</code></a> method), and shows GI/locus/accession/accession with version number. If a entry has more than two of such IDs, only the first ID are shown. It returns a string or nil.</p>
           
           
 
           
           <div class="method-source-code" id="gi-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 262</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gi</span>
-  <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">gi</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">262</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gi</span>
+<span class="line-num">263</span>   <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">gi</span>
+<span class="line-num">264</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -781,21 +767,19 @@ nil.</p>
 
         <div class="method-description">
           
-          <p>Parsing FASTA Defline, and extract IDs. IDs are NSIDs (NCBI standard FASTA
-sequence identifiers) or “:”-separated IDs. It returns a <a
-href="FastaDefline.html">Bio::FastaDefline</a> instance.</p>
+          <p>Parsing FASTA Defline, and extract IDs. IDs are NSIDs (NCBI standard FASTA sequence identifiers) or “:”-separated IDs. It returns a <a href="FastaDefline.html"><code>Bio::FastaDefline</code></a> instance.</p>
           
           
 
           
           <div class="method-source-code" id="identifiers-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 243</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">identifiers</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@ids</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@ids</span> = <span class="ruby-constant">FastaDefline</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@definition</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@ids</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">243</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">identifiers</span>
+<span class="line-num">244</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@ids</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">245</span>     <span class="ruby-ivar">@ids</span> = <span class="ruby-constant">FastaDefline</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@definition</span>)
+<span class="line-num">246</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">247</span>   <span class="ruby-ivar">@ids</span>
+<span class="line-num">248</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -825,10 +809,10 @@ href="FastaDefline.html">Bio::FastaDefline</a> instance.</p>
 
           
           <div class="method-source-code" id="length-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 203</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length</span>
-  <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">203</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length</span>
+<span class="line-num">204</span>   <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">205</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -858,10 +842,10 @@ href="FastaDefline.html">Bio::FastaDefline</a> instance.</p>
 
           
           <div class="method-source-code" id="locus-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 284</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">locus</span>
-  <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">locus</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">284</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">locus</span>
+<span class="line-num">285</span>   <span class="ruby-identifier">identifiers</span>.<span class="ruby-identifier">locus</span>
+<span class="line-num">286</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -885,16 +869,16 @@ href="FastaDefline.html">Bio::FastaDefline</a> instance.</p>
 
         <div class="method-description">
           
-          <p>Returens the length of <a href="Sequence/NA.html">Bio::Sequence::NA</a>.</p>
+          <p>Returens the length of <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a>.</p>
           
           
 
           
           <div class="method-source-code" id="nalen-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 213</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nalen</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">length</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">213</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nalen</span>
+<span class="line-num">214</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">215</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -918,16 +902,16 @@ href="FastaDefline.html">Bio::FastaDefline</a> instance.</p>
 
         <div class="method-description">
           
-          <p>Returens the <a href="Sequence/NA.html">Bio::Sequence::NA</a>.</p>
+          <p>Returens the <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a>.</p>
           
           
 
           
           <div class="method-source-code" id="naseq-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 208</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">naseq</span>
-  <span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">208</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">naseq</span>
+<span class="line-num">209</span>   <span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">210</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -951,8 +935,7 @@ href="FastaDefline.html">Bio::FastaDefline</a> instance.</p>
 
         <div class="method-description">
           
-          <p>Executes FASTA/BLAST search by using a <a href="Fasta.html">Bio::Fasta</a>
-or a <a href="Blast.html">Bio::Blast</a> factory object.</p>
+          <p>Executes FASTA/BLAST search by using a <a href="Fasta.html"><code>Bio::Fasta</code></a> or a <a href="Blast.html"><code>Bio::Blast</code></a> factory object.</p>
 
 <pre class="ruby"><span class="ruby-comment">#!/usr/bin/env ruby</span>
 <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio&#39;</span>
@@ -973,10 +956,10 @@ or a <a href="Blast.html">Bio::Blast</a> factory object.</p>
 
           
           <div class="method-source-code" id="query-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 164</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-identifier">factory</span>)
-  <span class="ruby-identifier">factory</span>.<span class="ruby-identifier">query</span>(<span class="ruby-identifier">entry</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">164</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-identifier">factory</span>)
+<span class="line-num">165</span>   <span class="ruby-identifier">factory</span>.<span class="ruby-identifier">query</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">166</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1010,31 +993,31 @@ or a <a href="Blast.html">Bio::Blast</a> factory object.</p>
 
           
           <div class="method-source-code" id="seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 171</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@seq</span>)
-    <span class="ruby-keyword">unless</span> <span class="ruby-regexp">/\A\s*^\#/</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@data</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Generic</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@data</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&quot; \t\r\n0-9&quot;</span>, <span class="ruby-string">&#39;&#39;</span>)) <span class="ruby-comment"># lazy clean up</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/(^\#.*$)/</span>)
-      <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
-      <span class="ruby-identifier">cmnt</span> = {}
-      <span class="ruby-identifier">s</span> = []
-      <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^# ?(.*)$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">then</span>
-          <span class="ruby-identifier">cmnt</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">cmnt</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">$1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">cmnt</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-node">$1</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">x</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&quot; \t\r\n0-9&quot;</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-comment"># lazy clean up</span>
-          <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span>
-          <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-ivar">@comment</span> = <span class="ruby-identifier">cmnt</span>
-      <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Generic</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>))
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@seq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">171</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
+<span class="line-num">172</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@seq</span>)
+<span class="line-num">173</span>     <span class="ruby-keyword">unless</span> <span class="ruby-regexp">/\A\s*^\#/</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@data</span> <span class="ruby-keyword">then</span>
+<span class="line-num">174</span>       <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Generic</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@data</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&quot; \t\r\n0-9&quot;</span>, <span class="ruby-string">&#39;&#39;</span>)) <span class="ruby-comment"># lazy clean up</span>
+<span class="line-num">175</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">176</span>       <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/(^\#.*$)/</span>)
+<span class="line-num">177</span>       <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+<span class="line-num">178</span>       <span class="ruby-identifier">cmnt</span> = {}
+<span class="line-num">179</span>       <span class="ruby-identifier">s</span> = []
+<span class="line-num">180</span>       <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">181</span>         <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^# ?(.*)$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">then</span>
+<span class="line-num">182</span>           <span class="ruby-identifier">cmnt</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">cmnt</span>[<span class="ruby-identifier">i</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">$1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">cmnt</span>[<span class="ruby-identifier">i</span>] = <span class="ruby-node">$1</span>
+<span class="line-num">183</span>         <span class="ruby-keyword">else</span>
+<span class="line-num">184</span>           <span class="ruby-identifier">x</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&quot; \t\r\n0-9&quot;</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-comment"># lazy clean up</span>
+<span class="line-num">185</span>           <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">186</span>           <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>
+<span class="line-num">187</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">188</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">189</span>       <span class="ruby-ivar">@comment</span> = <span class="ruby-identifier">cmnt</span>
+<span class="line-num">190</span>       <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Generic</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>))
+<span class="line-num">191</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">192</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">193</span>   <span class="ruby-ivar">@seq</span>
+<span class="line-num">194</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1058,21 +1041,18 @@ or a <a href="Blast.html">Bio::Blast</a> factory object.</p>
 
         <div class="method-description">
           
-          <p>Returns sequence as a <a href="Sequence.html">Bio::Sequence</a> object.</p>
+          <p>Returns sequence as a <a href="Sequence.html"><code>Bio::Sequence</code></a> object.</p>
 
-<p>Note: If you modify the returned <a href="Sequence.html">Bio::Sequence</a>
-object, the sequence or definition in this <a
-href="FastaFormat.html">FastaFormat</a> object might also be changed (but
-not always be changed) because of efficiency.</p>
+<p>Note: If you modify the returned <a href="Sequence.html"><code>Bio::Sequence</code></a> object, the sequence or definition in this <a href="FastaFormat.html"><code>FastaFormat</code></a> object might also be changed (but not always be changed) because of efficiency.</p>
           
           
 
           
           <div class="method-source-code" id="to_biosequence-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta.rb, line 234</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_biosequence</span>
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">adapter</span>(<span class="ruby-keyword">self</span>, <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Adapter</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta.rb</span>
+<span class="line-num">234</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_biosequence</span>
+<span class="line-num">235</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">adapter</span>(<span class="ruby-keyword">self</span>, <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Adapter</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>)
+<span class="line-num">236</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1146,12 +1126,13 @@ not always be changed) because of efficiency.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -94,14 +98,9 @@
 
   <section class="description">
     
-<p><a href="../MAFFT.html">MAFFT</a> result parser class. <a
-href="../MAFFT.html">MAFFT</a> is a very fast multiple sequence alignment
-software.</p>
+<p><a href="../MAFFT.html"><code>MAFFT</code></a> result parser class. <a href="../MAFFT.html"><code>MAFFT</code></a> is a very fast multiple sequence alignment software.</p>
 
-<p>Since a result of <a href="../MAFFT.html">MAFFT</a> is simply a
-multiple-fasta format, the significance of this class is to keep standard
-form and interface between <a
-href="../ClustalW/Report.html">Bio::ClustalW::Report</a>.</p>
+<p>Since a result of <a href="../MAFFT.html"><code>MAFFT</code></a> is simply a multiple-fasta format, the significance of this class is to keep standard form and interface between <a href="../ClustalW/Report.html"><code>Bio::ClustalW::Report</code></a>.</p>
 
   </section>
 
@@ -128,8 +127,7 @@ href="../ClustalW/Report.html">Bio::ClustalW::Report</a>.</p>
 
         <div class="method-description">
         
-        <p>sequence data. Returns an array of <a
-href="../FastaFormat.html">Bio::FastaFormat</a>.</p>
+        <p>sequence data. Returns an array of <a href="../FastaFormat.html"><code>Bio::FastaFormat</code></a>.</p>
         
         </div>
       </div>
@@ -142,8 +140,7 @@ href="../FastaFormat.html">Bio::FastaFormat</a>.</p>
 
         <div class="method-description">
         
-        <p><a href="../Sequence.html">Sequence</a> class (Bio::Sequence::AA, <a
-href="../Sequence/NA.html">Bio::Sequence::NA</a>, …)</p>
+        <p><a href="../Sequence.html"><code>Sequence</code></a> class (Bio::Sequence::AA, <a href="../Sequence/NA.html"><code>Bio::Sequence::NA</code></a>, …)</p>
 
 <p>Compatibility note: This method will be removed in the tufure.</p>
         
@@ -173,53 +170,48 @@ href="../Sequence/NA.html">Bio::Sequence::NA</a>, …)</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Report.html">Report</a> object. <code>str</code>
-should be multi-fasta formatted text as a string.</p>
+          <p>Creates a new <a href="Report.html"><code>Report</code></a> object. <code>str</code> should be multi-fasta formatted text as a string.</p>
 
-<p>Compatibility Note: the old usage (to get array of <a
-href="../FastaFormat.html">Bio::FastaFormat</a> objects) is deprecated.</p>
+<p>Compatibility Note: the old usage (to get array of <a href="../FastaFormat.html"><code>Bio::FastaFormat</code></a> objects) is deprecated.</p>
 
 <p>Compatibility Note 2: the argument <code>seqclass</code> is deprecated.</p>
 
-<p><code>seqclass</code> should be one of following: Class:  <a
-href="../Sequence/AA.html">Bio::Sequence::AA</a>, <a
-href="../Sequence/NA.html">Bio::Sequence::NA</a>, … String:
-&#39;PROTEIN&#39;, &#39;DNA&#39;, …</p>
+<p><code>seqclass</code> should be one of following: Class:  <a href="../Sequence/AA.html"><code>Bio::Sequence::AA</code></a>, <a href="../Sequence/NA.html"><code>Bio::Sequence::NA</code></a>, … String: &#39;PROTEIN&#39;, &#39;DNA&#39;, …</p>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="../Alignment/MultiFastaFormat.html#method-c-new">Bio::Alignment::MultiFastaFormat.new</a>
+              <a href="../Alignment/MultiFastaFormat.html#method-c-new"><code>Bio::Alignment::MultiFastaFormat::new</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft/report.rb, line 142</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">seqclass</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Array of Bio::FastaFormat objects will be no longer accepted.&quot;</span>
-    <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">super</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">seqclass</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;the 2nd argument (seqclass) will be no deprecated.&quot;</span>
-    <span class="ruby-keyword">case</span> <span class="ruby-identifier">seqclass</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/PROTEIN/i</span>
-      <span class="ruby-ivar">@seqclass</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/[DR]NA/i</span>
-      <span class="ruby-ivar">@seqclass</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">seqclass</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Module</span>) <span class="ruby-keyword">then</span>
-        <span class="ruby-ivar">@seqclass</span> = <span class="ruby-identifier">seqclass</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-ivar">@seqclass</span> = <span class="ruby-keyword">nil</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft/report.rb</span>
+<span class="line-num">142</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">seqclass</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">143</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">144</span>     <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Array of Bio::FastaFormat objects will be no longer accepted.&quot;</span>
+<span class="line-num">145</span>     <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>
+<span class="line-num">146</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">147</span>     <span class="ruby-keyword">super</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">148</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">149</span> 
+<span class="line-num">150</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">seqclass</span> <span class="ruby-keyword">then</span>
+<span class="line-num">151</span>     <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;the 2nd argument (seqclass) will be no deprecated.&quot;</span>
+<span class="line-num">152</span>     <span class="ruby-keyword">case</span> <span class="ruby-identifier">seqclass</span>
+<span class="line-num">153</span>     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/PROTEIN/i</span>
+<span class="line-num">154</span>       <span class="ruby-ivar">@seqclass</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>
+<span class="line-num">155</span>     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/[DR]NA/i</span>
+<span class="line-num">156</span>       <span class="ruby-ivar">@seqclass</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>
+<span class="line-num">157</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">158</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">seqclass</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Module</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">159</span>         <span class="ruby-ivar">@seqclass</span> = <span class="ruby-identifier">seqclass</span>
+<span class="line-num">160</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">161</span>         <span class="ruby-ivar">@seqclass</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">162</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">163</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">164</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">165</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -253,18 +245,17 @@ href="../Sequence/NA.html">Bio::Sequence::NA</a>, … String:
           
           <p>This method will be deprecated. Instead, please use alignment.</p>
 
-<p>Gets an multiple alignment. Returns a <a
-href="../Alignment.html">Bio::Alignment</a> object.</p>
+<p>Gets an multiple alignment. Returns a <a href="../Alignment.html"><code>Bio::Alignment</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="align-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft/report.rb, line 185</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">align</span>
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::MAFFT::Report#align is deprecated. Please use \&#39;alignment\&#39;.&quot;</span>
-  <span class="ruby-identifier">alignment</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft/report.rb</span>
+<span class="line-num">185</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">align</span>
+<span class="line-num">186</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::MAFFT::Report#align is deprecated. Please use \&#39;alignment\&#39;.&quot;</span>
+<span class="line-num">187</span>   <span class="ruby-identifier">alignment</span>
+<span class="line-num">188</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -288,22 +279,21 @@ href="../Alignment.html">Bio::Alignment</a> object.</p>
 
         <div class="method-description">
           
-          <p>Gets an multiple alignment. Returns a <a
-href="../Alignment.html">Bio::Alignment</a> object.</p>
+          <p>Gets an multiple alignment. Returns a <a href="../Alignment.html"><code>Bio::Alignment</code></a> object.</p>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="../Alignment/MultiFastaFormat.html#method-i-alignment">Bio::Alignment::MultiFastaFormat#alignment</a>
+              <a href="../Alignment/MultiFastaFormat.html#method-i-alignment"><code>Bio::Alignment::MultiFastaFormat#alignment</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="alignment-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft/report.rb, line 177</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">alignment</span>(<span class="ruby-identifier">method</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">super</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft/report.rb</span>
+<span class="line-num">177</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">alignment</span>(<span class="ruby-identifier">method</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">178</span>   <span class="ruby-keyword">super</span>
+<span class="line-num">179</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -329,17 +319,16 @@ href="../Alignment.html">Bio::Alignment</a> object.</p>
           
           <p>Compatibility note: Behavior of the method will be changed in the future.</p>
 
-<p>Gets an array of the sequences. Returns an array of <a
-href="../FastaFormat.html">Bio::FastaFormat</a> instances.</p>
+<p>Gets an array of the sequences. Returns an array of <a href="../FastaFormat.html"><code>Bio::FastaFormat</code></a> instances.</p>
           
           
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft/report.rb, line 206</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
-  <span class="ruby-ivar">@data</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft/report.rb</span>
+<span class="line-num">206</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
+<span class="line-num">207</span>   <span class="ruby-ivar">@data</span>
+<span class="line-num">208</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -365,18 +354,17 @@ href="../FastaFormat.html">Bio::FastaFormat</a> instances.</p>
           
           <p>This will be deprecated. Instead, please use alignment.output_fasta.</p>
 
-<p>Gets an fasta-format string of the sequences. Returns a string. Same as
-align.to_fasta. Please refer to Bio::Alignment#output_fasta for arguments.</p>
+<p>Gets an fasta-format string of the sequences. Returns a string. Same as align.to_fasta. Please refer to Bio::Alignment#output_fasta for arguments.</p>
           
           
 
           
           <div class="method-source-code" id="to_fasta-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft/report.rb, line 196</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fasta</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::MAFFT::report#to_fasta is deprecated. Please use \&#39;alignment.output_fasta\&#39;&quot;</span>
-  <span class="ruby-identifier">alignment</span>.<span class="ruby-identifier">output_fasta</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft/report.rb</span>
+<span class="line-num">196</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fasta</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">197</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::MAFFT::report#to_fasta is deprecated. Please use \&#39;alignment.output_fasta\&#39;&quot;</span>
+<span class="line-num">198</span>   <span class="ruby-identifier">alignment</span>.<span class="ruby-identifier">output_fasta</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">199</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -390,12 +378,13 @@ align.to_fasta. Please refer to Bio::Alignment#output_fasta for arguments.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -88,12 +92,7 @@
     
 <h2 id="class-Bio::GFF-label-DESCRIPTION">DESCRIPTION<span><a href="#class-Bio::GFF-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>The <a href="GFF.html">Bio::GFF</a> and <a
-href="GFF/Record.html">Bio::GFF::Record</a> classes describe data contained
-in a  GFF-formatted file. For information on the <a href="GFF.html">GFF</a>
-format, see  <a
-href="http://www.sanger.ac.uk/Software/formats/GFF">www.sanger.ac.uk/Software/formats/GFF</a>/.
-Data are represented in tab-  delimited format, including</p>
+<p>The <a href="GFF.html"><code>Bio::GFF</code></a> and <a href="GFF/Record.html"><code>Bio::GFF::Record</code></a> classes describe data contained in a  GFF-formatted file. For information on the <a href="GFF.html"><code>GFF</code></a> format, see  <a href="http://www.sanger.ac.uk/Software/formats/GFF">www.sanger.ac.uk/Software/formats/GFF</a>/. Data are represented in tab-  delimited format, including</p>
 <ul><li>
 <p>seqname</p>
 </li><li>
@@ -124,9 +123,7 @@ SEQ1     genie       sp5-20    163   182     2.3     +       .
 SEQ1     genie       sp5-10    168   177     2.1     +       .
 SEQ1     grail       ATG       17    19      2.1     -       0</pre>
 
-<p>The <a href="GFF.html">Bio::GFF</a> object is a container for <a
-href="GFF/Record.html">Bio::GFF::Record</a> objects, each  representing a
-single line in the <a href="GFF.html">GFF</a> file.</p>
+<p>The <a href="GFF.html"><code>Bio::GFF</code></a> object is a container for <a href="GFF/Record.html"><code>Bio::GFF::Record</code></a> objects, each  representing a single line in the <a href="GFF.html"><code>GFF</code></a> file.</p>
 
   </section>
 
@@ -153,7 +150,7 @@ single line in the <a href="GFF.html">GFF</a> file.</p>
 
         <div class="method-description">
         
-        <p>An array of <a href="GFF/Record.html">Bio::GFF::Record</a> objects.</p>
+        <p>An array of <a href="GFF/Record.html"><code>Bio::GFF::Record</code></a> objects.</p>
         
         </div>
       </div>
@@ -181,10 +178,9 @@ single line in the <a href="GFF.html">GFF</a> file.</p>
 
         <div class="method-description">
           
-          <p>Creates a <a href="GFF.html">Bio::GFF</a> object by building a collection
-of <a href="GFF/Record.html">Bio::GFF::Record</a> objects.</p>
+          <p>Creates a <a href="GFF.html"><code>Bio::GFF</code></a> object by building a collection of <a href="GFF/Record.html"><code>Bio::GFF::Record</code></a> objects.</p>
 
-<p>Create a <a href="GFF.html">Bio::GFF</a> object the hard way</p>
+<p>Create a <a href="GFF.html"><code>Bio::GFF</code></a> object the hard way</p>
 
 <pre class="ruby"><span class="ruby-identifier">this_gff</span> =  <span class="ruby-string">&quot;SEQ1\tEMBL\tatg\t103\t105\t.\t+\t0\n&quot;</span>
 <span class="ruby-identifier">this_gff</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;SEQ1\tEMBL\texon\t103\t172\t.\t+\t0\n&quot;</span>
@@ -203,24 +199,24 @@ of <a href="GFF/Record.html">Bio::GFF::Record</a> objects.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>str</em>: string in <a href="GFF.html">GFF</a> format</p>
+<p><em>str</em>: string in <a href="GFF.html"><code>GFF</code></a> format</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="GFF.html">Bio::GFF</a> object</p>
+<p><a href="GFF.html"><code>Bio::GFF</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 63</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-ivar">@records</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-ivar">@records</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">64</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">65</span>   <span class="ruby-ivar">@records</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">66</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">67</span>     <span class="ruby-ivar">@records</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">68</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">69</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -234,12 +230,13 @@ of <a href="GFF/Record.html">Bio::GFF::Record</a> objects.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

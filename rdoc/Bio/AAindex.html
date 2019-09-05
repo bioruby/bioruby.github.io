@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -114,19 +118,12 @@
     
 <h2 id="class-Bio::AAindex-label-Description">Description<span><a href="#class-Bio::AAindex-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p><a href="AAindex.html">Bio::AAindex</a> is the super class of <a
-href="AAindex1.html">Bio::AAindex1</a> and <a
-href="AAindex2.html">Bio::AAindex2</a>, parser classes for <a
-href="AAindex.html">AAindex</a> Amino Acid Index Database.</p>
+<p><a href="AAindex.html"><code>Bio::AAindex</code></a> is the super class of <a href="AAindex1.html"><code>Bio::AAindex1</code></a> and <a href="AAindex2.html"><code>Bio::AAindex2</code></a>, parser classes for <a href="AAindex.html"><code>AAindex</code></a> Amino Acid Index Database.</p>
 <ul><li>
-<p><a href="AAindex.html">AAindex</a> Help: <a
-href="https://www.genome.jp/aaindex/aaindex_help.html">www.genome.jp/aaindex/aaindex_help.html</a></p>
+<p><a href="AAindex.html"><code>AAindex</code></a> Help: <a href="https://www.genome.jp/aaindex/aaindex_help.html">www.genome.jp/aaindex/aaindex_help.html</a></p>
 </li></ul>
 
-<p>Except <a href="AAindex.html#method-c-auto">::auto</a>, do not use this
-class directly. Methods of this super class is used from <a
-href="AAindex1.html">AAindex1</a> and <a href="AAindex2.html">AAindex2</a>
-classes.</p>
+<p>Except <a href="AAindex.html#method-c-auto"><code>Bio::AAindex.auto</code></a>, do not use this class directly. Methods of this super class is used from <a href="AAindex1.html"><code>AAindex1</code></a> and <a href="AAindex2.html"><code>AAindex2</code></a> classes.</p>
 
 <h2 id="class-Bio::AAindex-label-Examples">Examples<span><a href="#class-Bio::AAindex-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -148,7 +145,7 @@ classes.</p>
 <span class="ruby-identifier">aax2</span>[<span class="ruby-string">&#39;R&#39;</span>, <span class="ruby-string">&#39;A&#39;</span>]
 </pre>
 
-<h2 id="class-Bio::AAindex-label-References"><a href="References.html">References</a><span><a href="#class-Bio::AAindex-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<h2 id="class-Bio::AAindex-label-References"><a href="References.html"><code>References</code></a><span><a href="#class-Bio::AAindex-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
 <p><a href="http://www.genome.jp/aaindex">www.genome.jp/aaindex</a>/</p>
 </li></ul>
@@ -180,7 +177,7 @@ classes.</p>
       
         <dt id="TAGSIZE">TAGSIZE
         
-        <dd><p><a href="DB.html">Bio::DB</a> API</p>
+        <dd><p><a href="DB.html"><code>Bio::DB</code></a> API</p>
         
       
       </dl>
@@ -209,25 +206,23 @@ classes.</p>
 
         <div class="method-description">
           
-          <p>Auto detecter for two <a href="AAindex.html">AAindex</a> formats. returns a
-<a href="AAindex1.html">Bio::AAindex1</a> object or a <a
-href="AAindex2.html">Bio::AAindex2</a> object.</p>
+          <p>Auto detecter for two <a href="AAindex.html"><code>AAindex</code></a> formats. returns a <a href="AAindex1.html"><code>Bio::AAindex1</code></a> object or a <a href="AAindex2.html"><code>Bio::AAindex2</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="auto-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 87</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">auto</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^I /m</span> 
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AAindex1</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^M /m</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AAindex2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span>
-  <span class="ruby-keyword">end</span>        
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/aaindex.rb</span>
+<span class="line-num">87</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">auto</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">88</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
+<span class="line-num">89</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^I /m</span> 
+<span class="line-num">90</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AAindex1</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">91</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^M /m</span>
+<span class="line-num">92</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AAindex2</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">93</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">94</span>     <span class="ruby-identifier">raise</span>
+<span class="line-num">95</span>   <span class="ruby-keyword">end</span>        
+<span class="line-num">96</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -256,16 +251,16 @@ href="AAindex2.html">Bio::AAindex2</a> object.</p>
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="NCBIDB.html#method-c-new">Bio::NCBIDB.new</a>
+              <a href="NCBIDB.html#method-c-new"><code>Bio::NCBIDB::new</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 99</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/aaindex.rb</span>
+<span class="line-num"> 99</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">100</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
+<span class="line-num">101</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -303,14 +298,14 @@ href="AAindex2.html">Bio::AAindex2</a> object.</p>
 
           
           <div class="method-source-code" id="author-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 132</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">author</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;author&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;author&#39;</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;author&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;A&#39;</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/aaindex.rb</span>
+<span class="line-num">132</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">author</span>
+<span class="line-num">133</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;author&#39;</span>]
+<span class="line-num">134</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;author&#39;</span>]
+<span class="line-num">135</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">136</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;author&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;A&#39;</span>)
+<span class="line-num">137</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">138</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -340,14 +335,14 @@ href="AAindex2.html">Bio::AAindex2</a> object.</p>
 
           
           <div class="method-source-code" id="comment-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 159</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comment</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;comment&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;comment&#39;</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;comment&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;*&#39;</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/aaindex.rb</span>
+<span class="line-num">159</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comment</span>
+<span class="line-num">160</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;comment&#39;</span>]
+<span class="line-num">161</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;comment&#39;</span>]
+<span class="line-num">162</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">163</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;comment&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;*&#39;</span>)
+<span class="line-num">164</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">165</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -371,21 +366,20 @@ href="AAindex2.html">Bio::AAindex2</a> object.</p>
 
         <div class="method-description">
           
-          <p>Returns database links in the R line. cf.) [&#39;LIT:123456&#39;,
-&#39;PMID:12345678&#39;]</p>
+          <p>Returns database links in the R line. cf.) [&#39;LIT:123456&#39;, &#39;PMID:12345678&#39;]</p>
           
           
 
           
           <div class="method-source-code" id="dblinks-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 123</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ref&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ref&#39;</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ref&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;R&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/aaindex.rb</span>
+<span class="line-num">123</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks</span>
+<span class="line-num">124</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ref&#39;</span>]
+<span class="line-num">125</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ref&#39;</span>]
+<span class="line-num">126</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">127</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ref&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;R&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="line-num">128</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">129</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -415,14 +409,14 @@ href="AAindex2.html">Bio::AAindex2</a> object.</p>
 
           
           <div class="method-source-code" id="definition-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 113</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">definition</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;definition&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;definition&#39;</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;definition&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;D&#39;</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/aaindex.rb</span>
+<span class="line-num">113</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">definition</span>
+<span class="line-num">114</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;definition&#39;</span>]
+<span class="line-num">115</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;definition&#39;</span>]
+<span class="line-num">116</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">117</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;definition&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;D&#39;</span>)
+<span class="line-num">118</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">119</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -446,21 +440,20 @@ href="AAindex2.html">Bio::AAindex2</a> object.</p>
 
         <div class="method-description">
           
-          <p>Returns <a href="AAindex.html#method-i-entry_id">#entry_id</a> in the H
-line.</p>
+          <p>Returns <a href="AAindex.html#method-i-entry_id"><code>entry_id</code></a> in the H line.</p>
           
           
 
           
           <div class="method-source-code" id="entry_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 104</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;entry_id&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;entry_id&#39;</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;entry_id&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;H&#39;</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/aaindex.rb</span>
+<span class="line-num">104</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
+<span class="line-num">105</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;entry_id&#39;</span>]
+<span class="line-num">106</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;entry_id&#39;</span>]
+<span class="line-num">107</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">108</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;entry_id&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;H&#39;</span>)
+<span class="line-num">109</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">110</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -490,14 +483,14 @@ line.</p>
 
           
           <div class="method-source-code" id="journal-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 150</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">journal</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;journal&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;journal&#39;</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;J&#39;</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/aaindex.rb</span>
+<span class="line-num">150</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">journal</span>
+<span class="line-num">151</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;journal&#39;</span>]
+<span class="line-num">152</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;journal&#39;</span>]
+<span class="line-num">153</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">154</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;J&#39;</span>)
+<span class="line-num">155</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">156</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -527,14 +520,14 @@ line.</p>
 
           
           <div class="method-source-code" id="title-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/aaindex.rb, line 141</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">title</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;title&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;title&#39;</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;title&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;T&#39;</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/aaindex.rb</span>
+<span class="line-num">141</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">title</span>
+<span class="line-num">142</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;title&#39;</span>]
+<span class="line-num">143</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;title&#39;</span>]
+<span class="line-num">144</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">145</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;title&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;T&#39;</span>)
+<span class="line-num">146</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">147</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -548,12 +541,13 @@ line.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

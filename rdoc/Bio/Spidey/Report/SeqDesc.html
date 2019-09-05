@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -88,8 +92,7 @@
 
   <section class="description">
     
-<p><a href="SeqDesc.html">SeqDesc</a> stores sequence information of query or
-subject.</p>
+<p><a href="SeqDesc.html"><code>SeqDesc</code></a> stores sequence information of query or subject.</p>
 
   </section>
 
@@ -170,20 +173,18 @@ subject.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="SeqDesc.html">SeqDesc</a> object. It is designed to
-be called from Bio::Spidey::Report::* classes. Users shall not call it
-directly.</p>
+          <p>Creates a new <a href="SeqDesc.html"><code>SeqDesc</code></a> object. It is designed to be called from Bio::Spidey::Report::* classes. Users shall not call it directly.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 84</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">seqid</span>, <span class="ruby-identifier">seqdef</span>, <span class="ruby-identifier">len</span>)
-  <span class="ruby-ivar">@entry_id</span>   = <span class="ruby-identifier">seqid</span>
-  <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">seqdef</span>
-  <span class="ruby-ivar">@len</span>        = <span class="ruby-identifier">len</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">84</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">seqid</span>, <span class="ruby-identifier">seqdef</span>, <span class="ruby-identifier">len</span>)
+<span class="line-num">85</span>   <span class="ruby-ivar">@entry_id</span>   = <span class="ruby-identifier">seqid</span>
+<span class="line-num">86</span>   <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">seqdef</span>
+<span class="line-num">87</span>   <span class="ruby-ivar">@len</span>        = <span class="ruby-identifier">len</span>
+<span class="line-num">88</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -207,23 +208,20 @@ directly.</p>
 
         <div class="method-description">
           
-          <p>Parses piece of <a href="../../Spidey.html">Spidey</a> result text and
-creates a new <a href="SeqDesc.html">SeqDesc</a> object. It is designed to
-be called from Bio::Spidey::Report::* classes. Users shall not call it
-directly.</p>
+          <p>Parses piece of <a href="../../Spidey.html"><code>Spidey</code></a> result text and creates a new <a href="SeqDesc.html"><code>SeqDesc</code></a> object. It is designed to be called from Bio::Spidey::Report::* classes. Users shall not call it directly.</p>
           
           
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 102</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-regexp">/^(Genomic|mRNA)\:\s*(([^\s]*) (.+))\, (\d+) bp\s*$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">seqid</span>  = <span class="ruby-node">$3</span>
-  <span class="ruby-identifier">seqdef</span> = <span class="ruby-node">$2</span>
-  <span class="ruby-identifier">len</span>    = (<span class="ruby-node">$5</span> <span class="ruby-operator">?</span> <span class="ruby-node">$5</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seqid</span>, <span class="ruby-identifier">seqdef</span>, <span class="ruby-identifier">len</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">102</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">103</span>   <span class="ruby-regexp">/^(Genomic|mRNA)\:\s*(([^\s]*) (.+))\, (\d+) bp\s*$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">104</span>   <span class="ruby-identifier">seqid</span>  = <span class="ruby-node">$3</span>
+<span class="line-num">105</span>   <span class="ruby-identifier">seqdef</span> = <span class="ruby-node">$2</span>
+<span class="line-num">106</span>   <span class="ruby-identifier">len</span>    = (<span class="ruby-node">$5</span> <span class="ruby-operator">?</span> <span class="ruby-node">$5</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+<span class="line-num">107</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seqid</span>, <span class="ruby-identifier">seqdef</span>, <span class="ruby-identifier">len</span>)
+<span class="line-num">108</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -237,12 +235,13 @@ directly.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

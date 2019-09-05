@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -221,7 +225,7 @@
       
         <dt id="TAGSIZE">TAGSIZE
         
-        <dd><p><a href="DB.html">Bio::DB</a> API</p>
+        <dd><p><a href="DB.html"><code>Bio::DB</code></a> API</p>
         
       
       </dl>
@@ -255,16 +259,16 @@
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="EMBLDB.html#method-c-new">Bio::EMBLDB.new</a>
+              <a href="EMBLDB.html#method-c-new"><code>Bio::EMBLDB::new</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 26</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">26</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">27</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
+<span class="line-num">28</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -293,18 +297,14 @@
 
 <p>prosite/prosuser.txt:</p>
 
-<p>The PA (PAttern) lines contains the definition of a <a
-href="PROSITE.html">PROSITE</a> pattern. The patterns are described using
-the following conventions:</p>
+<p>The PA (PAttern) lines contains the definition of a <a href="PROSITE.html"><code>PROSITE</code></a> pattern. The patterns are described using the following conventions:</p>
 
-<p>0) The standard IUPAC one-letter codes for the amino acids are used. 0)
-Ambiguities are indicated by listing the acceptable amino acids for a</p>
+<p>0) The standard IUPAC one-letter codes for the amino acids are used. 0) Ambiguities are indicated by listing the acceptable amino acids for a</p>
 
 <pre>given position, between square parentheses `[ ]&#39;. For example: [ALT]
 stands for Ala or Leu or Thr.</pre>
 
-<p>1) A period ends the pattern. 2) When a pattern is restricted to either the
-N- or C-terminal of a</p>
+<p>1) A period ends the pattern. 2) When a pattern is restricted to either the N- or C-terminal of a</p>
 
 <pre>sequence, that pattern either starts with a `&lt;&#39; symbol or respectively
 ends with a `&gt;&#39; symbol.</pre>
@@ -321,42 +321,38 @@ Met.</pre>
 parenthesis. Examples: x(3) corresponds to x-x-x, x(2,4) corresponds to
 x-x or x-x-x or x-x-x-x.</pre>
 
-<p>5) The symbol `x&#39; is used for a position where any amino acid is
-accepted. 6) Each element in a pattern is separated from its neighbor by a
-`-&#39;.</p>
+<p>5) The symbol `x&#39; is used for a position where any amino acid is accepted. 6) Each element in a pattern is separated from its neighbor by a `-&#39;.</p>
 
 <p>Examples:</p>
 
 <p>PA  [AC]-x-V-x(4)-{ED}.</p>
 
-<p>This pattern is translated as: [Ala or Cys]-any-Val-any-any-any-any-{any
-but Glu or Asp}</p>
+<p>This pattern is translated as: [Ala or Cys]-any-Val-any-any-any-any-{any but Glu or Asp}</p>
 
 <p>PA  &lt;<a href="ST">A-x-</a>(2)-x(0,1)-V.</p>
 
-<p>This pattern, which must be in the N-terminal of the sequence (`&lt;&#39;),
-is translated as: Ala-any-[Ser or Thr]-[Ser or Thr]-(any or none)-Val</p>
+<p>This pattern, which must be in the N-terminal of the sequence (`&lt;&#39;), is translated as: Ala-any-[Ser or Thr]-[Ser or Thr]-(any or none)-Val</p>
           
           
 
           
           <div class="method-source-code" id="pa2re-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 467</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">pa2re</span>(<span class="ruby-identifier">pattern</span>)
-  <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;&#39;</span>)     <span class="ruby-comment"># remove white spaces</span>
-  <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\.$/</span>, <span class="ruby-string">&#39;&#39;</span>)     <span class="ruby-comment"># (1) remove trailing &#39;.&#39;</span>
-  <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/^&lt;/</span>, <span class="ruby-string">&#39;^&#39;</span>)     <span class="ruby-comment"># (2) restricted to the N-terminal : `&lt;&#39;</span>
-  <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/&gt;$/</span>, <span class="ruby-string">&#39;$&#39;</span>)     <span class="ruby-comment"># (2) restricted to the C-terminal : `&gt;&#39;</span>
-  <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\{(\w+)\}/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
-    <span class="ruby-string">&#39;[^&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-node">$1</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;]&#39;</span>           <span class="ruby-comment"># (3) not accepted at a given position : &#39;{}&#39;</span>
-  }
-  <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\(([\d,]+)\)/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
-    <span class="ruby-string">&#39;{&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-node">$1</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;}&#39;</span>            <span class="ruby-comment"># (4) repetition of an element : (n), (n,m)</span>
-  }
-  <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;x&#39;</span>, <span class="ruby-string">&#39;.&#39;</span>)       <span class="ruby-comment"># (5) any amino acid is accepted : &#39;x&#39;</span>
-  <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39;&#39;</span>)        <span class="ruby-comment"># (6) each element is separated by a &#39;-&#39;</span>
-  <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">pattern</span>, <span class="ruby-constant">Regexp</span><span class="ruby-operator">::</span><span class="ruby-constant">IGNORECASE</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">467</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">pa2re</span>(<span class="ruby-identifier">pattern</span>)
+<span class="line-num">468</span>   <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\s/</span>, <span class="ruby-string">&#39;&#39;</span>)     <span class="ruby-comment"># remove white spaces</span>
+<span class="line-num">469</span>   <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\.$/</span>, <span class="ruby-string">&#39;&#39;</span>)     <span class="ruby-comment"># (1) remove trailing &#39;.&#39;</span>
+<span class="line-num">470</span>   <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/^&lt;/</span>, <span class="ruby-string">&#39;^&#39;</span>)     <span class="ruby-comment"># (2) restricted to the N-terminal : `&lt;&#39;</span>
+<span class="line-num">471</span>   <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/&gt;$/</span>, <span class="ruby-string">&#39;$&#39;</span>)     <span class="ruby-comment"># (2) restricted to the C-terminal : `&gt;&#39;</span>
+<span class="line-num">472</span>   <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\{(\w+)\}/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+<span class="line-num">473</span>     <span class="ruby-string">&#39;[^&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-node">$1</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;]&#39;</span>           <span class="ruby-comment"># (3) not accepted at a given position : &#39;{}&#39;</span>
+<span class="line-num">474</span>   }
+<span class="line-num">475</span>   <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\(([\d,]+)\)/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+<span class="line-num">476</span>     <span class="ruby-string">&#39;{&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-node">$1</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;}&#39;</span>            <span class="ruby-comment"># (4) repetition of an element : (n), (n,m)</span>
+<span class="line-num">477</span>   }
+<span class="line-num">478</span>   <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;x&#39;</span>, <span class="ruby-string">&#39;.&#39;</span>)       <span class="ruby-comment"># (5) any amino acid is accepted : &#39;x&#39;</span>
+<span class="line-num">479</span>   <span class="ruby-identifier">pattern</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39;&#39;</span>)        <span class="ruby-comment"># (6) each element is separated by a &#39;-&#39;</span>
+<span class="line-num">480</span>   <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">pattern</span>, <span class="ruby-constant">Regexp</span><span class="ruby-operator">::</span><span class="ruby-constant">IGNORECASE</span>)
+<span class="line-num">481</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -399,13 +395,13 @@ is translated as: Ala-any-[Ser or Thr]-[Ser or Thr]-(any or none)-Val</p>
 
           
           <div class="method-source-code" id="ac-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 57</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ac</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;AC&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;AC&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;AC&#39;</span>).<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;;&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;AC&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">57</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ac</span>
+<span class="line-num">58</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;AC&#39;</span>]
+<span class="line-num">59</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;AC&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;AC&#39;</span>).<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;;&#39;</span>)
+<span class="line-num">60</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">61</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;AC&#39;</span>]
+<span class="line-num">62</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -437,13 +433,11 @@ is translated as: Ala-any-[Ser or Thr]-[Ser or Thr]-(any or none)-Val</p>
 
 <pre>CC   /QUALIFIER=data; /QUALIFIER=data; .......</pre>
 
-<p>/TAXO-RANGE  Taxonomic range. /MAX-REPEAT  Maximum known  number of 
-repetitions of  the pattern  in a</p>
+<p>/TAXO-RANGE  Taxonomic range. /MAX-REPEAT  Maximum known  number of  repetitions of  the pattern  in a</p>
 
 <pre>single protein.</pre>
 
-<p>/SITE        Indication of an `interesting&#39; site in the pattern.
-/SKIP-FLAG   Indication of  an entry that can be, in some cases, ignored</p>
+<p>/SITE        Indication of an `interesting&#39; site in the pattern. /SKIP-FLAG   Indication of  an entry that can be, in some cases, ignored</p>
 
 <pre>by a program (because it is too unspecific).</pre>
 
@@ -453,17 +447,17 @@ repetitions of  the pattern  in a</p>
 
           
           <div class="method-source-code" id="cc-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 273</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cc</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>]
-    <span class="ruby-identifier">hash</span> = {}                 <span class="ruby-comment"># temporal hash</span>
-    <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;CC&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">%r{/(\S+)=([^;]+);}</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>] = <span class="ruby-identifier">hash</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">273</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cc</span>
+<span class="line-num">274</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>]
+<span class="line-num">275</span>     <span class="ruby-identifier">hash</span> = {}                 <span class="ruby-comment"># temporal hash</span>
+<span class="line-num">276</span>     <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;CC&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">%r{/(\S+)=([^;]+);}</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+<span class="line-num">277</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>
+<span class="line-num">278</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">279</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>] = <span class="ruby-identifier">hash</span>
+<span class="line-num">280</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">281</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;CC&#39;</span>]
+<span class="line-num">282</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -557,10 +551,10 @@ repetitions of  the pattern  in a</p>
 
           
           <div class="method-source-code" id="de-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 84</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">de</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;DE&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">84</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">de</span>
+<span class="line-num">85</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;DE&#39;</span>)
+<span class="line-num">86</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -622,13 +616,13 @@ repetitions of  the pattern  in a</p>
 
           
           <div class="method-source-code" id="division-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 44</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">division</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;TYPE&#39;</span>]
-    <span class="ruby-identifier">name</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;TYPE&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">44</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">division</span>
+<span class="line-num">45</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;TYPE&#39;</span>]
+<span class="line-num">46</span>     <span class="ruby-identifier">name</span>
+<span class="line-num">47</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">48</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;TYPE&#39;</span>]
+<span class="line-num">49</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -656,16 +650,14 @@ repetitions of  the pattern  in a</p>
 
 <pre>DR   AC_NB, ENTRY_NAME, C; AC_NB, ENTRY_NAME, C; AC_NB, ENTRY_NAME, C;</pre>
 <ul><li>
-<p>`AC_NB&#39; is the SWISS-PROT primary accession number of the entry to
-which reference is being made.</p>
+<p>`AC_NB&#39; is the SWISS-PROT primary accession number of the entry to which reference is being made.</p>
 </li><li>
 <p>`ENTRY_NAME&#39; is the SWISS-PROT entry name.</p>
 </li><li>
 <p>`C&#39; is a one character flag that can be one of the following:</p>
 </li></ul>
 
-<p>T For a true positive. N For a false negative; a sequence which belongs to
-the set under</p>
+<p>T For a true positive. N For a false negative; a sequence which belongs to the set under</p>
 
 <pre>consideration, but which has not been picked up by the pattern or
 profile.</pre>
@@ -690,19 +682,19 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="dr-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 349</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dr</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DR&#39;</span>]
-    <span class="ruby-identifier">hash</span> = {}                 <span class="ruby-comment"># temporal hash</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;DR&#39;</span>)
-      <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;DR&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/(\w+)\s*, (\w+)\s*, (.);/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">a</span>] = [<span class="ruby-identifier">e</span>, <span class="ruby-identifier">c</span>]      <span class="ruby-comment"># SWISS-PROT : accession, entry, true/false</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DR&#39;</span>] = <span class="ruby-identifier">hash</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DR&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">349</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dr</span>
+<span class="line-num">350</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DR&#39;</span>]
+<span class="line-num">351</span>     <span class="ruby-identifier">hash</span> = {}                 <span class="ruby-comment"># temporal hash</span>
+<span class="line-num">352</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;DR&#39;</span>)
+<span class="line-num">353</span>       <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;DR&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/(\w+)\s*, (\w+)\s*, (.);/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+<span class="line-num">354</span>         <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">a</span>] = [<span class="ruby-identifier">e</span>, <span class="ruby-identifier">c</span>]      <span class="ruby-comment"># SWISS-PROT : accession, entry, true/false</span>
+<span class="line-num">355</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">356</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">357</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DR&#39;</span>] = <span class="ruby-identifier">hash</span>
+<span class="line-num">358</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">359</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DR&#39;</span>]
+<span class="line-num">360</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -740,10 +732,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="dt-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dt</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;DT&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">72</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dt</span>
+<span class="line-num">73</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;DT&#39;</span>)
+<span class="line-num">74</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -805,10 +797,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="false_neg-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 250</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">false_neg</span>
-  <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;FALSE_NEG&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">250</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">false_neg</span>
+<span class="line-num">251</span>   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;FALSE_NEG&#39;</span>]
+<span class="line-num">252</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -870,10 +862,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="false_pos-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 235</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">false_pos</span>
-  <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;FALSE_POS&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">235</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">false_pos</span>
+<span class="line-num">236</span>   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;FALSE_POS&#39;</span>]
+<span class="line-num">237</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -903,10 +895,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="false_positive_hits-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 240</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">false_positive_hits</span>
-  <span class="ruby-identifier">false_pos</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">240</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">false_positive_hits</span>
+<span class="line-num">241</span>   <span class="ruby-identifier">false_pos</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">242</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -936,10 +928,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="false_positive_sequences-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 245</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">false_positive_sequences</span>
-  <span class="ruby-identifier">false_pos</span>.<span class="ruby-identifier">last</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">245</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">false_positive_sequences</span>
+<span class="line-num">246</span>   <span class="ruby-identifier">false_pos</span>.<span class="ruby-identifier">last</span>
+<span class="line-num">247</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -969,10 +961,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="list_falsenegative-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 386</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_falsenegative</span>(<span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">list_xref</span>(<span class="ruby-string">&#39;F&#39;</span>, <span class="ruby-identifier">by_name</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">386</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_falsenegative</span>(<span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">387</span>   <span class="ruby-identifier">list_xref</span>(<span class="ruby-string">&#39;F&#39;</span>, <span class="ruby-identifier">by_name</span>)
+<span class="line-num">388</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1002,10 +994,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="list_falsepositive-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 391</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_falsepositive</span>(<span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">list_xref</span>(<span class="ruby-string">&#39;P&#39;</span>, <span class="ruby-identifier">by_name</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">391</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_falsepositive</span>(<span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">392</span>   <span class="ruby-identifier">list_xref</span>(<span class="ruby-string">&#39;P&#39;</span>, <span class="ruby-identifier">by_name</span>)
+<span class="line-num">393</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1035,10 +1027,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="list_potentialhit-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 396</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_potentialhit</span>(<span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">list_xref</span>(<span class="ruby-string">&#39;P&#39;</span>, <span class="ruby-identifier">by_name</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">396</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_potentialhit</span>(<span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">397</span>   <span class="ruby-identifier">list_xref</span>(<span class="ruby-string">&#39;P&#39;</span>, <span class="ruby-identifier">by_name</span>)
+<span class="line-num">398</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1068,10 +1060,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="list_truepositive-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 381</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_truepositive</span>(<span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">list_xref</span>(<span class="ruby-string">&#39;T&#39;</span>, <span class="ruby-identifier">by_name</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">381</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_truepositive</span>(<span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">382</span>   <span class="ruby-identifier">list_xref</span>(<span class="ruby-string">&#39;T&#39;</span>, <span class="ruby-identifier">by_name</span>)
+<span class="line-num">383</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1101,10 +1093,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="list_unknown-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 401</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_unknown</span>(<span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">list_xref</span>(<span class="ruby-string">&#39;?&#39;</span>, <span class="ruby-identifier">by_name</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">401</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_unknown</span>(<span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">402</span>   <span class="ruby-identifier">list_xref</span>(<span class="ruby-string">&#39;?&#39;</span>, <span class="ruby-identifier">by_name</span>)
+<span class="line-num">403</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1134,21 +1126,21 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="list_xref-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 365</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_xref</span>(<span class="ruby-identifier">flag</span>, <span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">ary</span> = []
-  <span class="ruby-identifier">sp_xref</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sp_acc</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">flag</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">by_name</span>
-        <span class="ruby-identifier">sp_name</span> = <span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>]
-        <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">sp_name</span>)
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">sp_acc</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">365</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_xref</span>(<span class="ruby-identifier">flag</span>, <span class="ruby-identifier">by_name</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">366</span>   <span class="ruby-identifier">ary</span> = []
+<span class="line-num">367</span>   <span class="ruby-identifier">sp_xref</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">sp_acc</span>, <span class="ruby-identifier">value</span><span class="ruby-operator">|</span>
+<span class="line-num">368</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">flag</span>
+<span class="line-num">369</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">by_name</span>
+<span class="line-num">370</span>         <span class="ruby-identifier">sp_name</span> = <span class="ruby-identifier">value</span>[<span class="ruby-value">0</span>]
+<span class="line-num">371</span>         <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">sp_name</span>)
+<span class="line-num">372</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">373</span>         <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">sp_acc</span>)
+<span class="line-num">374</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">375</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">376</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">377</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>
+<span class="line-num">378</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1182,10 +1174,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="ma-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 111</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ma</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;MA&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">111</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ma</span>
+<span class="line-num">112</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;MA&#39;</span>)
+<span class="line-num">113</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1224,10 +1216,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="ma2re-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 497</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ma2re</span>(<span class="ruby-identifier">matrix</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">497</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ma2re</span>(<span class="ruby-identifier">matrix</span>)
+<span class="line-num">498</span>   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="line-num">499</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1257,10 +1249,10 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="max_repeat-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 306</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_repeat</span>
-  <span class="ruby-identifier">comment</span>[<span class="ruby-string">&#39;MAX-REPEAT&#39;</span>].<span class="ruby-identifier">to_i</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">306</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">max_repeat</span>
+<span class="line-num">307</span>   <span class="ruby-identifier">comment</span>[<span class="ruby-string">&#39;MAX-REPEAT&#39;</span>].<span class="ruby-identifier">to_i</span>
+<span class="line-num">308</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1294,13 +1286,13 @@ in the data bank (partial sequence).</pre>
 
           
           <div class="method-source-code" id="name-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>], <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;TYPE&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;ID&#39;</span>).<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;.&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;; &#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">36</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>
+<span class="line-num">37</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>]
+<span class="line-num">38</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>], <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;TYPE&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;ID&#39;</span>).<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;.&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;; &#39;</span>)
+<span class="line-num">39</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">40</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>]
+<span class="line-num">41</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1332,8 +1324,7 @@ in the data bank (partial sequence).</pre>
 
 <pre>entries in that release.</pre>
 
-<p>/TOTAL       Total number of hits in SWISS-PROT. /POSITIVE    Number of 
-hits on proteins that are known to belong to the</p>
+<p>/TOTAL       Total number of hits in SWISS-PROT. /POSITIVE    Number of  hits on proteins that are known to belong to the</p>
 
 <pre>set in consideration.</pre>
 
@@ -1341,9 +1332,7 @@ hits on proteins that are known to belong to the</p>
 
 <pre>the set in consideration.</pre>
 
-<p>/FALSE_POS   Number of false hits (on unrelated proteins). /FALSE_NEG  
-Number of known missed hits. /PARTIAL     Number of  partial sequences 
-which belong  to the  set  in</p>
+<p>/FALSE_POS   Number of false hits (on unrelated proteins). /FALSE_NEG   Number of known missed hits. /PARTIAL     Number of  partial sequences  which belong  to the  set  in</p>
 
 <pre>consideration, but  which  are  not  hit  by the pattern or
 profile because they are partial (fragment) sequences.</pre>
@@ -1354,28 +1343,28 @@ profile because they are partial (fragment) sequences.</pre>
 
           
           <div class="method-source-code" id="nr-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 150</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nr</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;NR&#39;</span>]
-    <span class="ruby-identifier">hash</span> = {}                 <span class="ruby-comment"># temporal hash</span>
-    <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;NR&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">%r{/(\S+)=([^;]+);}</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^(\d+)\((\d+)\)$/</span>
-        <span class="ruby-identifier">hits</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>                <span class="ruby-comment"># the number of hits</span>
-        <span class="ruby-identifier">seqs</span> = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>                <span class="ruby-comment"># the number of sequences</span>
-        <span class="ruby-identifier">v</span> = [<span class="ruby-identifier">hits</span>, <span class="ruby-identifier">seqs</span>]
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/([\d\.]+),(\d+)/</span>
-        <span class="ruby-identifier">sprel</span> = <span class="ruby-node">$1</span>                    <span class="ruby-comment"># the number of SWISS-PROT release</span>
-        <span class="ruby-identifier">spseq</span> = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>               <span class="ruby-comment"># the number of SWISS-PROT sequences</span>
-        <span class="ruby-identifier">v</span> = [<span class="ruby-identifier">sprel</span>, <span class="ruby-identifier">spseq</span>]
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">v</span> = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_i</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;NR&#39;</span>] = <span class="ruby-identifier">hash</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;NR&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">150</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nr</span>
+<span class="line-num">151</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;NR&#39;</span>]
+<span class="line-num">152</span>     <span class="ruby-identifier">hash</span> = {}                 <span class="ruby-comment"># temporal hash</span>
+<span class="line-num">153</span>     <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;NR&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">%r{/(\S+)=([^;]+);}</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+<span class="line-num">154</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^(\d+)\((\d+)\)$/</span>
+<span class="line-num">155</span>         <span class="ruby-identifier">hits</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>                <span class="ruby-comment"># the number of hits</span>
+<span class="line-num">156</span>         <span class="ruby-identifier">seqs</span> = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>                <span class="ruby-comment"># the number of sequences</span>
+<span class="line-num">157</span>         <span class="ruby-identifier">v</span> = [<span class="ruby-identifier">hits</span>, <span class="ruby-identifier">seqs</span>]
+<span class="line-num">158</span>       <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/([\d\.]+),(\d+)/</span>
+<span class="line-num">159</span>         <span class="ruby-identifier">sprel</span> = <span class="ruby-node">$1</span>                    <span class="ruby-comment"># the number of SWISS-PROT release</span>
+<span class="line-num">160</span>         <span class="ruby-identifier">spseq</span> = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>               <span class="ruby-comment"># the number of SWISS-PROT sequences</span>
+<span class="line-num">161</span>         <span class="ruby-identifier">v</span> = [<span class="ruby-identifier">sprel</span>, <span class="ruby-identifier">spseq</span>]
+<span class="line-num">162</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">163</span>         <span class="ruby-identifier">v</span> = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">164</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">165</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>
+<span class="line-num">166</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">167</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;NR&#39;</span>] = <span class="ruby-identifier">hash</span>
+<span class="line-num">168</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">169</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;NR&#39;</span>]
+<span class="line-num">170</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1413,13 +1402,13 @@ profile because they are partial (fragment) sequences.</pre>
 
           
           <div class="method-source-code" id="pa-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 96</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pa</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;PA&#39;</span>)
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;PA&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;PA&#39;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;PA&#39;</span>]
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;PA&#39;</span>].<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\s+/</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;PA&#39;</span>]
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;PA&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num"> 96</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pa</span>
+<span class="line-num"> 97</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;PA&#39;</span>)
+<span class="line-num"> 98</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;PA&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;PA&#39;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;PA&#39;</span>]
+<span class="line-num"> 99</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;PA&#39;</span>].<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/\s+/</span>, <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;PA&#39;</span>]
+<span class="line-num">100</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;PA&#39;</span>]
+<span class="line-num">101</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1453,10 +1442,10 @@ profile because they are partial (fragment) sequences.</pre>
 
           
           <div class="method-source-code" id="pa2re-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 483</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pa2re</span>(<span class="ruby-identifier">pattern</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">pa2re</span>(<span class="ruby-identifier">pattern</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">483</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pa2re</span>(<span class="ruby-identifier">pattern</span>)
+<span class="line-num">484</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">pa2re</span>(<span class="ruby-identifier">pattern</span>)
+<span class="line-num">485</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1486,10 +1475,10 @@ profile because they are partial (fragment) sequences.</pre>
 
           
           <div class="method-source-code" id="partial-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 256</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">partial</span>
-  <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;PARTIAL&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">256</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">partial</span>
+<span class="line-num">257</span>   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;PARTIAL&#39;</span>]
+<span class="line-num">258</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1541,8 +1530,7 @@ profile because they are partial (fragment) sequences.</pre>
 
         <div class="method-description">
           
-          <p>3D  Cross-references to <a href="PDB.html">PDB</a>            (&gt;=0 per
-entry)</p>
+          <p>3D  Cross-references to <a href="PDB.html"><code>PDB</code></a>            (&gt;=0 per entry)</p>
 
 <pre>3D   name; [name2;...]</pre>
 
@@ -1552,13 +1540,13 @@ entry)</p>
 
           
           <div class="method-source-code" id="pdb_xref-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 411</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pdb_xref</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;3D&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;3D&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;3D&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/; */</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;3D&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">411</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pdb_xref</span>
+<span class="line-num">412</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;3D&#39;</span>]
+<span class="line-num">413</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;3D&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;3D&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/; */</span>)
+<span class="line-num">414</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">415</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;3D&#39;</span>]
+<span class="line-num">416</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1593,10 +1581,10 @@ entry)</p>
 
           
           <div class="method-source-code" id="pdoc_xref-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 424</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pdoc_xref</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DO&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;DO&#39;</span>).<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;;&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">424</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pdoc_xref</span>
+<span class="line-num">425</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DO&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;DO&#39;</span>).<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;;&#39;</span>)
+<span class="line-num">426</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1626,10 +1614,10 @@ entry)</p>
 
           
           <div class="method-source-code" id="positive-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 205</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">positive</span>
-  <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;POSITIVE&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">205</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">positive</span>
+<span class="line-num">206</span>   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;POSITIVE&#39;</span>]
+<span class="line-num">207</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1659,10 +1647,10 @@ entry)</p>
 
           
           <div class="method-source-code" id="positive_hits-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 210</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">positive_hits</span>
-  <span class="ruby-identifier">positive</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">210</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">positive_hits</span>
+<span class="line-num">211</span>   <span class="ruby-identifier">positive</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">212</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1692,10 +1680,10 @@ entry)</p>
 
           
           <div class="method-source-code" id="positive_sequences-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 215</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">positive_sequences</span>
-  <span class="ruby-identifier">positive</span>.<span class="ruby-identifier">last</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">215</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">positive_sequences</span>
+<span class="line-num">216</span>   <span class="ruby-identifier">positive</span>.<span class="ruby-identifier">last</span>
+<span class="line-num">217</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1753,10 +1741,10 @@ entry)</p>
 
           
           <div class="method-source-code" id="re-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 487</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">re</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">pa2re</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">pa</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">487</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">re</span>
+<span class="line-num">488</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">pa2re</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">pa</span>)
+<span class="line-num">489</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1786,10 +1774,10 @@ entry)</p>
 
           
           <div class="method-source-code" id="release-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 175</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">release</span>
-  <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;RELEASE&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">175</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">release</span>
+<span class="line-num">176</span>   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;RELEASE&#39;</span>]
+<span class="line-num">177</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1825,10 +1813,10 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="ru-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 125</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ru</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;RU&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">125</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ru</span>
+<span class="line-num">126</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;RU&#39;</span>)
+<span class="line-num">127</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1890,13 +1878,13 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="site-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 311</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">site</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">comment</span>[<span class="ruby-string">&#39;SITE&#39;</span>]
-    <span class="ruby-identifier">num</span>, <span class="ruby-identifier">desc</span> = <span class="ruby-identifier">comment</span>[<span class="ruby-string">&#39;SITE&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> [<span class="ruby-identifier">num</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">desc</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">311</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">site</span>
+<span class="line-num">312</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">comment</span>[<span class="ruby-string">&#39;SITE&#39;</span>]
+<span class="line-num">313</span>     <span class="ruby-identifier">num</span>, <span class="ruby-identifier">desc</span> = <span class="ruby-identifier">comment</span>[<span class="ruby-string">&#39;SITE&#39;</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;,&#39;</span>)
+<span class="line-num">314</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">315</span>   <span class="ruby-keyword">return</span> [<span class="ruby-identifier">num</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">desc</span>]
+<span class="line-num">316</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1926,12 +1914,12 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="skip_flag-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 319</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_flag</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">comment</span>[<span class="ruby-string">&#39;SKIP-FLAG&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;TRUE&#39;</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">319</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_flag</span>
+<span class="line-num">320</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">comment</span>[<span class="ruby-string">&#39;SKIP-FLAG&#39;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;TRUE&#39;</span>
+<span class="line-num">321</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+<span class="line-num">322</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">323</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2017,10 +2005,10 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="swissprot_release_number-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 180</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">swissprot_release_number</span>
-  <span class="ruby-identifier">release</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">180</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">swissprot_release_number</span>
+<span class="line-num">181</span>   <span class="ruby-identifier">release</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">182</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2050,10 +2038,10 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="swissprot_release_sequences-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 185</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">swissprot_release_sequences</span>
-  <span class="ruby-identifier">release</span>.<span class="ruby-identifier">last</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">185</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">swissprot_release_sequences</span>
+<span class="line-num">186</span>   <span class="ruby-identifier">release</span>.<span class="ruby-identifier">last</span>
+<span class="line-num">187</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2083,24 +2071,24 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="taxon_range-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 287</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxon_range</span>(<span class="ruby-identifier">expand</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">range</span> = <span class="ruby-identifier">comment</span>[<span class="ruby-string">&#39;TAXO-RANGE&#39;</span>]
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">range</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">expand</span>
-    <span class="ruby-identifier">expand</span> = []
-    <span class="ruby-identifier">range</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/./</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">case</span> <span class="ruby-identifier">x</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;A&#39;</span>; <span class="ruby-identifier">expand</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;archaebacteria&#39;</span>)
-      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;B&#39;</span>; <span class="ruby-identifier">expand</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;bacteriophages&#39;</span>)
-      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;E&#39;</span>; <span class="ruby-identifier">expand</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;eukaryotes&#39;</span>)
-      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;P&#39;</span>; <span class="ruby-identifier">expand</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;prokaryotes&#39;</span>)
-      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;V&#39;</span>; <span class="ruby-identifier">expand</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;eukaryotic viruses&#39;</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">range</span> = <span class="ruby-identifier">expand</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">range</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">287</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxon_range</span>(<span class="ruby-identifier">expand</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">288</span>   <span class="ruby-identifier">range</span> = <span class="ruby-identifier">comment</span>[<span class="ruby-string">&#39;TAXO-RANGE&#39;</span>]
+<span class="line-num">289</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">range</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">expand</span>
+<span class="line-num">290</span>     <span class="ruby-identifier">expand</span> = []
+<span class="line-num">291</span>     <span class="ruby-identifier">range</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/./</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">292</span>       <span class="ruby-keyword">case</span> <span class="ruby-identifier">x</span>
+<span class="line-num">293</span>       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;A&#39;</span>; <span class="ruby-identifier">expand</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;archaebacteria&#39;</span>)
+<span class="line-num">294</span>       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;B&#39;</span>; <span class="ruby-identifier">expand</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;bacteriophages&#39;</span>)
+<span class="line-num">295</span>       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;E&#39;</span>; <span class="ruby-identifier">expand</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;eukaryotes&#39;</span>)
+<span class="line-num">296</span>       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;P&#39;</span>; <span class="ruby-identifier">expand</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;prokaryotes&#39;</span>)
+<span class="line-num">297</span>       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;V&#39;</span>; <span class="ruby-identifier">expand</span>.<span class="ruby-identifier">push</span>(<span class="ruby-string">&#39;eukaryotic viruses&#39;</span>)
+<span class="line-num">298</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">299</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">300</span>     <span class="ruby-identifier">range</span> = <span class="ruby-identifier">expand</span>
+<span class="line-num">301</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">302</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">range</span>
+<span class="line-num">303</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2130,10 +2118,10 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="total-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 190</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">total</span>
-  <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;TOTAL&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">190</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">total</span>
+<span class="line-num">191</span>   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;TOTAL&#39;</span>]
+<span class="line-num">192</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2163,10 +2151,10 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="total_hits-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 195</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">total_hits</span>
-  <span class="ruby-identifier">total</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">195</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">total_hits</span>
+<span class="line-num">196</span>   <span class="ruby-identifier">total</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">197</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2196,10 +2184,10 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="total_sequences-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 200</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">total_sequences</span>
-  <span class="ruby-identifier">total</span>.<span class="ruby-identifier">last</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">200</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">total_sequences</span>
+<span class="line-num">201</span>   <span class="ruby-identifier">total</span>.<span class="ruby-identifier">last</span>
+<span class="line-num">202</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2229,10 +2217,10 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="unknown-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 220</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unknown</span>
-  <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;UNKNOWN&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">220</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unknown</span>
+<span class="line-num">221</span>   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;UNKNOWN&#39;</span>]
+<span class="line-num">222</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2262,10 +2250,10 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="unknown_hits-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 225</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unknown_hits</span>
-  <span class="ruby-identifier">unknown</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">225</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unknown_hits</span>
+<span class="line-num">226</span>   <span class="ruby-identifier">unknown</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">227</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2295,10 +2283,10 @@ The rule is described in ordinary English and is free-format.</pre>
 
           
           <div class="method-source-code" id="unknown_sequences-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/prosite.rb, line 230</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unknown_sequences</span>
-  <span class="ruby-identifier">unknown</span>.<span class="ruby-identifier">last</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/prosite.rb</span>
+<span class="line-num">230</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unknown_sequences</span>
+<span class="line-num">231</span>   <span class="ruby-identifier">unknown</span>.<span class="ruby-identifier">last</span>
+<span class="line-num">232</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2312,12 +2300,13 @@ The rule is described in ordinary English and is free-format.</pre>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

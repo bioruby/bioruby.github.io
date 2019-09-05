@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -92,7 +96,7 @@
 
   <section class="description">
     
-<h1 id="class-Bio::SiRNA::ShRNA-label-Bio-3A-3ASiRNA-3A-3AShRNA"><a href="ShRNA.html">Bio::SiRNA::ShRNA</a><span><a href="#class-Bio::SiRNA::ShRNA-label-Bio-3A-3ASiRNA-3A-3AShRNA">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::SiRNA::ShRNA-label-Bio-3A-3ASiRNA-3A-3AShRNA"><a href="ShRNA.html"><code>Bio::SiRNA::ShRNA</code></a><span><a href="#class-Bio::SiRNA::ShRNA-label-Bio-3A-3ASiRNA-3A-3AShRNA">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p>Designing shRNA.</p>
 
@@ -121,7 +125,7 @@
 
         <div class="method-description">
         
-        <p><a href="../Sequence/NA.html">Bio::Sequence::NA</a></p>
+        <p><a href="../Sequence/NA.html"><code>Bio::Sequence::NA</code></a></p>
         
         </div>
       </div>
@@ -134,7 +138,7 @@
 
         <div class="method-description">
         
-        <p><a href="../Sequence/NA.html">Bio::Sequence::NA</a></p>
+        <p><a href="../Sequence/NA.html"><code>Bio::Sequence::NA</code></a></p>
         
         </div>
       </div>
@@ -162,17 +166,16 @@
 
         <div class="method-description">
           
-          <p>Input is a <a href="Pair.html">Bio::SiRNA::Pair</a> object (the target
-sequence).</p>
+          <p>Input is a <a href="Pair.html"><code>Bio::SiRNA::Pair</code></a> object (the target sequence). </p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 234</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">pair</span>)
-  <span class="ruby-ivar">@pair</span> = <span class="ruby-identifier">pair</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">234</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">pair</span>)
+<span class="line-num">235</span>   <span class="ruby-ivar">@pair</span> = <span class="ruby-identifier">pair</span>
+<span class="line-num">236</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -204,41 +207,40 @@ sequence).</p>
 
         <div class="method-description">
           
-          <p>same as design(&#39;BLOCK-iT&#39;). method can be one of &#39;piGENE&#39;
-(default) and &#39;BLOCK-iT&#39;.</p>
+          <p>same as design(&#39;BLOCK-iT&#39;). method can be one of &#39;piGENE&#39; (default) and &#39;BLOCK-iT&#39;.</p>
           
           
 
           
           <div class="method-source-code" id="block_it-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 251</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">block_it</span>(<span class="ruby-identifier">method</span> = <span class="ruby-string">&#39;piGENE&#39;</span>)
-  <span class="ruby-identifier">top</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;CACC&#39;</span>) <span class="ruby-comment"># top_strand_shrna_overhang</span>
-  <span class="ruby-identifier">bot</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;AAAA&#39;</span>) <span class="ruby-comment"># bottom_strand_shrna_overhang</span>
-  <span class="ruby-identifier">fwd</span> = <span class="ruby-ivar">@pair</span>.<span class="ruby-identifier">sense</span>
-  <span class="ruby-identifier">rev</span> = <span class="ruby-ivar">@pair</span>.<span class="ruby-identifier">sense</span>.<span class="ruby-identifier">complement</span>
-
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">method</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;BLOCK-iT&#39;</span>
-    <span class="ruby-comment"># From BLOCK-iT&#39;s manual</span>
-    <span class="ruby-identifier">loop_fwd</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;CGAA&#39;</span>)
-    <span class="ruby-identifier">loop_rev</span> = <span class="ruby-identifier">loop_fwd</span>.<span class="ruby-identifier">complement</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;piGENE&#39;</span>
-    <span class="ruby-comment"># From piGENE document</span>
-    <span class="ruby-identifier">loop_fwd</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;GTGTGCTGTCC&#39;</span>)
-    <span class="ruby-identifier">loop_rev</span> = <span class="ruby-identifier">loop_fwd</span>.<span class="ruby-identifier">complement</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^G/i</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">fwd</span>
-    <span class="ruby-ivar">@top_strand</span>    = <span class="ruby-identifier">top</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loop_fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rev</span>
-    <span class="ruby-ivar">@bottom_strand</span> = <span class="ruby-identifier">bot</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loop_rev</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rev</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@top_strand</span>    = <span class="ruby-identifier">top</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;G&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loop_fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rev</span>
-    <span class="ruby-ivar">@bottom_strand</span> = <span class="ruby-identifier">bot</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loop_rev</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rev</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;C&#39;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">251</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">block_it</span>(<span class="ruby-identifier">method</span> = <span class="ruby-string">&#39;piGENE&#39;</span>)
+<span class="line-num">252</span>   <span class="ruby-identifier">top</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;CACC&#39;</span>) <span class="ruby-comment"># top_strand_shrna_overhang</span>
+<span class="line-num">253</span>   <span class="ruby-identifier">bot</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;AAAA&#39;</span>) <span class="ruby-comment"># bottom_strand_shrna_overhang</span>
+<span class="line-num">254</span>   <span class="ruby-identifier">fwd</span> = <span class="ruby-ivar">@pair</span>.<span class="ruby-identifier">sense</span>
+<span class="line-num">255</span>   <span class="ruby-identifier">rev</span> = <span class="ruby-ivar">@pair</span>.<span class="ruby-identifier">sense</span>.<span class="ruby-identifier">complement</span>
+<span class="line-num">256</span> 
+<span class="line-num">257</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">method</span>
+<span class="line-num">258</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;BLOCK-iT&#39;</span>
+<span class="line-num">259</span>     <span class="ruby-comment"># From BLOCK-iT&#39;s manual</span>
+<span class="line-num">260</span>     <span class="ruby-identifier">loop_fwd</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;CGAA&#39;</span>)
+<span class="line-num">261</span>     <span class="ruby-identifier">loop_rev</span> = <span class="ruby-identifier">loop_fwd</span>.<span class="ruby-identifier">complement</span>
+<span class="line-num">262</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;piGENE&#39;</span>
+<span class="line-num">263</span>     <span class="ruby-comment"># From piGENE document</span>
+<span class="line-num">264</span>     <span class="ruby-identifier">loop_fwd</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;GTGTGCTGTCC&#39;</span>)
+<span class="line-num">265</span>     <span class="ruby-identifier">loop_rev</span> = <span class="ruby-identifier">loop_fwd</span>.<span class="ruby-identifier">complement</span>
+<span class="line-num">266</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">267</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="line-num">268</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">269</span> 
+<span class="line-num">270</span>   <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^G/i</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">fwd</span>
+<span class="line-num">271</span>     <span class="ruby-ivar">@top_strand</span>    = <span class="ruby-identifier">top</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loop_fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rev</span>
+<span class="line-num">272</span>     <span class="ruby-ivar">@bottom_strand</span> = <span class="ruby-identifier">bot</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loop_rev</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rev</span>
+<span class="line-num">273</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">274</span>     <span class="ruby-ivar">@top_strand</span>    = <span class="ruby-identifier">top</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;G&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loop_fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rev</span>
+<span class="line-num">275</span>     <span class="ruby-ivar">@bottom_strand</span> = <span class="ruby-identifier">bot</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fwd</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">loop_rev</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">rev</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;C&#39;</span>
+<span class="line-num">276</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">277</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -268,15 +270,15 @@ sequence).</p>
 
           
           <div class="method-source-code" id="design-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 239</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">design</span>(<span class="ruby-identifier">method</span> = <span class="ruby-string">&#39;BLOCK-iT&#39;</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">method</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;BLOCK-iT&#39;</span>
-    <span class="ruby-identifier">block_it</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">239</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">design</span>(<span class="ruby-identifier">method</span> = <span class="ruby-string">&#39;BLOCK-iT&#39;</span>)
+<span class="line-num">240</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">method</span>
+<span class="line-num">241</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;BLOCK-iT&#39;</span>
+<span class="line-num">242</span>     <span class="ruby-identifier">block_it</span>
+<span class="line-num">243</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">244</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>
+<span class="line-num">245</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">246</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -306,16 +308,16 @@ sequence).</p>
 
           
           <div class="method-source-code" id="report-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 280</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">report</span>
-  <span class="ruby-comment"># raise NomethodError for compatibility</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoMethodError</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@top_strand</span>) <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@top_strand</span>
-  <span class="ruby-identifier">report</span> = <span class="ruby-string">&quot;### shRNA\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Top strand shRNA (#{@top_strand.length} nt):\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;  5&#39;-#{@top_strand.upcase}-3&#39;\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Bottom strand shRNA (#{@bottom_strand.length} nt):\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;      3&#39;-#{@bottom_strand.reverse.upcase}-5&#39;\n&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">280</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">report</span>
+<span class="line-num">281</span>   <span class="ruby-comment"># raise NomethodError for compatibility</span>
+<span class="line-num">282</span>   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NoMethodError</span> <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@top_strand</span>) <span class="ruby-operator">||</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@top_strand</span>
+<span class="line-num">283</span>   <span class="ruby-identifier">report</span> = <span class="ruby-string">&quot;### shRNA\n&quot;</span>
+<span class="line-num">284</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Top strand shRNA (#{@top_strand.length} nt):\n&quot;</span>
+<span class="line-num">285</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;  5&#39;-#{@top_strand.upcase}-3&#39;\n&quot;</span>
+<span class="line-num">286</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;Bottom strand shRNA (#{@bottom_strand.length} nt):\n&quot;</span>
+<span class="line-num">287</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;      3&#39;-#{@bottom_strand.reverse.upcase}-5&#39;\n&quot;</span>
+<span class="line-num">288</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -329,12 +331,13 @@ sequence).</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

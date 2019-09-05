@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -86,12 +90,11 @@
 
   <section class="description">
     
-<h1 id="class-Bio::Genscan::Report-label-Bio-3A-3AGenscan-3A-3AReport+-+Class+for+Genscan+report+output."><a href="Report.html">Bio::Genscan::Report</a> - Class for <a href="../Genscan.html">Genscan</a> report output.<span><a href="#class-Bio::Genscan::Report-label-Bio-3A-3AGenscan-3A-3AReport+-+Class+for+Genscan+report+output.">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::Genscan::Report-label-Bio-3A-3AGenscan-3A-3AReport+-+Class+for+Genscan+report+output."><a href="Report.html"><code>Bio::Genscan::Report</code></a> - Class for <a href="../Genscan.html"><code>Genscan</code></a> report output.<span><a href="#class-Bio::Genscan::Report-label-Bio-3A-3AGenscan-3A-3AReport+-+Class+for+Genscan+report+output.">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>Parser for the <a href="../Genscan.html">Genscan</a> report output.</p>
+<p>Parser for the <a href="../Genscan.html"><code>Genscan</code></a> report output.</p>
 <ul><li>
-<p><a href="../Genscan.html">Genscan</a> <a
-href="http://genes.mit.edu/GENSCAN.html">genes.mit.edu/GENSCAN.html</a></p>
+<p><a href="../Genscan.html"><code>Genscan</code></a> <a href="http://genes.mit.edu/GENSCAN.html">genes.mit.edu/GENSCAN.html</a></p>
 </li></ul>
 
   </section>
@@ -145,7 +148,7 @@ href="http://genes.mit.edu/GENSCAN.html">genes.mit.edu/GENSCAN.html</a></p>
 
         <div class="method-description">
         
-        <p>Returns Array of <a href="Report/Gene.html">Bio::Genscan::Report::Gene</a>.</p>
+        <p>Returns Array of <a href="Report/Gene.html"><code>Bio::Genscan::Report::Gene</code></a>.</p>
         
         </div>
       </div>
@@ -158,7 +161,7 @@ href="http://genes.mit.edu/GENSCAN.html">genes.mit.edu/GENSCAN.html</a></p>
 
         <div class="method-description">
         
-        <p>Returns <a href="../Genscan.html">Genscan</a> version.</p>
+        <p>Returns <a href="../Genscan.html"><code>Genscan</code></a> version.</p>
         
         </div>
       </div>
@@ -223,7 +226,7 @@ href="http://genes.mit.edu/GENSCAN.html">genes.mit.edu/GENSCAN.html</a></p>
 
         <div class="method-description">
         
-        <p>Returns Array of <a href="Report/Gene.html">Bio::Genscan::Report::Gene</a>.</p>
+        <p>Returns Array of <a href="Report/Gene.html"><code>Bio::Genscan::Report::Gene</code></a>.</p>
         
         </div>
       </div>
@@ -236,7 +239,7 @@ href="http://genes.mit.edu/GENSCAN.html">genes.mit.edu/GENSCAN.html</a></p>
 
         <div class="method-description">
         
-        <p>Returns Array of <a href="Report/Gene.html">Bio::Genscan::Report::Gene</a>.</p>
+        <p>Returns Array of <a href="Report/Gene.html"><code>Bio::Genscan::Report::Gene</code></a>.</p>
         
         </div>
       </div>
@@ -303,60 +306,60 @@ href="http://genes.mit.edu/GENSCAN.html">genes.mit.edu/GENSCAN.html</a></p>
 
         <div class="method-description">
           
-          <p><a href="Report.html#method-c-new">::new</a></p>
+          <p><a href="Report.html#method-c-new"><code>Bio::Genscan::Report.new(str)</code></a></p>
 
-<p>Parse a <a href="../Genscan.html">Genscan</a> report output string.</p>
+<p>Parse a <a href="../Genscan.html"><code>Genscan</code></a> report output string.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/genscan/report.rb, line 66</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">report</span>)
-  <span class="ruby-ivar">@predictions</span> = []
-  <span class="ruby-ivar">@genscan_version</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@date_run</span>   = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@time</span>       = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@query_name</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@length</span>     = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@gccontent</span>  = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@isochore</span>   = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@matrix</span>     = <span class="ruby-keyword">nil</span>
-
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-string">&quot;\n&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">case</span> <span class="ruby-identifier">line</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^GENSCAN/</span>
-      <span class="ruby-identifier">parse_headline</span>(<span class="ruby-identifier">line</span>)
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^Sequence/</span>
-      <span class="ruby-identifier">parse_sequence</span>(<span class="ruby-identifier">line</span>)
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^Parameter/</span>
-      <span class="ruby-identifier">parse_parameter</span>(<span class="ruby-identifier">line</span>)
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^Predicted genes/</span>
-      <span class="ruby-keyword">break</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># rests</span>
-  <span class="ruby-identifier">i</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">index</span>(<span class="ruby-regexp">/^Predicted gene/</span>)
-  <span class="ruby-identifier">j</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">index</span>(<span class="ruby-regexp">/^Predicted peptide sequence/</span>)
-
-  <span class="ruby-comment"># genes/exons</span>
-  <span class="ruby-identifier">genes_region</span> = <span class="ruby-identifier">report</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">...</span><span class="ruby-identifier">j</span>]
-  <span class="ruby-identifier">genes_region</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-string">&quot;\n&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-regexp">/Init|Intr|Term|PlyA|Prom|Sngl/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-identifier">gn</span>, <span class="ruby-identifier">en</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot; +&quot;</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\./</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">ii</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ii</span>.<span class="ruby-identifier">to_i</span> }
-      <span class="ruby-identifier">add_exon</span>(<span class="ruby-identifier">gn</span>, <span class="ruby-identifier">en</span>, <span class="ruby-identifier">line</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># sequences (peptide|CDS)</span>
-  <span class="ruby-identifier">sequence_region</span> = <span class="ruby-identifier">report</span>[<span class="ruby-identifier">j</span><span class="ruby-operator">...</span><span class="ruby-identifier">report</span>.<span class="ruby-identifier">size</span>]
-  <span class="ruby-identifier">sequence_region</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^Predicted .+?:/</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">sequence_region</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^\s*$/</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">sequence_region</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span><span class="ruby-operator">::</span><span class="ruby-constant">RS</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ff</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">add_seq</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ff</span>))
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/genscan/report.rb</span>
+<span class="line-num"> 66</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">report</span>)
+<span class="line-num"> 67</span>   <span class="ruby-ivar">@predictions</span> = []
+<span class="line-num"> 68</span>   <span class="ruby-ivar">@genscan_version</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 69</span>   <span class="ruby-ivar">@date_run</span>   = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 70</span>   <span class="ruby-ivar">@time</span>       = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 71</span>   <span class="ruby-ivar">@query_name</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 72</span>   <span class="ruby-ivar">@length</span>     = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 73</span>   <span class="ruby-ivar">@gccontent</span>  = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 74</span>   <span class="ruby-ivar">@isochore</span>   = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 75</span>   <span class="ruby-ivar">@matrix</span>     = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 76</span> 
+<span class="line-num"> 77</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-string">&quot;\n&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num"> 78</span>     <span class="ruby-keyword">case</span> <span class="ruby-identifier">line</span>
+<span class="line-num"> 79</span>     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^GENSCAN/</span>
+<span class="line-num"> 80</span>       <span class="ruby-identifier">parse_headline</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num"> 81</span>     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^Sequence/</span>
+<span class="line-num"> 82</span>       <span class="ruby-identifier">parse_sequence</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num"> 83</span>     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^Parameter/</span>
+<span class="line-num"> 84</span>       <span class="ruby-identifier">parse_parameter</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num"> 85</span>     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^Predicted genes/</span>
+<span class="line-num"> 86</span>       <span class="ruby-keyword">break</span>
+<span class="line-num"> 87</span>     <span class="ruby-keyword">end</span>
+<span class="line-num"> 88</span>   <span class="ruby-keyword">end</span>
+<span class="line-num"> 89</span> 
+<span class="line-num"> 90</span>   <span class="ruby-comment"># rests</span>
+<span class="line-num"> 91</span>   <span class="ruby-identifier">i</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">index</span>(<span class="ruby-regexp">/^Predicted gene/</span>)
+<span class="line-num"> 92</span>   <span class="ruby-identifier">j</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">index</span>(<span class="ruby-regexp">/^Predicted peptide sequence/</span>)
+<span class="line-num"> 93</span> 
+<span class="line-num"> 94</span>   <span class="ruby-comment"># genes/exons</span>
+<span class="line-num"> 95</span>   <span class="ruby-identifier">genes_region</span> = <span class="ruby-identifier">report</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">...</span><span class="ruby-identifier">j</span>]
+<span class="line-num"> 96</span>   <span class="ruby-identifier">genes_region</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-string">&quot;\n&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num"> 97</span>     <span class="ruby-keyword">if</span> <span class="ruby-regexp">/Init|Intr|Term|PlyA|Prom|Sngl/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
+<span class="line-num"> 98</span>       <span class="ruby-identifier">gn</span>, <span class="ruby-identifier">en</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot; +&quot;</span>)[<span class="ruby-value">0</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\./</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">ii</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ii</span>.<span class="ruby-identifier">to_i</span> }
+<span class="line-num"> 99</span>       <span class="ruby-identifier">add_exon</span>(<span class="ruby-identifier">gn</span>, <span class="ruby-identifier">en</span>, <span class="ruby-identifier">line</span>)
+<span class="line-num">100</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">101</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">102</span> 
+<span class="line-num">103</span>   <span class="ruby-comment"># sequences (peptide|CDS)</span>
+<span class="line-num">104</span>   <span class="ruby-identifier">sequence_region</span> = <span class="ruby-identifier">report</span>[<span class="ruby-identifier">j</span><span class="ruby-operator">...</span><span class="ruby-identifier">report</span>.<span class="ruby-identifier">size</span>]
+<span class="line-num">105</span>   <span class="ruby-identifier">sequence_region</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^Predicted .+?:/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">106</span>   <span class="ruby-identifier">sequence_region</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^\s*$/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">107</span>   <span class="ruby-identifier">sequence_region</span>.<span class="ruby-identifier">split</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span><span class="ruby-operator">::</span><span class="ruby-constant">RS</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ff</span><span class="ruby-operator">|</span>
+<span class="line-num">108</span>     <span class="ruby-identifier">add_seq</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ff</span>))
+<span class="line-num">109</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">110</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -370,12 +373,13 @@ href="http://genes.mit.edu/GENSCAN.html">genes.mit.edu/GENSCAN.html</a></p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

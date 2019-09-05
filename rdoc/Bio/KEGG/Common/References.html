@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -113,71 +117,70 @@
 
         <div class="method-description">
           
-          <p>REFERENCE – Returns contents of the REFERENCE records as an Array of <a
-href="../../Reference.html">Bio::Reference</a> objects.</p>
+          <p>REFERENCE – Returns contents of the REFERENCE records as an Array of <a href="../../Reference.html"><code>Bio::Reference</code></a> objects.</p>
           
           
 
           
           <div class="method-source-code" id="references-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/common.rb, line 30</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">references</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
-    <span class="ruby-identifier">ary</span> = []
-    <span class="ruby-identifier">toptag2array</span>(<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;REFERENCE&#39;</span>)).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ref</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-      <span class="ruby-identifier">subtag2array</span>(<span class="ruby-identifier">ref</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">case</span> <span class="ruby-identifier">tag_get</span>(<span class="ruby-identifier">field</span>)
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/REFERENCE/</span>
-          <span class="ruby-identifier">cmnt</span> = <span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>).<span class="ruby-identifier">chomp</span>
-          <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\s*PMID\:(\d+)\s*/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">cmnt</span> <span class="ruby-keyword">then</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pubmed&#39;</span>] = <span class="ruby-node">$1</span>
-            <span class="ruby-identifier">cmnt</span> = <span class="ruby-node">$&#39;</span>
-          <span class="ruby-keyword">end</span>
-          <span class="ruby-keyword">if</span> <span class="ruby-identifier">cmnt</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">cmnt</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;comments&#39;</span>] <span class="ruby-operator">||=</span> []
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;comments&#39;</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">cmnt</span>)
-          <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/AUTHORS/</span>
-          <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
-          <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\, /</span>)
-          <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>] = <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+and\s+/</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>]
-          <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-string">&#39;,&#39;</span>, <span class="ruby-string">&#39;, &#39;</span>) }
-          <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;authors&#39;</span>] = <span class="ruby-identifier">authors</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/TITLE/</span>
-          <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;title&#39;</span>]   = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/JOURNAL/</span>
-          <span class="ruby-identifier">journal</span> = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
-          <span class="ruby-keyword">case</span> <span class="ruby-identifier">journal</span>
-            <span class="ruby-comment"># KEGG style</span>
-          <span class="ruby-keyword">when</span> <span class="ruby-regexp">/(.*) (\d*(?:\([^\)]+\))?)\:(\d+\-\d+) \((\d+)\)$/</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-node">$1</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;volume&#39;</span>]  = <span class="ruby-node">$2</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pages&#39;</span>]   = <span class="ruby-node">$3</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]    = <span class="ruby-node">$4</span>
-            <span class="ruby-comment"># old KEGG style</span>
-          <span class="ruby-keyword">when</span> <span class="ruby-regexp">/(.*) (\d+):(\d+\-\d+) \((\d+)\) \[UI:(\d+)\]$/</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-node">$1</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;volume&#39;</span>]  = <span class="ruby-node">$2</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pages&#39;</span>]   = <span class="ruby-node">$3</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]    = <span class="ruby-node">$4</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;medline&#39;</span>] = <span class="ruby-node">$5</span>
-            <span class="ruby-comment"># Only journal name and year are available</span>
-          <span class="ruby-keyword">when</span> <span class="ruby-regexp">/(.*) \((\d+)\)$/</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-node">$1</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]    = <span class="ruby-node">$2</span>
-          <span class="ruby-keyword">else</span>
-            <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-identifier">journal</span>
-          <span class="ruby-keyword">end</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Reference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">hash</span>))
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>] = <span class="ruby-identifier">ary</span> <span class="ruby-comment">#.extend(Bio::References::BackwardCompatibility)</span>
-
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/common.rb</span>
+<span class="line-num">30</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">references</span>
+<span class="line-num">31</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
+<span class="line-num">32</span>     <span class="ruby-identifier">ary</span> = []
+<span class="line-num">33</span>     <span class="ruby-identifier">toptag2array</span>(<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;REFERENCE&#39;</span>)).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ref</span><span class="ruby-operator">|</span>
+<span class="line-num">34</span>       <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">35</span>       <span class="ruby-identifier">subtag2array</span>(<span class="ruby-identifier">ref</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">field</span><span class="ruby-operator">|</span>
+<span class="line-num">36</span>         <span class="ruby-keyword">case</span> <span class="ruby-identifier">tag_get</span>(<span class="ruby-identifier">field</span>)
+<span class="line-num">37</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/REFERENCE/</span>
+<span class="line-num">38</span>           <span class="ruby-identifier">cmnt</span> = <span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>).<span class="ruby-identifier">chomp</span>
+<span class="line-num">39</span>           <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\s*PMID\:(\d+)\s*/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">cmnt</span> <span class="ruby-keyword">then</span>
+<span class="line-num">40</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pubmed&#39;</span>] = <span class="ruby-node">$1</span>
+<span class="line-num">41</span>             <span class="ruby-identifier">cmnt</span> = <span class="ruby-node">$&#39;</span>
+<span class="line-num">42</span>           <span class="ruby-keyword">end</span>
+<span class="line-num">43</span>           <span class="ruby-keyword">if</span> <span class="ruby-identifier">cmnt</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">cmnt</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">44</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;comments&#39;</span>] <span class="ruby-operator">||=</span> []
+<span class="line-num">45</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;comments&#39;</span>].<span class="ruby-identifier">push</span>(<span class="ruby-identifier">cmnt</span>)
+<span class="line-num">46</span>           <span class="ruby-keyword">end</span>
+<span class="line-num">47</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/AUTHORS/</span>
+<span class="line-num">48</span>           <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
+<span class="line-num">49</span>           <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\, /</span>)
+<span class="line-num">50</span>           <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>] = <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+and\s+/</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">authors</span>[<span class="ruby-value">-1</span>]
+<span class="line-num">51</span>           <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors</span>.<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-string">&#39;,&#39;</span>, <span class="ruby-string">&#39;, &#39;</span>) }
+<span class="line-num">52</span>           <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;authors&#39;</span>] = <span class="ruby-identifier">authors</span>
+<span class="line-num">53</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/TITLE/</span>
+<span class="line-num">54</span>           <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;title&#39;</span>]   = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
+<span class="line-num">55</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/JOURNAL/</span>
+<span class="line-num">56</span>           <span class="ruby-identifier">journal</span> = <span class="ruby-identifier">truncate</span>(<span class="ruby-identifier">tag_cut</span>(<span class="ruby-identifier">field</span>))
+<span class="line-num">57</span>           <span class="ruby-keyword">case</span> <span class="ruby-identifier">journal</span>
+<span class="line-num">58</span>             <span class="ruby-comment"># KEGG style</span>
+<span class="line-num">59</span>           <span class="ruby-keyword">when</span> <span class="ruby-regexp">/(.*) (\d*(?:\([^\)]+\))?)\:(\d+\-\d+) \((\d+)\)$/</span>
+<span class="line-num">60</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-node">$1</span>
+<span class="line-num">61</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;volume&#39;</span>]  = <span class="ruby-node">$2</span>
+<span class="line-num">62</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pages&#39;</span>]   = <span class="ruby-node">$3</span>
+<span class="line-num">63</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]    = <span class="ruby-node">$4</span>
+<span class="line-num">64</span>             <span class="ruby-comment"># old KEGG style</span>
+<span class="line-num">65</span>           <span class="ruby-keyword">when</span> <span class="ruby-regexp">/(.*) (\d+):(\d+\-\d+) \((\d+)\) \[UI:(\d+)\]$/</span>
+<span class="line-num">66</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-node">$1</span>
+<span class="line-num">67</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;volume&#39;</span>]  = <span class="ruby-node">$2</span>
+<span class="line-num">68</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pages&#39;</span>]   = <span class="ruby-node">$3</span>
+<span class="line-num">69</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]    = <span class="ruby-node">$4</span>
+<span class="line-num">70</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;medline&#39;</span>] = <span class="ruby-node">$5</span>
+<span class="line-num">71</span>             <span class="ruby-comment"># Only journal name and year are available</span>
+<span class="line-num">72</span>           <span class="ruby-keyword">when</span> <span class="ruby-regexp">/(.*) \((\d+)\)$/</span>
+<span class="line-num">73</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-node">$1</span>
+<span class="line-num">74</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]    = <span class="ruby-node">$2</span>
+<span class="line-num">75</span>           <span class="ruby-keyword">else</span>
+<span class="line-num">76</span>             <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] = <span class="ruby-identifier">journal</span>
+<span class="line-num">77</span>           <span class="ruby-keyword">end</span>
+<span class="line-num">78</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">79</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">80</span>       <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Reference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">hash</span>))
+<span class="line-num">81</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">82</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>] = <span class="ruby-identifier">ary</span> <span class="ruby-comment">#.extend(Bio::References::BackwardCompatibility)</span>
+<span class="line-num">83</span> 
+<span class="line-num">84</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">85</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
+<span class="line-num">86</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -191,12 +194,13 @@ href="../../Reference.html">Bio::Reference</a> objects.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

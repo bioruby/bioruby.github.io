@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../../";
 </script>
 
-<script src="../../../../js/jquery.js"></script>
-<script src="../../../../js/darkfish.js"></script>
+<script src="../../../../js/navigation.js" defer></script>
+<script src="../../../../js/search.js" defer></script>
+<script src="../../../../js/search_index.js" defer></script>
+<script src="../../../../js/searcher.js" defer></script>
+<script src="../../../../js/darkfish.js" defer></script>
 
 <link href="../../../../css/fonts.css" rel="stylesheet">
 <link href="../../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -102,12 +106,7 @@
 
   <section class="description">
     
-<p><a href="Iteration.html">Bio::Blast::Default::Report::Iteration</a> stores
-information about a iteration. It may contain some <a
-href="Hit.html">Bio::Blast::Default::Report::Hit</a> objects. Note that a
-PSI-BLAST (blastpgp command) result usually contain multiple iterations in
-it, and a normal BLAST (blastall command) result usually contain one
-iteration in it.</p>
+<p><a href="Iteration.html"><code>Bio::Blast::Default::Report::Iteration</code></a> stores information about a iteration. It may contain some <a href="Hit.html"><code>Bio::Blast::Default::Report::Hit</code></a> objects. Note that a PSI-BLAST (blastpgp command) result usually contain multiple iterations in it, and a normal BLAST (blastall command) result usually contain one iteration in it.</p>
 
   </section>
 
@@ -290,7 +289,7 @@ iteration in it.</p>
 
         <div class="method-description">
         
-        <p>(PSI-BLAST) <a href="Iteration.html">Iteration</a> round number.</p>
+        <p>(PSI-BLAST) <a href="Iteration.html"><code>Iteration</code></a> round number.</p>
         
         </div>
       </div>
@@ -344,72 +343,69 @@ iteration in it.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Iteration.html">Iteration</a> object. It is designed
-to be called only internally from the <a
-href="../Report.html">Bio::Blast::Default::Report</a> class. Users shall
-not use the method directly.</p>
+          <p>Creates a new <a href="Iteration.html"><code>Iteration</code></a> object. It is designed to be called only internally from the <a href="../Report.html"><code>Bio::Blast::Default::Report</code></a> class. Users shall not use the method directly.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 492</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-ivar">@f0stat</span> = []
-  <span class="ruby-ivar">@f0dbstat</span> = <span class="ruby-constant">AlwaysNil</span>.<span class="ruby-identifier">instance</span>
-  <span class="ruby-ivar">@f0hitlist</span> = []
-  <span class="ruby-ivar">@hits</span> = []
-  <span class="ruby-ivar">@num</span> = <span class="ruby-value">1</span>
-  <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-ivar">@f0message</span> = [ <span class="ruby-identifier">r</span> ]
-  <span class="ruby-identifier">r</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^Results from round (\d+).*\z/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-ivar">@num</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
-    <span class="ruby-ivar">@f0message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>
-    <span class="ruby-string">&#39;&#39;</span>
-  }
-  <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-keyword">while</span> <span class="ruby-regexp">/^Number of occurrences of pattern in the database is +(\d+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
-    <span class="ruby-comment"># PHI-BLAST</span>
-    <span class="ruby-ivar">@pattern_in_database</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
-    <span class="ruby-ivar">@f0message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
-    <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^Results from round (\d+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@num</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
-    <span class="ruby-ivar">@f0message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
-    <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span>(<span class="ruby-regexp">/\*{5} No hits found \*{5}/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@f0hitlist</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
-    <span class="ruby-keyword">begin</span>
-      <span class="ruby-ivar">@f0hitlist</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
-    <span class="ruby-keyword">end</span> <span class="ruby-keyword">until</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword">and</span> <span class="ruby-regexp">/^\&gt;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">and</span> <span class="ruby-regexp">/^CONVERGED\!/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">r</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/(.*\n)*^CONVERGED\!.*\n/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@f0hitlist</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>; <span class="ruby-string">&#39;&#39;</span> }
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@pattern_in_database</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-comment">#PHI-BLAST</span>
-      <span class="ruby-keyword">while</span> <span class="ruby-regexp">/^\&gt;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
-        <span class="ruby-ivar">@hits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>)
-        <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span>
-        <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span>
-        <span class="ruby-keyword">while</span> <span class="ruby-regexp">/^Significant alignments for pattern/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
-          <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
-          <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-comment">#not PHI-BLAST</span>
-      <span class="ruby-keyword">while</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword">and</span> <span class="ruby-regexp">/^\&gt;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
-        <span class="ruby-ivar">@hits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^CONVERGED\!\s*$/</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@f0hitlist</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@message</span> = <span class="ruby-string">&#39;CONVERGED!&#39;</span>
-    <span class="ruby-ivar">@flag_converged</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">492</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">493</span>   <span class="ruby-ivar">@f0stat</span> = []
+<span class="line-num">494</span>   <span class="ruby-ivar">@f0dbstat</span> = <span class="ruby-constant">AlwaysNil</span>.<span class="ruby-identifier">instance</span>
+<span class="line-num">495</span>   <span class="ruby-ivar">@f0hitlist</span> = []
+<span class="line-num">496</span>   <span class="ruby-ivar">@hits</span> = []
+<span class="line-num">497</span>   <span class="ruby-ivar">@num</span> = <span class="ruby-value">1</span>
+<span class="line-num">498</span>   <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">499</span>   <span class="ruby-ivar">@f0message</span> = [ <span class="ruby-identifier">r</span> ]
+<span class="line-num">500</span>   <span class="ruby-identifier">r</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^Results from round (\d+).*\z/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">501</span>     <span class="ruby-ivar">@num</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">502</span>     <span class="ruby-ivar">@f0message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>
+<span class="line-num">503</span>     <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">504</span>   }
+<span class="line-num">505</span>   <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">506</span>   <span class="ruby-keyword">while</span> <span class="ruby-regexp">/^Number of occurrences of pattern in the database is +(\d+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+<span class="line-num">507</span>     <span class="ruby-comment"># PHI-BLAST</span>
+<span class="line-num">508</span>     <span class="ruby-ivar">@pattern_in_database</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">509</span>     <span class="ruby-ivar">@f0message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
+<span class="line-num">510</span>     <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">511</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">512</span>   <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^Results from round (\d+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">then</span>
+<span class="line-num">513</span>     <span class="ruby-ivar">@num</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">514</span>     <span class="ruby-ivar">@f0message</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
+<span class="line-num">515</span>     <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">516</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">517</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span>(<span class="ruby-regexp">/\*{5} No hits found \*{5}/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">518</span>     <span class="ruby-ivar">@f0hitlist</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
+<span class="line-num">519</span>     <span class="ruby-keyword">begin</span>
+<span class="line-num">520</span>       <span class="ruby-ivar">@f0hitlist</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">521</span>     <span class="ruby-keyword">end</span> <span class="ruby-keyword">until</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword">and</span> <span class="ruby-regexp">/^\&gt;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+<span class="line-num">522</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">and</span> <span class="ruby-regexp">/^CONVERGED\!/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">then</span>
+<span class="line-num">523</span>       <span class="ruby-identifier">r</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/(.*\n)*^CONVERGED\!.*\n/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@f0hitlist</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>; <span class="ruby-string">&#39;&#39;</span> }
+<span class="line-num">524</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">525</span>     <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@pattern_in_database</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">then</span>
+<span class="line-num">526</span>       <span class="ruby-comment">#PHI-BLAST</span>
+<span class="line-num">527</span>       <span class="ruby-keyword">while</span> <span class="ruby-regexp">/^\&gt;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+<span class="line-num">528</span>         <span class="ruby-ivar">@hits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">529</span>         <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">530</span>         <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span>
+<span class="line-num">531</span>         <span class="ruby-keyword">while</span> <span class="ruby-regexp">/^Significant alignments for pattern/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+<span class="line-num">532</span>           <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">533</span>           <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">534</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">535</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">536</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">537</span>       <span class="ruby-comment">#not PHI-BLAST</span>
+<span class="line-num">538</span>       <span class="ruby-keyword">while</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword">and</span> <span class="ruby-regexp">/^\&gt;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+<span class="line-num">539</span>         <span class="ruby-ivar">@hits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">540</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">541</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">542</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">543</span>   <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^CONVERGED\!\s*$/</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@f0hitlist</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">then</span>
+<span class="line-num">544</span>     <span class="ruby-ivar">@message</span> = <span class="ruby-string">&#39;CONVERGED!&#39;</span>
+<span class="line-num">545</span>     <span class="ruby-ivar">@flag_converged</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">546</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">547</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -441,17 +437,16 @@ not use the method directly.</p>
 
         <div class="method-description">
           
-          <p>(PSI-BLAST) Returns true if the iteration is converged. Otherwise, returns
-false.</p>
+          <p>(PSI-BLAST) Returns true if the iteration is converged. Otherwise, returns false.</p>
           
           
 
           
           <div class="method-source-code" id="converged-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 573</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">converged?</span>
-  <span class="ruby-ivar">@flag_converged</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">573</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">converged?</span>
+<span class="line-num">574</span>   <span class="ruby-ivar">@flag_converged</span>
+<span class="line-num">575</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -475,19 +470,18 @@ false.</p>
 
         <div class="method-description">
           
-          <p>Iterates over each hit of the iteration. Yields a <a
-href="Hit.html">Bio::Blast::Default::Report::Hit</a> object.</p>
+          <p>Iterates over each hit of the iteration. Yields a <a href="Hit.html"><code>Bio::Blast::Default::Report::Hit</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 565</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
-  <span class="ruby-identifier">hits</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">565</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
+<span class="line-num">566</span>   <span class="ruby-identifier">hits</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">567</span>     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
+<span class="line-num">568</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">569</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -511,18 +505,17 @@ href="Hit.html">Bio::Blast::Default::Report::Hit</a> object.</p>
 
         <div class="method-description">
           
-          <p>Returns the hits of the iteration. It returns an array of <a
-href="Hit.html">Bio::Blast::Default::Report::Hit</a> objects.</p>
+          <p>Returns the hits of the iteration. It returns an array of <a href="Hit.html"><code>Bio::Blast::Default::Report::Hit</code></a> objects.</p>
           
           
 
           
           <div class="method-source-code" id="hits-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 558</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits</span>
-  <span class="ruby-identifier">parse_hitlist</span>
-  <span class="ruby-ivar">@hits</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">558</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits</span>
+<span class="line-num">559</span>   <span class="ruby-identifier">parse_hitlist</span>
+<span class="line-num">560</span>   <span class="ruby-ivar">@hits</span>
+<span class="line-num">561</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -552,11 +545,11 @@ href="Hit.html">Bio::Blast::Default::Report::Hit</a> objects.</p>
 
           
           <div class="method-source-code" id="hits_for_pattern-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 625</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits_for_pattern</span>
-  <span class="ruby-identifier">parse_hitlist</span>
-  <span class="ruby-ivar">@hits_for_pattern</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">625</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits_for_pattern</span>
+<span class="line-num">626</span>   <span class="ruby-identifier">parse_hitlist</span>
+<span class="line-num">627</span>   <span class="ruby-ivar">@hits_for_pattern</span>
+<span class="line-num">628</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -580,19 +573,17 @@ href="Hit.html">Bio::Blast::Default::Report::Hit</a> objects.</p>
 
         <div class="method-description">
           
-          <p>(PSI-BLAST) Returns hits which have been found again in the iteration. It
-returns an array of <a href="Hit.html">Bio::Blast::Default::Report::Hit</a>
-objects.</p>
+          <p>(PSI-BLAST) Returns hits which have been found again in the iteration. It returns an array of <a href="Hit.html"><code>Bio::Blast::Default::Report::Hit</code></a> objects.</p>
           
           
 
           
           <div class="method-source-code" id="hits_found_again-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 611</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits_found_again</span>
-  <span class="ruby-identifier">parse_hitlist</span>
-  <span class="ruby-ivar">@hits_found_again</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">611</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits_found_again</span>
+<span class="line-num">612</span>   <span class="ruby-identifier">parse_hitlist</span>
+<span class="line-num">613</span>   <span class="ruby-ivar">@hits_found_again</span>
+<span class="line-num">614</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -616,19 +607,17 @@ objects.</p>
 
         <div class="method-description">
           
-          <p>(PSI-BLAST) Returns hits which have been newly found in the iteration. It
-returns an array of <a href="Hit.html">Bio::Blast::Default::Report::Hit</a>
-objects.</p>
+          <p>(PSI-BLAST) Returns hits which have been newly found in the iteration. It returns an array of <a href="Hit.html"><code>Bio::Blast::Default::Report::Hit</code></a> objects.</p>
           
           
 
           
           <div class="method-source-code" id="hits_newly_found-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 619</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits_newly_found</span>
-  <span class="ruby-identifier">parse_hitlist</span>
-  <span class="ruby-ivar">@hits_newly_found</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">619</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits_newly_found</span>
+<span class="line-num">620</span>   <span class="ruby-identifier">parse_hitlist</span>
+<span class="line-num">621</span>   <span class="ruby-ivar">@hits_newly_found</span>
+<span class="line-num">622</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -652,34 +641,33 @@ objects.</p>
 
         <div class="method-description">
           
-          <p>(PHI-BLAST) Returns pattern string. Returns nil if it is not a PHI-BLAST
-result.</p>
+          <p>(PHI-BLAST) Returns pattern string. Returns nil if it is not a PHI-BLAST result.</p>
           
           
 
           
           <div class="method-source-code" id="pattern-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 579</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern</span>
-  <span class="ruby-comment">#PHI-BLAST</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@pattern</span>
-    <span class="ruby-ivar">@pattern</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@pattern_in_database</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@pattern</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-ivar">@pattern_positions</span> = []
-    <span class="ruby-ivar">@f0message</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">sc</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span>)
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">skip_until</span>(<span class="ruby-regexp">/^ *pattern +([^\s]+)/</span>) <span class="ruby-keyword">then</span>
-        <span class="ruby-ivar">@pattern</span> = <span class="ruby-identifier">sc</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pattern</span>
-        <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">skip_until</span>(<span class="ruby-regexp">/(?:^ *| +)at position +(\d+) +of +query +sequence/</span>)
-        <span class="ruby-ivar">@pattern_positions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sc</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@pattern</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">579</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern</span>
+<span class="line-num">580</span>   <span class="ruby-comment">#PHI-BLAST</span>
+<span class="line-num">581</span>   <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@pattern</span>
+<span class="line-num">582</span>     <span class="ruby-ivar">@pattern</span>
+<span class="line-num">583</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@pattern_in_database</span> <span class="ruby-keyword">then</span>
+<span class="line-num">584</span>     <span class="ruby-ivar">@pattern</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">585</span>     <span class="ruby-ivar">@pattern_positions</span> = []
+<span class="line-num">586</span>     <span class="ruby-ivar">@f0message</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span>
+<span class="line-num">587</span>       <span class="ruby-identifier">sc</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span>)
+<span class="line-num">588</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">skip_until</span>(<span class="ruby-regexp">/^ *pattern +([^\s]+)/</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">589</span>         <span class="ruby-ivar">@pattern</span> = <span class="ruby-identifier">sc</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pattern</span>
+<span class="line-num">590</span>         <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">skip_until</span>(<span class="ruby-regexp">/(?:^ *| +)at position +(\d+) +of +query +sequence/</span>)
+<span class="line-num">591</span>         <span class="ruby-ivar">@pattern_positions</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">sc</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>
+<span class="line-num">592</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">593</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">594</span>     <span class="ruby-ivar">@pattern</span>
+<span class="line-num">595</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">596</span>     <span class="ruby-keyword">nil</span>
+<span class="line-num">597</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">598</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -703,19 +691,18 @@ result.</p>
 
         <div class="method-description">
           
-          <p>(PHI-BLAST) Returns pattern positions. Returns nil if it is not a PHI-BLAST
-result.</p>
+          <p>(PHI-BLAST) Returns pattern positions. Returns nil if it is not a PHI-BLAST result.</p>
           
           
 
           
           <div class="method-source-code" id="pattern_positions-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 602</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern_positions</span>
-  <span class="ruby-comment">#PHI-BLAST</span>
-  <span class="ruby-identifier">pattern</span>
-  <span class="ruby-ivar">@pattern_positions</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">602</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern_positions</span>
+<span class="line-num">603</span>   <span class="ruby-comment">#PHI-BLAST</span>
+<span class="line-num">604</span>   <span class="ruby-identifier">pattern</span>
+<span class="line-num">605</span>   <span class="ruby-ivar">@pattern_positions</span>
+<span class="line-num">606</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -729,12 +716,13 @@ result.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -109,10 +113,7 @@
       
         <dt id="Data_XPath">Data_XPath
         
-        <dd><p>(MaXML sequence) <a
-href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allseq.sep.xml.gz">fantom2.gsc.riken.go.jp/fantom/2.1/allseq.sep.xml.gz</a>
-<a
-href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/repseq.sep.xml.gz">fantom2.gsc.riken.go.jp/fantom/2.1/repseq.sep.xml.gz</a></p>
+        <dd><p>(MaXML sequence) <a href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allseq.sep.xml.gz">fantom2.gsc.riken.go.jp/fantom/2.1/allseq.sep.xml.gz</a> <a href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/repseq.sep.xml.gz">fantom2.gsc.riken.go.jp/fantom/2.1/repseq.sep.xml.gz</a></p>
         
       
       </dl>
@@ -147,20 +148,20 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/repseq.sep.xml.gz">fantom2.gsc.ri
 
           
           <div class="method-source-code" id="altid-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 219</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">altid</span>(<span class="ruby-identifier">t</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@altid</span>)
-    <span class="ruby-ivar">@altid</span> = {}
-    <span class="ruby-ivar">@elem</span>.<span class="ruby-identifier">each_element</span>(<span class="ruby-string">&#39;altid&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-      <span class="ruby-ivar">@altid</span>[<span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;type&#39;</span>]] = <span class="ruby-identifier">gsub_entities</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@altid</span>[<span class="ruby-identifier">t</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@altid</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">219</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">altid</span>(<span class="ruby-identifier">t</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">220</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@altid</span>)
+<span class="line-num">221</span>     <span class="ruby-ivar">@altid</span> = {}
+<span class="line-num">222</span>     <span class="ruby-ivar">@elem</span>.<span class="ruby-identifier">each_element</span>(<span class="ruby-string">&#39;altid&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+<span class="line-num">223</span>       <span class="ruby-ivar">@altid</span>[<span class="ruby-identifier">e</span>.<span class="ruby-identifier">attributes</span>[<span class="ruby-string">&#39;type&#39;</span>]] = <span class="ruby-identifier">gsub_entities</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">text</span>)
+<span class="line-num">224</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">225</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">226</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span> <span class="ruby-keyword">then</span>
+<span class="line-num">227</span>     <span class="ruby-ivar">@altid</span>[<span class="ruby-identifier">t</span>]
+<span class="line-num">228</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">229</span>     <span class="ruby-ivar">@altid</span>
+<span class="line-num">230</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">231</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -190,14 +191,14 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/repseq.sep.xml.gz">fantom2.gsc.ri
 
           
           <div class="method-source-code" id="annotations-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 241</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">annotations</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@annotations</span>)
-    <span class="ruby-ivar">@annotations</span> =
-      <span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Annotations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@elem</span>.<span class="ruby-identifier">elements</span>[<span class="ruby-string">&#39;annotations&#39;</span>])
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@annotations</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">241</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">annotations</span>
+<span class="line-num">242</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@annotations</span>)
+<span class="line-num">243</span>     <span class="ruby-ivar">@annotations</span> =
+<span class="line-num">244</span>       <span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Annotations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@elem</span>.<span class="ruby-identifier">elements</span>[<span class="ruby-string">&#39;annotations&#39;</span>])
+<span class="line-num">245</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">246</span>   <span class="ruby-ivar">@annotations</span>
+<span class="line-num">247</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -227,10 +228,10 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/repseq.sep.xml.gz">fantom2.gsc.ri
 
           
           <div class="method-source-code" id="id_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 233</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">id_strings</span>
-  <span class="ruby-identifier">altid</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">233</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">id_strings</span>
+<span class="line-num">234</span>   <span class="ruby-identifier">altid</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+<span class="line-num">235</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -260,10 +261,10 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/repseq.sep.xml.gz">fantom2.gsc.ri
 
           
           <div class="method-source-code" id="library_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 237</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">library_id</span>
-  <span class="ruby-identifier">entry_id</span>[<span class="ruby-value">0</span>,<span class="ruby-value">2</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">237</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">library_id</span>
+<span class="line-num">238</span>   <span class="ruby-identifier">entry_id</span>[<span class="ruby-value">0</span>,<span class="ruby-value">2</span>]
+<span class="line-num">239</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -277,12 +278,13 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/repseq.sep.xml.gz">fantom2.gsc.ri
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

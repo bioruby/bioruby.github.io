@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../../";
 </script>
 
-<script src="../../../../js/jquery.js"></script>
-<script src="../../../../js/darkfish.js"></script>
+<script src="../../../../js/navigation.js" defer></script>
+<script src="../../../../js/search.js" defer></script>
+<script src="../../../../js/search_index.js" defer></script>
+<script src="../../../../js/searcher.js" defer></script>
+<script src="../../../../js/darkfish.js" defer></script>
 
 <link href="../../../../css/fonts.css" rel="stylesheet">
 <link href="../../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -114,8 +118,7 @@
 
   <section class="description">
     
-<p>Bio:GFF::GFF3::Record::Target is a class to store data of “Target”
-attribute.</p>
+<p>Bio:GFF::GFF3::Record::Target is a class to store data of “Target” attribute.</p>
 
   </section>
 
@@ -209,19 +212,19 @@ attribute.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Target.html">Target</a> object.</p>
+          <p>Creates a new <a href="Target.html"><code>Target</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 1196</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">target_id</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">endpos</span>, <span class="ruby-identifier">strand</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@target_id</span> = <span class="ruby-identifier">target_id</span>
-  <span class="ruby-ivar">@start</span> = <span class="ruby-identifier">start</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@end</span> = <span class="ruby-identifier">endpos</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">endpos</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@strand</span> = <span class="ruby-identifier">strand</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">1199</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">target_id</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">endpos</span>, <span class="ruby-identifier">strand</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">1200</span>   <span class="ruby-ivar">@target_id</span> = <span class="ruby-identifier">target_id</span>
+<span class="line-num">1201</span>   <span class="ruby-ivar">@start</span> = <span class="ruby-identifier">start</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">1202</span>   <span class="ruby-ivar">@end</span> = <span class="ruby-identifier">endpos</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">endpos</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">1203</span>   <span class="ruby-ivar">@strand</span> = <span class="ruby-identifier">strand</span>
+<span class="line-num">1204</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -245,19 +248,18 @@ attribute.</p>
 
         <div class="method-description">
           
-          <p>parses “target_id start end [strand]”-style string (for example, “ABC789
-123 456 +”) and creates a new <a href="Target.html">Target</a> object.</p>
+          <p>parses “target_id start end [strand]”-style string (for example, “ABC789 123 456 +”) and creates a new <a href="Target.html"><code>Target</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 1219</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">target_id</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">endpos</span>, <span class="ruby-identifier">strand</span> =
-    <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/ +/</span>, <span class="ruby-value">4</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">x</span>) }
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">target_id</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">endpos</span>, <span class="ruby-identifier">strand</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">1222</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">1223</span>   <span class="ruby-identifier">target_id</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">endpos</span>, <span class="ruby-identifier">strand</span> =
+<span class="line-num">1224</span>     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/ +/</span>, <span class="ruby-value">4</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">x</span>) }
+<span class="line-num">1225</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">target_id</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">endpos</span>, <span class="ruby-identifier">strand</span>)
+<span class="line-num">1226</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -295,18 +297,18 @@ attribute.</p>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 1236</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-identifier">other</span>.<span class="ruby-identifier">target_id</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target_id</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-identifier">other</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">start</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-identifier">other</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">end</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-identifier">other</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">strand</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">1239</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">1240</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span> <span class="ruby-keyword">and</span>
+<span class="line-num">1241</span>       <span class="ruby-identifier">other</span>.<span class="ruby-identifier">target_id</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target_id</span> <span class="ruby-keyword">and</span>
+<span class="line-num">1242</span>       <span class="ruby-identifier">other</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">start</span> <span class="ruby-keyword">and</span>
+<span class="line-num">1243</span>       <span class="ruby-identifier">other</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">end</span> <span class="ruby-keyword">and</span>
+<span class="line-num">1244</span>       <span class="ruby-identifier">other</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">strand</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1245</span>     <span class="ruby-keyword">true</span>
+<span class="line-num">1246</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1247</span>     <span class="ruby-keyword">false</span>
+<span class="line-num">1248</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1249</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -336,15 +338,15 @@ attribute.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 1226</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-identifier">i</span> = <span class="ruby-identifier">escape_seqid</span>(<span class="ruby-identifier">column_to_s</span>(<span class="ruby-ivar">@target_id</span>))
-  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">escape_attribute</span>(<span class="ruby-identifier">column_to_s</span>(<span class="ruby-ivar">@start</span>))
-  <span class="ruby-identifier">e</span> = <span class="ruby-identifier">escape_attribute</span>(<span class="ruby-identifier">column_to_s</span>(<span class="ruby-ivar">@end</span>))
-  <span class="ruby-identifier">strnd</span> = <span class="ruby-identifier">escape_attribute</span>(<span class="ruby-ivar">@strand</span>.<span class="ruby-identifier">to_s</span>)
-  <span class="ruby-identifier">strnd</span> = <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strnd</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">strnd</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-node">&quot;#{i} #{s} #{e}#{strnd}&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">1229</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">1230</span>   <span class="ruby-identifier">i</span> = <span class="ruby-identifier">escape_seqid</span>(<span class="ruby-identifier">column_to_s</span>(<span class="ruby-ivar">@target_id</span>))
+<span class="line-num">1231</span>   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">escape_attribute</span>(<span class="ruby-identifier">column_to_s</span>(<span class="ruby-ivar">@start</span>))
+<span class="line-num">1232</span>   <span class="ruby-identifier">e</span> = <span class="ruby-identifier">escape_attribute</span>(<span class="ruby-identifier">column_to_s</span>(<span class="ruby-ivar">@end</span>))
+<span class="line-num">1233</span>   <span class="ruby-identifier">strnd</span> = <span class="ruby-identifier">escape_attribute</span>(<span class="ruby-ivar">@strand</span>.<span class="ruby-identifier">to_s</span>)
+<span class="line-num">1234</span>   <span class="ruby-identifier">strnd</span> = <span class="ruby-string">&quot; &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">strnd</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">strnd</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">1235</span>   <span class="ruby-node">&quot;#{i} #{s} #{e}#{strnd}&quot;</span>
+<span class="line-num">1236</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -358,12 +360,13 @@ attribute.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

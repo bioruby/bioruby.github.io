@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -102,23 +106,19 @@
 24 15 23 29 20 13 20 21 21 23 22 25 13      &lt;== numerical data
 22 17 15 25 27 32 26 32 29 29 25</pre>
 
-<p>The precedent &#39;&gt;&#39; can be omitted and the trailing &#39;&gt;&#39;
-will be removed automatically.</p>
+<p>The precedent &#39;&gt;&#39; can be omitted and the trailing &#39;&gt;&#39; will be removed automatically.</p>
 
-<p>— <a href="FastaFormat.html#method-c-new">Bio::FastaFormat.new</a></p>
+<p>— <a href="FastaFormat.html#method-c-new"><code>Bio::FastaNumericFormat.new(entry)</code></a></p>
 
 <p>Stores the comment and the list of the numerical data.</p>
 
-<p>— <a
-href="FastaFormat.html#attribute-i-definition">Bio::FastaFormat#definition</a></p>
+<p>— <a href="FastaFormat.html#attribute-i-definition"><code>Bio::FastaNumericFormat#definition</code></a></p>
 
 <p>The comment line of the FASTA formatted data.</p>
 <ul><li>
-<p>FASTA format (Wikipedia) <a
-href="http://en.wikipedia.org/wiki/FASTA_format">en.wikipedia.org/wiki/FASTA_format</a></p>
+<p>FASTA format (Wikipedia) <a href="http://en.wikipedia.org/wiki/FASTA_format">en.wikipedia.org/wiki/FASTA_format</a></p>
 </li><li>
-<p>Phred quality score (WikiPedia) <a
-href="http://en.wikipedia.org/wiki/Phred_quality_score">en.wikipedia.org/wiki/Phred_quality_score</a></p>
+<p>Phred quality score (WikiPedia) <a href="http://en.wikipedia.org/wiki/Phred_quality_score">en.wikipedia.org/wiki/Phred_quality_score</a></p>
 </li></ul>
 
   </section>
@@ -169,10 +169,10 @@ href="http://en.wikipedia.org/wiki/Phred_quality_score">en.wikipedia.org/wiki/Ph
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/qual.rb, line 94</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">n</span>)
-  <span class="ruby-identifier">data</span>[<span class="ruby-identifier">n</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/fasta/qual.rb</span>
+<span class="line-num">94</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">n</span>)
+<span class="line-num">95</span>   <span class="ruby-identifier">data</span>[<span class="ruby-identifier">n</span>]
+<span class="line-num">96</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -196,8 +196,7 @@ href="http://en.wikipedia.org/wiki/Phred_quality_score">en.wikipedia.org/wiki/Ph
 
         <div class="method-description">
           
-          <p>Returns the list of the numerical data (typically the quality score of its
-corresponding sequence) as an Array.</p>
+          <p>Returns the list of the numerical data (typically the quality score of its corresponding sequence) as an Array.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -208,13 +207,13 @@ corresponding sequence) as an Array.</p>
 
           
           <div class="method-source-code" id="data-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/qual.rb, line 64</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">data</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@list</span>)
-    <span class="ruby-ivar">@list</span> = <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_i</span>}
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@list</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/fasta/qual.rb</span>
+<span class="line-num">64</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">data</span>
+<span class="line-num">65</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@list</span>)
+<span class="line-num">66</span>     <span class="ruby-ivar">@list</span> = <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_i</span>}
+<span class="line-num">67</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">68</span>   <span class="ruby-ivar">@list</span>
+<span class="line-num">69</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -252,12 +251,12 @@ corresponding sequence) as an Array.</p>
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/qual.rb, line 83</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
-  <span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/fasta/qual.rb</span>
+<span class="line-num">83</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
+<span class="line-num">84</span>   <span class="ruby-identifier">data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">85</span>     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
+<span class="line-num">86</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">87</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -281,8 +280,7 @@ corresponding sequence) as an Array.</p>
 
         <div class="method-description">
           
-          <p>Returns the number of elements in the numerical data, which will be the
-same of its corresponding sequence length.</p>
+          <p>Returns the number of elements in the numerical data, which will be the same of its corresponding sequence length.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -293,10 +291,10 @@ same of its corresponding sequence length.</p>
 
           
           <div class="method-source-code" id="length-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/qual.rb, line 75</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length</span>
-  <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/fasta/qual.rb</span>
+<span class="line-num">75</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length</span>
+<span class="line-num">76</span>   <span class="ruby-identifier">data</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">77</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -320,20 +318,11 @@ same of its corresponding sequence length.</p>
 
         <div class="method-description">
           
-          <p>Returns the data as a <a href="Sequence.html">Bio::Sequence</a> object. In
-the returned sequence object, the length of the sequence is zero, and the
-numeric data is stored to the <a
-href="Sequence.html#attribute-i-quality_scores">Bio::Sequence#quality_scores</a>
-attirbute.</p>
+          <p>Returns the data as a <a href="Sequence.html"><code>Bio::Sequence</code></a> object. In the returned sequence object, the length of the sequence is zero, and the numeric data is stored to the <a href="Sequence.html#attribute-i-quality_scores"><code>Bio::Sequence#quality_scores</code></a> attirbute.</p>
 
-<p>Because the meaning of the numeric data is unclear, <a
-href="Sequence.html#attribute-i-quality_score_type">Bio::Sequence#quality_score_type</a>
-is not set by default.</p>
+<p>Because the meaning of the numeric data is unclear, <a href="Sequence.html#attribute-i-quality_score_type"><code>Bio::Sequence#quality_score_type</code></a> is not set by default.</p>
 
-<p>Note: If you modify the returned <a href="Sequence.html">Bio::Sequence</a>
-object, the sequence or definition in this <a
-href="FastaNumericFormat.html">FastaNumericFormat</a> object might also be
-changed (but not always be changed) because of efficiency.</p>
+<p>Note: If you modify the returned <a href="Sequence.html"><code>Bio::Sequence</code></a> object, the sequence or definition in this <a href="FastaNumericFormat.html"><code>FastaNumericFormat</code></a> object might also be changed (but not always be changed) because of efficiency.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -346,13 +335,13 @@ changed (but not always be changed) because of efficiency.</p>
 
           
           <div class="method-source-code" id="to_biosequence-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/qual.rb, line 114</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_biosequence</span>
-  <span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">adapter</span>(<span class="ruby-keyword">self</span>,
-                            <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Adapter</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaNumericFormat</span>)
-  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Generic</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/qual.rb</span>
+<span class="line-num">114</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_biosequence</span>
+<span class="line-num">115</span>   <span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">adapter</span>(<span class="ruby-keyword">self</span>,
+<span class="line-num">116</span>                             <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Adapter</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaNumericFormat</span>)
+<span class="line-num">117</span>   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Generic</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">118</span>   <span class="ruby-identifier">s</span>
+<span class="line-num">119</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -398,12 +387,13 @@ changed (but not always be changed) because of efficiency.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

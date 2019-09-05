@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -94,7 +98,7 @@
 
   <section class="description">
     
-<p><a href="Record.html">Record</a> class.</p>
+<p><a href="Record.html"><code>Record</code></a> class.</p>
 
 <p>Internal use only.</p>
 
@@ -183,10 +187,10 @@
 
           
           <div class="method-source-code" id="create-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 714</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">size</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_string</span>(<span class="ruby-identifier">size</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>))
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">714</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">create</span>(<span class="ruby-identifier">size</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+<span class="line-num">715</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_string</span>(<span class="ruby-identifier">size</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>))
+<span class="line-num">716</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -216,15 +220,15 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 696</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">size</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>)
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/[\000 ]+\z/</span>, <span class="ruby-string">&#39;&#39;</span>) }
-  <span class="ruby-ivar">@key</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-ivar">@val</span> = <span class="ruby-identifier">a</span>
-  <span class="ruby-ivar">@size</span> = (<span class="ruby-identifier">size</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">length</span>)
-  <span class="ruby-comment">#DEBUG.print &quot;key=#{@key.inspect},val=#{@val.inspect},size=#{@size}\n&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">696</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">size</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">697</span>   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>)
+<span class="line-num">698</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/[\000 ]+\z/</span>, <span class="ruby-string">&#39;&#39;</span>) }
+<span class="line-num">699</span>   <span class="ruby-ivar">@key</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">700</span>   <span class="ruby-ivar">@val</span> = <span class="ruby-identifier">a</span>
+<span class="line-num">701</span>   <span class="ruby-ivar">@size</span> = (<span class="ruby-identifier">size</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">length</span>)
+<span class="line-num">702</span>   <span class="ruby-comment">#DEBUG.print &quot;key=#{@key.inspect},val=#{@val.inspect},size=#{@size}\n&quot;</span>
+<span class="line-num">703</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -254,10 +258,10 @@
 
           
           <div class="method-source-code" id="to_string-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 710</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_string</span>(<span class="ruby-identifier">size</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;%-*s&quot;</span>, <span class="ruby-identifier">size</span>, <span class="ruby-identifier">key</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>))
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">710</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_string</span>(<span class="ruby-identifier">size</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+<span class="line-num">711</span>   <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;%-*s&quot;</span>, <span class="ruby-identifier">size</span>, <span class="ruby-identifier">key</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\t&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>))
+<span class="line-num">712</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -295,10 +299,10 @@
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 718</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">718</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">719</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">720</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -328,10 +332,10 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 706</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_string</span>(<span class="ruby-ivar">@size</span>, <span class="ruby-ivar">@key</span>, <span class="ruby-ivar">@val</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">706</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">707</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_string</span>(<span class="ruby-ivar">@size</span>, <span class="ruby-ivar">@key</span>, <span class="ruby-ivar">@val</span>)
+<span class="line-num">708</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -345,12 +349,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

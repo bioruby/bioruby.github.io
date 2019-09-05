@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -147,16 +151,7 @@
     
 <h1 id="class-Bio::Sequence-label-DESCRIPTION">DESCRIPTION<span><a href="#class-Bio::Sequence-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p><a href="Sequence.html">Bio::Sequence</a> objects represent annotated
-sequences in bioruby. A <a href="Sequence.html">Bio::Sequence</a> object is
-a wrapper around the actual sequence,  represented as either a <a
-href="Sequence/NA.html">Bio::Sequence::NA</a> or a <a
-href="Sequence/AA.html">Bio::Sequence::AA</a> object. For most users, this
-encapsulation will be completely transparent. <a
-href="Sequence.html">Bio::Sequence</a> responds to all methods defined for
-Bio::Sequence::NA/AA objects using the same arguments and returning the
-same values (even though  these methods are not documented specifically for
-<a href="Sequence.html">Bio::Sequence</a>).</p>
+<p><a href="Sequence.html"><code>Bio::Sequence</code></a> objects represent annotated sequences in bioruby. A <a href="Sequence.html"><code>Bio::Sequence</code></a> object is a wrapper around the actual sequence,  represented as either a <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a> or a <a href="Sequence/AA.html"><code>Bio::Sequence::AA</code></a> object. For most users, this encapsulation will be completely transparent. <a href="Sequence.html"><code>Bio::Sequence</code></a> responds to all methods defined for Bio::Sequence::NA/AA objects using the same arguments and returning the same values (even though  these methods are not documented specifically for <a href="Sequence.html"><code>Bio::Sequence</code></a>).</p>
 
 <h1 id="class-Bio::Sequence-label-USAGE">USAGE<span><a href="#class-Bio::Sequence-label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
@@ -224,8 +219,7 @@ same values (even though  these methods are not documented specifically for
 
         <div class="method-description">
         
-        <p>Organism classification, taxonomic classification of the source organism.
-(Array of String)</p>
+        <p>Organism classification, taxonomic classification of the source organism. (Array of String)</p>
         
         </div>
       </div>
@@ -251,8 +245,7 @@ same values (even though  these methods are not documented specifically for
 
         <div class="method-description">
         
-        <p>Data Class defined by <a href="EMBL.html">EMBL</a> (String) See <a
-href="http://www.ebi.ac.uk/embl/Documentation/User_manual/usrman.html#3_1">www.ebi.ac.uk/embl/Documentation/User_manual/usrman.html#3_1</a></p>
+        <p>Data Class defined by <a href="EMBL.html"><code>EMBL</code></a> (String) See <a href="http://www.ebi.ac.uk/embl/Documentation/User_manual/usrman.html#3_1">www.ebi.ac.uk/embl/Documentation/User_manual/usrman.html#3_1</a></p>
         
         </div>
       </div>
@@ -291,8 +284,7 @@ href="http://www.ebi.ac.uk/embl/Documentation/User_manual/usrman.html#3_1">www.e
 
         <div class="method-description">
         
-        <p>Links to other database entries. (An Array of <a
-href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects)</p>
+        <p>Links to other database entries. (An Array of <a href="Sequence/DBLink.html"><code>Bio::Sequence::DBLink</code></a> objects)</p>
         
         </div>
       </div>
@@ -318,8 +310,7 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects)</p>
 
         <div class="method-description">
         
-        <p>Taxonomic Division defined by EMBL/GenBank/DDBJ (String) See <a
-href="http://www.ebi.ac.uk/embl/Documentation/User_manual/usrman.html#3_2">www.ebi.ac.uk/embl/Documentation/User_manual/usrman.html#3_2</a></p>
+        <p>Taxonomic Division defined by EMBL/GenBank/DDBJ (String) See <a href="http://www.ebi.ac.uk/embl/Documentation/User_manual/usrman.html#3_2">www.ebi.ac.uk/embl/Documentation/User_manual/usrman.html#3_2</a></p>
         
         </div>
       </div>
@@ -332,9 +323,7 @@ href="http://www.ebi.ac.uk/embl/Documentation/User_manual/usrman.html#3_2">www.e
 
         <div class="method-description">
         
-        <p>The sequence identifier (String).  For example, for a sequence of Genbank
-origin, this is the locus name. For a sequence of <a
-href="EMBL.html">EMBL</a> origin, this is the primary accession number.</p>
+        <p>The sequence identifier (String).  For example, for a sequence of Genbank origin, this is the locus name. For a sequence of <a href="EMBL.html"><code>EMBL</code></a> origin, this is the primary accession number.</p>
         
         </div>
       </div>
@@ -347,12 +336,7 @@ href="EMBL.html">EMBL</a> origin, this is the primary accession number.</p>
 
         <div class="method-description">
         
-        <p>Version of the entry (String or Integer). Unlike
-<code>sequence_version</code>, <code>entry_version</code> is a database
-maintainer&#39;s internal version number. The version number will be
-changed when the database maintainer modifies the entry. The same enrty in
-<a href="EMBL.html">EMBL</a>, <a href="GenBank.html">GenBank</a>, and <a
-href="DDBJ.html">DDBJ</a> may have different entry_version.</p>
+        <p>Version of the entry (String or Integer). Unlike <code>sequence_version</code>, <code>entry_version</code> is a database maintainer&#39;s internal version number. The version number will be changed when the database maintainer modifies the entry. The same enrty in <a href="EMBL.html"><code>EMBL</code></a>, <a href="GenBank.html"><code>GenBank</code></a>, and <a href="DDBJ.html"><code>DDBJ</code></a> may have different entry_version.</p>
         
         </div>
       </div>
@@ -365,8 +349,7 @@ href="DDBJ.html">DDBJ</a> may have different entry_version.</p>
 
         <div class="method-description">
         
-        <p>Error probabilities of the bases/residues in the sequence. (Array
-containing Float, or nil)</p>
+        <p>Error probabilities of the bases/residues in the sequence. (Array containing Float, or nil)</p>
         
         </div>
       </div>
@@ -379,8 +362,7 @@ containing Float, or nil)</p>
 
         <div class="method-description">
         
-        <p><a href="Features.html">Features</a> (An Array of <a
-href="Feature.html">Bio::Feature</a> objects)</p>
+        <p><a href="Features.html"><code>Features</code></a> (An Array of <a href="Feature.html"><code>Bio::Feature</code></a> objects)</p>
         
         </div>
       </div>
@@ -393,13 +375,7 @@ href="Feature.html">Bio::Feature</a> objects)</p>
 
         <div class="method-description">
         
-        <p>Namespace of the sequence IDs described in <a
-href="Sequence.html#attribute-i-entry_id">#entry_id</a>, <a
-href="Sequence.html#attribute-i-primary_accession">#primary_accession</a>,
-and <a
-href="Sequence.html#attribute-i-secondary_accessions">#secondary_accessions</a>
-methods (String). For example, &#39;EMBL&#39;, &#39;GenBank&#39;,
-&#39;DDBJ&#39;, &#39;RefSeq&#39;.</p>
+        <p>Namespace of the sequence IDs described in <a href="Sequence.html#attribute-i-entry_id"><code>entry_id</code></a>, <a href="Sequence.html#attribute-i-primary_accession"><code>primary_accession</code></a>, and <a href="Sequence.html#attribute-i-secondary_accessions"><code>secondary_accessions</code></a> methods (String). For example, &#39;EMBL&#39;, &#39;GenBank&#39;, &#39;DDBJ&#39;, &#39;RefSeq&#39;.</p>
         
         </div>
       </div>
@@ -464,15 +440,7 @@ methods (String). For example, &#39;EMBL&#39;, &#39;GenBank&#39;,
 
         <div class="method-description">
         
-        <p><a href="Sequence.html">Sequence</a> identifiers which are not described in
-<a href="Sequence.html#attribute-i-entry_id">#entry_id</a>, <a
-href="Sequence.html#attribute-i-primary_accession">#primary_accession</a>,and
-<a
-href="Sequence.html#attribute-i-secondary_accessions">#secondary_accessions</a>
-methods (Array of <a href="Sequence/DBLink.html">Bio::Sequence::DBLink</a>
-objects). For example, <a href="NCBI.html">NCBI</a> GI number can be
-stored. Note that only identifiers of the entry itself should be stored.
-For database cross references, <code>dblinks</code> should be used.</p>
+        <p><a href="Sequence.html"><code>Sequence</code></a> identifiers which are not described in <a href="Sequence.html#attribute-i-entry_id"><code>entry_id</code></a>, <a href="Sequence.html#attribute-i-primary_accession"><code>primary_accession</code></a>,and <a href="Sequence.html#attribute-i-secondary_accessions"><code>secondary_accessions</code></a> methods (Array of <a href="Sequence/DBLink.html"><code>Bio::Sequence::DBLink</code></a> objects). For example, <a href="NCBI.html"><code>NCBI</code></a> GI number can be stored. Note that only identifiers of the entry itself should be stored. For database cross references, <code>dblinks</code> should be used.</p>
         
         </div>
       </div>
@@ -498,12 +466,9 @@ For database cross references, <code>dblinks</code> should be used.</p>
 
         <div class="method-description">
         
-        <p>The meaning (calculation method) of the quality scores stored in the
-<code>quality_scores</code> attribute. Maybe one of :phred, :solexa, or
-nil.</p>
+        <p>The meaning (calculation method) of the quality scores stored in the <code>quality_scores</code> attribute. Maybe one of :phred, :solexa, or nil.</p>
 
-<p>Note that if it is nil, and <code>error_probabilities</code> is empty, some
-methods implicitly assumes that it is :phred (PHRED score).</p>
+<p>Note that if it is nil, and <code>error_probabilities</code> is empty, some methods implicitly assumes that it is :phred (PHRED score).</p>
         
         </div>
       </div>
@@ -516,8 +481,7 @@ methods implicitly assumes that it is :phred (PHRED score).</p>
 
         <div class="method-description">
         
-        <p>Quality scores of the bases/residues in the sequence. (Array containing
-Integer, or nil)</p>
+        <p>Quality scores of the bases/residues in the sequence. (Array containing Integer, or nil)</p>
         
         </div>
       </div>
@@ -530,8 +494,7 @@ Integer, or nil)</p>
 
         <div class="method-description">
         
-        <p><a href="References.html">References</a> (An Array of <a
-href="Reference.html">Bio::Reference</a> objects)</p>
+        <p><a href="References.html"><code>References</code></a> (An Array of <a href="Reference.html"><code>Bio::Reference</code></a> objects)</p>
         
         </div>
       </div>
@@ -583,8 +546,7 @@ href="Reference.html">Bio::Reference</a> objects)</p>
 
         <div class="method-description">
         
-        <p>The sequence object, usually Bio::Sequence::NA/AA,  but could be a simple
-String</p>
+        <p>The sequence object, usually Bio::Sequence::NA/AA,  but could be a simple String</p>
         
         </div>
       </div>
@@ -597,12 +559,7 @@ String</p>
 
         <div class="method-description">
         
-        <p>Version number of the sequence (String or Integer). Unlike
-<code>entry_version</code>, <code>sequence_version</code> will be changed
-when the submitter of the sequence updates the entry. Normally, the same
-entry taken from different databases (EMBL, <a
-href="GenBank.html">GenBank</a>, and <a href="DDBJ.html">DDBJ</a>) may have
-the same sequence_version.</p>
+        <p>Version number of the sequence (String or Integer). Unlike <code>entry_version</code>, <code>sequence_version</code> will be changed when the submitter of the sequence updates the entry. Normally, the same entry taken from different databases (EMBL, <a href="GenBank.html"><code>GenBank</code></a>, and <a href="DDBJ.html"><code>DDBJ</code></a>) may have the same sequence_version.</p>
         
         </div>
       </div>
@@ -628,8 +585,7 @@ the same sequence_version.</p>
 
         <div class="method-description">
         
-        <p>Strandedness (String). “single” (single-stranded), “double”
-(double-stranded), “mixed” (mixed-stranded), or nil.</p>
+        <p>Strandedness (String). “single” (single-stranded), “double” (double-stranded), “mixed” (mixed-stranded), or nil.</p>
         
         </div>
       </div>
@@ -642,8 +598,7 @@ the same sequence_version.</p>
 
         <div class="method-description">
         
-        <p>Organism classification, taxonomic classification of the source organism.
-(Array of String)</p>
+        <p>Organism classification, taxonomic classification of the source organism. (Array of String)</p>
         
         </div>
       </div>
@@ -684,27 +639,24 @@ the same sequence_version.</p>
 
         <div class="method-description">
           
-          <p>Normally, users should not call this method directly. Use
-Bio::*#to_biosequence (e.g. <a
-href="GenBank.html#method-i-to_biosequence">Bio::GenBank#to_biosequence</a>).</p>
+          <p>Normally, users should not call this method directly. Use Bio::*#to_biosequence (e.g. <a href="GenBank.html#method-i-to_biosequence"><code>Bio::GenBank#to_biosequence</code></a>).</p>
 
-<p>Creates a new <a href="Sequence.html">Bio::Sequence</a> object from
-database data with an adapter module.</p>
+<p>Creates a new <a href="Sequence.html"><code>Bio::Sequence</code></a> object from database data with an adapter module.</p>
           
           
 
           
           <div class="method-source-code" id="adapter-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 463</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">adapter</span>(<span class="ruby-identifier">source_data</span>, <span class="ruby-identifier">adapter_module</span>)
-  <span class="ruby-identifier">biosequence</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">biosequence</span>.<span class="ruby-identifier">instance_eval</span> {
-    <span class="ruby-identifier">remove_instance_variable</span>(<span class="ruby-value">:@seq</span>)
-    <span class="ruby-ivar">@source_data</span> = <span class="ruby-identifier">source_data</span>
-  }
-  <span class="ruby-identifier">biosequence</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-identifier">adapter_module</span>)
-  <span class="ruby-identifier">biosequence</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num">463</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">adapter</span>(<span class="ruby-identifier">source_data</span>, <span class="ruby-identifier">adapter_module</span>)
+<span class="line-num">464</span>   <span class="ruby-identifier">biosequence</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>)
+<span class="line-num">465</span>   <span class="ruby-identifier">biosequence</span>.<span class="ruby-identifier">instance_eval</span> {
+<span class="line-num">466</span>     <span class="ruby-identifier">remove_instance_variable</span>(<span class="ruby-value">:@seq</span>)
+<span class="line-num">467</span>     <span class="ruby-ivar">@source_data</span> = <span class="ruby-identifier">source_data</span>
+<span class="line-num">468</span>   }
+<span class="line-num">469</span>   <span class="ruby-identifier">biosequence</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-identifier">adapter_module</span>)
+<span class="line-num">470</span>   <span class="ruby-identifier">biosequence</span>
+<span class="line-num">471</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -728,11 +680,7 @@ database data with an adapter module.</p>
 
         <div class="method-description">
           
-          <p>Given a sequence String, guess its type, Amino Acid or Nucleic Acid, and
-return a new <a href="Sequence.html">Bio::Sequence</a> object wrapping a
-sequence of the guessed type (either <a
-href="Sequence/AA.html">Bio::Sequence::AA</a> or <a
-href="Sequence/NA.html">Bio::Sequence::NA</a>)</p>
+          <p>Given a sequence String, guess its type, Amino Acid or Nucleic Acid, and return a new <a href="Sequence.html"><code>Bio::Sequence</code></a> object wrapping a sequence of the guessed type (either <a href="Sequence/AA.html"><code>Bio::Sequence::AA</code></a> or <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a>)</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">auto</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span>                        <span class="ruby-comment">#=&gt; Bio::Sequence::NA</span>
@@ -741,24 +689,23 @@ href="Sequence/NA.html">Bio::Sequence::NA</a>)</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>str</em>: String <strong>or</strong> Bio::Sequence::NA/AA
-object</p>
+<p>(required) <em>str</em>: String <strong>or</strong> Bio::Sequence::NA/AA object</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Sequence.html">Bio::Sequence</a> object</p>
+<p><a href="Sequence.html"><code>Bio::Sequence</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="auto-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 283</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">auto</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">seq</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">auto</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">seq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num">283</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">auto</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">284</span>   <span class="ruby-identifier">seq</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">285</span>   <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">auto</span>
+<span class="line-num">286</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">seq</span>
+<span class="line-num">287</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -782,37 +729,27 @@ object</p>
 
         <div class="method-description">
           
-          <p>Guess the class of a given sequence.  Returns the class (Bio::Sequence::AA
-or <a href="Sequence/NA.html">Bio::Sequence::NA</a>) guessed.  In general,
-used by developers only, but if you know what you are doing, feel free.</p>
+          <p>Guess the class of a given sequence.  Returns the class (Bio::Sequence::AA or <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a>) guessed.  In general, used by developers only, but if you know what you are doing, feel free.</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> .<span class="ruby-identifier">guess</span>(<span class="ruby-string">&#39;atgc&#39;</span>)        <span class="ruby-comment">#=&gt; Bio::Sequence::NA</span>
 </pre>
 
 <p>There are three optional parameters: `threshold`, `length`, and `index`.</p>
 
-<p>The `threshold` value (defaults to 0.9) is the frequency of  nucleic acid
-bases [AGCTUagctu] required in the sequence for this method to produce a <a
-href="Sequence/NA.html">Bio::Sequence::NA</a> “guess”.  In the default
-case, if less than 90% of the bases (after excluding [Nn]) are in the set
-[AGCTUagctu], then the guess is <a
-href="Sequence/AA.html">Bio::Sequence::AA</a>.</p>
+<p>The `threshold` value (defaults to 0.9) is the frequency of  nucleic acid bases [AGCTUagctu] required in the sequence for this method to produce a <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a> “guess”.  In the default case, if less than 90% of the bases (after excluding [Nn]) are in the set [AGCTUagctu], then the guess is <a href="Sequence/AA.html"><code>Bio::Sequence::AA</code></a>.</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-string">&#39;atgcatgcqq&#39;</span>)      <span class="ruby-comment">#=&gt; Bio::Sequence::AA</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-string">&#39;atgcatgcqq&#39;</span>, <span class="ruby-value">0.8</span>) <span class="ruby-comment">#=&gt; Bio::Sequence::AA</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-string">&#39;atgcatgcqq&#39;</span>, <span class="ruby-value">0.7</span>) <span class="ruby-comment">#=&gt; Bio::Sequence::NA</span>
 </pre>
 
-<p>The `length` value is how much of the total sequence to use in the guess
-(default 10000).  If your sequence is very long, you may  want to use a
-smaller amount to reduce the computational burden.</p>
+<p>The `length` value is how much of the total sequence to use in the guess (default 10000).  If your sequence is very long, you may  want to use a smaller amount to reduce the computational burden.</p>
 
 <pre class="ruby"><span class="ruby-comment"># limit the guess to the first 1000 positions</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-string">&#39;A VERY LONG SEQUENCE&#39;</span>, <span class="ruby-value">0.9</span>, <span class="ruby-value">1000</span>)
 </pre>
 
-<p>The `index` value is where to start the guess.  Perhaps you know there are
-a lot of gaps at the start…</p>
+<p>The `index` value is where to start the guess.  Perhaps you know there are a lot of gaps at the start…</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-string">&#39;-----atgcc&#39;</span>)             <span class="ruby-comment">#=&gt; Bio::Sequence::AA</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-string">&#39;-----atgcc&#39;</span>,<span class="ruby-value">0.9</span>,<span class="ruby-value">10000</span>,<span class="ruby-value">5</span>) <span class="ruby-comment">#=&gt; Bio::Sequence::NA</span>
@@ -821,8 +758,7 @@ a lot of gaps at the start…</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>str</em>: String <strong>or</strong> Bio::Sequence::NA/AA
-object</p>
+<p>(required) <em>str</em>: String <strong>or</strong> Bio::Sequence::NA/AA object</p>
 </li><li>
 <p>(optional) <em>threshold</em>: Float in range 0,1 (default 0.9)</p>
 </li><li>
@@ -839,10 +775,10 @@ object</p>
 
           
           <div class="method-source-code" id="guess-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 381</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">guess</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>).<span class="ruby-identifier">guess</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num">381</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">guess</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">382</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>).<span class="ruby-identifier">guess</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">383</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -866,9 +802,7 @@ object</p>
 
         <div class="method-description">
           
-          <p>Create a new <a href="Sequence.html">Bio::Sequence</a> object from a
-formatted string (GenBank, <a href="EMBL.html">EMBL</a>, fasta format,
-etc.)</p>
+          <p>Create a new <a href="Sequence.html"><code>Bio::Sequence</code></a> object from a formatted string (GenBank, <a href="EMBL.html"><code>EMBL</code></a>, fasta format, etc.)</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">input</span>(<span class="ruby-identifier">str</span>)
 </pre>
@@ -882,23 +816,23 @@ etc.)</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Sequence.html">Bio::Sequence</a> object</p>
+<p><a href="Sequence.html"><code>Bio::Sequence</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="input-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 436</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">input</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">format</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">format</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">format</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">klass</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatFile</span><span class="ruby-operator">::</span><span class="ruby-constant">AutoDetect</span>.<span class="ruby-identifier">default</span>.<span class="ruby-identifier">autodetect</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_biosequence</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num">436</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">input</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">format</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">437</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">format</span> <span class="ruby-keyword">then</span>
+<span class="line-num">438</span>     <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">format</span>
+<span class="line-num">439</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">440</span>     <span class="ruby-identifier">klass</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatFile</span><span class="ruby-operator">::</span><span class="ruby-constant">AutoDetect</span>.<span class="ruby-identifier">default</span>.<span class="ruby-identifier">autodetect</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">441</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">442</span>   <span class="ruby-identifier">obj</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">443</span>   <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">to_biosequence</span>
+<span class="line-num">444</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -922,23 +856,18 @@ etc.)</p>
 
         <div class="method-description">
           
-          <p>Create a new <a href="Sequence.html">Bio::Sequence</a> object</p>
+          <p>Create a new <a href="Sequence.html"><code>Bio::Sequence</code></a> object</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>                                  <span class="ruby-comment">#=&gt; &#39;atgc&#39;</span>
 </pre>
 
-<p>Note that this method does not intialize the contained sequence as any kind
-of bioruby object, only as a simple string</p>
+<p>Note that this method does not intialize the contained sequence as any kind of bioruby object, only as a simple string</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span>                        <span class="ruby-comment">#=&gt; String</span>
 </pre>
 
-<p>See <a href="Sequence.html#method-i-na">#na</a>, <a
-href="Sequence.html#method-i-aa">#aa</a>, and <a
-href="Sequence.html#method-i-auto">#auto</a>  for methods to transform the
-basic String of a just created  <a href="Sequence.html">Bio::Sequence</a>
-object to a proper bioruby object</p>
+<p>See <a href="Sequence.html#method-i-na"><code>Bio::Sequence#na</code></a>, <a href="Sequence.html#method-i-aa"><code>Bio::Sequence#aa</code></a>, and <a href="Sequence.html#method-i-auto"><code>Bio::Sequence#auto</code></a>  for methods to transform the basic String of a just created  <a href="Sequence.html"><code>Bio::Sequence</code></a> object to a proper bioruby object</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -947,17 +876,17 @@ object to a proper bioruby object</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Sequence.html">Bio::Sequence</a> object</p>
+<p><a href="Sequence.html"><code>Bio::Sequence</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 99</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@seq</span> = <span class="ruby-identifier">str</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num"> 99</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">100</span>   <span class="ruby-ivar">@seq</span> = <span class="ruby-identifier">str</span>
+<span class="line-num">101</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -981,16 +910,16 @@ object to a proper bioruby object</p>
 
         <div class="method-description">
           
-          <p>alias of <a href="Sequence.html#method-c-input">::input</a></p>
+          <p>alias of <a href="Sequence.html#method-c-input"><code>Bio::Sequence.input</code></a></p>
           
           
 
           
           <div class="method-source-code" id="read-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 447</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">format</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">input</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">format</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num">447</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">format</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">448</span>   <span class="ruby-identifier">input</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">format</span>)
+<span class="line-num">449</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1022,11 +951,7 @@ object to a proper bioruby object</p>
 
         <div class="method-description">
           
-          <p>Transform the sequence wrapped in the current <a
-href="Sequence.html">Bio::Sequence</a> object into a <a
-href="Sequence/NA.html">Bio::Sequence::NA</a> object.  This method will
-change the current object.  This method does not validate your choice, so
-be careful!</p>
+          <p>Transform the sequence wrapped in the current <a href="Sequence.html"><code>Bio::Sequence</code></a> object into a <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a> object.  This method will change the current object.  This method does not validate your choice, so be careful!</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span>                        <span class="ruby-comment">#=&gt; String</span>
@@ -1034,8 +959,7 @@ be careful!</p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span>                        <span class="ruby-comment">#=&gt; Bio::Sequence::AA !!!</span>
 </pre>
 
-<p>However, if you know your sequence type, this method may be  constructively
-used after initialization,</p>
+<p>However, if you know your sequence type, this method may be  constructively used after initialization,</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;RRLE&#39;</span>)
 <span class="ruby-identifier">s</span>.<span class="ruby-identifier">aa</span>
@@ -1043,18 +967,18 @@ used after initialization,</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Sequence/AA.html">Bio::Sequence::AA</a></p>
+<p><a href="Sequence/AA.html"><code>Bio::Sequence::AA</code></a></p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="aa-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 422</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aa</span>
-  <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
-  <span class="ruby-ivar">@moltype</span> = <span class="ruby-constant">AA</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num">422</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aa</span>
+<span class="line-num">423</span>   <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">424</span>   <span class="ruby-ivar">@moltype</span> = <span class="ruby-constant">AA</span>
+<span class="line-num">425</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1088,10 +1012,10 @@ used after initialization,</p>
 
           
           <div class="method-source-code" id="accessions-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 454</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accessions</span>
-  [ <span class="ruby-identifier">primary_accession</span>, <span class="ruby-identifier">secondary_accessions</span> ].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">compact</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num">454</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accessions</span>
+<span class="line-num">455</span>   [ <span class="ruby-identifier">primary_accession</span>, <span class="ruby-identifier">secondary_accessions</span> ].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">compact</span>
+<span class="line-num">456</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1115,11 +1039,7 @@ used after initialization,</p>
 
         <div class="method-description">
           
-          <p>Guess the type of sequence, Amino Acid or Nucleic Acid, and create a  new
-sequence object (Bio::Sequence::AA or <a
-href="Sequence/NA.html">Bio::Sequence::NA</a>) on the basis of this guess. 
-This method will change the current <a
-href="Sequence.html">Bio::Sequence</a> object.</p>
+          <p>Guess the type of sequence, Amino Acid or Nucleic Acid, and create a  new sequence object (Bio::Sequence::AA or <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a>) on the basis of this guess.  This method will change the current <a href="Sequence.html"><code>Bio::Sequence</code></a> object.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span>                        <span class="ruby-comment">#=&gt; String</span>
@@ -1136,15 +1056,15 @@ href="Sequence.html">Bio::Sequence</a> object.</p>
 
           
           <div class="method-source-code" id="auto-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 264</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">auto</span>
-  <span class="ruby-ivar">@moltype</span> = <span class="ruby-identifier">guess</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@moltype</span> <span class="ruby-operator">==</span> <span class="ruby-constant">NA</span>
-    <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num">264</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">auto</span>
+<span class="line-num">265</span>   <span class="ruby-ivar">@moltype</span> = <span class="ruby-identifier">guess</span>
+<span class="line-num">266</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@moltype</span> <span class="ruby-operator">==</span> <span class="ruby-constant">NA</span>
+<span class="line-num">267</span>     <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">268</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">269</span>     <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">270</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">271</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1168,10 +1088,7 @@ href="Sequence.html">Bio::Sequence</a> object.</p>
 
         <div class="method-description">
           
-          <p>Guess the class of the current sequence.  Returns the class
-(Bio::Sequence::AA or <a href="Sequence/NA.html">Bio::Sequence::NA</a>)
-guessed.  In general, used by developers only, but if you know what you are
-doing, feel free.</p>
+          <p>Guess the class of the current sequence.  Returns the class (Bio::Sequence::AA or <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a>) guessed.  In general, used by developers only, but if you know what you are doing, feel free.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">guess</span>                            <span class="ruby-comment">#=&gt; Bio::Sequence::NA</span>
@@ -1179,12 +1096,7 @@ doing, feel free.</p>
 
 <p>There are three parameters: `threshold`, `length`, and `index`.</p>
 
-<p>The `threshold` value (defaults to 0.9) is the frequency of  nucleic acid
-bases [AGCTUagctu] required in the sequence for this method to produce a <a
-href="Sequence/NA.html">Bio::Sequence::NA</a> “guess”.  In the default
-case, if less than 90% of the bases (after excluding [Nn]) are in the set
-[AGCTUagctu], then the guess is <a
-href="Sequence/AA.html">Bio::Sequence::AA</a>.</p>
+<p>The `threshold` value (defaults to 0.9) is the frequency of  nucleic acid bases [AGCTUagctu] required in the sequence for this method to produce a <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a> “guess”.  In the default case, if less than 90% of the bases (after excluding [Nn]) are in the set [AGCTUagctu], then the guess is <a href="Sequence/AA.html"><code>Bio::Sequence::AA</code></a>.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgcatgcqq&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">guess</span>                            <span class="ruby-comment">#=&gt; Bio::Sequence::AA</span>
@@ -1192,16 +1104,13 @@ href="Sequence/AA.html">Bio::Sequence::AA</a>.</p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-value">0.7</span>)                       <span class="ruby-comment">#=&gt; Bio::Sequence::NA</span>
 </pre>
 
-<p>The `length` value is how much of the total sequence to use in the guess
-(default 10000).  If your sequence is very long, you may  want to use a
-smaller amount to reduce the computational burden.</p>
+<p>The `length` value is how much of the total sequence to use in the guess (default 10000).  If your sequence is very long, you may  want to use a smaller amount to reduce the computational burden.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">A</span> <span class="ruby-constant">VERY</span> <span class="ruby-constant">LONG</span> <span class="ruby-constant">SEQUENCE</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-value">0.9</span>, <span class="ruby-value">1000</span>)  <span class="ruby-comment"># limit the guess to the first 1000 positions</span>
 </pre>
 
-<p>The `index` value is where to start the guess.  Perhaps you know there are
-a lot of gaps at the start…</p>
+<p>The `index` value is where to start the guess.  Perhaps you know there are a lot of gaps at the start…</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;-----atgcc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">guess</span>                            <span class="ruby-comment">#=&gt; Bio::Sequence::AA</span>
@@ -1226,22 +1135,22 @@ a lot of gaps at the start…</p>
 
           
           <div class="method-source-code" id="guess-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 328</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">guess</span>(<span class="ruby-identifier">threshold</span> = <span class="ruby-value">0.9</span>, <span class="ruby-identifier">length</span> = <span class="ruby-value">10000</span>, <span class="ruby-identifier">index</span> = <span class="ruby-value">0</span>)
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_s</span>[<span class="ruby-identifier">index</span>,<span class="ruby-identifier">length</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Common</span>
-  <span class="ruby-identifier">cmp</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">composition</span>
-
-  <span class="ruby-identifier">bases</span> = <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;A&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;T&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;G&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;C&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;U&#39;</span>] <span class="ruby-operator">+</span>
-          <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;a&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;t&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;g&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;c&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;u&#39;</span>]
-
-  <span class="ruby-identifier">total</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;N&#39;</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;n&#39;</span>]
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">bases</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">threshold</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-constant">NA</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-constant">AA</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num">328</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">guess</span>(<span class="ruby-identifier">threshold</span> = <span class="ruby-value">0.9</span>, <span class="ruby-identifier">length</span> = <span class="ruby-value">10000</span>, <span class="ruby-identifier">index</span> = <span class="ruby-value">0</span>)
+<span class="line-num">329</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_s</span>[<span class="ruby-identifier">index</span>,<span class="ruby-identifier">length</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">extend</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Common</span>
+<span class="line-num">330</span>   <span class="ruby-identifier">cmp</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">composition</span>
+<span class="line-num">331</span> 
+<span class="line-num">332</span>   <span class="ruby-identifier">bases</span> = <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;A&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;T&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;G&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;C&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;U&#39;</span>] <span class="ruby-operator">+</span>
+<span class="line-num">333</span>           <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;a&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;t&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;g&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;c&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;u&#39;</span>]
+<span class="line-num">334</span> 
+<span class="line-num">335</span>   <span class="ruby-identifier">total</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;N&#39;</span>] <span class="ruby-operator">-</span> <span class="ruby-identifier">cmp</span>[<span class="ruby-string">&#39;n&#39;</span>]
+<span class="line-num">336</span> 
+<span class="line-num">337</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">bases</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">/</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">threshold</span>
+<span class="line-num">338</span>     <span class="ruby-keyword">return</span> <span class="ruby-constant">NA</span>
+<span class="line-num">339</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">340</span>     <span class="ruby-keyword">return</span> <span class="ruby-constant">AA</span>
+<span class="line-num">341</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">342</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1265,11 +1174,7 @@ a lot of gaps at the start…</p>
 
         <div class="method-description">
           
-          <p>Transform the sequence wrapped in the current <a
-href="Sequence.html">Bio::Sequence</a> object into a <a
-href="Sequence/NA.html">Bio::Sequence::NA</a> object.  This method will
-change the current object.  This method does not validate your choice, so
-be careful!</p>
+          <p>Transform the sequence wrapped in the current <a href="Sequence.html"><code>Bio::Sequence</code></a> object into a <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a> object.  This method will change the current object.  This method does not validate your choice, so be careful!</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;RRLE&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span>                        <span class="ruby-comment">#=&gt; String</span>
@@ -1277,8 +1182,7 @@ be careful!</p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span>                        <span class="ruby-comment">#=&gt; Bio::Sequence::NA !!!</span>
 </pre>
 
-<p>However, if you know your sequence type, this method may be  constructively
-used after initialization,</p>
+<p>However, if you know your sequence type, this method may be  constructively used after initialization,</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">s</span>.<span class="ruby-identifier">na</span>
@@ -1286,18 +1190,18 @@ used after initialization,</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Sequence/NA.html">Bio::Sequence::NA</a></p>
+<p><a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a></p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="na-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence.rb, line 401</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">na</span>
-  <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
-  <span class="ruby-ivar">@moltype</span> = <span class="ruby-constant">NA</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence.rb</span>
+<span class="line-num">401</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">na</span>
+<span class="line-num">402</span>   <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">403</span>   <span class="ruby-ivar">@moltype</span> = <span class="ruby-constant">NA</span>
+<span class="line-num">404</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1321,9 +1225,7 @@ used after initialization,</p>
 
         <div class="method-description">
           
-          <p>Return sequence as  <a
-href="http://corelib.rubyonrails.org/classes/String.html">String</a>. The
-original sequence is unchanged.</p>
+          <p>Return sequence as  <a href="http://corelib.rubyonrails.org/classes/String.html">String</a>. The original sequence is unchanged.</p>
 
 <pre class="ruby"><span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>                             <span class="ruby-comment">#=&gt; &#39;atgc&#39;</span>
@@ -1341,10 +1243,10 @@ original sequence is unchanged.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/compat.rb, line 27</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">seq</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/compat.rb</span>
+<span class="line-num">27</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">28</span>   <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">seq</span>)
+<span class="line-num">29</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1390,12 +1292,13 @@ original sequence is unchanged.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

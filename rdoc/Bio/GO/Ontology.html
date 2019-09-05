@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -99,7 +103,7 @@
 
   <section class="description">
     
-<h1 id="class-Bio::GO::Ontology-label-Bio-3A-3AGO-3A-3AOntology"><a href="Ontology.html">Bio::GO::Ontology</a><span><a href="#class-Bio::GO::Ontology-label-Bio-3A-3AGO-3A-3AOntology">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::GO::Ontology-label-Bio-3A-3AGO-3A-3AOntology"><a href="Ontology.html"><code>Bio::GO::Ontology</code></a><span><a href="#class-Bio::GO::Ontology-label-Bio-3A-3AGO-3A-3AOntology">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
 <p>Container class for ontologies in the DAG Edit format.</p>
 
@@ -189,26 +193,25 @@
 
         <div class="method-description">
           
-          <p><a href="Ontology.html#method-c-new">::new</a> The DAG Edit format ontology
-data parser.</p>
+          <p><a href="Ontology.html#method-c-new"><code>Bio::GO::Ontology.new(str)</code></a> The DAG Edit format ontology data parser.</p>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="../Pathway.html#method-c-new">Bio::Pathway.new</a>
+              <a href="../Pathway.html#method-c-new"><code>Bio::Pathway::new</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 68</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@id2term</span>      = {}
-  <span class="ruby-ivar">@header_lines</span> = {}
-  <span class="ruby-ivar">@id2id</span>        = {}
-  <span class="ruby-identifier">adj_list</span> = <span class="ruby-identifier">dag_edit_format_parser</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">adj_list</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">68</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">69</span>   <span class="ruby-ivar">@id2term</span>      = {}
+<span class="line-num">70</span>   <span class="ruby-ivar">@header_lines</span> = {}
+<span class="line-num">71</span>   <span class="ruby-ivar">@id2id</span>        = {}
+<span class="line-num">72</span>   <span class="ruby-identifier">adj_list</span> = <span class="ruby-identifier">dag_edit_format_parser</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">73</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">adj_list</span>)
+<span class="line-num">74</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -242,23 +245,23 @@ data parser.</p>
 
           
           <div class="method-source-code" id="parse_goids-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 39</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_goids</span>(<span class="ruby-identifier">line</span>)
-  <span class="ruby-identifier">goids</span> = []
-  <span class="ruby-identifier">loop</span> {
-    <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^ *[$%&lt;]\S.+?;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-identifier">endpoint</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;;&#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-      <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>[<span class="ruby-identifier">endpoint</span><span class="ruby-operator">..</span><span class="ruby-identifier">line</span>.<span class="ruby-identifier">size</span>]
-    <span class="ruby-keyword">elsif</span> <span class="ruby-regexp">/^,* GO:(\d{7}),*/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-identifier">goids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">$1</span>.<span class="ruby-identifier">clone</span>
-      <span class="ruby-identifier">endpoint</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">goids</span>.<span class="ruby-identifier">last</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">goids</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">size</span>
-      <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>[<span class="ruby-identifier">endpoint</span><span class="ruby-operator">..</span><span class="ruby-identifier">line</span>.<span class="ruby-identifier">size</span>]
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">break</span>
-    <span class="ruby-keyword">end</span>
-  }
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">goids</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">39</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_goids</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">40</span>   <span class="ruby-identifier">goids</span> = []
+<span class="line-num">41</span>   <span class="ruby-identifier">loop</span> {
+<span class="line-num">42</span>     <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^ *[$%&lt;]\S.+?;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
+<span class="line-num">43</span>       <span class="ruby-identifier">endpoint</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;;&#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">44</span>       <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>[<span class="ruby-identifier">endpoint</span><span class="ruby-operator">..</span><span class="ruby-identifier">line</span>.<span class="ruby-identifier">size</span>]
+<span class="line-num">45</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-regexp">/^,* GO:(\d{7}),*/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
+<span class="line-num">46</span>       <span class="ruby-identifier">goids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">$1</span>.<span class="ruby-identifier">clone</span>
+<span class="line-num">47</span>       <span class="ruby-identifier">endpoint</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">goids</span>.<span class="ruby-identifier">last</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">goids</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">size</span>
+<span class="line-num">48</span>       <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>[<span class="ruby-identifier">endpoint</span><span class="ruby-operator">..</span><span class="ruby-identifier">line</span>.<span class="ruby-identifier">size</span>]
+<span class="line-num">49</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">50</span>       <span class="ruby-keyword">break</span>
+<span class="line-num">51</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">52</span>   }
+<span class="line-num">53</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">goids</span>
+<span class="line-num">54</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -296,12 +299,12 @@ data parser.</p>
 
           
           <div class="method-source-code" id="goid2term-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 78</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">goid2term</span>(<span class="ruby-identifier">goid</span>)
-  <span class="ruby-identifier">term</span> = <span class="ruby-identifier">id2term</span>[<span class="ruby-identifier">goid</span>]
-  <span class="ruby-identifier">term</span> = <span class="ruby-identifier">id2term</span>[<span class="ruby-identifier">id2id</span>[<span class="ruby-identifier">goid</span>]] <span class="ruby-keyword">if</span> <span class="ruby-identifier">term</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">term</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">78</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">goid2term</span>(<span class="ruby-identifier">goid</span>)
+<span class="line-num">79</span>   <span class="ruby-identifier">term</span> = <span class="ruby-identifier">id2term</span>[<span class="ruby-identifier">goid</span>]
+<span class="line-num">80</span>   <span class="ruby-identifier">term</span> = <span class="ruby-identifier">id2term</span>[<span class="ruby-identifier">id2id</span>[<span class="ruby-identifier">goid</span>]] <span class="ruby-keyword">if</span> <span class="ruby-identifier">term</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">81</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">term</span>
+<span class="line-num">82</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -315,12 +318,13 @@ data parser.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

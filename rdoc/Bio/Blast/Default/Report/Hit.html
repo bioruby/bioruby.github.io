@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../../";
 </script>
 
-<script src="../../../../js/jquery.js"></script>
-<script src="../../../../js/darkfish.js"></script>
+<script src="../../../../js/navigation.js" defer></script>
+<script src="../../../../js/search.js" defer></script>
+<script src="../../../../js/search_index.js" defer></script>
+<script src="../../../../js/searcher.js" defer></script>
+<script src="../../../../js/darkfish.js" defer></script>
 
 <link href="../../../../css/fonts.css" rel="stylesheet">
 <link href="../../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -126,9 +130,7 @@
 
   <section class="description">
     
-<p><a href="Hit.html">Bio::Blast::Default::Report::Hit</a> contains
-information about a hit. It may contain some <a
-href="HSP.html">Bio::Blast::Default::Report::HSP</a> objects.</p>
+<p><a href="Hit.html"><code>Bio::Blast::Default::Report::Hit</code></a> contains information about a hit. It may contain some <a href="HSP.html"><code>Bio::Blast::Default::Report::HSP</code></a> objects.</p>
 
   </section>
 
@@ -155,8 +157,7 @@ href="HSP.html">Bio::Blast::Default::Report::HSP</a> objects.</p>
 
         <div class="method-description">
         
-        <p>Hsp(high-scoring segment pair)s of the hit. Returns an array of <a
-href="HSP.html">Bio::Blast::Default::Report::HSP</a> objects.</p>
+        <p>Hsp(high-scoring segment pair)s of the hit. Returns an array of <a href="HSP.html"><code>Bio::Blast::Default::Report::HSP</code></a> objects.</p>
         
         </div>
       </div>
@@ -184,24 +185,21 @@ href="HSP.html">Bio::Blast::Default::Report::HSP</a> objects.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Hit.html">Hit</a> object. It is designed to be
-called only internally from the <a
-href="Iteration.html">Bio::Blast::Default::Report::Iteration</a> class.
-Users should not call the method directly.</p>
+          <p>Creates a new <a href="Hit.html"><code>Hit</code></a> object. It is designed to be called only internally from the <a href="Iteration.html"><code>Bio::Blast::Default::Report::Iteration</code></a> class. Users should not call the method directly.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 803</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-ivar">@f0hitname</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-ivar">@hsps</span> = []
-  <span class="ruby-keyword">while</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword">and</span> <span class="ruby-regexp">/\A\s+Score/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
-    <span class="ruby-ivar">@hsps</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">HSP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@again</span> = <span class="ruby-keyword">false</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">803</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">804</span>   <span class="ruby-ivar">@f0hitname</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">805</span>   <span class="ruby-ivar">@hsps</span> = []
+<span class="line-num">806</span>   <span class="ruby-keyword">while</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>] <span class="ruby-keyword">and</span> <span class="ruby-regexp">/\A\s+Score/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+<span class="line-num">807</span>     <span class="ruby-ivar">@hsps</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">HSP</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">808</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">809</span>   <span class="ruby-ivar">@again</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">810</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -239,15 +237,15 @@ Users should not call the method directly.</p>
 
           
           <div class="method-source-code" id="bit_score-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 836</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bit_score</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@bit_score</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@hsps</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-ivar">@bit_score</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">bit_score</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@bit_score</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">836</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bit_score</span>
+<span class="line-num">837</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@bit_score</span>)
+<span class="line-num">838</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@hsps</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">then</span>
+<span class="line-num">839</span>       <span class="ruby-ivar">@bit_score</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">bit_score</span>
+<span class="line-num">840</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">841</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">842</span>   <span class="ruby-ivar">@bit_score</span>
+<span class="line-num">843</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -277,8 +275,8 @@ Users should not call the method directly.</p>
 
           
           <div class="method-source-code" id="definition-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 878</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">definition</span>; <span class="ruby-identifier">parse_hitname</span>; <span class="ruby-ivar">@definition</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">878</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">definition</span>; <span class="ruby-identifier">parse_hitname</span>; <span class="ruby-ivar">@definition</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -306,17 +304,16 @@ Users should not call the method directly.</p>
 
         <div class="method-description">
           
-          <p>Iterates over each hsp(high-scoring segment pair) of the hit. Yields a <a
-href="HSP.html">Bio::Blast::Default::Report::HSP</a> object.</p>
+          <p>Iterates over each hsp(high-scoring segment pair) of the hit. Yields a <a href="HSP.html"><code>Bio::Blast::Default::Report::HSP</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 818</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
-  <span class="ruby-ivar">@hsps</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span> }
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">818</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
+<span class="line-num">819</span>   <span class="ruby-ivar">@hsps</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span> }
+<span class="line-num">820</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -346,15 +343,15 @@ href="HSP.html">Bio::Blast::Default::Report::HSP</a> object.</p>
 
           
           <div class="method-source-code" id="evalue-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 847</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">evalue</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@evalue</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@hsps</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-ivar">@evalue</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">evalue</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@evalue</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">847</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">evalue</span>
+<span class="line-num">848</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@evalue</span>)
+<span class="line-num">849</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@hsps</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">then</span>
+<span class="line-num">850</span>       <span class="ruby-ivar">@evalue</span> = <span class="ruby-identifier">h</span>.<span class="ruby-identifier">evalue</span>
+<span class="line-num">851</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">852</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">853</span>   <span class="ruby-ivar">@evalue</span>
+<span class="line-num">854</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -378,17 +375,16 @@ href="HSP.html">Bio::Blast::Default::Report::HSP</a> object.</p>
 
         <div class="method-description">
           
-          <p>(PSI-BLAST) Returns true if the hit is found again in the iteration.
-Otherwise, returns false or nil.</p>
+          <p>(PSI-BLAST) Returns true if the hit is found again in the iteration. Otherwise, returns false or nil.</p>
           
           
 
           
           <div class="method-source-code" id="found_again-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 825</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">found_again?</span>
-  <span class="ruby-ivar">@again</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">825</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">found_again?</span>
+<span class="line-num">826</span>   <span class="ruby-ivar">@again</span>
+<span class="line-num">827</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -412,15 +408,14 @@ Otherwise, returns false or nil.</p>
 
         <div class="method-description">
           
-          <p>Same as hsps.first.identity. Returns nil if there are no hsp in the hit.
-(Compatibility method with FASTA)</p>
+          <p>Same as hsps.first.identity. Returns nil if there are no hsp in the hit. (Compatibility method with FASTA)</p>
           
           
 
           
           <div class="method-source-code" id="identity-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 903</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">identity</span>;      <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:identity</span>;     <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">903</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">identity</span>;      <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:identity</span>;     <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -444,21 +439,16 @@ Otherwise, returns false or nil.</p>
 
         <div class="method-description">
           
-          <p>Returns an array which contains [ <a
-href="Hit.html#method-i-query_start">#query_start</a>, <a
-href="Hit.html#method-i-query_end">#query_end</a>, <a
-href="Hit.html#method-i-target_start">#target_start</a>, <a
-href="Hit.html#method-i-target_end">#target_end</a> ]. (Compatibility
-method with FASTA)</p>
+          <p>Returns an array which contains [ <a href="Hit.html#method-i-query_start"><code>query_start</code></a>, <a href="Hit.html#method-i-query_end"><code>query_end</code></a>, <a href="Hit.html#method-i-target_start"><code>target_start</code></a>, <a href="Hit.html#method-i-target_end"><code>target_end</code></a> ]. (Compatibility method with FASTA)</p>
           
           
 
           
           <div class="method-source-code" id="lap_at-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 948</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lap_at</span>
-  [ <span class="ruby-identifier">query_start</span>, <span class="ruby-identifier">query_end</span>, <span class="ruby-identifier">target_start</span>, <span class="ruby-identifier">target_end</span> ]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">948</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lap_at</span>
+<span class="line-num">949</span>   [ <span class="ruby-identifier">query_start</span>, <span class="ruby-identifier">query_end</span>, <span class="ruby-identifier">target_start</span>, <span class="ruby-identifier">target_end</span> ]
+<span class="line-num">950</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -488,8 +478,8 @@ method with FASTA)</p>
 
           
           <div class="method-source-code" id="len-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 875</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">len</span>;        <span class="ruby-identifier">parse_hitname</span>; <span class="ruby-ivar">@len</span>;        <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">875</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">len</span>;        <span class="ruby-identifier">parse_hitname</span>; <span class="ruby-ivar">@len</span>;        <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -517,15 +507,14 @@ method with FASTA)</p>
 
         <div class="method-description">
           
-          <p>Same as hsps.first.midline. Returns nil if there are no hsp in the hit.
-(Compatibility method with FASTA)</p>
+          <p>Same as hsps.first.midline. Returns nil if there are no hsp in the hit. (Compatibility method with FASTA)</p>
           
           
 
           
           <div class="method-source-code" id="midline-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 923</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">midline</span>;       <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:midline</span>;      <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">923</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">midline</span>;       <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:midline</span>;      <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -549,15 +538,14 @@ method with FASTA)</p>
 
         <div class="method-description">
           
-          <p>Same as hsps.first.align_len. Returns nil if there are no hsp in the hit.
-(Compatibility method with FASTA)</p>
+          <p>Same as hsps.first.align_len. Returns nil if there are no hsp in the hit. (Compatibility method with FASTA)</p>
           
           
 
           
           <div class="method-source-code" id="overlap-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 908</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">overlap</span>;       <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:align_len</span>;    <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">908</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">overlap</span>;       <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:align_len</span>;    <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -581,15 +569,14 @@ method with FASTA)</p>
 
         <div class="method-description">
           
-          <p>Same as hsps.first.query_to. Returns nil if there are no hsp in the hit.
-(Compatibility method with FASTA)</p>
+          <p>Same as hsps.first.query_to. Returns nil if there are no hsp in the hit. (Compatibility method with FASTA)</p>
           
           
 
           
           <div class="method-source-code" id="query_end-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 933</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_end</span>;     <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:query_to</span>;     <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">933</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_end</span>;     <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:query_to</span>;     <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -613,15 +600,14 @@ method with FASTA)</p>
 
         <div class="method-description">
           
-          <p>Same as hsps.first.qseq. Returns nil if there are no hsp in the hit.
-(Compatibility method with FASTA)</p>
+          <p>Same as hsps.first.qseq. Returns nil if there are no hsp in the hit. (Compatibility method with FASTA)</p>
           
           
 
           
           <div class="method-source-code" id="query_seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 913</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_seq</span>;     <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:qseq</span>;         <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">913</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_seq</span>;     <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:qseq</span>;         <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -645,15 +631,14 @@ method with FASTA)</p>
 
         <div class="method-description">
           
-          <p>Same as hsps.first.query_from. Returns nil if there are no hsp in the hit.
-(Compatibility method with FASTA)</p>
+          <p>Same as hsps.first.query_from. Returns nil if there are no hsp in the hit. (Compatibility method with FASTA)</p>
           
           
 
           
           <div class="method-source-code" id="query_start-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 928</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_start</span>;   <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:query_from</span>;   <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">928</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_start</span>;   <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:query_from</span>;   <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -683,10 +668,10 @@ method with FASTA)</p>
 
           
           <div class="method-source-code" id="score-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 830</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">score</span>
-  (<span class="ruby-identifier">h</span> = <span class="ruby-ivar">@hsps</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">score</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">830</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">score</span>
+<span class="line-num">831</span>   (<span class="ruby-identifier">h</span> = <span class="ruby-ivar">@hsps</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">score</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">832</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -738,15 +723,14 @@ method with FASTA)</p>
 
         <div class="method-description">
           
-          <p>Same as hsps.first.hit_to. Returns nil if there are no hsp in the hit.
-(Compatibility method with FASTA)</p>
+          <p>Same as hsps.first.hit_to. Returns nil if there are no hsp in the hit. (Compatibility method with FASTA)</p>
           
           
 
           
           <div class="method-source-code" id="target_end-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 943</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_end</span>;    <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:hit_to</span>;       <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">943</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_end</span>;    <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:hit_to</span>;       <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -776,8 +760,8 @@ method with FASTA)</p>
 
           
           <div class="method-source-code" id="target_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 880</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_id</span>; <span class="ruby-identifier">definition</span>[<span class="ruby-regexp">/^\s*(\S+)/</span>, <span class="ruby-value">1</span>]; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">880</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_id</span>; <span class="ruby-identifier">definition</span>[<span class="ruby-regexp">/^\s*(\S+)/</span>, <span class="ruby-value">1</span>]; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -829,15 +813,14 @@ method with FASTA)</p>
 
         <div class="method-description">
           
-          <p>Same as hsps.first.hseq. Returns nil if there are no hsp in the hit.
-(Compatibility method with FASTA)</p>
+          <p>Same as hsps.first.hseq. Returns nil if there are no hsp in the hit. (Compatibility method with FASTA)</p>
           
           
 
           
           <div class="method-source-code" id="target_seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 918</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_seq</span>;    <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:hseq</span>;         <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">918</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_seq</span>;    <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:hseq</span>;         <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -861,15 +844,14 @@ method with FASTA)</p>
 
         <div class="method-description">
           
-          <p>Same as hsps.first.hit_from. Returns nil if there are no hsp in the hit.
-(Compatibility method with FASTA)</p>
+          <p>Same as hsps.first.hit_from. Returns nil if there are no hsp in the hit. (Compatibility method with FASTA)</p>
           
           
 
           
           <div class="method-source-code" id="target_start-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 938</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_start</span>;  <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:hit_from</span>;     <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">938</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_start</span>;  <span class="ruby-identifier">hsp_first</span> <span class="ruby-value">:hit_from</span>;     <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -883,12 +865,13 @@ method with FASTA)</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

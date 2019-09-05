@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -87,10 +91,7 @@
 
 <p>XXX#each_heterogen must be defined.</p>
 
-<p><a href="HetatmFinder.html">Bio::PDB::HetatmFinder</a> is included by
-Bio::PDB::PDB, <a href="Model.html">Bio::PDB::Model</a>, <a
-href="Chain.html">Bio::PDB::Chain</a>, and <a
-href="Heterogen.html">Bio::PDB::Heterogen</a>.</p>
+<p><a href="HetatmFinder.html"><code>Bio::PDB::HetatmFinder</code></a> is included by Bio::PDB::PDB, <a href="Model.html"><code>Bio::PDB::Model</code></a>, <a href="Chain.html"><code>Bio::PDB::Chain</code></a>, and <a href="Heterogen.html"><code>Bio::PDB::Heterogen</code></a>.</p>
 
   </section>
 
@@ -130,10 +131,10 @@ href="Heterogen.html">Bio::PDB::Heterogen</a>.</p>
 
           
           <div class="method-source-code" id="each_hetatm-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 357</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_hetatm</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: hetatm</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_heterogen</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">heterogen</span><span class="ruby-operator">|</span> <span class="ruby-identifier">heterogen</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) }
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/utils.rb</span>
+<span class="line-num">357</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_hetatm</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: hetatm</span>
+<span class="line-num">358</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_heterogen</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">heterogen</span><span class="ruby-operator">|</span> <span class="ruby-identifier">heterogen</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) }
+<span class="line-num">359</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -157,21 +158,20 @@ href="Heterogen.html">Bio::PDB::Heterogen</a>.</p>
 
         <div class="method-description">
           
-          <p>returns an array containing all HETATMs for which given block is not
-<code>false</code> (similar to Enumerable#find_all).</p>
+          <p>returns an array containing all HETATMs for which given block is not <code>false</code> (similar to Enumerable#find_all).</p>
           
           
 
           
           <div class="method-source-code" id="find_hetatm-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 348</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_hetatm</span>
-  <span class="ruby-identifier">array</span> = []
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_hetatm</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hetatm</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">hetatm</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">hetatm</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/utils.rb</span>
+<span class="line-num">348</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_hetatm</span>
+<span class="line-num">349</span>   <span class="ruby-identifier">array</span> = []
+<span class="line-num">350</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_hetatm</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">hetatm</span><span class="ruby-operator">|</span>
+<span class="line-num">351</span>     <span class="ruby-identifier">array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">hetatm</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">hetatm</span>)
+<span class="line-num">352</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">353</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
+<span class="line-num">354</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -201,12 +201,12 @@ href="Heterogen.html">Bio::PDB::Heterogen</a>.</p>
 
           
           <div class="method-source-code" id="hetatms-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 362</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hetatms</span>
-  <span class="ruby-identifier">array</span> = []
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_heterogen</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">heterogen</span><span class="ruby-operator">|</span> <span class="ruby-identifier">array</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">heterogen</span>.<span class="ruby-identifier">hetatms</span>) }
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/utils.rb</span>
+<span class="line-num">362</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hetatms</span>
+<span class="line-num">363</span>   <span class="ruby-identifier">array</span> = []
+<span class="line-num">364</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_heterogen</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">heterogen</span><span class="ruby-operator">|</span> <span class="ruby-identifier">array</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">heterogen</span>.<span class="ruby-identifier">hetatms</span>) }
+<span class="line-num">365</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
+<span class="line-num">366</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -220,12 +220,13 @@ href="Heterogen.html">Bio::PDB::Heterogen</a>.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

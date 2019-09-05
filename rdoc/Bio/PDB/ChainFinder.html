@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -87,8 +91,7 @@
 
 <p>XXX#each_model must be defined.</p>
 
-<p><a href="ChainFinder.html">Bio::PDB::ChainFinder</a> is included by
-Bio::PDB::PDB and <a href="Model.html">Bio::PDB::Model</a>.</p>
+<p><a href="ChainFinder.html"><code>Bio::PDB::ChainFinder</code></a> is included by Bio::PDB::PDB and <a href="Model.html"><code>Bio::PDB::Model</code></a>.</p>
 
   </section>
 
@@ -128,12 +131,12 @@ Bio::PDB::PDB and <a href="Model.html">Bio::PDB::Model</a>.</p>
 
           
           <div class="method-source-code" id="chains-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 272</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">chains</span>
-  <span class="ruby-identifier">array</span> = []
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_model</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-identifier">array</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">model</span>.<span class="ruby-identifier">chains</span>) }
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/utils.rb</span>
+<span class="line-num">272</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">chains</span>
+<span class="line-num">273</span>   <span class="ruby-identifier">array</span> = []
+<span class="line-num">274</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_model</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-identifier">array</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">model</span>.<span class="ruby-identifier">chains</span>) }
+<span class="line-num">275</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
+<span class="line-num">276</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -163,10 +166,10 @@ Bio::PDB::PDB and <a href="Model.html">Bio::PDB::Model</a>.</p>
 
           
           <div class="method-source-code" id="each_chain-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 267</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_chain</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: chain</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_model</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) }
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/utils.rb</span>
+<span class="line-num">267</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_chain</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: chain</span>
+<span class="line-num">268</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_model</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">model</span><span class="ruby-operator">|</span> <span class="ruby-identifier">model</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) }
+<span class="line-num">269</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -190,21 +193,20 @@ Bio::PDB::PDB and <a href="Model.html">Bio::PDB::Model</a>.</p>
 
         <div class="method-description">
           
-          <p>returns an array containing all chains for which given block is not
-<code>false</code> (similar to Enumerable#find_all).</p>
+          <p>returns an array containing all chains for which given block is not <code>false</code> (similar to Enumerable#find_all).</p>
           
           
 
           
           <div class="method-source-code" id="find_chain-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/utils.rb, line 258</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_chain</span>
-  <span class="ruby-identifier">array</span> = []
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_chain</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">chain</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">chain</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">chain</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/utils.rb</span>
+<span class="line-num">258</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">find_chain</span>
+<span class="line-num">259</span>   <span class="ruby-identifier">array</span> = []
+<span class="line-num">260</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_chain</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">chain</span><span class="ruby-operator">|</span>
+<span class="line-num">261</span>     <span class="ruby-identifier">array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">chain</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">chain</span>)
+<span class="line-num">262</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">263</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
+<span class="line-num">264</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -218,12 +220,13 @@ Bio::PDB::PDB and <a href="Model.html">Bio::PDB::Model</a>.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

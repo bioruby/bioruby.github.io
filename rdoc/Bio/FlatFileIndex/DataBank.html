@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -225,10 +229,10 @@
 
           
           <div class="method-source-code" id="filename-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1131</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">filename</span>(<span class="ruby-identifier">dbname</span>)
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dbname</span>, <span class="ruby-string">&#39;config.dat&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1131</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">filename</span>(<span class="ruby-identifier">dbname</span>)
+<span class="line-num">1132</span>   <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dbname</span>, <span class="ruby-string">&#39;config.dat&#39;</span>)
+<span class="line-num">1133</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -258,27 +262,27 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">idx_type</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-ivar">@dbname</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-ivar">@dbname</span>.<span class="ruby-identifier">freeze</span>
-  <span class="ruby-ivar">@bdb</span> = <span class="ruby-keyword">nil</span>
-
-  <span class="ruby-ivar">@always_check</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">index_type</span> = (<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;index&#39;</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">idx_type</span>)
-
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@config</span> = <span class="ruby-constant">BDBwrapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@dbname</span>, <span class="ruby-string">&#39;config&#39;</span>)
-    <span class="ruby-ivar">@bdb_fileids</span> = <span class="ruby-constant">BDBwrapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@dbname</span>, <span class="ruby-string">&#39;fileids&#39;</span>)
-    <span class="ruby-ivar">@nsclass_pri</span> = <span class="ruby-constant">BDB_1</span><span class="ruby-operator">::</span><span class="ruby-constant">PrimaryNameSpace</span>
-    <span class="ruby-ivar">@nsclass_sec</span> = <span class="ruby-constant">BDB_1</span><span class="ruby-operator">::</span><span class="ruby-constant">SecondaryNameSpace</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">hash</span>
-    <span class="ruby-ivar">@nsclass_pri</span> = <span class="ruby-constant">Flat_1</span><span class="ruby-operator">::</span><span class="ruby-constant">PrimaryNameSpace</span>
-    <span class="ruby-ivar">@nsclass_sec</span> = <span class="ruby-constant">Flat_1</span><span class="ruby-operator">::</span><span class="ruby-constant">SecondaryNameSpace</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">true</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1148</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">idx_type</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">1149</span>   <span class="ruby-ivar">@dbname</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">1150</span>   <span class="ruby-ivar">@dbname</span>.<span class="ruby-identifier">freeze</span>
+<span class="line-num">1151</span>   <span class="ruby-ivar">@bdb</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">1152</span> 
+<span class="line-num">1153</span>   <span class="ruby-ivar">@always_check</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">1154</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">index_type</span> = (<span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;index&#39;</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">idx_type</span>)
+<span class="line-num">1155</span> 
+<span class="line-num">1156</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1157</span>     <span class="ruby-ivar">@config</span> = <span class="ruby-constant">BDBwrapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@dbname</span>, <span class="ruby-string">&#39;config&#39;</span>)
+<span class="line-num">1158</span>     <span class="ruby-ivar">@bdb_fileids</span> = <span class="ruby-constant">BDBwrapper</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@dbname</span>, <span class="ruby-string">&#39;fileids&#39;</span>)
+<span class="line-num">1159</span>     <span class="ruby-ivar">@nsclass_pri</span> = <span class="ruby-constant">BDB_1</span><span class="ruby-operator">::</span><span class="ruby-constant">PrimaryNameSpace</span>
+<span class="line-num">1160</span>     <span class="ruby-ivar">@nsclass_sec</span> = <span class="ruby-constant">BDB_1</span><span class="ruby-operator">::</span><span class="ruby-constant">SecondaryNameSpace</span>
+<span class="line-num">1161</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1162</span>     <span class="ruby-ivar">@config</span> = <span class="ruby-identifier">hash</span>
+<span class="line-num">1163</span>     <span class="ruby-ivar">@nsclass_pri</span> = <span class="ruby-constant">Flat_1</span><span class="ruby-operator">::</span><span class="ruby-constant">PrimaryNameSpace</span>
+<span class="line-num">1164</span>     <span class="ruby-ivar">@nsclass_sec</span> = <span class="ruby-constant">Flat_1</span><span class="ruby-operator">::</span><span class="ruby-constant">SecondaryNameSpace</span>
+<span class="line-num">1165</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1166</span>   <span class="ruby-keyword">true</span>
+<span class="line-num">1167</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -308,10 +312,10 @@
 
           
           <div class="method-source-code" id="open-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1144</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1144</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">1145</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">1146</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -341,15 +345,15 @@
 
           
           <div class="method-source-code" id="read-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1135</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-string">&#39;rb&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
-  <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>(<span class="ruby-identifier">name</span>), <span class="ruby-identifier">mode</span>)
-  <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">file2hash</span>(<span class="ruby-identifier">f</span>)
-  <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
-  <span class="ruby-identifier">db</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">hash</span>)
-  <span class="ruby-identifier">db</span>.<span class="ruby-identifier">bdb_open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
-  <span class="ruby-identifier">db</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1135</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">mode</span> = <span class="ruby-string">&#39;rb&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
+<span class="line-num">1136</span>   <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>(<span class="ruby-identifier">name</span>), <span class="ruby-identifier">mode</span>)
+<span class="line-num">1137</span>   <span class="ruby-identifier">hash</span> = <span class="ruby-identifier">file2hash</span>(<span class="ruby-identifier">f</span>)
+<span class="line-num">1138</span>   <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">1139</span>   <span class="ruby-identifier">db</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">hash</span>)
+<span class="line-num">1140</span>   <span class="ruby-identifier">db</span>.<span class="ruby-identifier">bdb_open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
+<span class="line-num">1141</span>   <span class="ruby-identifier">db</span>
+<span class="line-num">1142</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -387,14 +391,14 @@
 
           
           <div class="method-source-code" id="always_check-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1305</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">always_check=</span>(<span class="ruby-identifier">bool</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">bool</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@always_check</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@always_check</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1305</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">always_check=</span>(<span class="ruby-identifier">bool</span>)
+<span class="line-num">1306</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">bool</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1307</span>     <span class="ruby-ivar">@always_check</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">1308</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1309</span>     <span class="ruby-ivar">@always_check</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">1310</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1311</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -424,18 +428,18 @@
 
           
           <div class="method-source-code" id="bdb_open-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1204</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bdb_open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">close</span>
-    <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
-    <span class="ruby-ivar">@bdb_fileids</span>.<span class="ruby-identifier">close</span>
-    <span class="ruby-ivar">@bdb_fileids</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
-    <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1204</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bdb_open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
+<span class="line-num">1205</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1206</span>     <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">1207</span>     <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
+<span class="line-num">1208</span>     <span class="ruby-ivar">@bdb_fileids</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">1209</span>     <span class="ruby-ivar">@bdb_fileids</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
+<span class="line-num">1210</span>     <span class="ruby-keyword">true</span>
+<span class="line-num">1211</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1212</span>     <span class="ruby-keyword">nil</span>
+<span class="line-num">1213</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1214</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -465,10 +469,10 @@
 
           
           <div class="method-source-code" id="check_consistency-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1374</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_consistency</span>
-  <span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">check_all</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1374</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_consistency</span>
+<span class="line-num">1375</span>   <span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">check_all</span>
+<span class="line-num">1376</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -498,18 +502,18 @@
 
           
           <div class="method-source-code" id="close-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1234</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
-  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;DataBank: close #{@dbname}\n&quot;</span>
-  <span class="ruby-identifier">primary</span>.<span class="ruby-identifier">close</span>
-  <span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">close</span>
-  <span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">close</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">close</span>
-    <span class="ruby-ivar">@bdb_fileids</span>.<span class="ruby-identifier">close</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1234</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
+<span class="line-num">1235</span>   <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;DataBank: close #{@dbname}\n&quot;</span>
+<span class="line-num">1236</span>   <span class="ruby-identifier">primary</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">1237</span>   <span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">1238</span>   <span class="ruby-identifier">fileids</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">1239</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1240</span>     <span class="ruby-ivar">@config</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">1241</span>     <span class="ruby-ivar">@bdb_fileids</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">1242</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1243</span>   <span class="ruby-keyword">nil</span>
+<span class="line-num">1244</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -539,13 +543,13 @@
 
           
           <div class="method-source-code" id="fileids-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1288</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fileids</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@fileids</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">init_fileids</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@fileids</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1288</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fileids</span>
+<span class="line-num">1289</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@fileids</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1290</span>     <span class="ruby-identifier">init_fileids</span>
+<span class="line-num">1291</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1292</span>   <span class="ruby-ivar">@fileids</span>
+<span class="line-num">1293</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -575,13 +579,13 @@
 
           
           <div class="method-source-code" id="format-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1281</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@format</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;format&#39;</span>]
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@format</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1281</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format</span>
+<span class="line-num">1282</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@format</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1283</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;format&#39;</span>]
+<span class="line-num">1284</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1285</span>   <span class="ruby-ivar">@format</span>
+<span class="line-num">1286</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -611,10 +615,10 @@
 
           
           <div class="method-source-code" id="format-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1277</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format=</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">dup</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1277</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format=</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">1278</span>   <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">1279</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -644,14 +648,14 @@
 
           
           <div class="method-source-code" id="get_flatfile_data-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1314</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_flatfile_data</span>(<span class="ruby-identifier">f</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">length</span>)
-  <span class="ruby-identifier">fi</span> = <span class="ruby-identifier">fileids</span>[<span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_i</span>]
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@always_check</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;flatfile #{fi.filename.inspect} may be modified&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">check</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">pos</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_i</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1314</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_flatfile_data</span>(<span class="ruby-identifier">f</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">length</span>)
+<span class="line-num">1315</span>   <span class="ruby-identifier">fi</span> = <span class="ruby-identifier">fileids</span>[<span class="ruby-identifier">f</span>.<span class="ruby-identifier">to_i</span>]
+<span class="line-num">1316</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@always_check</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1317</span>     <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;flatfile #{fi.filename.inspect} may be modified&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">check</span>
+<span class="line-num">1318</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1319</span>   <span class="ruby-identifier">fi</span>.<span class="ruby-identifier">get</span>(<span class="ruby-identifier">pos</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-identifier">length</span>.<span class="ruby-identifier">to_i</span>)
+<span class="line-num">1320</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -681,22 +685,22 @@
 
           
           <div class="method-source-code" id="index_type-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1171</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index_type=</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-constant">MAGIC_BDB</span>
-    <span class="ruby-ivar">@index_type</span> = <span class="ruby-constant">MAGIC_BDB</span>
-    <span class="ruby-ivar">@bdb</span> = <span class="ruby-keyword">true</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">BDB</span>)
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeError</span>, <span class="ruby-string">&quot;Berkeley DB support not found&quot;</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-constant">MAGIC_FLAT</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">false</span>
-    <span class="ruby-ivar">@index_type</span> = <span class="ruby-constant">MAGIC_FLAT</span>
-    <span class="ruby-ivar">@bdb</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;unknown or unsupported index type&#39;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1171</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index_type=</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">1172</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
+<span class="line-num">1173</span>   <span class="ruby-keyword">when</span> <span class="ruby-constant">MAGIC_BDB</span>
+<span class="line-num">1174</span>     <span class="ruby-ivar">@index_type</span> = <span class="ruby-constant">MAGIC_BDB</span>
+<span class="line-num">1175</span>     <span class="ruby-ivar">@bdb</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">1176</span>     <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-constant">BDB</span>)
+<span class="line-num">1177</span>       <span class="ruby-identifier">raise</span> <span class="ruby-constant">RuntimeError</span>, <span class="ruby-string">&quot;Berkeley DB support not found&quot;</span>
+<span class="line-num">1178</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1179</span>   <span class="ruby-keyword">when</span> <span class="ruby-constant">MAGIC_FLAT</span>, <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">false</span>
+<span class="line-num">1180</span>     <span class="ruby-ivar">@index_type</span> = <span class="ruby-constant">MAGIC_FLAT</span>
+<span class="line-num">1181</span>     <span class="ruby-ivar">@bdb</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">1182</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1183</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;unknown or unsupported index type&#39;</span>
+<span class="line-num">1184</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1185</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -726,15 +730,15 @@
 
           
           <div class="method-source-code" id="init_fileids-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1295</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init_fileids</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@fileids</span> = <span class="ruby-constant">FileIDs</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-ivar">@bdb_fileids</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@fileids</span> = <span class="ruby-constant">FileIDs</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;fileid_&#39;</span>, <span class="ruby-ivar">@config</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@fileids</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1295</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init_fileids</span>
+<span class="line-num">1296</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1297</span>     <span class="ruby-ivar">@fileids</span> = <span class="ruby-constant">FileIDs</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-ivar">@bdb_fileids</span>)
+<span class="line-num">1298</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1299</span>     <span class="ruby-ivar">@fileids</span> = <span class="ruby-constant">FileIDs</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;fileid_&#39;</span>, <span class="ruby-ivar">@config</span>)
+<span class="line-num">1300</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1301</span>   <span class="ruby-ivar">@fileids</span>
+<span class="line-num">1302</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -764,13 +768,13 @@
 
           
           <div class="method-source-code" id="primary-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1247</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">primary</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@primary</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">primary</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;primary_namespace&#39;</span>]
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@primary</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1247</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">primary</span>
+<span class="line-num">1248</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@primary</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1249</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">primary</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;primary_namespace&#39;</span>]
+<span class="line-num">1250</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1251</span>   <span class="ruby-ivar">@primary</span>
+<span class="line-num">1252</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -800,14 +804,14 @@
 
           
           <div class="method-source-code" id="primary-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1254</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">primary=</span>(<span class="ruby-identifier">pri_name</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">pri_name</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">pri_name</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">pri_name</span> = <span class="ruby-string">&#39;UNIQUE&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@primary</span> = <span class="ruby-ivar">@nsclass_pri</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@dbname</span>, <span class="ruby-identifier">pri_name</span>)
-  <span class="ruby-ivar">@primary</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1254</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">primary=</span>(<span class="ruby-identifier">pri_name</span>)
+<span class="line-num">1255</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">pri_name</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">pri_name</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1256</span>     <span class="ruby-identifier">pri_name</span> = <span class="ruby-string">&#39;UNIQUE&#39;</span>
+<span class="line-num">1257</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1258</span>   <span class="ruby-ivar">@primary</span> = <span class="ruby-ivar">@nsclass_pri</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@dbname</span>, <span class="ruby-identifier">pri_name</span>)
+<span class="line-num">1259</span>   <span class="ruby-ivar">@primary</span>
+<span class="line-num">1260</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -837,11 +841,11 @@
 
           
           <div class="method-source-code" id="search_all-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1341</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_all</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">search_all_get_unique_id</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">search_primary</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">s</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1341</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_all</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1342</span>   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">search_all_get_unique_id</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1343</span>   <span class="ruby-identifier">search_primary</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">s</span>)
+<span class="line-num">1344</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -871,15 +875,15 @@
 
           
           <div class="method-source-code" id="search_all_get_unique_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1322</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_all_get_unique_id</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">p</span> = <span class="ruby-identifier">primary</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span>
-  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">sort!</span>
-  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">uniq!</span>
-  <span class="ruby-identifier">s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1322</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_all_get_unique_id</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1323</span>   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1324</span>   <span class="ruby-identifier">p</span> = <span class="ruby-identifier">primary</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1325</span>   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span>
+<span class="line-num">1326</span>   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">sort!</span>
+<span class="line-num">1327</span>   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">uniq!</span>
+<span class="line-num">1328</span>   <span class="ruby-identifier">s</span>
+<span class="line-num">1329</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -909,11 +913,11 @@
 
           
           <div class="method-source-code" id="search_namespaces-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1369</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_namespaces</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
-  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">search_namespaces_get_unique_id</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
-  <span class="ruby-identifier">search_primary</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">s</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1369</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_namespaces</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
+<span class="line-num">1370</span>   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">search_namespaces_get_unique_id</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
+<span class="line-num">1371</span>   <span class="ruby-identifier">search_primary</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">s</span>)
+<span class="line-num">1372</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -943,22 +947,22 @@
 
           
           <div class="method-source-code" id="search_namespaces_get_unique_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1353</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_namespaces_get_unique_id</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">primary</span>.<span class="ruby-identifier">name</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">n2</span> = <span class="ruby-identifier">names</span>.<span class="ruby-identifier">dup</span>
-    <span class="ruby-identifier">n2</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">primary</span>.<span class="ruby-identifier">name</span>)
-    <span class="ruby-identifier">p</span> = <span class="ruby-identifier">primary</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">n2</span> = <span class="ruby-identifier">names</span>
-    <span class="ruby-identifier">p</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">search_names</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">n2</span>)
-  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span>
-  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">sort!</span>
-  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">uniq!</span>
-  <span class="ruby-identifier">s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1353</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_namespaces_get_unique_id</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">names</span>)
+<span class="line-num">1354</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">names</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">primary</span>.<span class="ruby-identifier">name</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">1355</span>     <span class="ruby-identifier">n2</span> = <span class="ruby-identifier">names</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">1356</span>     <span class="ruby-identifier">n2</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">primary</span>.<span class="ruby-identifier">name</span>)
+<span class="line-num">1357</span>     <span class="ruby-identifier">p</span> = <span class="ruby-identifier">primary</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1358</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1359</span>     <span class="ruby-identifier">n2</span> = <span class="ruby-identifier">names</span>
+<span class="line-num">1360</span>     <span class="ruby-identifier">p</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">1361</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1362</span>   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">search_names</span>(<span class="ruby-identifier">key</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">n2</span>)
+<span class="line-num">1363</span>   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span>
+<span class="line-num">1364</span>   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">sort!</span>
+<span class="line-num">1365</span>   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">uniq!</span>
+<span class="line-num">1366</span>   <span class="ruby-identifier">s</span>
+<span class="line-num">1367</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -988,16 +992,16 @@
 
           
           <div class="method-source-code" id="search_primary-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1331</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_primary</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">r</span> = <span class="ruby-constant">Results</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">a</span> = <span class="ruby-identifier">primary</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">x</span>)
-    <span class="ruby-comment"># a is empty or a.size==1 because primary key must be unique</span>
-    <span class="ruby-identifier">r</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">get_flatfile_data</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>])) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1331</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_primary</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">1332</span>   <span class="ruby-identifier">r</span> = <span class="ruby-constant">Results</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">1333</span>   <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">1334</span>     <span class="ruby-identifier">a</span> = <span class="ruby-identifier">primary</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">1335</span>     <span class="ruby-comment"># a is empty or a.size==1 because primary key must be unique</span>
+<span class="line-num">1336</span>     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">get_flatfile_data</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>])) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">1337</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1338</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">1339</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1027,13 +1031,13 @@
 
           
           <div class="method-source-code" id="search_primary_get_unique_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1346</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_primary_get_unique_id</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">s</span> = []
-  <span class="ruby-identifier">p</span> = <span class="ruby-identifier">primary</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span>
-  <span class="ruby-identifier">s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1346</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search_primary_get_unique_id</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1347</span>   <span class="ruby-identifier">s</span> = []
+<span class="line-num">1348</span>   <span class="ruby-identifier">p</span> = <span class="ruby-identifier">primary</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1349</span>   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">p</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span>
+<span class="line-num">1350</span>   <span class="ruby-identifier">s</span>
+<span class="line-num">1351</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1063,13 +1067,13 @@
 
           
           <div class="method-source-code" id="secondary-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1262</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">secondary</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@secondary</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">secondary</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;secondary_namespaces&#39;</span>]
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@secondary</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1262</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">secondary</span>
+<span class="line-num">1263</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@secondary</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1264</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">secondary</span> = <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;secondary_namespaces&#39;</span>]
+<span class="line-num">1265</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1266</span>   <span class="ruby-ivar">@secondary</span>
+<span class="line-num">1267</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1099,14 +1103,14 @@
 
           
           <div class="method-source-code" id="secondary-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1269</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">secondary=</span>(<span class="ruby-identifier">sec_names</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">sec_names</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">sec_names</span> = []
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@secondary</span> = <span class="ruby-constant">NameSpaces</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@dbname</span>, <span class="ruby-ivar">@nsclass_sec</span>, <span class="ruby-identifier">sec_names</span>)
-  <span class="ruby-ivar">@secondary</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1269</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">secondary=</span>(<span class="ruby-identifier">sec_names</span>)
+<span class="line-num">1270</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">sec_names</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1271</span>     <span class="ruby-identifier">sec_names</span> = []
+<span class="line-num">1272</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1273</span>   <span class="ruby-ivar">@secondary</span> = <span class="ruby-constant">NameSpaces</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@dbname</span>, <span class="ruby-ivar">@nsclass_sec</span>, <span class="ruby-identifier">sec_names</span>)
+<span class="line-num">1274</span>   <span class="ruby-ivar">@secondary</span>
+<span class="line-num">1275</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1136,23 +1140,23 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1187</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-identifier">a</span> = <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;index\t#{@index_type}\n&quot;</span>
-
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;format\t#{@format}\n&quot;</span>
-    <span class="ruby-ivar">@fileids</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{x.to_s(i)}\n&quot;</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;primary_namespace\t#{@primary.name}\n&quot;</span>
-    <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;secondary_namespaces\t&quot;</span>
-    <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@secondary</span>.<span class="ruby-identifier">names</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>)
-    <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">a</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1187</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">1188</span>   <span class="ruby-identifier">a</span> = <span class="ruby-string">&quot;&quot;</span>
+<span class="line-num">1189</span>   <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;index\t#{@index_type}\n&quot;</span>
+<span class="line-num">1190</span> 
+<span class="line-num">1191</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1192</span>     <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;format\t#{@format}\n&quot;</span>
+<span class="line-num">1193</span>     <span class="ruby-ivar">@fileids</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+<span class="line-num">1194</span>       <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{x.to_s(i)}\n&quot;</span>
+<span class="line-num">1195</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1196</span>     <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;primary_namespace\t#{@primary.name}\n&quot;</span>
+<span class="line-num">1197</span>     <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;secondary_namespaces\t&quot;</span>
+<span class="line-num">1198</span>     <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@secondary</span>.<span class="ruby-identifier">names</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>)
+<span class="line-num">1199</span>     <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">1200</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1201</span>   <span class="ruby-identifier">a</span>
+<span class="line-num">1202</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1182,24 +1186,24 @@
 
           
           <div class="method-source-code" id="write-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 1216</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write</span>(<span class="ruby-identifier">mode</span> = <span class="ruby-string">&#39;wb&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-constant">FileTest</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-ivar">@dbname</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-ivar">@dbname</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">filename</span>(<span class="ruby-ivar">@dbname</span>), <span class="ruby-identifier">mode</span>)
-  <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">bdb_open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
-    <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;format&#39;</span>] = <span class="ruby-identifier">format</span>
-    <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;primary_namespace&#39;</span>] = <span class="ruby-ivar">@primary</span>.<span class="ruby-identifier">name</span>
-    <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;secondary_namespaces&#39;</span>] = <span class="ruby-ivar">@secondary</span>.<span class="ruby-identifier">names</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>)
-    <span class="ruby-ivar">@bdb_fileids</span>.<span class="ruby-identifier">writeback_array</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">fileids</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">true</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">1216</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">write</span>(<span class="ruby-identifier">mode</span> = <span class="ruby-string">&#39;wb&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
+<span class="line-num">1217</span>   <span class="ruby-keyword">unless</span> <span class="ruby-constant">FileTest</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-ivar">@dbname</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">1218</span>     <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">mkdir</span>(<span class="ruby-ivar">@dbname</span>)
+<span class="line-num">1219</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1220</span>   <span class="ruby-identifier">f</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">filename</span>(<span class="ruby-ivar">@dbname</span>), <span class="ruby-identifier">mode</span>)
+<span class="line-num">1221</span>   <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">1222</span>   <span class="ruby-identifier">f</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">1223</span> 
+<span class="line-num">1224</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bdb</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1225</span>     <span class="ruby-identifier">bdb_open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
+<span class="line-num">1226</span>     <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;format&#39;</span>] = <span class="ruby-identifier">format</span>
+<span class="line-num">1227</span>     <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;primary_namespace&#39;</span>] = <span class="ruby-ivar">@primary</span>.<span class="ruby-identifier">name</span>
+<span class="line-num">1228</span>     <span class="ruby-ivar">@config</span>[<span class="ruby-string">&#39;secondary_namespaces&#39;</span>] = <span class="ruby-ivar">@secondary</span>.<span class="ruby-identifier">names</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>)
+<span class="line-num">1229</span>     <span class="ruby-ivar">@bdb_fileids</span>.<span class="ruby-identifier">writeback_array</span>(<span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">fileids</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">bdbarg</span>)
+<span class="line-num">1230</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1231</span>   <span class="ruby-keyword">true</span>
+<span class="line-num">1232</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1213,12 +1217,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

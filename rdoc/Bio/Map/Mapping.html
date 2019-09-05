@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -101,10 +105,7 @@
     
 <h2 id="class-Bio::Map::Mapping-label-Description">Description<span><a href="#class-Bio::Map::Mapping-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>Creates a new <a href="Mapping.html">Bio::Map::Mapping</a> object, which
-links Bio::Map::ActsAsMap- and Bio::Map::ActsAsMarker-like objects. This
-class is typically not accessed directly, but through map- or marker-like
-objects.</p>
+<p>Creates a new <a href="Mapping.html"><code>Bio::Map::Mapping</code></a> object, which links Bio::Map::ActsAsMap- and Bio::Map::ActsAsMarker-like objects. This class is typically not accessed directly, but through map- or marker-like objects.</p>
 
   </section>
 
@@ -185,26 +186,26 @@ objects.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Mapping.html">Bio::Map::Mapping</a> object</p>
+          <p>Creates a new <a href="Mapping.html"><code>Bio::Map::Mapping</code></a> object</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>map</em>: a <a href="SimpleMap.html">Bio::Map::SimpleMap</a> object</p>
+<p><em>map</em>: a <a href="SimpleMap.html"><code>Bio::Map::SimpleMap</code></a> object</p>
 </li><li>
-<p><em>marker</em>: a <a href="Marker.html">Bio::Map::Marker</a> object</p>
+<p><em>marker</em>: a <a href="Marker.html"><code>Bio::Map::Marker</code></a> object</p>
 </li><li>
-<p><em>location</em>: a <a href="../Locations.html">Bio::Locations</a> object</p>
+<p><em>location</em>: a <a href="../Locations.html"><code>Bio::Locations</code></a> object</p>
 </li></ul>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/map.rb, line 304</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">map</span>, <span class="ruby-identifier">marker</span>, <span class="ruby-identifier">location</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@map</span>, <span class="ruby-ivar">@marker</span>, <span class="ruby-ivar">@location</span> = <span class="ruby-identifier">map</span>, <span class="ruby-identifier">marker</span>, <span class="ruby-identifier">location</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/map.rb</span>
+<span class="line-num">304</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">map</span>, <span class="ruby-identifier">marker</span>, <span class="ruby-identifier">location</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">305</span>   <span class="ruby-ivar">@map</span>, <span class="ruby-ivar">@marker</span>, <span class="ruby-ivar">@location</span> = <span class="ruby-identifier">map</span>, <span class="ruby-identifier">marker</span>, <span class="ruby-identifier">location</span>
+<span class="line-num">306</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -241,7 +242,7 @@ objects.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>other_mapping: <a href="Mapping.html">Bio::Map::Mapping</a> object</p>
+<p>other_mapping: <a href="Mapping.html"><code>Bio::Map::Mapping</code></a> object</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd></dd></dl>
@@ -252,25 +253,24 @@ objects.</p>
 </li><li>
 <p>0 if both location are the same</p>
 </li><li>
-<p>nil if the argument is not a <a href="../Location.html">Bio::Location</a>
-object</p>
+<p>nil if the argument is not a <a href="../Location.html"><code>Bio::Location</code></a> object</p>
 </li></ul>
           
           
 
           
           <div class="method-source-code" id="3C-3D-3E-source">
-            <pre><span class="ruby-comment"># File lib/bio/map.rb, line 318</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">Mapping</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] markers are not comparable&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@map</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">map</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] maps have to be the same&quot;</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">location</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">location</span>[<span class="ruby-value">0</span>])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/map.rb</span>
+<span class="line-num">318</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">319</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Map</span><span class="ruby-operator">::</span><span class="ruby-constant">Mapping</span>)
+<span class="line-num">320</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] markers are not comparable&quot;</span>
+<span class="line-num">321</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">322</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@map</span>.<span class="ruby-identifier">equal?</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">map</span>)
+<span class="line-num">323</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;[Error] maps have to be the same&quot;</span>
+<span class="line-num">324</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">325</span> 
+<span class="line-num">326</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">location</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">location</span>[<span class="ruby-value">0</span>])
+<span class="line-num">327</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -284,12 +284,13 @@ object</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

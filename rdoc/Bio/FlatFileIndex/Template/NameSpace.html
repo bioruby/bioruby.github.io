@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -185,13 +189,13 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 457</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">dbname</span>, <span class="ruby-identifier">name</span>)
-  <span class="ruby-ivar">@dbname</span> = <span class="ruby-identifier">dbname</span>
-  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-ivar">@name</span>.<span class="ruby-identifier">freeze</span>
-  <span class="ruby-ivar">@file</span> = <span class="ruby-identifier">mapping</span>(<span class="ruby-identifier">filename</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">457</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">dbname</span>, <span class="ruby-identifier">name</span>)
+<span class="line-num">458</span>   <span class="ruby-ivar">@dbname</span> = <span class="ruby-identifier">dbname</span>
+<span class="line-num">459</span>   <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">460</span>   <span class="ruby-ivar">@name</span>.<span class="ruby-identifier">freeze</span>
+<span class="line-num">461</span>   <span class="ruby-ivar">@file</span> = <span class="ruby-identifier">mapping</span>(<span class="ruby-identifier">filename</span>)
+<span class="line-num">462</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -229,10 +233,10 @@
 
           
           <div class="method-source-code" id="close-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 470</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
-  <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">close</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">470</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
+<span class="line-num">471</span>   <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">472</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -262,11 +266,11 @@
 
           
           <div class="method-source-code" id="filename-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 446</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filename</span>
-  <span class="ruby-comment"># should be redifined in child class</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-string">&quot;should be redefined in child class&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">446</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filename</span>
+<span class="line-num">447</span>   <span class="ruby-comment"># should be redifined in child class</span>
+<span class="line-num">448</span>   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-string">&quot;should be redefined in child class&quot;</span>
+<span class="line-num">449</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -296,15 +300,15 @@
 
           
           <div class="method-source-code" id="include-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 474</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">include?</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">r</span> = <span class="ruby-identifier">search</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">key</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">474</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">include?</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">475</span>   <span class="ruby-identifier">r</span> = <span class="ruby-identifier">search</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">476</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">477</span>     <span class="ruby-identifier">key</span>
+<span class="line-num">478</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">479</span>     <span class="ruby-keyword">nil</span>
+<span class="line-num">480</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">481</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -334,12 +338,12 @@
 
           
           <div class="method-source-code" id="mapping-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 451</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mapping</span>(<span class="ruby-identifier">filename</span>)
-  <span class="ruby-comment"># should be redifined in child class</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-string">&quot;should be redefined in child class&quot;</span>
-  <span class="ruby-comment">#Flat_1::FlatMappingFile.new(filename)</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">451</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mapping</span>(<span class="ruby-identifier">filename</span>)
+<span class="line-num">452</span>   <span class="ruby-comment"># should be redifined in child class</span>
+<span class="line-num">453</span>   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-string">&quot;should be redefined in child class&quot;</span>
+<span class="line-num">454</span>   <span class="ruby-comment">#Flat_1::FlatMappingFile.new(filename)</span>
+<span class="line-num">455</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -369,11 +373,11 @@
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 465</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">open</span>
-  <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">key</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">465</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">466</span>   <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">open</span>
+<span class="line-num">467</span>   <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">search</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">468</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -387,12 +391,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

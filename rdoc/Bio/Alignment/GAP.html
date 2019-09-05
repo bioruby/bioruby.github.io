@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -81,8 +85,7 @@
 
   <section class="description">
     
-<p><a href="GAP.html">Bio::Alignment::GAP</a> is a set of class methods for
-gap-related position translation.</p>
+<p><a href="GAP.html"><code>Bio::Alignment::GAP</code></a> is a set of class methods for gap-related position translation.</p>
 
   </section>
 
@@ -132,22 +135,22 @@ gap-related position translation.</p>
 
           
           <div class="method-source-code" id="gapped_pos-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 2162</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gapped_pos</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">gap_regexp</span>)
-  <span class="ruby-identifier">olen</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">gap_regexp</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">length</span>
-  <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">olen</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">olen</span>
-  <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">olen</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pos</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
-  
-  <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
-  <span class="ruby-identifier">l</span> = <span class="ruby-identifier">pos</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">while</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
-    <span class="ruby-identifier">x</span> = <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">i</span>, <span class="ruby-identifier">l</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">gap_regexp</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">length</span>
-    <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">l</span>
-    <span class="ruby-identifier">l</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">i</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-  <span class="ruby-identifier">i</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">2162</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gapped_pos</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">gap_regexp</span>)
+<span class="line-num">2163</span>   <span class="ruby-identifier">olen</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">gap_regexp</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">length</span>
+<span class="line-num">2164</span>   <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">olen</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">olen</span>
+<span class="line-num">2165</span>   <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">olen</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pos</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+<span class="line-num">2166</span>   
+<span class="line-num">2167</span>   <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+<span class="line-num">2168</span>   <span class="ruby-identifier">l</span> = <span class="ruby-identifier">pos</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">2169</span>   <span class="ruby-keyword">while</span> <span class="ruby-identifier">l</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">2170</span>     <span class="ruby-identifier">x</span> = <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">i</span>, <span class="ruby-identifier">l</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">gap_regexp</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">length</span>
+<span class="line-num">2171</span>     <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">l</span>
+<span class="line-num">2172</span>     <span class="ruby-identifier">l</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">x</span>
+<span class="line-num">2173</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">2174</span>   <span class="ruby-identifier">i</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+<span class="line-num">2175</span>   <span class="ruby-identifier">i</span>
+<span class="line-num">2176</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -187,12 +190,12 @@ gap-related position translation.</p>
 
           
           <div class="method-source-code" id="ungapped_pos-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 2151</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ungapped_pos</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">gap_regexp</span>)
-  <span class="ruby-identifier">p</span> = <span class="ruby-identifier">seq</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">pos</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">gap_regexp</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">length</span>
-  <span class="ruby-identifier">p</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-  <span class="ruby-identifier">p</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">2151</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ungapped_pos</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">pos</span>, <span class="ruby-identifier">gap_regexp</span>)
+<span class="line-num">2152</span>   <span class="ruby-identifier">p</span> = <span class="ruby-identifier">seq</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-identifier">pos</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-identifier">gap_regexp</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">length</span>
+<span class="line-num">2153</span>   <span class="ruby-identifier">p</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">p</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+<span class="line-num">2154</span>   <span class="ruby-identifier">p</span>
+<span class="line-num">2155</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -206,12 +209,13 @@ gap-related position translation.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

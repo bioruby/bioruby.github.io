@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -128,21 +132,13 @@
     
 <h1 id="class-Bio::RestrictionEnzyme-label-Description">Description<span><a href="#class-Bio::RestrictionEnzyme-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p><a href="RestrictionEnzyme.html">Bio::RestrictionEnzyme</a> allows you to
-fragment a DNA strand using one or more restriction enzymes.  <a
-href="RestrictionEnzyme.html">Bio::RestrictionEnzyme</a> is aware that
-multiple enzymes may be competing for the same recognition site and returns
-the various possible fragmentation patterns that result in such
-circumstances.</p>
+<p><a href="RestrictionEnzyme.html"><code>Bio::RestrictionEnzyme</code></a> allows you to fragment a DNA strand using one or more restriction enzymes.  <a href="RestrictionEnzyme.html"><code>Bio::RestrictionEnzyme</code></a> is aware that multiple enzymes may be competing for the same recognition site and returns the various possible fragmentation patterns that result in such circumstances.</p>
 
-<p>When using <a href="RestrictionEnzyme.html">Bio::RestrictionEnzyme</a> you
-may simply use the name of common enzymes to cut your sequence or you may
-construct your own unique enzymes  to use.</p>
+<p>When using <a href="RestrictionEnzyme.html"><code>Bio::RestrictionEnzyme</code></a> you may simply use the name of common enzymes to cut your sequence or you may construct your own unique enzymes  to use.</p>
 
 <p>Visit the documentaion for individual classes for more information.</p>
 
-<p>An examination of the unit tests will also reveal several interesting uses
-for the curious programmer.</p>
+<p>An examination of the unit tests will also reveal several interesting uses for the curious programmer.</p>
 
 <h1 id="class-Bio::RestrictionEnzyme-label-Usage">Usage<span><a href="#class-Bio::RestrictionEnzyme-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
@@ -159,12 +155,7 @@ C T T A A|G</pre>
 <pre class="ruby"><span class="ruby-constant">G</span><span class="ruby-operator">^</span><span class="ruby-constant">AATTC</span>
 </pre>
 
-<p>Note that to use the method <code>cut_with_enzyme</code> from a <a
-href="Sequence.html">Bio::Sequence</a> object  you currently must
-<code>require</code> <code>bio/util/restriction_enzyme</code> directly.  If
-instead you&#39;re going to directly call <a
-href="RestrictionEnzyme/Analysis.html">Bio::RestrictionEnzyme::Analysis</a>
-then only <code>bio</code> needs to be <code>required</code>.</p>
+<p>Note that to use the method <code>cut_with_enzyme</code> from a <a href="Sequence.html"><code>Bio::Sequence</code></a> object  you currently must <code>require</code> <code>bio/util/restriction_enzyme</code> directly.  If instead you&#39;re going to directly call <a href="RestrictionEnzyme/Analysis.html"><code>Bio::RestrictionEnzyme::Analysis</code></a> then only <code>bio</code> needs to be <code>required</code>.</p>
 
 <pre class="ruby"><span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio&#39;</span>
 <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio/util/restriction_enzyme&#39;</span>
@@ -252,39 +243,29 @@ then only <code>bio</code> needs to be <code>required</code>.</p>
       
         <dt id="Fragment">Fragment
         
-        <dd><p>A <a
-href="RestrictionEnzyme.html#Fragment">Bio::RestrictionEnzyme::Fragment</a>
-is a DNA fragment composed of fused primary and  complementary strands that
-would be found floating in solution after a full sequence is digested by
-one or more RestrictionEnzymes.</p>
+        <dd><p>A <a href="RestrictionEnzyme.html#Fragment"><code>Bio::RestrictionEnzyme::Fragment</code></a> is a DNA fragment composed of fused primary and  complementary strands that would be found floating in solution after a full sequence is digested by one or more RestrictionEnzymes.</p>
 
-<p>You will notice that either the primary or complement strand will be padded
-with spaces to make them line up according to the original DNA
-configuration before they were cut.</p>
+<p>You will notice that either the primary or complement strand will be padded with spaces to make them line up according to the original DNA configuration before they were cut.</p>
 
 <p>Example:</p>
 
-<p><a href="RestrictionEnzyme.html#Fragment">Fragment</a> 1:</p>
+<p><a href="RestrictionEnzyme.html#Fragment"><code>Fragment</code></a> 1:</p>
 
 <pre class="ruby"><span class="ruby-identifier">primary</span> =    <span class="ruby-string">&quot;attaca&quot;</span>
 <span class="ruby-identifier">complement</span> = <span class="ruby-string">&quot;  atga&quot;</span>
 </pre>
 
-<p><a href="RestrictionEnzyme.html#Fragment">Fragment</a> 2:</p>
+<p><a href="RestrictionEnzyme.html#Fragment"><code>Fragment</code></a> 2:</p>
 
 <pre class="ruby"><span class="ruby-identifier">primary</span> =    <span class="ruby-string">&quot;g  &quot;</span>
 <span class="ruby-identifier">complement</span> = <span class="ruby-string">&quot;cta&quot;</span>
 </pre>
 
-<p>View these with the <code>primary</code> and <code>complement</code>
-methods.</p>
+<p>View these with the <code>primary</code> and <code>complement</code> methods.</p>
 
-<p><a
-href="RestrictionEnzyme.html#Fragment">Bio::RestrictionEnzyme::Fragment</a>
-is a simple <code>Struct</code> object.</p>
+<p><a href="RestrictionEnzyme.html#Fragment"><code>Bio::RestrictionEnzyme::Fragment</code></a> is a simple <code>Struct</code> object.</p>
 
-<p>Note: unrelated to <a
-href="RestrictionEnzyme/Range/SequenceRange/Fragment.html">Bio::RestrictionEnzyme::Range::SequenceRange::Fragment</a></p>
+<p>Note: unrelated to <a href="RestrictionEnzyme/Range/SequenceRange/Fragment.html"><code>Bio::RestrictionEnzyme::Range::SequenceRange::Fragment</code></a></p>
         
       
       </dl>
@@ -313,17 +294,16 @@ href="RestrictionEnzyme/Range/SequenceRange/Fragment.html">Bio::RestrictionEnzym
 
         <div class="method-description">
           
-          <p>See <a
-href="RestrictionEnzyme/Analysis.html#method-c-cut">Bio::RestrictionEnzyme::Analysis.cut</a></p>
+          <p>See <a href="RestrictionEnzyme/Analysis.html#method-c-cut"><code>Bio::RestrictionEnzyme::Analysis.cut</code></a></p>
           
           
 
           
           <div class="method-source-code" id="cut-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb, line 173</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cut</span>( <span class="ruby-identifier">sequence</span>, <span class="ruby-identifier">enzymes</span> )
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">RestrictionEnzyme</span><span class="ruby-operator">::</span><span class="ruby-constant">Analysis</span>.<span class="ruby-identifier">cut</span>( <span class="ruby-identifier">sequence</span>, <span class="ruby-identifier">enzymes</span> )
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb</span>
+<span class="line-num">173</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">cut</span>( <span class="ruby-identifier">sequence</span>, <span class="ruby-identifier">enzymes</span> )
+<span class="line-num">174</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">RestrictionEnzyme</span><span class="ruby-operator">::</span><span class="ruby-constant">Analysis</span>.<span class="ruby-identifier">cut</span>( <span class="ruby-identifier">sequence</span>, <span class="ruby-identifier">enzymes</span> )
+<span class="line-num">175</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -349,8 +329,7 @@ href="RestrictionEnzyme/Analysis.html#method-c-cut">Bio::RestrictionEnzyme::Anal
           
           <p>Check if supplied name is the name of an available enzyme</p>
 
-<p>See <a
-href="REBASE.html#method-i-enzyme_name-3F">Bio::REBASE#enzyme_name?</a></p>
+<p>See <a href="REBASE.html#method-i-enzyme_name-3F"><code>Bio::REBASE.enzyme_name?</code></a></p>
 <hr>
 
 <p><strong>Arguments</strong></p>
@@ -366,10 +345,10 @@ href="REBASE.html#method-i-enzyme_name-3F">Bio::REBASE#enzyme_name?</a></p>
 
           
           <div class="method-source-code" id="enzyme_name-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb, line 168</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enzyme_name?</span>( <span class="ruby-identifier">name</span> )
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rebase</span>.<span class="ruby-identifier">enzyme_name?</span>(<span class="ruby-identifier">name</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb</span>
+<span class="line-num">168</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">enzyme_name?</span>( <span class="ruby-identifier">name</span> )
+<span class="line-num">169</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rebase</span>.<span class="ruby-identifier">enzyme_name?</span>(<span class="ruby-identifier">name</span>)
+<span class="line-num">170</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -393,33 +372,28 @@ href="REBASE.html#method-i-enzyme_name-3F">Bio::REBASE#enzyme_name?</a></p>
 
         <div class="method-description">
           
-          <p>See <a
-href="RestrictionEnzyme/DoubleStranded.html#method-c-new">Bio::RestrictionEnzyme::DoubleStranded.new</a>
-for more information.</p>
+          <p>See <a href="RestrictionEnzyme/DoubleStranded.html#method-c-new"><code>Bio::RestrictionEnzyme::DoubleStranded.new</code></a> for more information.</p>
 <hr>
 
 <p><strong>Arguments</strong></p>
 <ul><li>
-<p><code>users_enzyme_or_rebase_or_pattern</code>: One of three possible
-parameters:  The name of an enzyme, a REBASE::EnzymeEntry object, or a
-nucleotide pattern with a cut mark.</p>
+<p><code>users_enzyme_or_rebase_or_pattern</code>: One of three possible parameters:  The name of an enzyme, a REBASE::EnzymeEntry object, or a nucleotide pattern with a cut mark.</p>
 </li><li>
 <p><code>cut_locations</code>: The cut locations in enzyme index notation.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a
-href="RestrictionEnzyme/DoubleStranded.html">Bio::RestrictionEnzyme::DoubleStranded</a></p>
+<p><a href="RestrictionEnzyme/DoubleStranded.html"><code>Bio::RestrictionEnzyme::DoubleStranded</code></a></p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb, line 142</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new</span>(<span class="ruby-identifier">users_enzyme_or_rebase_or_pattern</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">cut_locations</span>)
-  <span class="ruby-constant">DoubleStranded</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">users_enzyme_or_rebase_or_pattern</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">cut_locations</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb</span>
+<span class="line-num">142</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new</span>(<span class="ruby-identifier">users_enzyme_or_rebase_or_pattern</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">cut_locations</span>)
+<span class="line-num">143</span>   <span class="ruby-constant">DoubleStranded</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">users_enzyme_or_rebase_or_pattern</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">cut_locations</span>)
+<span class="line-num">144</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -443,10 +417,9 @@ href="RestrictionEnzyme/DoubleStranded.html">Bio::RestrictionEnzyme::DoubleStran
 
         <div class="method-description">
           
-          <p><a href="REBASE.html">REBASE</a> enzyme data information</p>
+          <p><a href="REBASE.html"><code>REBASE</code></a> enzyme data information</p>
 
-<p>Returns a <a href="REBASE.html">Bio::REBASE</a> object loaded with all of
-the enzyme data on file.</p>
+<p>Returns a <a href="REBASE.html"><code>Bio::REBASE</code></a> object loaded with all of the enzyme data on file.</p>
 <hr>
 
 <p><strong>Arguments</strong></p>
@@ -455,19 +428,19 @@ the enzyme data on file.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="REBASE.html">Bio::REBASE</a></p>
+<p><a href="REBASE.html"><code>Bio::REBASE</code></a></p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="rebase-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb, line 154</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">rebase</span>
-  <span class="ruby-identifier">enzymes_yaml_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-keyword">__FILE__</span>)), <span class="ruby-string">&#39;restriction_enzyme&#39;</span>, <span class="ruby-string">&#39;enzymes.yaml&#39;</span>)
-  <span class="ruby-identifier">@@rebase_enzymes</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">REBASE</span>.<span class="ruby-identifier">load_yaml</span>(<span class="ruby-identifier">enzymes_yaml_file</span>)
-  <span class="ruby-identifier">@@rebase_enzymes</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme.rb</span>
+<span class="line-num">154</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">rebase</span>
+<span class="line-num">155</span>   <span class="ruby-identifier">enzymes_yaml_file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">expand_path</span>(<span class="ruby-keyword">__FILE__</span>)), <span class="ruby-string">&#39;restriction_enzyme&#39;</span>, <span class="ruby-string">&#39;enzymes.yaml&#39;</span>)
+<span class="line-num">156</span>   <span class="ruby-identifier">@@rebase_enzymes</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">REBASE</span>.<span class="ruby-identifier">load_yaml</span>(<span class="ruby-identifier">enzymes_yaml_file</span>)
+<span class="line-num">157</span>   <span class="ruby-identifier">@@rebase_enzymes</span>
+<span class="line-num">158</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -481,12 +454,13 @@ the enzyme data on file.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

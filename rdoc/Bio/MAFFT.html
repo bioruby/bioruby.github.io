@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -114,13 +118,9 @@
 
   <section class="description">
     
-<p><a href="MAFFT.html">Bio::MAFFT</a> is a wrapper class to execute <a
-href="MAFFT.html">MAFFT</a>. <a href="MAFFT.html">MAFFT</a> is a very fast
-multiple sequence alignment software.</p>
+<p><a href="MAFFT.html"><code>Bio::MAFFT</code></a> is a wrapper class to execute <a href="MAFFT.html"><code>MAFFT</code></a>. <a href="MAFFT.html"><code>MAFFT</code></a> is a very fast multiple sequence alignment software.</p>
 
-<p>Though <a href="MAFFT.html">Bio::MAFFT</a> class currently supports only <a
-href="MAFFT.html">MAFFT</a> version 3, you can use <a
-href="MAFFT.html">MAFFT</a> version 5 because the class is a wrapper class.</p>
+<p>Though <a href="MAFFT.html"><code>Bio::MAFFT</code></a> class currently supports only <a href="MAFFT.html"><code>MAFFT</code></a> version 3, you can use <a href="MAFFT.html"><code>MAFFT</code></a> version 5 because the class is a wrapper class.</p>
 
   </section>
 
@@ -147,9 +147,7 @@ href="MAFFT.html">MAFFT</a> version 5 because the class is a wrapper class.</p>
 
         <div class="method-description">
         
-        <p>Shows last command-line string. Returns nil or an array of String. Note
-that filenames described in the command-line may already be removed because
-they are temporary files.</p>
+        <p>Shows last command-line string. Returns nil or an array of String. Note that filenames described in the command-line may already be removed because they are temporary files.</p>
         
         </div>
       </div>
@@ -201,10 +199,7 @@ they are temporary files.</p>
 
         <div class="method-description">
         
-        <p>Shows latest raw alignment result. Return a string. (Changed in
-bioruby-1.1.0). Compatibility note: If you want an array of <a
-href="FastaFormat.html">Bio::FastaFormat</a> instances, you should use
-report.data instead.</p>
+        <p>Shows latest raw alignment result. Return a string. (Changed in bioruby-1.1.0). Compatibility note: If you want an array of <a href="FastaFormat.html"><code>Bio::FastaFormat</code></a> instances, you should use report.data instead.</p>
         
         </div>
       </div>
@@ -230,9 +225,7 @@ report.data instead.</p>
 
         <div class="method-description">
         
-        <p>Shows last alignment result (instance of <a
-href="MAFFT/Report.html">Bio::MAFFT::Report</a> class) performed by the
-factory.</p>
+        <p>Shows last alignment result (instance of <a href="MAFFT/Report.html"><code>Bio::MAFFT::Report</code></a> class) performed by the factory.</p>
         
         </div>
       </div>
@@ -260,24 +253,22 @@ factory.</p>
 
         <div class="method-description">
           
-          <p>Creates a new alignment factory. When <code>n</code> is a number (1,2,3,
-…), performs &#39;fftns n&#39;. When <code>n</code> is :i or &#39;i&#39;,
-performs &#39;fftnsi&#39;.</p>
+          <p>Creates a new alignment factory. When <code>n</code> is a number (1,2,3, …), performs &#39;fftns n&#39;. When <code>n</code> is :i or &#39;i&#39;, performs &#39;fftnsi&#39;.</p>
           
           
 
           
           <div class="method-source-code" id="fftns-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fftns</span>(<span class="ruby-identifier">n</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">opt</span> = []
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;i&#39;</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;fftnsi&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">opt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;fftns&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">47</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fftns</span>(<span class="ruby-identifier">n</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">48</span>   <span class="ruby-identifier">opt</span> = []
+<span class="line-num">49</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;i&#39;</span> <span class="ruby-keyword">then</span>
+<span class="line-num">50</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;fftnsi&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
+<span class="line-num">51</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">52</span>     <span class="ruby-identifier">opt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span>
+<span class="line-num">53</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;fftns&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
+<span class="line-num">54</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">55</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -307,10 +298,10 @@ performs &#39;fftnsi&#39;.</p>
 
           
           <div class="method-source-code" id="fftnsi-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 59</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fftnsi</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;fftnsi&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">59</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">fftnsi</span>
+<span class="line-num">60</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;fftnsi&#39;</span>)
+<span class="line-num">61</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -334,23 +325,22 @@ performs &#39;fftnsi&#39;.</p>
 
         <div class="method-description">
           
-          <p>Creates a new alignment factory. <code>program</code> is the name of the
-program. <code>opt</code> is options of the program.</p>
+          <p>Creates a new alignment factory. <code>program</code> is the name of the program. <code>opt</code> is options of the program.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 108</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">program</span> = <span class="ruby-string">&#39;mafft&#39;</span>, <span class="ruby-identifier">opt</span> = [])
-  <span class="ruby-ivar">@program</span> = <span class="ruby-identifier">program</span>
-  <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">opt</span>
-  <span class="ruby-ivar">@command</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@output</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@report</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@data_stdout</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@exit_status</span> = <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">108</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">program</span> = <span class="ruby-string">&#39;mafft&#39;</span>, <span class="ruby-identifier">opt</span> = [])
+<span class="line-num">109</span>   <span class="ruby-ivar">@program</span> = <span class="ruby-identifier">program</span>
+<span class="line-num">110</span>   <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">opt</span>
+<span class="line-num">111</span>   <span class="ruby-ivar">@command</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">112</span>   <span class="ruby-ivar">@output</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">113</span>   <span class="ruby-ivar">@report</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">114</span>   <span class="ruby-ivar">@data_stdout</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">115</span>   <span class="ruby-ivar">@exit_status</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">116</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -374,21 +364,19 @@ program. <code>opt</code> is options of the program.</p>
 
         <div class="method-description">
           
-          <p>Creates a new alignment factory. <code>dir</code> is the path of the <a
-href="MAFFT.html">MAFFT</a> program. <code>prog</code> is the name of the
-program. <code>opt</code> is options of the program.</p>
+          <p>Creates a new alignment factory. <code>dir</code> is the path of the <a href="MAFFT.html"><code>MAFFT</code></a> program. <code>prog</code> is the name of the program. <code>opt</code> is options of the program.</p>
           
           
 
           
           <div class="method-source-code" id="new2-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 98</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new2</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">prog</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">dir</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">prog</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">prog</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prog</span>, <span class="ruby-identifier">opt</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num"> 98</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new2</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">prog</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
+<span class="line-num"> 99</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">dir</span> <span class="ruby-keyword">then</span>
+<span class="line-num">100</span>     <span class="ruby-identifier">prog</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">prog</span>)
+<span class="line-num">101</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">102</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prog</span>, <span class="ruby-identifier">opt</span>)
+<span class="line-num">103</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -412,18 +400,16 @@ program. <code>opt</code> is options of the program.</p>
 
         <div class="method-description">
           
-          <p>Creates a new alignment factory. Performs &#39;nwns –all-positive n&#39; or
-&#39;nwnsi –all-positive&#39;. Same as <a
-href="MAFFT.html#method-c-nwap">::nwap</a>(n, true).</p>
+          <p>Creates a new alignment factory. Performs &#39;nwns –all-positive n&#39; or &#39;nwnsi –all-positive&#39;. Same as <a href="MAFFT.html#method-c-nwap"><code>Bio::MAFFT.nwap</code></a>(n, true).</p>
           
           
 
           
           <div class="method-source-code" id="nwap-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 90</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">nwap</span>(<span class="ruby-identifier">n</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">nwns</span>(<span class="ruby-identifier">n</span>, <span class="ruby-keyword">true</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">90</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">nwap</span>(<span class="ruby-identifier">n</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">91</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">nwns</span>(<span class="ruby-identifier">n</span>, <span class="ruby-keyword">true</span>)
+<span class="line-num">92</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -447,26 +433,23 @@ href="MAFFT.html#method-c-nwap">::nwap</a>(n, true).</p>
 
         <div class="method-description">
           
-          <p>Creates a new alignment factory. When <code>n</code> is a number (1,2,3,
-…), performs &#39;nwns n&#39;. When <code>n</code> is :i or &#39;i&#39;,
-performs &#39;nwnsi&#39;. In both case, if all_positive is true, add option
-&#39;–all-positive&#39;.</p>
+          <p>Creates a new alignment factory. When <code>n</code> is a number (1,2,3, …), performs &#39;nwns n&#39;. When <code>n</code> is :i or &#39;i&#39;, performs &#39;nwnsi&#39;. In both case, if all_positive is true, add option &#39;–all-positive&#39;.</p>
           
           
 
           
           <div class="method-source-code" id="nwns-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 67</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">nwns</span>(<span class="ruby-identifier">n</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">ap</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">opt</span> = []
-  <span class="ruby-identifier">opt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;--all-positive&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">ap</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;i&#39;</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;nwnsi&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">opt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;nwns&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">67</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">nwns</span>(<span class="ruby-identifier">n</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">ap</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">68</span>   <span class="ruby-identifier">opt</span> = []
+<span class="line-num">69</span>   <span class="ruby-identifier">opt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;--all-positive&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">ap</span>
+<span class="line-num">70</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;i&#39;</span> <span class="ruby-keyword">then</span>
+<span class="line-num">71</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;nwnsi&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
+<span class="line-num">72</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">73</span>     <span class="ruby-identifier">opt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span>
+<span class="line-num">74</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;nwns&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
+<span class="line-num">75</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">76</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -490,19 +473,18 @@ performs &#39;nwnsi&#39;. In both case, if all_positive is true, add option
 
         <div class="method-description">
           
-          <p>Creates a new alignment factory. Performs &#39;nwnsi&#39;. If
-<code>all_positive</code> is true, add option &#39;–all-positive&#39;.</p>
+          <p>Creates a new alignment factory. Performs &#39;nwnsi&#39;. If <code>all_positive</code> is true, add option &#39;–all-positive&#39;.</p>
           
           
 
           
           <div class="method-source-code" id="nwnsi-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 81</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">nwnsi</span>(<span class="ruby-identifier">all_positive</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">opt</span> = []
-  <span class="ruby-identifier">opt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;--all-positive&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">all_positive</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;nwnsi&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">81</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">nwnsi</span>(<span class="ruby-identifier">all_positive</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">82</span>   <span class="ruby-identifier">opt</span> = []
+<span class="line-num">83</span>   <span class="ruby-identifier">opt</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;--all-positive&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">all_positive</span>
+<span class="line-num">84</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new2</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;nwnsi&#39;</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">opt</span>)
+<span class="line-num">85</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -540,11 +522,11 @@ performs &#39;nwnsi&#39;. In both case, if all_positive is true, add option
 
           
           <div class="method-source-code" id="log-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 141</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">log</span>
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::MAFFT#log is deprecated (no replacement) and returns empty string.&quot;</span>
-  <span class="ruby-string">&#39;&#39;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">141</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">log</span>
+<span class="line-num">142</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::MAFFT#log is deprecated (no replacement) and returns empty string.&quot;</span>
+<span class="line-num">143</span>   <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">144</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -574,11 +556,11 @@ performs &#39;nwnsi&#39;. In both case, if all_positive is true, add option
 
           
           <div class="method-source-code" id="option-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 125</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">option</span>
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::MAFFT#option is deprecated. Please use options.&quot;</span>
-  <span class="ruby-identifier">options</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">125</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">option</span>
+<span class="line-num">126</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::MAFFT#option is deprecated. Please use options.&quot;</span>
+<span class="line-num">127</span>   <span class="ruby-identifier">options</span>
+<span class="line-num">128</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -602,25 +584,23 @@ performs &#39;nwnsi&#39;. In both case, if all_positive is true, add option
 
         <div class="method-description">
           
-          <p>Executes the program. If <code>seqs</code> is not nil, perform alignment
-for seqs. If <code>seqs</code> is nil, simply executes the program.</p>
+          <p>Executes the program. If <code>seqs</code> is not nil, perform alignment for seqs. If <code>seqs</code> is nil, simply executes the program.</p>
 
-<p>Compatibility note: When seqs is nil, returns true if the program exits
-normally, and returns false if the program exits abnormally.</p>
+<p>Compatibility note: When seqs is nil, returns true if the program exits normally, and returns false if the program exits abnormally.</p>
           
           
 
           
           <div class="method-source-code" id="query-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 179</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-identifier">seqs</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">seqs</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">query_align</span>(<span class="ruby-identifier">seqs</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">exec_local</span>(<span class="ruby-ivar">@options</span>)
-    <span class="ruby-ivar">@exit_status</span>.<span class="ruby-identifier">exitstatus</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">179</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-identifier">seqs</span>)
+<span class="line-num">180</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">seqs</span> <span class="ruby-keyword">then</span>
+<span class="line-num">181</span>     <span class="ruby-identifier">query_align</span>(<span class="ruby-identifier">seqs</span>)
+<span class="line-num">182</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">183</span>     <span class="ruby-identifier">exec_local</span>(<span class="ruby-ivar">@options</span>)
+<span class="line-num">184</span>     <span class="ruby-ivar">@exit_status</span>.<span class="ruby-identifier">exitstatus</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="line-num">185</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">186</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -646,8 +626,7 @@ normally, and returns false if the program exits abnormally.</p>
           
           <p>Note that this method will be renamed to query_alignment.</p>
 
-<p>Performs alignment for seqs. <code>seqs</code> should be <a
-href="Alignment.html">Bio::Alignment</a> or Array of sequences or nil.</p>
+<p>Performs alignment for seqs. <code>seqs</code> should be <a href="Alignment.html"><code>Bio::Alignment</code></a> or Array of sequences or nil.</p>
 
 <p>Compatibility Note: arg is deprecated and ignored.</p>
           
@@ -655,16 +634,16 @@ href="Alignment.html">Bio::Alignment</a> or Array of sequences or nil.</p>
 
           
           <div class="method-source-code" id="query_align-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 194</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_align</span>(<span class="ruby-identifier">seqs</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;2nd and other arguments of Bio::MAFFT#query_align is ignored&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Alignment</span>)
-    <span class="ruby-identifier">seqs</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Alignment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seqs</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">query_string</span>(<span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">output_fasta</span>(<span class="ruby-value">:width</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">70</span>))
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">194</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_align</span>(<span class="ruby-identifier">seqs</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">195</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">196</span>     <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;2nd and other arguments of Bio::MAFFT#query_align is ignored&#39;</span>
+<span class="line-num">197</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">198</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Alignment</span>)
+<span class="line-num">199</span>     <span class="ruby-identifier">seqs</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Alignment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">seqs</span>)
+<span class="line-num">200</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">201</span>   <span class="ruby-identifier">query_string</span>(<span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">output_fasta</span>(<span class="ruby-value">:width</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">70</span>))
+<span class="line-num">202</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -688,17 +667,16 @@ href="Alignment.html">Bio::Alignment</a> or Array of sequences or nil.</p>
 
         <div class="method-description">
           
-          <p>Performs alignment for seqs. <code>seqs</code> should be <a
-href="Alignment.html">Bio::Alignment</a> or Array of sequences or nil.</p>
+          <p>Performs alignment for seqs. <code>seqs</code> should be <a href="Alignment.html"><code>Bio::Alignment</code></a> or Array of sequences or nil.</p>
           
           
 
           
           <div class="method-source-code" id="query_alignment-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 206</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_alignment</span>(<span class="ruby-identifier">seqs</span>)
-  <span class="ruby-identifier">query_align</span>(<span class="ruby-identifier">seqs</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">206</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_alignment</span>(<span class="ruby-identifier">seqs</span>)
+<span class="line-num">207</span>   <span class="ruby-identifier">query_align</span>(<span class="ruby-identifier">seqs</span>)
+<span class="line-num">208</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -730,16 +708,16 @@ href="Alignment.html">Bio::Alignment</a> or Array of sequences or nil.</p>
 
           
           <div class="method-source-code" id="query_by_filename-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 232</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_by_filename</span>(<span class="ruby-identifier">fn</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;2nd argument of Bio::MAFFT#query_filename is ignored&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">opt</span> = <span class="ruby-ivar">@options</span> <span class="ruby-operator">+</span> [ <span class="ruby-identifier">fn</span> ]
-  <span class="ruby-identifier">exec_local</span>(<span class="ruby-identifier">opt</span>)
-  <span class="ruby-ivar">@report</span> = <span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@output</span>)
-  <span class="ruby-ivar">@report</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">232</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_by_filename</span>(<span class="ruby-identifier">fn</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">233</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">234</span>     <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;2nd argument of Bio::MAFFT#query_filename is ignored&#39;</span>
+<span class="line-num">235</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">236</span>   <span class="ruby-identifier">opt</span> = <span class="ruby-ivar">@options</span> <span class="ruby-operator">+</span> [ <span class="ruby-identifier">fn</span> ]
+<span class="line-num">237</span>   <span class="ruby-identifier">exec_local</span>(<span class="ruby-identifier">opt</span>)
+<span class="line-num">238</span>   <span class="ruby-ivar">@report</span> = <span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@output</span>)
+<span class="line-num">239</span>   <span class="ruby-ivar">@report</span>
+<span class="line-num">240</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -763,8 +741,7 @@ href="Alignment.html">Bio::Alignment</a> or Array of sequences or nil.</p>
 
         <div class="method-description">
           
-          <p>Performs alignment for <code>str</code>. Str should be a string that can be
-recognized by the program.</p>
+          <p>Performs alignment for <code>str</code>. Str should be a string that can be recognized by the program.</p>
 
 <p>Compatibility Note: arg is deprecated and ignored.</p>
           
@@ -772,21 +749,21 @@ recognized by the program.</p>
 
           
           <div class="method-source-code" id="query_string-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 214</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_string</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;2nd and other arguments of Bio::MAFFT#query_string is ignored&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">tf_in</span> = <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;align&#39;</span>)
-    <span class="ruby-identifier">tf_in</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">ensure</span>
-    <span class="ruby-identifier">tf_in</span>.<span class="ruby-identifier">close</span>(<span class="ruby-keyword">false</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">r</span> = <span class="ruby-identifier">query_by_filename</span>(<span class="ruby-identifier">tf_in</span>.<span class="ruby-identifier">path</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">tf_in</span>.<span class="ruby-identifier">close</span>(<span class="ruby-keyword">true</span>)
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">214</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_string</span>(<span class="ruby-identifier">str</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">215</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">216</span>     <span class="ruby-identifier">warn</span> <span class="ruby-string">&#39;2nd and other arguments of Bio::MAFFT#query_string is ignored&#39;</span>
+<span class="line-num">217</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">218</span>   <span class="ruby-keyword">begin</span>
+<span class="line-num">219</span>     <span class="ruby-identifier">tf_in</span> = <span class="ruby-constant">Tempfile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">&#39;align&#39;</span>)
+<span class="line-num">220</span>     <span class="ruby-identifier">tf_in</span>.<span class="ruby-identifier">print</span> <span class="ruby-identifier">str</span>
+<span class="line-num">221</span>   <span class="ruby-keyword">ensure</span>
+<span class="line-num">222</span>     <span class="ruby-identifier">tf_in</span>.<span class="ruby-identifier">close</span>(<span class="ruby-keyword">false</span>)
+<span class="line-num">223</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">224</span>   <span class="ruby-identifier">r</span> = <span class="ruby-identifier">query_by_filename</span>(<span class="ruby-identifier">tf_in</span>.<span class="ruby-identifier">path</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">225</span>   <span class="ruby-identifier">tf_in</span>.<span class="ruby-identifier">close</span>(<span class="ruby-keyword">true</span>)
+<span class="line-num">226</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">227</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -816,14 +793,14 @@ recognized by the program.</p>
 
           
           <div class="method-source-code" id="reset-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/mafft.rb, line 164</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset</span>
-  <span class="ruby-ivar">@command</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@output</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@report</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@exit_status</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@data_stdout</span> = <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/mafft.rb</span>
+<span class="line-num">164</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset</span>
+<span class="line-num">165</span>   <span class="ruby-ivar">@command</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">166</span>   <span class="ruby-ivar">@output</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">167</span>   <span class="ruby-ivar">@report</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">168</span>   <span class="ruby-ivar">@exit_status</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">169</span>   <span class="ruby-ivar">@data_stdout</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">170</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -837,12 +814,13 @@ recognized by the program.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -83,14 +87,9 @@
 
   <section class="description">
     
-<p><a href="SequenceMasker.html">Bio::Sequence::SequenceMasker</a> is a mix-in
-module to provide helpful methods for masking a sequence.</p>
+<p><a href="SequenceMasker.html"><code>Bio::Sequence::SequenceMasker</code></a> is a mix-in module to provide helpful methods for masking a sequence.</p>
 
-<p>It is only expected to be included in <a
-href="../Sequence.html">Bio::Sequence</a>. In the future, methods in this
-module might be moved to <a href="../Sequence.html">Bio::Sequence</a> or
-other module and this module might be removed. Please do not depend on this
-module.</p>
+<p>It is only expected to be included in <a href="../Sequence.html"><code>Bio::Sequence</code></a>. In the future, methods in this module might be moved to <a href="../Sequence.html"><code>Bio::Sequence</code></a> or other module and this module might be removed. Please do not depend on this module.</p>
 
   </section>
 
@@ -124,10 +123,7 @@ module.</p>
 
         <div class="method-description">
           
-          <p>Masks the sequence with each value in the <em>enum</em>. The
-<em>enum&lt;em&gt; should be an array or enumerator. A block must be given.
-When the block returns true, the sequence is masked with
-&lt;em&gt;mask_char</em>.</p>
+          <p>Masks the sequence with each value in the <em>enum</em>. The <em>enum&lt;em&gt; should be an array or enumerator. A block must be given.  When the block returns true, the sequence is masked with &lt;em&gt;mask_char</em>.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -138,32 +134,32 @@ When the block returns true, the sequence is masked with
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../Sequence.html">Bio::Sequence</a> object</p>
+<p><a href="../Sequence.html"><code>Bio::Sequence</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="mask_with_enumerator-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/sequence_masker.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mask_with_enumerator</span>(<span class="ruby-identifier">enum</span>, <span class="ruby-identifier">mask_char</span>)
-  <span class="ruby-identifier">offset</span> = <span class="ruby-value">0</span>
-  <span class="ruby-identifier">unit</span> = <span class="ruby-identifier">mask_char</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-  <span class="ruby-identifier">s</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">seq</span>)
-  <span class="ruby-identifier">j</span> = <span class="ruby-value">0</span>
-  <span class="ruby-identifier">enum</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">item</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">j</span> = <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">offset</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">j</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">length</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-identifier">s</span>[<span class="ruby-identifier">j</span>, <span class="ruby-value">1</span>] = <span class="ruby-identifier">mask_char</span>
-        <span class="ruby-identifier">offset</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">unit</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">newseq</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-identifier">newseq</span>.<span class="ruby-identifier">seq</span> = <span class="ruby-identifier">s</span>
-  <span class="ruby-identifier">newseq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/sequence_masker.rb</span>
+<span class="line-num">42</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mask_with_enumerator</span>(<span class="ruby-identifier">enum</span>, <span class="ruby-identifier">mask_char</span>)
+<span class="line-num">43</span>   <span class="ruby-identifier">offset</span> = <span class="ruby-value">0</span>
+<span class="line-num">44</span>   <span class="ruby-identifier">unit</span> = <span class="ruby-identifier">mask_char</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+<span class="line-num">45</span>   <span class="ruby-identifier">s</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">seq</span>)
+<span class="line-num">46</span>   <span class="ruby-identifier">j</span> = <span class="ruby-value">0</span>
+<span class="line-num">47</span>   <span class="ruby-identifier">enum</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span>, <span class="ruby-identifier">index</span><span class="ruby-operator">|</span>
+<span class="line-num">48</span>     <span class="ruby-keyword">if</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">item</span> <span class="ruby-keyword">then</span>
+<span class="line-num">49</span>       <span class="ruby-identifier">j</span> = <span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">offset</span>
+<span class="line-num">50</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">j</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">length</span> <span class="ruby-keyword">then</span>
+<span class="line-num">51</span>         <span class="ruby-identifier">s</span>[<span class="ruby-identifier">j</span>, <span class="ruby-value">1</span>] = <span class="ruby-identifier">mask_char</span>
+<span class="line-num">52</span>         <span class="ruby-identifier">offset</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">unit</span>
+<span class="line-num">53</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">54</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">55</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">56</span>   <span class="ruby-identifier">newseq</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">57</span>   <span class="ruby-identifier">newseq</span>.<span class="ruby-identifier">seq</span> = <span class="ruby-identifier">s</span>
+<span class="line-num">58</span>   <span class="ruby-identifier">newseq</span>
+<span class="line-num">59</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -187,9 +183,7 @@ When the block returns true, the sequence is masked with
 
         <div class="method-description">
           
-          <p>Masks high error-probability sequence regions. For each sequence position,
-if the error probability is larger than the threshold, the sequence in the
-position is replaced with <em>mask_char</em>.</p>
+          <p>Masks high error-probability sequence regions. For each sequence position, if the error probability is larger than the threshold, the sequence in the position is replaced with <em>mask_char</em>.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -200,20 +194,20 @@ position is replaced with <em>mask_char</em>.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../Sequence.html">Bio::Sequence</a> object</p>
+<p><a href="../Sequence.html"><code>Bio::Sequence</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="mask_with_error_probability-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/sequence_masker.rb, line 89</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mask_with_error_probability</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span>)
-  <span class="ruby-identifier">values</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">error_probabilities</span> <span class="ruby-operator">||</span> []
-  <span class="ruby-identifier">mask_with_enumerator</span>(<span class="ruby-identifier">values</span>, <span class="ruby-identifier">mask_char</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">item</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">threshold</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/sequence_masker.rb</span>
+<span class="line-num">89</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mask_with_error_probability</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span>)
+<span class="line-num">90</span>   <span class="ruby-identifier">values</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">error_probabilities</span> <span class="ruby-operator">||</span> []
+<span class="line-num">91</span>   <span class="ruby-identifier">mask_with_enumerator</span>(<span class="ruby-identifier">values</span>, <span class="ruby-identifier">mask_char</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+<span class="line-num">92</span>     <span class="ruby-identifier">item</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">threshold</span>
+<span class="line-num">93</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">94</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -237,9 +231,7 @@ position is replaced with <em>mask_char</em>.</p>
 
         <div class="method-description">
           
-          <p>Masks low quality sequence regions. For each sequence position, if the
-quality score is smaller than the threshold, the sequence in the position
-is replaced with <em>mask_char</em>.</p>
+          <p>Masks low quality sequence regions. For each sequence position, if the quality score is smaller than the threshold, the sequence in the position is replaced with <em>mask_char</em>.</p>
 
 <p>Note: This method does not care quality_score_type.</p>
 <hr>
@@ -252,20 +244,20 @@ is replaced with <em>mask_char</em>.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../Sequence.html">Bio::Sequence</a> object</p>
+<p><a href="../Sequence.html"><code>Bio::Sequence</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="mask_with_quality_score-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/sequence_masker.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mask_with_quality_score</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span>)
-  <span class="ruby-identifier">scores</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">quality_scores</span> <span class="ruby-operator">||</span> []
-  <span class="ruby-identifier">mask_with_enumerator</span>(<span class="ruby-identifier">scores</span>, <span class="ruby-identifier">mask_char</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">item</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">threshold</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/sequence_masker.rb</span>
+<span class="line-num">72</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mask_with_quality_score</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span>)
+<span class="line-num">73</span>   <span class="ruby-identifier">scores</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">quality_scores</span> <span class="ruby-operator">||</span> []
+<span class="line-num">74</span>   <span class="ruby-identifier">mask_with_enumerator</span>(<span class="ruby-identifier">scores</span>, <span class="ruby-identifier">mask_char</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span>
+<span class="line-num">75</span>     <span class="ruby-identifier">item</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">threshold</span>
+<span class="line-num">76</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">77</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -279,12 +271,13 @@ is replaced with <em>mask_char</em>.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

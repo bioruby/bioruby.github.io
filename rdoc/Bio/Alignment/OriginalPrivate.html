@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -81,9 +85,7 @@
 
   <section class="description">
     
-<p><a href="OriginalPrivate.html">Bio::Alignment::OriginalPrivate</a> is a set
-of private methods for <a
-href="OriginalAlignment.html">Bio::Alignment::OriginalAlignment</a>.</p>
+<p><a href="OriginalPrivate.html"><code>Bio::Alignment::OriginalPrivate</code></a> is a set of private methods for <a href="OriginalAlignment.html"><code>Bio::Alignment::OriginalAlignment</code></a>.</p>
 
   </section>
 
@@ -123,19 +125,19 @@ href="OriginalAlignment.html">Bio::Alignment::OriginalAlignment</a>.</p>
 
           
           <div class="method-source-code" id="extract_key-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1493</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">extract_key</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-identifier">sn</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">for</span> <span class="ruby-identifier">m</span> <span class="ruby-keyword">in</span> [ <span class="ruby-value">:definition</span>, <span class="ruby-value">:entry_id</span> ]
-    <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">sn</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">m</span>)
-    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>, <span class="ruby-constant">ArgumentError</span>
-      <span class="ruby-identifier">sn</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">sn</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sn</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1493</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">extract_key</span>(<span class="ruby-identifier">obj</span>)
+<span class="line-num">1494</span>   <span class="ruby-identifier">sn</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">1495</span>   <span class="ruby-keyword">for</span> <span class="ruby-identifier">m</span> <span class="ruby-keyword">in</span> [ <span class="ruby-value">:definition</span>, <span class="ruby-value">:entry_id</span> ]
+<span class="line-num">1496</span>     <span class="ruby-keyword">begin</span>
+<span class="line-num">1497</span>       <span class="ruby-identifier">sn</span> = <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">send</span>(<span class="ruby-identifier">m</span>)
+<span class="line-num">1498</span>     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>, <span class="ruby-constant">ArgumentError</span>
+<span class="line-num">1499</span>       <span class="ruby-identifier">sn</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">1500</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1501</span>     <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">sn</span>
+<span class="line-num">1502</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1503</span>   <span class="ruby-identifier">sn</span>
+<span class="line-num">1504</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -165,19 +167,19 @@ href="OriginalAlignment.html">Bio::Alignment::OriginalAlignment</a>.</p>
 
           
           <div class="method-source-code" id="extract_seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1478</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">extract_seq</span>(<span class="ruby-identifier">obj</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">obj</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">meth</span> = [ <span class="ruby-value">:seq</span>, <span class="ruby-value">:naseq</span>, <span class="ruby-value">:aaseq</span> ].<span class="ruby-identifier">find</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">m</span>
-    }
-    <span class="ruby-identifier">meth</span> <span class="ruby-operator">?</span>
-      <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">meth</span>) <span class="ruby-operator">:</span>
-      <span class="ruby-identifier">obj</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1478</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">extract_seq</span>(<span class="ruby-identifier">obj</span>)
+<span class="line-num">1479</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">1480</span>     <span class="ruby-identifier">obj</span>
+<span class="line-num">1481</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1482</span>     <span class="ruby-identifier">meth</span> = [ <span class="ruby-value">:seq</span>, <span class="ruby-value">:naseq</span>, <span class="ruby-value">:aaseq</span> ].<span class="ruby-identifier">find</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+<span class="line-num">1483</span>       <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">respond_to?</span> <span class="ruby-identifier">m</span>
+<span class="line-num">1484</span>     }
+<span class="line-num">1485</span>     <span class="ruby-identifier">meth</span> <span class="ruby-operator">?</span>
+<span class="line-num">1486</span>       <span class="ruby-identifier">obj</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">meth</span>) <span class="ruby-operator">:</span>
+<span class="line-num">1487</span>       <span class="ruby-identifier">obj</span>
+<span class="line-num">1488</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1489</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -191,12 +193,13 @@ href="OriginalAlignment.html">Bio::Alignment::OriginalAlignment</a>.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

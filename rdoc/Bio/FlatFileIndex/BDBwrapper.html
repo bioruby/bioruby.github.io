@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -138,13 +142,13 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb, line 44</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-ivar">@dbname</span> = <span class="ruby-identifier">name</span>
-  <span class="ruby-ivar">@file</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@filename</span> = <span class="ruby-identifier">filename</span>
-  <span class="ruby-comment">#self.open(*arg)</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb</span>
+<span class="line-num">44</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">45</span>   <span class="ruby-ivar">@dbname</span> = <span class="ruby-identifier">name</span>
+<span class="line-num">46</span>   <span class="ruby-ivar">@file</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">47</span>   <span class="ruby-ivar">@filename</span> = <span class="ruby-identifier">filename</span>
+<span class="line-num">48</span>   <span class="ruby-comment">#self.open(*arg)</span>
+<span class="line-num">49</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -182,15 +186,15 @@
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">arg</span>)
-  <span class="ruby-comment">#self.open</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@file</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@file</span>[<span class="ruby-identifier">arg</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb</span>
+<span class="line-num">73</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">arg</span>)
+<span class="line-num">74</span>   <span class="ruby-comment">#self.open</span>
+<span class="line-num">75</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@file</span> <span class="ruby-keyword">then</span>
+<span class="line-num">76</span>     <span class="ruby-ivar">@file</span>[<span class="ruby-identifier">arg</span>]
+<span class="line-num">77</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">78</span>     <span class="ruby-keyword">nil</span>
+<span class="line-num">79</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">80</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -220,11 +224,11 @@
 
           
           <div class="method-source-code" id="5B-5D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb, line 82</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
-  <span class="ruby-comment">#self.open</span>
-  <span class="ruby-ivar">@file</span>[<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb</span>
+<span class="line-num">82</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span>)
+<span class="line-num">83</span>   <span class="ruby-comment">#self.open</span>
+<span class="line-num">84</span>   <span class="ruby-ivar">@file</span>[<span class="ruby-identifier">key</span>.<span class="ruby-identifier">to_s</span>] = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">85</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -254,15 +258,15 @@
 
           
           <div class="method-source-code" id="close-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb, line 64</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@file</span>
-    <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;BDBwrapper: close #{filename}\n&quot;</span>
-    <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">close</span>
-    <span class="ruby-ivar">@file</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb</span>
+<span class="line-num">64</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
+<span class="line-num">65</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@file</span>
+<span class="line-num">66</span>     <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;BDBwrapper: close #{filename}\n&quot;</span>
+<span class="line-num">67</span>     <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">68</span>     <span class="ruby-ivar">@file</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">69</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">70</span>   <span class="ruby-keyword">nil</span>
+<span class="line-num">71</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -292,10 +296,10 @@
 
           
           <div class="method-source-code" id="filename-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filename</span>
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@dbname</span>, <span class="ruby-ivar">@filename</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb</span>
+<span class="line-num">51</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filename</span>
+<span class="line-num">52</span>   <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-ivar">@dbname</span>, <span class="ruby-ivar">@filename</span>)
+<span class="line-num">53</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -325,14 +329,14 @@
 
           
           <div class="method-source-code" id="keys-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb, line 95</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keys</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@file</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">keys</span>
-  <span class="ruby-keyword">else</span>
-    []
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb</span>
+<span class="line-num"> 95</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keys</span>
+<span class="line-num"> 96</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@file</span> <span class="ruby-keyword">then</span>
+<span class="line-num"> 97</span>     <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">keys</span>
+<span class="line-num"> 98</span>   <span class="ruby-keyword">else</span>
+<span class="line-num"> 99</span>     []
+<span class="line-num">100</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">101</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -362,15 +366,15 @@
 
           
           <div class="method-source-code" id="open-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb, line 55</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open</span>(<span class="ruby-identifier">flag</span> = <span class="ruby-constant">BDBdefault</span>.<span class="ruby-identifier">flag_read</span>,
-         <span class="ruby-identifier">permission</span> = <span class="ruby-constant">BDBdefault</span>.<span class="ruby-identifier">permission</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@file</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;BDBwrapper: open #{filename}\n&quot;</span>
-    <span class="ruby-ivar">@file</span> = <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Btree</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">flag</span>, <span class="ruby-identifier">permission</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">true</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb</span>
+<span class="line-num">55</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open</span>(<span class="ruby-identifier">flag</span> = <span class="ruby-constant">BDBdefault</span>.<span class="ruby-identifier">flag_read</span>,
+<span class="line-num">56</span>          <span class="ruby-identifier">permission</span> = <span class="ruby-constant">BDBdefault</span>.<span class="ruby-identifier">permission</span>)
+<span class="line-num">57</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@file</span> <span class="ruby-keyword">then</span>
+<span class="line-num">58</span>     <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;BDBwrapper: open #{filename}\n&quot;</span>
+<span class="line-num">59</span>     <span class="ruby-ivar">@file</span> = <span class="ruby-constant">BDB</span><span class="ruby-operator">::</span><span class="ruby-constant">Btree</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">flag</span>, <span class="ruby-identifier">permission</span>)
+<span class="line-num">60</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">61</span>   <span class="ruby-keyword">true</span>
+<span class="line-num">62</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -400,14 +404,14 @@
 
           
           <div class="method-source-code" id="writeback_array-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb, line 87</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">writeback_array</span>(<span class="ruby-identifier">prefix</span>, <span class="ruby-identifier">array</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">close</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">array</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
-    <span class="ruby-ivar">@file</span>[<span class="ruby-node">&quot;#{prefix}#{key}&quot;</span>] = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/flatfile/bdb.rb</span>
+<span class="line-num">87</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">writeback_array</span>(<span class="ruby-identifier">prefix</span>, <span class="ruby-identifier">array</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">88</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">89</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">90</span>   <span class="ruby-identifier">array</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">val</span>, <span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+<span class="line-num">91</span>     <span class="ruby-ivar">@file</span>[<span class="ruby-node">&quot;#{prefix}#{key}&quot;</span>] = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">92</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">93</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -421,12 +425,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

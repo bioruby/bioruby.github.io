@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -99,8 +103,7 @@
     
 <h1 id="class-Bio::PSORT::CGIDriver-label-Generic+CGI+client+class">Generic CGI client class<span><a href="#class-Bio::PSORT::CGIDriver-label-Generic+CGI+client+class">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>A generic CGI client class for Bio::PSORT::* classes. The class provides an
-interface for CGI argument processing and output  report parsing.</p>
+<p>A generic CGI client class for Bio::PSORT::* classes. The class provides an interface for CGI argument processing and output  report parsing.</p>
 
 <h2 id="class-Bio::PSORT::CGIDriver-label-Example">Example<span><a href="#class-Bio::PSORT::CGIDriver-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -199,18 +202,18 @@ interface for CGI argument processing and output  report parsing.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort.rb, line 94</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">host</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">host</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^http:/</span>
-    <span class="ruby-identifier">uri</span> = <span class="ruby-identifier">host</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">uri</span> = <span class="ruby-string">&#39;http://&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">host</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">uri</span>)
-  <span class="ruby-ivar">@args</span> = {}
-  <span class="ruby-ivar">@report</span> = <span class="ruby-string">&#39;&#39;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort.rb</span>
+<span class="line-num"> 94</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">host</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">path</span> = <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num"> 95</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">host</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num"> 96</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^http:/</span>
+<span class="line-num"> 97</span>     <span class="ruby-identifier">uri</span> = <span class="ruby-identifier">host</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num"> 98</span>   <span class="ruby-keyword">else</span>
+<span class="line-num"> 99</span>     <span class="ruby-identifier">uri</span> = <span class="ruby-string">&#39;http://&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">host</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;/&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">path</span>
+<span class="line-num">100</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">101</span>   <span class="ruby-ivar">@uri</span> = <span class="ruby-constant">URI</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">uri</span>)
+<span class="line-num">102</span>   <span class="ruby-ivar">@args</span> = {}
+<span class="line-num">103</span>   <span class="ruby-ivar">@report</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">104</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -248,21 +251,21 @@ interface for CGI argument processing and output  report parsing.</p>
 
           
           <div class="method-source-code" id="exec-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort.rb, line 108</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">exec</span>(<span class="ruby-identifier">query</span>)
-  <span class="ruby-identifier">data</span> = <span class="ruby-identifier">make_args</span>(<span class="ruby-identifier">query</span>)  
-
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">result</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">start_http</span>(<span class="ruby-ivar">@uri</span>.<span class="ruby-identifier">host</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">result</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">post</span>(<span class="ruby-ivar">@uri</span>.<span class="ruby-identifier">path</span>, <span class="ruby-identifier">data</span>)
-    }
-    <span class="ruby-ivar">@report</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>
-    <span class="ruby-identifier">output</span> = <span class="ruby-identifier">parse_report</span>(<span class="ruby-ivar">@report</span>)
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/psort.rb</span>
+<span class="line-num">108</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">exec</span>(<span class="ruby-identifier">query</span>)
+<span class="line-num">109</span>   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">make_args</span>(<span class="ruby-identifier">query</span>)  
+<span class="line-num">110</span> 
+<span class="line-num">111</span>   <span class="ruby-keyword">begin</span>
+<span class="line-num">112</span>     <span class="ruby-identifier">result</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">113</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">start_http</span>(<span class="ruby-ivar">@uri</span>.<span class="ruby-identifier">host</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">http</span><span class="ruby-operator">|</span>
+<span class="line-num">114</span>       <span class="ruby-identifier">result</span> = <span class="ruby-identifier">http</span>.<span class="ruby-identifier">post</span>(<span class="ruby-ivar">@uri</span>.<span class="ruby-identifier">path</span>, <span class="ruby-identifier">data</span>)
+<span class="line-num">115</span>     }
+<span class="line-num">116</span>     <span class="ruby-ivar">@report</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">body</span>
+<span class="line-num">117</span>     <span class="ruby-identifier">output</span> = <span class="ruby-identifier">parse_report</span>(<span class="ruby-ivar">@report</span>)
+<span class="line-num">118</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">119</span> 
+<span class="line-num">120</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">output</span>
+<span class="line-num">121</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -276,12 +279,13 @@ interface for CGI argument processing and output  report parsing.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

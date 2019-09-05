@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -138,19 +142,15 @@
     
 <h2 id="class-Bio::KEGG::Keggtab-label-Description">Description<span><a href="#class-Bio::KEGG::Keggtab-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>Parse &#39;keggtab&#39; <a href="../KEGG.html">KEGG</a> database definition
-file which also includes Taxonomic category of the <a
-href="../KEGG.html">KEGG</a> organisms.</p>
+<p>Parse &#39;keggtab&#39; <a href="../KEGG.html"><code>KEGG</code></a> database definition file which also includes Taxonomic category of the <a href="../KEGG.html"><code>KEGG</code></a> organisms.</p>
 
-<h2 id="class-Bio::KEGG::Keggtab-label-References"><a href="../References.html">References</a><span><a href="#class-Bio::KEGG::Keggtab-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<h2 id="class-Bio::KEGG::Keggtab-label-References"><a href="../References.html"><code>References</code></a><span><a href="#class-Bio::KEGG::Keggtab-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <p>The &#39;keggtab&#39; file is included in</p>
 <ul><li>
-<p><a
-href="ftp://ftp.genome.jp/pub/kegg/tarfiles/genes.tar.gz">ftp.genome.jp/pub/kegg/tarfiles/genes.tar.gz</a></p>
+<p><a href="ftp://ftp.genome.jp/pub/kegg/tarfiles/genes.tar.gz">ftp.genome.jp/pub/kegg/tarfiles/genes.tar.gz</a></p>
 </li><li>
-<p><a
-href="ftp://ftp.genome.jp/pub/kegg/tarfiles/genes.weekly.last.tar.Z">ftp.genome.jp/pub/kegg/tarfiles/genes.weekly.last.tar.Z</a></p>
+<p><a href="ftp://ftp.genome.jp/pub/kegg/tarfiles/genes.weekly.last.tar.Z">ftp.genome.jp/pub/kegg/tarfiles/genes.weekly.last.tar.Z</a></p>
 </li></ul>
 
 <h2 id="class-Bio::KEGG::Keggtab-label-Format">Format<span><a href="#class-Bio::KEGG::Keggtab-label-Format">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -243,23 +243,22 @@ genes             alias           eubacteria+archaea+eukaryotes</pre>
 
         <div class="method-description">
           
-          <p>Path for keggtab file and optionally set bioroot top directory.
-Environmental variable BIOROOT overrides bioroot.</p>
+          <p>Path for keggtab file and optionally set bioroot top directory. Environmental variable BIOROOT overrides bioroot.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 54</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">file_path</span>, <span class="ruby-identifier">bioroot</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@bioroot</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;BIOROOT&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">bioroot</span>
-  <span class="ruby-ivar">@db_names</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@database</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-ivar">@taxonomy</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file_path</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">parse_keggtab</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">read</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">54</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">file_path</span>, <span class="ruby-identifier">bioroot</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">55</span>   <span class="ruby-ivar">@bioroot</span> = <span class="ruby-constant">ENV</span>[<span class="ruby-string">&#39;BIOROOT&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">bioroot</span>
+<span class="line-num">56</span>   <span class="ruby-ivar">@db_names</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">57</span>   <span class="ruby-ivar">@database</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">58</span>   <span class="ruby-ivar">@taxonomy</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">59</span>   <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">file_path</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+<span class="line-num">60</span>     <span class="ruby-identifier">parse_keggtab</span>(<span class="ruby-identifier">f</span>.<span class="ruby-identifier">read</span>)
+<span class="line-num">61</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">62</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -297,12 +296,12 @@ Environmental variable BIOROOT overrides bioroot.</p>
 
           
           <div class="method-source-code" id="alias_list-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 141</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">alias_list</span>(<span class="ruby-identifier">db_name</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@db_names</span>[<span class="ruby-identifier">db_name</span>]
-    <span class="ruby-ivar">@db_names</span>[<span class="ruby-identifier">db_name</span>].<span class="ruby-identifier">aliases</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">141</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">alias_list</span>(<span class="ruby-identifier">db_name</span>)
+<span class="line-num">142</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@db_names</span>[<span class="ruby-identifier">db_name</span>]
+<span class="line-num">143</span>     <span class="ruby-ivar">@db_names</span>[<span class="ruby-identifier">db_name</span>].<span class="ruby-identifier">aliases</span>
+<span class="line-num">144</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">145</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -326,20 +325,18 @@ Environmental variable BIOROOT overrides bioroot.</p>
 
         <div class="method-description">
           
-          <p>Returns an Array containing all alias names for the database. (e.g.
-&#39;hsa&#39; -&gt; [“H.sapiens”, “hsa”], &#39;hpj&#39; -&gt;
-[“H.pylori_J99”, “hpj”])</p>
+          <p>Returns an Array containing all alias names for the database. (e.g. &#39;hsa&#39; -&gt; [“H.sapiens”, “hsa”], &#39;hpj&#39; -&gt; [“H.pylori_J99”, “hpj”])</p>
           
           
 
           
           <div class="method-source-code" id="aliases-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 112</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aliases</span>(<span class="ruby-identifier">db_abbrev</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
-    <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>].<span class="ruby-identifier">aliases</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">112</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aliases</span>(<span class="ruby-identifier">db_abbrev</span>)
+<span class="line-num">113</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
+<span class="line-num">114</span>     <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>].<span class="ruby-identifier">aliases</span>
+<span class="line-num">115</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">116</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -369,10 +366,10 @@ Environmental variable BIOROOT overrides bioroot.</p>
 
           
           <div class="method-source-code" id="child_nodes-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 196</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">child_nodes</span>(<span class="ruby-identifier">node</span> = <span class="ruby-string">&#39;genes&#39;</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">196</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">child_nodes</span>(<span class="ruby-identifier">node</span> = <span class="ruby-string">&#39;genes&#39;</span>)
+<span class="line-num">197</span>   <span class="ruby-keyword">return</span> <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>]
+<span class="line-num">198</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -396,22 +393,20 @@ Environmental variable BIOROOT overrides bioroot.</p>
 
         <div class="method-description">
           
-          <p>Returns a hash containing <a href="Keggtab/DB.html">DB</a> definition
-section of the keggtab file. If database name is given as an argument,
-returns a <a href="Keggtab/DB.html">Keggtab::DB</a> object.</p>
+          <p>Returns a hash containing <a href="Keggtab/DB.html"><code>DB</code></a> definition section of the keggtab file. If database name is given as an argument, returns a <a href="Keggtab/DB.html"><code>Keggtab::DB</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="database-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 102</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">database</span>(<span class="ruby-identifier">db_abbrev</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">db_abbrev</span>
-    <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@database</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">102</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">database</span>(<span class="ruby-identifier">db_abbrev</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">103</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">db_abbrev</span>
+<span class="line-num">104</span>     <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
+<span class="line-num">105</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">106</span>     <span class="ruby-ivar">@database</span>
+<span class="line-num">107</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">108</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -441,13 +436,13 @@ returns a <a href="Keggtab/DB.html">Keggtab::DB</a> object.</p>
 
           
           <div class="method-source-code" id="db_by_abbrev-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 157</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
-  <span class="ruby-ivar">@db_names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">db</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">db</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">abbrev</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">db_abbrev</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">157</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
+<span class="line-num">158</span>   <span class="ruby-ivar">@db_names</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">db</span><span class="ruby-operator">|</span>
+<span class="line-num">159</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">db</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">abbrev</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">db_abbrev</span>
+<span class="line-num">160</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">161</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">162</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -477,14 +472,14 @@ returns a <a href="Keggtab/DB.html">Keggtab::DB</a> object.</p>
 
           
           <div class="method-source-code" id="db_path-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_path</span>(<span class="ruby-identifier">db_name</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bioroot</span>
-    <span class="ruby-node">&quot;#{@db_names[db_name].path.sub(/\$BIOROOT/,@bioroot)}/#{db_name}&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-node">&quot;#{@db_names[db_name].path}/#{db_name}&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">148</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_path</span>(<span class="ruby-identifier">db_name</span>)
+<span class="line-num">149</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bioroot</span>
+<span class="line-num">150</span>     <span class="ruby-node">&quot;#{@db_names[db_name].path.sub(/\$BIOROOT/,@bioroot)}/#{db_name}&quot;</span>
+<span class="line-num">151</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">152</span>     <span class="ruby-node">&quot;#{@db_names[db_name].path}/#{db_name}&quot;</span>
+<span class="line-num">153</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">154</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -514,11 +509,11 @@ returns a <a href="Keggtab/DB.html">Keggtab::DB</a> object.</p>
 
           
           <div class="method-source-code" id="db_path_by_abbrev-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 170</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_path_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
-  <span class="ruby-identifier">db_name</span> = <span class="ruby-identifier">name_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
-  <span class="ruby-identifier">db_path</span>(<span class="ruby-identifier">db_name</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">170</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_path_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
+<span class="line-num">171</span>   <span class="ruby-identifier">db_name</span> = <span class="ruby-identifier">name_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
+<span class="line-num">172</span>   <span class="ruby-identifier">db_path</span>(<span class="ruby-identifier">db_name</span>)
+<span class="line-num">173</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -598,30 +593,27 @@ returns a <a href="Keggtab/DB.html">Keggtab::DB</a> object.</p>
 
         <div class="method-description">
           
-          <p>Returns an array of taxonomy names the organism belongs. (e.g.
-&#39;eco&#39; -&gt;
-[&#39;proteogamma&#39;,&#39;proteobacteria&#39;,&#39;eubacteria&#39;,&#39;genes&#39;])
-This method has aliases as keggorg2taxo, korg2taxonomy, keggorg2taxonomy.</p>
+          <p>Returns an array of taxonomy names the organism belongs. (e.g. &#39;eco&#39; -&gt; [&#39;proteogamma&#39;,&#39;proteobacteria&#39;,&#39;eubacteria&#39;,&#39;genes&#39;]) This method has aliases as keggorg2taxo, korg2taxonomy, keggorg2taxonomy.</p>
           
           
 
           
           <div class="method-source-code" id="korg2taxo-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 225</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">korg2taxo</span>(<span class="ruby-identifier">keggorg</span>)
-  <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">traverse</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">keggorg</span><span class="ruby-operator">|</span>
-    <span class="ruby-ivar">@taxonomy</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">keggorg</span>)
-        <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">k</span>)
-        <span class="ruby-identifier">traverse</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">k</span>)
-        <span class="ruby-keyword">break</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  }
-  <span class="ruby-identifier">traverse</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">keggorg</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">tmp</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">225</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">korg2taxo</span>(<span class="ruby-identifier">keggorg</span>)
+<span class="line-num">226</span>   <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">227</span>   <span class="ruby-identifier">traverse</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">keggorg</span><span class="ruby-operator">|</span>
+<span class="line-num">228</span>     <span class="ruby-ivar">@taxonomy</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+<span class="line-num">229</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">keggorg</span>)
+<span class="line-num">230</span>         <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">k</span>)
+<span class="line-num">231</span>         <span class="ruby-identifier">traverse</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">k</span>)
+<span class="line-num">232</span>         <span class="ruby-keyword">break</span>
+<span class="line-num">233</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">234</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">235</span>   }
+<span class="line-num">236</span>   <span class="ruby-identifier">traverse</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">keggorg</span>)
+<span class="line-num">237</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">tmp</span>
+<span class="line-num">238</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -677,19 +669,18 @@ This method has aliases as keggorg2taxo, korg2taxonomy, keggorg2taxonomy.</p>
 
         <div class="method-description">
           
-          <p>Returns a canonical database name for the abbreviation. (e.g. &#39;ec&#39;
--&gt; &#39;enzyme&#39;,  &#39;hsa&#39; -&gt; &#39;h.sapies&#39;, …)</p>
+          <p>Returns a canonical database name for the abbreviation. (e.g. &#39;ec&#39; -&gt; &#39;enzyme&#39;,  &#39;hsa&#39; -&gt; &#39;h.sapies&#39;, …)</p>
           
           
 
           
           <div class="method-source-code" id="name-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 120</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>(<span class="ruby-identifier">db_abbrev</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
-    <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>].<span class="ruby-identifier">name</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">120</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>(<span class="ruby-identifier">db_abbrev</span>)
+<span class="line-num">121</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
+<span class="line-num">122</span>     <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>].<span class="ruby-identifier">name</span>
+<span class="line-num">123</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">124</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -719,10 +710,10 @@ This method has aliases as keggorg2taxo, korg2taxonomy, keggorg2taxonomy.</p>
 
           
           <div class="method-source-code" id="name_by_abbrev-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 165</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
-  <span class="ruby-identifier">db_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>).<span class="ruby-identifier">name</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">165</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>)
+<span class="line-num">166</span>   <span class="ruby-identifier">db_by_abbrev</span>(<span class="ruby-identifier">db_abbrev</span>).<span class="ruby-identifier">name</span>
+<span class="line-num">167</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -746,24 +737,23 @@ This method has aliases as keggorg2taxo, korg2taxonomy, keggorg2taxonomy.</p>
 
         <div class="method-description">
           
-          <p>Returns an absolute path for the flat file database. (e.g.
-&#39;/bio/db/kegg/genes&#39;, …)</p>
+          <p>Returns an absolute path for the flat file database. (e.g. &#39;/bio/db/kegg/genes&#39;, …)</p>
           
           
 
           
           <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 128</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>(<span class="ruby-identifier">db_abbrev</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
-    <span class="ruby-identifier">file</span> = <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>].<span class="ruby-identifier">name</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bioroot</span>
-      <span class="ruby-node">&quot;#{@database[db_abbrev].path.sub(/\$BIOROOT/,@bioroot)}/#{file}&quot;</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-node">&quot;#{@database[db_abbrev].path}/#{file}&quot;</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">128</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>(<span class="ruby-identifier">db_abbrev</span>)
+<span class="line-num">129</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>]
+<span class="line-num">130</span>     <span class="ruby-identifier">file</span> = <span class="ruby-ivar">@database</span>[<span class="ruby-identifier">db_abbrev</span>].<span class="ruby-identifier">name</span>
+<span class="line-num">131</span>     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@bioroot</span>
+<span class="line-num">132</span>       <span class="ruby-node">&quot;#{@database[db_abbrev].path.sub(/\$BIOROOT/,@bioroot)}/#{file}&quot;</span>
+<span class="line-num">133</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">134</span>       <span class="ruby-node">&quot;#{@database[db_abbrev].path}/#{file}&quot;</span>
+<span class="line-num">135</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">136</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">137</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -787,17 +777,16 @@ This method has aliases as keggorg2taxo, korg2taxonomy, keggorg2taxonomy.</p>
 
         <div class="method-description">
           
-          <p>List of all node labels from Taxonomy section. (e.g. [“actinobacteria”,
-“animals”, “archaea”, “bacillales”, …)</p>
+          <p>List of all node labels from Taxonomy section. (e.g. [“actinobacteria”, “animals”, “archaea”, “bacillales”, …)</p>
           
           
 
           
           <div class="method-source-code" id="taxa_list-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 192</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxa_list</span>
-  <span class="ruby-ivar">@taxonomy</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">192</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxa_list</span>
+<span class="line-num">193</span>   <span class="ruby-ivar">@taxonomy</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>
+<span class="line-num">194</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -849,30 +838,28 @@ This method has aliases as keggorg2taxo, korg2taxonomy, keggorg2taxonomy.</p>
 
         <div class="method-description">
           
-          <p>Returns an array of organism names included in the specified taxon label.
-(e.g. &#39;proteobeta&#39; -&gt; [“nme”, “nma”, “rso”]) This method has
-taxo2keggorgs, taxon2korgs, and taxon2keggorgs aliases.</p>
+          <p>Returns an array of organism names included in the specified taxon label. (e.g. &#39;proteobeta&#39; -&gt; [“nme”, “nma”, “rso”]) This method has taxo2keggorgs, taxon2korgs, and taxon2keggorgs aliases.</p>
           
           
 
           
           <div class="method-source-code" id="taxo2korgs-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 203</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxo2korgs</span>(<span class="ruby-identifier">node</span> = <span class="ruby-string">&#39;genes&#39;</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">node</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>]
-      <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-      <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">taxo2korgs</span>(<span class="ruby-identifier">x</span>))
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">return</span> <span class="ruby-identifier">tmp</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">203</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxo2korgs</span>(<span class="ruby-identifier">node</span> = <span class="ruby-string">&#39;genes&#39;</span>)
+<span class="line-num">204</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+<span class="line-num">205</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">node</span>
+<span class="line-num">206</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">207</span>     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>]
+<span class="line-num">208</span>       <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">209</span>       <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">210</span>         <span class="ruby-identifier">tmp</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">taxo2korgs</span>(<span class="ruby-identifier">x</span>))
+<span class="line-num">211</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">212</span>       <span class="ruby-keyword">return</span> <span class="ruby-identifier">tmp</span>
+<span class="line-num">213</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">214</span>       <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">215</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">216</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">217</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -956,22 +943,20 @@ taxo2keggorgs, taxon2korgs, and taxon2keggorgs aliases.</p>
 
         <div class="method-description">
           
-          <p>Returns a hash containing Taxonomy section of the keggtab file. If argument
-is given, returns a List of all child nodes belongs to the label node.
-(e.g. “eukaryotes” -&gt; [“animals”, “plants”, “protists”, “fungi”], …)</p>
+          <p>Returns a hash containing Taxonomy section of the keggtab file. If argument is given, returns a List of all child nodes belongs to the label node. (e.g. “eukaryotes” -&gt; [“animals”, “plants”, “protists”, “fungi”], …)</p>
           
           
 
           
           <div class="method-source-code" id="taxonomy-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 182</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxonomy</span>(<span class="ruby-identifier">node</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span>
-    <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@taxonomy</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">182</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">taxonomy</span>(<span class="ruby-identifier">node</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">183</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">node</span>
+<span class="line-num">184</span>     <span class="ruby-ivar">@taxonomy</span>[<span class="ruby-identifier">node</span>]
+<span class="line-num">185</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">186</span>     <span class="ruby-ivar">@taxonomy</span>
+<span class="line-num">187</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">188</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -985,12 +970,13 @@ is given, returns a List of all child nodes belongs to the label node.
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

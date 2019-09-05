@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -115,48 +119,36 @@
     
 <h2 id="class-Bio::PubMed-label-Description">Description<span><a href="#class-Bio::PubMed-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>The <a href="PubMed.html">Bio::PubMed</a> class provides several ways to
-retrieve bibliographic information from the <a
-href="PubMed.html">PubMed</a> database at <a href="NCBI.html">NCBI</a>.</p>
+<p>The <a href="PubMed.html"><code>Bio::PubMed</code></a> class provides several ways to retrieve bibliographic information from the <a href="PubMed.html"><code>PubMed</code></a> database at <a href="NCBI.html"><code>NCBI</code></a>.</p>
 
 <p>Basically, two types of queries are possible:</p>
 <ul><li>
-<p>searching for <a href="PubMed.html">PubMed</a> IDs given a query string:</p>
+<p>searching for <a href="PubMed.html"><code>PubMed</code></a> IDs given a query string:</p>
 <ul><li>
-<p><a href="PubMed.html#method-i-esearch">#esearch</a>  (recommended)</p>
+<p><a href="PubMed.html#method-i-esearch"><code>Bio::PubMed#esearch</code></a>  (recommended)</p>
 </li><li>
-<p><a href="PubMed.html#method-i-search">#search</a>   (only retrieves top 20
-hits; will be deprecated)</p>
+<p><a href="PubMed.html#method-i-search"><code>Bio::PubMed#search</code></a>   (only retrieves top 20 hits; will be deprecated)</p>
 </li></ul>
 </li><li>
-<p>retrieving the <a href="MEDLINE.html">MEDLINE</a> text (i.e. authors,
-journal, abstract, …) given a <a href="PubMed.html">PubMed</a> ID</p>
+<p>retrieving the <a href="MEDLINE.html"><code>MEDLINE</code></a> text (i.e. authors, journal, abstract, …) given a <a href="PubMed.html"><code>PubMed</code></a> ID</p>
 <ul><li>
-<p><a href="PubMed.html#method-i-efetch">#efetch</a>   (recommended)</p>
+<p><a href="PubMed.html#method-i-efetch"><code>Bio::PubMed#efetch</code></a>   (recommended)</p>
 </li><li>
-<p><a href="PubMed.html#method-i-query">#query</a>    (will be deprecated)</p>
+<p><a href="PubMed.html#method-i-query"><code>Bio::PubMed#query</code></a>    (will be deprecated)</p>
 </li><li>
-<p><a href="PubMed.html#method-i-pmfetch">#pmfetch</a>  (will be deprecated)</p>
+<p><a href="PubMed.html#method-i-pmfetch"><code>Bio::PubMed#pmfetch</code></a>  (will be deprecated)</p>
 </li></ul>
 </li></ul>
 
-<p>Since BioRuby 1.5, all implementations uses <a href="NCBI.html">NCBI</a>
-E-Utilities services. The different methods within the same group still
-remain because specifications of arguments and/or return values are
-different. The search, query, and pmfetch will be obsoleted in the future.</p>
+<p>Since BioRuby 1.5, all implementations uses <a href="NCBI.html"><code>NCBI</code></a> E-Utilities services. The different methods within the same group still remain because specifications of arguments and/or return values are different. The search, query, and pmfetch will be obsoleted in the future.</p>
 
-<p>Additional information about the <a href="MEDLINE.html">MEDLINE</a> format
-and <a href="PubMed.html">PubMed</a> programmable APIs can be found on the
-following websites:</p>
+<p>Additional information about the <a href="MEDLINE.html"><code>MEDLINE</code></a> format and <a href="PubMed.html"><code>PubMed</code></a> programmable APIs can be found on the following websites:</p>
 <ul><li>
-<p><a href="PubMed.html">PubMed</a> Tutorial: <a
-href="http://www.nlm.nih.gov/bsd/disted/pubmedtutorial/index.html">www.nlm.nih.gov/bsd/disted/pubmedtutorial/index.html</a></p>
+<p><a href="PubMed.html"><code>PubMed</code></a> Tutorial: <a href="http://www.nlm.nih.gov/bsd/disted/pubmedtutorial/index.html">www.nlm.nih.gov/bsd/disted/pubmedtutorial/index.html</a></p>
 </li><li>
-<p>E-utilities Quick Start: <a
-href="http://www.ncbi.nlm.nih.gov/books/NBK25500">www.ncbi.nlm.nih.gov/books/NBK25500</a>/</p>
+<p>E-utilities Quick Start: <a href="http://www.ncbi.nlm.nih.gov/books/NBK25500">www.ncbi.nlm.nih.gov/books/NBK25500</a>/</p>
 </li><li>
-<p>Creating a Web Link to PubMed: <a
-href="http://www.ncbi.nlm.nih.gov/books/NBK3862">www.ncbi.nlm.nih.gov/books/NBK3862</a>/</p>
+<p>Creating a Web Link to PubMed: <a href="http://www.ncbi.nlm.nih.gov/books/NBK3862">www.ncbi.nlm.nih.gov/books/NBK3862</a>/</p>
 </li></ul>
 
 <h2 id="class-Bio::PubMed-label-Usage">Usage<span><a href="#class-Bio::PubMed-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
@@ -224,10 +216,10 @@ href="http://www.ncbi.nlm.nih.gov/books/NBK3862">www.ncbi.nlm.nih.gov/books/NBK3
 
           
           <div class="method-source-code" id="efetch-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/pubmed.rb, line 190</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">efetch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/pubmed.rb</span>
+<span class="line-num">190</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">efetch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">191</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">192</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -257,10 +249,10 @@ href="http://www.ncbi.nlm.nih.gov/books/NBK3862">www.ncbi.nlm.nih.gov/books/NBK3
 
           
           <div class="method-source-code" id="esearch-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/pubmed.rb, line 185</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">esearch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">esearch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/pubmed.rb</span>
+<span class="line-num">185</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">esearch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">186</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">esearch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">187</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -292,10 +284,10 @@ href="http://www.ncbi.nlm.nih.gov/books/NBK3862">www.ncbi.nlm.nih.gov/books/NBK3
 
           
           <div class="method-source-code" id="pmfetch-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/pubmed.rb, line 211</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">pmfetch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">pmfetch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/pubmed.rb</span>
+<span class="line-num">211</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">pmfetch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">212</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">pmfetch</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">213</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -327,10 +319,10 @@ href="http://www.ncbi.nlm.nih.gov/books/NBK3862">www.ncbi.nlm.nih.gov/books/NBK3
 
           
           <div class="method-source-code" id="query-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/pubmed.rb, line 204</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">query</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">query</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/pubmed.rb</span>
+<span class="line-num">204</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">query</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">205</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">query</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">206</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -362,10 +354,10 @@ href="http://www.ncbi.nlm.nih.gov/books/NBK3862">www.ncbi.nlm.nih.gov/books/NBK3
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/pubmed.rb, line 197</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">search</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">search</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/pubmed.rb</span>
+<span class="line-num">197</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">search</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">198</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">search</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">199</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -397,9 +389,7 @@ href="http://www.ncbi.nlm.nih.gov/books/NBK3862">www.ncbi.nlm.nih.gov/books/NBK3
 
         <div class="method-description">
           
-          <p>Retrieve <a href="PubMed.html">PubMed</a> entry by PMID and returns <a
-href="MEDLINE.html">MEDLINE</a> formatted string using entrez efetch.
-Multiple <a href="PubMed.html">PubMed</a> IDs can be provided:</p>
+          <p>Retrieve <a href="PubMed.html"><code>PubMed</code></a> entry by PMID and returns <a href="MEDLINE.html"><code>MEDLINE</code></a> formatted string using entrez efetch. Multiple <a href="PubMed.html"><code>PubMed</code></a> IDs can be provided:</p>
 
 <pre class="ruby"><span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PubMed</span>.<span class="ruby-identifier">efetch</span>(<span class="ruby-value">123</span>)
 <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">PubMed</span>.<span class="ruby-identifier">efetch</span>([<span class="ruby-value">123</span>,<span class="ruby-value">456</span>,<span class="ruby-value">789</span>])
@@ -408,7 +398,7 @@ Multiple <a href="PubMed.html">PubMed</a> IDs can be provided:</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>ids</em>: list of <a href="PubMed.html">PubMed</a> IDs (required)</p>
+<p><em>ids</em>: list of <a href="PubMed.html"><code>PubMed</code></a> IDs (required)</p>
 </li><li>
 <p><em>hash</em>: hash of E-Utils options</p>
 <ul><li>
@@ -433,28 +423,28 @@ Multiple <a href="PubMed.html">PubMed</a> IDs can be provided:</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>Array of <a href="MEDLINE.html">MEDLINE</a> formatted String</p>
+<p>Array of <a href="MEDLINE.html"><code>MEDLINE</code></a> formatted String</p>
 </dd></dl>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="NCBI/REST.html#method-i-efetch">Bio::NCBI::REST#efetch</a>
+              <a href="NCBI/REST.html#method-i-efetch"><code>Bio::NCBI::REST#efetch</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="efetch-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/pubmed.rb, line 116</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pubmed&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;medline&quot;</span> }
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-identifier">result</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">opts</span>[<span class="ruby-string">&quot;retmode&quot;</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">opts</span>[<span class="ruby-string">&quot;retmode&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;text&quot;</span>
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n\n+/</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">result</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/pubmed.rb</span>
+<span class="line-num">116</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">efetch</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">117</span>   <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pubmed&quot;</span>, <span class="ruby-string">&quot;rettype&quot;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;medline&quot;</span> }
+<span class="line-num">118</span>   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">119</span>   <span class="ruby-identifier">result</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">ids</span>, <span class="ruby-identifier">opts</span>)
+<span class="line-num">120</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">opts</span>[<span class="ruby-string">&quot;retmode&quot;</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">opts</span>[<span class="ruby-string">&quot;retmode&quot;</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;text&quot;</span>
+<span class="line-num">121</span>     <span class="ruby-identifier">result</span> = <span class="ruby-identifier">result</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n\n+/</span>)
+<span class="line-num">122</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">123</span>   <span class="ruby-identifier">result</span>
+<span class="line-num">124</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -478,12 +468,9 @@ Multiple <a href="PubMed.html">PubMed</a> IDs can be provided:</p>
 
         <div class="method-description">
           
-          <p>Search the <a href="PubMed.html">PubMed</a> database by given keywords
-using E-Utils and returns  an array of <a href="PubMed.html">PubMed</a>
-IDs.</p>
+          <p>Search the <a href="PubMed.html"><code>PubMed</code></a> database by given keywords using E-Utils and returns  an array of <a href="PubMed.html"><code>PubMed</code></a> IDs.</p>
 
-<p>For information on the possible arguments, see <a
-href="http://eutils.ncbi.nlm.nih.gov/entrez/query/static/esearch_help.html#PubMed">eutils.ncbi.nlm.nih.gov/entrez/query/static/esearch_help.html#PubMed</a></p>
+<p>For information on the possible arguments, see <a href="http://eutils.ncbi.nlm.nih.gov/entrez/query/static/esearch_help.html#PubMed">eutils.ncbi.nlm.nih.gov/entrez/query/static/esearch_help.html#PubMed</a></p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -513,24 +500,24 @@ href="http://eutils.ncbi.nlm.nih.gov/entrez/query/static/esearch_help.html#PubMe
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>array of <a href="PubMed.html">PubMed</a> IDs or a number of results</p>
+<p>array of <a href="PubMed.html"><code>PubMed</code></a> IDs or a number of results</p>
 </dd></dl>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="NCBI/REST.html#method-i-esearch">Bio::NCBI::REST#esearch</a>
+              <a href="NCBI/REST.html#method-i-esearch"><code>Bio::NCBI::REST#esearch</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="esearch-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/pubmed.rb, line 92</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">esearch</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">hash</span> = {})
-  <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pubmed&quot;</span> }
-  <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">opts</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/pubmed.rb</span>
+<span class="line-num">92</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">esearch</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">hash</span> = {})
+<span class="line-num">93</span>   <span class="ruby-identifier">opts</span> = { <span class="ruby-string">&quot;db&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;pubmed&quot;</span> }
+<span class="line-num">94</span>   <span class="ruby-identifier">opts</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">95</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">opts</span>)
+<span class="line-num">96</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -556,34 +543,33 @@ href="http://eutils.ncbi.nlm.nih.gov/entrez/query/static/esearch_help.html#PubMe
           
           <p>This method will be DEPRECATED in the future.</p>
 
-<p>Retrieve <a href="PubMed.html">PubMed</a> entry by PMID and returns <a
-href="MEDLINE.html">MEDLINE</a> formatted string.</p>
+<p>Retrieve <a href="PubMed.html"><code>PubMed</code></a> entry by PMID and returns <a href="MEDLINE.html"><code>MEDLINE</code></a> formatted string.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>id</em>: <a href="PubMed.html">PubMed</a> ID (required)</p>
+<p><em>id</em>: <a href="PubMed.html"><code>PubMed</code></a> ID (required)</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="MEDLINE.html">MEDLINE</a> formatted String</p>
+<p><a href="MEDLINE.html"><code>MEDLINE</code></a> formatted String</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="pmfetch-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/pubmed.rb, line 173</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pmfetch</span>(<span class="ruby-identifier">id</span>)
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::PubMed#pmfetch internally use Bio::PubMed#efetch. Using Bio::PubMed#efetch is recommended.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$VERBOSE</span>
-
-  <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">id</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">ret</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n\n&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/pubmed.rb</span>
+<span class="line-num">173</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pmfetch</span>(<span class="ruby-identifier">id</span>)
+<span class="line-num">174</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::PubMed#pmfetch internally use Bio::PubMed#efetch. Using Bio::PubMed#efetch is recommended.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$VERBOSE</span>
+<span class="line-num">175</span> 
+<span class="line-num">176</span>   <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">id</span>)
+<span class="line-num">177</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">ret</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">178</span>     <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n\n&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">179</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">180</span>     <span class="ruby-string">&quot;&quot;</span>
+<span class="line-num">181</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">182</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -609,33 +595,32 @@ href="MEDLINE.html">MEDLINE</a> formatted string.</p>
           
           <p>This method will be DEPRECATED in the future.</p>
 
-<p>Retrieve <a href="PubMed.html">PubMed</a> entry by PMID and returns <a
-href="MEDLINE.html">MEDLINE</a> formatted string using entrez query.</p>
+<p>Retrieve <a href="PubMed.html"><code>PubMed</code></a> entry by PMID and returns <a href="MEDLINE.html"><code>MEDLINE</code></a> formatted string using entrez query.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>id</em>: <a href="PubMed.html">PubMed</a> ID (required)</p>
+<p><em>id</em>: <a href="PubMed.html"><code>PubMed</code></a> ID (required)</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="MEDLINE.html">MEDLINE</a> formatted String</p>
+<p><a href="MEDLINE.html"><code>MEDLINE</code></a> formatted String</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="query-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/pubmed.rb, line 155</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">ids</span>)
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::PubMed#query internally uses Bio::PubMed#efetch. Using Bio::PubMed#efetch is recommended.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$VERBOSE</span>
-  <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">ret</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n\n&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/pubmed.rb</span>
+<span class="line-num">155</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">ids</span>)
+<span class="line-num">156</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::PubMed#query internally uses Bio::PubMed#efetch. Using Bio::PubMed#efetch is recommended.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$VERBOSE</span>
+<span class="line-num">157</span>   <span class="ruby-identifier">ret</span> = <span class="ruby-identifier">efetch</span>(<span class="ruby-identifier">ids</span>)
+<span class="line-num">158</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">ret</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">159</span>     <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n\n&quot;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">160</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">161</span>     <span class="ruby-string">&quot;&quot;</span>
+<span class="line-num">162</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">163</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -661,17 +646,13 @@ href="MEDLINE.html">MEDLINE</a> formatted string using entrez query.</p>
           
           <p>This method will be DEPRECATED in the future.</p>
 
-<p>Search the <a href="PubMed.html">PubMed</a> database by given keywords
-using entrez query and returns an array of <a href="PubMed.html">PubMed</a>
-IDs.</p>
+<p>Search the <a href="PubMed.html"><code>PubMed</code></a> database by given keywords using entrez query and returns an array of <a href="PubMed.html"><code>PubMed</code></a> IDs.</p>
 
 <p>Caution: this method returns the first 20 hits only,</p>
 
 <p>Instead, use of the &#39;esearch&#39; method is strongly recomended.</p>
 
-<p>Implementation details: Since BioRuby 1.5, this method internally uses <a
-href="NCBI.html">NCBI</a> EUtils with retmax=20 by using <a
-href="PubMed.html#method-i-efetch">#efetch</a> method.</p>
+<p>Implementation details: Since BioRuby 1.5, this method internally uses <a href="NCBI.html"><code>NCBI</code></a> EUtils with retmax=20 by using <a href="PubMed.html#method-i-efetch"><code>Bio::PubMed#efetch</code></a> method.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -680,18 +661,18 @@ href="PubMed.html#method-i-efetch">#efetch</a> method.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>array of <a href="PubMed.html">PubMed</a> IDs</p>
+<p>array of <a href="PubMed.html"><code>PubMed</code></a> IDs</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="search-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/pubmed.rb, line 142</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::PubMed#search is now a subset of Bio::PubMed#esearch. Using Bio::PubMed#esearch is recommended.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$VERBOSE</span>
-  <span class="ruby-identifier">esearch</span>(<span class="ruby-identifier">str</span>, { <span class="ruby-string">&quot;retmax&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">20</span> })
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/pubmed.rb</span>
+<span class="line-num">142</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">search</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">143</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::PubMed#search is now a subset of Bio::PubMed#esearch. Using Bio::PubMed#esearch is recommended.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$VERBOSE</span>
+<span class="line-num">144</span>   <span class="ruby-identifier">esearch</span>(<span class="ruby-identifier">str</span>, { <span class="ruby-string">&quot;retmax&quot;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">20</span> })
+<span class="line-num">145</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -705,12 +686,13 @@ href="PubMed.html#method-i-efetch">#efetch</a> method.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

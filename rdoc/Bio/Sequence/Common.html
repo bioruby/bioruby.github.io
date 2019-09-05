@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -120,13 +124,7 @@
     
 <h1 id="module-Bio::Sequence::Common-label-DESCRIPTION">DESCRIPTION<span><a href="#module-Bio::Sequence::Common-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p><a href="Common.html">Bio::Sequence::Common</a> is a  <a
-href="http://www.rubycentral.com/book/tut_modules.html">Mixin</a>
-implementing methods common to <a href="AA.html">Bio::Sequence::AA</a> and
-<a href="NA.html">Bio::Sequence::NA</a>.  All of these methods are
-available to either Amino Acid or Nucleic Acid sequences, and by
-encapsulation are also available to <a
-href="../Sequence.html">Bio::Sequence</a> objects.</p>
+<p><a href="Common.html"><code>Bio::Sequence::Common</code></a> is a  <a href="http://www.rubycentral.com/book/tut_modules.html">Mixin</a> implementing methods common to <a href="AA.html"><code>Bio::Sequence::AA</code></a> and <a href="NA.html"><code>Bio::Sequence::NA</code></a>.  All of these methods are available to either Amino Acid or Nucleic Acid sequences, and by encapsulation are also available to <a href="../Sequence.html"><code>Bio::Sequence</code></a> objects.</p>
 
 <h1 id="module-Bio::Sequence::Common-label-USAGE">USAGE<span><a href="#module-Bio::Sequence::Common-label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
@@ -175,8 +173,7 @@ href="../Sequence.html">Bio::Sequence</a> objects.</p>
 
         <div class="method-description">
           
-          <p>Create a new sequence by adding to an existing sequence. The existing
-sequence is not modified.</p>
+          <p>Create a new sequence by adding to an existing sequence. The existing sequence is not modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">s2</span> = <span class="ruby-identifier">s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;atgc&#39;</span>
@@ -184,8 +181,7 @@ sequence is not modified.</p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>                                  <span class="ruby-comment">#=&gt; &quot;atgc&quot;</span>
 </pre>
 
-<p>The new sequence is of the same class as the existing sequence if  the new
-data was added to an existing sequence,</p>
+<p>The new sequence is of the same class as the existing sequence if  the new data was added to an existing sequence,</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">s2</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">class</span>                <span class="ruby-comment">#=&gt; true</span>
 </pre>
@@ -210,10 +206,10 @@ data was added to an existing sequence,</p>
 
           
           <div class="method-source-code" id="2B-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 121</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">+</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">super</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>))
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">121</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">+</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">122</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">super</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>))
+<span class="line-num">123</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -243,10 +239,10 @@ data was added to an existing sequence,</p>
 
           
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 98</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">concat</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num"> 98</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num"> 99</span>   <span class="ruby-identifier">concat</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">100</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -285,14 +281,14 @@ data was added to an existing sequence,</p>
 
           
           <div class="method-source-code" id="composition-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 215</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">composition</span>
-  <span class="ruby-identifier">count</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/./</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">count</span>[<span class="ruby-identifier">x</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">count</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">215</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">composition</span>
+<span class="line-num">216</span>   <span class="ruby-identifier">count</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+<span class="line-num">217</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/./</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">218</span>     <span class="ruby-identifier">count</span>[<span class="ruby-identifier">x</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+<span class="line-num">219</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">220</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">count</span>
+<span class="line-num">221</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -316,8 +312,7 @@ data was added to an existing sequence,</p>
 
         <div class="method-description">
           
-          <p>Add new data to the end of the current sequence. The original sequence is
-modified.</p>
+          <p>Add new data to the end of the current sequence. The original sequence is modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;atgc&#39;</span>
@@ -340,10 +335,10 @@ modified.</p>
 
           
           <div class="method-source-code" id="concat-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 94</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">concat</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>))
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">94</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">concat</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">95</span>   <span class="ruby-keyword">super</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>))
+<span class="line-num">96</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -367,10 +362,7 @@ modified.</p>
 
         <div class="method-description">
           
-          <p>Normalize the current sequence, removing all whitespace and  transforming
-all positions to uppercase if the sequence is <a href="AA.html">AA</a> or
-transforming all positions to lowercase if the sequence is <a
-href="NA.html">NA</a>. The original sequence is modified.</p>
+          <p>Normalize the current sequence, removing all whitespace and  transforming all positions to uppercase if the sequence is <a href="AA.html"><code>AA</code></a> or transforming all positions to lowercase if the sequence is <a href="NA.html"><code>NA</code></a>. The original sequence is modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">s</span>.<span class="ruby-identifier">normalize!</span>
@@ -385,11 +377,11 @@ href="NA.html">NA</a>. The original sequence is modified.</p>
 
           
           <div class="method-source-code" id="normalize-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 78</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">normalize!</span>
-  <span class="ruby-identifier">initialize</span>(<span class="ruby-keyword">self</span>)
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">78</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">normalize!</span>
+<span class="line-num">79</span>   <span class="ruby-identifier">initialize</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">80</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">81</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -417,11 +409,7 @@ href="NA.html">NA</a>. The original sequence is modified.</p>
 
         <div class="method-description">
           
-          <p>Returns a randomized sequence. The default is to retain the same 
-base/residue composition as the original.  If a hash of base/residue 
-counts is given, the new sequence will be based on that hash  composition. 
-If a block is given, each new randomly selected  position will be passed
-into the block.  In all cases, the original sequence is not modified.</p>
+          <p>Returns a randomized sequence. The default is to retain the same  base/residue composition as the original.  If a hash of base/residue  counts is given, the new sequence will be based on that hash  composition.  If a block is given, each new randomly selected  position will be passed into the block.  In all cases, the original sequence is not modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">randomize</span>                        <span class="ruby-comment">#=&gt; &quot;tcag&quot;  (for example)</span>
@@ -448,33 +436,33 @@ into the block.  In all cases, the original sequence is not modified.</p>
 
           
           <div class="method-source-code" id="randomize-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 243</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">randomize</span>(<span class="ruby-identifier">hash</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>
-    <span class="ruby-identifier">tmp</span> = <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">tmp</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_i</span>
-    }
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">tmp</span> = <span class="ruby-keyword">self</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">seq</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tmp</span>)
-  <span class="ruby-comment"># Reference: http://en.wikipedia.org/wiki/Fisher-Yates_shuffle</span>
-  <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">downto</span>(<span class="ruby-value">2</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">k</span> = <span class="ruby-identifier">rand</span>(<span class="ruby-identifier">n</span>)
-    <span class="ruby-identifier">c</span> = <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]
-    <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>] = <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">k</span>]
-    <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">c</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
-    (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">i</span>, <span class="ruby-value">1</span>]
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">seq</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">243</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">randomize</span>(<span class="ruby-identifier">hash</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">244</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">hash</span>
+<span class="line-num">245</span>     <span class="ruby-identifier">tmp</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">246</span>     <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+<span class="line-num">247</span>       <span class="ruby-identifier">tmp</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">k</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">248</span>     }
+<span class="line-num">249</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">250</span>     <span class="ruby-identifier">tmp</span> = <span class="ruby-keyword">self</span>
+<span class="line-num">251</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">252</span>   <span class="ruby-identifier">seq</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tmp</span>)
+<span class="line-num">253</span>   <span class="ruby-comment"># Reference: http://en.wikipedia.org/wiki/Fisher-Yates_shuffle</span>
+<span class="line-num">254</span>   <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>.<span class="ruby-identifier">downto</span>(<span class="ruby-value">2</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">n</span><span class="ruby-operator">|</span>
+<span class="line-num">255</span>     <span class="ruby-identifier">k</span> = <span class="ruby-identifier">rand</span>(<span class="ruby-identifier">n</span>)
+<span class="line-num">256</span>     <span class="ruby-identifier">c</span> = <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>]
+<span class="line-num">257</span>     <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>] = <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">k</span>]
+<span class="line-num">258</span>     <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">c</span>
+<span class="line-num">259</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">260</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">261</span>     (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+<span class="line-num">262</span>       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">seq</span>[<span class="ruby-identifier">i</span>, <span class="ruby-value">1</span>]
+<span class="line-num">263</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">264</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">265</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">266</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">seq</span>
+<span class="line-num">267</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">268</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -498,8 +486,7 @@ into the block.  In all cases, the original sequence is not modified.</p>
 
         <div class="method-description">
           
-          <p>Create a new sequence based on the current sequence. The original sequence
-is unchanged.</p>
+          <p>Create a new sequence based on the current sequence. The original sequence is unchanged.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">s2</span> = <span class="ruby-identifier">s</span>.<span class="ruby-identifier">seq</span>
@@ -515,10 +502,10 @@ is unchanged.</p>
 
           
           <div class="method-source-code" id="seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 65</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">65</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
+<span class="line-num">66</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">67</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -570,9 +557,7 @@ is unchanged.</p>
 
         <div class="method-description">
           
-          <p>Return a new sequence extracted from the original using a <a
-href="../GenBank.html">GenBank</a> style  position string.  See also
-documentation for the <a href="../Location.html">Bio::Location</a> class.</p>
+          <p>Return a new sequence extracted from the original using a <a href="../GenBank.html"><code>GenBank</code></a> style  position string.  See also documentation for the <a href="../Location.html"><code>Bio::Location</code></a> class.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgcatgcatgcatgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-string">&#39;1..3&#39;</span>)                           <span class="ruby-comment">#=&gt; &quot;atg&quot;</span>
@@ -581,14 +566,12 @@ documentation for the <a href="../Location.html">Bio::Location</a> class.</p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">splice</span>(<span class="ruby-string">&#39;complement(join(1..3,8..10))&#39;</span>)   <span class="ruby-comment">#=&gt; &quot;atgcat&quot;</span>
 </pre>
 
-<p>Note that &#39;complement&#39;ed Genbank position strings will have no 
-effect on <a href="AA.html">Bio::Sequence::AA</a> objects.</p>
+<p>Note that &#39;complement&#39;ed Genbank position strings will have no  effect on <a href="AA.html"><code>Bio::Sequence::AA</code></a> objects.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>position</em>: String <strong>or</strong> <a
-href="../Location.html">Bio::Location</a> object</p>
+<p>(required) <em>position</em>: String <strong>or</strong> <a href="../Location.html"><code>Bio::Location</code></a> object</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -599,26 +582,26 @@ href="../Location.html">Bio::Location</a> object</p>
 
           
           <div class="method-source-code" id="splice-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 285</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">splice</span>(<span class="ruby-identifier">position</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">position</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Locations</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">position</span> = <span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">position</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">s</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-identifier">position</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">location</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">sequence</span>
-      <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">sequence</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">exon</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-identifier">location</span>.<span class="ruby-identifier">from</span>, <span class="ruby-identifier">location</span>.<span class="ruby-identifier">to</span>)
-      <span class="ruby-keyword">begin</span>
-        <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">complement!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
-      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exon</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">285</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">splice</span>(<span class="ruby-identifier">position</span>)
+<span class="line-num">286</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">position</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Locations</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">287</span>     <span class="ruby-identifier">position</span> = <span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">position</span>)
+<span class="line-num">288</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">289</span>   <span class="ruby-identifier">s</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">290</span>   <span class="ruby-identifier">position</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">location</span><span class="ruby-operator">|</span>
+<span class="line-num">291</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">sequence</span>
+<span class="line-num">292</span>       <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">sequence</span>
+<span class="line-num">293</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">294</span>       <span class="ruby-identifier">exon</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-identifier">location</span>.<span class="ruby-identifier">from</span>, <span class="ruby-identifier">location</span>.<span class="ruby-identifier">to</span>)
+<span class="line-num">295</span>       <span class="ruby-keyword">begin</span>
+<span class="line-num">296</span>         <span class="ruby-identifier">exon</span>.<span class="ruby-identifier">complement!</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+<span class="line-num">297</span>       <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
+<span class="line-num">298</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">299</span>       <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">exon</span>
+<span class="line-num">300</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">301</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">302</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>)
+<span class="line-num">303</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -674,18 +657,13 @@ href="../Location.html">Bio::Location</a> object</p>
 
         <div class="method-description">
           
-          <p>Returns a new sequence containing the subsequence identified by the  start
-and end numbers given as parameters.  <strong>Important:</strong>
-Biological  sequence numbering conventions (one-based) rather than
-ruby&#39;s  (zero-based) numbering conventions are used.</p>
+          <p>Returns a new sequence containing the subsequence identified by the  start and end numbers given as parameters.  <strong>Important:</strong> Biological  sequence numbering conventions (one-based) rather than ruby&#39;s  (zero-based) numbering conventions are used.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atggaatga&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">subseq</span>(<span class="ruby-value">1</span>,<span class="ruby-value">3</span>)                      <span class="ruby-comment">#=&gt; &quot;atg&quot;</span>
 </pre>
 
-<p>Start defaults to 1 and end defaults to the entire existing string, so
-subseq called without any parameters simply returns a new sequence 
-identical to the existing sequence.</p>
+<p>Start defaults to 1 and end defaults to the entire existing string, so subseq called without any parameters simply returns a new sequence  identical to the existing sequence.</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">subseq</span>                           <span class="ruby-comment">#=&gt; &quot;atggaatga&quot;</span>
 </pre>
@@ -706,13 +684,13 @@ identical to the existing sequence.</p>
 
           
           <div class="method-source-code" id="subseq-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 143</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subseq</span>(<span class="ruby-identifier">s</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">e</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">length</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Error: start/end position must be a positive integer&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-  <span class="ruby-identifier">s</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
-  <span class="ruby-identifier">e</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">self</span>[<span class="ruby-identifier">s</span><span class="ruby-operator">..</span><span class="ruby-identifier">e</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">143</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">subseq</span>(<span class="ruby-identifier">s</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">e</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">length</span>)
+<span class="line-num">144</span>   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Error: start/end position must be a positive integer&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+<span class="line-num">145</span>   <span class="ruby-identifier">s</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+<span class="line-num">146</span>   <span class="ruby-identifier">e</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+<span class="line-num">147</span>   <span class="ruby-keyword">self</span>[<span class="ruby-identifier">s</span><span class="ruby-operator">..</span><span class="ruby-identifier">e</span>]
+<span class="line-num">148</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -736,17 +714,9 @@ identical to the existing sequence.</p>
 
         <div class="method-description">
           
-          <p><strong>Bio::Sequence#to_fasta is DEPRECATED</strong> Do not use
-Bio::Sequence#to_fasta ! Use <a
-href="Format.html#method-i-output">Bio::Sequence::Format#output</a>
-instead.  Note that <a href="Common.html#method-i-to_fasta">#to_fasta</a>,
-Bio::Sequence::AA#to_fasata, and Bio::Sequence::Generic#to_fasta
-<strong>can still be used</strong>, because there are no alternative
-methods.</p>
+          <p><strong>Bio::Sequence#to_fasta is DEPRECATED</strong> Do not use Bio::Sequence#to_fasta ! Use <a href="Format.html#method-i-output"><code>Bio::Sequence#output</code></a> instead.  Note that <a href="Common.html#method-i-to_fasta"><code>Bio::Sequence::NA#to_fasta</code></a>, Bio::Sequence::AA#to_fasata, and Bio::Sequence::Generic#to_fasta <strong>can still be used</strong>, because there are no alternative methods.</p>
 
-<p>Output the FASTA format string of the sequence.  The 1st argument is used
-as the comment string.  If the 2nd option is given, the output sequence
-will be folded.</p>
+<p>Output the FASTA format string of the sequence.  The 1st argument is used as the comment string.  If the 2nd option is given, the output sequence will be folded.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -764,16 +734,16 @@ will be folded.</p>
 
           
           <div class="method-source-code" id="to_fasta-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/compat.rb, line 49</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fasta</span>(<span class="ruby-identifier">header</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">width</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::Sequence#to_fasta is obsolete. Use Bio::Sequence#output(:fasta) instead&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
-  <span class="ruby-node">&quot;&gt;#{header}\n&quot;</span> <span class="ruby-operator">+</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">width</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;.{1,#{width}}&quot;</span>), <span class="ruby-string">&quot;\\0\n&quot;</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/compat.rb</span>
+<span class="line-num">49</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fasta</span>(<span class="ruby-identifier">header</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">width</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">50</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::Sequence#to_fasta is obsolete. Use Bio::Sequence#output(:fasta) instead&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
+<span class="line-num">51</span>   <span class="ruby-node">&quot;&gt;#{header}\n&quot;</span> <span class="ruby-operator">+</span>
+<span class="line-num">52</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">width</span>
+<span class="line-num">53</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;.{1,#{width}}&quot;</span>), <span class="ruby-string">&quot;\\0\n&quot;</span>)
+<span class="line-num">54</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">55</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">56</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">57</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -797,9 +767,7 @@ will be folded.</p>
 
         <div class="method-description">
           
-          <p>Return sequence as  <a
-href="http://corelib.rubyonrails.org/classes/String.html">String</a>. The
-original sequence is unchanged.</p>
+          <p>Return sequence as  <a href="http://corelib.rubyonrails.org/classes/String.html">String</a>. The original sequence is unchanged.</p>
 
 <pre class="ruby"><span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>                             <span class="ruby-comment">#=&gt; &#39;atgc&#39;</span>
@@ -817,10 +785,10 @@ original sequence is unchanged.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 52</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">52</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">53</span>   <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">54</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -876,8 +844,7 @@ original sequence is unchanged.</p>
 
         <div class="method-description">
           
-          <p>Returns a float total value for the sequence given a hash of base or
-residue values,</p>
+          <p>Returns a float total value for the sequence given a hash of base or residue values,</p>
 
 <pre class="ruby"><span class="ruby-identifier">values</span> = {<span class="ruby-string">&#39;a&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0.1</span>, <span class="ruby-string">&#39;t&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0.2</span>, <span class="ruby-string">&#39;g&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0.3</span>, <span class="ruby-string">&#39;c&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">0.4</span>}
 <span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
@@ -898,17 +865,17 @@ residue values,</p>
 
           
           <div class="method-source-code" id="total-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 198</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">total</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">default</span> = <span class="ruby-value">0.0</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">default</span>
-  <span class="ruby-identifier">sum</span> = <span class="ruby-value">0.0</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">chr</span>]
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">sum</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">198</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">total</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">199</span>   <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">default</span> = <span class="ruby-value">0.0</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">default</span>
+<span class="line-num">200</span>   <span class="ruby-identifier">sum</span> = <span class="ruby-value">0.0</span>
+<span class="line-num">201</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">202</span>     <span class="ruby-keyword">begin</span>
+<span class="line-num">203</span>       <span class="ruby-identifier">sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">chr</span>]
+<span class="line-num">204</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">205</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">206</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">sum</span>
+<span class="line-num">207</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -932,9 +899,7 @@ residue values,</p>
 
         <div class="method-description">
           
-          <p>This method steps through a sequences in steps of &#39;step_size&#39; by 
-subsequences of &#39;window_size&#39;. Typically used with a block. Any
-remaining sequence at the terminal end will be returned.</p>
+          <p>This method steps through a sequences in steps of &#39;step_size&#39; by  subsequences of &#39;window_size&#39;. Typically used with a block. Any remaining sequence at the terminal end will be returned.</p>
 
 <p>Prints average GC% on each 100bp</p>
 
@@ -976,15 +941,15 @@ remaining sequence at the terminal end will be returned.</p>
 
           
           <div class="method-source-code" id="window_search-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/common.rb, line 179</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">window_search</span>(<span class="ruby-identifier">window_size</span>, <span class="ruby-identifier">step_size</span> = <span class="ruby-value">1</span>)
-  <span class="ruby-identifier">last_step</span> = <span class="ruby-value">0</span>
-  <span class="ruby-value">0</span>.<span class="ruby-identifier">step</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">window_size</span>, <span class="ruby-identifier">step_size</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> 
-    <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">i</span>, <span class="ruby-identifier">window_size</span>]                        
-    <span class="ruby-identifier">last_step</span> = <span class="ruby-identifier">i</span>
-  <span class="ruby-keyword">end</span>                          
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">last_step</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">window_size</span> <span class="ruby-operator">..</span> <span class="ruby-value">-1</span>] 
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/common.rb</span>
+<span class="line-num">179</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">window_search</span>(<span class="ruby-identifier">window_size</span>, <span class="ruby-identifier">step_size</span> = <span class="ruby-value">1</span>)
+<span class="line-num">180</span>   <span class="ruby-identifier">last_step</span> = <span class="ruby-value">0</span>
+<span class="line-num">181</span>   <span class="ruby-value">0</span>.<span class="ruby-identifier">step</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">window_size</span>, <span class="ruby-identifier">step_size</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> 
+<span class="line-num">182</span>     <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">i</span>, <span class="ruby-identifier">window_size</span>]                        
+<span class="line-num">183</span>     <span class="ruby-identifier">last_step</span> = <span class="ruby-identifier">i</span>
+<span class="line-num">184</span>   <span class="ruby-keyword">end</span>                          
+<span class="line-num">185</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">last_step</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">window_size</span> <span class="ruby-operator">..</span> <span class="ruby-value">-1</span>] 
+<span class="line-num">186</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -998,12 +963,13 @@ remaining sequence at the terminal end will be returned.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

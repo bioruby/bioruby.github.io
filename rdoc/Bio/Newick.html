@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -90,7 +94,7 @@
 
   <section class="description">
     
-<p><a href="Newick.html">Newick</a> standard phylogenetic tree parser class.</p>
+<p><a href="Newick.html"><code>Newick</code></a> standard phylogenetic tree parser class.</p>
 
 <p>This is alpha version. Incompatible changes may be made frequently.</p>
 
@@ -116,12 +120,12 @@
       
         <dt id="Edge">Edge
         
-        <dd><p>same as <a href="Tree/Edge.html">Bio::Tree::Edge</a></p>
+        <dd><p>same as <a href="Tree/Edge.html"><code>Bio::Tree::Edge</code></a></p>
         
       
         <dt id="Node">Node
         
-        <dd><p>same as <a href="Tree/Node.html">Bio::Tree::Node</a></p>
+        <dd><p>same as <a href="Tree/Node.html"><code>Bio::Tree::Node</code></a></p>
         
       
       </dl>
@@ -156,8 +160,7 @@
 
         <div class="method-description">
         
-        <p>parser options (in some cases, options can be automatically set by the
-parser)</p>
+        <p>parser options (in some cases, options can be automatically set by the parser)</p>
         
         </div>
       </div>
@@ -198,44 +201,32 @@ parser)</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Newick.html">Newick</a> object. <em>options</em> for
-parsing can be set.</p>
+          <p>Creates a new <a href="Newick.html"><code>Newick</code></a> object. <em>options</em> for parsing can be set.</p>
 
 <p>Available options:</p>
 <dl class="rdoc-list note-list"><dt><code>:bootstrap_style</code>
 <dd>
-<p><code>:traditional</code> for traditional bootstrap style,
-<code>:molphy</code> for molphy style, <code>:disabled</code> to ignore
-bootstrap strings. For details of default actions, please read the notes
-below.</p>
+<p><code>:traditional</code> for traditional bootstrap style, <code>:molphy</code> for molphy style, <code>:disabled</code> to ignore bootstrap strings. For details of default actions, please read the notes below.</p>
 </dd><dt><code>:parser</code>
 <dd>
-<p><code>:naive</code> for using naive parser, compatible with BioRuby 1.1.0,
-which ignores quoted strings and do not convert underscores to spaces.</p>
+<p><code>:naive</code> for using naive parser, compatible with BioRuby 1.1.0, which ignores quoted strings and do not convert underscores to spaces. </p>
 </dd></dl>
 
-<p>Notes for bootstrap style: Molphy-style bootstrap values may always be
-parsed, even if the <code>options[:bootstrap_style]</code> is set to
-<code>:traditional</code> or <code>:disabled</code>.</p>
+<p>Notes for bootstrap style: Molphy-style bootstrap values may always be parsed, even if the <code>options[:bootstrap_style]</code> is set to <code>:traditional</code> or <code>:disabled</code>.</p>
 
-<p>Note for default or traditional bootstrap style: By default, if all of the
-internal node&#39;s names are numeric and there are no NHX and no
-molphy-style boostrap values, the names of internal nodes are regarded as
-bootstrap values. <code>options[:bootstrap_style] = :disabled</code> or
-<code>:molphy</code> to disable the feature (or at least one NHX tag
-exists).</p>
+<p>Note for default or traditional bootstrap style: By default, if all of the internal node&#39;s names are numeric and there are no NHX and no molphy-style boostrap values, the names of internal nodes are regarded as bootstrap values. <code>options[:bootstrap_style] = :disabled</code> or <code>:molphy</code> to disable the feature (or at least one NHX tag exists).</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/newick.rb, line 71</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\;(.*)/m</span>, <span class="ruby-string">&#39;;&#39;</span>)
-  <span class="ruby-ivar">@original_string</span> = <span class="ruby-identifier">str</span>
-  <span class="ruby-ivar">@entry_overrun</span> = <span class="ruby-node">$1</span>
-  <span class="ruby-ivar">@options</span> = (<span class="ruby-identifier">options</span> <span class="ruby-keyword">or</span> {})
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/newick.rb</span>
+<span class="line-num">71</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">options</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">72</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\;(.*)/m</span>, <span class="ruby-string">&#39;;&#39;</span>)
+<span class="line-num">73</span>   <span class="ruby-ivar">@original_string</span> = <span class="ruby-identifier">str</span>
+<span class="line-num">74</span>   <span class="ruby-ivar">@entry_overrun</span> = <span class="ruby-node">$1</span>
+<span class="line-num">75</span>   <span class="ruby-ivar">@options</span> = (<span class="ruby-identifier">options</span> <span class="ruby-keyword">or</span> {})
+<span class="line-num">76</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -267,21 +258,20 @@ exists).</p>
 
         <div class="method-description">
           
-          <p>Re-parses the tree from the original string. Returns self. This method is
-useful after changing parser options.</p>
+          <p>Re-parses the tree from the original string. Returns self. This method is useful after changing parser options.</p>
           
           
 
           
           <div class="method-source-code" id="reparse-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/newick.rb, line 101</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reparse</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@tree</span>)
-    <span class="ruby-identifier">remove_instance_variable</span>(<span class="ruby-value">:@tree</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tree</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/newick.rb</span>
+<span class="line-num">101</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reparse</span>
+<span class="line-num">102</span>   <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@tree</span>)
+<span class="line-num">103</span>     <span class="ruby-identifier">remove_instance_variable</span>(<span class="ruby-value">:@tree</span>)
+<span class="line-num">104</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">105</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tree</span>
+<span class="line-num">106</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">107</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -305,20 +295,20 @@ useful after changing parser options.</p>
 
         <div class="method-description">
           
-          <p>Gets the tree. Returns a <a href="Tree.html">Bio::Tree</a> object.</p>
+          <p>Gets the tree. Returns a <a href="Tree.html"><code>Bio::Tree</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="tree-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/newick.rb, line 90</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tree</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@tree</span>)
-    <span class="ruby-ivar">@tree</span> = <span class="ruby-identifier">__parse_newick</span>(<span class="ruby-ivar">@original_string</span>, <span class="ruby-ivar">@options</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@tree</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/newick.rb</span>
+<span class="line-num">90</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tree</span>
+<span class="line-num">91</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@tree</span>)
+<span class="line-num">92</span>     <span class="ruby-ivar">@tree</span> = <span class="ruby-identifier">__parse_newick</span>(<span class="ruby-ivar">@original_string</span>, <span class="ruby-ivar">@options</span>)
+<span class="line-num">93</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">94</span>     <span class="ruby-ivar">@tree</span>
+<span class="line-num">95</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">96</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -332,12 +322,13 @@ useful after changing parser options.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

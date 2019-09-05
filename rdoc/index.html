@@ -11,11 +11,15 @@
   var index_rel_prefix = "./";
 </script>
 
-<script src="./js/jquery.js"></script>
-<script src="./js/darkfish.js"></script>
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
 
 <link href="./css/fonts.css" rel="stylesheet">
 <link href="./css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -1096,6 +1100,8 @@
   
     <li><a href="./Bio/Tree/Node.html">Bio::Tree::Node</a>
   
+    <li><a href="./Bio/UniProtKB.html">Bio::UniProt</a>
+  
     <li><a href="./Bio/UniProtKB.html">Bio::UniProtKB</a>
   
     <li><a href="./Object.html">Object</a>
@@ -1113,30 +1119,13 @@
 
 <p>Copyright (C) 2001-2019 Toshiaki Katayama &lt;k@bioruby.org&gt;</p>
 
-<p>BioRuby is an open source Ruby library for developing bioinformatics
-software.  <a href="Object.html">Object</a> oriented scripting language
-Ruby has many features suitable for bioinformatics research, for example,
-clear syntax to express complex objects, regular expressions for text
-handling as powerful as Perl&#39;s, a wide variety of libraries including
-web service etc.  As the syntax of the Ruby language is simple and very
-clean, we believe that it is easy to learn for beginners, easy to use for
-biologists, and also powerful enough for the software developers.</p>
+<p>BioRuby is an open source Ruby library for developing bioinformatics software.  <a href="Object.html"><code>Object</code></a> oriented scripting language Ruby has many features suitable for bioinformatics research, for example, clear syntax to express complex objects, regular expressions for text handling as powerful as Perl&#39;s, a wide variety of libraries including web service etc.  As the syntax of the Ruby language is simple and very clean, we believe that it is easy to learn for beginners, easy to use for biologists, and also powerful enough for the software developers.</p>
 
-<p>In BioRuby, you can retrieve biological database entries from flat files,
-internet web servers and local relational databases.  These database
-entries can be parsed to extract information you need. Biological sequences
-can be treated with the fulfilling methods of the Ruby&#39;s String class
-and with regular expressions.  Daily tools like Blast, Fasta, Hmmer and
-many other software packages for biological analysis can be executed within
-the BioRuby script, and the results can be fully parsed to extract the
-portion you need.  BioRuby supports major biological database formats and
-provides many ways for accessing them through flatfile indexing, web
-services etc.  Various web services can be easily utilized by BioRuby.</p>
+<p>In BioRuby, you can retrieve biological database entries from flat files, internet web servers and local relational databases.  These database entries can be parsed to extract information you need. Biological sequences can be treated with the fulfilling methods of the Ruby&#39;s String class and with regular expressions.  Daily tools like Blast, Fasta, Hmmer and many other software packages for biological analysis can be executed within the BioRuby script, and the results can be fully parsed to extract the portion you need.  BioRuby supports major biological database formats and provides many ways for accessing them through flatfile indexing, web services etc.  Various web services can be easily utilized by BioRuby.</p>
 
 <h2 id="label-FOR+MORE+INFORMATION">FOR MORE INFORMATION<span><a href="#label-FOR+MORE+INFORMATION">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>See <a href="RELEASE_NOTES_rdoc.html">RELEASE_NOTES.rdoc</a> for news and
-important changes in this version.</p>
+<p>See <a href="RELEASE_NOTES_rdoc.html">RELEASE_NOTES.rdoc</a> for news and important changes in this version.</p>
 
 <h3 id="label-Documents+in+this+distribution">Documents in this distribution<span><a href="#label-Documents+in+this+distribution">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -1185,8 +1174,7 @@ important changes in this version.</p>
 <p>changes before 1.3.1.</p>
 </dd><dt><a href="README_DEV_rdoc.html">README_DEV.rdoc</a>
 <dd>
-<p>Describes ways to contribute to the BioRuby project, including coding
-styles and documentation guidelines.</p>
+<p>Describes ways to contribute to the BioRuby project, including coding styles and documentation guidelines.</p>
 </dd></dl>
 
 <h4 id="label-Documents+written+in+Japanese">Documents written in Japanese<span><a href="#label-Documents+written+in+Japanese">&para;</a> <a href="#top">&uarr;</a></span></h4>
@@ -1204,10 +1192,7 @@ styles and documentation guidelines.</p>
 
 <h3 id="label-WWW">WWW<span><a href="#label-WWW">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>BioRuby&#39;s official website is at <a
-href="http://bioruby.org">bioruby.org</a>/. You will find links to related
-resources including downloads, mailing lists, Wiki documentation etc. in
-the top page.</p>
+<p>BioRuby&#39;s official website is at <a href="http://bioruby.org">bioruby.org</a>/. You will find links to related resources including downloads, mailing lists, Wiki documentation etc. in the top page.</p>
 <ul><li>
 <p><a href="http://bioruby.org">bioruby.org</a>/</p>
 </li></ul>
@@ -1228,8 +1213,7 @@ the top page.</p>
 
 <h3 id="label-RubyGems">RubyGems<span><a href="#label-RubyGems">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p><a href="http://rubygems.org/">RubyGems (packaging system for Ruby)</a>
-version of the BioRuby package is also available for easy installation.</p>
+<p><a href="http://rubygems.org/">RubyGems (packaging system for Ruby)</a> version of the BioRuby package is also available for easy installation.</p>
 <ul><li>
 <p><a href="https://rubygems.org/gems/bio">rubygems.org/gems/bio</a></p>
 </li></ul>
@@ -1247,31 +1231,23 @@ version of the BioRuby package is also available for easy installation.</p>
 
 <h2 id="label-REQUIREMENTS">REQUIREMENTS<span><a href="#label-REQUIREMENTS">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
-<p>Ruby 2.0.0 or later – <a
-href="http://www.ruby-lang.org">www.ruby-lang.org</a>/</p>
+<p>Ruby 2.0.0 or later – <a href="http://www.ruby-lang.org">www.ruby-lang.org</a>/</p>
 <ul><li>
 <p>Ruby 2.4.6, 2.5.5, 2.6.3 or later is recommended.</p>
 </li><li>
-<p>See <a href="KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a> for Ruby version
-specific problems.</p>
+<p>See <a href="KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a> for Ruby version specific problems.</p>
 </li></ul>
 </li></ul>
 
 <h2 id="label-OPTIONAL+REQUIREMENTS">OPTIONAL REQUIREMENTS<span><a href="#label-OPTIONAL+REQUIREMENTS">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>Some optional libraries can be utilized to extend BioRuby&#39;s
-functionality. If your needs meets the following conditions, install them
-by using RubyGems, or download and install from the following web sites.</p>
+<p>Some optional libraries can be utilized to extend BioRuby&#39;s functionality. If your needs meets the following conditions, install them by using RubyGems, or download and install from the following web sites.</p>
 
 <p>Creating faster flatfile index using Berkley DB:</p>
 <ul><li>
-<p><a href="https://github.com/knu/ruby-bdb">GitHub:ruby-bdb</a> (which took
-over <a href="https://github.com/ruby-bdb/bdb">bdb</a>) (No RubyGems
-available)</p>
+<p><a href="https://github.com/knu/ruby-bdb">GitHub:ruby-bdb</a> (which took over <a href="https://github.com/ruby-bdb/bdb">bdb</a>) (No RubyGems available)</p>
 <ul><li>
-<p><a
-href="http://www.oracle.com/technetwork/database/berkeleydb/index.html">Oracle
-Berkeley DB</a> and C compiler will be required.</p>
+<p><a href="http://www.oracle.com/technetwork/database/berkeleydb/index.html">Oracle Berkeley DB</a> and C compiler will be required.</p>
 </li></ul>
 </li></ul>
 
@@ -1283,14 +1259,11 @@ Berkeley DB</a> and C compiler will be required.</p>
 
 <pre>% gem install bio</pre>
 
-<p>Alternatively, manually download bio-X.X.X.gem from  <a
-href="http://bioruby.org/archive">bioruby.org/archive</a>/ and install it
-by using gems command.</p>
+<p>Alternatively, manually download bio-X.X.X.gem from  <a href="http://bioruby.org/archive">bioruby.org/archive</a>/ and install it by using gems command.</p>
 
 <h3 id="label-Running+self-test">Running self-test<span><a href="#label-Running+self-test">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>To check if bioruby works fine on a machine, self-test codes are bundled.
-Note that some tests may need internet connection.</p>
+<p>To check if bioruby works fine on a machine, self-test codes are bundled. Note that some tests may need internet connection.</p>
 
 <p>To run tests,</p>
 
@@ -1302,16 +1275,11 @@ Note that some tests may need internet connection.</p>
 
 <p>also works.</p>
 
-<p>Before reporting test failure, please check <a
-href="KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a> about known
-platform-dependent issues.  We are happy if you write patches to solve the
-issues.</p>
+<p>Before reporting test failure, please check <a href="KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a> about known platform-dependent issues.  We are happy if you write patches to solve the issues.</p>
 
 <h2 id="label-SETUP">SETUP<span><a href="#label-SETUP">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>If you want to use the OBDA (Open <a href="Bio.html">Bio</a> Database
-Access) to obtain database entries, copy a sample configuration file in the
-BioRuby distribution</p>
+<p>If you want to use the OBDA (Open <a href="Bio.html"><code>Bio</code></a> Database Access) to obtain database entries, copy a sample configuration file in the BioRuby distribution</p>
 
 <pre class="ruby"><span class="ruby-identifier">bioruby</span><span class="ruby-operator">-</span><span class="ruby-identifier">x</span>.<span class="ruby-identifier">x</span>.<span class="ruby-identifier">x</span><span class="ruby-operator">/</span><span class="ruby-identifier">etc</span><span class="ruby-operator">/</span><span class="ruby-identifier">bioinformatics</span><span class="ruby-operator">/</span><span class="ruby-identifier">seqdatabase</span>.<span class="ruby-identifier">ini</span>
 </pre>
@@ -1324,15 +1292,11 @@ BioRuby distribution</p>
 
 <pre>~/.bioinformatics/seqdatabase.ini     (personal configuration)</pre>
 
-<p>and change the contents according to your preference.  For more information
-on the OBDA, see <a href="http://obda.open-bio.org">obda.open-bio.org</a>/
-.</p>
+<p>and change the contents according to your preference.  For more information on the OBDA, see <a href="http://obda.open-bio.org">obda.open-bio.org</a>/ .</p>
 
 <h2 id="label-USAGE">USAGE<span><a href="#label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>You can load all BioRuby classes just by requiring &#39;bio.rb&#39;.  All
-the BioRuby classes and modules are located under the module name
-&#39;Bio&#39; to separate the name space.</p>
+<p>You can load all BioRuby classes just by requiring &#39;bio.rb&#39;.  All the BioRuby classes and modules are located under the module name &#39;Bio&#39; to separate the name space.</p>
 
 <pre class="ruby"><span class="ruby-comment">#!/usr/bin/env ruby</span>
 <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio&#39;</span>
@@ -1344,29 +1308,22 @@ the BioRuby classes and modules are located under the module name
 
 <h2 id="label-PLUGIN+-28Biogem-29">PLUGIN (Biogem)<span><a href="#label-PLUGIN+-28Biogem-29">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>Many plugins (called Biogem) are now available. See <a
-href="http://biogems.info">biogems.info</a>/ for list of plugins and
-related software utilizing BioRuby.</p>
+<p>Many plugins (called Biogem) are now available. See <a href="http://biogems.info">biogems.info</a>/ for list of plugins and related software utilizing BioRuby.</p>
 <ul><li>
 <p><a href="http://biogems.info">biogems.info</a>/</p>
 </li></ul>
 
-<p>Plugins (Biogems) listed below had been included in BioRuby in former days,
-and were split to separate packages to reduce complexity and external
-dependencies.</p>
+<p>Plugins (Biogems) listed below had been included in BioRuby in former days, and were split to separate packages to reduce complexity and external dependencies.</p>
 <ul><li>
 <p><a href="https://rubygems.org/gems/bioruby-shell">bio-shell</a></p>
 </li><li>
 <p><a href="https://rubygems.org/gems/bioruby-executables">bio-executables</a></p>
 </li><li>
-<p><a
-href="https://rubygems.org/gems/bioruby-blast-xmlparser">bio-blast-xmlparser</a></p>
+<p><a href="https://rubygems.org/gems/bioruby-blast-xmlparser">bio-blast-xmlparser</a></p>
 </li><li>
 <p><a href="https://rubygems.org/gems/bioruby-phyloxml">bioruby-phyloxml</a></p>
 <ul><li>
-<p>NOTE: Please uninstall bio-phyloxml, that have been created as a
-preliminary trial of splitting a module in 2012 and have not been
-maintained after that.</p>
+<p>NOTE: Please uninstall bio-phyloxml, that have been created as a preliminary trial of splitting a module in 2012 and have not been maintained after that.</p>
 </li></ul>
 </li><li>
 <p><a href="https://rubygems.org/gems/bio-biosql">bio-biosql</a></p>
@@ -1374,22 +1331,17 @@ maintained after that.</p>
 
 <p>Plugins (Biogems) listed below may be useful for running existing codes.</p>
 <ul><li>
-<p><a
-href="https://rubygems.org/gems/bio-old-biofetch-emulator">bio-old-biofetch-emulator</a>
-– Emulates deprecated BioRuby&#39;s BioFetch server by using other existing
-web services.</p>
+<p><a href="https://rubygems.org/gems/bio-old-biofetch-emulator">bio-old-biofetch-emulator</a> – Emulates deprecated BioRuby&#39;s BioFetch server by using other existing web services.</p>
 </li></ul>
 
 <p>To develop your own plugin, see “Plugins” pages of BioRuby Wiki.</p>
 <ul><li>
-<p><a
-href="http://bioruby.open-bio.org/wiki/Plugins">bioruby.open-bio.org/wiki/Plugins</a></p>
+<p><a href="http://bioruby.open-bio.org/wiki/Plugins">bioruby.open-bio.org/wiki/Plugins</a></p>
 </li></ul>
 
 <h3 id="label-Recommended+Plugins+-28gems-29">Recommended Plugins (gems)<span><a href="#label-Recommended+Plugins+-28gems-29">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>For existing BioRuby users, it is recommended to install the following
-gems:</p>
+<p>For existing BioRuby users, it is recommended to install the following gems:</p>
 <dl class="rdoc-list note-list"><dt>bio-shell 
 <dd>
 <p>If you use the BioRuby Shell.</p>
@@ -1398,41 +1350,30 @@ gems:</p>
 <p>If you use br_bio* commands.</p>
 </dd><dt>bio-old-biofetch-emulator 
 <dd>
-<p>If you run existing codes using BioFetch, including sample and demo codes
-in sample/.</p>
+<p>If you run existing codes using BioFetch, including sample and demo codes in sample/.</p>
 </dd><dt>bio-blast-xmlparser 
 <dd>
-<p>If you treat BLAST XML result files and Expat XML parser (with development
-files) is installed in your system.</p>
+<p>If you treat BLAST XML result files and Expat XML parser (with development files) is installed in your system.</p>
 </dd><dt>bioruby-phyloxml 
 <dd>
-<p>If you use Bio::PhyloXML and Libxml2 (with developemnt files) is installed
-in your system.</p>
+<p>If you use Bio::PhyloXML and Libxml2 (with developemnt files) is installed in your system.</p>
 </dd></dl>
 
-<p>Note that it is NOT recommended to install bio-biosql unless you have
-really used Bio::SQL, because it depends on older version of ActiveRecords
-and ActiveSupport that may not be run on recent Ruby versions.</p>
+<p>Note that it is NOT recommended to install bio-biosql unless you have really used Bio::SQL, because it depends on older version of ActiveRecords and ActiveSupport that may not be run on recent Ruby versions.</p>
 
 <h2 id="label-LICENSE">LICENSE<span><a href="#label-LICENSE">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>BioRuby can be freely distributed under the same terms as Ruby. See the
-file COPYING (or COPYING.ja written in Japanese).</p>
+<p>BioRuby can be freely distributed under the same terms as Ruby. See the file COPYING (or COPYING.ja written in Japanese).</p>
 
-<p>As written in the file COPYING, see the file LEGAL for files distributed
-under different license.</p>
+<p>As written in the file COPYING, see the file LEGAL for files distributed under different license.</p>
 
 <h2 id="label-REFERENCE">REFERENCE<span><a href="#label-REFERENCE">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>If you use BioRuby in academic research, please consider citing the
-following publication.</p>
+<p>If you use BioRuby in academic research, please consider citing the following publication.</p>
 <ul><li>
-<p>BioRuby: Bioinformatics software for the Ruby programming language. Naohisa
-Goto, Pjotr Prins, Mitsuteru Nakao, Raoul Bonnal, Jan Aerts and  Toshiaki
-Katayama. Bioinformatics (2010) 26(20): 2617-2619.</p>
+<p>BioRuby: Bioinformatics software for the Ruby programming language. Naohisa Goto, Pjotr Prins, Mitsuteru Nakao, Raoul Bonnal, Jan Aerts and  Toshiaki Katayama. Bioinformatics (2010) 26(20): 2617-2619.</p>
 <ul><li>
-<p><a href="http://bioinformatics.oxfordjournals.org/content/26/20/2617">doi:
-10.1093/bioinformatics/btq475</a></p>
+<p><a href="http://bioinformatics.oxfordjournals.org/content/26/20/2617">doi: 10.1093/bioinformatics/btq475</a></p>
 </li><li>
 <p><a href="http://www.ncbi.nlm.nih.gov/pubmed/20739307">PMID: 20739307</a></p>
 </li></ul>
@@ -1440,15 +1381,16 @@ Katayama. Bioinformatics (2010) 26(20): 2617-2619.</p>
 
 <h2 id="label-CONTACT">CONTACT<span><a href="#label-CONTACT">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>Current staff of the BioRuby project can be reached by sending e-mail to
-&lt;staff@bioruby.org&gt;.</p>
+<p>Current staff of the BioRuby project can be reached by sending e-mail to &lt;staff@bioruby.org&gt;.</p>
+
+
 </main>
 
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

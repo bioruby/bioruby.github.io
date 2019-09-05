@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -136,10 +140,9 @@
 
   <section class="description">
     
-<h1 id="class-Bio::Blast::Report-label-Bio-3A-3ABlast-3A-3AReport"><a href="Report.html">Bio::Blast::Report</a><span><a href="#class-Bio::Blast::Report-label-Bio-3A-3ABlast-3A-3AReport">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::Blast::Report-label-Bio-3A-3ABlast-3A-3AReport"><a href="Report.html"><code>Bio::Blast::Report</code></a><span><a href="#class-Bio::Blast::Report-label-Bio-3A-3ABlast-3A-3AReport">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>Parsed results of the blast execution for Tab-delimited and XML output
-format.  Tab-delimited reports are consists of</p>
+<p>Parsed results of the blast execution for Tab-delimited and XML output format.  Tab-delimited reports are consists of</p>
 
 <pre>Query id,
 Subject id,
@@ -154,8 +157,7 @@ end of alignment in subject,
 expected value,
 bit score.</pre>
 
-<p>according to the MEGABLAST document (README.mbl).  As for XML output, see
-the following DTDs.</p>
+<p>according to the MEGABLAST document (README.mbl).  As for XML output, see the following DTDs.</p>
 
 <pre>* http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.dtd
 * http://www.ncbi.nlm.nih.gov/dtd/NCBI_BlastOutput.mod
@@ -178,15 +180,12 @@ the following DTDs.</p>
       
         <dt id="DELIMITER">DELIMITER
         
-        <dd><p>for <a href="../FlatFile.html">Bio::FlatFile</a> support (only for XML
-data)</p>
+        <dd><p>for <a href="../FlatFile.html"><code>Bio::FlatFile</code></a> support (only for XML data)</p>
         
       
         <dt id="FLATFILE_SPLITTER">FLATFILE_SPLITTER
         
-        <dd><p>Flatfile splitter for <a href="../NCBI.html">NCBI</a> BLAST XML format. It
-is internally used when reading BLAST XML. Normally, users do not need to
-use it directly.</p>
+        <dd><p>Flatfile splitter for <a href="../NCBI.html"><code>NCBI</code></a> BLAST XML format. It is internally used when reading BLAST XML. Normally, users do not need to use it directly.</p>
         
       
       </dl>
@@ -221,8 +220,7 @@ use it directly.</p>
 
         <div class="method-description">
         
-        <p>Returns an Array of <a
-href="Report/Iteration.html">Bio::Blast::Report::Iteration</a> objects.</p>
+        <p>Returns an Array of <a href="Report/Iteration.html"><code>Bio::Blast::Report::Iteration</code></a> objects.</p>
         
         </div>
       </div>
@@ -235,10 +233,7 @@ href="Report/Iteration.html">Bio::Blast::Report::Iteration</a> objects.</p>
 
         <div class="method-description">
         
-        <p>Returns a Hash containing execution parameters.  Valid keys are:
-&#39;matrix&#39;, &#39;expect&#39;, &#39;include&#39;, &#39;sc-match&#39;,
-&#39;sc-mismatch&#39;, &#39;gap-open&#39;, &#39;gap-extend&#39;,
-&#39;filter&#39;</p>
+        <p>Returns a Hash containing execution parameters.  Valid keys are: &#39;matrix&#39;, &#39;expect&#39;, &#39;include&#39;, &#39;sc-match&#39;, &#39;sc-mismatch&#39;, &#39;gap-open&#39;, &#39;gap-extend&#39;, &#39;filter&#39;</p>
         
         </div>
       </div>
@@ -316,16 +311,9 @@ href="Report/Iteration.html">Bio::Blast::Report::Iteration</a> objects.</p>
 
         <div class="method-description">
         
-        <p>When the report contains results for multiple query sequences, returns an
-array of <a href="Report.html">Bio::Blast::Report</a> objects corresponding
-to the multiple queries. Otherwise, returns nil.</p>
+        <p>When the report contains results for multiple query sequences, returns an array of <a href="Report.html"><code>Bio::Blast::Report</code></a> objects corresponding to the multiple queries. Otherwise, returns nil.</p>
 
-<p>Note for “No hits found”: When no hits found for a query sequence, the
-result for the query is completely void and no information available in the
-result XML, including query ID and query definition. The only trace is that
-iteration number is skipped. This means that if the no-hit query is the
-last query, the query can not be detected, because the result XML is
-completely the same as the result XML without the query.</p>
+<p>Note for “No hits found”: When no hits found for a query sequence, the result for the query is completely void and no information available in the result XML, including query ID and query definition. The only trace is that iteration number is skipped. This means that if the no-hit query is the last query, the query can not be detected, because the result XML is completely the same as the result XML without the query.</p>
         
         </div>
       </div>
@@ -366,36 +354,35 @@ completely the same as the result XML without the query.</p>
 
         <div class="method-description">
           
-          <p>Passing a BLAST output from &#39;blastall -m 7&#39; or &#39;-m 8&#39; as a
-String. Formats are auto detected.</p>
+          <p>Passing a BLAST output from &#39;blastall -m 7&#39; or &#39;-m 8&#39; as a String. Formats are auto detected.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 87</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">parser</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@iterations</span> = []
-  <span class="ruby-ivar">@parameters</span> = {}
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">parser</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:xmlparser</span>             <span class="ruby-comment"># format 7</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-identifier">xmlparser_parse</span>
-      <span class="ruby-identifier">xmlparser_parse</span>(<span class="ruby-identifier">data</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">NameError</span>, <span class="ruby-string">&quot;xmlparser_parse does not defined&quot;</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@reports</span> = <span class="ruby-identifier">blastxml_split_reports</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:rexml</span>         <span class="ruby-comment"># format 7</span>
-    <span class="ruby-identifier">rexml_parse</span>(<span class="ruby-identifier">data</span>)
-    <span class="ruby-ivar">@reports</span> = <span class="ruby-identifier">blastxml_split_reports</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:tab</span>           <span class="ruby-comment"># format 8</span>
-    <span class="ruby-identifier">tab_parse</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-keyword">when</span> <span class="ruby-keyword">false</span>
-    <span class="ruby-comment"># do not parse, creates an empty object</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">auto_parse</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num"> 87</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">parser</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num"> 88</span>   <span class="ruby-ivar">@iterations</span> = []
+<span class="line-num"> 89</span>   <span class="ruby-ivar">@parameters</span> = {}
+<span class="line-num"> 90</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">parser</span>
+<span class="line-num"> 91</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">:xmlparser</span>             <span class="ruby-comment"># format 7</span>
+<span class="line-num"> 92</span>     <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-identifier">xmlparser_parse</span>
+<span class="line-num"> 93</span>       <span class="ruby-identifier">xmlparser_parse</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num"> 94</span>     <span class="ruby-keyword">else</span>
+<span class="line-num"> 95</span>       <span class="ruby-identifier">raise</span> <span class="ruby-constant">NameError</span>, <span class="ruby-string">&quot;xmlparser_parse does not defined&quot;</span>
+<span class="line-num"> 96</span>     <span class="ruby-keyword">end</span>
+<span class="line-num"> 97</span>     <span class="ruby-ivar">@reports</span> = <span class="ruby-identifier">blastxml_split_reports</span>
+<span class="line-num"> 98</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">:rexml</span>         <span class="ruby-comment"># format 7</span>
+<span class="line-num"> 99</span>     <span class="ruby-identifier">rexml_parse</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">100</span>     <span class="ruby-ivar">@reports</span> = <span class="ruby-identifier">blastxml_split_reports</span>
+<span class="line-num">101</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">:tab</span>           <span class="ruby-comment"># format 8</span>
+<span class="line-num">102</span>     <span class="ruby-identifier">tab_parse</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">103</span>   <span class="ruby-keyword">when</span> <span class="ruby-keyword">false</span>
+<span class="line-num">104</span>     <span class="ruby-comment"># do not parse, creates an empty object</span>
+<span class="line-num">105</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">106</span>     <span class="ruby-identifier">auto_parse</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">107</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">108</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -425,10 +412,10 @@ String. Formats are auto detected.</p>
 
           
           <div class="method-source-code" id="rexml-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 61</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">rexml</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">:rexml</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">61</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">rexml</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">62</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">:rexml</span>)
+<span class="line-num">63</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -458,10 +445,10 @@ String. Formats are auto detected.</p>
 
           
           <div class="method-source-code" id="tab-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 66</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">tab</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">:tab</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">66</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">tab</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">67</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>, <span class="ruby-value">:tab</span>)
+<span class="line-num">68</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -499,8 +486,8 @@ String. Formats are auto detected.</p>
 
           
           <div class="method-source-code" id="db_len-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 197</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_len</span>;    <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;db-len&#39;</span>];    <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">197</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_len</span>;    <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;db-len&#39;</span>];    <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -530,8 +517,8 @@ String. Formats are auto detected.</p>
 
           
           <div class="method-source-code" id="db_num-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 195</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_num</span>;    <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;db-num&#39;</span>];    <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">195</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_num</span>;    <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;db-num&#39;</span>];    <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -583,20 +570,18 @@ String. Formats are auto detected.</p>
 
         <div class="method-description">
           
-          <p>Iterates on each <a href="Report/Hit.html">Bio::Blast::Report::Hit</a>
-object of the the last <a href="Report/Iteration.html">Iteration</a>.
-Shortcut for the last iteration&#39;s hits (for blastall)</p>
+          <p>Iterates on each <a href="Report/Hit.html"><code>Bio::Blast::Report::Hit</code></a> object of the the last <a href="Report/Iteration.html"><code>Iteration</code></a>. Shortcut for the last iteration&#39;s hits (for blastall)</p>
           
           
 
           
           <div class="method-source-code" id="each_hit-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 173</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_hit</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">173</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_hit</span>
+<span class="line-num">174</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">175</span>     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
+<span class="line-num">176</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">177</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -624,20 +609,18 @@ Shortcut for the last iteration&#39;s hits (for blastall)</p>
 
         <div class="method-description">
           
-          <p>Iterates on each <a
-href="Report/Iteration.html">Bio::Blast::Report::Iteration</a> object. (for
-blastpgp)</p>
+          <p>Iterates on each <a href="Report/Iteration.html"><code>Bio::Blast::Report::Iteration</code></a> object. (for blastpgp)</p>
           
           
 
           
           <div class="method-source-code" id="each_iteration-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 165</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_iteration</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">165</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_iteration</span>
+<span class="line-num">166</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">167</span>     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
+<span class="line-num">168</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">169</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -667,8 +650,8 @@ blastpgp)</p>
 
           
           <div class="method-source-code" id="eff_space-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 201</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eff_space</span>; <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;eff-space&#39;</span>]; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">201</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eff_space</span>; <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;eff-space&#39;</span>]; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -698,8 +681,8 @@ blastpgp)</p>
 
           
           <div class="method-source-code" id="entrez_query-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 162</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entrez_query</span>; <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;entrez-query&#39;</span>];     <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">162</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entrez_query</span>; <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;entrez-query&#39;</span>];     <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -729,8 +712,8 @@ blastpgp)</p>
 
           
           <div class="method-source-code" id="entropy-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 207</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entropy</span>;   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;entropy&#39;</span>];   <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">207</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entropy</span>;   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;entropy&#39;</span>];   <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -760,8 +743,8 @@ blastpgp)</p>
 
           
           <div class="method-source-code" id="expect-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 146</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">expect</span>;       <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;expect&#39;</span>];           <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">146</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">expect</span>;       <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;expect&#39;</span>];           <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -791,8 +774,8 @@ blastpgp)</p>
 
           
           <div class="method-source-code" id="filter-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 158</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter</span>;       <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;filter&#39;</span>];           <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">158</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">filter</span>;       <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;filter&#39;</span>];           <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -822,8 +805,8 @@ blastpgp)</p>
 
           
           <div class="method-source-code" id="gap_extend-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 156</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gap_extend</span>;   <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;gap-extend&#39;</span>];       <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">156</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gap_extend</span>;   <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;gap-extend&#39;</span>];       <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -853,8 +836,8 @@ blastpgp)</p>
 
           
           <div class="method-source-code" id="gap_open-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 154</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gap_open</span>;     <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;gap-open&#39;</span>];         <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">154</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gap_open</span>;     <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;gap-open&#39;</span>];         <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -878,17 +861,16 @@ blastpgp)</p>
 
         <div class="method-description">
           
-          <p>Returns a Array of Bio::Blast::Report::Hits of the last iteration. Shortcut
-for the last iteration&#39;s hits</p>
+          <p>Returns a Array of Bio::Blast::Report::Hits of the last iteration. Shortcut for the last iteration&#39;s hits</p>
           
           
 
           
           <div class="method-source-code" id="hits-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 182</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">hits</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">182</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits</span>
+<span class="line-num">183</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">hits</span>
+<span class="line-num">184</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -918,8 +900,8 @@ for the last iteration&#39;s hits</p>
 
           
           <div class="method-source-code" id="hsp_len-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 199</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hsp_len</span>;   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;hsp-len&#39;</span>];   <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">199</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hsp_len</span>;   <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;hsp-len&#39;</span>];   <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -949,8 +931,8 @@ for the last iteration&#39;s hits</p>
 
           
           <div class="method-source-code" id="inclusion-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inclusion</span>;    <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;include&#39;</span>];          <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">148</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inclusion</span>;    <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;include&#39;</span>];          <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -980,8 +962,8 @@ for the last iteration&#39;s hits</p>
 
           
           <div class="method-source-code" id="kappa-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 203</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">kappa</span>;     <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;kappa&#39;</span>];     <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">203</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">kappa</span>;     <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;kappa&#39;</span>];     <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1011,8 +993,8 @@ for the last iteration&#39;s hits</p>
 
           
           <div class="method-source-code" id="lambda-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 205</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lambda</span>;    <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;lambda&#39;</span>];    <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">205</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lambda</span>;    <span class="ruby-identifier">statistics</span>[<span class="ruby-string">&#39;lambda&#39;</span>];    <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1042,8 +1024,8 @@ for the last iteration&#39;s hits</p>
 
           
           <div class="method-source-code" id="matrix-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 144</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">matrix</span>;       <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;matrix&#39;</span>];           <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">144</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">matrix</span>;       <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;matrix&#39;</span>];           <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1067,18 +1049,16 @@ for the last iteration&#39;s hits</p>
 
         <div class="method-description">
           
-          <p>Returns a String (or nil) containing execution message of the last
-iteration (typically “CONVERGED”). Shortcut for the last iteration&#39;s
-message (for checking &#39;CONVERGED&#39;)</p>
+          <p>Returns a String (or nil) containing execution message of the last iteration (typically “CONVERGED”). Shortcut for the last iteration&#39;s message (for checking &#39;CONVERGED&#39;)</p>
           
           
 
           
           <div class="method-source-code" id="message-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 212</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">message</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">message</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">212</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">message</span>
+<span class="line-num">213</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">message</span>
+<span class="line-num">214</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1108,8 +1088,8 @@ message (for checking &#39;CONVERGED&#39;)</p>
 
           
           <div class="method-source-code" id="pattern-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 160</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern</span>;      <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;pattern&#39;</span>];          <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">160</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern</span>;      <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;pattern&#39;</span>];          <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1139,8 +1119,8 @@ message (for checking &#39;CONVERGED&#39;)</p>
 
           
           <div class="method-source-code" id="sc_match-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 150</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sc_match</span>;     <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;sc-match&#39;</span>];         <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">150</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sc_match</span>;     <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;sc-match&#39;</span>];         <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1170,8 +1150,8 @@ message (for checking &#39;CONVERGED&#39;)</p>
 
           
           <div class="method-source-code" id="sc_mismatch-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 152</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sc_mismatch</span>;  <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;sc-mismatch&#39;</span>];      <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">152</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sc_mismatch</span>;  <span class="ruby-ivar">@parameters</span>[<span class="ruby-string">&#39;sc-mismatch&#39;</span>];      <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1195,19 +1175,16 @@ message (for checking &#39;CONVERGED&#39;)</p>
 
         <div class="method-description">
           
-          <p>Returns a Hash containing execution statistics of the last iteration. Valid
-keys are: &#39;db-num&#39;, &#39;db-len&#39;, &#39;hsp-len&#39;,
-&#39;eff-space&#39;, &#39;kappa&#39;, &#39;lambda&#39;, &#39;entropy&#39;
-Shortcut for the last iteration&#39;s statistics.</p>
+          <p>Returns a Hash containing execution statistics of the last iteration. Valid keys are: &#39;db-num&#39;, &#39;db-len&#39;, &#39;hsp-len&#39;, &#39;eff-space&#39;, &#39;kappa&#39;, &#39;lambda&#39;, &#39;entropy&#39; Shortcut for the last iteration&#39;s statistics.</p>
           
           
 
           
           <div class="method-source-code" id="statistics-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 190</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">statistics</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">statistics</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">190</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">statistics</span>
+<span class="line-num">191</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">statistics</span>
+<span class="line-num">192</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1221,12 +1198,13 @@ Shortcut for the last iteration&#39;s statistics.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

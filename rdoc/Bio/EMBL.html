@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -75,18 +79,7 @@
   </ul>
 </div>
 
-    <div id="extends-section" class="nav-section">
-  <h3>Extended With Modules</h3>
-
-  <ul class="link-list">
     
-  
-    <li><span class="extend">Bio::Features::BackwardCompatibility</span>
-  
-  
-  </ul>
-</div>
-
     <!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
@@ -214,10 +207,10 @@
 
           
           <div class="method-source-code" id="cc-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 402</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cc</span>
-  <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;CC&#39;</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^CC   /</span>, <span class="ruby-string">&#39;&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">402</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cc</span>
+<span class="line-num">403</span>   <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;CC&#39;</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/^CC   /</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">404</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -279,10 +272,10 @@
 
           
           <div class="method-source-code" id="data_class-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 130</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">data_class</span>
-  <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;DATA_CLASS&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">130</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">data_class</span>
+<span class="line-num">131</span>   <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;DATA_CLASS&#39;</span>)
+<span class="line-num">132</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -312,10 +305,10 @@
 
           
           <div class="method-source-code" id="date_created-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 462</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">date_created</span>
-  <span class="ruby-identifier">parse_date</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dt</span>[<span class="ruby-string">&#39;created&#39;</span>])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">462</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">date_created</span>
+<span class="line-num">463</span>   <span class="ruby-identifier">parse_date</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dt</span>[<span class="ruby-string">&#39;created&#39;</span>])
+<span class="line-num">464</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -345,10 +338,10 @@
 
           
           <div class="method-source-code" id="date_modified-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 457</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">date_modified</span>
-  <span class="ruby-identifier">parse_date</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dt</span>[<span class="ruby-string">&#39;updated&#39;</span>])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">457</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">date_modified</span>
+<span class="line-num">458</span>   <span class="ruby-identifier">parse_date</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dt</span>[<span class="ruby-string">&#39;updated&#39;</span>])
+<span class="line-num">459</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -372,19 +365,18 @@
 
         <div class="method-description">
           
-          <p>database references (DR). Returns an array of <a
-href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
+          <p>database references (DR). Returns an array of <a href="Sequence/DBLink.html"><code>Bio::Sequence::DBLink</code></a> objects.</p>
           
           
 
           
           <div class="method-source-code" id="dblinks-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 512</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks</span>
-  <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;DR&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">DBLink</span>.<span class="ruby-identifier">parse_embl_DR_line</span>(<span class="ruby-identifier">x</span>)
-  }
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">512</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks</span>
+<span class="line-num">513</span>   <span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;DR&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">514</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">DBLink</span>.<span class="ruby-identifier">parse_embl_DR_line</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">515</span>   }
+<span class="line-num">516</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -410,17 +402,17 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
           
           <p>returns DIVISION in the ID line.</p>
 <ul><li>
-<p><a href="EMBL.html#method-i-division">#division</a> -&gt; String</p>
+<p><a href="EMBL.html#method-i-division"><code>Bio::EMBL#division</code></a> -&gt; String</p>
 </li></ul>
           
           
 
           
           <div class="method-source-code" id="division-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 140</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">division</span>
-  <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;DIVISION&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">140</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">division</span>
+<span class="line-num">141</span>   <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;DIVISION&#39;</span>)
+<span class="line-num">142</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -446,7 +438,7 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
           
           <p>returns contents in the date (DT) line.</p>
 <ul><li>
-<p><a href="EMBL.html#method-i-dt">#dt</a>  -&gt; &lt;DT Hash&gt;</p>
+<p><a href="EMBL.html#method-i-dt"><code>Bio::EMBL#dt</code></a>  -&gt; &lt;DT Hash&gt;</p>
 </li></ul>
 
 <p>where &lt;DT Hash&gt; is:</p>
@@ -454,7 +446,7 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
 <pre class="ruby">{}
 </pre>
 <ul><li>
-<p><a href="EMBL.html#method-i-dt">#dt</a>  -&gt; String</p>
+<p><a href="EMBL.html#method-i-dt"><code>Bio::EMBL#dt(key)</code></a>  -&gt; String</p>
 </li></ul>
 
 <p>keys: &#39;created&#39; and &#39;updated&#39;</p>
@@ -465,21 +457,21 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
 
           
           <div class="method-source-code" id="dt-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 182</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dt</span>(<span class="ruby-identifier">key</span>=<span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>]
-    <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">dt_line</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;DT&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>)
-    <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;created&#39;</span>] = <span class="ruby-identifier">dt_line</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\w{2}   /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>
-    <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;updated&#39;</span>] = <span class="ruby-identifier">dt_line</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\w{2}   /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>] = <span class="ruby-identifier">tmp</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>][<span class="ruby-identifier">key</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">182</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dt</span>(<span class="ruby-identifier">key</span>=<span class="ruby-keyword">nil</span>)
+<span class="line-num">183</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>]
+<span class="line-num">184</span>     <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">185</span>     <span class="ruby-identifier">dt_line</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">get</span>(<span class="ruby-string">&#39;DT&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>)
+<span class="line-num">186</span>     <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;created&#39;</span>] = <span class="ruby-identifier">dt_line</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\w{2}   /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>
+<span class="line-num">187</span>     <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;updated&#39;</span>] = <span class="ruby-identifier">dt_line</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\w{2}   /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">strip</span>
+<span class="line-num">188</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>] = <span class="ruby-identifier">tmp</span>
+<span class="line-num">189</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">190</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>
+<span class="line-num">191</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>][<span class="ruby-identifier">key</span>]
+<span class="line-num">192</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">193</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DT&#39;</span>]
+<span class="line-num">194</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">195</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -509,14 +501,14 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
 
           
           <div class="method-source-code" id="each_cds-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 381</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_cds</span>
-  <span class="ruby-identifier">ft</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cds_feature</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">cds_feature</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;CDS&#39;</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">cds_feature</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">381</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_cds</span>
+<span class="line-num">382</span>   <span class="ruby-identifier">ft</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">cds_feature</span><span class="ruby-operator">|</span>
+<span class="line-num">383</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">cds_feature</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;CDS&#39;</span>
+<span class="line-num">384</span>       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">cds_feature</span>
+<span class="line-num">385</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">386</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">387</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -546,14 +538,14 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
 
           
           <div class="method-source-code" id="each_gene-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 390</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_gene</span>
-  <span class="ruby-identifier">ft</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gene_feature</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">gene_feature</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;gene&#39;</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">gene_feature</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">390</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_gene</span>
+<span class="line-num">391</span>   <span class="ruby-identifier">ft</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">gene_feature</span><span class="ruby-operator">|</span>
+<span class="line-num">392</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">gene_feature</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;gene&#39;</span>
+<span class="line-num">393</span>       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">gene_feature</span>
+<span class="line-num">394</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">395</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">396</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -579,17 +571,17 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
           
           <p>returns ENTRY_NAME in the ID line.</p>
 <ul><li>
-<p><a href="EMBL.html#method-i-entry">#entry</a> -&gt; String</p>
+<p><a href="EMBL.html#method-i-entry"><code>Bio::EMBL#entry</code></a> -&gt; String</p>
 </li></ul>
           
           
 
           
           <div class="method-source-code" id="entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 117</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry</span>
-  <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;ENTRY_NAME&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">117</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry</span>
+<span class="line-num">118</span>   <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;ENTRY_NAME&#39;</span>)
+<span class="line-num">119</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -673,16 +665,16 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
 
         <div class="method-description">
           
-          <p>entry version number numbered by <a href="EMBL.html">EMBL</a></p>
+          <p>entry version number numbered by <a href="EMBL.html"><code>EMBL</code></a></p>
           
           
 
           
           <div class="method-source-code" id="entry_version-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 477</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_version</span>
-  <span class="ruby-identifier">parse_release_version</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dt</span>[<span class="ruby-string">&#39;updated&#39;</span>])[<span class="ruby-value">1</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">477</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_version</span>
+<span class="line-num">478</span>   <span class="ruby-identifier">parse_release_version</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dt</span>[<span class="ruby-string">&#39;updated&#39;</span>])[<span class="ruby-value">1</span>]
+<span class="line-num">479</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -742,10 +734,10 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
 
           
           <div class="method-source-code" id="fh-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 326</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fh</span>
-  <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;FH&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">326</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">fh</span>
+<span class="line-num">327</span>   <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;FH&#39;</span>)
+<span class="line-num">328</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -771,13 +763,12 @@ href="Sequence/DBLink.html">Bio::Sequence::DBLink</a> objects.</p>
           
           <p>returns contents in the feature table (FT) lines.</p>
 <ul><li>
-<p><a href="EMBL.html#method-i-ft">#ft</a> -&gt; <a
-href="Features.html">Bio::Features</a></p>
+<p><a href="EMBL.html#method-i-ft"><code>Bio::EMBL#ft</code></a> -&gt; <a href="Features.html"><code>Bio::Features</code></a></p>
 </li><li>
-<p><a href="EMBL.html#method-i-ft">#ft</a> {} -&gt; {|Bio::Feature| }</p>
+<p><a href="EMBL.html#method-i-ft"><code>Bio::EMBL#ft</code></a> {} -&gt; {|Bio::Feature| }</p>
 </li></ul>
 
-<p>same as features method in bio/db/genbank.rb</p>
+<p>same as features method in bio/db/genbank.rb </p>
 
 <p>FT Line; feature table data (&gt;=0)</p>
           
@@ -785,48 +776,48 @@ href="Features.html">Bio::Features</a></p>
 
           
           <div class="method-source-code" id="ft-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 337</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ft</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>]
-    <span class="ruby-identifier">ary</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">false</span>
-    <span class="ruby-ivar">@orig</span>[<span class="ruby-string">&#39;FT&#39;</span>].<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^FEATURES/</span>
-
-      <span class="ruby-comment">#head = line[0,20].strip  # feature key (source, CDS, ...)</span>
-      <span class="ruby-identifier">body</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">20</span>,<span class="ruby-value">60</span>].<span class="ruby-identifier">chomp</span> <span class="ruby-comment"># feature value (position, /qualifier=)</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^FT {3}(\S+)/</span>
-        <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>([ <span class="ruby-node">$1</span>, <span class="ruby-identifier">body</span> ]) <span class="ruby-comment"># [ feature, position, /q=&quot;data&quot;, ... ]</span>
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^ \//</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">in_quote</span>
-        <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">body</span>)    <span class="ruby-comment"># /q=&quot;data..., /q=data, /q</span>
-
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/=&quot; /</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/&quot;$/</span>
-          <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">true</span>
-        <span class="ruby-keyword">end</span>
-
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">body</span> <span class="ruby-comment"># ...data..., ...data...&quot;</span>
-
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/&quot;$/</span>
-          <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">false</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subary</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">parse_qualifiers</span>(<span class="ruby-identifier">subary</span>)
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>] = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Features</span><span class="ruby-operator">::</span><span class="ruby-constant">BackwardCompatibility</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">feature</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">feature</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">337</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ft</span>
+<span class="line-num">338</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>]
+<span class="line-num">339</span>     <span class="ruby-identifier">ary</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">340</span>     <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">341</span>     <span class="ruby-ivar">@orig</span>[<span class="ruby-string">&#39;FT&#39;</span>].<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">342</span>       <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^FEATURES/</span>
+<span class="line-num">343</span> 
+<span class="line-num">344</span>       <span class="ruby-comment">#head = line[0,20].strip  # feature key (source, CDS, ...)</span>
+<span class="line-num">345</span>       <span class="ruby-identifier">body</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">20</span>,<span class="ruby-value">60</span>].<span class="ruby-identifier">chomp</span> <span class="ruby-comment"># feature value (position, /qualifier=)</span>
+<span class="line-num">346</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^FT {3}(\S+)/</span>
+<span class="line-num">347</span>         <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">push</span>([ <span class="ruby-node">$1</span>, <span class="ruby-identifier">body</span> ]) <span class="ruby-comment"># [ feature, position, /q=&quot;data&quot;, ... ]</span>
+<span class="line-num">348</span>       <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^ \//</span> <span class="ruby-keyword">and</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">in_quote</span>
+<span class="line-num">349</span>         <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">body</span>)    <span class="ruby-comment"># /q=&quot;data..., /q=data, /q</span>
+<span class="line-num">350</span> 
+<span class="line-num">351</span>         <span class="ruby-keyword">if</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/=&quot; /</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">!~</span> <span class="ruby-regexp">/&quot;$/</span>
+<span class="line-num">352</span>           <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">353</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">354</span> 
+<span class="line-num">355</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">356</span>         <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">body</span> <span class="ruby-comment"># ...data..., ...data...&quot;</span>
+<span class="line-num">357</span> 
+<span class="line-num">358</span>         <span class="ruby-keyword">if</span> <span class="ruby-identifier">body</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/&quot;$/</span>
+<span class="line-num">359</span>           <span class="ruby-identifier">in_quote</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">360</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">361</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">362</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">363</span> 
+<span class="line-num">364</span>     <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">map!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">subary</span><span class="ruby-operator">|</span>
+<span class="line-num">365</span>       <span class="ruby-identifier">parse_qualifiers</span>(<span class="ruby-identifier">subary</span>)
+<span class="line-num">366</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">367</span> 
+<span class="line-num">368</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>] = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Features</span><span class="ruby-operator">::</span><span class="ruby-constant">BackwardCompatibility</span>)
+<span class="line-num">369</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">370</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+<span class="line-num">371</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">feature</span><span class="ruby-operator">|</span>
+<span class="line-num">372</span>       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">feature</span>
+<span class="line-num">373</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">374</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">375</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;FT&#39;</span>]
+<span class="line-num">376</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">377</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -856,7 +847,7 @@ href="Features.html">Bio::Features</a></p>
           
           <p>returns contents in the ID line.</p>
 <ul><li>
-<p><a href="EMBL.html#method-i-id_line">#id_line</a> -&gt; &lt;ID Hash&gt;</p>
+<p><a href="EMBL.html#method-i-id_line"><code>Bio::EMBL#id_line</code></a> -&gt; &lt;ID Hash&gt;</p>
 </li></ul>
 
 <p>where &lt;ID Hash&gt; is:</p>
@@ -896,13 +887,11 @@ href="Features.html">Bio::Features</a></p>
 <span class="ruby-constant">VRL</span> (<span class="ruby-constant">Viruses</span>)
 </pre>
 
-<p>Rel 89- ID   CD789012; SV 4; linear; genomic DNA; HTG; MAM; 500 BP. ID
-&lt;1&gt;; SV &lt;2&gt;; &lt;3&gt;; &lt;4&gt;; &lt;5&gt;; &lt;6&gt;;
-&lt;7&gt; BP.</p>
+<p>Rel 89- ID   CD789012; SV 4; linear; genomic DNA; HTG; MAM; 500 BP. ID &lt;1&gt;; SV &lt;2&gt;; &lt;3&gt;; &lt;4&gt;; &lt;5&gt;; &lt;6&gt;; &lt;7&gt; BP.</p>
 <ol><li>
 <p>Primary accession number</p>
 </li><li>
-<p><a href="Sequence.html">Sequence</a> version number</p>
+<p><a href="Sequence.html"><code>Sequence</code></a> version number</p>
 </li><li>
 <p>Topology: &#39;circular&#39; or &#39;linear&#39;</p>
 </li><li>
@@ -912,39 +901,39 @@ href="Features.html">Bio::Features</a></p>
 </li><li>
 <p>Taxonomic division (see section 3.2)</p>
 </li><li>
-<p><a href="Sequence.html">Sequence</a> length (see note 2 below)</p>
+<p><a href="Sequence.html"><code>Sequence</code></a> length (see note 2 below)</p>
 </li></ol>
           
           
 
           
           <div class="method-source-code" id="id_line-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 89</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">id_line</span>(<span class="ruby-identifier">key</span>=<span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>]
-    <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">idline</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;ID&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/; +/</span>)         
-    <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;ENTRY_NAME&#39;</span>], <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;DATA_CLASS&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/ +/</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^SV/</span>
-      <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;SEQUENCE_VERSION&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">last</span>
-      <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;TOPOLOGY&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>
-      <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;MOLECULE_TYPE&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>
-      <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;DATA_CLASS&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;MOLECULE_TYPE&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;DIVISION&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>
-    <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;SEQUENCE_LENGTH&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_i</span>
-
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>] = <span class="ruby-identifier">tmp</span>
-  <span class="ruby-keyword">end</span>
-  
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>][<span class="ruby-identifier">key</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num"> 89</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">id_line</span>(<span class="ruby-identifier">key</span>=<span class="ruby-keyword">nil</span>)
+<span class="line-num"> 90</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>]
+<span class="line-num"> 91</span>     <span class="ruby-identifier">tmp</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+<span class="line-num"> 92</span>     <span class="ruby-identifier">idline</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;ID&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/; +/</span>)         
+<span class="line-num"> 93</span>     <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;ENTRY_NAME&#39;</span>], <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;DATA_CLASS&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/ +/</span>)
+<span class="line-num"> 94</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^SV/</span>
+<span class="line-num"> 95</span>       <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;SEQUENCE_VERSION&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">last</span>
+<span class="line-num"> 96</span>       <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;TOPOLOGY&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num"> 97</span>       <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;MOLECULE_TYPE&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num"> 98</span>       <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;DATA_CLASS&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num"> 99</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">100</span>       <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;MOLECULE_TYPE&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">101</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">102</span>     <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;DIVISION&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">103</span>     <span class="ruby-identifier">tmp</span>[<span class="ruby-string">&#39;SEQUENCE_LENGTH&#39;</span>] = <span class="ruby-identifier">idline</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">first</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">104</span> 
+<span class="line-num">105</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>] = <span class="ruby-identifier">tmp</span>
+<span class="line-num">106</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">107</span>   
+<span class="line-num">108</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span>
+<span class="line-num">109</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>][<span class="ruby-identifier">key</span>]
+<span class="line-num">110</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">111</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ID&#39;</span>]
+<span class="line-num">112</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">113</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -970,17 +959,17 @@ href="Features.html">Bio::Features</a></p>
           
           <p>returns MOLECULE_TYPE in the ID line.</p>
 <ul><li>
-<p><a href="EMBL.html#method-i-molecule">#molecule</a> -&gt; String</p>
+<p><a href="EMBL.html#method-i-molecule"><code>Bio::EMBL#molecule</code></a> -&gt; String</p>
 </li></ul>
           
           
 
           
           <div class="method-source-code" id="molecule-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 125</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">molecule</span>
-  <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;MOLECULE_TYPE&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">125</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">molecule</span>
+<span class="line-num">126</span>   <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;MOLECULE_TYPE&#39;</span>)
+<span class="line-num">127</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1094,7 +1083,7 @@ href="Features.html">Bio::Features</a></p>
           
           <p>returns contents in the OS line.</p>
 <ul><li>
-<p><a href="EMBL.html#method-i-os">#os</a>  -&gt; Array of &lt;OS Hash&gt;</p>
+<p><a href="EMBL.html#method-i-os"><code>Bio::EMBL#os</code></a>  -&gt; Array of &lt;OS Hash&gt;</p>
 </li></ul>
 
 <p>where &lt;OS Hash&gt; is:</p>
@@ -1103,10 +1092,9 @@ href="Features.html">Bio::Features</a></p>
  {<span class="ruby-string">&#39;name&#39;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&#39;Rat&#39;</span>, <span class="ruby-string">&#39;os&#39;</span><span class="ruby-operator">=&gt;</span><span class="ruby-string">&#39;Rattus norveticus&#39;</span>}]
 </pre>
 <ul><li>
-<p><a href="EMBL.html#method-i-os">#os</a>[&#39;name&#39;] =&gt; “Human”</p>
+<p><a href="EMBL.html#method-i-os"><code><a href="0">Bio::EMBL#os</a></code></a>[&#39;name&#39;] =&gt; “Human”</p>
 </li><li>
-<p><a href="EMBL.html#method-i-os">#os</a> =&gt; {&#39;name&#39;=&gt;“Human”,
-&#39;os&#39;=&gt;&#39;Homo sapiens&#39;}</p>
+<p><a href="EMBL.html#method-i-os"><code><a href="0">Bio::EMBL#os</a></code></a> =&gt; {&#39;name&#39;=&gt;“Human”, &#39;os&#39;=&gt;&#39;Homo sapiens&#39;}</p>
 </li></ul>
 
 <p>OS Line; organism species (&gt;=1)</p>
@@ -1151,26 +1139,26 @@ OS   Recombinant Hepatitis C virus H77(5&#39;UTR-NS2)/JFH1_V787A,Q1247L</pre>
 
           
           <div class="method-source-code" id="os-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 266</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">os</span>(<span class="ruby-identifier">num</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OS&#39;</span>]
-    <span class="ruby-identifier">os</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;OS&#39;</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-regexp">/([A-Z][a-z]* *[\w \:\&#39;\+\-]+\w) *\(([\w ]+)\)\s*\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">tmp</span>
-      <span class="ruby-identifier">org</span> = <span class="ruby-node">$1</span>
-      <span class="ruby-identifier">name</span> = <span class="ruby-node">$2</span>
-      <span class="ruby-identifier">os</span>.<span class="ruby-identifier">push</span>({<span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;os&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">org</span>})
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">os</span>.<span class="ruby-identifier">push</span>({<span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;os&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tmp</span>})
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OS&#39;</span>] = <span class="ruby-identifier">os</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">num</span>
-    <span class="ruby-comment"># EX. &quot;Trifolium repens (white clover)&quot;</span>
-    <span class="ruby-node">&quot;#{@data[&#39;OS&#39;][num][&#39;os&#39;]} {#data[&#39;OS&#39;][num][&#39;name&#39;]&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OS&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">266</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">os</span>(<span class="ruby-identifier">num</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">267</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OS&#39;</span>]
+<span class="line-num">268</span>     <span class="ruby-identifier">os</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">269</span>     <span class="ruby-identifier">tmp</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;OS&#39;</span>)
+<span class="line-num">270</span>     <span class="ruby-keyword">if</span> <span class="ruby-regexp">/([A-Z][a-z]* *[\w \:\&#39;\+\-]+\w) *\(([\w ]+)\)\s*\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">tmp</span>
+<span class="line-num">271</span>       <span class="ruby-identifier">org</span> = <span class="ruby-node">$1</span>
+<span class="line-num">272</span>       <span class="ruby-identifier">name</span> = <span class="ruby-node">$2</span>
+<span class="line-num">273</span>       <span class="ruby-identifier">os</span>.<span class="ruby-identifier">push</span>({<span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">name</span>, <span class="ruby-string">&#39;os&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">org</span>})
+<span class="line-num">274</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">275</span>       <span class="ruby-identifier">os</span>.<span class="ruby-identifier">push</span>({<span class="ruby-string">&#39;name&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">nil</span>, <span class="ruby-string">&#39;os&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">tmp</span>})
+<span class="line-num">276</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">277</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OS&#39;</span>] = <span class="ruby-identifier">os</span>
+<span class="line-num">278</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">279</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">num</span>
+<span class="line-num">280</span>     <span class="ruby-comment"># EX. &quot;Trifolium repens (white clover)&quot;</span>
+<span class="line-num">281</span>     <span class="ruby-node">&quot;#{@data[&#39;OS&#39;][num][&#39;os&#39;]} {#data[&#39;OS&#39;][num][&#39;name&#39;]&quot;</span>
+<span class="line-num">282</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">283</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;OS&#39;</span>]
+<span class="line-num">284</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1200,10 +1188,10 @@ OS   Recombinant Hepatitis C virus H77(5&#39;UTR-NS2)/JFH1_V787A,Q1247L</pre>
 
           
           <div class="method-source-code" id="release_created-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 472</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">release_created</span>
-  <span class="ruby-identifier">parse_release_version</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dt</span>[<span class="ruby-string">&#39;created&#39;</span>])[<span class="ruby-value">0</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">472</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">release_created</span>
+<span class="line-num">473</span>   <span class="ruby-identifier">parse_release_version</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dt</span>[<span class="ruby-string">&#39;created&#39;</span>])[<span class="ruby-value">0</span>]
+<span class="line-num">474</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1233,10 +1221,10 @@ OS   Recombinant Hepatitis C virus H77(5&#39;UTR-NS2)/JFH1_V787A,Q1247L</pre>
 
           
           <div class="method-source-code" id="release_modified-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 467</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">release_modified</span>
-  <span class="ruby-identifier">parse_release_version</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dt</span>[<span class="ruby-string">&#39;updated&#39;</span>])[<span class="ruby-value">0</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">467</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">release_modified</span>
+<span class="line-num">468</span>   <span class="ruby-identifier">parse_release_version</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dt</span>[<span class="ruby-string">&#39;updated&#39;</span>])[<span class="ruby-value">0</span>]
+<span class="line-num">469</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1262,8 +1250,7 @@ OS   Recombinant Hepatitis C virus H77(5&#39;UTR-NS2)/JFH1_V787A,Q1247L</pre>
           
           <p>returns the nucleotie sequence in this entry.</p>
 <ul><li>
-<p><a href="EMBL.html#method-i-seq">#seq</a>  -&gt; <a
-href="Sequence/NA.html">Bio::Sequence::NA</a></p>
+<p><a href="EMBL.html#method-i-seq"><code>Bio::EMBL#seq</code></a>  -&gt; <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a></p>
 </li></ul>
 
 <p>@<a href="''">orig</a> as sequence bb Line; (blanks) sequence data (&gt;=1)</p>
@@ -1272,10 +1259,10 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
 
           
           <div class="method-source-code" id="seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 446</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/ /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\d+/</span>,<span class="ruby-string">&#39;&#39;</span>) )
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">446</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
+<span class="line-num">447</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>( <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/ /</span>,<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\d+/</span>,<span class="ruby-string">&#39;&#39;</span>) )
+<span class="line-num">448</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1340,10 +1327,10 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
 
           
           <div class="method-source-code" id="sequence_length-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 146</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sequence_length</span>
-  <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;SEQUENCE_LENGTH&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">146</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sequence_length</span>
+<span class="line-num">147</span>   <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;SEQUENCE_LENGTH&#39;</span>)
+<span class="line-num">148</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1377,10 +1364,10 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
 
           
           <div class="method-source-code" id="species-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 519</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">species</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;OS&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">519</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">species</span>
+<span class="line-num">520</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;OS&#39;</span>)
+<span class="line-num">521</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1406,7 +1393,7 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
           
           <p>returns sequence header information in the sequence header (SQ) line.</p>
 <ul><li>
-<p><a href="EMBL.html#method-i-sq">#sq</a>  -&gt; &lt;SQ Hash&gt;</p>
+<p><a href="EMBL.html#method-i-sq"><code>Bio::EMBL#sq</code></a>  -&gt; &lt;SQ Hash&gt;</p>
 </li></ul>
 
 <p>where &lt;SQ Hash&gt; is:</p>
@@ -1415,9 +1402,9 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
  <span class="ruby-string">&#39;a&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Int</span>, <span class="ruby-string">&#39;c&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Int</span>, <span class="ruby-string">&#39;g&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Int</span>, <span class="ruby-string">&#39;t&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-constant">Int</span>}
 </pre>
 <ul><li>
-<p><a href="EMBL.html#method-i-sq">#sq</a>  -&gt; &lt;base content in Int&gt;</p>
+<p><a href="EMBL.html#method-i-sq"><code>Bio::EMBL#sq(base)</code></a>  -&gt; &lt;base content in Int&gt;</p>
 </li><li>
-<p><a href="EMBL.html#method-i-sq">#sq</a>  -&gt; &lt;base content in Int&gt;</p>
+<p><a href="EMBL.html#method-i-sq"><code><a href="base">Bio::EMBL#sq</a></code></a>  -&gt; &lt;base content in Int&gt;</p>
 </li></ul>
 
 <p>SQ Line; sequence header (1/entry)</p>
@@ -1428,23 +1415,23 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
 
           
           <div class="method-source-code" id="sq-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 423</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sq</span>(<span class="ruby-identifier">base</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>]
-    <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;SQ&#39;</span>) <span class="ruby-operator">=~</span> \
-           <span class="ruby-regexp">/(\d+) BP\; (\d+) A; (\d+) C; (\d+) G; (\d+) T; (\d+) other;/</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>] = {<span class="ruby-string">&#39;ntlen&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-string">&#39;other&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$6</span>.<span class="ruby-identifier">to_i</span>,
-                   <span class="ruby-string">&#39;a&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-string">&#39;c&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$3</span>.<span class="ruby-identifier">to_i</span> , <span class="ruby-string">&#39;g&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$4</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-string">&#39;t&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$5</span>.<span class="ruby-identifier">to_i</span>}
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>]
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">base</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>][<span class="ruby-identifier">base</span>.<span class="ruby-identifier">downcase</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">423</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sq</span>(<span class="ruby-identifier">base</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">424</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>]
+<span class="line-num">425</span>     <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;SQ&#39;</span>) <span class="ruby-operator">=~</span> \
+<span class="line-num">426</span>            <span class="ruby-regexp">/(\d+) BP\; (\d+) A; (\d+) C; (\d+) G; (\d+) T; (\d+) other;/</span>
+<span class="line-num">427</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>] = {<span class="ruby-string">&#39;ntlen&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-string">&#39;other&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$6</span>.<span class="ruby-identifier">to_i</span>,
+<span class="line-num">428</span>                    <span class="ruby-string">&#39;a&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-string">&#39;c&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$3</span>.<span class="ruby-identifier">to_i</span> , <span class="ruby-string">&#39;g&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$4</span>.<span class="ruby-identifier">to_i</span>, <span class="ruby-string">&#39;t&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-node">$5</span>.<span class="ruby-identifier">to_i</span>}
+<span class="line-num">429</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">430</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>]
+<span class="line-num">431</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">432</span> 
+<span class="line-num">433</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">base</span>
+<span class="line-num">434</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>][<span class="ruby-identifier">base</span>.<span class="ruby-identifier">downcase</span>]
+<span class="line-num">435</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">436</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;SQ&#39;</span>]
+<span class="line-num">437</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">438</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1470,9 +1457,9 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
           
           <p>returns the version information in the sequence version (SV) line.</p>
 <ul><li>
-<p><a href="EMBL.html#method-i-sv">#sv</a> -&gt; Accession.Version in String</p>
+<p><a href="EMBL.html#method-i-sv"><code>Bio::EMBL#sv</code></a> -&gt; Accession.Version in String</p>
 </li><li>
-<p><a href="EMBL.html#method-i-version">#version</a> -&gt; accession in Int</p>
+<p><a href="EMBL.html#method-i-version"><code>Bio::EMBL#version</code></a> -&gt; accession in Int</p>
 </li></ul>
 
 <p>SV Line; sequence version (1/entry)</p>
@@ -1484,14 +1471,14 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
 
           
           <div class="method-source-code" id="sv-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 162</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sv</span>
-  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">v</span> = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;SV&#39;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/;/</span>,<span class="ruby-string">&#39;&#39;</span>)) <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
-    [<span class="ruby-identifier">id_line</span>[<span class="ruby-string">&#39;ENTRY_NAME&#39;</span>], <span class="ruby-identifier">id_line</span>[<span class="ruby-string">&#39;SEQUENCE_VERSION&#39;</span>]].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.&#39;</span>) 
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">v</span>
-  <span class="ruby-keyword">end</span>  
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">162</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sv</span>
+<span class="line-num">163</span>   <span class="ruby-keyword">if</span> (<span class="ruby-identifier">v</span> = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;SV&#39;</span>).<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/;/</span>,<span class="ruby-string">&#39;&#39;</span>)) <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
+<span class="line-num">164</span>     [<span class="ruby-identifier">id_line</span>[<span class="ruby-string">&#39;ENTRY_NAME&#39;</span>], <span class="ruby-identifier">id_line</span>[<span class="ruby-string">&#39;SEQUENCE_VERSION&#39;</span>]].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;.&#39;</span>) 
+<span class="line-num">165</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">166</span>     <span class="ruby-identifier">v</span>
+<span class="line-num">167</span>   <span class="ruby-keyword">end</span>  
+<span class="line-num">168</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1515,22 +1502,22 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
 
         <div class="method-description">
           
-          <p>converts the entry to <a href="Sequence.html">Bio::Sequence</a> object</p>
+          <p>converts the entry to <a href="Sequence.html"><code>Bio::Sequence</code></a> object</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Arguments</strong>
 <dt><strong>Returns</strong>
 <dd>
-<p><a href="Sequence.html">Bio::Sequence</a> object</p>
+<p><a href="Sequence.html"><code>Bio::Sequence</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="to_biosequence-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 531</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_biosequence</span>
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">adapter</span>(<span class="ruby-keyword">self</span>, <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Adapter</span><span class="ruby-operator">::</span><span class="ruby-constant">EMBL</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">531</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_biosequence</span>
+<span class="line-num">532</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">adapter</span>(<span class="ruby-keyword">self</span>, <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Adapter</span><span class="ruby-operator">::</span><span class="ruby-constant">EMBL</span>)
+<span class="line-num">533</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1560,10 +1547,10 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
 
           
           <div class="method-source-code" id="topology-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 134</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">topology</span>
-  <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;TOPOLOGY&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">134</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">topology</span>
+<span class="line-num">135</span>   <span class="ruby-identifier">id_line</span>(<span class="ruby-string">&#39;TOPOLOGY&#39;</span>)
+<span class="line-num">136</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1593,10 +1580,10 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
 
           
           <div class="method-source-code" id="version-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/embl/embl.rb, line 169</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>
-  (<span class="ruby-identifier">sv</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;.&quot;</span>)[<span class="ruby-value">1</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">id_line</span>[<span class="ruby-string">&#39;SEQUENCE_VERSION&#39;</span>]).<span class="ruby-identifier">to_i</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/embl/embl.rb</span>
+<span class="line-num">169</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>
+<span class="line-num">170</span>   (<span class="ruby-identifier">sv</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;.&quot;</span>)[<span class="ruby-value">1</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">id_line</span>[<span class="ruby-string">&#39;SEQUENCE_VERSION&#39;</span>]).<span class="ruby-identifier">to_i</span>
+<span class="line-num">171</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1610,12 +1597,13 @@ href="Sequence/NA.html">Bio::Sequence::NA</a></p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

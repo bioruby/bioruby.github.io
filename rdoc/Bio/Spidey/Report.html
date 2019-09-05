@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -100,11 +104,9 @@
 
   <section class="description">
     
-<p><a href="../Spidey.html">Spidey</a> report parser class. Please see
-bio/appl/spidey/report.rb for details.</p>
+<p><a href="../Spidey.html"><code>Spidey</code></a> report parser class. Please see bio/appl/spidey/report.rb for details.</p>
 
-<p>Its object may contain some <a
-href="Report/Hit.html">Bio::Spidey::Report::Hit</a> objects.</p>
+<p>Its object may contain some <a href="Report/Hit.html"><code>Bio::Spidey::Report::Hit</code></a> objects.</p>
 
   </section>
 
@@ -123,14 +125,12 @@ href="Report/Hit.html">Bio::Spidey::Report::Hit</a> objects.</p>
       
         <dt id="DELIMITER">DELIMITER
         
-        <dd><p>Delimiter of each entry. <a href="../FlatFile.html">Bio::FlatFile</a> uses
-it.</p>
+        <dd><p>Delimiter of each entry. <a href="../FlatFile.html"><code>Bio::FlatFile</code></a> uses it.</p>
         
       
         <dt id="DELIMITER_OVERRUN">DELIMITER_OVERRUN
         
-        <dd><p>(Integer) excess read size included in <a
-href="Report.html#DELIMITER">DELIMITER</a>.</p>
+        <dd><p>(Integer) excess read size included in <a href="Report.html#DELIMITER"><code>DELIMITER</code></a>.</p>
         
       
       </dl>
@@ -152,10 +152,7 @@ href="Report.html#DELIMITER">DELIMITER</a>.</p>
 
         <div class="method-description">
         
-        <p>Returns an Array of <a href="Report/Hit.html">Bio::Spidey::Report::Hit</a>
-objects. Unlike <a href="Report.html#attribute-i-hits">#hits</a>, the
-method returns results of all trials of pairwise alignment. This would be a
-<a href="../Spidey.html">Bio::Spidey</a> specific method.</p>
+        <p>Returns an Array of <a href="Report/Hit.html"><code>Bio::Spidey::Report::Hit</code></a> objects. Unlike <a href="Report.html#attribute-i-hits"><code>Bio::Spidey::Report#hits</code></a>, the method returns results of all trials of pairwise alignment. This would be a <a href="../Spidey.html"><code>Bio::Spidey</code></a> specific method.</p>
         
         </div>
       </div>
@@ -168,7 +165,7 @@ method returns results of all trials of pairwise alignment. This would be a
 
         <div class="method-description">
         
-        <p>piece of next entry. <a href="../FlatFile.html">Bio::FlatFile</a> uses it.</p>
+        <p>piece of next entry. <a href="../FlatFile.html"><code>Bio::FlatFile</code></a> uses it.</p>
         
         </div>
       </div>
@@ -181,9 +178,7 @@ method returns results of all trials of pairwise alignment. This would be a
 
         <div class="method-description">
         
-        <p>Returns an Array of <a href="Report/Hit.html">Bio::Spidey::Report::Hit</a>
-objects. Because current version of SPIDEY supports only 1 genomic
-sequences, the number of hits is 1 or 0.</p>
+        <p>Returns an Array of <a href="Report/Hit.html"><code>Bio::Spidey::Report::Hit</code></a> objects. Because current version of SPIDEY supports only 1 genomic sequences, the number of hits is 1 or 0.</p>
         
         </div>
       </div>
@@ -211,29 +206,27 @@ sequences, the number of hits is 1 or 0.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Report.html">Bio::Spidey::Report</a> object from
-String. You can use <a href="../FlatFile.html">Bio::FlatFile</a> to read a
-file.</p>
+          <p>Creates a new <a href="Report.html"><code>Bio::Spidey::Report</code></a> object from String. You can use <a href="../FlatFile.html"><code>Bio::FlatFile</code></a> to read a file.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\A\s+/</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\n(^\-\-SPIDEY .*)/m</span>, <span class="ruby-string">&#39;&#39;</span>)  <span class="ruby-comment"># remove trailing entries for sure</span>
-  <span class="ruby-ivar">@entry_overrun</span> = <span class="ruby-node">$1</span>
-  <span class="ruby-identifier">data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\r?\n(?:\r?\n)+/</span>)
-  <span class="ruby-identifier">d0</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\r?\n/</span>)
-  <span class="ruby-ivar">@hit</span> = <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">d0</span>)
-  <span class="ruby-ivar">@all_hits</span> = [ <span class="ruby-ivar">@hit</span> ]
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">d0</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> <span class="ruby-regexp">/\ANo alignment found\.\s*\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">d0</span>[<span class="ruby-value">-1</span>] <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@hits</span> = []
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@hits</span> = [ <span class="ruby-ivar">@hit</span> ]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">47</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">48</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\A\s+/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">49</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\n(^\-\-SPIDEY .*)/m</span>, <span class="ruby-string">&#39;&#39;</span>)  <span class="ruby-comment"># remove trailing entries for sure</span>
+<span class="line-num">50</span>   <span class="ruby-ivar">@entry_overrun</span> = <span class="ruby-node">$1</span>
+<span class="line-num">51</span>   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\r?\n(?:\r?\n)+/</span>)
+<span class="line-num">52</span>   <span class="ruby-identifier">d0</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\r?\n/</span>)
+<span class="line-num">53</span>   <span class="ruby-ivar">@hit</span> = <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">d0</span>)
+<span class="line-num">54</span>   <span class="ruby-ivar">@all_hits</span> = [ <span class="ruby-ivar">@hit</span> ]
+<span class="line-num">55</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">d0</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> <span class="ruby-regexp">/\ANo alignment found\.\s*\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">d0</span>[<span class="ruby-value">-1</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">56</span>     <span class="ruby-ivar">@hits</span> = []
+<span class="line-num">57</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">58</span>     <span class="ruby-ivar">@hits</span> = [ <span class="ruby-ivar">@hit</span> ]
+<span class="line-num">59</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">60</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -293,17 +286,16 @@ file.</p>
 
         <div class="method-description">
           
-          <p>Iterates over each hits. Same as hits.each. Yields a <a
-href="Report/Hit.html">Bio::Spidey::Report::Hit</a> object.</p>
+          <p>Iterates over each hits. Same as hits.each. Yields a <a href="Report/Hit.html"><code>Bio::Spidey::Report::Hit</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="each_hit-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 576</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_hit</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: hit</span>
-  <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">576</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_hit</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: hit</span>
+<span class="line-num">577</span>   <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
+<span class="line-num">578</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -331,16 +323,14 @@ href="Report/Hit.html">Bio::Spidey::Report::Hit</a> object.</p>
 
         <div class="method-description">
           
-          <p>Returns sequence informationsof the mRNA. Returns a <a
-href="Report/SeqDesc.html">Bio::Spidey::Report::SeqDesc</a> object. This
-would be a <a href="../Spidey.html">Bio::Spidey</a> specific method.</p>
+          <p>Returns sequence informationsof the mRNA. Returns a <a href="Report/SeqDesc.html"><code>Bio::Spidey::Report::SeqDesc</code></a> object. This would be a <a href="../Spidey.html"><code>Bio::Spidey</code></a> specific method.</p>
           
           
 
           
           <div class="method-source-code" id="mrna-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 563</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mrna</span>; <span class="ruby-ivar">@hit</span>.<span class="ruby-identifier">mrna</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">563</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mrna</span>; <span class="ruby-ivar">@hit</span>.<span class="ruby-identifier">mrna</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -370,8 +360,8 @@ would be a <a href="../Spidey.html">Bio::Spidey</a> specific method.</p>
 
           
           <div class="method-source-code" id="num_hits-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 571</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">num_hits</span>;     <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">size</span>;     <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">571</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">num_hits</span>;     <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">size</span>;     <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -401,8 +391,8 @@ would be a <a href="../Spidey.html">Bio::Spidey</a> specific method.</p>
 
           
           <div class="method-source-code" id="query_def-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 582</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_def</span>; <span class="ruby-ivar">@hit</span>.<span class="ruby-identifier">mrna</span>.<span class="ruby-identifier">definition</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">582</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_def</span>; <span class="ruby-ivar">@hit</span>.<span class="ruby-identifier">mrna</span>.<span class="ruby-identifier">definition</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -432,8 +422,8 @@ would be a <a href="../Spidey.html">Bio::Spidey</a> specific method.</p>
 
           
           <div class="method-source-code" id="query_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 585</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_id</span>;  <span class="ruby-ivar">@hit</span>.<span class="ruby-identifier">mrna</span>.<span class="ruby-identifier">entry_id</span>;   <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">585</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_id</span>;  <span class="ruby-ivar">@hit</span>.<span class="ruby-identifier">mrna</span>.<span class="ruby-identifier">entry_id</span>;   <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -463,8 +453,8 @@ would be a <a href="../Spidey.html">Bio::Spidey</a> specific method.</p>
 
           
           <div class="method-source-code" id="query_len-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 588</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_len</span>; <span class="ruby-ivar">@hit</span>.<span class="ruby-identifier">mrna</span>.<span class="ruby-identifier">len</span>;        <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">588</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_len</span>; <span class="ruby-ivar">@hit</span>.<span class="ruby-identifier">mrna</span>.<span class="ruby-identifier">len</span>;        <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -478,12 +468,13 @@ would be a <a href="../Spidey.html">Bio::Spidey</a> specific method.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

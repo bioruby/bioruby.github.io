@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -98,16 +102,13 @@
 
   <section class="description">
     
-<h2 id="class-Bio::KEGG::KGML-label-KGML+-28KEGG+XML-29+parser"><a href="KGML.html">KGML</a> (KEGG XML) parser<span><a href="#class-Bio::KEGG::KGML-label-KGML+-28KEGG+XML-29+parser">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<h2 id="class-Bio::KEGG::KGML-label-KGML+-28KEGG+XML-29+parser"><a href="KGML.html"><code>KGML</code></a> (KEGG XML) parser<span><a href="#class-Bio::KEGG::KGML-label-KGML+-28KEGG+XML-29+parser">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>See <a href="http://www.genome.jp/kegg/xml">www.genome.jp/kegg/xml</a>/ for
-more details on <a href="KGML.html">KGML</a>.</p>
+<p>See <a href="http://www.genome.jp/kegg/xml">www.genome.jp/kegg/xml</a>/ for more details on <a href="KGML.html"><code>KGML</code></a>.</p>
 
 <h3 id="class-Bio::KEGG::KGML-label-Note+for+older+version+users">Note for older version users<span><a href="#class-Bio::KEGG::KGML-label-Note+for+older+version+users">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p>Most of incompatible attribute names with <a href="KGML.html">KGML</a> tags
-are now deprecated. Use the names of <a href="KGML.html">KGML</a> tags
-instead of old incompatible names that will be removed in the future.</p>
+<p>Most of incompatible attribute names with <a href="KGML.html"><code>KGML</code></a> tags are now deprecated. Use the names of <a href="KGML.html"><code>KGML</code></a> tags instead of old incompatible names that will be removed in the future.</p>
 <ul><li>
 <p>Bio::KGML::Entry#id (entry_id is deprecated)</p>
 </li><li>
@@ -124,41 +125,29 @@ instead of old incompatible names that will be removed in the future.</p>
 <p>Bio::KGML::Reaction#type (direction is deprecated)</p>
 </li></ul>
 </li><li>
-<p>New class Bio::KGML::Graphics and new method Bio::KGML::Entry#graphics.
-Because two or more graphics elements may exist, following attribute
-methods in Bio::KGML::Entry are now deprecated and will be removed in the
-future. See rdoc of these methods for details.</p>
+<p>New class Bio::KGML::Graphics and new method Bio::KGML::Entry#graphics. Because two or more graphics elements may exist, following attribute methods in Bio::KGML::Entry are now deprecated and will be removed in the future. See rdoc of these methods for details.</p>
 <ul><li>
-<p><a href="KGML/Entry.html#method-i-label">Bio::KEGG::KGML::Entry#label</a></p>
+<p><a href="KGML/Entry.html#method-i-label"><code>Bio::KEGG::KGML::Entry#label</code></a></p>
 </li><li>
-<p><a href="KGML/Entry.html#method-i-shape">Bio::KEGG::KGML::Entry#shape</a></p>
+<p><a href="KGML/Entry.html#method-i-shape"><code>Bio::KEGG::KGML::Entry#shape</code></a></p>
 </li><li>
-<p><a href="KGML/Entry.html#method-i-x">Bio::KEGG::KGML::Entry#x</a></p>
+<p><a href="KGML/Entry.html#method-i-x"><code>Bio::KEGG::KGML::Entry#x</code></a></p>
 </li><li>
-<p><a href="KGML/Entry.html#method-i-y">Bio::KEGG::KGML::Entry#y</a></p>
+<p><a href="KGML/Entry.html#method-i-y"><code>Bio::KEGG::KGML::Entry#y</code></a></p>
 </li><li>
-<p><a href="KGML/Entry.html#method-i-width">Bio::KEGG::KGML::Entry#width</a></p>
+<p><a href="KGML/Entry.html#method-i-width"><code>Bio::KEGG::KGML::Entry#width</code></a></p>
 </li><li>
-<p><a href="KGML/Entry.html#method-i-height">Bio::KEGG::KGML::Entry#height</a></p>
+<p><a href="KGML/Entry.html#method-i-height"><code>Bio::KEGG::KGML::Entry#height</code></a></p>
 </li><li>
-<p><a
-href="KGML/Entry.html#method-i-fgcolor">Bio::KEGG::KGML::Entry#fgcolor</a></p>
+<p><a href="KGML/Entry.html#method-i-fgcolor"><code>Bio::KEGG::KGML::Entry#fgcolor</code></a></p>
 </li><li>
-<p><a
-href="KGML/Entry.html#method-i-bgcolor">Bio::KEGG::KGML::Entry#bgcolor</a></p>
+<p><a href="KGML/Entry.html#method-i-bgcolor"><code>Bio::KEGG::KGML::Entry#bgcolor</code></a></p>
 </li></ul>
 </li><li>
-<p>Incompatible changes: <a
-href="KGML/Reaction.html#attribute-i-substrates">Bio::KEGG::KGML::Reaction#substrates</a>
-now returns an array containing <a
-href="KGML/Substrate.html">Bio::KEGG::KGML::Substrate</a> objects, and  <a
-href="KGML/Reaction.html#attribute-i-products">Bio::KEGG::KGML::Reaction#products</a>
-now returns an array containing <a
-href="KGML/Product.html">Bio::KEGG::KGML::Product</a> objects. The changes
-enable us to get id of substrates and products.</p>
+<p>Incompatible changes: <a href="KGML/Reaction.html#attribute-i-substrates"><code>Bio::KEGG::KGML::Reaction#substrates</code></a> now returns an array containing <a href="KGML/Substrate.html"><code>Bio::KEGG::KGML::Substrate</code></a> objects, and  <a href="KGML/Reaction.html#attribute-i-products"><code>Bio::KEGG::KGML::Reaction#products</code></a> now returns an array containing <a href="KGML/Product.html"><code>Bio::KEGG::KGML::Product</code></a> objects. The changes enable us to get id of substrates and products.</p>
 </li></ul>
 
-<h3 id="class-Bio::KEGG::KGML-label-Incompatible+attribute+names+with+KGML+tags">Incompatible attribute names with <a href="KGML.html">KGML</a> tags<span><a href="#class-Bio::KEGG::KGML-label-Incompatible+attribute+names+with+KGML+tags">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h3 id="class-Bio::KEGG::KGML-label-Incompatible+attribute+names+with+KGML+tags">Incompatible attribute names with <a href="KGML.html"><code>KGML</code></a> tags<span><a href="#class-Bio::KEGG::KGML-label-Incompatible+attribute+names+with+KGML+tags">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <pre>&lt;entry&gt;
 :map -&gt; :pathway
@@ -240,10 +229,9 @@ edge()</pre>
 <span class="ruby-keyword">end</span>
 </pre>
 
-<h3 id="class-Bio::KEGG::KGML-label-References"><a href="../References.html">References</a><span><a href="#class-Bio::KEGG::KGML-label-References">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h3 id="class-Bio::KEGG::KGML-label-References"><a href="../References.html"><code>References</code></a><span><a href="#class-Bio::KEGG::KGML-label-References">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p><a
-href="http://www.genome.jp/kegg/xml/docs">www.genome.jp/kegg/xml/docs</a>/</p>
+<p><a href="http://www.genome.jp/kegg/xml/docs">www.genome.jp/kegg/xml/docs</a>/</p>
 </li></ul>
 
   </section>
@@ -271,8 +259,7 @@ href="http://www.genome.jp/kegg/xml/docs">www.genome.jp/kegg/xml/docs</a>/</p>
 
         <div class="method-description">
         
-        <p>entry elements (Array containing <a href="KGML/Entry.html">KGML::Entry</a>
-objects, or nil)</p>
+        <p>entry elements (Array containing <a href="KGML/Entry.html"><code>KGML::Entry</code></a> objects, or nil)</p>
         
         </div>
       </div>
@@ -298,8 +285,7 @@ objects, or nil)</p>
 
         <div class="method-description">
         
-        <p>information URL of this pathway map (String or nil) (&#39;pathway&#39;
-element)</p>
+        <p>information URL of this pathway map (String or nil) (&#39;pathway&#39; element)</p>
         
         </div>
       </div>
@@ -312,8 +298,7 @@ element)</p>
 
         <div class="method-description">
         
-        <p>KEGG-style ID string of this pathway map (String or nil) (&#39;pathway&#39;
-element)</p>
+        <p>KEGG-style ID string of this pathway map (String or nil) (&#39;pathway&#39; element)</p>
         
         </div>
       </div>
@@ -339,9 +324,7 @@ element)</p>
 
         <div class="method-description">
         
-        <p>“ko” (KEGG Orthology), “ec” (KEGG <a href="ENZYME.html">ENZYME</a>), or the
-<a href="../KEGG.html">KEGG</a> 3-letter organism code (String or nil)
-(&#39;pathway&#39; element)</p>
+        <p>“ko” (KEGG Orthology), “ec” (KEGG <a href="ENZYME.html"><code>ENZYME</code></a>), or the <a href="../KEGG.html"><code>KEGG</code></a> 3-letter organism code (String or nil) (&#39;pathway&#39; element)</p>
         
         </div>
       </div>
@@ -408,7 +391,7 @@ element)</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="KGML.html">KGML</a> object.</p>
+          <p>Creates a new <a href="KGML.html"><code>KGML</code></a> object.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -417,21 +400,21 @@ element)</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="KGML.html">Bio::KEGG::KGML</a> object</p>
+<p><a href="KGML.html"><code>Bio::KEGG::KGML</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/kgml.rb, line 141</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">xml</span>)
-  <span class="ruby-identifier">dom</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">xml</span>)
-  <span class="ruby-identifier">parse_root</span>(<span class="ruby-identifier">dom</span>)
-  <span class="ruby-identifier">parse_entry</span>(<span class="ruby-identifier">dom</span>)
-  <span class="ruby-identifier">parse_relation</span>(<span class="ruby-identifier">dom</span>)
-  <span class="ruby-identifier">parse_reaction</span>(<span class="ruby-identifier">dom</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/kgml.rb</span>
+<span class="line-num">141</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">xml</span>)
+<span class="line-num">142</span>   <span class="ruby-identifier">dom</span> = <span class="ruby-constant">REXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Document</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">xml</span>)
+<span class="line-num">143</span>   <span class="ruby-identifier">parse_root</span>(<span class="ruby-identifier">dom</span>)
+<span class="line-num">144</span>   <span class="ruby-identifier">parse_entry</span>(<span class="ruby-identifier">dom</span>)
+<span class="line-num">145</span>   <span class="ruby-identifier">parse_relation</span>(<span class="ruby-identifier">dom</span>)
+<span class="line-num">146</span>   <span class="ruby-identifier">parse_reaction</span>(<span class="ruby-identifier">dom</span>)
+<span class="line-num">147</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -445,12 +428,13 @@ element)</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

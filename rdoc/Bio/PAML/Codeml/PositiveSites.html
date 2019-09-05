@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -94,11 +98,9 @@
 
   <section class="description">
     
-<p>List for the positive selection sites. <a href="../../PAML.html">PAML</a>
-returns:</p>
+<p>List for the positive selection sites. <a href="../../PAML.html"><code>PAML</code></a> returns:</p>
 
-<p>Naive Empirical Bayes (NEB) analysis Positively selected sites (*:
-P&gt;95%; **: P&gt;99%) (amino acids refer to 1st sequence: PITG_23265T0)</p>
+<p>Naive Empirical Bayes (NEB) analysis Positively selected sites (*: P&gt;95%; **: P&gt;99%) (amino acids refer to 1st sequence: PITG_23265T0)</p>
 
 <pre>        Pr(w&gt;1)     post mean +- SE for w
 
@@ -113,8 +115,7 @@ P&gt;95%; **: P&gt;99%) (amino acids refer to 1st sequence: PITG_23265T0)</p>
 
 <p>(newline)</p>
 
-<p>these can be accessed using normal iterators. Also special methods are
-available for presenting this data</p>
+<p>these can be accessed using normal iterators. Also special methods are available for presenting this data</p>
 
   </section>
 
@@ -175,32 +176,32 @@ available for presenting this data</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 537</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span> <span class="ruby-identifier">search</span>, <span class="ruby-identifier">buf</span>, <span class="ruby-identifier">num_codons</span>
-  <span class="ruby-ivar">@num_codons</span> = <span class="ruby-identifier">num_codons</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">search</span>)<span class="ruby-operator">==</span><span class="ruby-keyword">nil</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReportError</span>,<span class="ruby-node">&quot;No NB sites found for #{search}&quot;</span> 
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-comment"># Set description of this class</span>
-  <span class="ruby-ivar">@descr</span> = <span class="ruby-identifier">search</span>
-  <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
-  <span class="ruby-comment"># find location of &#39;search&#39;</span>
-  <span class="ruby-identifier">start</span> = <span class="ruby-value">0</span>
-  <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">line</span>, <span class="ruby-identifier">i</span> <span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">search</span>) <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
-      <span class="ruby-identifier">start</span> = <span class="ruby-identifier">i</span>
-      <span class="ruby-keyword">break</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReportError</span>,<span class="ruby-node">&quot;Out of bound error for &lt;#{buf}&gt;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lines</span>[<span class="ruby-identifier">start</span><span class="ruby-value">+6</span>]<span class="ruby-operator">==</span><span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">lines</span>[<span class="ruby-identifier">start</span><span class="ruby-value">+6</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">|</span>
-    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
-    <span class="ruby-identifier">fields</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>
-    <span class="ruby-identifier">push</span> <span class="ruby-constant">PositiveSite</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fields</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">num</span> = <span class="ruby-identifier">size</span>()
-  <span class="ruby-ivar">@buf</span> = <span class="ruby-identifier">lines</span>[<span class="ruby-identifier">start</span><span class="ruby-operator">..</span><span class="ruby-identifier">start</span><span class="ruby-operator">+</span><span class="ruby-identifier">num</span><span class="ruby-value">+7</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb</span>
+<span class="line-num">537</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span> <span class="ruby-identifier">search</span>, <span class="ruby-identifier">buf</span>, <span class="ruby-identifier">num_codons</span>
+<span class="line-num">538</span>   <span class="ruby-ivar">@num_codons</span> = <span class="ruby-identifier">num_codons</span>
+<span class="line-num">539</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">search</span>)<span class="ruby-operator">==</span><span class="ruby-keyword">nil</span>
+<span class="line-num">540</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReportError</span>,<span class="ruby-node">&quot;No NB sites found for #{search}&quot;</span> 
+<span class="line-num">541</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">542</span>   <span class="ruby-comment"># Set description of this class</span>
+<span class="line-num">543</span>   <span class="ruby-ivar">@descr</span> = <span class="ruby-identifier">search</span>
+<span class="line-num">544</span>   <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">buf</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+<span class="line-num">545</span>   <span class="ruby-comment"># find location of &#39;search&#39;</span>
+<span class="line-num">546</span>   <span class="ruby-identifier">start</span> = <span class="ruby-value">0</span>
+<span class="line-num">547</span>   <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">line</span>, <span class="ruby-identifier">i</span> <span class="ruby-operator">|</span>
+<span class="line-num">548</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">search</span>) <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">549</span>       <span class="ruby-identifier">start</span> = <span class="ruby-identifier">i</span>
+<span class="line-num">550</span>       <span class="ruby-keyword">break</span>
+<span class="line-num">551</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">552</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">553</span>   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ReportError</span>,<span class="ruby-node">&quot;Out of bound error for &lt;#{buf}&gt;&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lines</span>[<span class="ruby-identifier">start</span><span class="ruby-value">+6</span>]<span class="ruby-operator">==</span><span class="ruby-keyword">nil</span>
+<span class="line-num">554</span>   <span class="ruby-identifier">lines</span>[<span class="ruby-identifier">start</span><span class="ruby-value">+6</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">|</span>
+<span class="line-num">555</span>     <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;&quot;</span>
+<span class="line-num">556</span>     <span class="ruby-identifier">fields</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>
+<span class="line-num">557</span>     <span class="ruby-identifier">push</span> <span class="ruby-constant">PositiveSite</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fields</span>)
+<span class="line-num">558</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">559</span>   <span class="ruby-identifier">num</span> = <span class="ruby-identifier">size</span>()
+<span class="line-num">560</span>   <span class="ruby-ivar">@buf</span> = <span class="ruby-identifier">lines</span>[<span class="ruby-identifier">start</span><span class="ruby-operator">..</span><span class="ruby-identifier">start</span><span class="ruby-operator">+</span><span class="ruby-identifier">num</span><span class="ruby-value">+7</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+<span class="line-num">561</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -232,8 +233,7 @@ available for presenting this data</p>
 
         <div class="method-description">
           
-          <p>Generate a graph - which is a simple string pointing out the positions
-showing evidence of positive selection pressure.</p>
+          <p>Generate a graph - which is a simple string pointing out the positions showing evidence of positive selection pressure.</p>
 
 <pre>&gt;&gt; c.sites.graph[0..32]
 =&gt; &quot;                **    *       * *&quot;</pre>
@@ -242,10 +242,10 @@ showing evidence of positive selection pressure.</p>
 
           
           <div class="method-source-code" id="graph-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 569</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">graph</span>
-  <span class="ruby-identifier">graph_to_s</span>(<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;*&quot;</span> })
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb</span>
+<span class="line-num">569</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">graph</span>
+<span class="line-num">570</span>   <span class="ruby-identifier">graph_to_s</span>(<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;*&quot;</span> })
+<span class="line-num">571</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -269,9 +269,7 @@ showing evidence of positive selection pressure.</p>
 
         <div class="method-description">
           
-          <p>Generate a graph - which is a simple string pointing out the positions
-showing evidence of positive selection pressure, with dN/dS values (high
-values are an asterisk *)</p>
+          <p>Generate a graph - which is a simple string pointing out the positions showing evidence of positive selection pressure, with dN/dS values (high values are an asterisk *)</p>
 
 <pre>&gt;&gt; c.sites.graph_omega[0..32]
 =&gt; &quot;                24    3       3 2&quot;</pre>
@@ -280,14 +278,14 @@ values are an asterisk *)</p>
 
           
           <div class="method-source-code" id="graph_omega-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 580</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">graph_omega</span>
-  <span class="ruby-identifier">graph_to_s</span>(<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span> 
-      <span class="ruby-identifier">symbol</span> = <span class="ruby-string">&quot;*&quot;</span>
-      <span class="ruby-identifier">symbol</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">omega</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">omega</span>.<span class="ruby-identifier">abs</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">10.0</span>
-      <span class="ruby-identifier">symbol</span>
-  })
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb</span>
+<span class="line-num">580</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">graph_omega</span>
+<span class="line-num">581</span>   <span class="ruby-identifier">graph_to_s</span>(<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">site</span><span class="ruby-operator">|</span> 
+<span class="line-num">582</span>       <span class="ruby-identifier">symbol</span> = <span class="ruby-string">&quot;*&quot;</span>
+<span class="line-num">583</span>       <span class="ruby-identifier">symbol</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">omega</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">site</span>.<span class="ruby-identifier">omega</span>.<span class="ruby-identifier">abs</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">10.0</span>
+<span class="line-num">584</span>       <span class="ruby-identifier">symbol</span>
+<span class="line-num">585</span>   })
+<span class="line-num">586</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -317,13 +315,13 @@ values are an asterisk *)</p>
 
           
           <div class="method-source-code" id="graph_seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 589</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">graph_seq</span>
-  <span class="ruby-identifier">graph_to_s</span>(<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">site</span> <span class="ruby-operator">|</span>
-    <span class="ruby-identifier">symbol</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">aaref</span>
-    <span class="ruby-identifier">symbol</span>
-  })
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb</span>
+<span class="line-num">589</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">graph_seq</span>
+<span class="line-num">590</span>   <span class="ruby-identifier">graph_to_s</span>(<span class="ruby-identifier">lambda</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">site</span> <span class="ruby-operator">|</span>
+<span class="line-num">591</span>     <span class="ruby-identifier">symbol</span> = <span class="ruby-identifier">site</span>.<span class="ruby-identifier">aaref</span>
+<span class="line-num">592</span>     <span class="ruby-identifier">symbol</span>
+<span class="line-num">593</span>   })
+<span class="line-num">594</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -353,10 +351,10 @@ values are an asterisk *)</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb, line 597</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-ivar">@buf</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/codeml/report.rb</span>
+<span class="line-num">597</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">598</span>   <span class="ruby-ivar">@buf</span>
+<span class="line-num">599</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -370,12 +368,13 @@ values are an asterisk *)</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

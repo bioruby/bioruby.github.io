@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -225,37 +229,37 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/horizontal_cut_range.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>( <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>=<span class="ruby-identifier">left</span> )
-  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;left &gt; right&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">left</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">right</span>
-
-  <span class="ruby-comment"># The &#39;range&#39; here is actually off by one on the left</span>
-  <span class="ruby-comment"># side in relation to a normal CutRange, so using the normal</span>
-  <span class="ruby-comment"># variables from CutRange would result in bad behavior.</span>
-  <span class="ruby-comment">#</span>
-  <span class="ruby-comment"># See below - the first horizontal cut is the primary cut plus one.</span>
-  <span class="ruby-comment">#</span>
-  <span class="ruby-comment">#    1 2 3 4 5 6 7</span>
-  <span class="ruby-comment">#    G A|T T A C A</span>
-  <span class="ruby-comment">#       +-----+</span>
-  <span class="ruby-comment">#    C T A A T|G T</span>
-  <span class="ruby-comment">#    1 2 3 4 5 6 7</span>
-  <span class="ruby-comment">#</span>
-  <span class="ruby-comment"># Primary cut = 2</span>
-  <span class="ruby-comment"># Complement cut = 5</span>
-  <span class="ruby-comment"># Horizontal cuts = 3, 4, 5</span>
-
-  <span class="ruby-ivar">@p_cut_left</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@p_cut_right</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@c_cut_left</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@c_cut_right</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@min</span> = <span class="ruby-identifier">left</span>  <span class="ruby-comment"># NOTE this used to be &#39;nil&#39;, make sure all tests work</span>
-  <span class="ruby-ivar">@max</span> = <span class="ruby-identifier">right</span> <span class="ruby-comment"># NOTE this used to be &#39;nil&#39;, make sure all tests work</span>
-  <span class="ruby-ivar">@range</span> = (<span class="ruby-ivar">@min</span><span class="ruby-operator">..</span><span class="ruby-ivar">@max</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@min</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@max</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-comment"># NOTE this used to be &#39;nil&#39;, make sure all tests work</span>
-  
-
-  <span class="ruby-ivar">@hcuts</span> = (<span class="ruby-identifier">left</span><span class="ruby-operator">..</span><span class="ruby-identifier">right</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/horizontal_cut_range.rb</span>
+<span class="line-num">22</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>( <span class="ruby-identifier">left</span>, <span class="ruby-identifier">right</span>=<span class="ruby-identifier">left</span> )
+<span class="line-num">23</span>   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;left &gt; right&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">left</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">right</span>
+<span class="line-num">24</span> 
+<span class="line-num">25</span>   <span class="ruby-comment"># The &#39;range&#39; here is actually off by one on the left</span>
+<span class="line-num">26</span>   <span class="ruby-comment"># side in relation to a normal CutRange, so using the normal</span>
+<span class="line-num">27</span>   <span class="ruby-comment"># variables from CutRange would result in bad behavior.</span>
+<span class="line-num">28</span>   <span class="ruby-comment">#</span>
+<span class="line-num">29</span>   <span class="ruby-comment"># See below - the first horizontal cut is the primary cut plus one.</span>
+<span class="line-num">30</span>   <span class="ruby-comment">#</span>
+<span class="line-num">31</span>   <span class="ruby-comment">#    1 2 3 4 5 6 7</span>
+<span class="line-num">32</span>   <span class="ruby-comment">#    G A|T T A C A</span>
+<span class="line-num">33</span>   <span class="ruby-comment">#       +-----+</span>
+<span class="line-num">34</span>   <span class="ruby-comment">#    C T A A T|G T</span>
+<span class="line-num">35</span>   <span class="ruby-comment">#    1 2 3 4 5 6 7</span>
+<span class="line-num">36</span>   <span class="ruby-comment">#</span>
+<span class="line-num">37</span>   <span class="ruby-comment"># Primary cut = 2</span>
+<span class="line-num">38</span>   <span class="ruby-comment"># Complement cut = 5</span>
+<span class="line-num">39</span>   <span class="ruby-comment"># Horizontal cuts = 3, 4, 5</span>
+<span class="line-num">40</span> 
+<span class="line-num">41</span>   <span class="ruby-ivar">@p_cut_left</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">42</span>   <span class="ruby-ivar">@p_cut_right</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">43</span>   <span class="ruby-ivar">@c_cut_left</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">44</span>   <span class="ruby-ivar">@c_cut_right</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">45</span>   <span class="ruby-ivar">@min</span> = <span class="ruby-identifier">left</span>  <span class="ruby-comment"># NOTE this used to be &#39;nil&#39;, make sure all tests work</span>
+<span class="line-num">46</span>   <span class="ruby-ivar">@max</span> = <span class="ruby-identifier">right</span> <span class="ruby-comment"># NOTE this used to be &#39;nil&#39;, make sure all tests work</span>
+<span class="line-num">47</span>   <span class="ruby-ivar">@range</span> = (<span class="ruby-ivar">@min</span><span class="ruby-operator">..</span><span class="ruby-ivar">@max</span>) <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@min</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@max</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-comment"># NOTE this used to be &#39;nil&#39;, make sure all tests work</span>
+<span class="line-num">48</span>   
+<span class="line-num">49</span> 
+<span class="line-num">50</span>   <span class="ruby-ivar">@hcuts</span> = (<span class="ruby-identifier">left</span><span class="ruby-operator">..</span><span class="ruby-identifier">right</span>)
+<span class="line-num">51</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -287,14 +291,12 @@
 
         <div class="method-description">
           
-          <p>Check if a location falls within the minimum or maximum values of this
-range.</p>
+          <p>Check if a location falls within the minimum or maximum values of this range.</p>
 <hr>
 
 <p><strong>Arguments</strong></p>
 <ul><li>
-<p><code>i</code>: <a href="../../Location.html">Location</a> to check if it
-is included in the range</p>
+<p><code>i</code>: <a href="../../Location.html"><code>Location</code></a> to check if it is included in the range</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -305,10 +307,10 @@ is included in the range</p>
 
           
           <div class="method-source-code" id="include-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/horizontal_cut_range.rb, line 60</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">include?</span>(<span class="ruby-identifier">i</span>)
-  <span class="ruby-ivar">@range</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">i</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/range/horizontal_cut_range.rb</span>
+<span class="line-num">60</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">include?</span>(<span class="ruby-identifier">i</span>)
+<span class="line-num">61</span>   <span class="ruby-ivar">@range</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">i</span>)
+<span class="line-num">62</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -322,12 +324,13 @@ is included in the range</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

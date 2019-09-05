@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -118,7 +122,7 @@
 
   <section class="description">
     
-<p><a href="Fastq.html">Bio::Fastq</a> is a parser for FASTQ format.</p>
+<p><a href="Fastq.html"><code>Bio::Fastq</code></a> is a parser for FASTQ format.</p>
 
   </section>
 
@@ -142,7 +146,7 @@
       
         <dt id="FLATFILE_SPLITTER">FLATFILE_SPLITTER
         
-        <dd><p>Splitter for <a href="FlatFile.html">Bio::FlatFile</a></p>
+        <dd><p>Splitter for <a href="FlatFile.html"><code>Bio::FlatFile</code></a></p>
         
       
         <dt id="FormatNames">FormatNames
@@ -187,7 +191,7 @@
 
         <div class="method-description">
         
-        <p><a href="Fastq.html#attribute-i-entry_overrun">#entry_overrun</a></p>
+        <p><a href="Fastq.html#attribute-i-entry_overrun"><code>entry_overrun</code></a></p>
         
         </div>
       </div>
@@ -254,11 +258,9 @@
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Fastq.html">Fastq</a> object from formatted text
-string.</p>
+          <p>Creates a new <a href="Fastq.html"><code>Fastq</code></a> object from formatted text string.</p>
 
-<p>The format of quality scores should be specified later by using
-<code>format=</code> method.</p>
+<p>The format of quality scores should be specified later by using <code>format=</code> method.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -270,24 +272,24 @@ string.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 383</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">str</span>
-  <span class="ruby-identifier">sc</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">while</span> <span class="ruby-operator">!</span><span class="ruby-identifier">sc</span>.<span class="ruby-identifier">eos?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/.*(?:\n|\r|\r\n)?/</span>)
-    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">add_header_line</span>(<span class="ruby-identifier">line</span>) <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">unscan</span>
-      <span class="ruby-keyword">break</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">while</span> <span class="ruby-operator">!</span><span class="ruby-identifier">sc</span>.<span class="ruby-identifier">eos?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/.*(?:\n|\r|\r\n)?/</span>)
-    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">add_line</span>(<span class="ruby-identifier">line</span>) <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">unscan</span>
-      <span class="ruby-keyword">break</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@entry_overrun</span> = <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">rest</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">383</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">384</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">str</span>
+<span class="line-num">385</span>   <span class="ruby-identifier">sc</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">386</span>   <span class="ruby-keyword">while</span> <span class="ruby-operator">!</span><span class="ruby-identifier">sc</span>.<span class="ruby-identifier">eos?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/.*(?:\n|\r|\r\n)?/</span>)
+<span class="line-num">387</span>     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">add_header_line</span>(<span class="ruby-identifier">line</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">388</span>       <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">unscan</span>
+<span class="line-num">389</span>       <span class="ruby-keyword">break</span>
+<span class="line-num">390</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">391</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">392</span>   <span class="ruby-keyword">while</span> <span class="ruby-operator">!</span><span class="ruby-identifier">sc</span>.<span class="ruby-identifier">eos?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/.*(?:\n|\r|\r\n)?/</span>)
+<span class="line-num">393</span>     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">add_line</span>(<span class="ruby-identifier">line</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">394</span>       <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">unscan</span>
+<span class="line-num">395</span>       <span class="ruby-keyword">break</span>
+<span class="line-num">396</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">397</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">398</span>   <span class="ruby-ivar">@entry_overrun</span> = <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">rest</span>
+<span class="line-num">399</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -319,24 +321,22 @@ string.</p>
 
         <div class="method-description">
           
-          <p>Adds a header line if the header data is not yet given and the given line
-is suitable for header. Returns self if adding header line is succeeded.
-Otherwise, returns false (the line is not added).</p>
+          <p>Adds a header line if the header data is not yet given and the given line is suitable for header. Returns self if adding header line is succeeded. Otherwise, returns false (the line is not added).</p>
           
           
 
           
           <div class="method-source-code" id="add_header_line-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 324</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_header_line</span>(<span class="ruby-identifier">line</span>)
-  <span class="ruby-ivar">@header</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;@&quot;</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@header</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">line</span>
-    <span class="ruby-keyword">self</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">324</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_header_line</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">325</span>   <span class="ruby-ivar">@header</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&quot;&quot;</span>
+<span class="line-num">326</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;@&quot;</span> <span class="ruby-keyword">then</span>
+<span class="line-num">327</span>     <span class="ruby-keyword">false</span>
+<span class="line-num">328</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">329</span>     <span class="ruby-ivar">@header</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">line</span>
+<span class="line-num">330</span>     <span class="ruby-keyword">self</span>
+<span class="line-num">331</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">332</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -360,46 +360,45 @@ Otherwise, returns false (the line is not added).</p>
 
         <div class="method-description">
           
-          <p>Adds a line to the entry if the given line is regarded as a part of the
-current entry.</p>
+          <p>Adds a line to the entry if the given line is regarded as a part of the current entry.</p>
           
           
 
           
           <div class="method-source-code" id="add_line-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 339</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_line</span>(<span class="ruby-identifier">line</span>)
-  <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@definition</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;@&quot;</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">line</span>
-      <span class="ruby-ivar">@parse_errors</span> <span class="ruby-operator">||=</span> []
-      <span class="ruby-ivar">@parse_errors</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">No_atmark</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@definition2</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@quality_string</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;@&quot;</span> <span class="ruby-keyword">and</span>
-        <span class="ruby-ivar">@quality_string</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@sequence_string</span>.<span class="ruby-identifier">size</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@quality_string</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@sequence_string</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;+&#39;</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-ivar">@definition2</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@sequence_string</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">line</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Bug: should not reach here!&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">339</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_line</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">340</span>   <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+<span class="line-num">341</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@definition</span> <span class="ruby-keyword">then</span>
+<span class="line-num">342</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;@&quot;</span> <span class="ruby-keyword">then</span>
+<span class="line-num">343</span>       <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+<span class="line-num">344</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">345</span>       <span class="ruby-ivar">@definition</span> = <span class="ruby-identifier">line</span>
+<span class="line-num">346</span>       <span class="ruby-ivar">@parse_errors</span> <span class="ruby-operator">||=</span> []
+<span class="line-num">347</span>       <span class="ruby-ivar">@parse_errors</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">No_atmark</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">348</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">349</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+<span class="line-num">350</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">351</span>   <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@definition2</span> <span class="ruby-keyword">then</span>
+<span class="line-num">352</span>     <span class="ruby-ivar">@quality_string</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">353</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;@&quot;</span> <span class="ruby-keyword">and</span>
+<span class="line-num">354</span>         <span class="ruby-ivar">@quality_string</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@sequence_string</span>.<span class="ruby-identifier">size</span> <span class="ruby-keyword">then</span>
+<span class="line-num">355</span>       <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+<span class="line-num">356</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">357</span>       <span class="ruby-ivar">@quality_string</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">line</span>
+<span class="line-num">358</span>       <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+<span class="line-num">359</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">360</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">361</span>     <span class="ruby-ivar">@sequence_string</span> <span class="ruby-operator">||=</span> <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">362</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>, <span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;+&#39;</span> <span class="ruby-keyword">then</span>
+<span class="line-num">363</span>       <span class="ruby-ivar">@definition2</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+<span class="line-num">364</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">365</span>       <span class="ruby-ivar">@sequence_string</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">line</span>
+<span class="line-num">366</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">367</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+<span class="line-num">368</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">369</span>   <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;Bug: should not reach here!&quot;</span>
+<span class="line-num">370</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -429,14 +428,14 @@ current entry.</p>
 
           
           <div class="method-source-code" id="entry_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 446</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@entry_id</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">eid</span> = <span class="ruby-ivar">@definition</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@definition</span>
-    <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">eid</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@entry_id</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">446</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
+<span class="line-num">447</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@entry_id</span> <span class="ruby-keyword">then</span>
+<span class="line-num">448</span>     <span class="ruby-identifier">eid</span> = <span class="ruby-ivar">@definition</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)[<span class="ruby-value">0</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@definition</span>
+<span class="line-num">449</span>     <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">eid</span>
+<span class="line-num">450</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">451</span>   <span class="ruby-ivar">@entry_id</span>
+<span class="line-num">452</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -471,15 +470,15 @@ current entry.</p>
 
           
           <div class="method-source-code" id="error_probabilities-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 529</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">error_probabilities</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@error_probabilities</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultFormatName</span>
-    <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">q2p</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">quality_scores</span>)
-    <span class="ruby-ivar">@error_probabilities</span> = <span class="ruby-identifier">a</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@error_probabilities</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">529</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">error_probabilities</span>
+<span class="line-num">530</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@error_probabilities</span> <span class="ruby-keyword">then</span>
+<span class="line-num">531</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultFormatName</span>
+<span class="line-num">532</span>     <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">q2p</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">quality_scores</span>)
+<span class="line-num">533</span>     <span class="ruby-ivar">@error_probabilities</span> = <span class="ruby-identifier">a</span>
+<span class="line-num">534</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">535</span>   <span class="ruby-ivar">@error_probabilities</span>
+<span class="line-num">536</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -503,8 +502,7 @@ current entry.</p>
 
         <div class="method-description">
           
-          <p>Format name. One of “fastq-sanger”, “fastq-solexa”, “fastq-illumina”, or
-nil (when not specified).</p>
+          <p>Format name. One of “fastq-sanger”, “fastq-solexa”, “fastq-illumina”, or nil (when not specified).</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -515,10 +513,10 @@ nil (when not specified).</p>
 
           
           <div class="method-source-code" id="format-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 497</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format</span>
-  ((<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@format</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@format</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">497</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format</span>
+<span class="line-num">498</span>   ((<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@format</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@format</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">499</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -565,22 +563,22 @@ nil (when not specified).</p>
 
           
           <div class="method-source-code" id="format-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 476</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format=</span>(<span class="ruby-identifier">name</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">f</span> = <span class="ruby-constant">FormatNames</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Formats</span>[<span class="ruby-identifier">name</span>]
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">reset_state</span>
-      <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">instance</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;unknown format&quot;</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">reset_state</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">476</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format=</span>(<span class="ruby-identifier">name</span>)
+<span class="line-num">477</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">name</span> <span class="ruby-keyword">then</span>
+<span class="line-num">478</span>     <span class="ruby-identifier">f</span> = <span class="ruby-constant">FormatNames</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">Formats</span>[<span class="ruby-identifier">name</span>]
+<span class="line-num">479</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span> <span class="ruby-keyword">then</span>
+<span class="line-num">480</span>       <span class="ruby-identifier">reset_state</span>
+<span class="line-num">481</span>       <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">instance</span>
+<span class="line-num">482</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span>
+<span class="line-num">483</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">484</span>       <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;unknown format&quot;</span>
+<span class="line-num">485</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">486</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">487</span>     <span class="ruby-identifier">reset_state</span>
+<span class="line-num">488</span>     <span class="ruby-keyword">nil</span>
+<span class="line-num">489</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">490</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -604,9 +602,7 @@ nil (when not specified).</p>
 
         <div class="method-description">
           
-          <p>Masks low quality sequence regions. For each sequence position, if the
-quality score is smaller than the threshold, the sequence in the position
-is replaced with <em>mask_char</em>.</p>
+          <p>Masks low quality sequence regions. For each sequence position, if the quality score is smaller than the threshold, the sequence in the position is replaced with <em>mask_char</em>.</p>
 
 <p>Note: This method does not care quality_score_type.</p>
 <hr>
@@ -619,17 +615,17 @@ is replaced with <em>mask_char</em>.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Sequence.html">Bio::Sequence</a> object</p>
+<p><a href="Sequence.html"><code>Bio::Sequence</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="mask-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 668</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mask</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span> = <span class="ruby-string">&#39;n&#39;</span>)
-  <span class="ruby-identifier">to_biosequence</span>.<span class="ruby-identifier">mask_with_quality_score</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">668</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mask</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span> = <span class="ruby-string">&#39;n&#39;</span>)
+<span class="line-num">669</span>   <span class="ruby-identifier">to_biosequence</span>.<span class="ruby-identifier">mask_with_quality_score</span>(<span class="ruby-identifier">threshold</span>, <span class="ruby-identifier">mask_char</span>)
+<span class="line-num">670</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -659,10 +655,10 @@ is replaced with <em>mask_char</em>.</p>
 
           
           <div class="method-source-code" id="nalen-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 433</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nalen</span>
-  <span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">length</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">433</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nalen</span>
+<span class="line-num">434</span>   <span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">435</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -686,19 +682,19 @@ is replaced with <em>mask_char</em>.</p>
 
         <div class="method-description">
           
-          <p>returns <a href="Sequence/NA.html">Bio::Sequence::NA</a></p>
+          <p>returns <a href="Sequence/NA.html"><code>Bio::Sequence::NA</code></a></p>
           
           
 
           
           <div class="method-source-code" id="naseq-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 425</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">naseq</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@naseq</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@naseq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sequence_string</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@naseq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">425</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">naseq</span>
+<span class="line-num">426</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@naseq</span> <span class="ruby-keyword">then</span>
+<span class="line-num">427</span>     <span class="ruby-ivar">@naseq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sequence_string</span>)
+<span class="line-num">428</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">429</span>   <span class="ruby-ivar">@naseq</span>
+<span class="line-num">430</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -750,18 +746,17 @@ is replaced with <em>mask_char</em>.</p>
 
         <div class="method-description">
           
-          <p>The meaning of the quality scores. It may be one of :phred, :solexa, or
-nil.</p>
+          <p>The meaning of the quality scores. It may be one of :phred, :solexa, or nil.</p>
           
           
 
           
           <div class="method-source-code" id="quality_score_type-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 504</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quality_score_type</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultFormatName</span>
-  <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">quality_score_type</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">504</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quality_score_type</span>
+<span class="line-num">505</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultFormatName</span>
+<span class="line-num">506</span>   <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">quality_score_type</span>
+<span class="line-num">507</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -785,8 +780,7 @@ nil.</p>
 
         <div class="method-description">
           
-          <p>Quality score for each base. For “fastq-sanger” or “fastq-illumina”, it is
-PHRED score. For “fastq-solexa”, it is Solexa score.</p>
+          <p>Quality score for each base. For “fastq-sanger” or “fastq-illumina”, it is PHRED score. For “fastq-solexa”, it is Solexa score.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -797,15 +791,15 @@ PHRED score. For “fastq-solexa”, it is Solexa score.</p>
 
           
           <div class="method-source-code" id="quality_scores-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 515</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quality_scores</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@quality_scores</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultFormatName</span>
-    <span class="ruby-identifier">s</span> = <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">str2scores</span>(<span class="ruby-ivar">@quality_string</span>)
-    <span class="ruby-ivar">@quality_scores</span> = <span class="ruby-identifier">s</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@quality_scores</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">515</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quality_scores</span>
+<span class="line-num">516</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@quality_scores</span> <span class="ruby-keyword">then</span>
+<span class="line-num">517</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">format</span> <span class="ruby-operator">||=</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DefaultFormatName</span>
+<span class="line-num">518</span>     <span class="ruby-identifier">s</span> = <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">str2scores</span>(<span class="ruby-ivar">@quality_string</span>)
+<span class="line-num">519</span>     <span class="ruby-ivar">@quality_scores</span> = <span class="ruby-identifier">s</span>
+<span class="line-num">520</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">521</span>   <span class="ruby-ivar">@quality_scores</span>
+<span class="line-num">522</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -839,13 +833,13 @@ PHRED score. For “fastq-solexa”, it is Solexa score.</p>
 
           
           <div class="method-source-code" id="seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 438</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@seq</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Generic</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sequence_string</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@seq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">438</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
+<span class="line-num">439</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@seq</span> <span class="ruby-keyword">then</span>
+<span class="line-num">440</span>     <span class="ruby-ivar">@seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Generic</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sequence_string</span>)
+<span class="line-num">441</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">442</span>   <span class="ruby-ivar">@seq</span>
+<span class="line-num">443</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -869,21 +863,18 @@ PHRED score. For “fastq-solexa”, it is Solexa score.</p>
 
         <div class="method-description">
           
-          <p>Returns sequence as a <a href="Sequence.html">Bio::Sequence</a> object.</p>
+          <p>Returns sequence as a <a href="Sequence.html"><code>Bio::Sequence</code></a> object.</p>
 
-<p>Note: If you modify the returned <a href="Sequence.html">Bio::Sequence</a>
-object, the sequence or definition in this <a href="Fastq.html">Fastq</a>
-object might also be changed (but not always be changed) because of
-efficiency.</p>
+<p>Note: If you modify the returned <a href="Sequence.html"><code>Bio::Sequence</code></a> object, the sequence or definition in this <a href="Fastq.html"><code>Fastq</code></a> object might also be changed (but not always be changed) because of efficiency.</p>
           
           
 
           
           <div class="method-source-code" id="to_biosequence-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 653</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_biosequence</span>
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">adapter</span>(<span class="ruby-keyword">self</span>, <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Adapter</span><span class="ruby-operator">::</span><span class="ruby-constant">Fastq</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">653</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_biosequence</span>
+<span class="line-num">654</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">adapter</span>(<span class="ruby-keyword">self</span>, <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Adapter</span><span class="ruby-operator">::</span><span class="ruby-constant">Fastq</span>)
+<span class="line-num">655</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -907,26 +898,18 @@ efficiency.</p>
 
         <div class="method-description">
           
-          <p>Returns <a href="Fastq.html">Fastq</a> formatted string constructed from
-instance variables. The string will always be consisted of four lines
-without wrapping of the sequence and quality string, and the third-line is
-always only contains “+”. This may be different from initial entry.</p>
+          <p>Returns <a href="Fastq.html"><code>Fastq</code></a> formatted string constructed from instance variables. The string will always be consisted of four lines without wrapping of the sequence and quality string, and the third-line is always only contains “+”. This may be different from initial entry.</p>
 
-<p>Note that use of the method may be inefficient and may lose performance
-because new string object is created every time it is called. For showing
-an entry as-is, consider using <a
-href="FlatFile.html#method-i-entry_raw">Bio::FlatFile#entry_raw</a>. For
-output with various options, use <a
-href="Sequence/Format.html#method-i-output">Bio::Sequence::Format#output</a>(:fastq).</p>
+<p>Note that use of the method may be inefficient and may lose performance because new string object is created every time it is called. For showing an entry as-is, consider using <a href="FlatFile.html#method-i-entry_raw"><code>Bio::FlatFile#entry_raw</code></a>. For output with various options, use <a href="Sequence/Format.html#method-i-output"><code>Bio::Sequence#output</code></a>(:fastq).</p>
           
           
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 420</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-node">&quot;@#{@definition}\n#{@sequence_string}\n+\n#{@quality_string}\n&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">420</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">421</span>   <span class="ruby-node">&quot;@#{@definition}\n#{@sequence_string}\n+\n#{@quality_string}\n&quot;</span>
+<span class="line-num">422</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -952,37 +935,14 @@ href="Sequence/Format.html#method-i-output">Bio::Sequence::Format#output</a>(:fa
           
           <p>Format validation.</p>
 
-<p>If an array is given as the argument, when errors are found, error objects
-are pushed to the array. Currently, following errors may be added to the
-array. (All errors are under the <a href="Fastq.html">Bio::Fastq</a>
-namespace, for example, <a
-href="Fastq/Error/Diff_ids.html">Bio::Fastq::Error::Diff_ids</a>).</p>
+<p>If an array is given as the argument, when errors are found, error objects are pushed to the array. Currently, following errors may be added to the array. (All errors are under the <a href="Fastq.html"><code>Bio::Fastq</code></a> namespace, for example, <a href="Fastq/Error/Diff_ids.html"><code>Bio::Fastq::Error::Diff_ids</code></a>).</p>
 
-<p><a href="Fastq/Error/Diff_ids.html">Error::Diff_ids</a>   – the identifier
-in the two lines are different <a
-href="Fastq/Error/Long_qual.html">Error::Long_qual</a>  – length of quality
-is longer than the sequence <a
-href="Fastq/Error/Short_qual.html">Error::Short_qual</a> – length of
-quality is shorter than the sequence <a
-href="Fastq/Error/No_qual.html">Error::No_qual</a>    – no quality
-characters found <a href="Fastq/Error/No_seq.html">Error::No_seq</a>     –
-no sequence found <a href="Fastq/Error/Qual_char.html">Error::Qual_char</a>
-– invalid character in the quality <a
-href="Fastq/Error/Seq_char.html">Error::Seq_char</a>   – invalid character
-in the sequence <a href="Fastq/Error/Qual_range.html">Error::Qual_range</a>
-– quality score value out of range <a
-href="Fastq/Error/No_ids.html">Error::No_ids</a>     – sequence identifier
-not found <a href="Fastq/Error/No_atmark.html">Error::No_atmark</a>  – the
-first identifier does not begin with “@” <a
-href="Fastq/Error/Skipped_unformatted_lines.html">Error::Skipped_unformatted_lines</a>
-– the parser skipped unformatted lines that could not be recognized as
-FASTQ format</p>
+<p><a href="Fastq/Error/Diff_ids.html"><code>Error::Diff_ids</code></a>   – the identifier in the two lines are different <a href="Fastq/Error/Long_qual.html"><code>Error::Long_qual</code></a>  – length of quality is longer than the sequence <a href="Fastq/Error/Short_qual.html"><code>Error::Short_qual</code></a> – length of quality is shorter than the sequence <a href="Fastq/Error/No_qual.html"><code>Error::No_qual</code></a>    – no quality characters found <a href="Fastq/Error/No_seq.html"><code>Error::No_seq</code></a>     – no sequence found <a href="Fastq/Error/Qual_char.html"><code>Error::Qual_char</code></a>  – invalid character in the quality <a href="Fastq/Error/Seq_char.html"><code>Error::Seq_char</code></a>   – invalid character in the sequence <a href="Fastq/Error/Qual_range.html"><code>Error::Qual_range</code></a> – quality score value out of range <a href="Fastq/Error/No_ids.html"><code>Error::No_ids</code></a>     – sequence identifier not found <a href="Fastq/Error/No_atmark.html"><code>Error::No_atmark</code></a>  – the first identifier does not begin with “@” <a href="Fastq/Error/Skipped_unformatted_lines.html"><code>Error::Skipped_unformatted_lines</code></a> – the parser skipped unformatted lines that could not be recognized as FASTQ format</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(optional) <em>errors</em>: (Array or nil) an array for pushing error
-messages. The array should be empty.</p>
+<p>(optional) <em>errors</em>: (Array or nil) an array for pushing error messages. The array should be empty.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -993,90 +953,90 @@ messages. The array should be empty.</p>
 
           
           <div class="method-source-code" id="validate_format-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fastq.rb, line 562</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_format</span>(<span class="ruby-identifier">errors</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">err</span> = []
-
-  <span class="ruby-comment"># if header exists, the format might be broken.</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@header</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@header</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@header</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Skipped_unformatted_lines</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># if parse errors exist, adding them</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@parse_errors</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@parse_errors</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">err</span>.<span class="ruby-identifier">concat</span> <span class="ruby-ivar">@parse_errors</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># check if identifier exists, and identifier matches</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@definition</span>) <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@definition</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">No_ids</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@definition2</span>) <span class="ruby-keyword">and</span>
-      <span class="ruby-operator">!</span><span class="ruby-ivar">@definition2</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-ivar">@definition</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@definition2</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Diff_ids</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># check if sequence exists</span>
-  <span class="ruby-identifier">has_seq</span>  = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@sequence_string</span>) <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@sequence_string</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">No_seq</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">has_seq</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># check if quality exists</span>
-  <span class="ruby-identifier">has_qual</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@quality_string</span>) <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@quality_string</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">No_qual</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">has_qual</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># sequence and quality length check</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_seq</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">has_qual</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">slen</span> = <span class="ruby-ivar">@sequence_string</span>.<span class="ruby-identifier">length</span>
-    <span class="ruby-identifier">qlen</span> = <span class="ruby-ivar">@quality_string</span>.<span class="ruby-identifier">length</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">slen</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">qlen</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Short_qual</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">qlen</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">slen</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Long_qual</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># sequence character check</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_seq</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">sc</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sequence_string</span>)
-    <span class="ruby-keyword">while</span> <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">scan_until</span>(<span class="ruby-regexp">/[ \x00-\x1f\x7f-\xff]/n</span>)
-      <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Seq_char</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sc</span>.<span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">matched_size</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># sequence character check</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_qual</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">fmt</span> = <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@format</span>) <span class="ruby-keyword">and</span> <span class="ruby-ivar">@format</span> <span class="ruby-keyword">then</span>
-            <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">name</span>
-          <span class="ruby-keyword">else</span>
-            <span class="ruby-keyword">nil</span>
-          <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">re</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">fmt</span>
-         <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;fastq-sanger&#39;</span>
-           <span class="ruby-regexp">/[^\x21-\x7e]/n</span>
-         <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;fastq-solexa&#39;</span>
-           <span class="ruby-regexp">/[^\x3b-\x7e]/n</span>
-         <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;fastq-illumina&#39;</span>
-           <span class="ruby-regexp">/[^\x40-\x7e]/n</span>
-         <span class="ruby-keyword">else</span>
-           <span class="ruby-regexp">/[ \x00-\x1f\x7f-\xff]/n</span>
-         <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">sc</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@quality_string</span>)
-    <span class="ruby-keyword">while</span> <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">scan_until</span>(<span class="ruby-identifier">re</span>)
-      <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Qual_char</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sc</span>.<span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">matched_size</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># if &quot;errors&quot; is given, set errors</span>
-  <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">err</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">errors</span>
-  <span class="ruby-comment"># returns true if no error; otherwise, returns false</span>
-  <span class="ruby-identifier">err</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fastq.rb</span>
+<span class="line-num">562</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_format</span>(<span class="ruby-identifier">errors</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">563</span>   <span class="ruby-identifier">err</span> = []
+<span class="line-num">564</span> 
+<span class="line-num">565</span>   <span class="ruby-comment"># if header exists, the format might be broken.</span>
+<span class="line-num">566</span>   <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@header</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@header</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@header</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">567</span>     <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Skipped_unformatted_lines</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">568</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">569</span> 
+<span class="line-num">570</span>   <span class="ruby-comment"># if parse errors exist, adding them</span>
+<span class="line-num">571</span>   <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@parse_errors</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@parse_errors</span> <span class="ruby-keyword">then</span>
+<span class="line-num">572</span>     <span class="ruby-identifier">err</span>.<span class="ruby-identifier">concat</span> <span class="ruby-ivar">@parse_errors</span>
+<span class="line-num">573</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">574</span> 
+<span class="line-num">575</span>   <span class="ruby-comment"># check if identifier exists, and identifier matches</span>
+<span class="line-num">576</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@definition</span>) <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@definition</span> <span class="ruby-keyword">then</span>
+<span class="line-num">577</span>     <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">No_ids</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">578</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@definition2</span>) <span class="ruby-keyword">and</span>
+<span class="line-num">579</span>       <span class="ruby-operator">!</span><span class="ruby-ivar">@definition2</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">and</span>
+<span class="line-num">580</span>       <span class="ruby-ivar">@definition</span> <span class="ruby-operator">!=</span> <span class="ruby-ivar">@definition2</span> <span class="ruby-keyword">then</span>
+<span class="line-num">581</span>     <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Diff_ids</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">582</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">583</span> 
+<span class="line-num">584</span>   <span class="ruby-comment"># check if sequence exists</span>
+<span class="line-num">585</span>   <span class="ruby-identifier">has_seq</span>  = <span class="ruby-keyword">true</span>
+<span class="line-num">586</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@sequence_string</span>) <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@sequence_string</span> <span class="ruby-keyword">then</span>
+<span class="line-num">587</span>     <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">No_seq</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">588</span>     <span class="ruby-identifier">has_seq</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">589</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">590</span> 
+<span class="line-num">591</span>   <span class="ruby-comment"># check if quality exists</span>
+<span class="line-num">592</span>   <span class="ruby-identifier">has_qual</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">593</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@quality_string</span>) <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@quality_string</span> <span class="ruby-keyword">then</span>
+<span class="line-num">594</span>     <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">No_qual</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">595</span>     <span class="ruby-identifier">has_qual</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">596</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">597</span> 
+<span class="line-num">598</span>   <span class="ruby-comment"># sequence and quality length check</span>
+<span class="line-num">599</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_seq</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">has_qual</span> <span class="ruby-keyword">then</span>
+<span class="line-num">600</span>     <span class="ruby-identifier">slen</span> = <span class="ruby-ivar">@sequence_string</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">601</span>     <span class="ruby-identifier">qlen</span> = <span class="ruby-ivar">@quality_string</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">602</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">slen</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">qlen</span> <span class="ruby-keyword">then</span>
+<span class="line-num">603</span>       <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Short_qual</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">604</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">qlen</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">slen</span> <span class="ruby-keyword">then</span>
+<span class="line-num">605</span>       <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Long_qual</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">606</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">607</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">608</span> 
+<span class="line-num">609</span>   <span class="ruby-comment"># sequence character check</span>
+<span class="line-num">610</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_seq</span> <span class="ruby-keyword">then</span>
+<span class="line-num">611</span>     <span class="ruby-identifier">sc</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sequence_string</span>)
+<span class="line-num">612</span>     <span class="ruby-keyword">while</span> <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">scan_until</span>(<span class="ruby-regexp">/[ \x00-\x1f\x7f-\xff]/n</span>)
+<span class="line-num">613</span>       <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Seq_char</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sc</span>.<span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">matched_size</span>)
+<span class="line-num">614</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">615</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">616</span> 
+<span class="line-num">617</span>   <span class="ruby-comment"># sequence character check</span>
+<span class="line-num">618</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">has_qual</span> <span class="ruby-keyword">then</span>
+<span class="line-num">619</span>     <span class="ruby-identifier">fmt</span> = <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@format</span>) <span class="ruby-keyword">and</span> <span class="ruby-ivar">@format</span> <span class="ruby-keyword">then</span>
+<span class="line-num">620</span>             <span class="ruby-ivar">@format</span>.<span class="ruby-identifier">name</span>
+<span class="line-num">621</span>           <span class="ruby-keyword">else</span>
+<span class="line-num">622</span>             <span class="ruby-keyword">nil</span>
+<span class="line-num">623</span>           <span class="ruby-keyword">end</span>
+<span class="line-num">624</span>     <span class="ruby-identifier">re</span> = <span class="ruby-keyword">case</span> <span class="ruby-identifier">fmt</span>
+<span class="line-num">625</span>          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;fastq-sanger&#39;</span>
+<span class="line-num">626</span>            <span class="ruby-regexp">/[^\x21-\x7e]/n</span>
+<span class="line-num">627</span>          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;fastq-solexa&#39;</span>
+<span class="line-num">628</span>            <span class="ruby-regexp">/[^\x3b-\x7e]/n</span>
+<span class="line-num">629</span>          <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;fastq-illumina&#39;</span>
+<span class="line-num">630</span>            <span class="ruby-regexp">/[^\x40-\x7e]/n</span>
+<span class="line-num">631</span>          <span class="ruby-keyword">else</span>
+<span class="line-num">632</span>            <span class="ruby-regexp">/[ \x00-\x1f\x7f-\xff]/n</span>
+<span class="line-num">633</span>          <span class="ruby-keyword">end</span>
+<span class="line-num">634</span>     <span class="ruby-identifier">sc</span> = <span class="ruby-constant">StringScanner</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@quality_string</span>)
+<span class="line-num">635</span>     <span class="ruby-keyword">while</span> <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">scan_until</span>(<span class="ruby-identifier">re</span>)
+<span class="line-num">636</span>       <span class="ruby-identifier">err</span>.<span class="ruby-identifier">push</span> <span class="ruby-constant">Error</span><span class="ruby-operator">::</span><span class="ruby-constant">Qual_char</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">sc</span>.<span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">sc</span>.<span class="ruby-identifier">matched_size</span>)
+<span class="line-num">637</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">638</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">639</span> 
+<span class="line-num">640</span>   <span class="ruby-comment"># if &quot;errors&quot; is given, set errors</span>
+<span class="line-num">641</span>   <span class="ruby-identifier">errors</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">err</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">errors</span>
+<span class="line-num">642</span>   <span class="ruby-comment"># returns true if no error; otherwise, returns false</span>
+<span class="line-num">643</span>   <span class="ruby-identifier">err</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="line-num">644</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1090,12 +1050,13 @@ messages. The array should be empty.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

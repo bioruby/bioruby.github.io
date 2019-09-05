@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -138,11 +142,7 @@
     
 <h2 id="class-Bio::Locations-label-Description">Description<span><a href="#class-Bio::Locations-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>The <a href="Locations.html">Bio::Locations</a> class is a container for <a
-href="Location.html">Bio::Location</a> objects: creating a <a
-href="Locations.html">Bio::Locations</a> object (based on a <a
-href="GenBank.html">GenBank</a> style position string) will spawn an array
-of <a href="Location.html">Bio::Location</a> objects.</p>
+<p>The <a href="Locations.html"><code>Bio::Locations</code></a> class is a container for <a href="Location.html"><code>Bio::Location</code></a> objects: creating a <a href="Locations.html"><code>Bio::Locations</code></a> object (based on a <a href="GenBank.html"><code>GenBank</code></a> style position string) will spawn an array of <a href="Location.html"><code>Bio::Location</code></a> objects.</p>
 
 <h2 id="class-Bio::Locations-label-Usage">Usage<span><a href="#class-Bio::Locations-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -167,13 +167,11 @@ of <a href="Location.html">Bio::Location</a> objects.</p>
 <span class="ruby-keyword">end</span>
 </pre>
 
-<h3 id="class-Bio::Locations-label-GenBank+location+descriptor+classification"><a href="GenBank.html">GenBank</a> location descriptor classification<span><a href="#class-Bio::Locations-label-GenBank+location+descriptor+classification">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h3 id="class-Bio::Locations-label-GenBank+location+descriptor+classification"><a href="GenBank.html"><code>GenBank</code></a> location descriptor classification<span><a href="#class-Bio::Locations-label-GenBank+location+descriptor+classification">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<h4 id="class-Bio::Locations-label-Definition+of+the+position+notation+of+the+GenBank+location+format">Definition of the position notation of the <a href="GenBank.html">GenBank</a> location format<span><a href="#class-Bio::Locations-label-Definition+of+the+position+notation+of+the+GenBank+location+format">&para;</a> <a href="#top">&uarr;</a></span></h4>
+<h4 id="class-Bio::Locations-label-Definition+of+the+position+notation+of+the+GenBank+location+format">Definition of the position notation of the <a href="GenBank.html"><code>GenBank</code></a> location format<span><a href="#class-Bio::Locations-label-Definition+of+the+position+notation+of+the+GenBank+location+format">&para;</a> <a href="#top">&uarr;</a></span></h4>
 
-<p>According to the <a href="GenBank.html">GenBank</a> manual
-&#39;gbrel.txt&#39;, position notations were classified into 10 patterns -
-(A) to (J).</p>
+<p>According to the <a href="GenBank.html"><code>GenBank</code></a> manual &#39;gbrel.txt&#39;, position notations were classified into 10 patterns - (A) to (J).</p>
 
 <pre>3.4.12.2 Feature Location
 
@@ -245,19 +243,19 @@ Location descriptors can be one of the following:
 
 <h3 id="class-Bio::Locations-label-Reduction+strategy+of+the+position+notations">Reduction strategy of the position notations<span><a href="#class-Bio::Locations-label-Reduction+strategy+of+the+position+notations">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p>(A) <a href="Location.html">Location</a> n</p>
+<p>(A) <a href="Location.html"><code>Location</code></a> n</p>
 </li><li>
-<p>(B) <a href="Location.html">Location</a> n..m</p>
+<p>(B) <a href="Location.html"><code>Location</code></a> n..m</p>
 </li><li>
-<p>(C) <a href="Location.html">Location</a> n^m</p>
+<p>(C) <a href="Location.html"><code>Location</code></a> n^m</p>
 </li><li>
-<p>(D) (n.m)                   =&gt; <a href="Location.html">Location</a> n</p>
+<p>(D) (n.m)                   =&gt; <a href="Location.html"><code>Location</code></a> n</p>
 </li><li>
 <p>(E)</p>
 <ul><li>
-<p>one-of(n,m,..)            =&gt; <a href="Location.html">Location</a> n</p>
+<p>one-of(n,m,..)            =&gt; <a href="Location.html"><code>Location</code></a> n</p>
 </li><li>
-<p>one-of(n..m,..)           =&gt; <a href="Location.html">Location</a> n..m</p>
+<p>one-of(n..m,..)           =&gt; <a href="Location.html"><code>Location</code></a> n..m</p>
 </li></ul>
 </li><li>
 <p>(F)</p>
@@ -266,37 +264,29 @@ Location descriptors can be one of the following:
 </li><li>
 <p>group(loc,loc,..)         =&gt; join(loc, loc,..)</p>
 </li><li>
-<p>join(loc,loc,..)          =&gt; <a href="Sequence.html">Sequence</a></p>
+<p>join(loc,loc,..)          =&gt; <a href="Sequence.html"><code>Sequence</code></a></p>
 </li></ul>
 </li><li>
-<p>(G) ID:loc                  =&gt; <a href="Location.html">Location</a> with
-ID</p>
+<p>(G) ID:loc                  =&gt; <a href="Location.html"><code>Location</code></a> with ID</p>
 </li><li>
-<p>(H) “atgc”                  =&gt; <a href="Location.html">Location</a> only
-with <a href="Sequence.html">Sequence</a></p>
+<p>(H) “atgc”                  =&gt; <a href="Location.html"><code>Location</code></a> only with <a href="Sequence.html"><code>Sequence</code></a></p>
 </li><li>
 <p>(I)</p>
 <ul><li>
-<p>&lt;n                        =&gt; <a href="Location.html">Location</a> n
-with lt flag</p>
+<p>&lt;n                        =&gt; <a href="Location.html"><code>Location</code></a> n with lt flag</p>
 </li><li>
-<p>&gt;n                        =&gt; <a href="Location.html">Location</a> n
-with gt flag</p>
+<p>&gt;n                        =&gt; <a href="Location.html"><code>Location</code></a> n with gt flag</p>
 </li><li>
-<p>&lt;n..m                     =&gt; <a href="Location.html">Location</a>
-n..m with lt flag</p>
+<p>&lt;n..m                     =&gt; <a href="Location.html"><code>Location</code></a> n..m with lt flag</p>
 </li><li>
-<p>n..&gt;m                     =&gt; <a href="Location.html">Location</a>
-n..m with gt flag</p>
+<p>n..&gt;m                     =&gt; <a href="Location.html"><code>Location</code></a> n..m with gt flag</p>
 </li><li>
-<p>&lt;n..&gt;m                    =&gt; <a href="Location.html">Location</a>
-n..m with lt, gt flag</p>
+<p>&lt;n..&gt;m                    =&gt; <a href="Location.html"><code>Location</code></a> n..m with lt, gt flag</p>
 </li></ul>
 </li><li>
-<p>(J) complement(loc)         =&gt; <a href="Sequence.html">Sequence</a></p>
+<p>(J) complement(loc)         =&gt; <a href="Sequence.html"><code>Sequence</code></a></p>
 </li><li>
-<p>(K) replace(loc, str)       =&gt; <a href="Location.html">Location</a> with
-replacement <a href="Sequence.html">Sequence</a></p>
+<p>(K) replace(loc, str)       =&gt; <a href="Location.html"><code>Location</code></a> with replacement <a href="Sequence.html"><code>Sequence</code></a></p>
 </li></ul>
 
   </section>
@@ -324,7 +314,7 @@ replacement <a href="Sequence.html">Sequence</a></p>
 
         <div class="method-description">
         
-        <p>(Array) An Array of <a href="Location.html">Bio::Location</a> objects</p>
+        <p>(Array) An Array of <a href="Location.html"><code>Bio::Location</code></a> objects</p>
         
         </div>
       </div>
@@ -365,9 +355,7 @@ replacement <a href="Sequence.html">Sequence</a></p>
 
         <div class="method-description">
           
-          <p>Parses a <a href="GenBank.html">GenBank</a> style position string and
-returns a <a href="Locations.html">Bio::Locations</a> object, which
-contains a list of <a href="Location.html">Bio::Location</a> objects.</p>
+          <p>Parses a <a href="GenBank.html"><code>GenBank</code></a> style position string and returns a <a href="Locations.html"><code>Bio::Locations</code></a> object, which contains a list of <a href="Location.html"><code>Bio::Location</code></a> objects.</p>
 
 <pre class="ruby"><span class="ruby-identifier">locations</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;join(complement(500..550), 600..625)&#39;</span>)
 </pre>
@@ -375,28 +363,27 @@ contains a list of <a href="Location.html">Bio::Location</a> objects.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>str</em>: <a href="GenBank.html">GenBank</a> style position
-string</p>
+<p>(required) <em>str</em>: <a href="GenBank.html"><code>GenBank</code></a> style position string</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Locations.html">Bio::Locations</a> object</p>
+<p><a href="Locations.html"><code>Bio::Locations</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 346</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">position</span>)
-  <span class="ruby-ivar">@operator</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">position</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>
-    <span class="ruby-ivar">@locations</span> = <span class="ruby-identifier">position</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">position</span>   = <span class="ruby-identifier">gbl_cleanup</span>(<span class="ruby-identifier">position</span>)        <span class="ruby-comment"># preprocessing</span>
-    <span class="ruby-ivar">@locations</span> = <span class="ruby-identifier">gbl_pos2loc</span>(<span class="ruby-identifier">position</span>)        <span class="ruby-comment"># create an Array of Bio::Location objects</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">346</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">position</span>)
+<span class="line-num">347</span>   <span class="ruby-ivar">@operator</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">348</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">position</span>.<span class="ruby-identifier">is_a?</span> <span class="ruby-constant">Array</span>
+<span class="line-num">349</span>     <span class="ruby-ivar">@locations</span> = <span class="ruby-identifier">position</span>
+<span class="line-num">350</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">351</span>     <span class="ruby-identifier">position</span>   = <span class="ruby-identifier">gbl_cleanup</span>(<span class="ruby-identifier">position</span>)        <span class="ruby-comment"># preprocessing</span>
+<span class="line-num">352</span>     <span class="ruby-ivar">@locations</span> = <span class="ruby-identifier">gbl_pos2loc</span>(<span class="ruby-identifier">position</span>)        <span class="ruby-comment"># create an Array of Bio::Location objects</span>
+<span class="line-num">353</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">354</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -428,8 +415,7 @@ string</p>
 
         <div class="method-description">
           
-          <p>If <em>other</em> is equal with the self, returns true. Otherwise, returns
-false.</p>
+          <p>If <em>other</em> is equal with the self, returns true. Otherwise, returns false.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -450,17 +436,17 @@ false.</p>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 381</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">locations</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">locations</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">operator</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">operator</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">381</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">382</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">383</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
+<span class="line-num">384</span>   <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">locations</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">locations</span> <span class="ruby-keyword">and</span>
+<span class="line-num">385</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">operator</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">operator</span> <span class="ruby-keyword">then</span>
+<span class="line-num">386</span>     <span class="ruby-keyword">true</span>
+<span class="line-num">387</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">388</span>     <span class="ruby-keyword">false</span>
+<span class="line-num">389</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">390</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -484,16 +470,16 @@ false.</p>
 
         <div class="method-description">
           
-          <p>Returns nth <a href="Location.html">Bio::Location</a> object.</p>
+          <p>Returns nth <a href="Location.html"><code>Bio::Location</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 400</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">n</span>)
-  <span class="ruby-ivar">@locations</span>[<span class="ruby-identifier">n</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">400</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">n</span>)
+<span class="line-num">401</span>   <span class="ruby-ivar">@locations</span>[<span class="ruby-identifier">n</span>]
+<span class="line-num">402</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -517,12 +503,9 @@ false.</p>
 
         <div class="method-description">
           
-          <p>Converts relative position in the locus to position in the whole of the DNA
-sequence.</p>
+          <p>Converts relative position in the locus to position in the whole of the DNA sequence.</p>
 
-<p>This method can for example be used to relate positions in a DNA-sequence
-with those in RNA. In this use, the optional &#39;:aa&#39;-flag returns the
-position of the associated amino-acid rather than the nucleotide.</p>
+<p>This method can for example be used to relate positions in a DNA-sequence with those in RNA. In this use, the optional &#39;:aa&#39;-flag returns the position of the associated amino-acid rather than the nucleotide.</p>
 
 <pre class="ruby"><span class="ruby-identifier">loc</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;complement(12838..13533)&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">absolute</span>(<span class="ruby-value">10</span>)          <span class="ruby-comment"># =&gt; 13524</span>
@@ -534,8 +517,7 @@ position of the associated amino-acid rather than the nucleotide.</p>
 <ul><li>
 <p>(required) <em>position</em>: nucleotide position within locus</p>
 </li><li>
-<p><em>:aa</em>: flag to be used if <em>position</em> is a aminoacid position
-rather than a nucleotide position</p>
+<p><em>:aa</em>: flag to be used if <em>position</em> is a aminoacid position rather than a nucleotide position</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -546,18 +528,18 @@ rather than a nucleotide position</p>
 
           
           <div class="method-source-code" id="absolute-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 490</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">absolute</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:location</span>
-    ;
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:aa</span>
-    <span class="ruby-identifier">n</span> = (<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">*</span> <span class="ruby-value">3</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">rel2abs</span>(<span class="ruby-identifier">n</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">rel2abs</span>(<span class="ruby-identifier">n</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">490</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">absolute</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">491</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
+<span class="line-num">492</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">:location</span>
+<span class="line-num">493</span>     ;
+<span class="line-num">494</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">:aa</span>
+<span class="line-num">495</span>     <span class="ruby-identifier">n</span> = (<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">*</span> <span class="ruby-value">3</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">496</span>     <span class="ruby-identifier">rel2abs</span>(<span class="ruby-identifier">n</span>)
+<span class="line-num">497</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">498</span>     <span class="ruby-identifier">rel2abs</span>(<span class="ruby-identifier">n</span>)
+<span class="line-num">499</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">500</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -581,18 +563,18 @@ rather than a nucleotide position</p>
 
         <div class="method-description">
           
-          <p>Iterates on each <a href="Location.html">Bio::Location</a> object.</p>
+          <p>Iterates on each <a href="Location.html"><code>Bio::Location</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 393</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
-  <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">393</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
+<span class="line-num">394</span>   <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">395</span>     <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">396</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">397</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -616,23 +598,23 @@ rather than a nucleotide position</p>
 
         <div class="method-description">
           
-          <p>Evaluate equality of <a href="Locations.html">Bio::Locations</a> object.</p>
+          <p>Evaluate equality of <a href="Locations.html"><code>Bio::Locations</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="equals-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 364</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">equals?</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>)
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sort</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">sort</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">364</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">equals?</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">365</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>)
+<span class="line-num">366</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">367</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">368</span>   <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">sort</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">sort</span>
+<span class="line-num">369</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span>
+<span class="line-num">370</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">371</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+<span class="line-num">372</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">373</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -656,16 +638,16 @@ rather than a nucleotide position</p>
 
         <div class="method-description">
           
-          <p>Returns first <a href="Location.html">Bio::Location</a> object.</p>
+          <p>Returns first <a href="Location.html"><code>Bio::Location</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="first-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 405</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">first</span>
-  <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">405</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">first</span>
+<span class="line-num">406</span>   <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">407</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -689,16 +671,16 @@ rather than a nucleotide position</p>
 
         <div class="method-description">
           
-          <p>Returns last <a href="Location.html">Bio::Location</a> object.</p>
+          <p>Returns last <a href="Location.html"><code>Bio::Location</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="last-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 410</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">last</span>
-  <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">last</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">410</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">last</span>
+<span class="line-num">411</span>   <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">last</span>
+<span class="line-num">412</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -728,18 +710,18 @@ rather than a nucleotide position</p>
 
           
           <div class="method-source-code" id="length-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 429</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length</span>
-  <span class="ruby-identifier">len</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sequence</span>
-      <span class="ruby-identifier">len</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">size</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">len</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">x</span>.<span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">len</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">429</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length</span>
+<span class="line-num">430</span>   <span class="ruby-identifier">len</span> = <span class="ruby-value">0</span>
+<span class="line-num">431</span>   <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">432</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sequence</span>
+<span class="line-num">433</span>       <span class="ruby-identifier">len</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">size</span>
+<span class="line-num">434</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">435</span>       <span class="ruby-identifier">len</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">x</span>.<span class="ruby-identifier">to</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+<span class="line-num">436</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">437</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">438</span>   <span class="ruby-identifier">len</span>
+<span class="line-num">439</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -773,11 +755,11 @@ rather than a nucleotide position</p>
 
           
           <div class="method-source-code" id="range-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 423</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">range</span>
-  <span class="ruby-identifier">min</span>, <span class="ruby-identifier">max</span> = <span class="ruby-identifier">span</span>
-  <span class="ruby-identifier">min</span><span class="ruby-operator">..</span><span class="ruby-identifier">max</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">423</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">range</span>
+<span class="line-num">424</span>   <span class="ruby-identifier">min</span>, <span class="ruby-identifier">max</span> = <span class="ruby-identifier">span</span>
+<span class="line-num">425</span>   <span class="ruby-identifier">min</span><span class="ruby-operator">..</span><span class="ruby-identifier">max</span>
+<span class="line-num">426</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -801,12 +783,9 @@ rather than a nucleotide position</p>
 
         <div class="method-description">
           
-          <p>Converts absolute position in the whole of the DNA sequence to relative 
-position in the locus.</p>
+          <p>Converts absolute position in the whole of the DNA sequence to relative  position in the locus.</p>
 
-<p>This method can for example be used to relate positions in a DNA-sequence
-with those in RNA. In this use, the optional &#39;:aa&#39;-flag returns the
-position of the associated amino-acid rather than the nucleotide.</p>
+<p>This method can for example be used to relate positions in a DNA-sequence with those in RNA. In this use, the optional &#39;:aa&#39;-flag returns the position of the associated amino-acid rather than the nucleotide.</p>
 
 <pre class="ruby"><span class="ruby-identifier">loc</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Locations</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;complement(12838..13533)&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">relative</span>(<span class="ruby-value">13524</span>)        <span class="ruby-comment"># =&gt; 10</span>
@@ -816,11 +795,9 @@ position of the associated amino-acid rather than the nucleotide.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>position</em>: nucleotide position within whole of the
-sequence</p>
+<p>(required) <em>position</em>: nucleotide position within whole of the sequence</p>
 </li><li>
-<p><em>:aa</em>: flag that lets method return position in aminoacid
-coordinates</p>
+<p><em>:aa</em>: flag that lets method return position in aminoacid coordinates</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -831,21 +808,21 @@ coordinates</p>
 
           
           <div class="method-source-code" id="relative-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 458</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">relative</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:location</span>
-    ;
-  <span class="ruby-keyword">when</span> <span class="ruby-value">:aa</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span> = <span class="ruby-identifier">abs2rel</span>(<span class="ruby-identifier">n</span>)
-      (<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">/</span> <span class="ruby-value">3</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">abs2rel</span>(<span class="ruby-identifier">n</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">458</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">relative</span>(<span class="ruby-identifier">n</span>, <span class="ruby-identifier">type</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">459</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">type</span>
+<span class="line-num">460</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">:location</span>
+<span class="line-num">461</span>     ;
+<span class="line-num">462</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">:aa</span>
+<span class="line-num">463</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span> = <span class="ruby-identifier">abs2rel</span>(<span class="ruby-identifier">n</span>)
+<span class="line-num">464</span>       (<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">/</span> <span class="ruby-value">3</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">465</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">466</span>       <span class="ruby-keyword">nil</span>
+<span class="line-num">467</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">468</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">469</span>     <span class="ruby-identifier">abs2rel</span>(<span class="ruby-identifier">n</span>)
+<span class="line-num">470</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">471</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -897,19 +874,18 @@ coordinates</p>
 
         <div class="method-description">
           
-          <p>Returns an Array containing overall min and max position [min, max] of this
-<a href="Locations.html">Bio::Locations</a> object.</p>
+          <p>Returns an Array containing overall min and max position [min, max] of this <a href="Locations.html"><code>Bio::Locations</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="span-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 416</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">span</span>
-  <span class="ruby-identifier">span_min</span> = <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">min</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">from</span> }
-  <span class="ruby-identifier">span_max</span> = <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">max</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">to</span>   <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">to</span>   }
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">span_min</span>.<span class="ruby-identifier">from</span>, <span class="ruby-identifier">span_max</span>.<span class="ruby-identifier">to</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">416</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">span</span>
+<span class="line-num">417</span>   <span class="ruby-identifier">span_min</span> = <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">min</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">from</span> }
+<span class="line-num">418</span>   <span class="ruby-identifier">span_max</span> = <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">max</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">to</span>   <span class="ruby-operator">&lt;=&gt;</span> <span class="ruby-identifier">b</span>.<span class="ruby-identifier">to</span>   }
+<span class="line-num">419</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">span_min</span>.<span class="ruby-identifier">from</span>, <span class="ruby-identifier">span_max</span>.<span class="ruby-identifier">to</span>
+<span class="line-num">420</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -935,9 +911,7 @@ coordinates</p>
           
           <p>String representation.</p>
 
-<p>Note: In some cases, it fails to detect whether “complement(join(…))” or
-“join(complement(..))”, and whether “complement(order(…))” or
-“order(complement(..))”.</p>
+<p>Note: In some cases, it fails to detect whether “complement(join(…))” or “join(complement(..))”, and whether “complement(order(…))” or “order(complement(..))”.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -948,56 +922,56 @@ coordinates</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 511</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">complement_join</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-identifier">locs</span> = <span class="ruby-ivar">@locations</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">flag</span>, <span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
-      <span class="ruby-comment"># check if each location is complement</span>
-      (<span class="ruby-identifier">flag</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">loc</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">loc</span>.<span class="ruby-identifier">xref_id</span>)
-    <span class="ruby-keyword">end</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-identifier">locs</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">from</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span>, <span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> <span class="ruby-keyword">then</span>
-        (<span class="ruby-identifier">pos</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">from</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-keyword">false</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">locs</span> = <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">reverse</span>
-    <span class="ruby-identifier">complement_join</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">locs</span> = <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">lt</span> = <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">lt</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&lt;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-identifier">gt</span> = <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">gt</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&gt;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-identifier">str</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">to</span> <span class="ruby-keyword">then</span>
-            <span class="ruby-node">&quot;#{lt}#{gt}#{loc.from.to_i}&quot;</span>
-          <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">carat</span> <span class="ruby-keyword">then</span>
-            <span class="ruby-node">&quot;#{lt}#{loc.from.to_i}^#{gt}#{loc.to.to_i}&quot;</span>
-          <span class="ruby-keyword">else</span>
-            <span class="ruby-node">&quot;#{lt}#{loc.from.to_i}..#{gt}#{loc.to.to_i}&quot;</span>
-          <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">xref_id</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">loc</span>.<span class="ruby-identifier">xref_id</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;#{loc.xref_id}:#{str}&quot;</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">complement_join</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;complement(#{str})&quot;</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">sequence</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;replace(#{str},\&quot;#{loc.sequence}\&quot;)&quot;</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">op</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">operator</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;join&#39;</span>).<span class="ruby-identifier">to_s</span>
-    <span class="ruby-identifier">result</span> = <span class="ruby-node">&quot;#{op}(#{locs.join(&#39;,&#39;)})&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">result</span> = <span class="ruby-identifier">locs</span>[<span class="ruby-value">0</span>]
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">complement_join</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">result</span> = <span class="ruby-node">&quot;complement(#{result})&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">result</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">511</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">512</span>   <span class="ruby-keyword">return</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@locations</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">513</span>   <span class="ruby-identifier">complement_join</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">514</span>   <span class="ruby-identifier">locs</span> = <span class="ruby-ivar">@locations</span>
+<span class="line-num">515</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-keyword">true</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">flag</span>, <span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
+<span class="line-num">516</span>       <span class="ruby-comment"># check if each location is complement</span>
+<span class="line-num">517</span>       (<span class="ruby-identifier">flag</span> <span class="ruby-operator">&amp;&amp;</span> (<span class="ruby-identifier">loc</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">loc</span>.<span class="ruby-identifier">xref_id</span>)
+<span class="line-num">518</span>     <span class="ruby-keyword">end</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">inject</span>(<span class="ruby-identifier">locs</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">from</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pos</span>, <span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
+<span class="line-num">519</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> <span class="ruby-keyword">then</span>
+<span class="line-num">520</span>         (<span class="ruby-identifier">pos</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">from</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="line-num">521</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">522</span>         <span class="ruby-keyword">false</span>
+<span class="line-num">523</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">524</span>     <span class="ruby-keyword">end</span> <span class="ruby-keyword">then</span>
+<span class="line-num">525</span>     <span class="ruby-identifier">locs</span> = <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">reverse</span>
+<span class="line-num">526</span>     <span class="ruby-identifier">complement_join</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">527</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">528</span>   <span class="ruby-identifier">locs</span> = <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">loc</span><span class="ruby-operator">|</span>
+<span class="line-num">529</span>     <span class="ruby-identifier">lt</span> = <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">lt</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&lt;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">530</span>     <span class="ruby-identifier">gt</span> = <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">gt</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&gt;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">531</span>     <span class="ruby-identifier">str</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">from</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">to</span> <span class="ruby-keyword">then</span>
+<span class="line-num">532</span>             <span class="ruby-node">&quot;#{lt}#{gt}#{loc.from.to_i}&quot;</span>
+<span class="line-num">533</span>           <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">carat</span> <span class="ruby-keyword">then</span>
+<span class="line-num">534</span>             <span class="ruby-node">&quot;#{lt}#{loc.from.to_i}^#{gt}#{loc.to.to_i}&quot;</span>
+<span class="line-num">535</span>           <span class="ruby-keyword">else</span>
+<span class="line-num">536</span>             <span class="ruby-node">&quot;#{lt}#{loc.from.to_i}..#{gt}#{loc.to.to_i}&quot;</span>
+<span class="line-num">537</span>           <span class="ruby-keyword">end</span>
+<span class="line-num">538</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">xref_id</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">loc</span>.<span class="ruby-identifier">xref_id</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">539</span>       <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;#{loc.xref_id}:#{str}&quot;</span>
+<span class="line-num">540</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">541</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-value">-1</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">complement_join</span> <span class="ruby-keyword">then</span>
+<span class="line-num">542</span>       <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;complement(#{str})&quot;</span>
+<span class="line-num">543</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">544</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">loc</span>.<span class="ruby-identifier">sequence</span> <span class="ruby-keyword">then</span>
+<span class="line-num">545</span>       <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;replace(#{str},\&quot;#{loc.sequence}\&quot;)&quot;</span>
+<span class="line-num">546</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">547</span>     <span class="ruby-identifier">str</span>
+<span class="line-num">548</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">549</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">locs</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">then</span>
+<span class="line-num">550</span>     <span class="ruby-identifier">op</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">operator</span> <span class="ruby-operator">||</span> <span class="ruby-string">&#39;join&#39;</span>).<span class="ruby-identifier">to_s</span>
+<span class="line-num">551</span>     <span class="ruby-identifier">result</span> = <span class="ruby-node">&quot;#{op}(#{locs.join(&#39;,&#39;)})&quot;</span>
+<span class="line-num">552</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">553</span>     <span class="ruby-identifier">result</span> = <span class="ruby-identifier">locs</span>[<span class="ruby-value">0</span>]
+<span class="line-num">554</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">555</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">complement_join</span> <span class="ruby-keyword">then</span>
+<span class="line-num">556</span>     <span class="ruby-identifier">result</span> = <span class="ruby-node">&quot;complement(#{result})&quot;</span>
+<span class="line-num">557</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">558</span>   <span class="ruby-identifier">result</span>
+<span class="line-num">559</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1011,12 +985,13 @@ coordinates</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

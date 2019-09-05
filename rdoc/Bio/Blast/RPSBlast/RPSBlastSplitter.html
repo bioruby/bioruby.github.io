@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -92,12 +96,9 @@
 
   <section class="description">
     
-<p>Flatfile splitter for RPS-BLAST reports. It is internally used when reading
-RPS-BLAST report. Normally, users do not need to use it directly.</p>
+<p>Flatfile splitter for RPS-BLAST reports. It is internally used when reading RPS-BLAST report. Normally, users do not need to use it directly.</p>
 
-<p>Note for Windows: RPS-BLAST results generated in Microsoft Windows may not
-be parsed correctly due to the line feed code problem. For a workaroud,
-convert line feed codes from Windows(DOS) to UNIX.</p>
+<p>Note for Windows: RPS-BLAST results generated in Microsoft Windows may not be parsed correctly due to the line feed code problem. For a workaroud, convert line feed codes from Windows(DOS) to UNIX.</p>
 
   </section>
 
@@ -116,7 +117,7 @@ convert line feed codes from Windows(DOS) to UNIX.</p>
       
         <dt id="Delimiter">Delimiter
         
-        <dd><p><a href="RPSBlastSplitter.html#Delimiter">Delimiter</a> used for IO#gets</p>
+        <dd><p><a href="RPSBlastSplitter.html#Delimiter"><code>Delimiter</code></a> used for IO#gets</p>
         
       
         <dt id="ReportHead">ReportHead
@@ -155,17 +156,17 @@ convert line feed codes from Windows(DOS) to UNIX.</p>
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="../../FlatFile/Splitter/Template.html#method-c-new">Bio::FlatFile::Splitter::Template.new</a>
+              <a href="../../FlatFile/Splitter/Template.html#method-c-new"><code>Bio::FlatFile::Splitter::Template::new</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/rpsblast.rb, line 54</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">bstream</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">bstream</span>)
-  <span class="ruby-ivar">@entry_head</span> = <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/rpsblast.rb</span>
+<span class="line-num">54</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">bstream</span>)
+<span class="line-num">55</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">bstream</span>)
+<span class="line-num">56</span>   <span class="ruby-ivar">@entry_head</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">57</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -203,51 +204,51 @@ convert line feed codes from Windows(DOS) to UNIX.</p>
 
           
           <div class="method-source-code" id="get_entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/rpsblast.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_entry</span>
-  <span class="ruby-identifier">p0</span> = <span class="ruby-identifier">stream_pos</span>()
-  <span class="ruby-identifier">pieces</span> = []
-  <span class="ruby-identifier">flag_head</span> = <span class="ruby-keyword">false</span> <span class="ruby-comment"># reached to start of header</span>
-  <span class="ruby-identifier">flag_body</span> = <span class="ruby-keyword">false</span> <span class="ruby-comment"># reached to start of body (Query=...)</span>
-  <span class="ruby-keyword">while</span> <span class="ruby-identifier">x</span> = <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-constant">Delimiter</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-constant">ReportHead</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">case</span> <span class="ruby-node">$1</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RPS-BLAST&#39;</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-          <span class="ruby-ivar">@entry_head</span> = <span class="ruby-keyword">nil</span>
-          <span class="ruby-identifier">flag_head</span> = <span class="ruby-keyword">true</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">ungets</span>(<span class="ruby-identifier">x</span>)
-          <span class="ruby-keyword">break</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Query=&#39;</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">flag_body</span> <span class="ruby-keyword">then</span>
-          <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">ungets</span>(<span class="ruby-identifier">x</span>)
-          <span class="ruby-keyword">break</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-ivar">@entry_head</span> = <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">flag_head</span>
-          <span class="ruby-identifier">flag_body</span> = <span class="ruby-keyword">true</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Bug: should not reach here&#39;</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span> <span class="ruby-comment">#if ReportHead...</span>
-    <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">end</span> <span class="ruby-comment">#while</span>
-  <span class="ruby-identifier">p1</span> = <span class="ruby-identifier">stream_pos</span>()
-
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry_start_pos</span> = <span class="ruby-identifier">p0</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry</span> = 
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">flag_head</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@entry_head</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-ivar">@entry_head</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry_ended_pos</span> = <span class="ruby-identifier">p1</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/rpsblast.rb</span>
+<span class="line-num"> 73</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_entry</span>
+<span class="line-num"> 74</span>   <span class="ruby-identifier">p0</span> = <span class="ruby-identifier">stream_pos</span>()
+<span class="line-num"> 75</span>   <span class="ruby-identifier">pieces</span> = []
+<span class="line-num"> 76</span>   <span class="ruby-identifier">flag_head</span> = <span class="ruby-keyword">false</span> <span class="ruby-comment"># reached to start of header</span>
+<span class="line-num"> 77</span>   <span class="ruby-identifier">flag_body</span> = <span class="ruby-keyword">false</span> <span class="ruby-comment"># reached to start of body (Query=...)</span>
+<span class="line-num"> 78</span>   <span class="ruby-keyword">while</span> <span class="ruby-identifier">x</span> = <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-constant">Delimiter</span>)
+<span class="line-num"> 79</span>     <span class="ruby-keyword">if</span> <span class="ruby-constant">ReportHead</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">then</span>
+<span class="line-num"> 80</span>       <span class="ruby-keyword">case</span> <span class="ruby-node">$1</span>
+<span class="line-num"> 81</span>       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;RPS-BLAST&#39;</span>
+<span class="line-num"> 82</span>         <span class="ruby-keyword">if</span> <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num"> 83</span>           <span class="ruby-ivar">@entry_head</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 84</span>           <span class="ruby-identifier">flag_head</span> = <span class="ruby-keyword">true</span>
+<span class="line-num"> 85</span>         <span class="ruby-keyword">else</span>
+<span class="line-num"> 86</span>           <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">ungets</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num"> 87</span>           <span class="ruby-keyword">break</span>
+<span class="line-num"> 88</span>         <span class="ruby-keyword">end</span>
+<span class="line-num"> 89</span>       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;Query=&#39;</span>
+<span class="line-num"> 90</span>         <span class="ruby-keyword">if</span> <span class="ruby-identifier">flag_body</span> <span class="ruby-keyword">then</span>
+<span class="line-num"> 91</span>           <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">ungets</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num"> 92</span>           <span class="ruby-keyword">break</span>
+<span class="line-num"> 93</span>         <span class="ruby-keyword">else</span>
+<span class="line-num"> 94</span>           <span class="ruby-ivar">@entry_head</span> = <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">flag_head</span>
+<span class="line-num"> 95</span>           <span class="ruby-identifier">flag_body</span> = <span class="ruby-keyword">true</span>
+<span class="line-num"> 96</span>         <span class="ruby-keyword">end</span>
+<span class="line-num"> 97</span>       <span class="ruby-keyword">else</span>
+<span class="line-num"> 98</span>         <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;Bug: should not reach here&#39;</span>
+<span class="line-num"> 99</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">100</span>     <span class="ruby-keyword">end</span> <span class="ruby-comment">#if ReportHead...</span>
+<span class="line-num">101</span>     <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">x</span>
+<span class="line-num">102</span>   <span class="ruby-keyword">end</span> <span class="ruby-comment">#while</span>
+<span class="line-num">103</span>   <span class="ruby-identifier">p1</span> = <span class="ruby-identifier">stream_pos</span>()
+<span class="line-num">104</span> 
+<span class="line-num">105</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry_start_pos</span> = <span class="ruby-identifier">p0</span>
+<span class="line-num">106</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry</span> = 
+<span class="line-num">107</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">108</span>       <span class="ruby-keyword">nil</span>
+<span class="line-num">109</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-operator">!</span><span class="ruby-identifier">flag_head</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@entry_head</span> <span class="ruby-keyword">then</span>
+<span class="line-num">110</span>       <span class="ruby-ivar">@entry_head</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">111</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">112</span>       <span class="ruby-identifier">pieces</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">113</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">114</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry_ended_pos</span> = <span class="ruby-identifier">p1</span>
+<span class="line-num">115</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry</span>
+<span class="line-num">116</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -276,17 +277,17 @@ convert line feed codes from Windows(DOS) to UNIX.</p>
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="../../FlatFile/Splitter/Template.html#method-i-rewind">Bio::FlatFile::Splitter::Template#rewind</a>
+              <a href="../../FlatFile/Splitter/Template.html#method-i-rewind"><code>Bio::FlatFile::Splitter::Template#rewind</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="rewind-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/rpsblast.rb, line 67</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
-  <span class="ruby-ivar">@entry_head</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">super</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/rpsblast.rb</span>
+<span class="line-num">67</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
+<span class="line-num">68</span>   <span class="ruby-ivar">@entry_head</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">69</span>   <span class="ruby-keyword">super</span>
+<span class="line-num">70</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -316,11 +317,11 @@ convert line feed codes from Windows(DOS) to UNIX.</p>
 
           
           <div class="method-source-code" id="skip_leader-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/rpsblast.rb, line 61</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_leader</span>
-  <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">skip_spaces</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/rpsblast.rb</span>
+<span class="line-num">61</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_leader</span>
+<span class="line-num">62</span>   <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">skip_spaces</span>
+<span class="line-num">63</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">64</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -334,12 +335,13 @@ convert line feed codes from Windows(DOS) to UNIX.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

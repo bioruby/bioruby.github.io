@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -88,10 +92,7 @@
 
   <section class="description">
     
-<p><a href="../../Sequence.html">Sequence</a> segment pair of BLAT result.
-Similar to <a
-href="../../Blast/Report/Hsp.html">Bio::Blast::Report::Hsp</a> but lacks
-many methods.</p>
+<p><a href="../../Sequence.html"><code>Sequence</code></a> segment pair of BLAT result. Similar to <a href="../../Blast/Report/Hsp.html"><code>Bio::Blast::Report::Hsp</code></a> but lacks many methods.</p>
 
   </section>
 
@@ -118,8 +119,7 @@ many methods.</p>
 
         <div class="method-description">
         
-        <p>Returns block size (length) of the segment pair. This would be a <a
-href="../../Blat.html">Bio::Blat</a> specific method.</p>
+        <p>Returns block size (length) of the segment pair. This would be a <a href="../../Blat.html"><code>Bio::Blat</code></a> specific method.</p>
         
         </div>
       </div>
@@ -132,9 +132,7 @@ href="../../Blat.html">Bio::Blat</a> specific method.</p>
 
         <div class="method-description">
         
-        <p>Returns target (subject, hit) start position. CAUTION: In Blat&#39;s raw
-result(psl format), first position is 0. To keep compatibility, the parser
-add 1 to the position.</p>
+        <p>Returns target (subject, hit) start position. CAUTION: In Blat&#39;s raw result(psl format), first position is 0. To keep compatibility, the parser add 1 to the position.</p>
         
         </div>
       </div>
@@ -147,8 +145,7 @@ add 1 to the position.</p>
 
         <div class="method-description">
         
-        <p>Returns strand information of the target (subject, hit). Returns
-&#39;plus&#39; or &#39;minus&#39;.</p>
+        <p>Returns strand information of the target (subject, hit). Returns &#39;plus&#39; or &#39;minus&#39;.</p>
         
         </div>
       </div>
@@ -161,9 +158,7 @@ add 1 to the position.</p>
 
         <div class="method-description">
         
-        <p>Returns target (subject, hit) end position. CAUTION: In Blat&#39;s raw
-result(psl format), first position is 0. To keep compatibility, the parser
-add 1 to the position.</p>
+        <p>Returns target (subject, hit) end position. CAUTION: In Blat&#39;s raw result(psl format), first position is 0. To keep compatibility, the parser add 1 to the position.</p>
         
         </div>
       </div>
@@ -176,8 +171,7 @@ add 1 to the position.</p>
 
         <div class="method-description">
         
-        <p>Returns the target (subject, hit) sequence. If sequence data is not
-available, returns nil.</p>
+        <p>Returns the target (subject, hit) sequence. If sequence data is not available, returns nil.</p>
         
         </div>
       </div>
@@ -203,9 +197,7 @@ available, returns nil.</p>
 
         <div class="method-description">
         
-        <p>Returns query start position. CAUTION: In Blat&#39;s raw result(psl
-format), first position is 0. To keep compatibility, the parser add 1 to
-the position.</p>
+        <p>Returns query start position. CAUTION: In Blat&#39;s raw result(psl format), first position is 0. To keep compatibility, the parser add 1 to the position.</p>
         
         </div>
       </div>
@@ -218,8 +210,7 @@ the position.</p>
 
         <div class="method-description">
         
-        <p>Returns strand information of the query. Returns &#39;plus&#39; or
-&#39;minus&#39;.</p>
+        <p>Returns strand information of the query. Returns &#39;plus&#39; or &#39;minus&#39;.</p>
         
         </div>
       </div>
@@ -232,9 +223,7 @@ the position.</p>
 
         <div class="method-description">
         
-        <p>Returns query end position. CAUTION: In Blat&#39;s raw result(psl format),
-first position is 0. To keep compatibility, the parser add 1 to the
-position.</p>
+        <p>Returns query end position. CAUTION: In Blat&#39;s raw result(psl format), first position is 0. To keep compatibility, the parser add 1 to the position.</p>
         
         </div>
       </div>
@@ -262,56 +251,53 @@ position.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="SegmentPair.html">SegmentPair</a> object. It is
-designed to be called internally from <a
-href="../Report.html">Bio::Blat::Report</a> class. Users shall not use it
-directly.</p>
+          <p>Creates a new <a href="SegmentPair.html"><code>SegmentPair</code></a> object. It is designed to be called internally from <a href="../Report.html"><code>Bio::Blat::Report</code></a> class. Users shall not use it directly.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 199</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">query_len</span>, <span class="ruby-identifier">target_len</span>, <span class="ruby-identifier">strand</span>,
-               <span class="ruby-identifier">blksize</span>, <span class="ruby-identifier">qstart</span>, <span class="ruby-identifier">tstart</span>, <span class="ruby-identifier">qseq</span>, <span class="ruby-identifier">tseq</span>,
-               <span class="ruby-identifier">protein_flag</span>)
-  <span class="ruby-ivar">@blocksize</span>  = <span class="ruby-identifier">blksize</span>
-  <span class="ruby-ivar">@qseq</span>       = <span class="ruby-identifier">qseq</span>
-  <span class="ruby-ivar">@hseq</span>       = <span class="ruby-identifier">hseq</span>
-  <span class="ruby-ivar">@hit_strand</span>   = <span class="ruby-string">&#39;plus&#39;</span>
-  <span class="ruby-identifier">w</span> = (<span class="ruby-identifier">protein_flag</span> <span class="ruby-operator">?</span> <span class="ruby-value">3</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>) <span class="ruby-comment"># 3 means query=protein target=dna</span>
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">strand</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;-&#39;</span>
-    <span class="ruby-comment"># query is minus strand</span>
-    <span class="ruby-ivar">@query_strand</span> = <span class="ruby-string">&#39;minus&#39;</span>
-    <span class="ruby-comment"># convert positions</span>
-    <span class="ruby-ivar">@query_from</span> = <span class="ruby-identifier">query_len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">qstart</span>
-    <span class="ruby-ivar">@query_to</span>   = <span class="ruby-identifier">query_len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">qstart</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">blksize</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-    <span class="ruby-comment"># To keep compatibility, with other homology search programs,</span>
-    <span class="ruby-comment"># we add 1 to each position number.</span>
-    <span class="ruby-ivar">@hit_from</span>   = <span class="ruby-identifier">tstart</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-    <span class="ruby-ivar">@hit_to</span>     = <span class="ruby-identifier">tstart</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">blksize</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">w</span> <span class="ruby-comment"># - 1 + 1</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;+-&#39;</span>
-    <span class="ruby-comment"># hit is minus strand</span>
-    <span class="ruby-ivar">@query_strand</span> = <span class="ruby-string">&#39;plus&#39;</span>
-    <span class="ruby-ivar">@hit_strand</span> = <span class="ruby-string">&#39;minus&#39;</span>
-    <span class="ruby-comment"># To keep compatibility, with other homology search programs,</span>
-    <span class="ruby-comment"># we add 1 to each position number.</span>
-    <span class="ruby-ivar">@query_from</span>   = <span class="ruby-identifier">qstart</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-    <span class="ruby-ivar">@query_to</span>     = <span class="ruby-identifier">qstart</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">blksize</span> <span class="ruby-comment"># - 1 + 1</span>
-    <span class="ruby-comment"># convert positions</span>
-    <span class="ruby-ivar">@hit_from</span>     = <span class="ruby-identifier">target_len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">tstart</span>
-    <span class="ruby-ivar">@hit_to</span>       = <span class="ruby-identifier">target_len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">tstart</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">blksize</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">else</span> <span class="ruby-comment">#when &#39;+&#39;, &#39;++&#39;</span>
-    <span class="ruby-ivar">@query_strand</span> = <span class="ruby-string">&#39;plus&#39;</span>
-    <span class="ruby-comment"># To keep compatibility with other homology search programs,</span>
-    <span class="ruby-comment"># we add 1 to each position number.</span>
-    <span class="ruby-ivar">@query_from</span> = <span class="ruby-identifier">qstart</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-    <span class="ruby-ivar">@query_to</span>   = <span class="ruby-identifier">qstart</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">blksize</span> <span class="ruby-comment"># - 1 + 1</span>
-    <span class="ruby-ivar">@hit_from</span>   = <span class="ruby-identifier">tstart</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-    <span class="ruby-ivar">@hit_to</span>     = <span class="ruby-identifier">tstart</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">blksize</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">w</span> <span class="ruby-comment"># - 1 + 1</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">199</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">query_len</span>, <span class="ruby-identifier">target_len</span>, <span class="ruby-identifier">strand</span>,
+<span class="line-num">200</span>                <span class="ruby-identifier">blksize</span>, <span class="ruby-identifier">qstart</span>, <span class="ruby-identifier">tstart</span>, <span class="ruby-identifier">qseq</span>, <span class="ruby-identifier">tseq</span>,
+<span class="line-num">201</span>                <span class="ruby-identifier">protein_flag</span>)
+<span class="line-num">202</span>   <span class="ruby-ivar">@blocksize</span>  = <span class="ruby-identifier">blksize</span>
+<span class="line-num">203</span>   <span class="ruby-ivar">@qseq</span>       = <span class="ruby-identifier">qseq</span>
+<span class="line-num">204</span>   <span class="ruby-ivar">@hseq</span>       = <span class="ruby-identifier">hseq</span>
+<span class="line-num">205</span>   <span class="ruby-ivar">@hit_strand</span>   = <span class="ruby-string">&#39;plus&#39;</span>
+<span class="line-num">206</span>   <span class="ruby-identifier">w</span> = (<span class="ruby-identifier">protein_flag</span> <span class="ruby-operator">?</span> <span class="ruby-value">3</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>) <span class="ruby-comment"># 3 means query=protein target=dna</span>
+<span class="line-num">207</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">strand</span>
+<span class="line-num">208</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;-&#39;</span>
+<span class="line-num">209</span>     <span class="ruby-comment"># query is minus strand</span>
+<span class="line-num">210</span>     <span class="ruby-ivar">@query_strand</span> = <span class="ruby-string">&#39;minus&#39;</span>
+<span class="line-num">211</span>     <span class="ruby-comment"># convert positions</span>
+<span class="line-num">212</span>     <span class="ruby-ivar">@query_from</span> = <span class="ruby-identifier">query_len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">qstart</span>
+<span class="line-num">213</span>     <span class="ruby-ivar">@query_to</span>   = <span class="ruby-identifier">query_len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">qstart</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">blksize</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">214</span>     <span class="ruby-comment"># To keep compatibility, with other homology search programs,</span>
+<span class="line-num">215</span>     <span class="ruby-comment"># we add 1 to each position number.</span>
+<span class="line-num">216</span>     <span class="ruby-ivar">@hit_from</span>   = <span class="ruby-identifier">tstart</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">217</span>     <span class="ruby-ivar">@hit_to</span>     = <span class="ruby-identifier">tstart</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">blksize</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">w</span> <span class="ruby-comment"># - 1 + 1</span>
+<span class="line-num">218</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;+-&#39;</span>
+<span class="line-num">219</span>     <span class="ruby-comment"># hit is minus strand</span>
+<span class="line-num">220</span>     <span class="ruby-ivar">@query_strand</span> = <span class="ruby-string">&#39;plus&#39;</span>
+<span class="line-num">221</span>     <span class="ruby-ivar">@hit_strand</span> = <span class="ruby-string">&#39;minus&#39;</span>
+<span class="line-num">222</span>     <span class="ruby-comment"># To keep compatibility, with other homology search programs,</span>
+<span class="line-num">223</span>     <span class="ruby-comment"># we add 1 to each position number.</span>
+<span class="line-num">224</span>     <span class="ruby-ivar">@query_from</span>   = <span class="ruby-identifier">qstart</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">225</span>     <span class="ruby-ivar">@query_to</span>     = <span class="ruby-identifier">qstart</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">blksize</span> <span class="ruby-comment"># - 1 + 1</span>
+<span class="line-num">226</span>     <span class="ruby-comment"># convert positions</span>
+<span class="line-num">227</span>     <span class="ruby-ivar">@hit_from</span>     = <span class="ruby-identifier">target_len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">tstart</span>
+<span class="line-num">228</span>     <span class="ruby-ivar">@hit_to</span>       = <span class="ruby-identifier">target_len</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">tstart</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">blksize</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">229</span>   <span class="ruby-keyword">else</span> <span class="ruby-comment">#when &#39;+&#39;, &#39;++&#39;</span>
+<span class="line-num">230</span>     <span class="ruby-ivar">@query_strand</span> = <span class="ruby-string">&#39;plus&#39;</span>
+<span class="line-num">231</span>     <span class="ruby-comment"># To keep compatibility with other homology search programs,</span>
+<span class="line-num">232</span>     <span class="ruby-comment"># we add 1 to each position number.</span>
+<span class="line-num">233</span>     <span class="ruby-ivar">@query_from</span> = <span class="ruby-identifier">qstart</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">234</span>     <span class="ruby-ivar">@query_to</span>   = <span class="ruby-identifier">qstart</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">blksize</span> <span class="ruby-comment"># - 1 + 1</span>
+<span class="line-num">235</span>     <span class="ruby-ivar">@hit_from</span>   = <span class="ruby-identifier">tstart</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">236</span>     <span class="ruby-ivar">@hit_to</span>     = <span class="ruby-identifier">tstart</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">blksize</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">w</span> <span class="ruby-comment"># - 1 + 1</span>
+<span class="line-num">237</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">238</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -343,17 +329,16 @@ directly.</p>
 
         <div class="method-description">
           
-          <p>Returns alignment length of the segment pair. Returns nil if no alignment
-data are available.</p>
+          <p>Returns alignment length of the segment pair. Returns nil if no alignment data are available.</p>
           
           
 
           
           <div class="method-source-code" id="align_len-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 281</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">align_len</span>
-  <span class="ruby-ivar">@qseq</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@qseq</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">281</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">align_len</span>
+<span class="line-num">282</span>   <span class="ruby-ivar">@qseq</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@qseq</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">283</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -367,12 +352,13 @@ data are available.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

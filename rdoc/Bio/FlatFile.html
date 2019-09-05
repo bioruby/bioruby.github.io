@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -157,10 +161,7 @@
 
   <section class="description">
     
-<p><a href="FlatFile.html">Bio::FlatFile</a> is a helper and wrapper class to
-read a biological data file. It acts like a IO object. It can automatically
-detect data format, and users do not need to tell the class what the data
-is.</p>
+<p><a href="FlatFile.html"><code>Bio::FlatFile</code></a> is a helper and wrapper class to read a biological data file. It acts like a IO object. It can automatically detect data format, and users do not need to tell the class what the data is.</p>
 
   </section>
 
@@ -187,8 +188,7 @@ is.</p>
 
         <div class="method-description">
         
-        <p>Returns database class which is automatically detected or given in
-FlatFile#initialize.</p>
+        <p>Returns database class which is automatically detected or given in FlatFile#initialize.</p>
         
         </div>
       </div>
@@ -265,8 +265,7 @@ FlatFile#initialize.</p>
 
         <div class="method-description">
           
-          <p>Same as <a href="FlatFile.html#method-c-open">::open</a>(nil,
-filename_or_stream, mode, perm, options).</p>
+          <p>Same as <a href="FlatFile.html#method-c-open"><code>Bio::FlatFile.open</code></a>(nil, filename_or_stream, mode, perm, options).</p>
 <ul><li>
 <p>Example 1</p>
 
@@ -288,10 +287,10 @@ filename_or_stream, mode, perm, options).</p>
 
           
           <div class="method-source-code" id="auto-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 122</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">auto</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">122</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">auto</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">123</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">124</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -315,17 +314,16 @@ filename_or_stream, mode, perm, options).</p>
 
         <div class="method-description">
           
-          <p>Detects database class (== file format) of given string. If fails to
-determine, returns false or nil.</p>
+          <p>Detects database class (== file format) of given string. If fails to determine, returns false or nil.</p>
           
           
 
           
           <div class="method-source-code" id="autodetect-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 460</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">autodetect</span>(<span class="ruby-identifier">text</span>)
-  <span class="ruby-constant">AutoDetect</span>.<span class="ruby-identifier">default</span>.<span class="ruby-identifier">autodetect</span>(<span class="ruby-identifier">text</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">460</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">autodetect</span>(<span class="ruby-identifier">text</span>)
+<span class="line-num">461</span>   <span class="ruby-constant">AutoDetect</span>.<span class="ruby-identifier">default</span>.<span class="ruby-identifier">autodetect</span>(<span class="ruby-identifier">text</span>)
+<span class="line-num">462</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -349,17 +347,16 @@ determine, returns false or nil.</p>
 
         <div class="method-description">
           
-          <p>Detects database class (== file format) of given file. If fails to
-determine, returns nil.</p>
+          <p>Detects database class (== file format) of given file. If fails to determine, returns nil.</p>
           
           
 
           
           <div class="method-source-code" id="autodetect_file-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 440</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">autodetect_file</span>(<span class="ruby-identifier">filename</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open_file</span>(<span class="ruby-identifier">filename</span>).<span class="ruby-identifier">dbclass</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">440</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">autodetect_file</span>(<span class="ruby-identifier">filename</span>)
+<span class="line-num">441</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open_file</span>(<span class="ruby-identifier">filename</span>).<span class="ruby-identifier">dbclass</span>
+<span class="line-num">442</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -383,18 +380,16 @@ determine, returns nil.</p>
 
         <div class="method-description">
           
-          <p>Detects database class (== file format) of given input stream. If fails to
-determine, returns nil. Caution: the method reads some data from the input
-stream, and the data will be lost.</p>
+          <p>Detects database class (== file format) of given input stream. If fails to determine, returns nil. Caution: the method reads some data from the input stream, and the data will be lost.</p>
           
           
 
           
           <div class="method-source-code" id="autodetect_io-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 448</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">autodetect_io</span>(<span class="ruby-identifier">io</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">io</span>).<span class="ruby-identifier">dbclass</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">448</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">autodetect_io</span>(<span class="ruby-identifier">io</span>)
+<span class="line-num">449</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">io</span>).<span class="ruby-identifier">dbclass</span>
+<span class="line-num">450</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -418,19 +413,17 @@ stream, and the data will be lost.</p>
 
         <div class="method-description">
           
-          <p>This is OBSOLETED. Please use <a
-href="FlatFile.html#method-c-autodetect_io">::autodetect_io</a>(io)
-instead.</p>
+          <p>This is OBSOLETED. Please use <a href="FlatFile.html#method-c-autodetect_io"><code>autodetect_io</code></a>(io) instead.</p>
           
           
 
           
           <div class="method-source-code" id="autodetect_stream-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 453</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">autodetect_stream</span>(<span class="ruby-identifier">io</span>)
-  <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;Bio::FlatFile.autodetect_stream will be deprecated.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$VERBOSE</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">autodetect_io</span>(<span class="ruby-identifier">io</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">453</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">autodetect_stream</span>(<span class="ruby-identifier">io</span>)
+<span class="line-num">454</span>   <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;Bio::FlatFile.autodetect_stream will be deprecated.&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$VERBOSE</span>
+<span class="line-num">455</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">autodetect_io</span>(<span class="ruby-identifier">io</span>)
+<span class="line-num">456</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -454,9 +447,7 @@ instead.</p>
 
         <div class="method-description">
           
-          <p>Executes the block for every entry in the stream. Same as <a
-href="FlatFile.html#method-c-open">::open</a> { |ff| ff.each { |entry| …
-}}.</p>
+          <p>Executes the block for every entry in the stream. Same as <a href="FlatFile.html#method-c-open"><code>FlatFile.open(*arg)</code></a> { |ff| ff.each { |entry| … }}.</p>
 <ul><li>
 <p>Example</p>
 
@@ -468,14 +459,14 @@ href="FlatFile.html#method-c-open">::open</a> { |ff| ff.each { |entry| …
 
           
           <div class="method-source-code" id="foreach-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 194</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">foreach</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">flatfileobj</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">flatfileobj</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">entry</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">194</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">foreach</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">195</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">flatfileobj</span><span class="ruby-operator">|</span>
+<span class="line-num">196</span>     <span class="ruby-identifier">flatfileobj</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+<span class="line-num">197</span>       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">entry</span>
+<span class="line-num">198</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">199</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">200</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -499,9 +490,7 @@ href="FlatFile.html#method-c-open">::open</a> { |ff| ff.each { |entry| …
 
         <div class="method-description">
           
-          <p>Same as <a href="FlatFile.html#method-c-open">::open</a>, except that
-&#39;stream&#39; should be a opened stream object (IO, File, …, who have
-the &#39;gets&#39; method).</p>
+          <p>Same as <a href="FlatFile.html#method-c-open"><code>FlatFile.open</code></a>, except that &#39;stream&#39; should be a opened stream object (IO, File, …, who have the &#39;gets&#39; method).</p>
 <ul><li>
 <p>Example 1</p>
 
@@ -514,8 +503,7 @@ the &#39;gets&#39; method).</p>
 </pre>
 </li></ul>
 
-<p>Compatibility Note: Now, you cannot specify “:raw =&gt; true” or “:raw
-=&gt; false”. Below styles are DEPRECATED.</p>
+<p>Compatibility Note: Now, you cannot specify “:raw =&gt; true” or “:raw =&gt; false”. Below styles are DEPRECATED.</p>
 <ul><li>
 <p>Example 3 (deprecated)</p>
 
@@ -538,26 +526,26 @@ the &#39;gets&#39; method).</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 225</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">dbclass</span>, <span class="ruby-identifier">stream</span>)
-  <span class="ruby-comment"># 2nd arg: IO object</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">BufferedInputStream</span>)
-    <span class="ruby-ivar">@stream</span> = <span class="ruby-identifier">stream</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@stream</span> = <span class="ruby-constant">BufferedInputStream</span>.<span class="ruby-identifier">for_io</span>(<span class="ruby-identifier">stream</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-comment"># 1st arg: database class (or file format autodetection)</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">dbclass</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dbclass</span> = <span class="ruby-identifier">dbclass</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">autodetect</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-comment">#</span>
-  <span class="ruby-ivar">@skip_leader_mode</span> = <span class="ruby-value">:firsttime</span>
-  <span class="ruby-ivar">@firsttime_flag</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-comment"># default raw mode is false</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">raw</span> = <span class="ruby-keyword">false</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">225</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">dbclass</span>, <span class="ruby-identifier">stream</span>)
+<span class="line-num">226</span>   <span class="ruby-comment"># 2nd arg: IO object</span>
+<span class="line-num">227</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">BufferedInputStream</span>)
+<span class="line-num">228</span>     <span class="ruby-ivar">@stream</span> = <span class="ruby-identifier">stream</span>
+<span class="line-num">229</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">230</span>     <span class="ruby-ivar">@stream</span> = <span class="ruby-constant">BufferedInputStream</span>.<span class="ruby-identifier">for_io</span>(<span class="ruby-identifier">stream</span>)
+<span class="line-num">231</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">232</span>   <span class="ruby-comment"># 1st arg: database class (or file format autodetection)</span>
+<span class="line-num">233</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">dbclass</span> <span class="ruby-keyword">then</span>
+<span class="line-num">234</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dbclass</span> = <span class="ruby-identifier">dbclass</span>
+<span class="line-num">235</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">236</span>     <span class="ruby-identifier">autodetect</span>
+<span class="line-num">237</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">238</span>   <span class="ruby-comment">#</span>
+<span class="line-num">239</span>   <span class="ruby-ivar">@skip_leader_mode</span> = <span class="ruby-value">:firsttime</span>
+<span class="line-num">240</span>   <span class="ruby-ivar">@firsttime_flag</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">241</span>   <span class="ruby-comment"># default raw mode is false</span>
+<span class="line-num">242</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">raw</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">243</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -585,23 +573,13 @@ the &#39;gets&#39; method).</p>
 <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatFile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">dbclass</span>, <span class="ruby-identifier">file</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
 </pre>
 
-<p>Creates a new <a href="FlatFile.html">Bio::FlatFile</a> object to read a
-file or a stream which contains <em>dbclass</em> data.</p>
+<p>Creates a new <a href="FlatFile.html"><code>Bio::FlatFile</code></a> object to read a file or a stream which contains <em>dbclass</em> data.</p>
 
-<p><em>dbclass</em> should be a class (or module) or nil. e.g. <a
-href="GenBank.html">Bio::GenBank</a>, <a
-href="FastaFormat.html">Bio::FastaFormat</a>.</p>
+<p><em>dbclass</em> should be a class (or module) or nil. e.g. <a href="GenBank.html"><code>Bio::GenBank</code></a>, <a href="FastaFormat.html"><code>Bio::FastaFormat</code></a>.</p>
 
-<p>If <em>file</em> is a filename (which doesn&#39;t have gets method), the
-method opens a local file named <em>file</em> with
-<code>File.open(filename, *arg)</code>.</p>
+<p>If <em>file</em> is a filename (which doesn&#39;t have gets method), the method opens a local file named <em>file</em> with <code>File.open(filename, *arg)</code>.</p>
 
-<p>When <em>dbclass</em> is omitted or nil is given to <em>dbclass</em>, the
-method tries to determine database class (file format) automatically. When
-it fails to determine, dbclass is set to nil and <a
-href="FlatFile.html#method-i-next_entry">#next_entry</a> would fail. You
-can still set dbclass using <a
-href="FlatFile.html#method-i-dbclass-3D">#dbclass=</a> method.</p>
+<p>When <em>dbclass</em> is omitted or nil is given to <em>dbclass</em>, the method tries to determine database class (file format) automatically. When it fails to determine, dbclass is set to nil and <a href="FlatFile.html#method-i-next_entry"><code>FlatFile#next_entry</code></a> would fail. You can still set dbclass using <a href="FlatFile.html#method-i-dbclass-3D"><code>FlatFile#dbclass=</code></a> method.</p>
 <ul><li>
 <p>Example 1</p>
 
@@ -624,9 +602,7 @@ href="FlatFile.html#method-i-dbclass-3D">#dbclass=</a> method.</p>
 </pre>
 </li></ul>
 
-<p>If it is called with a block, the block will be executed with a new <a
-href="FlatFile.html">Bio::FlatFile</a> object. If filename is given, the
-file is automatically closed when leaving the block.</p>
+<p>If it is called with a block, the block will be executed with a new <a href="FlatFile.html"><code>Bio::FlatFile</code></a> object. If filename is given, the file is automatically closed when leaving the block.</p>
 <ul><li>
 <p>Example 5</p>
 
@@ -643,47 +619,45 @@ file is automatically closed when leaving the block.</p>
 </pre>
 </li></ul>
 
-<p>Compatibility Note: <em>*arg</em> is completely passed to the
-<code>File.open</code> and you cannot specify “:raw =&gt; true” or “:raw
-=&gt; false”.</p>
+<p>Compatibility Note: <em>*arg</em> is completely passed to the <code>File.open</code> and you cannot specify “:raw =&gt; true” or “:raw =&gt; false”.</p>
           
           
 
           
           <div class="method-source-code" id="open-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 80</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-comment"># FlatFile.open(dbclass, file, mode, perm)</span>
-  <span class="ruby-comment"># FlatFile.open(file, mode, perm)</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;wrong number of arguments (0 for 1)&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">x</span> = <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Module</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-comment"># FlatFile.open(dbclass, filename_or_io, ...)</span>
-    <span class="ruby-identifier">dbclass</span> = <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-comment"># FlatFile.open(nil, filename_or_io, ...)</span>
-    <span class="ruby-identifier">dbclass</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-comment"># FlatFile.open(filename, ...)</span>
-    <span class="ruby-identifier">dbclass</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;wrong number of arguments (1 for 2)&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">file</span> = <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-comment"># check if file is filename or IO object</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:gets</span>)
-    <span class="ruby-comment"># &#39;file&#39; is a filename</span>
-    <span class="ruby-identifier">_open_file</span>(<span class="ruby-identifier">dbclass</span>, <span class="ruby-identifier">file</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-comment"># &#39;file&#39; is a IO object</span>
-    <span class="ruby-identifier">ff</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dbclass</span>, <span class="ruby-identifier">file</span>)
-    <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> (<span class="ruby-keyword">yield</span> <span class="ruby-identifier">ff</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">ff</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num"> 80</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num"> 81</span>   <span class="ruby-comment"># FlatFile.open(dbclass, file, mode, perm)</span>
+<span class="line-num"> 82</span>   <span class="ruby-comment"># FlatFile.open(file, mode, perm)</span>
+<span class="line-num"> 83</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+<span class="line-num"> 84</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;wrong number of arguments (0 for 1)&#39;</span>
+<span class="line-num"> 85</span>   <span class="ruby-keyword">end</span>
+<span class="line-num"> 86</span>   <span class="ruby-identifier">x</span> = <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num"> 87</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Module</span>) <span class="ruby-keyword">then</span>
+<span class="line-num"> 88</span>     <span class="ruby-comment"># FlatFile.open(dbclass, filename_or_io, ...)</span>
+<span class="line-num"> 89</span>     <span class="ruby-identifier">dbclass</span> = <span class="ruby-identifier">x</span>
+<span class="line-num"> 90</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">then</span>
+<span class="line-num"> 91</span>     <span class="ruby-comment"># FlatFile.open(nil, filename_or_io, ...)</span>
+<span class="line-num"> 92</span>     <span class="ruby-identifier">dbclass</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 93</span>   <span class="ruby-keyword">else</span>
+<span class="line-num"> 94</span>     <span class="ruby-comment"># FlatFile.open(filename, ...)</span>
+<span class="line-num"> 95</span>     <span class="ruby-identifier">dbclass</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 96</span>     <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num"> 97</span>   <span class="ruby-keyword">end</span>
+<span class="line-num"> 98</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+<span class="line-num"> 99</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;wrong number of arguments (1 for 2)&#39;</span>
+<span class="line-num">100</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">101</span>   <span class="ruby-identifier">file</span> = <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">102</span>   <span class="ruby-comment"># check if file is filename or IO object</span>
+<span class="line-num">103</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">file</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:gets</span>)
+<span class="line-num">104</span>     <span class="ruby-comment"># &#39;file&#39; is a filename</span>
+<span class="line-num">105</span>     <span class="ruby-identifier">_open_file</span>(<span class="ruby-identifier">dbclass</span>, <span class="ruby-identifier">file</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">106</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">107</span>     <span class="ruby-comment"># &#39;file&#39; is a IO object</span>
+<span class="line-num">108</span>     <span class="ruby-identifier">ff</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">dbclass</span>, <span class="ruby-identifier">file</span>)
+<span class="line-num">109</span>     <span class="ruby-identifier">block_given?</span> <span class="ruby-operator">?</span> (<span class="ruby-keyword">yield</span> <span class="ruby-identifier">ff</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">ff</span>
+<span class="line-num">110</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">111</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -707,22 +681,18 @@ file is automatically closed when leaving the block.</p>
 
         <div class="method-description">
           
-          <p>Same as <a href="FlatFile.html#method-c-auto">::auto</a>(filename, *arg),
-except that it only accept filename and doesn&#39;t accept IO object. File
-format is automatically determined.</p>
+          <p>Same as <a href="FlatFile.html#method-c-auto"><code>FlatFile.auto</code></a>(filename, *arg), except that it only accept filename and doesn&#39;t accept IO object. File format is automatically determined.</p>
 
-<p>It can accept a block. If a block is given, it returns the block&#39;s
-return value. Otherwise, it returns a new <a
-href="FlatFile.html">FlatFile</a> object.</p>
+<p>It can accept a block. If a block is given, it returns the block&#39;s return value. Otherwise, it returns a new <a href="FlatFile.html"><code>FlatFile</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="open_file-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 144</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open_file</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">_open_file</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">144</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open_file</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">145</span>   <span class="ruby-identifier">_open_file</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">146</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -746,29 +716,27 @@ href="FlatFile.html">FlatFile</a> object.</p>
 
         <div class="method-description">
           
-          <p>Opens URI specified as <em>uri</em>. <em>uri</em> must be a String or URI
-object. *arg is passed to OpenURI.open_uri or URI#open.</p>
+          <p>Opens URI specified as <em>uri</em>. <em>uri</em> must be a String or URI object. *arg is passed to OpenURI.open_uri or URI#open.</p>
 
 <p>Like FlatFile#open, it can accept a block.</p>
 
-<p>Note that you MUST explicitly require &#39;open-uri&#39;. Because
-open-uri.rb modifies existing class, it isn&#39;t required by default.</p>
+<p>Note that you MUST explicitly require &#39;open-uri&#39;. Because open-uri.rb modifies existing class, it isn&#39;t required by default.</p>
           
           
 
           
           <div class="method-source-code" id="open_uri-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 177</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-constant">BufferedInputStream</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">stream</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">stream</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">stream</span> = <span class="ruby-constant">BufferedInputStream</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">stream</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">177</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">178</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">179</span>     <span class="ruby-constant">BufferedInputStream</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">stream</span><span class="ruby-operator">|</span>
+<span class="line-num">180</span>       <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">stream</span>)
+<span class="line-num">181</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">182</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">183</span>     <span class="ruby-identifier">stream</span> = <span class="ruby-constant">BufferedInputStream</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">184</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">stream</span>)
+<span class="line-num">185</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">186</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -792,9 +760,7 @@ open-uri.rb modifies existing class, it isn&#39;t required by default.</p>
 
         <div class="method-description">
           
-          <p>Same as <a
-href="FlatFile.html#method-c-auto">::auto</a>(filename_or_stream,
-*arg).to_a</p>
+          <p>Same as <a href="FlatFile.html#method-c-auto"><code>FlatFile.auto</code></a>(filename_or_stream, *arg).to_a</p>
 
 <p>(This method might be OBSOLETED in the future.)</p>
           
@@ -802,13 +768,13 @@ href="FlatFile.html#method-c-auto">::auto</a>(filename_or_stream,
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 129</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_a</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">auto</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ff</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;cannot determine file format&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ff</span>.<span class="ruby-identifier">dbclass</span>
-    <span class="ruby-identifier">ff</span>.<span class="ruby-identifier">to_a</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">129</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_a</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">130</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">auto</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ff</span><span class="ruby-operator">|</span>
+<span class="line-num">131</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;cannot determine file format&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ff</span>.<span class="ruby-identifier">dbclass</span>
+<span class="line-num">132</span>     <span class="ruby-identifier">ff</span>.<span class="ruby-identifier">to_a</span>
+<span class="line-num">133</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">134</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -840,26 +806,23 @@ href="FlatFile.html#method-c-auto">::auto</a>(filename_or_stream,
 
         <div class="method-description">
           
-          <p>Performs determination of database class (file format). Pre-reads
-<code>lines</code> lines for format determination (default 31 lines). If
-fails, returns nil or false. Otherwise, returns database class.</p>
+          <p>Performs determination of database class (file format). Pre-reads <code>lines</code> lines for format determination (default 31 lines). If fails, returns nil or false. Otherwise, returns database class.</p>
 
-<p>The method can be called anytime if you want (but not recommended). This
-might be useful if input file is a mixture of muitiple format data.</p>
+<p>The method can be called anytime if you want (but not recommended). This might be useful if input file is a mixture of muitiple format data.</p>
           
           
 
           
           <div class="method-source-code" id="autodetect-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 429</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">autodetect</span>(<span class="ruby-identifier">lines</span> = <span class="ruby-value">31</span>, <span class="ruby-identifier">ad</span> = <span class="ruby-constant">AutoDetect</span>.<span class="ruby-identifier">default</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">ad</span>.<span class="ruby-identifier">autodetect_flatfile</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">lines</span>)
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dbclass</span> = <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dbclass</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dbclass</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">429</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">autodetect</span>(<span class="ruby-identifier">lines</span> = <span class="ruby-value">31</span>, <span class="ruby-identifier">ad</span> = <span class="ruby-constant">AutoDetect</span>.<span class="ruby-identifier">default</span>)
+<span class="line-num">430</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">ad</span>.<span class="ruby-identifier">autodetect_flatfile</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">lines</span>)
+<span class="line-num">431</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dbclass</span> = <span class="ruby-identifier">r</span>
+<span class="line-num">432</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">433</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dbclass</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dbclass</span>
+<span class="line-num">434</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">435</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">436</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -889,10 +852,10 @@ might be useful if input file is a mixture of muitiple format data.</p>
 
           
           <div class="method-source-code" id="close-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 351</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
-  <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">close</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">351</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
+<span class="line-num">352</span>   <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">353</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -922,25 +885,25 @@ might be useful if input file is a mixture of muitiple format data.</p>
 
           
           <div class="method-source-code" id="dbclass-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 400</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dbclass=</span>(<span class="ruby-identifier">klass</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">klass</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@dbclass</span> = <span class="ruby-identifier">klass</span>
-    <span class="ruby-keyword">begin</span>
-      <span class="ruby-ivar">@splitter</span> = <span class="ruby-ivar">@dbclass</span>.<span class="ruby-identifier">flatfile_splitter</span>(<span class="ruby-ivar">@dbclass</span>, <span class="ruby-ivar">@stream</span>)
-    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>, <span class="ruby-constant">NoMethodError</span>
-      <span class="ruby-keyword">begin</span>
-        <span class="ruby-identifier">splitter_class</span> = <span class="ruby-ivar">@dbclass</span><span class="ruby-operator">::</span><span class="ruby-constant">FLATFILE_SPLITTER</span>
-      <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
-        <span class="ruby-identifier">splitter_class</span> = <span class="ruby-constant">Splitter</span><span class="ruby-operator">::</span><span class="ruby-constant">Default</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-ivar">@splitter</span> = <span class="ruby-identifier">splitter_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-ivar">@stream</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@dbclass</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-ivar">@splitter</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">400</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dbclass=</span>(<span class="ruby-identifier">klass</span>)
+<span class="line-num">401</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">klass</span> <span class="ruby-keyword">then</span>
+<span class="line-num">402</span>     <span class="ruby-ivar">@dbclass</span> = <span class="ruby-identifier">klass</span>
+<span class="line-num">403</span>     <span class="ruby-keyword">begin</span>
+<span class="line-num">404</span>       <span class="ruby-ivar">@splitter</span> = <span class="ruby-ivar">@dbclass</span>.<span class="ruby-identifier">flatfile_splitter</span>(<span class="ruby-ivar">@dbclass</span>, <span class="ruby-ivar">@stream</span>)
+<span class="line-num">405</span>     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>, <span class="ruby-constant">NoMethodError</span>
+<span class="line-num">406</span>       <span class="ruby-keyword">begin</span>
+<span class="line-num">407</span>         <span class="ruby-identifier">splitter_class</span> = <span class="ruby-ivar">@dbclass</span><span class="ruby-operator">::</span><span class="ruby-constant">FLATFILE_SPLITTER</span>
+<span class="line-num">408</span>       <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
+<span class="line-num">409</span>         <span class="ruby-identifier">splitter_class</span> = <span class="ruby-constant">Splitter</span><span class="ruby-operator">::</span><span class="ruby-constant">Default</span>
+<span class="line-num">410</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">411</span>       <span class="ruby-ivar">@splitter</span> = <span class="ruby-identifier">splitter_class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-ivar">@stream</span>)
+<span class="line-num">412</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">413</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">414</span>     <span class="ruby-ivar">@dbclass</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">415</span>     <span class="ruby-ivar">@splitter</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">416</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">417</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1008,12 +971,12 @@ might be useful if input file is a mixture of muitiple format data.</p>
 
           
           <div class="method-source-code" id="each_entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 334</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_entry</span>
-  <span class="ruby-keyword">while</span> <span class="ruby-identifier">e</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">next_entry</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">e</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">334</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_entry</span>
+<span class="line-num">335</span>   <span class="ruby-keyword">while</span> <span class="ruby-identifier">e</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">next_entry</span>
+<span class="line-num">336</span>     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">e</span>
+<span class="line-num">337</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">338</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1047,10 +1010,10 @@ might be useful if input file is a mixture of muitiple format data.</p>
 
           
           <div class="method-source-code" id="entry_ended_pos-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 322</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_ended_pos</span>
-  <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">entry_ended_pos</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">322</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_ended_pos</span>
+<span class="line-num">323</span>   <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">entry_ended_pos</span>
+<span class="line-num">324</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1080,10 +1043,10 @@ might be useful if input file is a mixture of muitiple format data.</p>
 
           
           <div class="method-source-code" id="entry_pos_flag-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 307</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_pos_flag</span>
-  <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">entry_pos_flag</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">307</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_pos_flag</span>
+<span class="line-num">308</span>   <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">entry_pos_flag</span>
+<span class="line-num">309</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1113,10 +1076,10 @@ might be useful if input file is a mixture of muitiple format data.</p>
 
           
           <div class="method-source-code" id="entry_pos_flag-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 312</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_pos_flag=</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">entry_pos_flag</span> = <span class="ruby-identifier">x</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">312</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_pos_flag=</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">313</span>   <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">entry_pos_flag</span> = <span class="ruby-identifier">x</span>
+<span class="line-num">314</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1146,10 +1109,10 @@ might be useful if input file is a mixture of muitiple format data.</p>
 
           
           <div class="method-source-code" id="entry_raw-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 302</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_raw</span>
-  <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">entry</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">302</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_raw</span>
+<span class="line-num">303</span>   <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">entry</span>
+<span class="line-num">304</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1179,10 +1142,10 @@ might be useful if input file is a mixture of muitiple format data.</p>
 
           
           <div class="method-source-code" id="entry_start_pos-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 317</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_start_pos</span>
-  <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">entry_start_pos</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">317</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_start_pos</span>
+<span class="line-num">318</span>   <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">entry_start_pos</span>
+<span class="line-num">319</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1206,18 +1169,16 @@ might be useful if input file is a mixture of muitiple format data.</p>
 
         <div class="method-description">
           
-          <p>Returns true if input stream is end-of-file. Otherwise, returns false.
-(Similar to IO#eof?, but may not be equal to io.eof?, because <a
-href="FlatFile.html">FlatFile</a> has its own internal buffer.)</p>
+          <p>Returns true if input stream is end-of-file. Otherwise, returns false. (Similar to IO#eof?, but may not be equal to io.eof?, because <a href="FlatFile.html"><code>FlatFile</code></a> has its own internal buffer.)</p>
           
           
 
           
           <div class="method-source-code" id="eof-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 380</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eof?</span>
-  <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">eof?</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">380</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eof?</span>
+<span class="line-num">381</span>   <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">eof?</span>
+<span class="line-num">382</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1247,10 +1208,10 @@ href="FlatFile.html">FlatFile</a> has its own internal buffer.)</p>
 
           
           <div class="method-source-code" id="gets-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 395</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gets</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">395</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gets</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">396</span>   <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">397</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1276,19 +1237,17 @@ href="FlatFile.html">FlatFile</a> has its own internal buffer.)</p>
           
           <p>(DEPRECATED) IO object in the flatfile object.</p>
 
-<p>Compatibility Note: <a href="FlatFile.html#method-i-io">#io</a> is
-deprecated. Please use <a href="FlatFile.html#method-i-to_io">#to_io</a>
-instead.</p>
+<p>Compatibility Note: <a href="FlatFile.html#method-i-io"><code>Bio::FlatFile#io</code></a> is deprecated. Please use <a href="FlatFile.html#method-i-to_io"><code>Bio::FlatFile#to_io</code></a> instead.</p>
           
           
 
           
           <div class="method-source-code" id="io-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 255</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">io</span>
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::FlatFile#io is deprecated.&quot;</span>
-  <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">to_io</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">255</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">io</span>
+<span class="line-num">256</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;Bio::FlatFile#io is deprecated.&quot;</span>
+<span class="line-num">257</span>   <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">to_io</span>
+<span class="line-num">258</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1318,29 +1277,29 @@ instead.</p>
 
           
           <div class="method-source-code" id="next_entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 277</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">next_entry</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">UnknownDataFormatError</span>, 
-  <span class="ruby-string">&#39;file format auto-detection failed?&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@dbclass</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@skip_leader_mode</span> <span class="ruby-keyword">and</span>
-      ((<span class="ruby-ivar">@firsttime_flag</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@skip_leader_mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:firsttime</span>) <span class="ruby-keyword">or</span>
-         <span class="ruby-ivar">@skip_leader_mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:everytime</span>)
-    <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">skip_leader</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">raw</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">get_entry</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">get_parsed_entry</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@firsttime_flag</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">raw</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@entry</span> = <span class="ruby-identifier">r</span>
-    <span class="ruby-ivar">@entry</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">277</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">next_entry</span>
+<span class="line-num">278</span>   <span class="ruby-identifier">raise</span> <span class="ruby-constant">UnknownDataFormatError</span>, 
+<span class="line-num">279</span>   <span class="ruby-string">&#39;file format auto-detection failed?&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@dbclass</span>
+<span class="line-num">280</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@skip_leader_mode</span> <span class="ruby-keyword">and</span>
+<span class="line-num">281</span>       ((<span class="ruby-ivar">@firsttime_flag</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@skip_leader_mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:firsttime</span>) <span class="ruby-keyword">or</span>
+<span class="line-num">282</span>          <span class="ruby-ivar">@skip_leader_mode</span> <span class="ruby-operator">==</span> <span class="ruby-value">:everytime</span>)
+<span class="line-num">283</span>     <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">skip_leader</span>
+<span class="line-num">284</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">285</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">raw</span> <span class="ruby-keyword">then</span>
+<span class="line-num">286</span>     <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">get_entry</span>
+<span class="line-num">287</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">288</span>     <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@splitter</span>.<span class="ruby-identifier">get_parsed_entry</span>
+<span class="line-num">289</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">290</span>   <span class="ruby-ivar">@firsttime_flag</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">291</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span>
+<span class="line-num">292</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">raw</span> <span class="ruby-keyword">then</span>
+<span class="line-num">293</span>     <span class="ruby-identifier">r</span>
+<span class="line-num">294</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">295</span>     <span class="ruby-ivar">@entry</span> = <span class="ruby-identifier">r</span>
+<span class="line-num">296</span>     <span class="ruby-ivar">@entry</span>
+<span class="line-num">297</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">298</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1370,10 +1329,10 @@ instead.</p>
 
           
           <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 268</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
-  <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">path</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">268</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
+<span class="line-num">269</span>   <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">path</span>
+<span class="line-num">270</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1397,19 +1356,16 @@ instead.</p>
 
         <div class="method-description">
           
-          <p>Returns current position of input stream. If the input stream is not a
-normal file, the result is not guaranteed. It is similar to IO#pos. Note
-that it will not be equal to io.pos, because <a
-href="FlatFile.html">FlatFile</a> has its own internal buffer.</p>
+          <p>Returns current position of input stream. If the input stream is not a normal file, the result is not guaranteed. It is similar to IO#pos. Note that it will not be equal to io.pos, because <a href="FlatFile.html"><code>FlatFile</code></a> has its own internal buffer.</p>
           
           
 
           
           <div class="method-source-code" id="pos-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 361</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pos</span>
-  <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">pos</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">361</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pos</span>
+<span class="line-num">362</span>   <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">pos</span>
+<span class="line-num">363</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1433,19 +1389,16 @@ href="FlatFile.html">FlatFile</a> has its own internal buffer.</p>
 
         <div class="method-description">
           
-          <p>(Not recommended to use it.) Sets position of input stream. If the input
-stream is not a normal file, the result is not guaranteed. It is similar to
-IO#pos=. Note that it will not be equal to io.pos=, because <a
-href="FlatFile.html">FlatFile</a> has its own internal buffer.</p>
+          <p>(Not recommended to use it.) Sets position of input stream. If the input stream is not a normal file, the result is not guaranteed. It is similar to IO#pos=. Note that it will not be equal to io.pos=, because <a href="FlatFile.html"><code>FlatFile</code></a> has its own internal buffer.</p>
           
           
 
           
           <div class="method-source-code" id="pos-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 372</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pos=</span>(<span class="ruby-identifier">p</span>)
-  <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">pos</span>=(<span class="ruby-identifier">p</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">372</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pos=</span>(<span class="ruby-identifier">p</span>)
+<span class="line-num">373</span>   <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">pos</span>=(<span class="ruby-identifier">p</span>)
+<span class="line-num">374</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1469,18 +1422,16 @@ href="FlatFile.html">FlatFile</a> has its own internal buffer.</p>
 
         <div class="method-description">
           
-          <p>If true is given, the <a
-href="FlatFile.html#method-i-next_entry">#next_entry</a> method returns a
-entry as a text, whereas if false, returns as a parsed object.</p>
+          <p>If true is given, the <a href="FlatFile.html#method-i-next_entry"><code>next_entry</code></a> method returns a entry as a text, whereas if false, returns as a parsed object.</p>
           
           
 
           
           <div class="method-source-code" id="raw-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 386</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">raw=</span>(<span class="ruby-identifier">bool</span>)
-  <span class="ruby-ivar">@raw</span> = (<span class="ruby-identifier">bool</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">386</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">raw=</span>(<span class="ruby-identifier">bool</span>)
+<span class="line-num">387</span>   <span class="ruby-ivar">@raw</span> = (<span class="ruby-identifier">bool</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
+<span class="line-num">388</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1510,12 +1461,12 @@ entry as a text, whereas if false, returns as a parsed object.</p>
 
           
           <div class="method-source-code" id="rewind-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 343</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
-  <span class="ruby-identifier">r</span> = (<span class="ruby-ivar">@splitter</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@stream</span>).<span class="ruby-identifier">rewind</span>
-  <span class="ruby-ivar">@firsttime_flag</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">343</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
+<span class="line-num">344</span>   <span class="ruby-identifier">r</span> = (<span class="ruby-ivar">@splitter</span> <span class="ruby-operator">||</span> <span class="ruby-ivar">@stream</span>).<span class="ruby-identifier">rewind</span>
+<span class="line-num">345</span>   <span class="ruby-ivar">@firsttime_flag</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">346</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">347</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1541,17 +1492,16 @@ entry as a text, whereas if false, returns as a parsed object.</p>
           
           <p>IO object in the flatfile object.</p>
 
-<p>Compatibility Note: <a href="FlatFile.html#method-i-io">#io</a> is
-deprecated.</p>
+<p>Compatibility Note: <a href="FlatFile.html#method-i-io"><code>Bio::FlatFile#io</code></a> is deprecated.</p>
           
           
 
           
           <div class="method-source-code" id="to_io-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile.rb, line 263</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_io</span>
-  <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">to_io</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile.rb</span>
+<span class="line-num">263</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_io</span>
+<span class="line-num">264</span>   <span class="ruby-ivar">@stream</span>.<span class="ruby-identifier">to_io</span>
+<span class="line-num">265</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1565,12 +1515,13 @@ deprecated.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

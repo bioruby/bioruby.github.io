@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -92,8 +96,7 @@
 
   <section class="description">
     
-<p>Stores a single cut location pair in 0-based index notation for use with <a
-href="../DoubleStranded.html">DoubleStranded</a> enzyme sequences.</p>
+<p>Stores a single cut location pair in 0-based index notation for use with <a href="../DoubleStranded.html"><code>DoubleStranded</code></a> enzyme sequences.</p>
 
   </section>
 
@@ -120,9 +123,7 @@ href="../DoubleStranded.html">DoubleStranded</a> enzyme sequences.</p>
 
         <div class="method-description">
         
-        <p><a href="../../Location.html">Location</a> of the cut on the complementary
-strand. Corresponds - or &#39;pairs&#39; - to the primary cut. A value of
-<code>nil</code> is an explicit representation of &#39;no cut&#39;.</p>
+        <p><a href="../../Location.html"><code>Location</code></a> of the cut on the complementary strand. Corresponds - or &#39;pairs&#39; - to the primary cut. A value of <code>nil</code> is an explicit representation of &#39;no cut&#39;.</p>
         
         </div>
       </div>
@@ -135,9 +136,7 @@ strand. Corresponds - or &#39;pairs&#39; - to the primary cut. A value of
 
         <div class="method-description">
         
-        <p><a href="../../Location.html">Location</a> of the cut on the primary
-strand. Corresponds - or &#39;pairs&#39; - to the complement cut. A value
-of <code>nil</code> is an explicit representation of &#39;no cut&#39;.</p>
+        <p><a href="../../Location.html"><code>Location</code></a> of the cut on the primary strand. Corresponds - or &#39;pairs&#39; - to the complement cut. A value of <code>nil</code> is an explicit representation of &#39;no cut&#39;.</p>
         
         </div>
       </div>
@@ -165,10 +164,9 @@ of <code>nil</code> is an explicit representation of &#39;no cut&#39;.</p>
 
         <div class="method-description">
           
-          <p><a href="CutLocationPair.html">CutLocationPair</a> constructor.</p>
+          <p><a href="CutLocationPair.html"><code>CutLocationPair</code></a> constructor.</p>
 
-<p>Stores a single cut location pair in 0-based index notation for use with <a
-href="../DoubleStranded.html">DoubleStranded</a> enzyme sequences.</p>
+<p>Stores a single cut location pair in 0-based index notation for use with <a href="../DoubleStranded.html"><code>DoubleStranded</code></a> enzyme sequences.</p>
 
 <p>Example:</p>
 
@@ -180,10 +178,7 @@ href="../DoubleStranded.html">DoubleStranded</a> enzyme sequences.</p>
 
 <p><strong>Arguments</strong></p>
 <ul><li>
-<p><code>pair</code>: May be two values represented as an Array, a <a
-href="../Range.html">Range</a>, or a combination of Integer and nil values.
-The first value represents a cut on the primary strand, the second
-represents a cut on the complement strand.</p>
+<p><code>pair</code>: May be two values represented as an Array, a <a href="../Range.html"><code>Range</code></a>, or a combination of Integer and nil values.  The first value represents a cut on the primary strand, the second represents a cut on the complement strand.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -199,31 +194,31 @@ represents a cut on the complement strand.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded/cut_location_pair.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>( <span class="ruby-operator">*</span><span class="ruby-identifier">pair</span> )
-  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">b</span> = <span class="ruby-keyword">nil</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Array</span>
-    <span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span> = <span class="ruby-identifier">init_with_array</span>( <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>] )
-
-  <span class="ruby-comment"># no idea why this barfs without the second half during test/runner.rb</span>
-  <span class="ruby-comment"># are there two Range objects running around?</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Range</span> <span class="ruby-keyword">or</span> (<span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Range&#39;</span>)
-  <span class="ruby-comment">#elsif pair[0].kind_of? Range</span>
-    <span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span> = <span class="ruby-identifier">init_with_array</span>( [<span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">first</span>, <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">last</span>] )
-
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Integer</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">NilClass</span>
-    <span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span> = <span class="ruby-identifier">init_with_array</span>( [<span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">pair</span>[<span class="ruby-value">1</span>]] )
-
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;#{pair[0].class} is an invalid class type to initalize CutLocationPair.&quot;</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">super</span>( [<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>] )
-  <span class="ruby-ivar">@primary</span> = <span class="ruby-identifier">a</span>
-  <span class="ruby-ivar">@complement</span> = <span class="ruby-identifier">b</span>
-  <span class="ruby-keyword">return</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded/cut_location_pair.rb</span>
+<span class="line-num">47</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>( <span class="ruby-operator">*</span><span class="ruby-identifier">pair</span> )
+<span class="line-num">48</span>   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">b</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">49</span> 
+<span class="line-num">50</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Array</span>
+<span class="line-num">51</span>     <span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span> = <span class="ruby-identifier">init_with_array</span>( <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>] )
+<span class="line-num">52</span> 
+<span class="line-num">53</span>   <span class="ruby-comment"># no idea why this barfs without the second half during test/runner.rb</span>
+<span class="line-num">54</span>   <span class="ruby-comment"># are there two Range objects running around?</span>
+<span class="line-num">55</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Range</span> <span class="ruby-keyword">or</span> (<span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">class</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Range&#39;</span>)
+<span class="line-num">56</span>   <span class="ruby-comment">#elsif pair[0].kind_of? Range</span>
+<span class="line-num">57</span>     <span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span> = <span class="ruby-identifier">init_with_array</span>( [<span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">first</span>, <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">last</span>] )
+<span class="line-num">58</span> 
+<span class="line-num">59</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">Integer</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">kind_of?</span> <span class="ruby-constant">NilClass</span>
+<span class="line-num">60</span>     <span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span> = <span class="ruby-identifier">init_with_array</span>( [<span class="ruby-identifier">pair</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">pair</span>[<span class="ruby-value">1</span>]] )
+<span class="line-num">61</span> 
+<span class="line-num">62</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">63</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;#{pair[0].class} is an invalid class type to initalize CutLocationPair.&quot;</span>
+<span class="line-num">64</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">65</span> 
+<span class="line-num">66</span>   <span class="ruby-keyword">super</span>( [<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>] )
+<span class="line-num">67</span>   <span class="ruby-ivar">@primary</span> = <span class="ruby-identifier">a</span>
+<span class="line-num">68</span>   <span class="ruby-ivar">@complement</span> = <span class="ruby-identifier">b</span>
+<span class="line-num">69</span>   <span class="ruby-keyword">return</span>
+<span class="line-num">70</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -261,14 +256,14 @@ represents a cut on the complement strand.</p>
 
           
           <div class="method-source-code" id="init_with_array-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded/cut_location_pair.rb, line 76</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init_with_array</span>( <span class="ruby-identifier">ary</span> )
-  <span class="ruby-identifier">validate_1</span>(<span class="ruby-identifier">ary</span>)
-  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">b</span> = <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">b</span> = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-identifier">validate_2</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>)
-  [<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded/cut_location_pair.rb</span>
+<span class="line-num">76</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">init_with_array</span>( <span class="ruby-identifier">ary</span> )
+<span class="line-num">77</span>   <span class="ruby-identifier">validate_1</span>(<span class="ruby-identifier">ary</span>)
+<span class="line-num">78</span>   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">79</span>   <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">b</span> = <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">b</span> = <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">80</span>   <span class="ruby-identifier">validate_2</span>(<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>)
+<span class="line-num">81</span>   [<span class="ruby-identifier">a</span>,<span class="ruby-identifier">b</span>]
+<span class="line-num">82</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -298,12 +293,12 @@ represents a cut on the complement strand.</p>
 
           
           <div class="method-source-code" id="validate_1-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded/cut_location_pair.rb, line 84</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_1</span>( <span class="ruby-identifier">ary</span> )
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Must be one or two elements.&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded/cut_location_pair.rb</span>
+<span class="line-num">84</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_1</span>( <span class="ruby-identifier">ary</span> )
+<span class="line-num">85</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+<span class="line-num">86</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Must be one or two elements.&quot;</span>
+<span class="line-num">87</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">88</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -333,16 +328,16 @@ represents a cut on the complement strand.</p>
 
           
           <div class="method-source-code" id="validate_2-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded/cut_location_pair.rb, line 90</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_2</span>( <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> )
-  <span class="ruby-keyword">if</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>) <span class="ruby-keyword">or</span> (<span class="ruby-identifier">b</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;0-based index notation only.  Negative values are illegal.&quot;</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Neither strand has a cut.  Ambiguous.&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/double_stranded/cut_location_pair.rb</span>
+<span class="line-num">90</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_2</span>( <span class="ruby-identifier">a</span>, <span class="ruby-identifier">b</span> )
+<span class="line-num">91</span>   <span class="ruby-keyword">if</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>) <span class="ruby-keyword">or</span> (<span class="ruby-identifier">b</span> <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>)
+<span class="line-num">92</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;0-based index notation only.  Negative values are illegal.&quot;</span>
+<span class="line-num">93</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">94</span> 
+<span class="line-num">95</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">96</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&quot;Neither strand has a cut.  Ambiguous.&quot;</span>
+<span class="line-num">97</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">98</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -356,12 +351,13 @@ represents a cut on the complement strand.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

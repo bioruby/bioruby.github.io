@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -128,8 +132,7 @@
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>program</em> (required): &#39;blastn&#39;, &#39;blastp&#39;,
-&#39;blastx&#39;, &#39;tblastn&#39; or &#39;tblastx&#39;</p>
+<p><em>program</em> (required): &#39;blastn&#39;, &#39;blastp&#39;, &#39;blastx&#39;, &#39;tblastn&#39; or &#39;tblastx&#39;</p>
 </li><li>
 <p><em>db</em> (required): database name</p>
 </li></ul>
@@ -142,12 +145,12 @@
 
           
           <div class="method-source-code" id="database_description-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/remote.rb, line 81</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">database_description</span>(<span class="ruby-identifier">program</span>, <span class="ruby-identifier">db</span>)
-  <span class="ruby-identifier">_parse_databases</span>
-  <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@database_descriptions</span>[<span class="ruby-identifier">program</span>]
-  <span class="ruby-identifier">h</span> <span class="ruby-operator">?</span> (<span class="ruby-identifier">h</span>[<span class="ruby-identifier">db</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/remote.rb</span>
+<span class="line-num">81</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">database_description</span>(<span class="ruby-identifier">program</span>, <span class="ruby-identifier">db</span>)
+<span class="line-num">82</span>   <span class="ruby-identifier">_parse_databases</span>
+<span class="line-num">83</span>   <span class="ruby-identifier">h</span> = <span class="ruby-ivar">@database_descriptions</span>[<span class="ruby-identifier">program</span>]
+<span class="line-num">84</span>   <span class="ruby-identifier">h</span> <span class="ruby-operator">?</span> (<span class="ruby-identifier">h</span>[<span class="ruby-identifier">db</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">85</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -173,17 +176,12 @@
           
           <p>Returns a list of available databases for given program.</p>
 
-<p>Note: It parses remote sites to obtain database information (e.g. <a
-href="http://blast.genome.jp">blast.genome.jp</a>/ for <a
-href="GenomeNet.html">Bio::Blast::Remote::GenomeNet</a>). Thus, if the site
-is changed, this method can not return correct data. Please tell BioRuby
-developers when the site is changed.</p>
+<p>Note: It parses remote sites to obtain database information (e.g. <a href="http://blast.genome.jp">blast.genome.jp</a>/ for <a href="GenomeNet.html"><code>Bio::Blast::Remote::GenomeNet</code></a>). Thus, if the site is changed, this method can not return correct data. Please tell BioRuby developers when the site is changed.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>program</em> (required): blast program(&#39;blastn&#39;,
-&#39;blastp&#39;, &#39;blastx&#39;, &#39;tblastn&#39; or &#39;tblastx&#39;)</p>
+<p><em>program</em> (required): blast program(&#39;blastn&#39;, &#39;blastp&#39;, &#39;blastx&#39;, &#39;tblastn&#39; or &#39;tblastx&#39;)</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -194,11 +192,11 @@ developers when the site is changed.</p>
 
           
           <div class="method-source-code" id="databases-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/remote.rb, line 68</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">databases</span>(<span class="ruby-identifier">program</span>)
-  <span class="ruby-identifier">_parse_databases</span>
-  <span class="ruby-ivar">@databases</span>[<span class="ruby-identifier">program</span>] <span class="ruby-operator">||</span> []
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/remote.rb</span>
+<span class="line-num">68</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">databases</span>(<span class="ruby-identifier">program</span>)
+<span class="line-num">69</span>   <span class="ruby-identifier">_parse_databases</span>
+<span class="line-num">70</span>   <span class="ruby-ivar">@databases</span>[<span class="ruby-identifier">program</span>] <span class="ruby-operator">||</span> []
+<span class="line-num">71</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -235,11 +233,11 @@ developers when the site is changed.</p>
 
           
           <div class="method-source-code" id="nucleotide_databases-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/remote.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nucleotide_databases</span>
-  <span class="ruby-identifier">_parse_databases</span>
-  <span class="ruby-ivar">@databases</span>[<span class="ruby-string">&#39;blastn&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/remote.rb</span>
+<span class="line-num">42</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nucleotide_databases</span>
+<span class="line-num">43</span>   <span class="ruby-identifier">_parse_databases</span>
+<span class="line-num">44</span>   <span class="ruby-ivar">@databases</span>[<span class="ruby-string">&#39;blastn&#39;</span>]
+<span class="line-num">45</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -276,11 +274,11 @@ developers when the site is changed.</p>
 
           
           <div class="method-source-code" id="protein_databases-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/remote.rb, line 52</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">protein_databases</span>
-  <span class="ruby-identifier">_parse_databases</span>
-  <span class="ruby-ivar">@databases</span>[<span class="ruby-string">&#39;blastp&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/remote.rb</span>
+<span class="line-num">52</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">protein_databases</span>
+<span class="line-num">53</span>   <span class="ruby-identifier">_parse_databases</span>
+<span class="line-num">54</span>   <span class="ruby-ivar">@databases</span>[<span class="ruby-string">&#39;blastp&#39;</span>]
+<span class="line-num">55</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -310,11 +308,11 @@ developers when the site is changed.</p>
 
           
           <div class="method-source-code" id="reset-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/remote.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset</span>
-  <span class="ruby-ivar">@parse_databases</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">true</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/remote.rb</span>
+<span class="line-num">88</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reset</span>
+<span class="line-num">89</span>   <span class="ruby-ivar">@parse_databases</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">90</span>   <span class="ruby-keyword">true</span>
+<span class="line-num">91</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -328,12 +326,13 @@ developers when the site is changed.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

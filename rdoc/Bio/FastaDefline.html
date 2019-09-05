@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -125,14 +129,9 @@
 
   <section class="description">
     
-<p>Parsing FASTA Defline, and extract IDs and other informations. IDs are <a
-href="FastaDefline.html#NSIDs">NSIDs</a> (NCBI standard FASTA sequence
-identifiers) or “:”-separated IDs.</p>
+<p>Parsing FASTA Defline, and extract IDs and other informations. IDs are <a href="FastaDefline.html#NSIDs"><code>NSIDs</code></a> (NCBI standard FASTA sequence identifiers) or “:”-separated IDs.</p>
 
-<p>specs are described in: <a
-href="ftp://ftp.ncbi.nih.gov/blast/documents/README.formatdb">ftp.ncbi.nih.gov/blast/documents/README.formatdb</a>
-<a
-href="http://blast.wustl.edu/doc/FAQ-Indexing.html#Identifiers">blast.wustl.edu/doc/FAQ-Indexing.html#Identifiers</a></p>
+<p>specs are described in: <a href="ftp://ftp.ncbi.nih.gov/blast/documents/README.formatdb">ftp.ncbi.nih.gov/blast/documents/README.formatdb</a> <a href="http://blast.wustl.edu/doc/FAQ-Indexing.html#Identifiers">blast.wustl.edu/doc/FAQ-Indexing.html#Identifiers</a></p>
 
 <h3 id="class-Bio::FastaDefline-label-Examples">Examples<span><a href="#class-Bio::FastaDefline-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -176,22 +175,15 @@ ckr.list_ids      ==&gt;
    [&quot;gi&quot;, &quot;2147182&quot;], [&quot;pir&quot;, nil, &quot;I51898&quot;], [&quot;gi&quot;, &quot;544724&quot;],
    [&quot;gb&quot;, &quot;AAB29504.1&quot;, nil], [&quot;Cavia&quot;]]</pre>
 
-<h3 id="class-Bio::FastaDefline-label-References"><a href="References.html">References</a><span><a href="#class-Bio::FastaDefline-label-References">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h3 id="class-Bio::FastaDefline-label-References"><a href="References.html"><code>References</code></a><span><a href="#class-Bio::FastaDefline-label-References">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p><a href="Fasta.html">Fasta</a> format description (NCBI) <a
-href="http://www.ncbi.nlm.nih.gov/BLAST/fasta.shtml">www.ncbi.nlm.nih.gov/BLAST/fasta.shtml</a></p>
+<p><a href="Fasta.html"><code>Fasta</code></a> format description (NCBI) <a href="http://www.ncbi.nlm.nih.gov/BLAST/fasta.shtml">www.ncbi.nlm.nih.gov/BLAST/fasta.shtml</a></p>
 </li><li>
-<p>Frequently Asked Questions:  Indexing of <a
-href="Sequence.html">Sequence</a> Identifiers (by Warren R. Gish.) (Dead
-link. Please find in <a href="http://web.archive.org">web.archive.org</a>/
-). <a
-href="http://blast.wustl.edu/doc/FAQ-Indexing.html#Identifiers">blast.wustl.edu/doc/FAQ-Indexing.html#Identifiers</a></p>
+<p>Frequently Asked Questions:  Indexing of <a href="Sequence.html"><code>Sequence</code></a> Identifiers (by Warren R. Gish.) (Dead link. Please find in <a href="http://web.archive.org">web.archive.org</a>/ ). <a href="http://blast.wustl.edu/doc/FAQ-Indexing.html#Identifiers">blast.wustl.edu/doc/FAQ-Indexing.html#Identifiers</a></p>
 </li><li>
-<p>Program Parameters for formatdb and fastacmd (by Tao Tao) <a
-href="http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/formatdb_fastacmd.html#t1.1">www.ncbi.nlm.nih.gov/staff/tao/URLAPI/formatdb_fastacmd.html#t1.1</a></p>
+<p>Program Parameters for formatdb and fastacmd (by Tao Tao) <a href="http://www.ncbi.nlm.nih.gov/staff/tao/URLAPI/formatdb_fastacmd.html#t1.1">www.ncbi.nlm.nih.gov/staff/tao/URLAPI/formatdb_fastacmd.html#t1.1</a></p>
 </li><li>
-<p>Formatdb <a href="../README_rdoc.html">README</a> <a
-href="ftp://ftp.ncbi.nih.gov/blast/documents/formatdb.html">ftp.ncbi.nih.gov/blast/documents/formatdb.html</a></p>
+<p>Formatdb <a href="../README_rdoc.html">README</a> <a href="ftp://ftp.ncbi.nih.gov/blast/documents/formatdb.html">ftp.ncbi.nih.gov/blast/documents/formatdb.html</a></p>
 </li></ul>
 
   </section>
@@ -261,8 +253,7 @@ href="ftp://ftp.ncbi.nih.gov/blast/documents/formatdb.html">ftp.ncbi.nih.gov/bla
 
         <div class="method-description">
         
-        <p>Shows array that contains IDs (or ID-like strings). Returns an array of
-arrays of strings.</p>
+        <p>Shows array that contains IDs (or ID-like strings). Returns an array of arrays of strings.</p>
         
         </div>
       </div>
@@ -296,19 +287,19 @@ arrays of strings.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 180</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@deflines</span> = []
-  <span class="ruby-ivar">@info</span> = {}
-  <span class="ruby-ivar">@list_ids</span> = []
-
-  <span class="ruby-ivar">@entry_id</span> = <span class="ruby-keyword">nil</span>
-
-  <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\x01&quot;</span>)
-  <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">add_defline</span>(<span class="ruby-identifier">line</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">180</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">181</span>   <span class="ruby-ivar">@deflines</span> = []
+<span class="line-num">182</span>   <span class="ruby-ivar">@info</span> = {}
+<span class="line-num">183</span>   <span class="ruby-ivar">@list_ids</span> = []
+<span class="line-num">184</span> 
+<span class="line-num">185</span>   <span class="ruby-ivar">@entry_id</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">186</span> 
+<span class="line-num">187</span>   <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\x01&quot;</span>)
+<span class="line-num">188</span>   <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">189</span>     <span class="ruby-identifier">add_defline</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">190</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">191</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -340,20 +331,19 @@ arrays of strings.</p>
 
         <div class="method-description">
           
-          <p>Shows accession with version number. If the entry has more than two of such
-IDs, only the first ID are shown. Returns a string or nil.</p>
+          <p>Shows accession with version number. If the entry has more than two of such IDs, only the first ID are shown. Returns a string or nil.</p>
           
           
 
           
           <div class="method-source-code" id="acc_version-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 492</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">acc_version</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@acc_version</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@acc_version</span> = <span class="ruby-identifier">get_by_type</span>(<span class="ruby-string">&#39;acc_version&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@acc_version</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">492</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">acc_version</span>
+<span class="line-num">493</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@acc_version</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">494</span>     <span class="ruby-ivar">@acc_version</span> = <span class="ruby-identifier">get_by_type</span>(<span class="ruby-string">&#39;acc_version&#39;</span>)
+<span class="line-num">495</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">496</span>   <span class="ruby-ivar">@acc_version</span>
+<span class="line-num">497</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -383,17 +373,17 @@ IDs, only the first ID are shown. Returns a string or nil.</p>
 
           
           <div class="method-source-code" id="accession-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 510</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accession</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@accession</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">acc_version</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-ivar">@accession</span> = <span class="ruby-identifier">acc_version</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>)[<span class="ruby-value">0</span>]
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@accession</span> = <span class="ruby-identifier">accessions</span>[<span class="ruby-value">0</span>]
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@accession</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">510</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accession</span>
+<span class="line-num">511</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@accession</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">512</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">acc_version</span> <span class="ruby-keyword">then</span>
+<span class="line-num">513</span>       <span class="ruby-ivar">@accession</span> = <span class="ruby-identifier">acc_version</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;.&#39;</span>)[<span class="ruby-value">0</span>]
+<span class="line-num">514</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">515</span>       <span class="ruby-ivar">@accession</span> = <span class="ruby-identifier">accessions</span>[<span class="ruby-value">0</span>]
+<span class="line-num">516</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">517</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">518</span>   <span class="ruby-ivar">@accession</span>
+<span class="line-num">519</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -423,14 +413,14 @@ IDs, only the first ID are shown. Returns a string or nil.</p>
 
           
           <div class="method-source-code" id="accessions-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 501</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accessions</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@accessions</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@accessions</span> = <span class="ruby-identifier">get_all_by_type</span>(<span class="ruby-string">&#39;accession&#39;</span>, <span class="ruby-string">&#39;acc_version&#39;</span>)
-    <span class="ruby-ivar">@accessions</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\..*\z/</span>, <span class="ruby-string">&#39;&#39;</span>) }
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@accessions</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">501</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">accessions</span>
+<span class="line-num">502</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@accessions</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">503</span>     <span class="ruby-ivar">@accessions</span> = <span class="ruby-identifier">get_all_by_type</span>(<span class="ruby-string">&#39;accession&#39;</span>, <span class="ruby-string">&#39;acc_version&#39;</span>)
+<span class="line-num">504</span>     <span class="ruby-ivar">@accessions</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\..*\z/</span>, <span class="ruby-string">&#39;&#39;</span>) }
+<span class="line-num">505</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">506</span>   <span class="ruby-ivar">@accessions</span>
+<span class="line-num">507</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -460,70 +450,70 @@ IDs, only the first ID are shown. Returns a string or nil.</p>
 
           
           <div class="method-source-code" id="add_defline-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 194</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_defline</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^\&gt;?\s*((?:[^\|\s]*\|)+[^\s]+)\s*(.*)$/</span>
-    <span class="ruby-comment"># NSIDs</span>
-    <span class="ruby-comment"># examples:</span>
-    <span class="ruby-comment"># &gt;gi|9910844|sp|Q9UWG2|RL3_METVA 50S ribosomal protein L3P</span>
-    <span class="ruby-comment">#</span>
-    <span class="ruby-comment"># note: regexp (:?) means grouping without backreferences</span>
-    <span class="ruby-identifier">i</span> = <span class="ruby-node">$1</span>
-    <span class="ruby-identifier">d</span> = <span class="ruby-node">$2</span>
-    <span class="ruby-identifier">tks</span> = <span class="ruby-identifier">i</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;|&#39;</span>)
-    <span class="ruby-identifier">tks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span>[<span class="ruby-value">-1</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;|&#39;</span>
-    <span class="ruby-identifier">a</span> = <span class="ruby-identifier">parse_NSIDs</span>(<span class="ruby-identifier">tks</span>)
-    <span class="ruby-identifier">i</span> = <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;|&#39;</span>)
-    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-string">&#39;|&#39;</span>)
-    <span class="ruby-identifier">d</span> = <span class="ruby-identifier">tks</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;|&#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">d</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tks</span>.<span class="ruby-identifier">empty?</span>
-    <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">d</span>
-    <span class="ruby-identifier">this_line</span> = <span class="ruby-identifier">a</span>
-    <span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">d</span>)
-    <span class="ruby-identifier">parse_square_brackets</span>(<span class="ruby-identifier">d</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">x</span>, <span class="ruby-keyword">false</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[A-Z]/</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-identifier">di</span> = [  <span class="ruby-identifier">x</span> ]
-        <span class="ruby-ivar">@list_ids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">di</span>
-        <span class="ruby-ivar">@info</span>[<span class="ruby-string">&#39;organism&#39;</span>] = <span class="ruby-identifier">x</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@info</span>[<span class="ruby-string">&#39;organism&#39;</span>]
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^\&gt;?\s*([a-zA-Z0-9]+\:[^\s]+)\s*(.*)$/</span>
-    <span class="ruby-comment"># examples:</span>
-    <span class="ruby-comment"># &gt;sce:YBR160W  CDC28, SRM5; cyclin-dependent protein kinase catalytic subunit [EC:2.7.1.-] [SP:CC28_YEAST]</span>
-    <span class="ruby-comment"># &gt;emb:CACDC28 [X80034] C.albicans CDC28 gene</span>
-    <span class="ruby-identifier">i</span> = <span class="ruby-node">$1</span>
-    <span class="ruby-identifier">d</span> = <span class="ruby-node">$2</span>
-    <span class="ruby-identifier">a</span> = <span class="ruby-identifier">parse_ColonSepID</span>(<span class="ruby-identifier">i</span>)
-    <span class="ruby-identifier">i</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;:&#39;</span>)
-    <span class="ruby-identifier">this_line</span> = [ <span class="ruby-string">&#39;:&#39;</span>, <span class="ruby-identifier">a</span> , <span class="ruby-identifier">d</span> ]
-    <span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">d</span>)
-    <span class="ruby-identifier">parse_square_brackets</span>(<span class="ruby-identifier">d</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">x</span>, <span class="ruby-keyword">false</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/:/</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-identifier">parse_ColonSepID</span>(<span class="ruby-identifier">x</span>)
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A\s*([A-Z][A-Z0-9_\.]+)\s*\z/</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-ivar">@list_ids</span> <span class="ruby-operator">&lt;&lt;</span> [ <span class="ruby-node">$1</span> ]
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^\&gt;?\s*(\S+)(?:\s+(.+))?$/</span>
-    <span class="ruby-comment"># examples:</span>
-    <span class="ruby-comment"># &gt;ABC12345 this is test</span>
-    <span class="ruby-identifier">i</span> = <span class="ruby-node">$1</span>
-    <span class="ruby-identifier">d</span> = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_s</span>
-    <span class="ruby-ivar">@list_ids</span> <span class="ruby-operator">&lt;&lt;</span> [ <span class="ruby-identifier">i</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;.&#39;</span>) ]
-    <span class="ruby-identifier">this_line</span> = [  <span class="ruby-string">&#39;&#39;</span>, [ <span class="ruby-identifier">i</span> ], <span class="ruby-identifier">d</span> ]
-    <span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">d</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">i</span> = <span class="ruby-identifier">str</span>
-    <span class="ruby-identifier">d</span> = <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">i</span>)
-    <span class="ruby-identifier">this_line</span> = [ <span class="ruby-string">&#39;&#39;</span>, [ <span class="ruby-identifier">i</span> ], <span class="ruby-identifier">d</span> ]
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-ivar">@deflines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">this_line</span>
-  <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">i</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@entry_id</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">194</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_defline</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">195</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>
+<span class="line-num">196</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^\&gt;?\s*((?:[^\|\s]*\|)+[^\s]+)\s*(.*)$/</span>
+<span class="line-num">197</span>     <span class="ruby-comment"># NSIDs</span>
+<span class="line-num">198</span>     <span class="ruby-comment"># examples:</span>
+<span class="line-num">199</span>     <span class="ruby-comment"># &gt;gi|9910844|sp|Q9UWG2|RL3_METVA 50S ribosomal protein L3P</span>
+<span class="line-num">200</span>     <span class="ruby-comment">#</span>
+<span class="line-num">201</span>     <span class="ruby-comment"># note: regexp (:?) means grouping without backreferences</span>
+<span class="line-num">202</span>     <span class="ruby-identifier">i</span> = <span class="ruby-node">$1</span>
+<span class="line-num">203</span>     <span class="ruby-identifier">d</span> = <span class="ruby-node">$2</span>
+<span class="line-num">204</span>     <span class="ruby-identifier">tks</span> = <span class="ruby-identifier">i</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;|&#39;</span>)
+<span class="line-num">205</span>     <span class="ruby-identifier">tks</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span>[<span class="ruby-value">-1</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;|&#39;</span>
+<span class="line-num">206</span>     <span class="ruby-identifier">a</span> = <span class="ruby-identifier">parse_NSIDs</span>(<span class="ruby-identifier">tks</span>)
+<span class="line-num">207</span>     <span class="ruby-identifier">i</span> = <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;|&#39;</span>)
+<span class="line-num">208</span>     <span class="ruby-identifier">a</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-string">&#39;|&#39;</span>)
+<span class="line-num">209</span>     <span class="ruby-identifier">d</span> = <span class="ruby-identifier">tks</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;|&#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">d</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tks</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">210</span>     <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">d</span>
+<span class="line-num">211</span>     <span class="ruby-identifier">this_line</span> = <span class="ruby-identifier">a</span>
+<span class="line-num">212</span>     <span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">d</span>)
+<span class="line-num">213</span>     <span class="ruby-identifier">parse_square_brackets</span>(<span class="ruby-identifier">d</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">214</span>       <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">x</span>, <span class="ruby-keyword">false</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[A-Z]/</span> <span class="ruby-keyword">then</span>
+<span class="line-num">215</span>         <span class="ruby-identifier">di</span> = [  <span class="ruby-identifier">x</span> ]
+<span class="line-num">216</span>         <span class="ruby-ivar">@list_ids</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">di</span>
+<span class="line-num">217</span>         <span class="ruby-ivar">@info</span>[<span class="ruby-string">&#39;organism&#39;</span>] = <span class="ruby-identifier">x</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@info</span>[<span class="ruby-string">&#39;organism&#39;</span>]
+<span class="line-num">218</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">219</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">220</span> 
+<span class="line-num">221</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^\&gt;?\s*([a-zA-Z0-9]+\:[^\s]+)\s*(.*)$/</span>
+<span class="line-num">222</span>     <span class="ruby-comment"># examples:</span>
+<span class="line-num">223</span>     <span class="ruby-comment"># &gt;sce:YBR160W  CDC28, SRM5; cyclin-dependent protein kinase catalytic subunit [EC:2.7.1.-] [SP:CC28_YEAST]</span>
+<span class="line-num">224</span>     <span class="ruby-comment"># &gt;emb:CACDC28 [X80034] C.albicans CDC28 gene</span>
+<span class="line-num">225</span>     <span class="ruby-identifier">i</span> = <span class="ruby-node">$1</span>
+<span class="line-num">226</span>     <span class="ruby-identifier">d</span> = <span class="ruby-node">$2</span>
+<span class="line-num">227</span>     <span class="ruby-identifier">a</span> = <span class="ruby-identifier">parse_ColonSepID</span>(<span class="ruby-identifier">i</span>)
+<span class="line-num">228</span>     <span class="ruby-identifier">i</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;:&#39;</span>)
+<span class="line-num">229</span>     <span class="ruby-identifier">this_line</span> = [ <span class="ruby-string">&#39;:&#39;</span>, <span class="ruby-identifier">a</span> , <span class="ruby-identifier">d</span> ]
+<span class="line-num">230</span>     <span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">d</span>)
+<span class="line-num">231</span>     <span class="ruby-identifier">parse_square_brackets</span>(<span class="ruby-identifier">d</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">232</span>       <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">x</span>, <span class="ruby-keyword">false</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/:/</span> <span class="ruby-keyword">then</span>
+<span class="line-num">233</span>         <span class="ruby-identifier">parse_ColonSepID</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">234</span>       <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A\s*([A-Z][A-Z0-9_\.]+)\s*\z/</span> <span class="ruby-keyword">then</span>
+<span class="line-num">235</span>         <span class="ruby-ivar">@list_ids</span> <span class="ruby-operator">&lt;&lt;</span> [ <span class="ruby-node">$1</span> ]
+<span class="line-num">236</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">237</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">238</span> 
+<span class="line-num">239</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^\&gt;?\s*(\S+)(?:\s+(.+))?$/</span>
+<span class="line-num">240</span>     <span class="ruby-comment"># examples:</span>
+<span class="line-num">241</span>     <span class="ruby-comment"># &gt;ABC12345 this is test</span>
+<span class="line-num">242</span>     <span class="ruby-identifier">i</span> = <span class="ruby-node">$1</span>
+<span class="line-num">243</span>     <span class="ruby-identifier">d</span> = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">244</span>     <span class="ruby-ivar">@list_ids</span> <span class="ruby-operator">&lt;&lt;</span> [ <span class="ruby-identifier">i</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&#39;.&#39;</span>) ]
+<span class="line-num">245</span>     <span class="ruby-identifier">this_line</span> = [  <span class="ruby-string">&#39;&#39;</span>, [ <span class="ruby-identifier">i</span> ], <span class="ruby-identifier">d</span> ]
+<span class="line-num">246</span>     <span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">d</span>)
+<span class="line-num">247</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">248</span>     <span class="ruby-identifier">i</span> = <span class="ruby-identifier">str</span>
+<span class="line-num">249</span>     <span class="ruby-identifier">d</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">250</span>     <span class="ruby-identifier">match_EC</span>(<span class="ruby-identifier">i</span>)
+<span class="line-num">251</span>     <span class="ruby-identifier">this_line</span> = [ <span class="ruby-string">&#39;&#39;</span>, [ <span class="ruby-identifier">i</span> ], <span class="ruby-identifier">d</span> ]
+<span class="line-num">252</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">253</span> 
+<span class="line-num">254</span>   <span class="ruby-ivar">@deflines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">this_line</span>
+<span class="line-num">255</span>   <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">i</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@entry_id</span>
+<span class="line-num">256</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -553,10 +543,10 @@ IDs, only the first ID are shown. Returns a string or nil.</p>
 
           
           <div class="method-source-code" id="description-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 335</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">description</span>
-  <span class="ruby-ivar">@deflines</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_a</span>[<span class="ruby-value">-1</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">335</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">description</span>
+<span class="line-num">336</span>   <span class="ruby-ivar">@deflines</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_a</span>[<span class="ruby-value">-1</span>]
+<span class="line-num">337</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -586,12 +576,12 @@ IDs, only the first ID are shown. Returns a string or nil.</p>
 
           
           <div class="method-source-code" id="descriptions-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 340</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">descriptions</span>
-  <span class="ruby-ivar">@deflines</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">a</span>[<span class="ruby-value">-1</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">340</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">descriptions</span>
+<span class="line-num">341</span>   <span class="ruby-ivar">@deflines</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+<span class="line-num">342</span>     <span class="ruby-identifier">a</span>[<span class="ruby-value">-1</span>]
+<span class="line-num">343</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">344</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -621,29 +611,29 @@ IDs, only the first ID are shown. Returns a string or nil.</p>
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 416</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">dbname</span>)
-  <span class="ruby-identifier">db</span> = <span class="ruby-identifier">dbname</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">r</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@info</span>[<span class="ruby-identifier">db</span>] <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">di</span> = <span class="ruby-ivar">@list_ids</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_s</span> }
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">di</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">di</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">r</span> = <span class="ruby-identifier">di</span>[<span class="ruby-value">-1</span>]
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">di</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">labels</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">NSIDs</span>[<span class="ruby-identifier">db</span>]
-      [ <span class="ruby-string">&#39;acc_version&#39;</span>, <span class="ruby-string">&#39;entry_id&#39;</span>,
-        <span class="ruby-string">&#39;locus&#39;</span>, <span class="ruby-string">&#39;accession&#39;</span>, <span class="ruby-string">&#39;number&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> = <span class="ruby-identifier">labels</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">x</span>) <span class="ruby-keyword">then</span>
-          <span class="ruby-identifier">r</span> = <span class="ruby-identifier">di</span>[<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>]
-          <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">r</span> = <span class="ruby-identifier">di</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@info</span>[<span class="ruby-identifier">db</span>] = <span class="ruby-identifier">r</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">416</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">dbname</span>)
+<span class="line-num">417</span>   <span class="ruby-identifier">db</span> = <span class="ruby-identifier">dbname</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">418</span>   <span class="ruby-identifier">r</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">419</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@info</span>[<span class="ruby-identifier">db</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">420</span>     <span class="ruby-identifier">di</span> = <span class="ruby-ivar">@list_ids</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">db</span>.<span class="ruby-identifier">to_s</span> }
+<span class="line-num">421</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">di</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">di</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">then</span>
+<span class="line-num">422</span>       <span class="ruby-identifier">r</span> = <span class="ruby-identifier">di</span>[<span class="ruby-value">-1</span>]
+<span class="line-num">423</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">di</span> <span class="ruby-keyword">then</span>
+<span class="line-num">424</span>       <span class="ruby-identifier">labels</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">NSIDs</span>[<span class="ruby-identifier">db</span>]
+<span class="line-num">425</span>       [ <span class="ruby-string">&#39;acc_version&#39;</span>, <span class="ruby-string">&#39;entry_id&#39;</span>,
+<span class="line-num">426</span>         <span class="ruby-string">&#39;locus&#39;</span>, <span class="ruby-string">&#39;accession&#39;</span>, <span class="ruby-string">&#39;number&#39;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">427</span>         <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> = <span class="ruby-identifier">labels</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">x</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">428</span>           <span class="ruby-identifier">r</span> = <span class="ruby-identifier">di</span>[<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>]
+<span class="line-num">429</span>           <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
+<span class="line-num">430</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">431</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">432</span>       <span class="ruby-identifier">r</span> = <span class="ruby-identifier">di</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span>
+<span class="line-num">433</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">434</span>     <span class="ruby-ivar">@info</span>[<span class="ruby-identifier">db</span>] = <span class="ruby-identifier">r</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
+<span class="line-num">435</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">436</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">437</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -673,20 +663,20 @@ IDs, only the first ID are shown. Returns a string or nil.</p>
 
           
           <div class="method-source-code" id="get_all_by_type-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 452</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_all_by_type</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">type_strarg</span>)
-  <span class="ruby-identifier">d</span> = []
-  <span class="ruby-ivar">@list_ids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">labels</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">NSIDs</span>[<span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]] <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">type_strarg</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> = <span class="ruby-identifier">labels</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">y</span>) <span class="ruby-keyword">then</span>
-          <span class="ruby-identifier">d</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>[<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>]
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">d</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">452</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_all_by_type</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">type_strarg</span>)
+<span class="line-num">453</span>   <span class="ruby-identifier">d</span> = []
+<span class="line-num">454</span>   <span class="ruby-ivar">@list_ids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">455</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">labels</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">NSIDs</span>[<span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]] <span class="ruby-keyword">then</span>
+<span class="line-num">456</span>       <span class="ruby-identifier">type_strarg</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+<span class="line-num">457</span>         <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> = <span class="ruby-identifier">labels</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">y</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">458</span>           <span class="ruby-identifier">d</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>] <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>[<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>]
+<span class="line-num">459</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">460</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">461</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">462</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">463</span>   <span class="ruby-identifier">d</span>
+<span class="line-num">464</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -716,17 +706,17 @@ IDs, only the first ID are shown. Returns a string or nil.</p>
 
           
           <div class="method-source-code" id="get_by_type-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 440</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_by_type</span>(<span class="ruby-identifier">type_str</span>)
-  <span class="ruby-ivar">@list_ids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">labels</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">NSIDs</span>[<span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]] <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> = <span class="ruby-identifier">labels</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">type_str</span>) <span class="ruby-keyword">then</span>
-        <span class="ruby-keyword">return</span> <span class="ruby-identifier">x</span>[<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>]
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">440</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_by_type</span>(<span class="ruby-identifier">type_str</span>)
+<span class="line-num">441</span>   <span class="ruby-ivar">@list_ids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">442</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">labels</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">NSIDs</span>[<span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]] <span class="ruby-keyword">then</span>
+<span class="line-num">443</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> = <span class="ruby-identifier">labels</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">type_str</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">444</span>         <span class="ruby-keyword">return</span> <span class="ruby-identifier">x</span>[<span class="ruby-identifier">i</span><span class="ruby-value">+1</span>]
+<span class="line-num">445</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">446</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">447</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">448</span>   <span class="ruby-keyword">nil</span>
+<span class="line-num">449</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -750,20 +740,19 @@ IDs, only the first ID are shown. Returns a string or nil.</p>
 
         <div class="method-description">
           
-          <p>Shows GI. If the entry has more than two of such IDs, only the first ID are
-shown. Returns a string or nil.</p>
+          <p>Shows GI. If the entry has more than two of such IDs, only the first ID are shown. Returns a string or nil.</p>
           
           
 
           
           <div class="method-source-code" id="gi-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 481</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gi</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@gi</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@gi</span> = <span class="ruby-identifier">get_by_type</span>(<span class="ruby-string">&#39;gi&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@gi</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">481</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gi</span>
+<span class="line-num">482</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@gi</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">483</span>     <span class="ruby-ivar">@gi</span> = <span class="ruby-identifier">get_by_type</span>(<span class="ruby-string">&#39;gi&#39;</span>)
+<span class="line-num">484</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">485</span>   <span class="ruby-ivar">@gi</span>
+<span class="line-num">486</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -793,24 +782,24 @@ shown. Returns a string or nil.</p>
 
           
           <div class="method-source-code" id="id_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 348</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">id_strings</span>
-  <span class="ruby-identifier">r</span> = []
-  <span class="ruby-ivar">@list_ids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">r</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span> }
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[A-Za-z0-9\.\-\_]+\z/</span>
-        <span class="ruby-identifier">r</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">r</span>.<span class="ruby-identifier">concat</span>( <span class="ruby-identifier">words</span>(<span class="ruby-keyword">true</span>, []).<span class="ruby-identifier">find_all</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-             <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[A-Z][A-Za-z0-9\_]*[0-9]+[A-Za-z0-9\_]+\z/</span> <span class="ruby-keyword">or</span>
-               <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[A-Z][A-Z0-9]*\_[A-Z0-9\_]+\z/</span>
-           <span class="ruby-keyword">end</span>)
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">348</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">id_strings</span>
+<span class="line-num">349</span>   <span class="ruby-identifier">r</span> = []
+<span class="line-num">350</span>   <span class="ruby-ivar">@list_ids</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+<span class="line-num">351</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">2</span> <span class="ruby-keyword">then</span>
+<span class="line-num">352</span>       <span class="ruby-identifier">r</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>].<span class="ruby-identifier">find_all</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span> }
+<span class="line-num">353</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">354</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[A-Za-z0-9\.\-\_]+\z/</span>
+<span class="line-num">355</span>         <span class="ruby-identifier">r</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
+<span class="line-num">356</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">357</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">358</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">359</span>   <span class="ruby-identifier">r</span>.<span class="ruby-identifier">concat</span>( <span class="ruby-identifier">words</span>(<span class="ruby-keyword">true</span>, []).<span class="ruby-identifier">find_all</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">360</span>              <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[A-Z][A-Za-z0-9\_]*[0-9]+[A-Za-z0-9\_]+\z/</span> <span class="ruby-keyword">or</span>
+<span class="line-num">361</span>                <span class="ruby-identifier">x</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\A[A-Z][A-Z0-9]*\_[A-Z0-9\_]+\z/</span>
+<span class="line-num">362</span>            <span class="ruby-keyword">end</span>)
+<span class="line-num">363</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">364</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -834,20 +823,19 @@ shown. Returns a string or nil.</p>
 
         <div class="method-description">
           
-          <p>Shows locus. If the entry has more than two of such IDs, only the first ID
-are shown. Returns a string or nil.</p>
+          <p>Shows locus. If the entry has more than two of such IDs, only the first ID are shown. Returns a string or nil.</p>
           
           
 
           
           <div class="method-source-code" id="locus-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 470</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">locus</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@locus</span>)
-    <span class="ruby-ivar">@locus</span> = <span class="ruby-identifier">get_by_type</span>(<span class="ruby-string">&#39;locus&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@locus</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">470</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">locus</span>
+<span class="line-num">471</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@locus</span>)
+<span class="line-num">472</span>     <span class="ruby-ivar">@locus</span> = <span class="ruby-identifier">get_by_type</span>(<span class="ruby-string">&#39;locus&#39;</span>)
+<span class="line-num">473</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">474</span>   <span class="ruby-ivar">@locus</span>
+<span class="line-num">475</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -877,16 +865,16 @@ are shown. Returns a string or nil.</p>
 
           
           <div class="method-source-code" id="method_missing-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 521</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">method_missing</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-comment"># raise ArgumentError,</span>
-  <span class="ruby-comment"># &quot;wrong # of arguments(#{args.size} for 1)&quot; if args.size &gt;= 2</span>
-  <span class="ruby-identifier">r</span> = <span class="ruby-identifier">get</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">r</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">NSIDs</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>]) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;NameError: undefined method `#{name.inspect}&#39;&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">521</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">method_missing</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">522</span>   <span class="ruby-comment"># raise ArgumentError,</span>
+<span class="line-num">523</span>   <span class="ruby-comment"># &quot;wrong # of arguments(#{args.size} for 1)&quot; if args.size &gt;= 2</span>
+<span class="line-num">524</span>   <span class="ruby-identifier">r</span> = <span class="ruby-identifier">get</span>(<span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">525</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">r</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">NSIDs</span>[<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>]) <span class="ruby-keyword">then</span>
+<span class="line-num">526</span>     <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;NameError: undefined method `#{name.inspect}&#39;&quot;</span>
+<span class="line-num">527</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">528</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">529</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -910,21 +898,19 @@ are shown. Returns a string or nil.</p>
 
         <div class="method-description">
           
-          <p>Shows original string. Note that the result of this method may be different
-from original string which is given in <a
-href="FastaDefline.html#method-c-new">::new</a> method.</p>
+          <p>Shows original string. Note that the result of this method may be different from original string which is given in <a href="FastaDefline.html#method-c-new"><code>FastaDefline.new</code></a> method.</p>
           
           
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 327</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-ivar">@deflines</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">s</span> = <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
-    (<span class="ruby-identifier">a</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>].<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">s</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">s</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">-1</span>]).<span class="ruby-identifier">strip</span>
-  }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\x01&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">327</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">328</span>   <span class="ruby-ivar">@deflines</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span>
+<span class="line-num">329</span>     <span class="ruby-identifier">s</span> = <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>]
+<span class="line-num">330</span>     (<span class="ruby-identifier">a</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-2</span>].<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">s</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">s</span>) <span class="ruby-operator">+</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">-1</span>]).<span class="ruby-identifier">strip</span>
+<span class="line-num">331</span>   }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\x01&quot;</span>)
+<span class="line-num">332</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -954,31 +940,31 @@ href="FastaDefline.html#method-c-new">::new</a> method.</p>
 
           
           <div class="method-source-code" id="words-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fasta/defline.rb, line 390</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">words</span>(<span class="ruby-identifier">case_sensitive</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">kill_regexp</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">KillRegexpArray</span>,
-          <span class="ruby-identifier">kwhash</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">KillWordsHash</span>)
-  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">descriptions</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/[\.\,\;\:\(\)\[\]\{\}\&lt;\&gt;\&quot;\&#39;\`\~\/\|\?\!\&amp;\@\# \x00-\x1f\x7f]+/</span>)
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\A[\$\*\-\+]+/</span>, <span class="ruby-string">&#39;&#39;</span>)
-    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/[\$\*\-\=]+\z/</span>, <span class="ruby-string">&#39;&#39;</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">kwhash</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">downcase</span>] <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">kill_regexp</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">expr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">expr</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">x</span> } <span class="ruby-keyword">then</span>
-        <span class="ruby-keyword">nil</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">x</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">compact!</span>
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">downcase</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">case_sensitive</span>
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">sort!</span>
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">uniq!</span>
-  <span class="ruby-identifier">a</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fasta/defline.rb</span>
+<span class="line-num">390</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">words</span>(<span class="ruby-identifier">case_sensitive</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">kill_regexp</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">KillRegexpArray</span>,
+<span class="line-num">391</span>           <span class="ruby-identifier">kwhash</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">KillWordsHash</span>)
+<span class="line-num">392</span>   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">descriptions</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/[\.\,\;\:\(\)\[\]\{\}\&lt;\&gt;\&quot;\&#39;\`\~\/\|\?\!\&amp;\@\# \x00-\x1f\x7f]+/</span>)
+<span class="line-num">393</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">394</span>     <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\A[\$\*\-\+]+/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">395</span>     <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/[\$\*\-\=]+\z/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">396</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
+<span class="line-num">397</span>       <span class="ruby-keyword">nil</span>
+<span class="line-num">398</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">kwhash</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">downcase</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">399</span>       <span class="ruby-keyword">nil</span>
+<span class="line-num">400</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">401</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">kill_regexp</span>.<span class="ruby-identifier">find</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">expr</span><span class="ruby-operator">|</span> <span class="ruby-identifier">expr</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">x</span> } <span class="ruby-keyword">then</span>
+<span class="line-num">402</span>         <span class="ruby-keyword">nil</span>
+<span class="line-num">403</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">404</span>         <span class="ruby-identifier">x</span>
+<span class="line-num">405</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">406</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">407</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">408</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">compact!</span>
+<span class="line-num">409</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">downcase</span> } <span class="ruby-keyword">unless</span> <span class="ruby-identifier">case_sensitive</span>
+<span class="line-num">410</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">sort!</span>
+<span class="line-num">411</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">uniq!</span>
+<span class="line-num">412</span>   <span class="ruby-identifier">a</span>
+<span class="line-num">413</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -992,12 +978,13 @@ href="FastaDefline.html#method-c-new">::new</a> method.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

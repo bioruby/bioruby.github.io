@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -203,16 +207,16 @@
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="../NCBIDB.html#method-c-new">Bio::NCBIDB.new</a>
+              <a href="../NCBIDB.html#method-c-new"><code>Bio::NCBIDB::new</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">36</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">37</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
+<span class="line-num">38</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -250,10 +254,10 @@
 
           
           <div class="method-source-code" id="comment-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 118</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comment</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;COMMENT&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">118</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comment</span>
+<span class="line-num">119</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;COMMENT&#39;</span>)
+<span class="line-num">120</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -283,17 +287,17 @@
 
           
           <div class="method-source-code" id="composition-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">composition</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOSITION&#39;</span>]
-    <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
-    <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;COMPOSITION&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\((\S+)\)(\d+)/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOSITION&#39;</span>] = <span class="ruby-identifier">hash</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOSITION&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">51</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">composition</span>
+<span class="line-num">52</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOSITION&#39;</span>]
+<span class="line-num">53</span>     <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+<span class="line-num">54</span>     <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;COMPOSITION&#39;</span>).<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\((\S+)\)(\d+)/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+<span class="line-num">55</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">56</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">57</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOSITION&#39;</span>] = <span class="ruby-identifier">hash</span>
+<span class="line-num">58</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">59</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOSITION&#39;</span>]
+<span class="line-num">60</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -317,19 +321,19 @@
 
         <div class="method-description">
           
-          <p><a href="COMPOUND.html">COMPOUND</a></p>
+          <p><a href="COMPOUND.html"><code>COMPOUND</code></a></p>
           
           
 
           
           <div class="method-source-code" id="compounds-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 76</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compounds</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOUND&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOUND&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;COMPOUND&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOUND&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">76</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compounds</span>
+<span class="line-num">77</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOUND&#39;</span>]
+<span class="line-num">78</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOUND&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;COMPOUND&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
+<span class="line-num">79</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">80</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;COMPOUND&#39;</span>]
+<span class="line-num">81</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -381,20 +385,19 @@
 
         <div class="method-description">
           
-          <p>Returns a Hash of the <a href="../DB.html">DB</a> name and an Array of
-entry IDs in DBLINKS field.</p>
+          <p>Returns a Hash of the <a href="../DB.html"><code>DB</code></a> name and an Array of entry IDs in DBLINKS field.</p>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="Common/DblinksAsHash.html#method-i-dblinks_as_hash">Bio::KEGG::Common::DblinksAsHash#dblinks_as_hash</a>
+              <a href="Common/DblinksAsHash.html#method-i-dblinks_as_hash"><code>Bio::KEGG::Common::DblinksAsHash#dblinks_as_hash</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="dblinks_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 23</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">23</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -428,13 +431,13 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="dblinks_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 145</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks_as_strings</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DBLINKS&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DBLINKS&#39;</span>] = <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;DBLINKS&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DBLINKS&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">145</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks_as_strings</span>
+<span class="line-num">146</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DBLINKS&#39;</span>]
+<span class="line-num">147</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DBLINKS&#39;</span>] = <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;DBLINKS&#39;</span>)
+<span class="line-num">148</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">149</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;DBLINKS&#39;</span>]
+<span class="line-num">150</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -464,10 +467,10 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="entry_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 41</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;ENTRY&#39;</span>)[<span class="ruby-regexp">/\S+/</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">41</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
+<span class="line-num">42</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;ENTRY&#39;</span>)[<span class="ruby-regexp">/\S+/</span>]
+<span class="line-num">43</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -491,24 +494,24 @@ entry IDs in DBLINKS field.</p>
 
         <div class="method-description">
           
-          <p><a href="ENZYME.html">ENZYME</a></p>
+          <p><a href="ENZYME.html"><code>ENZYME</code></a></p>
           
           
 
           
           <div class="method-source-code" id="enzymes-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 97</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enzymes</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENZYME&#39;</span>]
-    <span class="ruby-identifier">field</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;ENZYME&#39;</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\(/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">field</span>)      <span class="ruby-comment"># old version</span>
-      <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENZYME&#39;</span>] = <span class="ruby-identifier">field</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\S+ \(\S+\)/</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENZYME&#39;</span>] = <span class="ruby-identifier">field</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\S+/</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENZYME&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num"> 97</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enzymes</span>
+<span class="line-num"> 98</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENZYME&#39;</span>]
+<span class="line-num"> 99</span>     <span class="ruby-identifier">field</span> = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;ENZYME&#39;</span>)
+<span class="line-num">100</span>     <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\(/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">field</span>)      <span class="ruby-comment"># old version</span>
+<span class="line-num">101</span>       <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENZYME&#39;</span>] = <span class="ruby-identifier">field</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\S+ \(\S+\)/</span>)
+<span class="line-num">102</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">103</span>       <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENZYME&#39;</span>] = <span class="ruby-identifier">field</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\S+/</span>)
+<span class="line-num">104</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">105</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">106</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ENZYME&#39;</span>]
+<span class="line-num">107</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -538,10 +541,10 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="kcf-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 153</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">kcf</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{get(&#39;NODE&#39;)}#{get(&#39;EDGE&#39;)}&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">153</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">kcf</span>
+<span class="line-num">154</span>   <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{get(&#39;NODE&#39;)}#{get(&#39;EDGE&#39;)}&quot;</span>
+<span class="line-num">155</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -571,10 +574,10 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="keggclass-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 71</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keggclass</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;CLASS&#39;</span>) 
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">71</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keggclass</span>
+<span class="line-num">72</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;CLASS&#39;</span>) 
+<span class="line-num">73</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -604,13 +607,13 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="mass-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 63</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mass</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;MASS&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;MASS&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;MASS&#39;</span>)[<span class="ruby-regexp">/[\d\.]+/</span>].<span class="ruby-identifier">to_f</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;MASS&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">63</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mass</span>
+<span class="line-num">64</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;MASS&#39;</span>]
+<span class="line-num">65</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;MASS&#39;</span>] = <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;MASS&#39;</span>)[<span class="ruby-regexp">/[\d\.]+/</span>].<span class="ruby-identifier">to_f</span>
+<span class="line-num">66</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">67</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;MASS&#39;</span>]
+<span class="line-num">68</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -640,10 +643,10 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="name-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;NAME&#39;</span>) 
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">46</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>
+<span class="line-num">47</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;NAME&#39;</span>) 
+<span class="line-num">48</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -695,20 +698,19 @@ entry IDs in DBLINKS field.</p>
 
         <div class="method-description">
           
-          <p>Returns a Hash of the orthology ID and definition in <a
-href="ORTHOLOGY.html">ORTHOLOGY</a> field.</p>
+          <p>Returns a Hash of the orthology ID and definition in <a href="ORTHOLOGY.html"><code>ORTHOLOGY</code></a> field.</p>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="Common/OrthologsAsHash.html#method-i-orthologs_as_hash">Bio::KEGG::Common::OrthologsAsHash#orthologs_as_hash</a>
+              <a href="Common/OrthologsAsHash.html#method-i-orthologs_as_hash"><code>Bio::KEGG::Common::OrthologsAsHash#orthologs_as_hash</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="orthologs_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 33</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">orthologs_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">33</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">orthologs_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -736,19 +738,19 @@ href="ORTHOLOGY.html">ORTHOLOGY</a> field.</p>
 
         <div class="method-description">
           
-          <p><a href="ORTHOLOGY.html">ORTHOLOGY</a></p>
+          <p><a href="ORTHOLOGY.html"><code>ORTHOLOGY</code></a></p>
           
           
 
           
           <div class="method-source-code" id="orthologs_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 110</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">orthologs_as_strings</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>] = <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">110</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">orthologs_as_strings</span>
+<span class="line-num">111</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>]
+<span class="line-num">112</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>] = <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>)
+<span class="line-num">113</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">114</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>]
+<span class="line-num">115</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -800,20 +802,19 @@ href="ORTHOLOGY.html">ORTHOLOGY</a> field.</p>
 
         <div class="method-description">
           
-          <p>Returns a Hash of the pathway ID and name in <a
-href="PATHWAY.html">PATHWAY</a> field.</p>
+          <p>Returns a Hash of the pathway ID and name in <a href="PATHWAY.html"><code>PATHWAY</code></a> field.</p>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="Common/PathwaysAsHash.html#method-i-pathways_as_hash">Bio::KEGG::Common::PathwaysAsHash#pathways_as_hash</a>
+              <a href="Common/PathwaysAsHash.html#method-i-pathways_as_hash"><code>Bio::KEGG::Common::PathwaysAsHash#pathways_as_hash</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="pathways_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 28</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pathways_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">28</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pathways_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -841,16 +842,16 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
 
         <div class="method-description">
           
-          <p><a href="PATHWAY.html">PATHWAY</a></p>
+          <p><a href="PATHWAY.html"><code>PATHWAY</code></a></p>
           
           
 
           
           <div class="method-source-code" id="pathways_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 92</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pathways_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;PATHWAY&#39;</span>) 
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">92</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pathways_as_strings</span>
+<span class="line-num">93</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;PATHWAY&#39;</span>) 
+<span class="line-num">94</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -874,19 +875,19 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
 
         <div class="method-description">
           
-          <p><a href="REACTION.html">REACTION</a></p>
+          <p><a href="REACTION.html"><code>REACTION</code></a></p>
           
           
 
           
           <div class="method-source-code" id="reactions-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 84</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reactions</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REACTION&#39;</span>]
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REACTION&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;REACTION&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REACTION&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">84</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reactions</span>
+<span class="line-num">85</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REACTION&#39;</span>]
+<span class="line-num">86</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REACTION&#39;</span>] = <span class="ruby-identifier">fetch</span>(<span class="ruby-string">&#39;REACTION&#39;</span>).<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
+<span class="line-num">87</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">88</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REACTION&#39;</span>]
+<span class="line-num">89</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -916,22 +917,22 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
 
           
           <div class="method-source-code" id="references-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 128</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">references</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
-    <span class="ruby-identifier">ary</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;REFERENCE&#39;</span>)
-    <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\d+\s+\[PMID/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">line</span>)
-        <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; #{line.strip}&quot;</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>] = <span class="ruby-identifier">ary</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">128</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">references</span>
+<span class="line-num">129</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
+<span class="line-num">130</span>     <span class="ruby-identifier">ary</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">131</span>     <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;REFERENCE&#39;</span>)
+<span class="line-num">132</span>     <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">133</span>       <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\d+\s+\[PMID/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">134</span>         <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
+<span class="line-num">135</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">136</span>         <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; #{line.strip}&quot;</span>
+<span class="line-num">137</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">138</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">139</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>] = <span class="ruby-identifier">ary</span>
+<span class="line-num">140</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">141</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-string">&#39;REFERENCE&#39;</span>]
+<span class="line-num">142</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -961,10 +962,10 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
 
           
           <div class="method-source-code" id="remark-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb, line 123</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remark</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;REMARK&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/glycan.rb</span>
+<span class="line-num">123</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remark</span>
+<span class="line-num">124</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;REMARK&#39;</span>)
+<span class="line-num">125</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -978,12 +979,13 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

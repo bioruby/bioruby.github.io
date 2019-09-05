@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -109,11 +113,7 @@
     
 <h2 id="class-Bio::Nexus::GenericBlock-label-DESCRIPTION">DESCRIPTION<span><a href="#class-Bio::Nexus::GenericBlock-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p><a href="GenericBlock.html">Bio::Nexus::GenericBlock</a> represents a
-generic nexus block. It is mainly intended to be extended into more
-specific classes, although it is used for blocks not represented by more
-specific block classes. It has a name and a array for the tokenized content
-of a nexus block.</p>
+<p><a href="GenericBlock.html"><code>Bio::Nexus::GenericBlock</code></a> represents a generic nexus block. It is mainly intended to be extended into more specific classes, although it is used for blocks not represented by more specific block classes. It has a name and a array for the tokenized content of a nexus block.</p>
 
 <h2 id="class-Bio::Nexus::GenericBlock-label-USAGE">USAGE<span><a href="#class-Bio::Nexus::GenericBlock-label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -166,8 +166,7 @@ name = my_block_0.to_nexus</pre>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="GenericBlock.html">GenericBlock</a> object named
-&#39;name&#39;.</p>
+          <p>Creates a new <a href="GenericBlock.html"><code>GenericBlock</code></a> object named &#39;name&#39;.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -179,11 +178,11 @@ name = my_block_0.to_nexus</pre>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 775</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>( <span class="ruby-identifier">name</span> )
-  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&quot;;&quot;</span>) 
-  <span class="ruby-ivar">@tokens</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/nexus.rb</span>
+<span class="line-num">775</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>( <span class="ruby-identifier">name</span> )
+<span class="line-num">776</span>   <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">chomp</span>(<span class="ruby-string">&quot;;&quot;</span>) 
+<span class="line-num">777</span>   <span class="ruby-ivar">@tokens</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">778</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -227,10 +226,10 @@ name = my_block_0.to_nexus</pre>
 
           
           <div class="method-source-code" id="add_token-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 818</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_token</span>( <span class="ruby-identifier">token</span> )
-  <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">token</span> )
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/nexus.rb</span>
+<span class="line-num">818</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_token</span>( <span class="ruby-identifier">token</span> )
+<span class="line-num">819</span>   <span class="ruby-ivar">@tokens</span>.<span class="ruby-identifier">push</span>( <span class="ruby-identifier">token</span> )
+<span class="line-num">820</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -265,10 +264,10 @@ name = my_block_0.to_nexus</pre>
 
           
           <div class="method-source-code" id="get_name-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 784</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_name</span>
-  <span class="ruby-ivar">@name</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/nexus.rb</span>
+<span class="line-num">784</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_name</span>
+<span class="line-num">785</span>   <span class="ruby-ivar">@name</span>
+<span class="line-num">786</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -303,10 +302,10 @@ name = my_block_0.to_nexus</pre>
 
           
           <div class="method-source-code" id="get_tokens-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 792</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_tokens</span>
-  <span class="ruby-ivar">@tokens</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/nexus.rb</span>
+<span class="line-num">792</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_tokens</span>
+<span class="line-num">793</span>   <span class="ruby-ivar">@tokens</span>
+<span class="line-num">794</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -341,11 +340,11 @@ name = my_block_0.to_nexus</pre>
 
           
           <div class="method-source-code" id="to_nexus-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 808</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_nexus</span>
-  <span class="ruby-identifier">str</span> = <span class="ruby-string">&quot;generic block \&quot;&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\&quot; [do not know how to write in nexus format]&quot;</span>
-  <span class="ruby-identifier">str</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/nexus.rb</span>
+<span class="line-num">808</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_nexus</span>
+<span class="line-num">809</span>   <span class="ruby-identifier">str</span> = <span class="ruby-string">&quot;generic block \&quot;&quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">get_name</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\&quot; [do not know how to write in nexus format]&quot;</span>
+<span class="line-num">810</span>   <span class="ruby-identifier">str</span>
+<span class="line-num">811</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -380,10 +379,10 @@ name = my_block_0.to_nexus</pre>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/nexus.rb, line 800</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-identifier">to_nexus</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/nexus.rb</span>
+<span class="line-num">800</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">801</span>   <span class="ruby-identifier">to_nexus</span>
+<span class="line-num">802</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -429,12 +428,13 @@ name = my_block_0.to_nexus</pre>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

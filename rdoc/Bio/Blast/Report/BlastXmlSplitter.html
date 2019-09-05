@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -100,9 +104,7 @@
 
   <section class="description">
     
-<p>Flatfile splitter for <a href="../../NCBI.html">NCBI</a> BLAST XML format.
-It is internally used when reading BLAST XML. Normally, users do not need
-to use it directly.</p>
+<p>Flatfile splitter for <a href="../../NCBI.html"><code>NCBI</code></a> BLAST XML format. It is internally used when reading BLAST XML. Normally, users do not need to use it directly.</p>
 
   </section>
 
@@ -141,18 +143,18 @@ to use it directly.</p>
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="../../FlatFile/Splitter/Default.html#method-c-new">Bio::FlatFile::Splitter::Default.new</a>
+              <a href="../../FlatFile/Splitter/Default.html#method-c-new"><code>Bio::FlatFile::Splitter::Default::new</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 518</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">bstream</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">bstream</span>)
-  <span class="ruby-ivar">@parsed_entries</span> = []
-  <span class="ruby-ivar">@raw_unsupported</span> = <span class="ruby-keyword">false</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">518</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">bstream</span>)
+<span class="line-num">519</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">klass</span>, <span class="ruby-identifier">bstream</span>)
+<span class="line-num">520</span>   <span class="ruby-ivar">@parsed_entries</span> = []
+<span class="line-num">521</span>   <span class="ruby-ivar">@raw_unsupported</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">522</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -195,11 +197,11 @@ to use it directly.</p>
 
           
           <div class="method-source-code" id="entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 563</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;not supported for new BLAST XML format&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@raw_unsupported</span>
-  <span class="ruby-keyword">super</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">563</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry</span>
+<span class="line-num">564</span>   <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;not supported for new BLAST XML format&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@raw_unsupported</span>
+<span class="line-num">565</span>   <span class="ruby-keyword">super</span>
+<span class="line-num">566</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -234,13 +236,13 @@ to use it directly.</p>
 
           
           <div class="method-source-code" id="entry_ended_pos-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 577</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_ended_pos</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry_pos_flag</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;not supported for new BLAST XML format&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@raw_unsupported</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">super</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">577</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_ended_pos</span>
+<span class="line-num">578</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry_pos_flag</span> <span class="ruby-keyword">then</span>
+<span class="line-num">579</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;not supported for new BLAST XML format&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@raw_unsupported</span>
+<span class="line-num">580</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">581</span>   <span class="ruby-keyword">super</span>
+<span class="line-num">582</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -275,13 +277,13 @@ to use it directly.</p>
 
           
           <div class="method-source-code" id="entry_start_pos-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 569</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_start_pos</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry_pos_flag</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;not supported for new BLAST XML format&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@raw_unsupported</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">super</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">569</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_start_pos</span>
+<span class="line-num">570</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry_pos_flag</span> <span class="ruby-keyword">then</span>
+<span class="line-num">571</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;not supported for new BLAST XML format&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@raw_unsupported</span>
+<span class="line-num">572</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">573</span>   <span class="ruby-keyword">super</span>
+<span class="line-num">574</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -310,24 +312,24 @@ to use it directly.</p>
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="../../FlatFile/Splitter/Default.html#method-i-get_entry">Bio::FlatFile::Splitter::Default#get_entry</a>
+              <a href="../../FlatFile/Splitter/Default.html#method-i-get_entry"><code>Bio::FlatFile::Splitter::Default#get_entry</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="get_entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 538</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_entry</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@parsed_entries</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@raw_unsupported</span> = <span class="ruby-keyword">false</span>
-    <span class="ruby-identifier">ent</span> = <span class="ruby-keyword">super</span>
-    <span class="ruby-identifier">prepare_parsed_entries</span>(<span class="ruby-identifier">ent</span>)
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parsed_entry</span> = <span class="ruby-ivar">@parsed_entries</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;not supported for new BLAST XML format&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">ent</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">538</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_entry</span>
+<span class="line-num">539</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@parsed_entries</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">540</span>     <span class="ruby-ivar">@raw_unsupported</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">541</span>     <span class="ruby-identifier">ent</span> = <span class="ruby-keyword">super</span>
+<span class="line-num">542</span>     <span class="ruby-identifier">prepare_parsed_entries</span>(<span class="ruby-identifier">ent</span>)
+<span class="line-num">543</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parsed_entry</span> = <span class="ruby-ivar">@parsed_entries</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">544</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">545</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;not supported for new BLAST XML format&#39;</span>
+<span class="line-num">546</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">547</span>   <span class="ruby-identifier">ent</span>
+<span class="line-num">548</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -351,23 +353,23 @@ to use it directly.</p>
 
         <div class="method-description">
           
-          <p>get an entry as a <a href="../Report.html">Bio::Blast::Report</a> object</p>
+          <p>get an entry as a <a href="../Report.html"><code>Bio::Blast::Report</code></a> object</p>
           
           
 
           
           <div class="method-source-code" id="get_parsed_entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 551</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_parsed_entry</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@parsed_entries</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">get_entry</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parsed_entry</span> = <span class="ruby-ivar">@parsed_entries</span>.<span class="ruby-identifier">shift</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-ivar">@raw_unsupported</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parsed_entry</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">551</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_parsed_entry</span>
+<span class="line-num">552</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@parsed_entries</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">553</span>     <span class="ruby-identifier">get_entry</span>
+<span class="line-num">554</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">555</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parsed_entry</span> = <span class="ruby-ivar">@parsed_entries</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">556</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">entry</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">557</span>     <span class="ruby-ivar">@raw_unsupported</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">558</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">559</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parsed_entry</span>
+<span class="line-num">560</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -396,19 +398,19 @@ to use it directly.</p>
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="../../FlatFile/Splitter/Template.html#method-i-rewind">Bio::FlatFile::Splitter::Template#rewind</a>
+              <a href="../../FlatFile/Splitter/Template.html#method-i-rewind"><code>Bio::FlatFile::Splitter::Template#rewind</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="rewind-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 525</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
-  <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">super</span>
-  <span class="ruby-ivar">@parsed_entries</span>.<span class="ruby-identifier">clear</span>
-  <span class="ruby-ivar">@raw_unsupported</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-identifier">ret</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">525</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
+<span class="line-num">526</span>   <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">super</span>
+<span class="line-num">527</span>   <span class="ruby-ivar">@parsed_entries</span>.<span class="ruby-identifier">clear</span>
+<span class="line-num">528</span>   <span class="ruby-ivar">@raw_unsupported</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">529</span>   <span class="ruby-identifier">ret</span>
+<span class="line-num">530</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -438,10 +440,10 @@ to use it directly.</p>
 
           
           <div class="method-source-code" id="skip_leader-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/report.rb, line 533</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_leader</span>
-  <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/report.rb</span>
+<span class="line-num">533</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_leader</span>
+<span class="line-num">534</span>   <span class="ruby-keyword">nil</span>
+<span class="line-num">535</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -455,12 +457,13 @@ to use it directly.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

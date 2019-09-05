@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -206,17 +210,13 @@
     
 <h2 id="class-Bio::KEGG::PATHWAY-label-Description">Description<span><a href="#class-Bio::KEGG::PATHWAY-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p><a href="PATHWAY.html">Bio::KEGG::PATHWAY</a> is a parser class for the <a
-href="../KEGG.html">KEGG</a> <a href="PATHWAY.html">PATHWAY</a> database
-entry.</p>
+<p><a href="PATHWAY.html"><code>Bio::KEGG::PATHWAY</code></a> is a parser class for the <a href="../KEGG.html"><code>KEGG</code></a> <a href="PATHWAY.html"><code>PATHWAY</code></a> database entry.</p>
 
-<h2 id="class-Bio::KEGG::PATHWAY-label-References"><a href="../References.html">References</a><span><a href="#class-Bio::KEGG::PATHWAY-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
+<h2 id="class-Bio::KEGG::PATHWAY-label-References"><a href="../References.html"><code>References</code></a><span><a href="#class-Bio::KEGG::PATHWAY-label-References">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
-<p><a
-href="http://www.genome.jp/kegg/pathway.html">www.genome.jp/kegg/pathway.html</a></p>
+<p><a href="http://www.genome.jp/kegg/pathway.html">www.genome.jp/kegg/pathway.html</a></p>
 </li><li>
-<p><a
-href="ftp://ftp.genome.jp/pub/kegg/pathway/pathway">ftp.genome.jp/pub/kegg/pathway/pathway</a></p>
+<p><a href="ftp://ftp.genome.jp/pub/kegg/pathway/pathway">ftp.genome.jp/pub/kegg/pathway/pathway</a></p>
 </li></ul>
 
   </section>
@@ -270,7 +270,7 @@ href="ftp://ftp.genome.jp/pub/kegg/pathway/pathway">ftp.genome.jp/pub/kegg/pathw
 
         <div class="method-description">
           
-          <p>Creates a new <a href="PATHWAY.html">Bio::KEGG::PATHWAY</a> object.</p>
+          <p>Creates a new <a href="PATHWAY.html"><code>Bio::KEGG::PATHWAY</code></a> object.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -279,22 +279,22 @@ href="ftp://ftp.genome.jp/pub/kegg/pathway/pathway">ftp.genome.jp/pub/kegg/pathw
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="PATHWAY.html">Bio::KEGG::PATHWAY</a> object</p>
+<p><a href="PATHWAY.html"><code>Bio::KEGG::PATHWAY</code></a> object</p>
 </dd></dl>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="../NCBIDB.html#method-c-new">Bio::NCBIDB.new</a>
+              <a href="../NCBIDB.html#method-c-new"><code>Bio::NCBIDB::new</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 76</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">76</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">77</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">entry</span>, <span class="ruby-constant">TAGSIZE</span>)
+<span class="line-num">78</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -354,7 +354,7 @@ href="ftp://ftp.genome.jp/pub/kegg/pathway/pathway">ftp.genome.jp/pub/kegg/pathw
 
         <div class="method-description">
           
-          <p>Compounds described in the <a href="COMPOUND.html">COMPOUND</a> lines.</p>
+          <p>Compounds described in the <a href="COMPOUND.html"><code>COMPOUND</code></a> lines.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -365,13 +365,13 @@ href="ftp://ftp.genome.jp/pub/kegg/pathway/pathway">ftp.genome.jp/pub/kegg/pathw
 
           
           <div class="method-source-code" id="compounds_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 205</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compounds_as_hash</span>
-  <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@compounds_as_hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@compounds_as_hash</span>
-    <span class="ruby-ivar">@compounds_as_hash</span> = <span class="ruby-identifier">strings_as_hash</span>(<span class="ruby-identifier">compounds_as_strings</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@compounds_as_hash</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">205</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compounds_as_hash</span>
+<span class="line-num">206</span>   <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@compounds_as_hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@compounds_as_hash</span>
+<span class="line-num">207</span>     <span class="ruby-ivar">@compounds_as_hash</span> = <span class="ruby-identifier">strings_as_hash</span>(<span class="ruby-identifier">compounds_as_strings</span>)
+<span class="line-num">208</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">209</span>   <span class="ruby-ivar">@compounds_as_hash</span>
+<span class="line-num">210</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -399,7 +399,7 @@ href="ftp://ftp.genome.jp/pub/kegg/pathway/pathway">ftp.genome.jp/pub/kegg/pathw
 
         <div class="method-description">
           
-          <p>Compounds described in the <a href="COMPOUND.html">COMPOUND</a> lines.</p>
+          <p>Compounds described in the <a href="COMPOUND.html"><code>COMPOUND</code></a> lines.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -410,10 +410,10 @@ href="ftp://ftp.genome.jp/pub/kegg/pathway/pathway">ftp.genome.jp/pub/kegg/pathw
 
           
           <div class="method-source-code" id="compounds_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 198</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compounds_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;COMPOUND&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">198</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compounds_as_strings</span>
+<span class="line-num">199</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;COMPOUND&#39;</span>)
+<span class="line-num">200</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -465,20 +465,19 @@ href="ftp://ftp.genome.jp/pub/kegg/pathway/pathway">ftp.genome.jp/pub/kegg/pathw
 
         <div class="method-description">
           
-          <p>Returns a Hash of the <a href="../DB.html">DB</a> name and an Array of
-entry IDs in DBLINKS field.</p>
+          <p>Returns a Hash of the <a href="../DB.html"><code>DB</code></a> name and an Array of entry IDs in DBLINKS field.</p>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="Common/DblinksAsHash.html#method-i-dblinks_as_hash">Bio::KEGG::Common::DblinksAsHash#dblinks_as_hash</a>
+              <a href="Common/DblinksAsHash.html#method-i-dblinks_as_hash"><code>Bio::KEGG::Common::DblinksAsHash#dblinks_as_hash</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="dblinks_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 32</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">32</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -517,10 +516,10 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="dblinks_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 133</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;DBLINKS&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">133</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dblinks_as_strings</span>
+<span class="line-num">134</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;DBLINKS&#39;</span>)
+<span class="line-num">135</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -583,10 +582,10 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="description-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 97</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">description</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;DESCRIPTION&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">97</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">description</span>
+<span class="line-num">98</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;DESCRIPTION&#39;</span>)
+<span class="line-num">99</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -647,14 +646,14 @@ entry IDs in DBLINKS field.</p>
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="Common/DiseasesAsHash.html#method-i-diseases_as_hash">Bio::KEGG::Common::DiseasesAsHash#diseases_as_hash</a>
+              <a href="Common/DiseasesAsHash.html#method-i-diseases_as_hash"><code>Bio::KEGG::Common::DiseasesAsHash#diseases_as_hash</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="diseases_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">diseases_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">47</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">diseases_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -693,10 +692,10 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="diseases_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 126</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">diseases_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;DISEASE&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">126</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">diseases_as_strings</span>
+<span class="line-num">127</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;DISEASE&#39;</span>)
+<span class="line-num">128</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -731,10 +730,10 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="entry_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 83</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;ENTRY&#39;</span>)[<span class="ruby-regexp">/\S+/</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">83</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
+<span class="line-num">84</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;ENTRY&#39;</span>)[<span class="ruby-regexp">/\S+/</span>]
+<span class="line-num">85</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -786,7 +785,7 @@ entry IDs in DBLINKS field.</p>
 
         <div class="method-description">
           
-          <p>Enzymes described in the <a href="ENZYME.html">ENZYME</a> lines.</p>
+          <p>Enzymes described in the <a href="ENZYME.html"><code>ENZYME</code></a> lines.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -797,10 +796,10 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="enzymes_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 172</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enzymes_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;ENZYME&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">172</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enzymes_as_strings</span>
+<span class="line-num">173</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;ENZYME&#39;</span>)
+<span class="line-num">174</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -867,13 +866,13 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="genes_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 161</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">genes_as_hash</span>
-  <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@genes_as_hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@genes_as_hash</span>
-    <span class="ruby-ivar">@genes_as_hash</span> = <span class="ruby-identifier">strings_as_hash</span>(<span class="ruby-identifier">genes_as_strings</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@genes_as_hash</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">161</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">genes_as_hash</span>
+<span class="line-num">162</span>   <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@genes_as_hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@genes_as_hash</span>
+<span class="line-num">163</span>     <span class="ruby-ivar">@genes_as_hash</span> = <span class="ruby-identifier">strings_as_hash</span>(<span class="ruby-identifier">genes_as_strings</span>)
+<span class="line-num">164</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">165</span>   <span class="ruby-ivar">@genes_as_hash</span>
+<span class="line-num">166</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -912,10 +911,10 @@ entry IDs in DBLINKS field.</p>
 
           
           <div class="method-source-code" id="genes_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 154</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">genes_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;GENE&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">154</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">genes_as_strings</span>
+<span class="line-num">155</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;GENE&#39;</span>)
+<span class="line-num">156</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -939,8 +938,7 @@ entry IDs in DBLINKS field.</p>
 
         <div class="method-description">
           
-          <p>Return the name of the <a href="../KEGG.html">KEGG</a> class, described in
-the CLASS line.</p>
+          <p>Return the name of the <a href="../KEGG.html"><code>KEGG</code></a> class, described in the CLASS line.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -951,10 +949,10 @@ the CLASS line.</p>
 
           
           <div class="method-source-code" id="keggclass-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 105</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keggclass</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;CLASS&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">105</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">keggclass</span>
+<span class="line-num">106</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;CLASS&#39;</span>)
+<span class="line-num">107</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -989,10 +987,10 @@ the CLASS line.</p>
 
           
           <div class="method-source-code" id="ko_pathway-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 240</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ko_pathway</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;KO_PATHWAY&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">240</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ko_pathway</span>
+<span class="line-num">241</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;KO_PATHWAY&#39;</span>)
+<span class="line-num">242</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1044,10 +1042,7 @@ the CLASS line.</p>
 
         <div class="method-description">
           
-          <p>Returns <a href="MODULE.html">MODULE</a> field as a Hash. Each key of the
-hash is <a href="../KEGG.html">KEGG</a> <a href="MODULE.html">MODULE</a>
-ID, and each value is the name of the <a href="../Pathway.html">Pathway</a>
-Module.</p>
+          <p>Returns <a href="MODULE.html"><code>MODULE</code></a> field as a Hash. Each key of the hash is <a href="../KEGG.html"><code>KEGG</code></a> <a href="MODULE.html"><code>MODULE</code></a> ID, and each value is the name of the <a href="../Pathway.html"><code>Pathway</code></a> Module.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -1057,14 +1052,14 @@ Module.</p>
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="Common/ModulesAsHash.html#method-i-modules_as_hash">Bio::KEGG::Common::ModulesAsHash#modules_as_hash</a>
+              <a href="Common/ModulesAsHash.html#method-i-modules_as_hash"><code>Bio::KEGG::Common::ModulesAsHash#modules_as_hash</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="modules_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 63</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">modules_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">63</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">modules_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1092,7 +1087,7 @@ Module.</p>
 
         <div class="method-description">
           
-          <p>Returns <a href="MODULE.html">MODULE</a> field of the entry.</p>
+          <p>Returns <a href="MODULE.html"><code>MODULE</code></a> field of the entry.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -1103,10 +1098,10 @@ Module.</p>
 
           
           <div class="method-source-code" id="modules_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 119</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">modules_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;MODULE&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">119</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">modules_as_strings</span>
+<span class="line-num">120</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;MODULE&#39;</span>)
+<span class="line-num">121</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1141,10 +1136,10 @@ Module.</p>
 
           
           <div class="method-source-code" id="name-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 90</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;NAME&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">90</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>
+<span class="line-num">91</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;NAME&#39;</span>)
+<span class="line-num">92</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1179,10 +1174,10 @@ Module.</p>
 
           
           <div class="method-source-code" id="organism-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 147</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">organism</span>
-  <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;ORGANISM&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">147</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">organism</span>
+<span class="line-num">148</span>   <span class="ruby-identifier">field_fetch</span>(<span class="ruby-string">&#39;ORGANISM&#39;</span>)
+<span class="line-num">149</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1234,20 +1229,19 @@ Module.</p>
 
         <div class="method-description">
           
-          <p>Returns a Hash of the orthology ID and definition in <a
-href="ORTHOLOGY.html">ORTHOLOGY</a> field.</p>
+          <p>Returns a Hash of the orthology ID and definition in <a href="ORTHOLOGY.html"><code>ORTHOLOGY</code></a> field.</p>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="Common/OrthologsAsHash.html#method-i-orthologs_as_hash">Bio::KEGG::Common::OrthologsAsHash#orthologs_as_hash</a>
+              <a href="Common/OrthologsAsHash.html#method-i-orthologs_as_hash"><code>Bio::KEGG::Common::OrthologsAsHash#orthologs_as_hash</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="orthologs_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">orthologs_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">42</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">orthologs_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1275,7 +1269,7 @@ href="ORTHOLOGY.html">ORTHOLOGY</a> field.</p>
 
         <div class="method-description">
           
-          <p>Orthologs described in the <a href="ORTHOLOGY.html">ORTHOLOGY</a> lines.</p>
+          <p>Orthologs described in the <a href="ORTHOLOGY.html"><code>ORTHOLOGY</code></a> lines.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -1286,10 +1280,10 @@ href="ORTHOLOGY.html">ORTHOLOGY</a> field.</p>
 
           
           <div class="method-source-code" id="orthologs_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 140</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">orthologs_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">140</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">orthologs_as_strings</span>
+<span class="line-num">141</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;ORTHOLOGY&#39;</span>)
+<span class="line-num">142</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1341,20 +1335,19 @@ href="ORTHOLOGY.html">ORTHOLOGY</a> field.</p>
 
         <div class="method-description">
           
-          <p>Returns a Hash of the pathway ID and name in <a
-href="PATHWAY.html">PATHWAY</a> field.</p>
+          <p>Returns a Hash of the pathway ID and name in <a href="PATHWAY.html"><code>PATHWAY</code></a> field.</p>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="Common/PathwaysAsHash.html#method-i-pathways_as_hash">Bio::KEGG::Common::PathwaysAsHash#pathways_as_hash</a>
+              <a href="Common/PathwaysAsHash.html#method-i-pathways_as_hash"><code>Bio::KEGG::Common::PathwaysAsHash#pathways_as_hash</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="pathways_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pathways_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">37</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pathways_as_hash</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1393,10 +1386,10 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
 
           
           <div class="method-source-code" id="pathways_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 112</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pathways_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;PATHWAY_MAP&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">112</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pathways_as_strings</span>
+<span class="line-num">113</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;PATHWAY_MAP&#39;</span>)
+<span class="line-num">114</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1448,7 +1441,7 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
 
         <div class="method-description">
           
-          <p>Reactions described in the <a href="REACTION.html">REACTION</a> lines.</p>
+          <p>Reactions described in the <a href="REACTION.html"><code>REACTION</code></a> lines.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -1459,13 +1452,13 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
 
           
           <div class="method-source-code" id="reactions_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 187</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reactions_as_hash</span>
-  <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@reactions_as_hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@reactions_as_hash</span>
-    <span class="ruby-ivar">@reactions_as_hash</span> = <span class="ruby-identifier">strings_as_hash</span>(<span class="ruby-identifier">reactions_as_strings</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@reactions_as_hash</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">187</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reactions_as_hash</span>
+<span class="line-num">188</span>   <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@reactions_as_hash</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@reactions_as_hash</span>
+<span class="line-num">189</span>     <span class="ruby-ivar">@reactions_as_hash</span> = <span class="ruby-identifier">strings_as_hash</span>(<span class="ruby-identifier">reactions_as_strings</span>)
+<span class="line-num">190</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">191</span>   <span class="ruby-ivar">@reactions_as_hash</span>
+<span class="line-num">192</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1493,7 +1486,7 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
 
         <div class="method-description">
           
-          <p>Reactions described in the <a href="REACTION.html">REACTION</a> lines.</p>
+          <p>Reactions described in the <a href="REACTION.html"><code>REACTION</code></a> lines.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -1504,10 +1497,10 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
 
           
           <div class="method-source-code" id="reactions_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 180</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reactions_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;REACTION&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">180</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reactions_as_strings</span>
+<span class="line-num">181</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;REACTION&#39;</span>)
+<span class="line-num">182</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1531,25 +1524,24 @@ href="PATHWAY.html">PATHWAY</a> field.</p>
 
         <div class="method-description">
           
-          <p>REFERENCE – Returns contents of the REFERENCE records as an Array of <a
-href="../Reference.html">Bio::Reference</a> objects.</p>
+          <p>REFERENCE – Returns contents of the REFERENCE records as an Array of <a href="../Reference.html"><code>Bio::Reference</code></a> objects.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>an Array containing <a href="../Reference.html">Bio::Reference</a> objects</p>
+<p>an Array containing <a href="../Reference.html"><code>Bio::Reference</code></a> objects</p>
 </dd></dl>
           
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="Common/References.html#method-i-references">Bio::KEGG::Common::References#references</a>
+              <a href="Common/References.html#method-i-references"><code>Bio::KEGG::Common::References#references</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="references-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 55</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">references</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">55</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">references</span>; <span class="ruby-keyword">super</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1601,9 +1593,7 @@ href="../Reference.html">Bio::Reference</a> objects.</p>
 
         <div class="method-description">
           
-          <p>Returns REL_PATHWAY field as a Hash. Each key of the hash is <a
-href="../Pathway.html">Pathway</a> ID, and each value is the name of the
-pathway.</p>
+          <p>Returns REL_PATHWAY field as a Hash. Each key of the hash is <a href="../Pathway.html"><code>Pathway</code></a> ID, and each value is the name of the pathway.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -1614,18 +1604,18 @@ pathway.</p>
 
           
           <div class="method-source-code" id="rel_pathways_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 224</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rel_pathways_as_hash</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@rel_pathways_as_hash</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">hash</span> = {}
-    <span class="ruby-identifier">rel_pathways_as_strings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">entry_id</span>, <span class="ruby-identifier">name</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>, <span class="ruby-value">2</span>)
-      <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">entry_id</span>] = <span class="ruby-identifier">name</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@rel_pathways_as_hash</span> = <span class="ruby-identifier">hash</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@rel_pathways_as_hash</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">224</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rel_pathways_as_hash</span>
+<span class="line-num">225</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@rel_pathways_as_hash</span> <span class="ruby-keyword">then</span>
+<span class="line-num">226</span>     <span class="ruby-identifier">hash</span> = {}
+<span class="line-num">227</span>     <span class="ruby-identifier">rel_pathways_as_strings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">228</span>       <span class="ruby-identifier">entry_id</span>, <span class="ruby-identifier">name</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>, <span class="ruby-value">2</span>)
+<span class="line-num">229</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">entry_id</span>] = <span class="ruby-identifier">name</span>
+<span class="line-num">230</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">231</span>     <span class="ruby-ivar">@rel_pathways_as_hash</span> = <span class="ruby-identifier">hash</span>
+<span class="line-num">232</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">233</span>   <span class="ruby-ivar">@rel_pathways_as_hash</span>
+<span class="line-num">234</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1664,10 +1654,10 @@ pathway.</p>
 
           
           <div class="method-source-code" id="rel_pathways_as_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb, line 216</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rel_pathways_as_strings</span>
-  <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;REL_PATHWAY&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/pathway.rb</span>
+<span class="line-num">216</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rel_pathways_as_strings</span>
+<span class="line-num">217</span>   <span class="ruby-identifier">lines_fetch</span>(<span class="ruby-string">&#39;REL_PATHWAY&#39;</span>)
+<span class="line-num">218</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1681,12 +1671,13 @@ pathway.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

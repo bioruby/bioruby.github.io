@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -83,8 +87,7 @@
 
   <section class="description">
     
-<p><a href="Converter.html">Converter</a> methods between PHRED and <a
-href="Solexa.html">Solexa</a> quality scores.</p>
+<p><a href="Converter.html"><code>Converter</code></a> methods between PHRED and <a href="Solexa.html"><code>Solexa</code></a> quality scores.</p>
 
   </section>
 
@@ -134,10 +137,10 @@ href="Solexa.html">Solexa</a> quality scores.</p>
 
           
           <div class="method-source-code" id="convert_nothing-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/quality_score.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_nothing</span>(<span class="ruby-identifier">scores</span>)
-  <span class="ruby-identifier">scores</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/quality_score.rb</span>
+<span class="line-num">72</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_nothing</span>(<span class="ruby-identifier">scores</span>)
+<span class="line-num">73</span>   <span class="ruby-identifier">scores</span>
+<span class="line-num">74</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -161,10 +164,9 @@ href="Solexa.html">Solexa</a> quality scores.</p>
 
         <div class="method-description">
           
-          <p>Converts PHRED scores to <a href="Solexa.html">Solexa</a> scores.</p>
+          <p>Converts PHRED scores to <a href="Solexa.html"><code>Solexa</code></a> scores.</p>
 
-<p>The values may be truncated or incorrect if overflows/underflows occurred
-during the calculation.</p>
+<p>The values may be truncated or incorrect if overflows/underflows occurred during the calculation.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -180,16 +182,16 @@ during the calculation.</p>
 
           
           <div class="method-source-code" id="convert_scores_from_phred_to_solexa-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/quality_score.rb, line 40</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_scores_from_phred_to_solexa</span>(<span class="ruby-identifier">scores</span>)
-  <span class="ruby-identifier">sc</span> = <span class="ruby-identifier">scores</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">t</span> = <span class="ruby-value">10</span> <span class="ruby-operator">**</span> (<span class="ruby-identifier">q</span> <span class="ruby-operator">/</span> <span class="ruby-value">10.0</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">t</span> = <span class="ruby-constant">Float</span><span class="ruby-operator">::</span><span class="ruby-constant">MIN</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Float</span><span class="ruby-operator">::</span><span class="ruby-constant">MIN</span>
-    <span class="ruby-identifier">r</span> = <span class="ruby-value">10</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-identifier">t</span>)
-    <span class="ruby-identifier">r</span>.<span class="ruby-identifier">finite?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">round</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sc</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/quality_score.rb</span>
+<span class="line-num">40</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_scores_from_phred_to_solexa</span>(<span class="ruby-identifier">scores</span>)
+<span class="line-num">41</span>   <span class="ruby-identifier">sc</span> = <span class="ruby-identifier">scores</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+<span class="line-num">42</span>     <span class="ruby-identifier">t</span> = <span class="ruby-value">10</span> <span class="ruby-operator">**</span> (<span class="ruby-identifier">q</span> <span class="ruby-operator">/</span> <span class="ruby-value">10.0</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+<span class="line-num">43</span>     <span class="ruby-identifier">t</span> = <span class="ruby-constant">Float</span><span class="ruby-operator">::</span><span class="ruby-constant">MIN</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Float</span><span class="ruby-operator">::</span><span class="ruby-constant">MIN</span>
+<span class="line-num">44</span>     <span class="ruby-identifier">r</span> = <span class="ruby-value">10</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-identifier">t</span>)
+<span class="line-num">45</span>     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">finite?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">round</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">r</span>
+<span class="line-num">46</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">47</span>   <span class="ruby-identifier">sc</span>
+<span class="line-num">48</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -213,10 +215,9 @@ during the calculation.</p>
 
         <div class="method-description">
           
-          <p>Converts <a href="Solexa.html">Solexa</a> scores to PHRED scores.</p>
+          <p>Converts <a href="Solexa.html"><code>Solexa</code></a> scores to PHRED scores.</p>
 
-<p>The values may be truncated if overflows/underflows occurred during the
-calculation.</p>
+<p>The values may be truncated if overflows/underflows occurred during the calculation.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -232,14 +233,14 @@ calculation.</p>
 
           
           <div class="method-source-code" id="convert_scores_from_solexa_to_phred-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/quality_score.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_scores_from_solexa_to_phred</span>(<span class="ruby-identifier">scores</span>)
-  <span class="ruby-identifier">sc</span> = <span class="ruby-identifier">scores</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">r</span> = <span class="ruby-value">10</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-value">10</span> <span class="ruby-operator">**</span> (<span class="ruby-identifier">q</span> <span class="ruby-operator">/</span> <span class="ruby-value">10.0</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
-    <span class="ruby-identifier">r</span>.<span class="ruby-identifier">finite?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">round</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">sc</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/quality_score.rb</span>
+<span class="line-num">58</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">convert_scores_from_solexa_to_phred</span>(<span class="ruby-identifier">scores</span>)
+<span class="line-num">59</span>   <span class="ruby-identifier">sc</span> = <span class="ruby-identifier">scores</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+<span class="line-num">60</span>     <span class="ruby-identifier">r</span> = <span class="ruby-value">10</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-value">10</span> <span class="ruby-operator">**</span> (<span class="ruby-identifier">q</span> <span class="ruby-operator">/</span> <span class="ruby-value">10.0</span>) <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+<span class="line-num">61</span>     <span class="ruby-identifier">r</span>.<span class="ruby-identifier">finite?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">round</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">r</span>
+<span class="line-num">62</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">63</span>   <span class="ruby-identifier">sc</span>
+<span class="line-num">64</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -253,12 +254,13 @@ calculation.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -136,11 +140,7 @@
 
   <section class="description">
     
-<p><a href="Report.html">Bio::Blast::Default::Report</a> parses <a
-href="../../NCBI.html">NCBI</a> BLAST default output and stores information
-in the data. It may store some <a
-href="Report/Iteration.html">Bio::Blast::Default::Report::Iteration</a>
-objects.</p>
+<p><a href="Report.html"><code>Bio::Blast::Default::Report</code></a> parses <a href="../../NCBI.html"><code>NCBI</code></a> BLAST default output and stores information in the data. It may store some <a href="Report/Iteration.html"><code>Bio::Blast::Default::Report::Iteration</code></a> objects.</p>
 
   </section>
 
@@ -159,14 +159,12 @@ objects.</p>
       
         <dt id="DELIMITER">DELIMITER
         
-        <dd><p>Delimiter of each entry. <a href="../../FlatFile.html">Bio::FlatFile</a>
-uses it.</p>
+        <dd><p>Delimiter of each entry. <a href="../../FlatFile.html"><code>Bio::FlatFile</code></a> uses it.</p>
         
       
         <dt id="DELIMITER_OVERRUN">DELIMITER_OVERRUN
         
-        <dd><p>(Integer) excess read size included in <a
-href="Report.html#DELIMITER">DELIMITER</a>.</p>
+        <dd><p>(Integer) excess read size included in <a href="Report.html#DELIMITER"><code>DELIMITER</code></a>.</p>
         
       
       </dl>
@@ -227,8 +225,7 @@ href="Report.html#DELIMITER">DELIMITER</a>.</p>
 
         <div class="method-description">
         
-        <p>piece of next entry. <a href="../../FlatFile.html">Bio::FlatFile</a> uses
-it.</p>
+        <p>piece of next entry. <a href="../../FlatFile.html"><code>Bio::FlatFile</code></a> uses it.</p>
         
         </div>
       </div>
@@ -280,9 +277,7 @@ it.</p>
 
         <div class="method-description">
         
-        <p>(PSI-BLAST) Returns iterations. It returns an array of <a
-href="Report/Iteration.html">Bio::Blast::Default::Report::Iteration</a>
-class. Note that normal blastall result usually contains one iteration.</p>
+        <p>(PSI-BLAST) Returns iterations. It returns an array of <a href="Report/Iteration.html"><code>Bio::Blast::Default::Report::Iteration</code></a> class. Note that normal blastall result usually contains one iteration.</p>
         
         </div>
       </div>
@@ -375,25 +370,24 @@ class. Note that normal blastall result usually contains one iteration.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Report.html">Report</a> object from BLAST result
-text.</p>
+          <p>Creates a new <a href="Report.html"><code>Report</code></a> object from BLAST result text.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 48</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\A\s+/</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\n(T?BLAST.*)/m</span>, <span class="ruby-string">&quot;\n&quot;</span>) <span class="ruby-comment"># remove trailing entries for sure</span>
-  <span class="ruby-ivar">@entry_overrun</span> = <span class="ruby-node">$1</span>
-  <span class="ruby-ivar">@entry</span> = <span class="ruby-identifier">str</span>
-  <span class="ruby-identifier">data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/(?:^[ \t]*\n)+/</span>)
-
-  <span class="ruby-identifier">format0_split_headers</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-ivar">@iterations</span> = <span class="ruby-identifier">format0_split_search</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-identifier">format0_split_stat_params</span>(<span class="ruby-identifier">data</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">48</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">49</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\A\s+/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">50</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\n(T?BLAST.*)/m</span>, <span class="ruby-string">&quot;\n&quot;</span>) <span class="ruby-comment"># remove trailing entries for sure</span>
+<span class="line-num">51</span>   <span class="ruby-ivar">@entry_overrun</span> = <span class="ruby-node">$1</span>
+<span class="line-num">52</span>   <span class="ruby-ivar">@entry</span> = <span class="ruby-identifier">str</span>
+<span class="line-num">53</span>   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/(?:^[ \t]*\n)+/</span>)
+<span class="line-num">54</span> 
+<span class="line-num">55</span>   <span class="ruby-identifier">format0_split_headers</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">56</span>   <span class="ruby-ivar">@iterations</span> = <span class="ruby-identifier">format0_split_search</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">57</span>   <span class="ruby-identifier">format0_split_stat_params</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">58</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -417,17 +411,16 @@ text.</p>
 
         <div class="method-description">
           
-          <p>Opens file by using <a
-href="../../FlatFile.html#method-c-open">Bio::FlatFile.open</a>.</p>
+          <p>Opens file by using <a href="../../FlatFile.html#method-c-open"><code>Bio::FlatFile.open</code></a>.</p>
           
           
 
           
           <div class="method-source-code" id="open-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 43</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">mode</span>)
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatFile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">mode</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">43</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">mode</span>)
+<span class="line-num">44</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatFile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">mode</span>)
+<span class="line-num">45</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -459,17 +452,16 @@ href="../../FlatFile.html#method-c-open">Bio::FlatFile.open</a>.</p>
 
         <div class="method-description">
           
-          <p>(PSI-BLAST) Same as <code>iterations.last.converged?</code>. Returns true
-if the last iteration is converged, otherwise, returns false.</p>
+          <p>(PSI-BLAST) Same as <code>iterations.last.converged?</code>. Returns true if the last iteration is converged, otherwise, returns false.</p>
           
           
 
           
           <div class="method-source-code" id="converged-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 203</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">converged?</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">converged?</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">203</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">converged?</span>
+<span class="line-num">204</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">converged?</span>
+<span class="line-num">205</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -499,17 +491,17 @@ if the last iteration is converged, otherwise, returns false.</p>
 
           
           <div class="method-source-code" id="db-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 227</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@db</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-regexp">/Database *\: *(.*)/m</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@f0database</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">a</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/^/</span>)
-      <span class="ruby-identifier">a</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
-      <span class="ruby-ivar">@db</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\s+\z/</span>, <span class="ruby-string">&#39;&#39;</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span> <span class="ruby-comment">#unless</span>
-  <span class="ruby-ivar">@db</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">227</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db</span>
+<span class="line-num">228</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@db</span>)
+<span class="line-num">229</span>     <span class="ruby-keyword">if</span> <span class="ruby-regexp">/Database *\: *(.*)/m</span> <span class="ruby-operator">=~</span> <span class="ruby-ivar">@f0database</span> <span class="ruby-keyword">then</span>
+<span class="line-num">230</span>       <span class="ruby-identifier">a</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/^/</span>)
+<span class="line-num">231</span>       <span class="ruby-identifier">a</span>.<span class="ruby-identifier">pop</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+<span class="line-num">232</span>       <span class="ruby-ivar">@db</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\s+\z/</span>, <span class="ruby-string">&#39;&#39;</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="line-num">233</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">234</span>   <span class="ruby-keyword">end</span> <span class="ruby-comment">#unless</span>
+<span class="line-num">235</span>   <span class="ruby-ivar">@db</span>
+<span class="line-num">236</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -561,21 +553,18 @@ if the last iteration is converged, otherwise, returns false.</p>
 
         <div class="method-description">
           
-          <p>Iterates over each hit of the last iteration. Same as
-<code>iterations.last.each_hit</code>. Yields a <a
-href="Report/Hit.html">Bio::Blast::Default::Report::Hit</a> object. This is
-very useful in most cases, e.g. for blastall results.</p>
+          <p>Iterates over each hit of the last iteration. Same as <code>iterations.last.each_hit</code>. Yields a <a href="Report/Hit.html"><code>Bio::Blast::Default::Report::Hit</code></a> object. This is very useful in most cases, e.g. for blastall results.</p>
           
           
 
           
           <div class="method-source-code" id="each_hit-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 178</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_hit</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">178</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_hit</span>
+<span class="line-num">179</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">180</span>     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
+<span class="line-num">181</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">182</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -603,21 +592,18 @@ very useful in most cases, e.g. for blastall results.</p>
 
         <div class="method-description">
           
-          <p>(PSI-BLAST) Iterates over each iteration. Same as
-<code>iterations.each</code>. Yields a <a
-href="Report/Iteration.html">Bio::Blast::Default::Report::Iteration</a>
-object.</p>
+          <p>(PSI-BLAST) Iterates over each iteration. Same as <code>iterations.each</code>. Yields a <a href="Report/Iteration.html"><code>Bio::Blast::Default::Report::Iteration</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="each_iteration-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 168</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_iteration</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">168</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_iteration</span>
+<span class="line-num">169</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">170</span>     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
+<span class="line-num">171</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">172</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -647,8 +633,8 @@ object.</p>
 
           
           <div class="method-source-code" id="entropy-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 128</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entropy</span>;        <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">entropy</span>;        <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">128</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entropy</span>;        <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">entropy</span>;        <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -678,8 +664,8 @@ object.</p>
 
           
           <div class="method-source-code" id="gapped_entropy-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 135</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gapped_entropy</span>; <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">gapped_entropy</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">135</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gapped_entropy</span>; <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">gapped_entropy</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -709,8 +695,8 @@ object.</p>
 
           
           <div class="method-source-code" id="gapped_kappa-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 131</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gapped_kappa</span>;   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">gapped_kappa</span>;   <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">131</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gapped_kappa</span>;   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">gapped_kappa</span>;   <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -740,8 +726,8 @@ object.</p>
 
           
           <div class="method-source-code" id="gapped_lambda-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 133</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gapped_lambda</span>;  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">gapped_lambda</span>;  <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">133</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gapped_lambda</span>;  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">gapped_lambda</span>;  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -765,19 +751,16 @@ object.</p>
 
         <div class="method-description">
           
-          <p>Same as <code>iterations.last.hits</code>. Returns the last iteration&#39;s
-hits. Returns an array of <a
-href="Report/Hit.html">Bio::Blast::Default::Report::Hit</a> object. This is
-very useful in most cases, e.g. for blastall results.</p>
+          <p>Same as <code>iterations.last.hits</code>. Returns the last iteration&#39;s hits. Returns an array of <a href="Report/Hit.html"><code>Bio::Blast::Default::Report::Hit</code></a> object. This is very useful in most cases, e.g. for blastall results.</p>
           
           
 
           
           <div class="method-source-code" id="hits-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 189</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">hits</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">189</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hits</span>
+<span class="line-num">190</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">hits</span>
+<span class="line-num">191</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -807,8 +790,8 @@ very useful in most cases, e.g. for blastall results.</p>
 
           
           <div class="method-source-code" id="kappa-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 124</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">kappa</span>;          <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">kappa</span>;          <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">124</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">kappa</span>;          <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">kappa</span>;          <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -838,8 +821,8 @@ very useful in most cases, e.g. for blastall results.</p>
 
           
           <div class="method-source-code" id="lambda-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 126</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lambda</span>;         <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">lambda</span>;         <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">126</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lambda</span>;         <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">lambda</span>;         <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -869,10 +852,10 @@ very useful in most cases, e.g. for blastall results.</p>
 
           
           <div class="method-source-code" id="message-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 195</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">message</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">message</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">195</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">message</span>
+<span class="line-num">196</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">message</span>
+<span class="line-num">197</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -896,15 +879,14 @@ very useful in most cases, e.g. for blastall results.</p>
 
         <div class="method-description">
           
-          <p>(PHI-BLAST) Same as <code>iterations.first.pattern</code>. Note that it
-returns the FIRST iteration&#39;s value.</p>
+          <p>(PHI-BLAST) Same as <code>iterations.first.pattern</code>. Note that it returns the FIRST iteration&#39;s value.</p>
           
           
 
           
           <div class="method-source-code" id="pattern-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 155</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern</span>; <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">pattern</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">155</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern</span>; <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">pattern</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -928,17 +910,16 @@ returns the FIRST iteration&#39;s value.</p>
 
         <div class="method-description">
           
-          <p>(PHI-BLAST) Same as <code>iterations.first.pattern_positions</code>. Note
-that it returns the FIRST iteration&#39;s value.</p>
+          <p>(PHI-BLAST) Same as <code>iterations.first.pattern_positions</code>. Note that it returns the FIRST iteration&#39;s value.</p>
           
           
 
           
           <div class="method-source-code" id="pattern_positions-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 160</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern_positions</span>
-  <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">pattern_positions</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">160</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pattern_positions</span>
+<span class="line-num">161</span>   <span class="ruby-ivar">@iterations</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">pattern_positions</span>
+<span class="line-num">162</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -968,8 +949,8 @@ that it returns the FIRST iteration&#39;s value.</p>
 
           
           <div class="method-source-code" id="program-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 138</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">program</span>;        <span class="ruby-identifier">format0_parse_header</span>; <span class="ruby-ivar">@program</span>;        <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">138</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">program</span>;        <span class="ruby-identifier">format0_parse_header</span>; <span class="ruby-ivar">@program</span>;        <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -999,8 +980,8 @@ that it returns the FIRST iteration&#39;s value.</p>
 
           
           <div class="method-source-code" id="query_def-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 150</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_def</span>; <span class="ruby-identifier">format0_parse_query</span>; <span class="ruby-ivar">@query_def</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">150</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_def</span>; <span class="ruby-identifier">format0_parse_query</span>; <span class="ruby-ivar">@query_def</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1030,8 +1011,8 @@ that it returns the FIRST iteration&#39;s value.</p>
 
           
           <div class="method-source-code" id="query_len-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 147</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_len</span>; <span class="ruby-identifier">format0_parse_query</span>; <span class="ruby-ivar">@query_len</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">147</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_len</span>; <span class="ruby-identifier">format0_parse_query</span>; <span class="ruby-ivar">@query_len</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1055,18 +1036,16 @@ that it returns the FIRST iteration&#39;s value.</p>
 
         <div class="method-description">
           
-          <p>Returns the bibliography reference of the BLAST software.  Note that this
-method shows only the first reference. When you want to get additional
-references, you can use <code>references</code> method.</p>
+          <p>Returns the bibliography reference of the BLAST software.  Note that this method shows only the first reference. When you want to get additional references, you can use <code>references</code> method.</p>
           
           
 
           
           <div class="method-source-code" id="reference-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 211</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reference</span>
-  <span class="ruby-identifier">references</span>[<span class="ruby-value">0</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">211</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reference</span>
+<span class="line-num">212</span>   <span class="ruby-identifier">references</span>[<span class="ruby-value">0</span>]
+<span class="line-num">213</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1090,22 +1069,21 @@ references, you can use <code>references</code> method.</p>
 
         <div class="method-description">
           
-          <p>Returns the bibliography references of the BLAST software.  Returns an
-array of strings.</p>
+          <p>Returns the bibliography references of the BLAST software.  Returns an array of strings.</p>
           
           
 
           
           <div class="method-source-code" id="references-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 217</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">references</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@references</span>)
-    <span class="ruby-ivar">@references</span> = <span class="ruby-ivar">@f0references</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s+/</span>, <span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">strip</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span> <span class="ruby-comment">#unless</span>
-  <span class="ruby-ivar">@references</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">217</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">references</span>
+<span class="line-num">218</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@references</span>)
+<span class="line-num">219</span>     <span class="ruby-ivar">@references</span> = <span class="ruby-ivar">@f0references</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">220</span>       <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\s+/</span>, <span class="ruby-string">&#39; &#39;</span>).<span class="ruby-identifier">strip</span>
+<span class="line-num">221</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">222</span>   <span class="ruby-keyword">end</span> <span class="ruby-comment">#unless</span>
+<span class="line-num">223</span>   <span class="ruby-ivar">@references</span>
+<span class="line-num">224</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1135,8 +1113,8 @@ array of strings.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 69</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>; <span class="ruby-ivar">@entry</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">69</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>; <span class="ruby-ivar">@entry</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1166,8 +1144,8 @@ array of strings.</p>
 
           
           <div class="method-source-code" id="version-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 140</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>;        <span class="ruby-identifier">format0_parse_header</span>; <span class="ruby-ivar">@version</span>;        <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">140</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version</span>;        <span class="ruby-identifier">format0_parse_header</span>; <span class="ruby-ivar">@version</span>;        <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1197,8 +1175,8 @@ array of strings.</p>
 
           
           <div class="method-source-code" id="version_date-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 144</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version_date</span>;   <span class="ruby-identifier">format0_parse_header</span>; <span class="ruby-ivar">@version_date</span>;   <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">144</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version_date</span>;   <span class="ruby-identifier">format0_parse_header</span>; <span class="ruby-ivar">@version_date</span>;   <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1228,8 +1206,8 @@ array of strings.</p>
 
           
           <div class="method-source-code" id="version_number-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/format0.rb, line 142</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version_number</span>; <span class="ruby-identifier">format0_parse_header</span>; <span class="ruby-ivar">@version_number</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/format0.rb</span>
+<span class="line-num">142</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">version_number</span>; <span class="ruby-identifier">format0_parse_header</span>; <span class="ruby-ivar">@version_number</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1243,12 +1221,13 @@ array of strings.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

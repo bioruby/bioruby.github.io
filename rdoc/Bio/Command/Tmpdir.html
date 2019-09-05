@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -90,10 +94,7 @@
 
   <section class="description">
     
-<p><a href="Tmpdir.html">Bio::Command::Tmpdir</a> is a wrapper class to handle
-temporary directory like Tempfile class. A temporary directory is created
-when the object of the class is created, and automatically removed when the
-object is destroyed by GC.</p>
+<p><a href="Tmpdir.html"><code>Bio::Command::Tmpdir</code></a> is a wrapper class to handle temporary directory like Tempfile class. A temporary directory is created when the object of the class is created, and automatically removed when the object is destroyed by GC.</p>
 
 <p>BioRuby library internal use only.</p>
 
@@ -129,9 +130,7 @@ object is destroyed by GC.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Tmpdir.html">Tmpdir</a> object. The arguments are
-the same as <a
-href="../Command.html#method-i-mktmpdir">Bio::Command#mktmpdir</a>.</p>
+          <p>Creates a new <a href="Tmpdir.html"><code>Tmpdir</code></a> object. The arguments are the same as <a href="../Command.html#method-i-mktmpdir"><code>Bio::Command.mktmpdir</code></a>.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -142,20 +141,20 @@ href="../Command.html#method-i-mktmpdir">Bio::Command#mktmpdir</a>.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Tmpdir.html">Tmpdir</a> object</p>
+<p><a href="Tmpdir.html"><code>Tmpdir</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 668</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">prefix_suffix</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tmpdir</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@data</span> = []
-  <span class="ruby-ivar">@clean_proc</span> = <span class="ruby-constant">Remover</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@data</span>)
-  <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">define_finalizer</span>(<span class="ruby-keyword">self</span>, <span class="ruby-ivar">@clean_proc</span>)
-  <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">push</span>(<span class="ruby-ivar">@path</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">mktmpdir</span>(<span class="ruby-identifier">prefix_suffix</span>, <span class="ruby-identifier">tmpdir</span>).<span class="ruby-identifier">freeze</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/command.rb</span>
+<span class="line-num">668</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">prefix_suffix</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tmpdir</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">669</span>   <span class="ruby-ivar">@data</span> = []
+<span class="line-num">670</span>   <span class="ruby-ivar">@clean_proc</span> = <span class="ruby-constant">Remover</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@data</span>)
+<span class="line-num">671</span>   <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">define_finalizer</span>(<span class="ruby-keyword">self</span>, <span class="ruby-ivar">@clean_proc</span>)
+<span class="line-num">672</span>   <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">push</span>(<span class="ruby-ivar">@path</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">mktmpdir</span>(<span class="ruby-identifier">prefix_suffix</span>, <span class="ruby-identifier">tmpdir</span>).<span class="ruby-identifier">freeze</span>)
+<span class="line-num">673</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -197,17 +196,17 @@ href="../Command.html#method-i-mktmpdir">Bio::Command#mktmpdir</a>.</p>
 
           
           <div class="method-source-code" id="close-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 685</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close!</span>
-  <span class="ruby-comment"># raise error if path is nil</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">path</span>
-  <span class="ruby-comment"># finilizer object is called to remove the directory</span>
-  <span class="ruby-ivar">@clean_proc</span>.<span class="ruby-identifier">call</span>
-  <span class="ruby-comment"># unregister finalizer</span>
-  <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">undefine_finalizer</span>(<span class="ruby-keyword">self</span>)
-  <span class="ruby-comment"># @data and @path is removed</span>
-  <span class="ruby-ivar">@data</span> = <span class="ruby-ivar">@path</span> = <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/command.rb</span>
+<span class="line-num">685</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close!</span>
+<span class="line-num">686</span>   <span class="ruby-comment"># raise error if path is nil</span>
+<span class="line-num">687</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">path</span>
+<span class="line-num">688</span>   <span class="ruby-comment"># finilizer object is called to remove the directory</span>
+<span class="line-num">689</span>   <span class="ruby-ivar">@clean_proc</span>.<span class="ruby-identifier">call</span>
+<span class="line-num">690</span>   <span class="ruby-comment"># unregister finalizer</span>
+<span class="line-num">691</span>   <span class="ruby-constant">ObjectSpace</span>.<span class="ruby-identifier">undefine_finalizer</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">692</span>   <span class="ruby-comment"># @data and @path is removed</span>
+<span class="line-num">693</span>   <span class="ruby-ivar">@data</span> = <span class="ruby-ivar">@path</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">694</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -241,10 +240,10 @@ href="../Command.html#method-i-mktmpdir">Bio::Command#mktmpdir</a>.</p>
 
           
           <div class="method-source-code" id="path-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 678</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
-  <span class="ruby-ivar">@path</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">IOError</span>, <span class="ruby-string">&#39;removed temporary directory&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/command.rb</span>
+<span class="line-num">678</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">path</span>
+<span class="line-num">679</span>   <span class="ruby-ivar">@path</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">raise</span>(<span class="ruby-constant">IOError</span>, <span class="ruby-string">&#39;removed temporary directory&#39;</span>)
+<span class="line-num">680</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -258,12 +257,13 @@ href="../Command.html#method-i-mktmpdir">Bio::Command#mktmpdir</a>.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

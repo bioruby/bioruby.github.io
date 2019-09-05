@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -99,9 +103,9 @@
 
   <section class="description">
     
-<h1 id="class-Bio::PSORT::PSORT1::Report-label-Bio-3A-3APSORT-3A-3APSORT1-3A-3AReport"><a href="Report.html">Bio::PSORT::PSORT1::Report</a><span><a href="#class-Bio::PSORT::PSORT1::Report-label-Bio-3A-3APSORT-3A-3APSORT1-3A-3AReport">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::PSORT::PSORT1::Report-label-Bio-3A-3APSORT-3A-3APSORT1-3A-3AReport"><a href="Report.html"><code>Bio::PSORT::PSORT1::Report</code></a><span><a href="#class-Bio::PSORT::PSORT1::Report-label-Bio-3A-3APSORT-3A-3APSORT1-3A-3AReport">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>Parser class for <a href="../PSORT1.html">PSORT1</a> output report.</p>
+<p>Parser class for <a href="../PSORT1.html"><code>PSORT1</code></a> output report.</p>
 
 <h2 id="class-Bio::PSORT::PSORT1::Report-label-Example">Example<span><a href="#class-Bio::PSORT::PSORT1::Report-label-Example">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -255,30 +259,30 @@
 
           
           <div class="method-source-code" id="default_parser-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 36</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default_parser</span>(<span class="ruby-identifier">output_report</span>)
-  <span class="ruby-identifier">rpt</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">raw</span> = <span class="ruby-identifier">output_report</span>
-  <span class="ruby-identifier">query_info</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^Query Information\n\n(.+?)\n\n/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>)
-  <span class="ruby-identifier">result_info</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^Result Information\n\n(.+?)\n\n\*/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>]
-  <span class="ruby-identifier">step1</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^\*\*\* Reasoning Step: 1\n\n(.+?)\n\n/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>]
-  <span class="ruby-identifier">step2</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^\*\*\* Reasoning Step: 2\n\n(.+?)\n\n/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>]
-  <span class="ruby-identifier">final_result</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\n\n----- Final Results -----\n\n(.+?)\n\n\n/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>]
-
-  <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">query_info</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^&gt;(\S+) */</span>).<span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">origin</span>   = <span class="ruby-identifier">query_info</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/ORIGIN (\w+)/</span>).<span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query_info</span>[<span class="ruby-value">3</span><span class="ruby-operator">..</span><span class="ruby-identifier">query_info</span>.<span class="ruby-identifier">size</span>].<span class="ruby-identifier">to_s</span>)
-  <span class="ruby-comment"># rpt.reasoning</span>
-
-  <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">final_result</span> = <span class="ruby-identifier">final_result</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">x</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/---/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">strip</span> }
-    { <span class="ruby-string">&#39;prediction&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>], 
-      <span class="ruby-string">&#39;certainty&#39;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/Certainty= (\d\.\d{3})/</span>).<span class="ruby-identifier">to_s</span>,
-      <span class="ruby-string">&#39;comment&#39;</span>    <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\((\w+)\)/</span>).<span class="ruby-identifier">to_s</span>
-    }
-  }
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">rpt</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">36</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default_parser</span>(<span class="ruby-identifier">output_report</span>)
+<span class="line-num">37</span>   <span class="ruby-identifier">rpt</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">38</span>   <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">raw</span> = <span class="ruby-identifier">output_report</span>
+<span class="line-num">39</span>   <span class="ruby-identifier">query_info</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^Query Information\n\n(.+?)\n\n/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>)
+<span class="line-num">40</span>   <span class="ruby-identifier">result_info</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^Result Information\n\n(.+?)\n\n\*/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>]
+<span class="line-num">41</span>   <span class="ruby-identifier">step1</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^\*\*\* Reasoning Step: 1\n\n(.+?)\n\n/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>]
+<span class="line-num">42</span>   <span class="ruby-identifier">step2</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^\*\*\* Reasoning Step: 2\n\n(.+?)\n\n/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>]
+<span class="line-num">43</span>   <span class="ruby-identifier">final_result</span> = <span class="ruby-identifier">output_report</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\n\n----- Final Results -----\n\n(.+?)\n\n\n/m</span>)[<span class="ruby-value">0</span>][<span class="ruby-value">0</span>]
+<span class="line-num">44</span> 
+<span class="line-num">45</span>   <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">query_info</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^&gt;(\S+) */</span>).<span class="ruby-identifier">to_s</span>
+<span class="line-num">46</span>   <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">origin</span>   = <span class="ruby-identifier">query_info</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/ORIGIN (\w+)/</span>).<span class="ruby-identifier">to_s</span>
+<span class="line-num">47</span>   <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">sequence</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query_info</span>[<span class="ruby-value">3</span><span class="ruby-operator">..</span><span class="ruby-identifier">query_info</span>.<span class="ruby-identifier">size</span>].<span class="ruby-identifier">to_s</span>)
+<span class="line-num">48</span>   <span class="ruby-comment"># rpt.reasoning</span>
+<span class="line-num">49</span> 
+<span class="line-num">50</span>   <span class="ruby-identifier">rpt</span>.<span class="ruby-identifier">final_result</span> = <span class="ruby-identifier">final_result</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">51</span>     <span class="ruby-identifier">x</span> = <span class="ruby-identifier">x</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/---/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">y</span><span class="ruby-operator">|</span> <span class="ruby-identifier">y</span>.<span class="ruby-identifier">strip</span> }
+<span class="line-num">52</span>     { <span class="ruby-string">&#39;prediction&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>], 
+<span class="line-num">53</span>       <span class="ruby-string">&#39;certainty&#39;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/Certainty= (\d\.\d{3})/</span>).<span class="ruby-identifier">to_s</span>,
+<span class="line-num">54</span>       <span class="ruby-string">&#39;comment&#39;</span>    <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/\((\w+)\)/</span>).<span class="ruby-identifier">to_s</span>
+<span class="line-num">55</span>     }
+<span class="line-num">56</span>   }
+<span class="line-num">57</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">rpt</span>
+<span class="line-num">58</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -308,18 +312,18 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry_id</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">origin</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">title</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">sequence</span> = <span class="ruby-string">&#39;&#39;</span>,
-               <span class="ruby-identifier">result_info</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">reasoning</span> = {}, <span class="ruby-identifier">final_result</span> = [])
-  <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">entry_id</span>
-  <span class="ruby-ivar">@origin</span> = <span class="ruby-identifier">origin</span>
-  <span class="ruby-ivar">@title</span> = <span class="ruby-identifier">title</span>
-  <span class="ruby-ivar">@sequence</span> = <span class="ruby-identifier">sequence</span>
-  <span class="ruby-ivar">@result_info</span> = <span class="ruby-identifier">result_info</span>
-  <span class="ruby-ivar">@reasoning</span> = <span class="ruby-identifier">reasoning</span>
-  <span class="ruby-ivar">@final_result</span> = <span class="ruby-identifier">final_result</span>
-  <span class="ruby-ivar">@raw</span> = <span class="ruby-string">&#39;&#39;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">72</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry_id</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">origin</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">title</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">sequence</span> = <span class="ruby-string">&#39;&#39;</span>,
+<span class="line-num">73</span>                <span class="ruby-identifier">result_info</span> = <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-identifier">reasoning</span> = {}, <span class="ruby-identifier">final_result</span> = [])
+<span class="line-num">74</span>   <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">entry_id</span>
+<span class="line-num">75</span>   <span class="ruby-ivar">@origin</span> = <span class="ruby-identifier">origin</span>
+<span class="line-num">76</span>   <span class="ruby-ivar">@title</span> = <span class="ruby-identifier">title</span>
+<span class="line-num">77</span>   <span class="ruby-ivar">@sequence</span> = <span class="ruby-identifier">sequence</span>
+<span class="line-num">78</span>   <span class="ruby-ivar">@result_info</span> = <span class="ruby-identifier">result_info</span>
+<span class="line-num">79</span>   <span class="ruby-ivar">@reasoning</span> = <span class="ruby-identifier">reasoning</span>
+<span class="line-num">80</span>   <span class="ruby-ivar">@final_result</span> = <span class="ruby-identifier">final_result</span>
+<span class="line-num">81</span>   <span class="ruby-ivar">@raw</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">82</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -349,10 +353,10 @@
 
           
           <div class="method-source-code" id="parser-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/psort/report.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parser</span>(<span class="ruby-identifier">output_report</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_parser</span>(<span class="ruby-identifier">output_report</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/psort/report.rb</span>
+<span class="line-num">31</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parser</span>(<span class="ruby-identifier">output_report</span>)
+<span class="line-num">32</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">default_parser</span>(<span class="ruby-identifier">output_report</span>)
+<span class="line-num">33</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -366,12 +370,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

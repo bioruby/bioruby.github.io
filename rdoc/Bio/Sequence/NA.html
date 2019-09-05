@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -158,8 +162,7 @@
     
 <h1 id="class-Bio::Sequence::NA-label-DESCRIPTION">DESCRIPTION<span><a href="#class-Bio::Sequence::NA-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p><a href="NA.html">Bio::Sequence::NA</a> represents a bare Nucleic Acid
-sequence in bioruby.</p>
+<p><a href="NA.html"><code>Bio::Sequence::NA</code></a> represents a bare Nucleic Acid sequence in bioruby.</p>
 
 <h1 id="class-Bio::Sequence::NA-label-USAGE">USAGE<span><a href="#class-Bio::Sequence::NA-label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
@@ -252,7 +255,7 @@ sequence in bioruby.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="NA.html">Bio::Sequence::NA</a> object</p>
+<p><a href="NA.html"><code>Bio::Sequence::NA</code></a> object</p>
 </dd></dl>
           
           
@@ -264,12 +267,12 @@ sequence in bioruby.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 75</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">super</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">downcase!</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&quot; \t\n\r&quot;</span>,<span class="ruby-string">&#39;&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">75</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">76</span>   <span class="ruby-keyword">super</span>
+<span class="line-num">77</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">downcase!</span>
+<span class="line-num">78</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&quot; \t\n\r&quot;</span>,<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">79</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -293,11 +296,7 @@ sequence in bioruby.</p>
 
         <div class="method-description">
           
-          <p>Generate a new random sequence with the given frequency of bases. The
-sequence length is determined by their cumulative sum. (See also <a
-href="Common.html#method-i-randomize">Bio::Sequence::Common#randomize</a>
-which creates a new randomized sequence object using the base composition
-of an existing  sequence instance).</p>
+          <p>Generate a new random sequence with the given frequency of bases. The sequence length is determined by their cumulative sum. (See also <a href="Common.html#method-i-randomize"><code>Bio::Sequence::Common#randomize</code></a> which creates a new randomized sequence object using the base composition of an existing  sequence instance).</p>
 
 <pre class="ruby"><span class="ruby-identifier">counts</span> = {<span class="ruby-string">&#39;a&#39;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">1</span>,<span class="ruby-string">&#39;c&#39;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">2</span>,<span class="ruby-string">&#39;g&#39;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">3</span>,<span class="ruby-string">&#39;t&#39;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">4</span>}
 <span class="ruby-identifier">puts</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">randomize</span>(<span class="ruby-identifier">counts</span>)  <span class="ruby-comment">#=&gt; &quot;ggcttgttac&quot; (for example)</span>
@@ -317,17 +316,17 @@ of an existing  sequence instance).</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="NA.html">Bio::Sequence::NA</a> object</p>
+<p><a href="NA.html"><code>Bio::Sequence::NA</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="randomize-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/compat.rb, line 82</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">randomize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">randomize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/compat.rb</span>
+<span class="line-num">82</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">randomize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">83</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">randomize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">84</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -372,8 +371,7 @@ of an existing  sequence instance).</p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">at_content</span>                       <span class="ruby-comment">#=&gt; 0.444444444444444</span>
 </pre>
 
-<p>Note that “u” is regarded as “t”. If there are no ATGC bases in the
-sequence, 0.0 is returned.</p>
+<p>Note that “u” is regarded as “t”. If there are no ATGC bases in the sequence, 0.0 is returned.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -384,15 +382,15 @@ sequence, 0.0 is returned.</p>
 
           
           <div class="method-source-code" id="at_content-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 346</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">at_content</span>
-  <span class="ruby-identifier">count</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">composition</span>
-  <span class="ruby-identifier">at</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;a&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;t&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;u&#39;</span>]
-  <span class="ruby-identifier">gc</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;g&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;c&#39;</span>]
-  <span class="ruby-identifier">total</span> = <span class="ruby-identifier">at</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">gc</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-value">0.0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">at</span>.<span class="ruby-identifier">quo</span>(<span class="ruby-identifier">total</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">346</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">at_content</span>
+<span class="line-num">347</span>   <span class="ruby-identifier">count</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">composition</span>
+<span class="line-num">348</span>   <span class="ruby-identifier">at</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;a&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;t&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;u&#39;</span>]
+<span class="line-num">349</span>   <span class="ruby-identifier">gc</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;g&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;c&#39;</span>]
+<span class="line-num">350</span>   <span class="ruby-identifier">total</span> = <span class="ruby-identifier">at</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">gc</span>
+<span class="line-num">351</span>   <span class="ruby-keyword">return</span> <span class="ruby-value">0.0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+<span class="line-num">352</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">at</span>.<span class="ruby-identifier">quo</span>(<span class="ruby-identifier">total</span>)
+<span class="line-num">353</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -429,8 +427,7 @@ sequence, 0.0 is returned.</p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">at_skew</span>                          <span class="ruby-comment">#=&gt; -0.75</span>
 </pre>
 
-<p>Note that “u” is regarded as “t”. If there are no AT bases in the sequence,
-0.0 is returned.</p>
+<p>Note that “u” is regarded as “t”. If there are no AT bases in the sequence, 0.0 is returned.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -441,15 +438,15 @@ sequence, 0.0 is returned.</p>
 
           
           <div class="method-source-code" id="at_skew-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 395</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">at_skew</span>
-  <span class="ruby-identifier">count</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">composition</span>
-  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;a&#39;</span>]
-  <span class="ruby-identifier">t</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;t&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;u&#39;</span>]
-  <span class="ruby-identifier">at</span> = <span class="ruby-identifier">a</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-value">0.0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">at</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-  <span class="ruby-keyword">return</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">t</span>).<span class="ruby-identifier">quo</span>(<span class="ruby-identifier">at</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">395</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">at_skew</span>
+<span class="line-num">396</span>   <span class="ruby-identifier">count</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">composition</span>
+<span class="line-num">397</span>   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;a&#39;</span>]
+<span class="line-num">398</span>   <span class="ruby-identifier">t</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;t&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;u&#39;</span>]
+<span class="line-num">399</span>   <span class="ruby-identifier">at</span> = <span class="ruby-identifier">a</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>
+<span class="line-num">400</span>   <span class="ruby-keyword">return</span> <span class="ruby-value">0.0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">at</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+<span class="line-num">401</span>   <span class="ruby-keyword">return</span> (<span class="ruby-identifier">a</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">t</span>).<span class="ruby-identifier">quo</span>(<span class="ruby-identifier">at</span>)
+<span class="line-num">402</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -479,8 +476,7 @@ sequence, 0.0 is returned.</p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">codon_usage</span>                <span class="ruby-comment">#=&gt; {&quot;gcg&quot;=&gt;1, &quot;tga&quot;=&gt;1, &quot;atg&quot;=&gt;1}</span>
 </pre>
 
-<p>This method does not validate codons!  Any three letter group is a
-&#39;codon&#39;. So,</p>
+<p>This method does not validate codons!  Any three letter group is a &#39;codon&#39;. So,</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atggNNtga&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">codon_usage</span>                <span class="ruby-comment">#=&gt; {&quot;tga&quot;=&gt;1, &quot;gnn&quot;=&gt;1, &quot;atg&quot;=&gt;1}</span>
@@ -500,14 +496,14 @@ sequence, 0.0 is returned.</p>
 
           
           <div class="method-source-code" id="codon_usage-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 273</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">codon_usage</span>
-  <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">window_search</span>(<span class="ruby-value">3</span>, <span class="ruby-value">3</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">codon</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">codon</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">hash</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">273</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">codon_usage</span>
+<span class="line-num">274</span>   <span class="ruby-identifier">hash</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">0</span>)
+<span class="line-num">275</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">window_search</span>(<span class="ruby-value">3</span>, <span class="ruby-value">3</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">codon</span><span class="ruby-operator">|</span>
+<span class="line-num">276</span>     <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">codon</span>] <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+<span class="line-num">277</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">278</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">hash</span>
+<span class="line-num">279</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -529,8 +525,7 @@ sequence, 0.0 is returned.</p>
 
         <div class="method-description">
           
-          <p>Alias for <a
-href="NA.html#method-i-reverse_complement">#reverse_complement</a></p>
+          <p>Alias for <a href="NA.html#method-i-reverse_complement"><code>Bio::Sequence::NA#reverse_complement</code></a></p>
           
           
 
@@ -558,8 +553,7 @@ href="NA.html#method-i-reverse_complement">#reverse_complement</a></p>
 
         <div class="method-description">
           
-          <p>Alias for <a
-href="NA.html#method-i-reverse_complement-21">#reverse_complement!</a></p>
+          <p>Alias for <a href="NA.html#method-i-reverse_complement-21"><code>Bio::Sequence::NA#reverse_complement!</code></a></p>
           
           
 
@@ -602,17 +596,16 @@ href="NA.html#method-i-reverse_complement-21">#reverse_complement!</a></p>
 </pre>
 <hr>
 
-<p>See <a
-href="../RestrictionEnzyme/Analysis.html#method-c-cut">Bio::RestrictionEnzyme::Analysis.cut</a></p>
+<p>See <a href="../RestrictionEnzyme/Analysis.html#method-c-cut"><code>Bio::RestrictionEnzyme::Analysis.cut</code></a></p>
           
           
 
           
           <div class="method-source-code" id="cut_with_enzyme-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 530</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cut_with_enzyme</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">RestrictionEnzyme</span><span class="ruby-operator">::</span><span class="ruby-constant">Analysis</span>.<span class="ruby-identifier">cut</span>(<span class="ruby-keyword">self</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">530</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cut_with_enzyme</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">531</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">RestrictionEnzyme</span><span class="ruby-operator">::</span><span class="ruby-constant">Analysis</span>.<span class="ruby-identifier">cut</span>(<span class="ruby-keyword">self</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">532</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -668,8 +661,7 @@ href="../RestrictionEnzyme/Analysis.html#method-c-cut">Bio::RestrictionEnzyme::A
 
         <div class="method-description">
           
-          <p>Returns a new sequence object with any &#39;u&#39; bases changed to
-&#39;t&#39;. The original sequence is not modified.</p>
+          <p>Returns a new sequence object with any &#39;u&#39; bases changed to &#39;t&#39;. The original sequence is not modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;augc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">dna</span>                              <span class="ruby-comment">#=&gt; &#39;atgc&#39;</span>
@@ -678,17 +670,17 @@ href="../RestrictionEnzyme/Analysis.html#method-c-cut">Bio::RestrictionEnzyme::A
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>new <a href="NA.html">Bio::Sequence::NA</a> object</p>
+<p>new <a href="NA.html"><code>Bio::Sequence::NA</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="dna-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 474</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dna</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;u&#39;</span>, <span class="ruby-string">&#39;t&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">474</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dna</span>
+<span class="line-num">475</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;u&#39;</span>, <span class="ruby-string">&#39;t&#39;</span>)
+<span class="line-num">476</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -712,8 +704,7 @@ href="../RestrictionEnzyme/Analysis.html#method-c-cut">Bio::RestrictionEnzyme::A
 
         <div class="method-description">
           
-          <p>Changes any &#39;u&#39; bases in the original sequence to &#39;t&#39;. The
-original sequence is modified.</p>
+          <p>Changes any &#39;u&#39; bases in the original sequence to &#39;t&#39;. The original sequence is modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;augc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">dna!</span>                             <span class="ruby-comment">#=&gt; &#39;atgc&#39;</span>
@@ -722,17 +713,17 @@ original sequence is modified.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>current <a href="NA.html">Bio::Sequence::NA</a> object (modified)</p>
+<p>current <a href="NA.html"><code>Bio::Sequence::NA</code></a> object (modified)</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="dna-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 486</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dna!</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;u&#39;</span>, <span class="ruby-string">&#39;t&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">486</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dna!</span>
+<span class="line-num">487</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;u&#39;</span>, <span class="ruby-string">&#39;t&#39;</span>)
+<span class="line-num">488</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -756,8 +747,7 @@ original sequence is modified.</p>
 
         <div class="method-description">
           
-          <p>Returns a new complementary sequence object (without reversing). The
-original sequence object is not modified.</p>
+          <p>Returns a new complementary sequence object (without reversing). The original sequence object is not modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">forward_complement</span>               <span class="ruby-comment">#=&gt; &#39;tacg&#39;</span>
@@ -766,19 +756,19 @@ original sequence object is not modified.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>new <a href="NA.html">Bio::Sequence::NA</a> object</p>
+<p>new <a href="NA.html"><code>Bio::Sequence::NA</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="forward_complement-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 100</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forward_complement</span>
-  <span class="ruby-identifier">s</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
-  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">forward_complement!</span>
-  <span class="ruby-identifier">s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">100</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forward_complement</span>
+<span class="line-num">101</span>   <span class="ruby-identifier">s</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">102</span>   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">forward_complement!</span>
+<span class="line-num">103</span>   <span class="ruby-identifier">s</span>
+<span class="line-num">104</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -802,8 +792,7 @@ original sequence object is not modified.</p>
 
         <div class="method-description">
           
-          <p>Converts the current sequence into its complement (without reversing). The
-original sequence object is modified.</p>
+          <p>Converts the current sequence into its complement (without reversing). The original sequence object is modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">seq</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">forward_complement!</span>              <span class="ruby-comment">#=&gt; &#39;tacg&#39;</span>
@@ -812,22 +801,22 @@ original sequence object is modified.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>current <a href="NA.html">Bio::Sequence::NA</a> object (modified)</p>
+<p>current <a href="NA.html"><code>Bio::Sequence::NA</code></a> object (modified)</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="forward_complement-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 114</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forward_complement!</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rna?</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;augcrymkdhvbswn&#39;</span>, <span class="ruby-string">&#39;uacgyrkmhdbvswn&#39;</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;atgcrymkdhvbswn&#39;</span>, <span class="ruby-string">&#39;tacgyrkmhdbvswn&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">114</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">forward_complement!</span>
+<span class="line-num">115</span>   <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rna?</span>
+<span class="line-num">116</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;augcrymkdhvbswn&#39;</span>, <span class="ruby-string">&#39;uacgyrkmhdbvswn&#39;</span>)
+<span class="line-num">117</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">118</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;atgcrymkdhvbswn&#39;</span>, <span class="ruby-string">&#39;tacgyrkmhdbvswn&#39;</span>)
+<span class="line-num">119</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">120</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">121</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -864,8 +853,7 @@ original sequence object is modified.</p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gc_content</span>                       <span class="ruby-comment">#=&gt; 0.555555555555556</span>
 </pre>
 
-<p>Note that “u” is regarded as “t”. If there are no ATGC bases in the
-sequence, 0.0 is returned.</p>
+<p>Note that “u” is regarded as “t”. If there are no ATGC bases in the sequence, 0.0 is returned.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -876,15 +864,15 @@ sequence, 0.0 is returned.</p>
 
           
           <div class="method-source-code" id="gc_content-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 321</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gc_content</span>
-  <span class="ruby-identifier">count</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">composition</span>
-  <span class="ruby-identifier">at</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;a&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;t&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;u&#39;</span>]
-  <span class="ruby-identifier">gc</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;g&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;c&#39;</span>]
-  <span class="ruby-identifier">total</span> = <span class="ruby-identifier">at</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">gc</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-value">0.0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">quo</span>(<span class="ruby-identifier">total</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">321</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gc_content</span>
+<span class="line-num">322</span>   <span class="ruby-identifier">count</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">composition</span>
+<span class="line-num">323</span>   <span class="ruby-identifier">at</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;a&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;t&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;u&#39;</span>]
+<span class="line-num">324</span>   <span class="ruby-identifier">gc</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;g&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;c&#39;</span>]
+<span class="line-num">325</span>   <span class="ruby-identifier">total</span> = <span class="ruby-identifier">at</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">gc</span>
+<span class="line-num">326</span>   <span class="ruby-keyword">return</span> <span class="ruby-value">0.0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+<span class="line-num">327</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">gc</span>.<span class="ruby-identifier">quo</span>(<span class="ruby-identifier">total</span>)
+<span class="line-num">328</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -908,16 +896,13 @@ sequence, 0.0 is returned.</p>
 
         <div class="method-description">
           
-          <p>Calculate the ratio of GC / ATGC bases as a percentage rounded to  the
-nearest whole number. U is regarded as T.</p>
+          <p>Calculate the ratio of GC / ATGC bases as a percentage rounded to  the nearest whole number. U is regarded as T.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atggcgtga&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gc_percent</span>                       <span class="ruby-comment">#=&gt; 55</span>
 </pre>
 
-<p>Note that this method only returns an integer value. When more digits after
-decimal points are needed, use <a
-href="NA.html#method-i-gc_content">#gc_content</a> and sprintf like below:</p>
+<p>Note that this method only returns an integer value. When more digits after decimal points are needed, use <a href="NA.html#method-i-gc_content"><code>gc_content</code></a> and sprintf like below:</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atggcgtga&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;%3.2f&quot;</span>, <span class="ruby-identifier">s</span>.<span class="ruby-identifier">gc_content</span> <span class="ruby-operator">*</span> <span class="ruby-value">100</span>)  <span class="ruby-comment">#=&gt; &quot;55.56&quot;</span>
@@ -932,15 +917,15 @@ href="NA.html#method-i-gc_content">#gc_content</a> and sprintf like below:</p>
 
           
           <div class="method-source-code" id="gc_percent-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 296</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gc_percent</span>
-  <span class="ruby-identifier">count</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">composition</span>
-  <span class="ruby-identifier">at</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;a&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;t&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;u&#39;</span>]
-  <span class="ruby-identifier">gc</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;g&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;c&#39;</span>]
-  <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">at</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">gc</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-  <span class="ruby-identifier">gc</span> = <span class="ruby-value">100</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">gc</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">at</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">gc</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">gc</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">296</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gc_percent</span>
+<span class="line-num">297</span>   <span class="ruby-identifier">count</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">composition</span>
+<span class="line-num">298</span>   <span class="ruby-identifier">at</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;a&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;t&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;u&#39;</span>]
+<span class="line-num">299</span>   <span class="ruby-identifier">gc</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;g&#39;</span>] <span class="ruby-operator">+</span> <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;c&#39;</span>]
+<span class="line-num">300</span>   <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">at</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">gc</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+<span class="line-num">301</span>   <span class="ruby-identifier">gc</span> = <span class="ruby-value">100</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">gc</span> <span class="ruby-operator">/</span> (<span class="ruby-identifier">at</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">gc</span>)
+<span class="line-num">302</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">gc</span>
+<span class="line-num">303</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -988,15 +973,15 @@ href="NA.html#method-i-gc_content">#gc_content</a> and sprintf like below:</p>
 
           
           <div class="method-source-code" id="gc_skew-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 370</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gc_skew</span>
-  <span class="ruby-identifier">count</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">composition</span>
-  <span class="ruby-identifier">g</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;g&#39;</span>]
-  <span class="ruby-identifier">c</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;c&#39;</span>]
-  <span class="ruby-identifier">gc</span> = <span class="ruby-identifier">g</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">c</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-value">0.0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">gc</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-  <span class="ruby-keyword">return</span> (<span class="ruby-identifier">g</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">c</span>).<span class="ruby-identifier">quo</span>(<span class="ruby-identifier">gc</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">370</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gc_skew</span>
+<span class="line-num">371</span>   <span class="ruby-identifier">count</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">composition</span>
+<span class="line-num">372</span>   <span class="ruby-identifier">g</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;g&#39;</span>]
+<span class="line-num">373</span>   <span class="ruby-identifier">c</span> = <span class="ruby-identifier">count</span>[<span class="ruby-string">&#39;c&#39;</span>]
+<span class="line-num">374</span>   <span class="ruby-identifier">gc</span> = <span class="ruby-identifier">g</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">c</span>
+<span class="line-num">375</span>   <span class="ruby-keyword">return</span> <span class="ruby-value">0.0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">gc</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+<span class="line-num">376</span>   <span class="ruby-keyword">return</span> (<span class="ruby-identifier">g</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">c</span>).<span class="ruby-identifier">quo</span>(<span class="ruby-identifier">gc</span>)
+<span class="line-num">377</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1020,8 +1005,7 @@ href="NA.html#method-i-gc_content">#gc_content</a> and sprintf like below:</p>
 
         <div class="method-description">
           
-          <p>Returns an alphabetically sorted array of any non-standard bases  (other
-than &#39;atgcu&#39;).</p>
+          <p>Returns an alphabetically sorted array of any non-standard bases  (other than &#39;atgcu&#39;).</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgStgQccR&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">illegal_bases</span>                    <span class="ruby-comment">#=&gt; [&quot;q&quot;, &quot;r&quot;, &quot;s&quot;]</span>
@@ -1036,10 +1020,10 @@ than &#39;atgcu&#39;).</p>
 
           
           <div class="method-source-code" id="illegal_bases-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 411</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">illegal_bases</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/[^atgcu]/</span>).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">411</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">illegal_bases</span>
+<span class="line-num">412</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/[^atgcu]/</span>).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">uniq</span>
+<span class="line-num">413</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1063,9 +1047,7 @@ than &#39;atgcu&#39;).</p>
 
         <div class="method-description">
           
-          <p>Estimate molecular weight (using the values from BioPerl&#39;s  <a
-href="http://doc.bioperl.org/releases/bioperl-1.0.1/Bio/Tools/SeqStats.html">SeqStats.pm</a>
-module).</p>
+          <p>Estimate molecular weight (using the values from BioPerl&#39;s  <a href="http://doc.bioperl.org/releases/bioperl-1.0.1/Bio/Tools/SeqStats.html">SeqStats.pm</a> module).</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atggcgtga&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">molecular_weight</span>                 <span class="ruby-comment">#=&gt; 2841.00708</span>
@@ -1086,14 +1068,14 @@ module).</p>
 
           
           <div class="method-source-code" id="molecular_weight-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 427</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">molecular_weight</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rna?</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">weight</span>(<span class="ruby-keyword">self</span>, <span class="ruby-keyword">true</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">weight</span>(<span class="ruby-keyword">self</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">427</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">molecular_weight</span>
+<span class="line-num">428</span>   <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rna?</span>
+<span class="line-num">429</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">weight</span>(<span class="ruby-keyword">self</span>, <span class="ruby-keyword">true</span>)
+<span class="line-num">430</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">431</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">weight</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">432</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">433</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1117,9 +1099,7 @@ module).</p>
 
         <div class="method-description">
           
-          <p>Generate the list of the names of each nucleotide along with the sequence
-(full name).  Names used in bioruby are found in the Bio::AminoAcid::NAMES
-hash.</p>
+          <p>Generate the list of the names of each nucleotide along with the sequence (full name).  Names used in bioruby are found in the Bio::AminoAcid::NAMES hash.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atg&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">names</span>                    <span class="ruby-comment">#=&gt; [&quot;Adenine&quot;, &quot;Thymine&quot;, &quot;Guanine&quot;]</span>
@@ -1134,14 +1114,14 @@ hash.</p>
 
           
           <div class="method-source-code" id="names-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 458</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">names</span>
-  <span class="ruby-identifier">array</span> = []
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">names</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">chr</span>.<span class="ruby-identifier">upcase</span>])
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">458</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">names</span>
+<span class="line-num">459</span>   <span class="ruby-identifier">array</span> = []
+<span class="line-num">460</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">461</span>     <span class="ruby-identifier">array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">names</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">chr</span>.<span class="ruby-identifier">upcase</span>])
+<span class="line-num">462</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">463</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
+<span class="line-num">464</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1165,8 +1145,7 @@ hash.</p>
 
         <div class="method-description">
           
-          <p>Returns a new sequence object with the reverse complement  sequence to the
-original.  The original sequence is not modified.</p>
+          <p>Returns a new sequence object with the reverse complement  sequence to the original.  The original sequence is not modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">reverse_complement</span>               <span class="ruby-comment">#=&gt; &#39;gcat&#39;</span>
@@ -1175,19 +1154,19 @@ original.  The original sequence is not modified.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>new <a href="NA.html">Bio::Sequence::NA</a> object</p>
+<p>new <a href="NA.html"><code>Bio::Sequence::NA</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="reverse_complement-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 131</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse_complement</span>
-  <span class="ruby-identifier">s</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
-  <span class="ruby-identifier">s</span>.<span class="ruby-identifier">reverse_complement!</span>
-  <span class="ruby-identifier">s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">131</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse_complement</span>
+<span class="line-num">132</span>   <span class="ruby-identifier">s</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">133</span>   <span class="ruby-identifier">s</span>.<span class="ruby-identifier">reverse_complement!</span>
+<span class="line-num">134</span>   <span class="ruby-identifier">s</span>
+<span class="line-num">135</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1226,18 +1205,18 @@ original.  The original sequence is not modified.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>current <a href="NA.html">Bio::Sequence::NA</a> object (modified)</p>
+<p>current <a href="NA.html"><code>Bio::Sequence::NA</code></a> object (modified)</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="reverse_complement-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 145</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse_complement!</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">reverse!</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">forward_complement!</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">145</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse_complement!</span>
+<span class="line-num">146</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">reverse!</span>
+<span class="line-num">147</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">forward_complement!</span>
+<span class="line-num">148</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1265,8 +1244,7 @@ original.  The original sequence is not modified.</p>
 
         <div class="method-description">
           
-          <p>Returns a new sequence object with any &#39;t&#39; bases changed to
-&#39;u&#39;. The original sequence is not modified.</p>
+          <p>Returns a new sequence object with any &#39;t&#39; bases changed to &#39;u&#39;. The original sequence is not modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">dna</span>                              <span class="ruby-comment">#=&gt; &#39;augc&#39;</span>
@@ -1275,17 +1253,17 @@ original.  The original sequence is not modified.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>new <a href="NA.html">Bio::Sequence::NA</a> object</p>
+<p>new <a href="NA.html"><code>Bio::Sequence::NA</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="rna-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 498</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rna</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;t&#39;</span>, <span class="ruby-string">&#39;u&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">498</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rna</span>
+<span class="line-num">499</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;t&#39;</span>, <span class="ruby-string">&#39;u&#39;</span>)
+<span class="line-num">500</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1309,8 +1287,7 @@ original.  The original sequence is not modified.</p>
 
         <div class="method-description">
           
-          <p>Changes any &#39;t&#39; bases in the original sequence to &#39;u&#39;. The
-original sequence is modified.</p>
+          <p>Changes any &#39;t&#39; bases in the original sequence to &#39;u&#39;. The original sequence is modified.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">dna!</span>                             <span class="ruby-comment">#=&gt; &#39;augc&#39;</span>
@@ -1319,17 +1296,17 @@ original sequence is modified.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>current <a href="NA.html">Bio::Sequence::NA</a> object (modified)</p>
+<p>current <a href="NA.html"><code>Bio::Sequence::NA</code></a> object (modified)</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="rna-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 510</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rna!</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;t&#39;</span>, <span class="ruby-string">&#39;u&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">510</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rna!</span>
+<span class="line-num">511</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&#39;t&#39;</span>, <span class="ruby-string">&#39;u&#39;</span>)
+<span class="line-num">512</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1353,8 +1330,7 @@ original sequence is modified.</p>
 
         <div class="method-description">
           
-          <p>Create a ruby regular expression instance  (<a
-href="http://corelib.rubyonrails.org/classes/Regexp.html">Regexp)</a></p>
+          <p>Create a ruby regular expression instance  (<a href="http://corelib.rubyonrails.org/classes/Regexp.html">Regexp)</a></p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atggcgtga&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_re</span>                            <span class="ruby-comment">#=&gt; /atggcgtga/</span>
@@ -1369,14 +1345,14 @@ href="http://corelib.rubyonrails.org/classes/Regexp.html">Regexp)</a></p>
 
           
           <div class="method-source-code" id="to_re-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 442</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_re</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rna?</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">to_re</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dna</span>, <span class="ruby-keyword">true</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">to_re</span>(<span class="ruby-keyword">self</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">442</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_re</span>
+<span class="line-num">443</span>   <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rna?</span>
+<span class="line-num">444</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">to_re</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">dna</span>, <span class="ruby-keyword">true</span>)
+<span class="line-num">445</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">446</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">to_re</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">447</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">448</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1406,26 +1382,20 @@ href="http://corelib.rubyonrails.org/classes/Regexp.html">Regexp)</a></p>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>                        <span class="ruby-comment">#=&gt; &quot;MA*&quot;</span>
 </pre>
 
-<p>By default, translate starts in reading frame position 1, but you can start
-in either 2 or 3 as well,</p>
+<p>By default, translate starts in reading frame position 1, but you can start in either 2 or 3 as well,</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">2</span>)                     <span class="ruby-comment">#=&gt; &quot;WR&quot;</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">3</span>)                     <span class="ruby-comment">#=&gt; &quot;GV&quot;</span>
 </pre>
 
-<p>You may also translate the reverse complement in one step by using frame
-values of -1, -2, and -3 (or 4, 5, and 6)</p>
+<p>You may also translate the reverse complement in one step by using frame values of -1, -2, and -3 (or 4, 5, and 6)</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">-1</span>)                    <span class="ruby-comment">#=&gt; &quot;SRH&quot;</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">4</span>)                     <span class="ruby-comment">#=&gt; &quot;SRH&quot;</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">reverse_complement</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">1</span>)  <span class="ruby-comment">#=&gt; &quot;SRH&quot;</span>
 </pre>
 
-<p>The default codon table in the translate function is the Standard
-Eukaryotic codon table.  The translate function takes either a  number or a
-<a href="../CodonTable.html">Bio::CodonTable</a> object for its table
-argument.  The available tables are  (<a
-href="http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode=t">NCBI</a>):</p>
+<p>The default codon table in the translate function is the Standard Eukaryotic codon table.  The translate function takes either a  number or a <a href="../CodonTable.html"><code>Bio::CodonTable</code></a> object for its table argument.  The available tables are  (<a href="http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode=t">NCBI</a>):</p>
 
 <pre>1. &quot;Standard (Eukaryote)&quot;
 2. &quot;Vertebrate Mitochondrial&quot;
@@ -1445,32 +1415,27 @@ href="http://www.ncbi.nlm.nih.gov/Taxonomy/Utils/wprintgc.cgi?mode=t">NCBI</a>):
 22. &quot;Scenedesmus obliquus mitochondrial&quot;
 23. &quot;Thraustochytrium Mitochondrial&quot;</pre>
 
-<p>If you are using anything other than the default table, you must specify 
-frame in the translate method call,</p>
+<p>If you are using anything other than the default table, you must specify  frame in the translate method call,</p>
 
 <pre class="ruby"><span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>                <span class="ruby-comment">#=&gt; &quot;MA*&quot;  (using defaults)</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>)           <span class="ruby-comment">#=&gt; &quot;MA*&quot;  (same as above, but explicit)</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">1</span>,<span class="ruby-value">2</span>)           <span class="ruby-comment">#=&gt; &quot;MAW&quot;  (different codon table)</span>
 </pre>
 
-<p>and using a <a href="../CodonTable.html">Bio::CodonTable</a> instance in
-the translate method call,</p>
+<p>and using a <a href="../CodonTable.html"><code>Bio::CodonTable</code></a> instance in the translate method call,</p>
 
 <pre class="ruby"><span class="ruby-identifier">mt_table</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-value">2</span>]
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">1</span>, <span class="ruby-identifier">mt_table</span>)           <span class="ruby-comment">#=&gt; &quot;MAW&quot;</span>
 </pre>
 
-<p>By default, any invalid or unknown codons (as could happen if the  sequence
-contains ambiguities) will be represented by &#39;X&#39; in the  translated
-sequence.  You may change this to any character of your choice.</p>
+<p>By default, any invalid or unknown codons (as could happen if the  sequence contains ambiguities) will be represented by &#39;X&#39; in the  translated sequence.  You may change this to any character of your choice.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgcNNtga&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>                        <span class="ruby-comment">#=&gt; &quot;MX*&quot;</span>
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>(<span class="ruby-value">1</span>,<span class="ruby-value">1</span>,<span class="ruby-string">&#39;9&#39;</span>)               <span class="ruby-comment">#=&gt; &quot;M9*&quot;</span>
 </pre>
 
-<p>The translate method considers gaps to be unknown characters and treats 
-them as such (i.e. does not collapse sequences prior to translation), so</p>
+<p>The translate method considers gaps to be unknown characters and treats  them as such (i.e. does not collapse sequences prior to translation), so</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc--tga&#39;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">translate</span>                        <span class="ruby-comment">#=&gt; &quot;MX*&quot;</span>
@@ -1481,45 +1446,44 @@ them as such (i.e. does not collapse sequences prior to translation), so</p>
 <ul><li>
 <p>(optional) <em>frame</em>:  one of 1,2,3,4,5,6,-1,-2,-3 (default 1)</p>
 </li><li>
-<p>(optional) <em>table</em>: Fixnum in range 1,23 or <a
-href="../CodonTable.html">Bio::CodonTable</a> object (default 1)</p>
+<p>(optional) <em>table</em>: Fixnum in range 1,23 or <a href="../CodonTable.html"><code>Bio::CodonTable</code></a> object (default 1)</p>
 </li><li>
 <p>(optional) <em>unknown</em>: Character (default &#39;X&#39;)</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="AA.html">Bio::Sequence::AA</a> object</p>
+<p><a href="AA.html"><code>Bio::Sequence::AA</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="translate-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 232</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">translate</span>(<span class="ruby-identifier">frame</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">table</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">unknown</span> = <span class="ruby-string">&#39;X&#39;</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">table</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>)
-    <span class="ruby-identifier">ct</span> = <span class="ruby-identifier">table</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">ct</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-identifier">table</span>]
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">naseq</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dna</span>
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">frame</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>
-    <span class="ruby-identifier">from</span> = <span class="ruby-identifier">frame</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">4</span>, <span class="ruby-value">5</span>, <span class="ruby-value">6</span>
-    <span class="ruby-identifier">from</span> = <span class="ruby-identifier">frame</span> <span class="ruby-operator">-</span> <span class="ruby-value">4</span>
-    <span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">complement!</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">-1</span>, <span class="ruby-value">-2</span>, <span class="ruby-value">-3</span>
-    <span class="ruby-identifier">from</span> = <span class="ruby-value">-1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">frame</span>
-    <span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">complement!</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">from</span> = <span class="ruby-value">0</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">nalen</span> = <span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span>
-  <span class="ruby-identifier">nalen</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">nalen</span> <span class="ruby-operator">%</span> <span class="ruby-value">3</span>
-  <span class="ruby-identifier">aaseq</span> = <span class="ruby-identifier">naseq</span>[<span class="ruby-identifier">from</span>, <span class="ruby-identifier">nalen</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/.{3}/</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">codon</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ct</span>[<span class="ruby-identifier">codon</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">unknown</span>}
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">aaseq</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">232</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">translate</span>(<span class="ruby-identifier">frame</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">table</span> = <span class="ruby-value">1</span>, <span class="ruby-identifier">unknown</span> = <span class="ruby-string">&#39;X&#39;</span>)
+<span class="line-num">233</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">table</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>)
+<span class="line-num">234</span>     <span class="ruby-identifier">ct</span> = <span class="ruby-identifier">table</span>
+<span class="line-num">235</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">236</span>     <span class="ruby-identifier">ct</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">CodonTable</span>[<span class="ruby-identifier">table</span>]
+<span class="line-num">237</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">238</span>   <span class="ruby-identifier">naseq</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dna</span>
+<span class="line-num">239</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">frame</span>
+<span class="line-num">240</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">1</span>, <span class="ruby-value">2</span>, <span class="ruby-value">3</span>
+<span class="line-num">241</span>     <span class="ruby-identifier">from</span> = <span class="ruby-identifier">frame</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+<span class="line-num">242</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">4</span>, <span class="ruby-value">5</span>, <span class="ruby-value">6</span>
+<span class="line-num">243</span>     <span class="ruby-identifier">from</span> = <span class="ruby-identifier">frame</span> <span class="ruby-operator">-</span> <span class="ruby-value">4</span>
+<span class="line-num">244</span>     <span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">complement!</span>
+<span class="line-num">245</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">-1</span>, <span class="ruby-value">-2</span>, <span class="ruby-value">-3</span>
+<span class="line-num">246</span>     <span class="ruby-identifier">from</span> = <span class="ruby-value">-1</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">frame</span>
+<span class="line-num">247</span>     <span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">complement!</span>
+<span class="line-num">248</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">249</span>     <span class="ruby-identifier">from</span> = <span class="ruby-value">0</span>
+<span class="line-num">250</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">251</span>   <span class="ruby-identifier">nalen</span> = <span class="ruby-identifier">naseq</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">from</span>
+<span class="line-num">252</span>   <span class="ruby-identifier">nalen</span> <span class="ruby-operator">-=</span> <span class="ruby-identifier">nalen</span> <span class="ruby-operator">%</span> <span class="ruby-value">3</span>
+<span class="line-num">253</span>   <span class="ruby-identifier">aaseq</span> = <span class="ruby-identifier">naseq</span>[<span class="ruby-identifier">from</span>, <span class="ruby-identifier">nalen</span>].<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/.{3}/</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">codon</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ct</span>[<span class="ruby-identifier">codon</span>] <span class="ruby-keyword">or</span> <span class="ruby-identifier">unknown</span>}
+<span class="line-num">254</span>   <span class="ruby-keyword">return</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">aaseq</span>)
+<span class="line-num">255</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1557,10 +1521,10 @@ href="../CodonTable.html">Bio::CodonTable</a> object (default 1)</p>
 
           
           <div class="method-source-code" id="rna-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/na.rb, line 514</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rna?</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;u&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/na.rb</span>
+<span class="line-num">514</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rna?</span>
+<span class="line-num">515</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">&#39;u&#39;</span>)
+<span class="line-num">516</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1574,12 +1538,13 @@ href="../CodonTable.html">Bio::CodonTable</a> object (default 1)</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -96,12 +100,9 @@
 
   <section class="description">
     
-<p><code>Results</code> stores search results created by
-<code>Bio::FlatFileIndex</code> methods.</p>
+<p><code>Results</code> stores search results created by <code>Bio::FlatFileIndex</code> methods.</p>
 
-<p>Currently, this class inherits Hash, but internal structure of this class
-may be changed anytime. Only using methods described below are strongly
-recomended.</p>
+<p>Currently, this class inherits Hash, but internal structure of this class may be changed anytime. Only using methods described below are strongly recomended.</p>
 
   </section>
 
@@ -152,13 +153,13 @@ recomended.</p>
 
           
           <div class="method-source-code" id="2A-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 351</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">*</span>(<span class="ruby-identifier">a</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;argument must be Results class&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
-  <span class="ruby-identifier">res</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each_key</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">a</span>[<span class="ruby-identifier">x</span>]) <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">x</span>] }
-  <span class="ruby-identifier">res</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">351</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">*</span>(<span class="ruby-identifier">a</span>)
+<span class="line-num">352</span>   <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;argument must be Results class&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
+<span class="line-num">353</span>   <span class="ruby-identifier">res</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">354</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each_key</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">res</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">x</span>, <span class="ruby-identifier">a</span>[<span class="ruby-identifier">x</span>]) <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">x</span>] }
+<span class="line-num">355</span>   <span class="ruby-identifier">res</span>
+<span class="line-num">356</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -199,13 +200,13 @@ recomended.</p>
 
           
           <div class="method-source-code" id="2B-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 334</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">+</span>(<span class="ruby-identifier">a</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;argument must be Results class&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
-  <span class="ruby-identifier">res</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-identifier">res</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">a</span>)
-  <span class="ruby-identifier">res</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">334</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">+</span>(<span class="ruby-identifier">a</span>)
+<span class="line-num">335</span>   <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;argument must be Results class&#39;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
+<span class="line-num">336</span>   <span class="ruby-identifier">res</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">337</span>   <span class="ruby-identifier">res</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">a</span>)
+<span class="line-num">338</span>   <span class="ruby-identifier">res</span>
+<span class="line-num">339</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -235,10 +236,10 @@ recomended.</p>
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 374</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: str</span>
-  <span class="ruby-identifier">each_value</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">374</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: str</span>
+<span class="line-num">375</span>   <span class="ruby-identifier">each_value</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
+<span class="line-num">376</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -268,8 +269,8 @@ recomended.</p>
 
           
           <div class="method-source-code" id="size-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 392</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">392</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -293,15 +294,14 @@ recomended.</p>
 
         <div class="method-description">
           
-          <p>Returns an array of strings. If no search results are exist, returns an
-empty array.</p>
+          <p>Returns an array of strings. If no search results are exist, returns an empty array.</p>
           
           
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 388</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>; <span class="ruby-identifier">values</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">388</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>; <span class="ruby-identifier">values</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -325,17 +325,16 @@ empty array.</p>
 
         <div class="method-description">
           
-          <p>Returns a string. (concatinated if multiple results exists). Same as
-<code>to_a.join(&#39;&#39;)</code>.</p>
+          <p>Returns a string. (concatinated if multiple results exists). Same as <code>to_a.join(&#39;&#39;)</code>.</p>
           
           
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 361</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">join</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">361</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">362</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">join</span>
+<span class="line-num">363</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -349,12 +348,13 @@ empty array.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

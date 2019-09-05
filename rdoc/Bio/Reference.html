@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -247,7 +251,7 @@
 
         <div class="method-description">
         
-        <p><a href="Sequence.html">Sequence</a> number in EMBL/GenBank records</p>
+        <p><a href="Sequence.html"><code>Sequence</code></a> number in EMBL/GenBank records</p>
         
         </div>
       </div>
@@ -418,8 +422,7 @@
 
         <div class="method-description">
           
-          <p>Create a new <a href="Reference.html">Bio::Reference</a> object from a Hash
-of values.  Data is extracted from the values for keys:</p>
+          <p>Create a new <a href="Reference.html"><code>Bio::Reference</code></a> object from a Hash of values.  Data is extracted from the values for keys:</p>
 <ul><li>
 <p>authors - expected value: Array of Strings</p>
 </li><li>
@@ -471,33 +474,33 @@ of values.  Data is extracted from the values for keys:</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Reference.html">Bio::Reference</a> object</p>
+<p><a href="Reference.html"><code>Bio::Reference</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 133</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-ivar">@authors</span>  = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;authors&#39;</span>] <span class="ruby-operator">||</span> [] <span class="ruby-comment"># [ &quot;Hoge, J.P.&quot;, &quot;Fuga, F.B.&quot; ]</span>
-  <span class="ruby-ivar">@title</span>    = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;title&#39;</span>]   <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># &quot;Title of the study.&quot;</span>
-  <span class="ruby-ivar">@journal</span>  = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># &quot;Theor. J. Hoge&quot;</span>
-  <span class="ruby-ivar">@volume</span>   = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;volume&#39;</span>]  <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 12</span>
-  <span class="ruby-ivar">@issue</span>    = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;issue&#39;</span>]   <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 3</span>
-  <span class="ruby-ivar">@pages</span>    = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pages&#39;</span>]   <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 123-145</span>
-  <span class="ruby-ivar">@year</span>     = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]    <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 2001</span>
-  <span class="ruby-ivar">@pubmed</span>   = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pubmed&#39;</span>]  <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 12345678</span>
-  <span class="ruby-ivar">@medline</span>  = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;medline&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 98765432</span>
-  <span class="ruby-ivar">@doi</span>      = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;doi&#39;</span>]
-  <span class="ruby-ivar">@abstract</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;abstract&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> 
-  <span class="ruby-ivar">@url</span>      = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;url&#39;</span>]
-  <span class="ruby-ivar">@mesh</span>     = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;mesh&#39;</span>] <span class="ruby-operator">||</span> []
-  <span class="ruby-ivar">@embl_gb_record_number</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;embl_gb_record_number&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@sequence_position</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;sequence_position&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@comments</span>  = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;comments&#39;</span>]
-  <span class="ruby-ivar">@affiliations</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;affiliations&#39;</span>] <span class="ruby-operator">||</span> []
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">133</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">134</span>   <span class="ruby-ivar">@authors</span>  = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;authors&#39;</span>] <span class="ruby-operator">||</span> [] <span class="ruby-comment"># [ &quot;Hoge, J.P.&quot;, &quot;Fuga, F.B.&quot; ]</span>
+<span class="line-num">135</span>   <span class="ruby-ivar">@title</span>    = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;title&#39;</span>]   <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># &quot;Title of the study.&quot;</span>
+<span class="line-num">136</span>   <span class="ruby-ivar">@journal</span>  = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;journal&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># &quot;Theor. J. Hoge&quot;</span>
+<span class="line-num">137</span>   <span class="ruby-ivar">@volume</span>   = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;volume&#39;</span>]  <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 12</span>
+<span class="line-num">138</span>   <span class="ruby-ivar">@issue</span>    = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;issue&#39;</span>]   <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 3</span>
+<span class="line-num">139</span>   <span class="ruby-ivar">@pages</span>    = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pages&#39;</span>]   <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 123-145</span>
+<span class="line-num">140</span>   <span class="ruby-ivar">@year</span>     = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;year&#39;</span>]    <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 2001</span>
+<span class="line-num">141</span>   <span class="ruby-ivar">@pubmed</span>   = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;pubmed&#39;</span>]  <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 12345678</span>
+<span class="line-num">142</span>   <span class="ruby-ivar">@medline</span>  = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;medline&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-comment"># 98765432</span>
+<span class="line-num">143</span>   <span class="ruby-ivar">@doi</span>      = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;doi&#39;</span>]
+<span class="line-num">144</span>   <span class="ruby-ivar">@abstract</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;abstract&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;&#39;</span> 
+<span class="line-num">145</span>   <span class="ruby-ivar">@url</span>      = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;url&#39;</span>]
+<span class="line-num">146</span>   <span class="ruby-ivar">@mesh</span>     = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;mesh&#39;</span>] <span class="ruby-operator">||</span> []
+<span class="line-num">147</span>   <span class="ruby-ivar">@embl_gb_record_number</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;embl_gb_record_number&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">148</span>   <span class="ruby-ivar">@sequence_position</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;sequence_position&#39;</span>] <span class="ruby-operator">||</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">149</span>   <span class="ruby-ivar">@comments</span>  = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;comments&#39;</span>]
+<span class="line-num">150</span>   <span class="ruby-ivar">@affiliations</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-string">&#39;affiliations&#39;</span>] <span class="ruby-operator">||</span> []
+<span class="line-num">151</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -529,8 +532,7 @@ of values.  Data is extracted from the values for keys:</p>
 
         <div class="method-description">
           
-          <p>If <em>other</em> is equal with the self, returns true. Otherwise, returns
-false.</p>
+          <p>If <em>other</em> is equal with the self, returns true. Otherwise, returns false.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -551,24 +553,24 @@ false.</p>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 159</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
-  <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
-  [ <span class="ruby-value">:authors</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:journal</span>, <span class="ruby-value">:volume</span>, <span class="ruby-value">:issue</span>, <span class="ruby-value">:pages</span>,
-    <span class="ruby-value">:year</span>, <span class="ruby-value">:pubmed</span>, <span class="ruby-value">:medline</span>, <span class="ruby-value">:doi</span>, <span class="ruby-value">:abstract</span>,
-    <span class="ruby-value">:url</span>, <span class="ruby-value">:mesh</span>, <span class="ruby-value">:embl_gb_record_number</span>,
-    <span class="ruby-value">:sequence_position</span>, <span class="ruby-value">:comments</span>, <span class="ruby-value">:affiliations</span> ].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">flag</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">m</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">m</span>))
-    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>, <span class="ruby-constant">ArgumentError</span>, <span class="ruby-constant">NameError</span>
-      <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">flag</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">flag</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">159</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">160</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">161</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
+<span class="line-num">162</span>   <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">163</span>   [ <span class="ruby-value">:authors</span>, <span class="ruby-value">:title</span>, <span class="ruby-value">:journal</span>, <span class="ruby-value">:volume</span>, <span class="ruby-value">:issue</span>, <span class="ruby-value">:pages</span>,
+<span class="line-num">164</span>     <span class="ruby-value">:year</span>, <span class="ruby-value">:pubmed</span>, <span class="ruby-value">:medline</span>, <span class="ruby-value">:doi</span>, <span class="ruby-value">:abstract</span>,
+<span class="line-num">165</span>     <span class="ruby-value">:url</span>, <span class="ruby-value">:mesh</span>, <span class="ruby-value">:embl_gb_record_number</span>,
+<span class="line-num">166</span>     <span class="ruby-value">:sequence_position</span>, <span class="ruby-value">:comments</span>, <span class="ruby-value">:affiliations</span> ].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+<span class="line-num">167</span>     <span class="ruby-keyword">begin</span>
+<span class="line-num">168</span>       <span class="ruby-identifier">flag</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">m</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">m</span>))
+<span class="line-num">169</span>     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>, <span class="ruby-constant">ArgumentError</span>, <span class="ruby-constant">NameError</span>
+<span class="line-num">170</span>       <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">171</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">172</span>     <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">flag</span>
+<span class="line-num">173</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">174</span>   <span class="ruby-identifier">flag</span>
+<span class="line-num">175</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -605,8 +607,7 @@ puts ref.bibitem
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(optional) <em>item</em>: label string (default:
-<code>&quot;PMID:#{pubmed}&quot;</code>).</p>
+<p>(optional) <em>item</em>: label string (default: <code>&quot;PMID:#{pubmed}&quot;</code>).</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -617,17 +618,17 @@ puts ref.bibitem
 
           
           <div class="method-source-code" id="bibitem-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 316</span>
-    <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bibitem</span>(<span class="ruby-identifier">item</span> = <span class="ruby-keyword">nil</span>)
-      <span class="ruby-identifier">item</span>  = <span class="ruby-node">&quot;PMID:#{@pubmed}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">item</span>
-      <span class="ruby-identifier">pages</span> = <span class="ruby-ivar">@pages</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39;--&#39;</span>)
-      <span class="ruby-keyword">return</span> <span class="ruby-identifier">&lt;&lt;-&quot;END&quot;</span>.<span class="ruby-identifier">enum_for</span>(<span class="ruby-value">:each_line</span>).<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
-<span class="ruby-value">        \\bibitem{#{item}}
-        #{@authors.join(&#39;, &#39;)}
-        #{@title},
-        {\\em #{@journal}}, #{@volume}(#{@issue}):#{pages}, #{@year}.
-</span><span class="ruby-identifier">      END</span>
-    <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">316</span>     <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bibitem</span>(<span class="ruby-identifier">item</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">317</span>       <span class="ruby-identifier">item</span>  = <span class="ruby-node">&quot;PMID:#{@pubmed}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">item</span>
+<span class="line-num">318</span>       <span class="ruby-identifier">pages</span> = <span class="ruby-ivar">@pages</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-string">&#39;-&#39;</span>, <span class="ruby-string">&#39;--&#39;</span>)
+<span class="line-num">319</span>       <span class="ruby-keyword">return</span> <span class="ruby-identifier">&lt;&lt;-&quot;END&quot;</span>.<span class="ruby-identifier">enum_for</span>(<span class="ruby-value">:each_line</span>).<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+<span class="line-num">320</span> <span class="ruby-value">        \\bibitem{#{item}}
+<span class="line-num">321</span>         #{@authors.join(&#39;, &#39;)}
+<span class="line-num">322</span>         #{@title},
+<span class="line-num">323</span>         {\\em #{@journal}}, #{@volume}(#{@issue}):#{pages}, #{@year}.
+<span class="line-num">324</span> </span><span class="ruby-identifier">      END</span>
+<span class="line-num">325</span>     <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -705,42 +706,42 @@ value, e.g. { &#39;url&#39; =&gt; false, &#39;year&#39; =&gt; false }.</pre>
 
           
           <div class="method-source-code" id="bibtex-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 366</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bibtex</span>(<span class="ruby-identifier">section</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">label</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keywords</span> = {})
-  <span class="ruby-identifier">section</span> = <span class="ruby-string">&quot;article&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">section</span>
-  <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>, <span class="ruby-string">&#39; and &#39;</span>)
-  <span class="ruby-identifier">thepages</span> = <span class="ruby-identifier">pages</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">pages</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\-/</span>, <span class="ruby-string">&#39;--&#39;</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">label</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">label</span> = <span class="ruby-node">&quot;PMID:#{pubmed}&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">theurl</span> = <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">url</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>) <span class="ruby-keyword">then</span>
-             <span class="ruby-identifier">url</span>
-           <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">pmurl</span> = <span class="ruby-identifier">pubmed_url</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">pmurl</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>) <span class="ruby-keyword">then</span>
-             <span class="ruby-identifier">pmurl</span>
-           <span class="ruby-keyword">else</span>
-             <span class="ruby-keyword">nil</span>
-           <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">hash</span> = {
-    <span class="ruby-string">&#39;author&#39;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">authors</span>.<span class="ruby-identifier">empty?</span>    <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">authors</span>,
-    <span class="ruby-string">&#39;title&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">title</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">title</span>,
-    <span class="ruby-string">&#39;number&#39;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">issue</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">issue</span>,
-    <span class="ruby-string">&#39;pages&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">thepages</span>,
-    <span class="ruby-string">&#39;url&#39;</span>     <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">theurl</span>
-  }
-  <span class="ruby-identifier">keys</span> = <span class="ruby-node">%w( author title journal year volume number pages url )</span>
-  <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">intern</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">keywords</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v1</span>, <span class="ruby-identifier">v2</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v2</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">v1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">v2</span> }
-  <span class="ruby-identifier">bib</span> = [ <span class="ruby-node">&quot;@#{section}{#{label},&quot;</span> ]
-  <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">concat</span>((<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">keys</span>).<span class="ruby-identifier">sort</span>)
-  <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">kw</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">ref</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">kw</span>]
-    <span class="ruby-identifier">bib</span>.<span class="ruby-identifier">push</span> <span class="ruby-node">&quot;  #{kw.ljust(12)} = {#{ref}},&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">ref</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">bib</span>.<span class="ruby-identifier">push</span> <span class="ruby-string">&quot;}\n&quot;</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">bib</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">366</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">bibtex</span>(<span class="ruby-identifier">section</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">label</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">keywords</span> = {})
+<span class="line-num">367</span>   <span class="ruby-identifier">section</span> = <span class="ruby-string">&quot;article&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">section</span>
+<span class="line-num">368</span>   <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>, <span class="ruby-string">&#39; and &#39;</span>)
+<span class="line-num">369</span>   <span class="ruby-identifier">thepages</span> = <span class="ruby-identifier">pages</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">pages</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\-/</span>, <span class="ruby-string">&#39;--&#39;</span>)
+<span class="line-num">370</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">label</span> <span class="ruby-keyword">then</span>
+<span class="line-num">371</span>     <span class="ruby-identifier">label</span> = <span class="ruby-node">&quot;PMID:#{pubmed}&quot;</span>
+<span class="line-num">372</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">373</span>   <span class="ruby-identifier">theurl</span> = <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">url</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">374</span>              <span class="ruby-identifier">url</span>
+<span class="line-num">375</span>            <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">pmurl</span> = <span class="ruby-identifier">pubmed_url</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span>(<span class="ruby-identifier">pmurl</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">376</span>              <span class="ruby-identifier">pmurl</span>
+<span class="line-num">377</span>            <span class="ruby-keyword">else</span>
+<span class="line-num">378</span>              <span class="ruby-keyword">nil</span>
+<span class="line-num">379</span>            <span class="ruby-keyword">end</span>
+<span class="line-num">380</span>   <span class="ruby-identifier">hash</span> = {
+<span class="line-num">381</span>     <span class="ruby-string">&#39;author&#39;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">authors</span>.<span class="ruby-identifier">empty?</span>    <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">authors</span>,
+<span class="line-num">382</span>     <span class="ruby-string">&#39;title&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">title</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">title</span>,
+<span class="line-num">383</span>     <span class="ruby-string">&#39;number&#39;</span>  <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">issue</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">issue</span>,
+<span class="line-num">384</span>     <span class="ruby-string">&#39;pages&#39;</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">thepages</span>,
+<span class="line-num">385</span>     <span class="ruby-string">&#39;url&#39;</span>     <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">theurl</span>
+<span class="line-num">386</span>   }
+<span class="line-num">387</span>   <span class="ruby-identifier">keys</span> = <span class="ruby-node">%w( author title journal year volume number pages url )</span>
+<span class="line-num">388</span>   <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">389</span>     <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">k</span>.<span class="ruby-identifier">intern</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>)
+<span class="line-num">390</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">391</span>   <span class="ruby-identifier">hash</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-identifier">keywords</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">v1</span>, <span class="ruby-identifier">v2</span><span class="ruby-operator">|</span> <span class="ruby-identifier">v2</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">v1</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">v2</span> }
+<span class="line-num">392</span>   <span class="ruby-identifier">bib</span> = [ <span class="ruby-node">&quot;@#{section}{#{label},&quot;</span> ]
+<span class="line-num">393</span>   <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">concat</span>((<span class="ruby-identifier">hash</span>.<span class="ruby-identifier">keys</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">keys</span>).<span class="ruby-identifier">sort</span>)
+<span class="line-num">394</span>   <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">kw</span><span class="ruby-operator">|</span>
+<span class="line-num">395</span>     <span class="ruby-identifier">ref</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">kw</span>]
+<span class="line-num">396</span>     <span class="ruby-identifier">bib</span>.<span class="ruby-identifier">push</span> <span class="ruby-node">&quot;  #{kw.ljust(12)} = {#{ref}},&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">ref</span>
+<span class="line-num">397</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">398</span>   <span class="ruby-identifier">bib</span>.<span class="ruby-identifier">push</span> <span class="ruby-string">&quot;}\n&quot;</span>
+<span class="line-num">399</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">bib</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+<span class="line-num">400</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -764,8 +765,7 @@ value, e.g. { &#39;url&#39; =&gt; false, &#39;year&#39; =&gt; false }.</pre>
 
         <div class="method-description">
           
-          <p>Returns reference formatted in the  <a href="http://www.cell.com">CELL</a>
-Press style.</p>
+          <p>Returns reference formatted in the  <a href="http://www.cell.com">CELL</a> Press style.</p>
 
 <pre># ref is a Bio::Reference object
 puts ref.cell
@@ -781,11 +781,11 @@ puts ref.cell
 
           
           <div class="method-source-code" id="cell-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 560</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cell</span>
-  <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>)
-  <span class="ruby-node">&quot;#{authors} (#{@year}). #{@title} #{@journal} #{@volume}, #{pages}.&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">560</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cell</span>
+<span class="line-num">561</span>   <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>)
+<span class="line-num">562</span>   <span class="ruby-node">&quot;#{authors} (#{@year}). #{@title} #{@journal} #{@volume}, #{pages}.&quot;</span>
+<span class="line-num">563</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -809,9 +809,7 @@ puts ref.cell
 
         <div class="method-description">
           
-          <p>Returns reference formatted in the Current Biology  (<a
-href="http://current-biology.com">current-biology.com</a>) style. (Same as
-the Genome Biology style)</p>
+          <p>Returns reference formatted in the Current Biology  (<a href="http://current-biology.com">current-biology.com</a>) style. (Same as the Genome Biology style)</p>
 
 <pre># ref is a Bio::Reference object
 puts ref.current
@@ -827,10 +825,10 @@ puts ref.current
 
           
           <div class="method-source-code" id="current-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 518</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">current</span> 
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">genome_biol</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">518</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">current</span> 
+<span class="line-num">519</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">genome_biol</span>
+<span class="line-num">520</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -854,7 +852,7 @@ puts ref.current
 
         <div class="method-description">
           
-          <p>Returns reference formatted in the <a href="EMBL.html">EMBL</a> style.</p>
+          <p>Returns reference formatted in the <a href="EMBL.html"><code>EMBL</code></a> style.</p>
 
 <pre># ref is a Bio::Reference object
 puts ref.embl
@@ -870,13 +868,13 @@ puts ref.embl
 
           
           <div class="method-source-code" id="embl-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 296</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">embl</span>
-  <span class="ruby-identifier">r</span> = <span class="ruby-keyword">self</span>
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Format</span><span class="ruby-operator">::</span><span class="ruby-constant">NucFormatter</span><span class="ruby-operator">::</span><span class="ruby-constant">Embl</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">instance_eval</span> {
-    <span class="ruby-identifier">reference_format_embl</span>(<span class="ruby-identifier">r</span>)
-  }
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">296</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">embl</span>
+<span class="line-num">297</span>   <span class="ruby-identifier">r</span> = <span class="ruby-keyword">self</span>
+<span class="line-num">298</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">Format</span><span class="ruby-operator">::</span><span class="ruby-constant">NucFormatter</span><span class="ruby-operator">::</span><span class="ruby-constant">Embl</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">instance_eval</span> {
+<span class="line-num">299</span>     <span class="ruby-identifier">reference_format_embl</span>(<span class="ruby-identifier">r</span>)
+<span class="line-num">300</span>   }
+<span class="line-num">301</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -927,29 +925,29 @@ puts ref.endnote
 
           
           <div class="method-source-code" id="endnote-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 262</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">endnote</span>
-  <span class="ruby-identifier">lines</span> = []
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;%0 Journal Article&quot;</span>
-  <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">author</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%A #{author}&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%D #{@year}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@year</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%T #{@title}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@title</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%J #{@journal}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@journal</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%V #{@volume}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@volume</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%N #{@issue}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@issue</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%P #{@pages}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pages</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%M #{@pubmed}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pubmed</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">u</span> = <span class="ruby-ivar">@url</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">pubmed_url</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@url</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%U #{u}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%X #{@abstract}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@abstract</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-ivar">@mesh</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">term</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%K #{term}&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%+ #{@affiliations.join(&#39; &#39;)}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@affiliations</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">262</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">endnote</span>
+<span class="line-num">263</span>   <span class="ruby-identifier">lines</span> = []
+<span class="line-num">264</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;%0 Journal Article&quot;</span>
+<span class="line-num">265</span>   <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">author</span><span class="ruby-operator">|</span>
+<span class="line-num">266</span>     <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%A #{author}&quot;</span>
+<span class="line-num">267</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">268</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%D #{@year}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@year</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">269</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%T #{@title}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@title</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">270</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%J #{@journal}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@journal</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">271</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%V #{@volume}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@volume</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">272</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%N #{@issue}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@issue</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">273</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%P #{@pages}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pages</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">274</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%M #{@pubmed}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pubmed</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">275</span>   <span class="ruby-identifier">u</span> = <span class="ruby-ivar">@url</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">pubmed_url</span> <span class="ruby-operator">:</span> <span class="ruby-ivar">@url</span>
+<span class="line-num">276</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%U #{u}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">u</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">277</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%X #{@abstract}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@abstract</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">278</span>   <span class="ruby-ivar">@mesh</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">term</span><span class="ruby-operator">|</span>
+<span class="line-num">279</span>     <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%K #{term}&quot;</span>
+<span class="line-num">280</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">281</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;%+ #{@affiliations.join(&#39; &#39;)}&quot;</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@affiliations</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">282</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+<span class="line-num">283</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -991,11 +989,9 @@ puts ref.endnote
 </li><li>
 <p>science - Science</p>
 </li><li>
-<p><a href="Reference.html#method-i-genome_biol">#genome_biol</a> - Genome
-Biology</p>
+<p><a href="Reference.html#method-i-genome_biol"><code>genome_biol</code></a> - Genome Biology</p>
 </li><li>
-<p><a href="Reference.html#method-i-genome_res">#genome_res</a> - Genome
-Research</p>
+<p><a href="Reference.html#method-i-genome_res"><code>genome_res</code></a> - Genome Research</p>
 </li><li>
 <p>nar - Nucleic Acids Research</p>
 </li><li>
@@ -1035,39 +1031,39 @@ Research</p>
 
           
           <div class="method-source-code" id="format-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 210</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format</span>(<span class="ruby-identifier">style</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">style</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;embl&#39;</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">embl</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;endnote&#39;</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">endnote</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;bibitem&#39;</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">bibitem</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;bibtex&#39;</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">bibtex</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;rd&#39;</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">rd</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^nature$/i</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">nature</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^science$/i</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">science</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^genome\s*_*biol/i</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">genome_biol</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^genome\s*_*res/i</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">genome_res</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^nar$/i</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">nar</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^current/i</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">current</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^trends/i</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">trends</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^cell$/i</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">cell</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-identifier">general</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">210</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format</span>(<span class="ruby-identifier">style</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
+<span class="line-num">211</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">style</span>
+<span class="line-num">212</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;embl&#39;</span>
+<span class="line-num">213</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">embl</span>
+<span class="line-num">214</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;endnote&#39;</span>
+<span class="line-num">215</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">endnote</span>
+<span class="line-num">216</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;bibitem&#39;</span>
+<span class="line-num">217</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">bibitem</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
+<span class="line-num">218</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;bibtex&#39;</span>
+<span class="line-num">219</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">bibtex</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
+<span class="line-num">220</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;rd&#39;</span>
+<span class="line-num">221</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">rd</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
+<span class="line-num">222</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^nature$/i</span>
+<span class="line-num">223</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">nature</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">options</span>)
+<span class="line-num">224</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^science$/i</span>
+<span class="line-num">225</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">science</span>
+<span class="line-num">226</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^genome\s*_*biol/i</span>
+<span class="line-num">227</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">genome_biol</span>
+<span class="line-num">228</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^genome\s*_*res/i</span>
+<span class="line-num">229</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">genome_res</span>
+<span class="line-num">230</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^nar$/i</span>
+<span class="line-num">231</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">nar</span>
+<span class="line-num">232</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^current/i</span>
+<span class="line-num">233</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">current</span>
+<span class="line-num">234</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^trends/i</span>
+<span class="line-num">235</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">trends</span>
+<span class="line-num">236</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^cell$/i</span>
+<span class="line-num">237</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">cell</span>
+<span class="line-num">238</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">239</span>     <span class="ruby-keyword">return</span> <span class="ruby-identifier">general</span>
+<span class="line-num">240</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">241</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1107,11 +1103,11 @@ puts ref.general
 
           
           <div class="method-source-code" id="general-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 410</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">general</span>
-  <span class="ruby-identifier">authors</span> = <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
-  <span class="ruby-node">&quot;#{authors} (#{@year}). \&quot;#{@title}\&quot; #{@journal} #{@volume}:#{@pages}.&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">410</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">general</span>
+<span class="line-num">411</span>   <span class="ruby-identifier">authors</span> = <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
+<span class="line-num">412</span>   <span class="ruby-node">&quot;#{authors} (#{@year}). \&quot;#{@title}\&quot; #{@journal} #{@volume}:#{@pages}.&quot;</span>
+<span class="line-num">413</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1135,8 +1131,7 @@ puts ref.general
 
         <div class="method-description">
           
-          <p>Returns reference formatted in the Genome Biology  (<a
-href="http://genomebiology.com">genomebiology.com</a>) style.</p>
+          <p>Returns reference formatted in the Genome Biology  (<a href="http://genomebiology.com">genomebiology.com</a>) style.</p>
 
 <pre># ref is a Bio::Reference object
 puts ref.genome_biol
@@ -1152,12 +1147,12 @@ puts ref.genome_biol
 
           
           <div class="method-source-code" id="genome_biol-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 503</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">genome_biol</span>
-  <span class="ruby-identifier">authors</span> = <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span> <span class="ruby-identifier">strip_dots</span>(<span class="ruby-identifier">name</span>)}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
-  <span class="ruby-identifier">journal</span> = <span class="ruby-identifier">strip_dots</span>(<span class="ruby-ivar">@journal</span>)
-  <span class="ruby-node">&quot;#{authors}: #{@title} #{journal} #{@year}, #{@volume}:#{@pages}.&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">503</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">genome_biol</span>
+<span class="line-num">504</span>   <span class="ruby-identifier">authors</span> = <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span> <span class="ruby-identifier">strip_dots</span>(<span class="ruby-identifier">name</span>)}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
+<span class="line-num">505</span>   <span class="ruby-identifier">journal</span> = <span class="ruby-identifier">strip_dots</span>(<span class="ruby-ivar">@journal</span>)
+<span class="line-num">506</span>   <span class="ruby-node">&quot;#{authors}: #{@title} #{journal} #{@year}, #{@volume}:#{@pages}.&quot;</span>
+<span class="line-num">507</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1181,8 +1176,7 @@ puts ref.genome_biol
 
         <div class="method-description">
           
-          <p>Returns reference formatted in the Genome Research  (<a
-href="http://genome.org">genome.org</a>) style.</p>
+          <p>Returns reference formatted in the Genome Research  (<a href="http://genome.org">genome.org</a>) style.</p>
 
 <pre># ref is a Bio::Reference object
 puts ref.genome_res
@@ -1199,11 +1193,11 @@ puts ref.genome_res
 
           
           <div class="method-source-code" id="genome_res-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 532</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">genome_res</span>
-  <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>)
-  <span class="ruby-node">&quot;#{authors} #{@year}.\n  #{@title} #{@journal} #{@volume}: #{@pages}.&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">532</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">genome_res</span>
+<span class="line-num">533</span>   <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>)
+<span class="line-num">534</span>   <span class="ruby-node">&quot;#{authors} #{@year}.\n  #{@title} #{@journal} #{@volume}: #{@pages}.&quot;</span>
+<span class="line-num">535</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1227,8 +1221,7 @@ puts ref.genome_res
 
         <div class="method-description">
           
-          <p>Returns reference formatted in the Nucleic Acids Reseach  (<a
-href="http://nar.oxfordjournals.org">nar.oxfordjournals.org</a>) style.</p>
+          <p>Returns reference formatted in the Nucleic Acids Reseach  (<a href="http://nar.oxfordjournals.org">nar.oxfordjournals.org</a>) style.</p>
 
 <pre># ref is a Bio::Reference object
 puts ref.nar
@@ -1244,11 +1237,11 @@ puts ref.nar
 
           
           <div class="method-source-code" id="nar-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 546</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nar</span>
-  <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>)
-  <span class="ruby-node">&quot;#{authors} (#{@year}) #{@title} #{@journal}, #{@volume}, #{@pages}.&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">546</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nar</span>
+<span class="line-num">547</span>   <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>)
+<span class="line-num">548</span>   <span class="ruby-node">&quot;#{authors} (#{@year}) #{@title} #{@journal}, #{@volume}, #{@pages}.&quot;</span>
+<span class="line-num">549</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1272,8 +1265,7 @@ puts ref.nar
 
         <div class="method-description">
           
-          <p>Formats in the Nature Publishing Group  (<a
-href="http://www.nature.com">www.nature.com</a>) style.</p>
+          <p>Formats in the Nature Publishing Group  (<a href="http://www.nature.com">www.nature.com</a>) style.</p>
 
 <pre># ref is a Bio::Reference object
 puts ref.nature
@@ -1299,22 +1291,22 @@ puts ref.nature(true)  # or puts ref.nature(short=true)
 
           
           <div class="method-source-code" id="nature-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 459</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nature</span>(<span class="ruby-identifier">short</span> = <span class="ruby-keyword">false</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">short</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
-      <span class="ruby-identifier">authors</span> = <span class="ruby-node">&quot;#{@authors[0]} et al.&quot;</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-      <span class="ruby-identifier">authors</span> = <span class="ruby-node">&quot;#{@authors[0]}&quot;</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; &amp; &#39;</span>)
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-node">&quot;#{authors} #{@journal} #{@volume}, #{@pages} (#{@year}).&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; &amp; &#39;</span>)
-    <span class="ruby-node">&quot;#{authors} #{@title} #{@journal} #{@volume}, #{@pages} (#{@year}).&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">459</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">nature</span>(<span class="ruby-identifier">short</span> = <span class="ruby-keyword">false</span>)
+<span class="line-num">460</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">short</span>
+<span class="line-num">461</span>     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
+<span class="line-num">462</span>       <span class="ruby-identifier">authors</span> = <span class="ruby-node">&quot;#{@authors[0]} et al.&quot;</span>
+<span class="line-num">463</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+<span class="line-num">464</span>       <span class="ruby-identifier">authors</span> = <span class="ruby-node">&quot;#{@authors[0]}&quot;</span>
+<span class="line-num">465</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">466</span>       <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; &amp; &#39;</span>)
+<span class="line-num">467</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">468</span>     <span class="ruby-node">&quot;#{authors} #{@journal} #{@volume}, #{@pages} (#{@year}).&quot;</span>
+<span class="line-num">469</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">470</span>     <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; &amp; &#39;</span>)
+<span class="line-num">471</span>     <span class="ruby-node">&quot;#{authors} #{@title} #{@journal} #{@volume}, #{@pages} (#{@year}).&quot;</span>
+<span class="line-num">472</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">473</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1348,14 +1340,14 @@ puts ref.nature(true)  # or puts ref.nature(short=true)
 
           
           <div class="method-source-code" id="pubmed_url-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 588</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pubmed_url</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pubmed</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
-    <span class="ruby-identifier">head</span> = <span class="ruby-string">&quot;http://www.ncbi.nlm.nih.gov/pubmed&quot;</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{head}/#{@pubmed}&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-string">&#39;&#39;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">588</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pubmed_url</span>
+<span class="line-num">589</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@pubmed</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">590</span>     <span class="ruby-identifier">head</span> = <span class="ruby-string">&quot;http://www.ncbi.nlm.nih.gov/pubmed&quot;</span>
+<span class="line-num">591</span>     <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;#{head}/#{@pubmed}&quot;</span>
+<span class="line-num">592</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">593</span>   <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">594</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1408,16 +1400,16 @@ puts ref.rd
 
           
           <div class="method-source-code" id="rd-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 433</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rd</span>(<span class="ruby-identifier">str</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@abstract</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">str</span>
-  <span class="ruby-identifier">lines</span> = []
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;== &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@title</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;* &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>)
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;* #{@journal} #{@year} #{@volume}:#{@pages} [PMID:#{@pubmed}]&quot;</span>
-  <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@abstract</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n\n&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">433</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rd</span>(<span class="ruby-identifier">str</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">434</span>   <span class="ruby-ivar">@abstract</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">str</span>
+<span class="line-num">435</span>   <span class="ruby-identifier">lines</span> = []
+<span class="line-num">436</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;== &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@title</span>
+<span class="line-num">437</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;* &quot;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>)
+<span class="line-num">438</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;* #{@journal} #{@year} #{@volume}:#{@pages} [PMID:#{@pubmed}]&quot;</span>
+<span class="line-num">439</span>   <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@abstract</span>
+<span class="line-num">440</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n\n&quot;</span>)
+<span class="line-num">441</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1441,8 +1433,7 @@ puts ref.rd
 
         <div class="method-description">
           
-          <p>Returns reference formatted in the  <a
-href="http://www.sciencemag.org">Science</a> style.</p>
+          <p>Returns reference formatted in the  <a href="http://www.sciencemag.org">Science</a> style.</p>
 
 <pre># ref is a Bio::Reference object
 puts ref.science
@@ -1458,16 +1449,16 @@ puts ref.science
 
           
           <div class="method-source-code" id="science-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 484</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">science</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
-    <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">rev_name</span>(<span class="ruby-ivar">@authors</span>[<span class="ruby-value">0</span>]) <span class="ruby-operator">+</span> <span class="ruby-string">&quot; et al.&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">authors</span> = <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rev_name</span>(<span class="ruby-identifier">name</span>)}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">page_from</span>, = <span class="ruby-ivar">@pages</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;-&#39;</span>)
-  <span class="ruby-node">&quot;#{authors}, #{@journal} #{@volume} #{page_from} (#{@year}).&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">484</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">science</span>
+<span class="line-num">485</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">4</span>
+<span class="line-num">486</span>     <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">rev_name</span>(<span class="ruby-ivar">@authors</span>[<span class="ruby-value">0</span>]) <span class="ruby-operator">+</span> <span class="ruby-string">&quot; et al.&quot;</span>
+<span class="line-num">487</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">488</span>     <span class="ruby-identifier">authors</span> = <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">collect</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rev_name</span>(<span class="ruby-identifier">name</span>)}.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
+<span class="line-num">489</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">490</span>   <span class="ruby-identifier">page_from</span>, = <span class="ruby-ivar">@pages</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;-&#39;</span>)
+<span class="line-num">491</span>   <span class="ruby-node">&quot;#{authors}, #{@journal} #{@volume} #{page_from} (#{@year}).&quot;</span>
+<span class="line-num">492</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1491,8 +1482,7 @@ puts ref.science
 
         <div class="method-description">
           
-          <p>Returns reference formatted in the  <a
-href="http://www.trends.com">TRENDS</a> style.</p>
+          <p>Returns reference formatted in the  <a href="http://www.trends.com">TRENDS</a> style.</p>
 
 <pre># ref is a Bio::Reference object
 puts ref.trends
@@ -1508,17 +1498,17 @@ puts ref.trends
 
           
           <div class="method-source-code" id="trends-source">
-            <pre><span class="ruby-comment"># File lib/bio/reference.rb, line 574</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">trends</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>
-    <span class="ruby-identifier">authors</span> = <span class="ruby-node">&quot;#{@authors[0]} et al.&quot;</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">authors</span> = <span class="ruby-node">&quot;#{@authors[0]}&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-node">&quot;#{authors} (#{@year}) #{@title} #{@journal} #{@volume}, #{@pages}&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/reference.rb</span>
+<span class="line-num">574</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">trends</span>
+<span class="line-num">575</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">2</span>
+<span class="line-num">576</span>     <span class="ruby-identifier">authors</span> = <span class="ruby-node">&quot;#{@authors[0]} et al.&quot;</span>
+<span class="line-num">577</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@authors</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span>
+<span class="line-num">578</span>     <span class="ruby-identifier">authors</span> = <span class="ruby-node">&quot;#{@authors[0]}&quot;</span>
+<span class="line-num">579</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">580</span>     <span class="ruby-identifier">authors</span> = <span class="ruby-identifier">authors_join</span>(<span class="ruby-string">&#39; and &#39;</span>)
+<span class="line-num">581</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">582</span>   <span class="ruby-node">&quot;#{authors} (#{@year}) #{@title} #{@journal} #{@volume}, #{@pages}&quot;</span>
+<span class="line-num">583</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1532,12 +1522,13 @@ puts ref.trends
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

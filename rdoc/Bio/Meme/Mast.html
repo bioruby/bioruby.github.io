@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -114,13 +118,7 @@
     
 <h2 id="class-Bio::Meme::Mast-label-Description">Description<span><a href="#class-Bio::Meme::Mast-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p><a href="Mast.html">Bio::Meme::Mast</a> is a wrapper for searching a
-database using sequence motifs.  The code will read options from a Hash and
-run the program.  Parsing of the output is provided by <a
-href="Mast/Report.html">Bio::Meme::Mast::Report</a>.  Before running, <a
-href=":mfile">options</a> and <a href=":d">options</a> must be set  in the
-constructor or <a href="Mast.html#method-i-config">#config</a>(options =
-{})</p>
+<p><a href="Mast.html"><code>Bio::Meme::Mast</code></a> is a wrapper for searching a database using sequence motifs.  The code will read options from a Hash and run the program.  Parsing of the output is provided by <a href="Mast/Report.html"><code>Bio::Meme::Mast::Report</code></a>.  Before running, <a href=":mfile">options</a> and <a href=":d">options</a> must be set  in the constructor or <a href="Mast.html#method-i-config"><code>Mast.config</code></a>(options = {})</p>
 
 <h2 id="class-Bio::Meme::Mast-label-Usage">Usage<span><a href="#class-Bio::Meme::Mast-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -185,7 +183,7 @@ end</pre>
 
         <div class="method-description">
         
-        <p>A Hash of options for <a href="Mast.html">Mast</a></p>
+        <p>A Hash of options for <a href="Mast.html"><code>Mast</code></a></p>
         
         </div>
       </div>
@@ -228,21 +226,21 @@ end</pre>
 <p>ArgumentError if mast program is not found</p>
 </dd><dt><strong>Returns</strong>
 <dd>
-<p>a <a href="Mast.html">Bio::Meme::Mast</a> object</p>
+<p>a <a href="Mast.html"><code>Bio::Meme::Mast</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/meme/mast.rb, line 96</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">mast_location</span>, <span class="ruby-identifier">options</span> = {})
-  <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">mast_location</span>)
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;mast: command not found : #{mast_location}&quot;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@binary</span> = <span class="ruby-identifier">mast_location</span>
-  <span class="ruby-identifier">options</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">config</span>(<span class="ruby-constant">DEFAULT_OPTIONS</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">config</span>(<span class="ruby-identifier">options</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/meme/mast.rb</span>
+<span class="line-num"> 96</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">mast_location</span>, <span class="ruby-identifier">options</span> = {})
+<span class="line-num"> 97</span>   <span class="ruby-keyword">unless</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">mast_location</span>)
+<span class="line-num"> 98</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;mast: command not found : #{mast_location}&quot;</span>)
+<span class="line-num"> 99</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">100</span>   <span class="ruby-ivar">@binary</span> = <span class="ruby-identifier">mast_location</span>
+<span class="line-num">101</span>   <span class="ruby-identifier">options</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">config</span>(<span class="ruby-constant">DEFAULT_OPTIONS</span>) <span class="ruby-operator">:</span> <span class="ruby-identifier">config</span>(<span class="ruby-identifier">options</span>)
+<span class="line-num">102</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -290,14 +288,14 @@ end</pre>
 
           
           <div class="method-source-code" id="check_options-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/meme/mast.rb, line 136</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_options</span>
-  <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Invalid option: #{k}&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">DEFAULT_OPTIONS</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Motif file not found: #{@options[:mfile]}&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:mfile</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@options</span>[<span class="ruby-value">:mfile</span>])
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Database not found: #{@options[:d]}&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:d</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@options</span>[<span class="ruby-value">:d</span>])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/meme/mast.rb</span>
+<span class="line-num">136</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check_options</span>
+<span class="line-num">137</span>   <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">each_key</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">138</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Invalid option: #{k}&quot;</span>) <span class="ruby-keyword">unless</span> <span class="ruby-constant">DEFAULT_OPTIONS</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>)
+<span class="line-num">139</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">140</span>   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Motif file not found: #{@options[:mfile]}&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:mfile</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@options</span>[<span class="ruby-value">:mfile</span>])
+<span class="line-num">141</span>   <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;Database not found: #{@options[:d]}&quot;</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@options</span>[<span class="ruby-value">:d</span>].<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@options</span>[<span class="ruby-value">:d</span>])
+<span class="line-num">142</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -321,10 +319,7 @@ end</pre>
 
         <div class="method-description">
           
-          <p>Builds the command line string any options passed in will be merged with <a
-href="Mast.html#DEFAULT_OPTIONS">DEFAULT_OPTIONS</a> <a
-href="Mast.html">Mast</a> usage: mast &lt;mfile&gt; &lt;opts&gt;
-&lt;flags&gt;</p>
+          <p>Builds the command line string any options passed in will be merged with <a href="Mast.html#DEFAULT_OPTIONS"><code>DEFAULT_OPTIONS</code></a> <a href="Mast.html"><code>Mast</code></a> usage: mast &lt;mfile&gt; &lt;opts&gt; &lt;flags&gt;</p>
 
 <pre class="ruby"><span class="ruby-identifier">mast</span>.<span class="ruby-identifier">config</span>({<span class="ruby-value">:mfile</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;meme.out&quot;</span>, <span class="ruby-value">:d</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&quot;/path/to/fasta/db&quot;</span>})
 </pre>
@@ -332,8 +327,7 @@ href="Mast.html">Mast</a> usage: mast &lt;mfile&gt; &lt;opts&gt;
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>options</em>: Hash (see <a
-href="Mast.html#DEFAULT_OPTIONS">DEFAULT_OPTIONS</a>)</p>
+<p>(required) <em>options</em>: Hash (see <a href="Mast.html#DEFAULT_OPTIONS"><code>DEFAULT_OPTIONS</code></a>)</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -344,23 +338,23 @@ href="Mast.html#DEFAULT_OPTIONS">DEFAULT_OPTIONS</a>)</p>
 
           
           <div class="method-source-code" id="config-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/meme/mast.rb, line 114</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config</span>(<span class="ruby-identifier">options</span>)
-  <span class="ruby-ivar">@options</span> = <span class="ruby-constant">DEFAULT_OPTIONS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
-  <span class="ruby-identifier">mfile</span>, <span class="ruby-identifier">opts</span>, <span class="ruby-identifier">flags</span> = <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">val</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
-      <span class="ruby-keyword">next</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">opt</span> <span class="ruby-operator">==</span> <span class="ruby-value">:mfile</span>
-      <span class="ruby-identifier">mfile</span> = <span class="ruby-identifier">val</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">val</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
-      <span class="ruby-identifier">flags</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -#{opt}&quot;</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">opts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -#{opt} #{val}&quot;</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@cmd</span> = <span class="ruby-node">&quot;#{@binary} #{mfile + opts + flags}&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/meme/mast.rb</span>
+<span class="line-num">114</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">config</span>(<span class="ruby-identifier">options</span>)
+<span class="line-num">115</span>   <span class="ruby-ivar">@options</span> = <span class="ruby-constant">DEFAULT_OPTIONS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">options</span>)
+<span class="line-num">116</span>   <span class="ruby-identifier">mfile</span>, <span class="ruby-identifier">opts</span>, <span class="ruby-identifier">flags</span> = <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-string">&quot;&quot;</span>
+<span class="line-num">117</span>   <span class="ruby-ivar">@options</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">opt</span>, <span class="ruby-identifier">val</span><span class="ruby-operator">|</span>
+<span class="line-num">118</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">nil?</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">val</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">false</span>
+<span class="line-num">119</span>       <span class="ruby-keyword">next</span>
+<span class="line-num">120</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">opt</span> <span class="ruby-operator">==</span> <span class="ruby-value">:mfile</span>
+<span class="line-num">121</span>       <span class="ruby-identifier">mfile</span> = <span class="ruby-identifier">val</span>
+<span class="line-num">122</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">val</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">true</span>
+<span class="line-num">123</span>       <span class="ruby-identifier">flags</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -#{opt}&quot;</span>
+<span class="line-num">124</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">125</span>       <span class="ruby-identifier">opts</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot; -#{opt} #{val}&quot;</span>
+<span class="line-num">126</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">127</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">128</span>   <span class="ruby-ivar">@cmd</span> = <span class="ruby-node">&quot;#{@binary} #{mfile + opts + flags}&quot;</span>
+<span class="line-num">129</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -388,19 +382,19 @@ href="Mast.html#DEFAULT_OPTIONS">DEFAULT_OPTIONS</a>)</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Mast/Report.html">Bio::Meme::Mast::Report</a> object</p>
+<p><a href="Mast/Report.html"><code>Bio::Meme::Mast::Report</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="run-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/meme/mast.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run</span>
-  <span class="ruby-identifier">check_options</span>
-  <span class="ruby-identifier">call_command</span>(<span class="ruby-ivar">@cmd</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@output</span> = <span class="ruby-identifier">io</span>.<span class="ruby-identifier">read</span> }
-  <span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@output</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/meme/mast.rb</span>
+<span class="line-num">148</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run</span>
+<span class="line-num">149</span>   <span class="ruby-identifier">check_options</span>
+<span class="line-num">150</span>   <span class="ruby-identifier">call_command</span>(<span class="ruby-ivar">@cmd</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@output</span> = <span class="ruby-identifier">io</span>.<span class="ruby-identifier">read</span> }
+<span class="line-num">151</span>   <span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@output</span>)
+<span class="line-num">152</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -414,12 +408,13 @@ href="Mast.html#DEFAULT_OPTIONS">DEFAULT_OPTIONS</a>)</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

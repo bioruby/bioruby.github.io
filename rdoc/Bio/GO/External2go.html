@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -114,7 +118,7 @@
     
 <h1 id="class-Bio::GO::External2go-label-Container+class+for+files+in+geneontology.org-2Fgo-2Fexternal2go-2F-2A2go.">Container class for files in geneontology.org/go/external2go/*2go.<span><a href="#class-Bio::GO::External2go-label-Container+class+for+files+in+geneontology.org-2Fgo-2Fexternal2go-2F-2A2go.">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>The line syntax is:</p>
+<p>The line syntax is: </p>
 
 <p>database:&lt;identifier&gt; &gt; GO:&lt;term&gt; ; GO:&lt;GO_id&gt;</p>
 
@@ -190,8 +194,7 @@ SP_KW:ATP synthesis &gt; GO:ATP biosynthesis ; GO:0006754
 
         <div class="method-description">
           
-          <p>Constructor. relation := {:db =&gt; aStr, :db_id =&gt; aStr, :go_term =&gt;
-aStr, :go_id =&gt; aStr}</p>
+          <p>Constructor. relation := {:db =&gt; aStr, :db_id =&gt; aStr, :go_term =&gt; aStr, :go_id =&gt; aStr}</p>
           
           
             <div class="method-calls-super">
@@ -202,11 +205,11 @@ aStr, :go_id =&gt; aStr}</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 354</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
-  <span class="ruby-ivar">@header</span> = {<span class="ruby-value">:date</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">:desc</span> <span class="ruby-operator">=&gt;</span> []}
-  <span class="ruby-keyword">super</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">354</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
+<span class="line-num">355</span>   <span class="ruby-ivar">@header</span> = {<span class="ruby-value">:date</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;&#39;</span>, <span class="ruby-value">:desc</span> <span class="ruby-operator">=&gt;</span> []}
+<span class="line-num">356</span>   <span class="ruby-keyword">super</span>
+<span class="line-num">357</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -236,23 +239,23 @@ aStr, :go_id =&gt; aStr}</p>
 
           
           <div class="method-source-code" id="parser-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 334</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parser</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">e2g</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp!</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^\!date: (.+)/</span>
-      <span class="ruby-identifier">e2g</span>.<span class="ruby-identifier">header</span>[<span class="ruby-value">:date</span>] = <span class="ruby-node">$1</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^\!(.*)/</span>
-      <span class="ruby-identifier">e2g</span>.<span class="ruby-identifier">header</span>[<span class="ruby-value">:desc</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">$1</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^(.+?):(.+) &gt; GO:(.+) ; (GO:\d{7})/</span>).<span class="ruby-identifier">first</span>
-      <span class="ruby-identifier">e2g</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">:db_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>], <span class="ruby-value">:db</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span>], <span class="ruby-value">:go_term</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">2</span>], <span class="ruby-value">:go_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">3</span>]}
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">raise</span>(<span class="ruby-node">&quot;Invalid Format Line: \n #{line.inspect}\n&quot;</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">e2g</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">334</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parser</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">335</span>   <span class="ruby-identifier">e2g</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">336</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">337</span>     <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp!</span>
+<span class="line-num">338</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^\!date: (.+)/</span>
+<span class="line-num">339</span>       <span class="ruby-identifier">e2g</span>.<span class="ruby-identifier">header</span>[<span class="ruby-value">:date</span>] = <span class="ruby-node">$1</span>
+<span class="line-num">340</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^\!(.*)/</span>
+<span class="line-num">341</span>       <span class="ruby-identifier">e2g</span>.<span class="ruby-identifier">header</span>[<span class="ruby-value">:desc</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">$1</span>
+<span class="line-num">342</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/^(.+?):(.+) &gt; GO:(.+) ; (GO:\d{7})/</span>).<span class="ruby-identifier">first</span>
+<span class="line-num">343</span>       <span class="ruby-identifier">e2g</span> <span class="ruby-operator">&lt;&lt;</span> {<span class="ruby-value">:db_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>], <span class="ruby-value">:db</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">0</span>], <span class="ruby-value">:go_term</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">2</span>], <span class="ruby-value">:go_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">3</span>]}
+<span class="line-num">344</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">345</span>       <span class="ruby-identifier">raise</span>(<span class="ruby-node">&quot;Invalid Format Line: \n #{line.inspect}\n&quot;</span>)
+<span class="line-num">346</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">347</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">348</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">e2g</span>
+<span class="line-num">349</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -290,10 +293,10 @@ aStr, :go_id =&gt; aStr}</p>
 
           
           <div class="method-source-code" id="db_ids-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 389</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_ids</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rel</span>[<span class="ruby-value">:db_id</span>] }.<span class="ruby-identifier">uniq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">389</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">db_ids</span>
+<span class="line-num">390</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rel</span>[<span class="ruby-value">:db_id</span>] }.<span class="ruby-identifier">uniq</span>
+<span class="line-num">391</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -323,10 +326,10 @@ aStr, :go_id =&gt; aStr}</p>
 
           
           <div class="method-source-code" id="dbs-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 383</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dbs</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rel</span>[<span class="ruby-value">:db</span>] }.<span class="ruby-identifier">uniq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">383</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dbs</span>
+<span class="line-num">384</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rel</span>[<span class="ruby-value">:db</span>] }.<span class="ruby-identifier">uniq</span>
+<span class="line-num">385</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -350,16 +353,16 @@ aStr, :go_id =&gt; aStr}</p>
 
         <div class="method-description">
           
-          <p>Returns ary of <a href="../GO.html">GO</a> IDs.</p>
+          <p>Returns ary of <a href="../GO.html"><code>GO</code></a> IDs.</p>
           
           
 
           
           <div class="method-source-code" id="go_ids-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 399</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">go_ids</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rel</span>[<span class="ruby-value">:go_id</span>] }.<span class="ruby-identifier">uniq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">399</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">go_ids</span>
+<span class="line-num">400</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rel</span>[<span class="ruby-value">:go_id</span>] }.<span class="ruby-identifier">uniq</span>
+<span class="line-num">401</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -383,16 +386,16 @@ aStr, :go_id =&gt; aStr}</p>
 
         <div class="method-description">
           
-          <p>Returns ary of <a href="../GO.html">GO</a> Terms.</p>
+          <p>Returns ary of <a href="../GO.html"><code>GO</code></a> Terms.</p>
           
           
 
           
           <div class="method-source-code" id="go_terms-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 394</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">go_terms</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rel</span>[<span class="ruby-value">:go_term</span>] }.<span class="ruby-identifier">uniq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">394</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">go_terms</span>
+<span class="line-num">395</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">rel</span><span class="ruby-operator">|</span> <span class="ruby-identifier">rel</span>[<span class="ruby-value">:go_term</span>] }.<span class="ruby-identifier">uniq</span>
+<span class="line-num">396</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -416,16 +419,16 @@ aStr, :go_id =&gt; aStr}</p>
 
         <div class="method-description">
           
-          <p><a href="External2go.html#method-i-set_date">#set_date</a></p>
+          <p><a href="External2go.html#method-i-set_date"><code>Bio::GO::External2go#set_date(value)</code></a></p>
           
           
 
           
           <div class="method-source-code" id="set_date-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 361</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_date</span>(<span class="ruby-identifier">value</span>)
-  <span class="ruby-ivar">@header</span>[<span class="ruby-value">:date</span>] = <span class="ruby-identifier">value</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">361</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_date</span>(<span class="ruby-identifier">value</span>)
+<span class="line-num">362</span>   <span class="ruby-ivar">@header</span>[<span class="ruby-value">:date</span>] = <span class="ruby-identifier">value</span>
+<span class="line-num">363</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -449,16 +452,16 @@ aStr, :go_id =&gt; aStr}</p>
 
         <div class="method-description">
           
-          <p><a href="External2go.html#method-i-set_desc">#set_desc</a></p>
+          <p><a href="External2go.html#method-i-set_desc"><code>Bio::GO::External2go#set_desc(ary)</code></a></p>
           
           
 
           
           <div class="method-source-code" id="set_desc-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 367</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_desc</span>(<span class="ruby-identifier">ary</span>)
-  <span class="ruby-ivar">@header</span>[<span class="ruby-value">:desc</span>] = <span class="ruby-identifier">ary</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">367</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_desc</span>(<span class="ruby-identifier">ary</span>)
+<span class="line-num">368</span>   <span class="ruby-ivar">@header</span>[<span class="ruby-value">:desc</span>] = <span class="ruby-identifier">ary</span>
+<span class="line-num">369</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -482,20 +485,19 @@ aStr, :go_id =&gt; aStr}</p>
 
         <div class="method-description">
           
-          <p><a href="External2go.html#method-i-to_str">#to_str</a> Returns the contents
-in the external2go format.</p>
+          <p><a href="External2go.html#method-i-to_str"><code>Bio::GO::External2go#to_str</code></a> Returns the contents in the external2go format.</p>
           
           
 
           
           <div class="method-source-code" id="to_str-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/go.rb, line 374</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_str</span>
-  [<span class="ruby-node">&quot;!date: #{@header[:date]}&quot;</span>,
-   <span class="ruby-ivar">@header</span>[<span class="ruby-value">:desc</span>].<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;!#{e}&quot;</span> },
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">e</span>[<span class="ruby-value">:db</span>], <span class="ruby-string">&#39;:&#39;</span>, <span class="ruby-identifier">e</span>[<span class="ruby-value">:db_id</span>], <span class="ruby-string">&#39; &gt; GO:&#39;</span>, <span class="ruby-identifier">e</span>[<span class="ruby-value">:go_term</span>], <span class="ruby-string">&#39; ; &#39;</span>, <span class="ruby-identifier">e</span>[<span class="ruby-value">:go_id</span>]].<span class="ruby-identifier">join</span> }
-  ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/go.rb</span>
+<span class="line-num">374</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_str</span>
+<span class="line-num">375</span>   [<span class="ruby-node">&quot;!date: #{@header[:date]}&quot;</span>,
+<span class="line-num">376</span>    <span class="ruby-ivar">@header</span>[<span class="ruby-value">:desc</span>].<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-node">&quot;!#{e}&quot;</span> },
+<span class="line-num">377</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> [<span class="ruby-identifier">e</span>[<span class="ruby-value">:db</span>], <span class="ruby-string">&#39;:&#39;</span>, <span class="ruby-identifier">e</span>[<span class="ruby-value">:db_id</span>], <span class="ruby-string">&#39; &gt; GO:&#39;</span>, <span class="ruby-identifier">e</span>[<span class="ruby-value">:go_term</span>], <span class="ruby-string">&#39; ; &#39;</span>, <span class="ruby-identifier">e</span>[<span class="ruby-value">:go_id</span>]].<span class="ruby-identifier">join</span> }
+<span class="line-num">378</span>   ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+<span class="line-num">379</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -509,12 +511,13 @@ in the external2go format.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

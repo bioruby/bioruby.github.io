@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../../";
 </script>
 
-<script src="../../../../js/jquery.js"></script>
-<script src="../../../../js/darkfish.js"></script>
+<script src="../../../../js/navigation.js" defer></script>
+<script src="../../../../js/search.js" defer></script>
+<script src="../../../../js/search_index.js" defer></script>
+<script src="../../../../js/searcher.js" defer></script>
+<script src="../../../../js/darkfish.js" defer></script>
 
 <link href="../../../../css/fonts.css" rel="stylesheet">
 <link href="../../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -88,15 +92,7 @@
 
   <section class="description">
     
-<p><a href="Iteration.html">Iteration</a> class for WU-BLAST report. Though
-WU-BLAST does not iterate like PSI-BLAST, <a
-href="Iteration.html">Bio::Blast::WU::Report::Iteration</a> aims to keep
-compatibility with Bio::Blast::Default::Report::* classes. It may contain
-some <a href="Hit.html">Bio::Blast::WU::Report::Hit</a> objects. Because it
-inherits <a
-href="../../Default/Report/Iteration.html">Bio::Blast::Default::Report::Iteration</a>,
-please also refer <a
-href="../../Default/Report/Iteration.html">Bio::Blast::Default::Report::Iteration</a>.</p>
+<p><a href="Iteration.html"><code>Iteration</code></a> class for WU-BLAST report. Though WU-BLAST does not iterate like PSI-BLAST, <a href="Iteration.html"><code>Bio::Blast::WU::Report::Iteration</code></a> aims to keep compatibility with Bio::Blast::Default::Report::* classes. It may contain some <a href="Hit.html"><code>Bio::Blast::WU::Report::Hit</code></a> objects. Because it inherits <a href="../../Default/Report/Iteration.html"><code>Bio::Blast::Default::Report::Iteration</code></a>, please also refer <a href="../../Default/Report/Iteration.html"><code>Bio::Blast::Default::Report::Iteration</code></a>.</p>
 
   </section>
 
@@ -130,39 +126,36 @@ href="../../Default/Report/Iteration.html">Bio::Blast::Default::Report::Iteratio
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Iteration.html">Iteration</a> object. It is designed
-to be called only internally from the <a
-href="../Report.html">Bio::Blast::WU::Report</a> class. Users shall not use
-the method directly.</p>
+          <p>Creates a new <a href="Iteration.html"><code>Iteration</code></a> object. It is designed to be called only internally from the <a href="../Report.html"><code>Bio::Blast::WU::Report</code></a> class. Users shall not use the method directly.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/wublast.rb, line 319</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-ivar">@f0stat</span> = []
-  <span class="ruby-ivar">@f0dbstat</span> = <span class="ruby-constant">Default</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span><span class="ruby-operator">::</span><span class="ruby-constant">AlwaysNil</span>.<span class="ruby-identifier">instance</span>
-  <span class="ruby-ivar">@f0hitlist</span> = []
-  <span class="ruby-ivar">@hits</span> = []
-  <span class="ruby-ivar">@num</span> = <span class="ruby-value">1</span>
-  <span class="ruby-ivar">@f0message</span> = []
-  <span class="ruby-ivar">@f0warnings</span> = []
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\AParameters\:$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\AEXIT CODE *\d+/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
-  <span class="ruby-ivar">@f0hitlist</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-regexp">/\*{3} +NONE +\*{3}/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@f0hitlist</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
-    <span class="ruby-keyword">while</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">and</span> <span class="ruby-regexp">/^WARNING\: /</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
-      <span class="ruby-ivar">@f0warnings</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">while</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">and</span> <span class="ruby-regexp">/^\&gt;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
-      <span class="ruby-ivar">@hits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span> <span class="ruby-comment">#unless</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/wublast.rb</span>
+<span class="line-num">319</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">320</span>   <span class="ruby-ivar">@f0stat</span> = []
+<span class="line-num">321</span>   <span class="ruby-ivar">@f0dbstat</span> = <span class="ruby-constant">Default</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span><span class="ruby-operator">::</span><span class="ruby-constant">AlwaysNil</span>.<span class="ruby-identifier">instance</span>
+<span class="line-num">322</span>   <span class="ruby-ivar">@f0hitlist</span> = []
+<span class="line-num">323</span>   <span class="ruby-ivar">@hits</span> = []
+<span class="line-num">324</span>   <span class="ruby-ivar">@num</span> = <span class="ruby-value">1</span>
+<span class="line-num">325</span>   <span class="ruby-ivar">@f0message</span> = []
+<span class="line-num">326</span>   <span class="ruby-ivar">@f0warnings</span> = []
+<span class="line-num">327</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">328</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\AParameters\:$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+<span class="line-num">329</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\AEXIT CODE *\d+/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+<span class="line-num">330</span>   <span class="ruby-ivar">@f0hitlist</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">331</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">332</span>   <span class="ruby-keyword">unless</span> <span class="ruby-regexp">/\*{3} +NONE +\*{3}/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">then</span>
+<span class="line-num">333</span>     <span class="ruby-ivar">@f0hitlist</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span>
+<span class="line-num">334</span>     <span class="ruby-keyword">while</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">and</span> <span class="ruby-regexp">/^WARNING\: /</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+<span class="line-num">335</span>       <span class="ruby-ivar">@f0warnings</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">336</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">337</span>     <span class="ruby-keyword">while</span> <span class="ruby-identifier">r</span> = <span class="ruby-identifier">data</span>.<span class="ruby-identifier">first</span> <span class="ruby-keyword">and</span> <span class="ruby-regexp">/^\&gt;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">r</span>
+<span class="line-num">338</span>       <span class="ruby-ivar">@hits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">339</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">340</span>   <span class="ruby-keyword">end</span> <span class="ruby-comment">#unless</span>
+<span class="line-num">341</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -200,10 +193,10 @@ the method directly.</p>
 
           
           <div class="method-source-code" id="warnings-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blast/wublast.rb, line 344</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">warnings</span>
-  <span class="ruby-ivar">@f0warnings</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blast/wublast.rb</span>
+<span class="line-num">344</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">warnings</span>
+<span class="line-num">345</span>   <span class="ruby-ivar">@f0warnings</span>
+<span class="line-num">346</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -217,12 +210,13 @@ the method directly.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

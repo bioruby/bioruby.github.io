@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../../";
 </script>
 
-<script src="../../../../js/jquery.js"></script>
-<script src="../../../../js/darkfish.js"></script>
+<script src="../../../../js/navigation.js" defer></script>
+<script src="../../../../js/search.js" defer></script>
+<script src="../../../../js/search_index.js" defer></script>
+<script src="../../../../js/searcher.js" defer></script>
+<script src="../../../../js/darkfish.js" defer></script>
 
 <link href="../../../../css/fonts.css" rel="stylesheet">
 <link href="../../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -105,7 +109,7 @@
 
   <section class="description">
     
-<p>Stores <a href="../../GFF2.html">GFF2</a> attribute&#39;s value.</p>
+<p>Stores <a href="../../GFF2.html"><code>GFF2</code></a> attribute&#39;s value.</p>
 
   </section>
 
@@ -139,8 +143,7 @@
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Value.html">Value</a> object. Note that the given
-array <em>values</em> is directly stored in the object.</p>
+          <p>Creates a new <a href="Value.html"><code>Value</code></a> object. Note that the given array <em>values</em> is directly stored in the object.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -149,17 +152,17 @@ array <em>values</em> is directly stored in the object.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Value.html">Value</a> object.</p>
+<p><a href="Value.html"><code>Value</code></a> object.</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 324</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">values</span> = [])
-  <span class="ruby-ivar">@values</span> = <span class="ruby-identifier">values</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">325</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">values</span> = [])
+<span class="line-num">326</span>   <span class="ruby-ivar">@values</span> = <span class="ruby-identifier">values</span>
+<span class="line-num">327</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -197,12 +200,12 @@ array <em>values</em> is directly stored in the object.</p>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 350</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-keyword">or</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">values</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">values</span> <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">351</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">352</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-keyword">or</span>
+<span class="line-num">353</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span>)
+<span class="line-num">354</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">values</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">values</span> <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">355</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -254,8 +257,7 @@ array <em>values</em> is directly stored in the object.</p>
 
         <div class="method-description">
           
-          <p>Returns string representation of this <a href="Value.html">Value</a>
-object.</p>
+          <p>Returns string representation of this <a href="Value.html"><code>Value</code></a> object.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -266,12 +268,12 @@ object.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 331</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-ivar">@values</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">escape_gff2_attribute_value</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">332</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">333</span>   <span class="ruby-ivar">@values</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">str</span><span class="ruby-operator">|</span>
+<span class="line-num">334</span>     <span class="ruby-identifier">escape_gff2_attribute_value</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">335</span>   <span class="ruby-keyword">end</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>)
+<span class="line-num">336</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -297,8 +299,7 @@ object.</p>
           
           <p>Returns all values in this object.</p>
 
-<p>Note that modification of the returned array would affect original <a
-href="Value.html">Value</a> object.</p>
+<p>Note that modification of the returned array would affect original <a href="Value.html"><code>Value</code></a> object.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -309,10 +310,10 @@ href="Value.html">Value</a> object.</p>
 
           
           <div class="method-source-code" id="values-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 343</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">values</span>
-  <span class="ruby-ivar">@values</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">344</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">values</span>
+<span class="line-num">345</span>   <span class="ruby-ivar">@values</span>
+<span class="line-num">346</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -330,12 +331,13 @@ href="Value.html">Value</a> object.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

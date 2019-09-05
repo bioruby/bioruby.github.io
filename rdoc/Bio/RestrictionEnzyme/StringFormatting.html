@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -141,8 +145,7 @@
 
         <div class="method-description">
           
-          <p>Return the sequence with spacing for alignment.  Does not add whitespace
-around cut symbols.</p>
+          <p>Return the sequence with spacing for alignment.  Does not add whitespace around cut symbols.</p>
 
 <p>Example:</p>
 
@@ -155,10 +158,7 @@ around cut symbols.</p>
 <ul><li>
 <p><code>seq</code>: sequence with cut symbols</p>
 </li><li>
-<p><code>cs</code>: (<em>optional</em>) Cut symbol along the string.  The
-reason this is definable outside of <a href="CutSymbol.html">CutSymbol</a>
-is that this is a utility function used to form vertical and horizontal
-cuts such as:</p>
+<p><code>cs</code>: (<em>optional</em>) Cut symbol along the string.  The reason this is definable outside of <a href="CutSymbol.html"><code>CutSymbol</code></a> is that this is a utility function used to form vertical and horizontal cuts such as:</p>
 
 <pre>a|t g c
  +---+
@@ -173,24 +173,24 @@ t a c|g</pre>
 
           
           <div class="method-source-code" id="add_spacing-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/string_formatting.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_spacing</span>( <span class="ruby-identifier">seq</span>, <span class="ruby-identifier">cs</span> = <span class="ruby-identifier">cut_symbol</span> )
-  <span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">c</span> = <span class="ruby-identifier">c</span>.<span class="ruby-identifier">chr</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cs</span>
-      <span class="ruby-identifier">str</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">c</span>
-      <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">flag</span>
-      <span class="ruby-identifier">str</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">c</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">str</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">c</span>
-      <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">str</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/string_formatting.rb</span>
+<span class="line-num">37</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_spacing</span>( <span class="ruby-identifier">seq</span>, <span class="ruby-identifier">cs</span> = <span class="ruby-identifier">cut_symbol</span> )
+<span class="line-num">38</span>   <span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">39</span>   <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">40</span>   <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+<span class="line-num">41</span>     <span class="ruby-identifier">c</span> = <span class="ruby-identifier">c</span>.<span class="ruby-identifier">chr</span>
+<span class="line-num">42</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">cs</span>
+<span class="line-num">43</span>       <span class="ruby-identifier">str</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">c</span>
+<span class="line-num">44</span>       <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">45</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">flag</span>
+<span class="line-num">46</span>       <span class="ruby-identifier">str</span> <span class="ruby-operator">+=</span> <span class="ruby-string">&#39; &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">c</span>
+<span class="line-num">47</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">48</span>       <span class="ruby-identifier">str</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">c</span>
+<span class="line-num">49</span>       <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">50</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">51</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">52</span>   <span class="ruby-identifier">str</span>
+<span class="line-num">53</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -219,8 +219,7 @@ t a c|g</pre>
 
 <p><strong>Arguments</strong></p>
 <ul><li>
-<p><code>s</code>: sequence with extraneous &#39;n&#39; padding on the left
-side of the strand</p>
+<p><code>s</code>: sequence with extraneous &#39;n&#39; padding on the left side of the strand</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -231,12 +230,12 @@ side of the strand</p>
 
           
           <div class="method-source-code" id="left_padding-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/string_formatting.rb, line 91</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">left_padding</span>( <span class="ruby-identifier">s</span> )
-  <span class="ruby-identifier">s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{^n+}</span>
-  <span class="ruby-identifier">ret</span> = <span class="ruby-node">$&amp;</span>
-  <span class="ruby-identifier">ret</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">ret</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>  <span class="ruby-comment"># Don&#39;t pass nil values</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/string_formatting.rb</span>
+<span class="line-num">91</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">left_padding</span>( <span class="ruby-identifier">s</span> )
+<span class="line-num">92</span>   <span class="ruby-identifier">s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{^n+}</span>
+<span class="line-num">93</span>   <span class="ruby-identifier">ret</span> = <span class="ruby-node">$&amp;</span>
+<span class="line-num">94</span>   <span class="ruby-identifier">ret</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">ret</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>  <span class="ruby-comment"># Don&#39;t pass nil values</span>
+<span class="line-num">95</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -265,8 +264,7 @@ side of the strand</p>
 
 <p><strong>Arguments</strong></p>
 <ul><li>
-<p><code>s</code>: sequence with extraneous &#39;n&#39; padding on the right
-side of the strand</p>
+<p><code>s</code>: sequence with extraneous &#39;n&#39; padding on the right side of the strand</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -277,12 +275,12 @@ side of the strand</p>
 
           
           <div class="method-source-code" id="right_padding-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/string_formatting.rb, line 103</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">right_padding</span>( <span class="ruby-identifier">s</span> )
-  <span class="ruby-identifier">s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{n+$}</span>
-  <span class="ruby-identifier">ret</span> = <span class="ruby-node">$&amp;</span>
-  <span class="ruby-identifier">ret</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">ret</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>  <span class="ruby-comment"># Don&#39;t pass nil values</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/string_formatting.rb</span>
+<span class="line-num">103</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">right_padding</span>( <span class="ruby-identifier">s</span> )
+<span class="line-num">104</span>   <span class="ruby-identifier">s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{n+$}</span>
+<span class="line-num">105</span>   <span class="ruby-identifier">ret</span> = <span class="ruby-node">$&amp;</span>
+<span class="line-num">106</span>   <span class="ruby-identifier">ret</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">ret</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39;&#39;</span>  <span class="ruby-comment"># Don&#39;t pass nil values</span>
+<span class="line-num">107</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -306,29 +304,26 @@ side of the strand</p>
 
         <div class="method-description">
           
-          <p>Remove extraneous nucleic acid wildcards (&#39;n&#39; padding) from the
-left and right sides and remove cut symbols</p>
+          <p>Remove extraneous nucleic acid wildcards (&#39;n&#39; padding) from the left and right sides and remove cut symbols</p>
 <hr>
 
 <p><strong>Arguments</strong></p>
 <ul><li>
-<p><code>s</code>: sequence with extraneous &#39;n&#39; padding and cut
-symbols</p>
+<p><code>s</code>: sequence with extraneous &#39;n&#39; padding and cut symbols</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><code>String</code> sequence without &#39;n&#39; padding on the sides or
-cut symbols</p>
+<p><code>String</code> sequence without &#39;n&#39; padding on the sides or cut symbols</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="strip_cuts_and_padding-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/string_formatting.rb, line 81</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strip_cuts_and_padding</span>( <span class="ruby-identifier">s</span> )
-  <span class="ruby-identifier">strip_padding</span>( <span class="ruby-identifier">s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-identifier">cut_symbol</span>, <span class="ruby-string">&#39;&#39;</span>) )
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/string_formatting.rb</span>
+<span class="line-num">81</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strip_cuts_and_padding</span>( <span class="ruby-identifier">s</span> )
+<span class="line-num">82</span>   <span class="ruby-identifier">strip_padding</span>( <span class="ruby-identifier">s</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-identifier">cut_symbol</span>, <span class="ruby-string">&#39;&#39;</span>) )
+<span class="line-num">83</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -352,8 +347,7 @@ cut symbols</p>
 
         <div class="method-description">
           
-          <p>Remove extraneous nucleic acid wildcards (&#39;n&#39; padding) from the
-left and right sides</p>
+          <p>Remove extraneous nucleic acid wildcards (&#39;n&#39; padding) from the left and right sides</p>
 <hr>
 
 <p><strong>Arguments</strong></p>
@@ -369,18 +363,18 @@ left and right sides</p>
 
           
           <div class="method-source-code" id="strip_padding-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/string_formatting.rb, line 62</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strip_padding</span>( <span class="ruby-identifier">s</span> )
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;n&#39;</span>
-    <span class="ruby-identifier">s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{(n+)(.+)}</span>
-    <span class="ruby-identifier">s</span> = <span class="ruby-node">$2</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;n&#39;</span>
-    <span class="ruby-identifier">s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{(.+?)(n+)$}</span>
-    <span class="ruby-identifier">s</span> = <span class="ruby-node">$1</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">s</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/string_formatting.rb</span>
+<span class="line-num">62</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strip_padding</span>( <span class="ruby-identifier">s</span> )
+<span class="line-num">63</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;n&#39;</span>
+<span class="line-num">64</span>     <span class="ruby-identifier">s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{(n+)(.+)}</span>
+<span class="line-num">65</span>     <span class="ruby-identifier">s</span> = <span class="ruby-node">$2</span>
+<span class="line-num">66</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">67</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>[<span class="ruby-value">-1</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;n&#39;</span>
+<span class="line-num">68</span>     <span class="ruby-identifier">s</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{(.+?)(n+)$}</span>
+<span class="line-num">69</span>     <span class="ruby-identifier">s</span> = <span class="ruby-node">$1</span>
+<span class="line-num">70</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">71</span>   <span class="ruby-identifier">s</span>
+<span class="line-num">72</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -394,12 +388,13 @@ left and right sides</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -118,8 +122,7 @@
     
 <h1 id="class-Bio::Sequence::AA-label-DESCRIPTION">DESCRIPTION<span><a href="#class-Bio::Sequence::AA-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p><a href="AA.html">Bio::Sequence::AA</a> represents a bare Amino Acid
-sequence in bioruby.</p>
+<p><a href="AA.html"><code>Bio::Sequence::AA</code></a> represents a bare Amino Acid sequence in bioruby.</p>
 
 <h1 id="class-Bio::Sequence::AA-label-USAGE">USAGE<span><a href="#class-Bio::Sequence::AA-label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
@@ -197,7 +200,7 @@ sequence in bioruby.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="AA.html">Bio::Sequence::AA</a> object</p>
+<p><a href="AA.html"><code>Bio::Sequence::AA</code></a> object</p>
 </dd></dl>
           
           
@@ -209,12 +212,12 @@ sequence in bioruby.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/aa.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">super</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">upcase!</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&quot; \t\n\r&quot;</span>,<span class="ruby-string">&#39;&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/aa.rb</span>
+<span class="line-num">58</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">59</span>   <span class="ruby-keyword">super</span>
+<span class="line-num">60</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">upcase!</span>
+<span class="line-num">61</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">tr!</span>(<span class="ruby-string">&quot; \t\n\r&quot;</span>,<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">62</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -238,11 +241,7 @@ sequence in bioruby.</p>
 
         <div class="method-description">
           
-          <p>Generate a new random sequence with the given frequency of bases. The
-sequence length is determined by their cumulative sum. (See also <a
-href="Common.html#method-i-randomize">Bio::Sequence::Common#randomize</a>
-which creates a new randomized sequence object using the base composition
-of an existing  sequence instance).</p>
+          <p>Generate a new random sequence with the given frequency of bases. The sequence length is determined by their cumulative sum. (See also <a href="Common.html#method-i-randomize"><code>Bio::Sequence::Common#randomize</code></a> which creates a new randomized sequence object using the base composition of an existing  sequence instance).</p>
 
 <pre class="ruby"><span class="ruby-identifier">counts</span> = {<span class="ruby-string">&#39;R&#39;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">1</span>,<span class="ruby-string">&#39;L&#39;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">2</span>,<span class="ruby-string">&#39;E&#39;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">3</span>,<span class="ruby-string">&#39;A&#39;</span><span class="ruby-operator">=&gt;</span><span class="ruby-value">4</span>}
 <span class="ruby-identifier">puts</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">randomize</span>(<span class="ruby-identifier">counts</span>)  <span class="ruby-comment">#=&gt; &quot;AAEAELALRE&quot; (for example)</span>
@@ -262,17 +261,17 @@ of an existing  sequence instance).</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="AA.html">Bio::Sequence::AA</a> object</p>
+<p><a href="AA.html"><code>Bio::Sequence::AA</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="randomize-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/compat.rb, line 113</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">randomize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">randomize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/compat.rb</span>
+<span class="line-num">113</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">randomize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">114</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">randomize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">115</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -304,9 +303,7 @@ of an existing  sequence instance).</p>
 
         <div class="method-description">
           
-          <p>Generate the list of the names of each residue along with the sequence (3
-letters code).  Codes used in bioruby are found in the
-Bio::AminoAcid::NAMES hash.</p>
+          <p>Generate the list of the names of each residue along with the sequence (3 letters code).  Codes used in bioruby are found in the Bio::AminoAcid::NAMES hash.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;RRLE&quot;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">codes</span>                        <span class="ruby-comment">#=&gt; [&quot;Arg&quot;, &quot;Arg&quot;, &quot;Leu&quot;, &quot;Glu&quot;]</span>
@@ -321,14 +318,14 @@ Bio::AminoAcid::NAMES hash.</p>
 
           
           <div class="method-source-code" id="codes-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/aa.rb, line 95</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">codes</span>
-  <span class="ruby-identifier">array</span> = []
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AminoAcid</span>.<span class="ruby-identifier">names</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">chr</span>])
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/aa.rb</span>
+<span class="line-num"> 95</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">codes</span>
+<span class="line-num"> 96</span>   <span class="ruby-identifier">array</span> = []
+<span class="line-num"> 97</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num"> 98</span>     <span class="ruby-identifier">array</span>.<span class="ruby-identifier">push</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AminoAcid</span>.<span class="ruby-identifier">names</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">chr</span>])
+<span class="line-num"> 99</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">100</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">array</span>
+<span class="line-num">101</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -352,8 +349,7 @@ Bio::AminoAcid::NAMES hash.</p>
 
         <div class="method-description">
           
-          <p>Estimate molecular weight based on  <a
-href="http://www.genome.ad.jp/dbget-bin/www_bget?aaindex+FASG760101">Fasman1976</a></p>
+          <p>Estimate molecular weight based on  <a href="http://www.genome.ad.jp/dbget-bin/www_bget?aaindex+FASG760101">Fasman1976</a></p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;RRLE&quot;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">molecular_weight</span>             <span class="ruby-comment">#=&gt; 572.655</span>
@@ -368,10 +364,10 @@ href="http://www.genome.ad.jp/dbget-bin/www_bget?aaindex+FASG760101">Fasman1976<
 
           
           <div class="method-source-code" id="molecular_weight-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/aa.rb, line 72</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">molecular_weight</span>
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AminoAcid</span>.<span class="ruby-identifier">weight</span>(<span class="ruby-keyword">self</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/aa.rb</span>
+<span class="line-num">72</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">molecular_weight</span>
+<span class="line-num">73</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AminoAcid</span>.<span class="ruby-identifier">weight</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">74</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -395,9 +391,7 @@ href="http://www.genome.ad.jp/dbget-bin/www_bget?aaindex+FASG760101">Fasman1976<
 
         <div class="method-description">
           
-          <p>Generate the list of the names of each residue along with the sequence
-(full name).  Names used in bioruby are found in the Bio::AminoAcid::NAMES
-hash.</p>
+          <p>Generate the list of the names of each residue along with the sequence (full name).  Names used in bioruby are found in the Bio::AminoAcid::NAMES hash.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;RRLE&quot;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">names</span>  
@@ -413,12 +407,12 @@ hash.</p>
 
           
           <div class="method-source-code" id="names-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/aa.rb, line 112</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">names</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">codes</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AminoAcid</span>.<span class="ruby-identifier">names</span>[<span class="ruby-identifier">x</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/aa.rb</span>
+<span class="line-num">112</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">names</span>
+<span class="line-num">113</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">codes</span>.<span class="ruby-identifier">map</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">114</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AminoAcid</span>.<span class="ruby-identifier">names</span>[<span class="ruby-identifier">x</span>]
+<span class="line-num">115</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">116</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -442,8 +436,7 @@ hash.</p>
 
         <div class="method-description">
           
-          <p>Create a ruby regular expression instance  (<a
-href="http://corelib.rubyonrails.org/classes/Regexp.html">Regexp)</a></p>
+          <p>Create a ruby regular expression instance  (<a href="http://corelib.rubyonrails.org/classes/Regexp.html">Regexp)</a></p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;RRLE&quot;</span>)
 <span class="ruby-identifier">puts</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_re</span>                        <span class="ruby-comment">#=&gt; /RRLE/</span>
@@ -458,10 +451,10 @@ href="http://corelib.rubyonrails.org/classes/Regexp.html">Regexp)</a></p>
 
           
           <div class="method-source-code" id="to_re-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/aa.rb, line 83</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_re</span>
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AminoAcid</span>.<span class="ruby-identifier">to_re</span>(<span class="ruby-keyword">self</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/aa.rb</span>
+<span class="line-num">83</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_re</span>
+<span class="line-num">84</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AminoAcid</span>.<span class="ruby-identifier">to_re</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">85</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -475,12 +468,13 @@ href="http://corelib.rubyonrails.org/classes/Regexp.html">Regexp)</a></p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

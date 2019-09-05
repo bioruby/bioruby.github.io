@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -131,7 +135,7 @@
 
   <section class="description">
     
-<p>Stores <a href="../GFF2.html">GFF2</a> record.</p>
+<p>Stores <a href="../GFF2.html"><code>GFF2</code></a> record.</p>
 
   </section>
 
@@ -158,7 +162,7 @@
 
         <div class="method-description">
         
-        <p>Comment for the <a href="../../GFF.html">GFF</a> record</p>
+        <p>Comment for the <a href="../../GFF.html"><code>GFF</code></a> record</p>
         
         </div>
       </div>
@@ -186,15 +190,12 @@
 
         <div class="method-description">
           
-          <p>Creates a <a href="Record.html">Bio::GFF::GFF2::Record</a> object. Is
-typically not called directly, but is called automatically when creating a
-<a href="../GFF2.html">Bio::GFF::GFF2</a> object.</p>
+          <p>Creates a <a href="Record.html"><code>Bio::GFF::GFF2::Record</code></a> object. Is typically not called directly, but is called automatically when creating a <a href="../GFF2.html"><code>Bio::GFF::GFF2</code></a> object.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>str</em>: a tab-delimited line in <a href="../GFF2.html">GFF2</a>
-format</p>
+<p><em>str</em>: a tab-delimited line in <a href="../GFF2.html"><code>GFF2</code></a> format</p>
 </li></ul>
 
 <p><strong>Arguments</strong>:</p>
@@ -222,21 +223,21 @@ format</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 381</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>])
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@seqname</span>, <span class="ruby-ivar">@source</span>, <span class="ruby-ivar">@feature</span>,
-    <span class="ruby-identifier">start</span>, <span class="ruby-identifier">endp</span>, <span class="ruby-ivar">@score</span>, <span class="ruby-ivar">@strand</span>, <span class="ruby-identifier">frame</span>,
-    <span class="ruby-ivar">@attributes</span> = <span class="ruby-identifier">arg</span>
-    <span class="ruby-ivar">@start</span> = <span class="ruby-identifier">start</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-    <span class="ruby-ivar">@end</span>   = <span class="ruby-identifier">endp</span>  <span class="ruby-operator">?</span> <span class="ruby-identifier">endp</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-    <span class="ruby-ivar">@score</span> = <span class="ruby-identifier">score</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-    <span class="ruby-ivar">@frame</span> = <span class="ruby-identifier">frame</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@attributes</span> <span class="ruby-operator">||=</span> []
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">384</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">385</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
+<span class="line-num">386</span>     <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>])
+<span class="line-num">387</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">388</span>     <span class="ruby-ivar">@seqname</span>, <span class="ruby-ivar">@source</span>, <span class="ruby-ivar">@feature</span>,
+<span class="line-num">389</span>     <span class="ruby-identifier">start</span>, <span class="ruby-identifier">endp</span>, <span class="ruby-ivar">@score</span>, <span class="ruby-ivar">@strand</span>, <span class="ruby-identifier">frame</span>,
+<span class="line-num">390</span>     <span class="ruby-ivar">@attributes</span> = <span class="ruby-identifier">arg</span>
+<span class="line-num">391</span>     <span class="ruby-ivar">@start</span> = <span class="ruby-identifier">start</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">392</span>     <span class="ruby-ivar">@end</span>   = <span class="ruby-identifier">endp</span>  <span class="ruby-operator">?</span> <span class="ruby-identifier">endp</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">393</span>     <span class="ruby-ivar">@score</span> = <span class="ruby-identifier">score</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">394</span>     <span class="ruby-ivar">@frame</span> = <span class="ruby-identifier">frame</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">395</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">396</span>   <span class="ruby-ivar">@attributes</span> <span class="ruby-operator">||=</span> []
+<span class="line-num">397</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -260,17 +261,18 @@ format</p>
 
         <div class="method-description">
           
-          <p>Parses a GFF2-formatted line and returns a new <a
-href="Record.html">Bio::GFF::GFF2::Record</a> object.</p>
+          <p>Parses a GFF2-formatted line and returns a new <a href="Record.html"><code>Bio::GFF::GFF2::Record</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 360</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">str</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">361</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">362</span>   <span class="ruby-identifier">ret</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">363</span>   <span class="ruby-identifier">ret</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">364</span>   <span class="ruby-identifier">ret</span>
+<span class="line-num">365</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -313,20 +315,20 @@ href="Record.html">Bio::GFF::GFF2::Record</a> object.</p>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 478</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">super</span> <span class="ruby-operator">||</span>
-    ((<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">seqname</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">seqname</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">source</span>  <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">source</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">feature</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">start</span>   <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">start</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">end</span>     <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">end</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">score</span>   <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">score</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">strand</span>  <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">strand</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">frame</span>   <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">frame</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">attributes</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">attributes</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">481</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">482</span>   <span class="ruby-keyword">super</span> <span class="ruby-operator">||</span>
+<span class="line-num">483</span>     ((<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">class</span> <span class="ruby-keyword">and</span>
+<span class="line-num">484</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">seqname</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">seqname</span> <span class="ruby-keyword">and</span>
+<span class="line-num">485</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">source</span>  <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">source</span> <span class="ruby-keyword">and</span>
+<span class="line-num">486</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">feature</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">feature</span> <span class="ruby-keyword">and</span>
+<span class="line-num">487</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">start</span>   <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">start</span> <span class="ruby-keyword">and</span>
+<span class="line-num">488</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">end</span>     <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">end</span> <span class="ruby-keyword">and</span>
+<span class="line-num">489</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">score</span>   <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">score</span> <span class="ruby-keyword">and</span>
+<span class="line-num">490</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">strand</span>  <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">strand</span> <span class="ruby-keyword">and</span>
+<span class="line-num">491</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">frame</span>   <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">frame</span> <span class="ruby-keyword">and</span>
+<span class="line-num">492</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">attributes</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">attributes</span>) <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
+<span class="line-num">493</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -357,8 +359,7 @@ href="Record.html">Bio::GFF::GFF2::Record</a> object.</p>
 <ul><li>
 <p>(required) <em>tag</em>: String</p>
 </li><li>
-<p>(required) <em>value</em>: String or <a
-href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> object.</p>
+<p>(required) <em>value</em>: String or <a href="Record/Value.html"><code>Bio::GFF::GFF2::Record::Value</code></a> object.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -369,10 +370,10 @@ href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> object.</p>
 
           
           <div class="method-source-code" id="add_attribute-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 582</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_attribute</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">value</span>)
-  <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">push</span>([ <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tag</span>), <span class="ruby-identifier">value</span> ])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">585</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_attribute</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">value</span>)
+<span class="line-num">586</span>   <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">push</span>([ <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tag</span>), <span class="ruby-identifier">value</span> ])
+<span class="line-num">587</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -426,8 +427,7 @@ href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> object.</p>
           
           <p>Returns hash representation of attributes.</p>
 
-<p>Note: If two or more tag-value pairs with same tag names exist, only the
-first tag-value pair is used for each tag.</p>
+<p>Note: If two or more tag-value pairs with same tag names exist, only the first tag-value pair is used for each tag.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -438,15 +438,15 @@ first tag-value pair is used for each tag.</p>
 
           
           <div class="method-source-code" id="attributes_to_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 660</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attributes_to_hash</span>
-  <span class="ruby-identifier">h</span> = {}
-  <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span> = <span class="ruby-identifier">x</span>
-    <span class="ruby-identifier">h</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">key</span>]
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">h</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">663</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">attributes_to_hash</span>
+<span class="line-num">664</span>   <span class="ruby-identifier">h</span> = {}
+<span class="line-num">665</span>   <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">666</span>     <span class="ruby-identifier">key</span>, <span class="ruby-identifier">val</span> = <span class="ruby-identifier">x</span>
+<span class="line-num">667</span>     <span class="ruby-identifier">h</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">h</span>[<span class="ruby-identifier">key</span>]
+<span class="line-num">668</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">669</span>   <span class="ruby-identifier">h</span>
+<span class="line-num">670</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -470,29 +470,28 @@ first tag-value pair is used for each tag.</p>
 
         <div class="method-description">
           
-          <p>Returns true if the entry is empty except for comment. Otherwise, returns
-false.</p>
+          <p>Returns true if the entry is empty except for comment. Otherwise, returns false.</p>
           
           
 
           
           <div class="method-source-code" id="comment_only-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 438</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comment_only?</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@seqname</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-operator">!</span><span class="ruby-ivar">@source</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-operator">!</span><span class="ruby-ivar">@feature</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-operator">!</span><span class="ruby-ivar">@start</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-operator">!</span><span class="ruby-ivar">@end</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-operator">!</span><span class="ruby-ivar">@score</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-operator">!</span><span class="ruby-ivar">@strand</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-operator">!</span><span class="ruby-ivar">@frame</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">441</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comment_only?</span>
+<span class="line-num">442</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@seqname</span> <span class="ruby-keyword">and</span>
+<span class="line-num">443</span>       <span class="ruby-operator">!</span><span class="ruby-ivar">@source</span> <span class="ruby-keyword">and</span>
+<span class="line-num">444</span>       <span class="ruby-operator">!</span><span class="ruby-ivar">@feature</span> <span class="ruby-keyword">and</span>
+<span class="line-num">445</span>       <span class="ruby-operator">!</span><span class="ruby-ivar">@start</span> <span class="ruby-keyword">and</span>
+<span class="line-num">446</span>       <span class="ruby-operator">!</span><span class="ruby-ivar">@end</span> <span class="ruby-keyword">and</span>
+<span class="line-num">447</span>       <span class="ruby-operator">!</span><span class="ruby-ivar">@score</span> <span class="ruby-keyword">and</span>
+<span class="line-num">448</span>       <span class="ruby-operator">!</span><span class="ruby-ivar">@strand</span> <span class="ruby-keyword">and</span>
+<span class="line-num">449</span>       <span class="ruby-operator">!</span><span class="ruby-ivar">@frame</span> <span class="ruby-keyword">and</span>
+<span class="line-num">450</span>       <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">451</span>     <span class="ruby-keyword">true</span>
+<span class="line-num">452</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">453</span>     <span class="ruby-keyword">false</span>
+<span class="line-num">454</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">455</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -522,11 +521,11 @@ false.</p>
 
           
           <div class="method-source-code" id="comments-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 400</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comments</span>
-  <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{self.class.to_s}#comments is deprecated. Instead, use \&quot;comment\&quot;.&quot;</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">comment</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">403</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comments</span>
+<span class="line-num">404</span>   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{self.class.to_s}#comments is deprecated. Instead, use \&quot;comment\&quot;.&quot;</span>
+<span class="line-num">405</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">comment</span>
+<span class="line-num">406</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -556,11 +555,11 @@ false.</p>
 
           
           <div class="method-source-code" id="comments-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 406</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comments=</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{self.class.to_s}#comments= is deprecated. Instead, use \&quot;comment=\&quot;.&quot;</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">comment</span> = <span class="ruby-identifier">str</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">409</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">comments=</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">410</span>   <span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;#{self.class.to_s}#comments= is deprecated. Instead, use \&quot;comment=\&quot;.&quot;</span>
+<span class="line-num">411</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">comment</span> = <span class="ruby-identifier">str</span>
+<span class="line-num">412</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -586,16 +585,14 @@ false.</p>
           
           <p>Removes a specific tag-value pair.</p>
 
-<p>Note that if two or more tag-value pairs found, only the first tag-value
-pair is removed.</p>
+<p>Note that if two or more tag-value pairs found, only the first tag-value pair is removed.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
 <p>(required) <em>tag</em>: String</p>
 </li><li>
-<p>(required) <em>value</em>: String or <a
-href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> object.</p>
+<p>(required) <em>value</em>: String or <a href="Record/Value.html"><code>Bio::GFF::GFF2::Record::Value</code></a> object.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -606,15 +603,15 @@ href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> object.</p>
 
           
           <div class="method-source-code" id="delete_attribute-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 596</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_attribute</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">value</span>)
-  <span class="ruby-identifier">removed</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">index</span>([ <span class="ruby-identifier">tag</span>, <span class="ruby-identifier">value</span> ]) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-identifier">i</span>)
-    <span class="ruby-identifier">removed</span> = <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>]
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">removed</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">599</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_attribute</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">value</span>)
+<span class="line-num">600</span>   <span class="ruby-identifier">removed</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">601</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">index</span>([ <span class="ruby-identifier">tag</span>, <span class="ruby-identifier">value</span> ]) <span class="ruby-keyword">then</span>
+<span class="line-num">602</span>     <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-identifier">i</span>)
+<span class="line-num">603</span>     <span class="ruby-identifier">removed</span> = <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>]
+<span class="line-num">604</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">605</span>   <span class="ruby-identifier">removed</span>
+<span class="line-num">606</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -654,12 +651,12 @@ href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> object.</p>
 
           
           <div class="method-source-code" id="delete_attributes-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 611</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_attributes</span>(<span class="ruby-identifier">tag</span>)
-  <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">reject!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">tag</span>
-  <span class="ruby-keyword">end</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">614</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete_attributes</span>(<span class="ruby-identifier">tag</span>)
+<span class="line-num">615</span>   <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">reject!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">616</span>     <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">tag</span>
+<span class="line-num">617</span>   <span class="ruby-keyword">end</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">618</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -685,8 +682,7 @@ href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> object.</p>
           
           <p>Gets the attribute value for the given tag.</p>
 
-<p>Note that if two or more tag-value pairs with the same name found, only the
-first value is returned.</p>
+<p>Note that if two or more tag-value pairs with the same name found, only the first value is returned.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -695,19 +691,18 @@ first value is returned.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>String, <a href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a>
-object, or nil.</p>
+<p>String, <a href="Record/Value.html"><code>Bio::GFF::GFF2::Record::Value</code></a> object, or nil.</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="get_attribute-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 500</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_attribute</span>(<span class="ruby-identifier">tag</span>)
-  <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-identifier">tag</span>)
-  <span class="ruby-identifier">ary</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">503</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_attribute</span>(<span class="ruby-identifier">tag</span>)
+<span class="line-num">504</span>   <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">assoc</span>(<span class="ruby-identifier">tag</span>)
+<span class="line-num">505</span>   <span class="ruby-identifier">ary</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">506</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -735,8 +730,7 @@ object, or nil.</p>
 
         <div class="method-description">
           
-          <p>Gets the attribute values for the given tag. This method always returns an
-array.</p>
+          <p>Gets the attribute values for the given tag. This method always returns an array.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -748,20 +742,20 @@ array.</p>
 <p>Array containing String or \</p>
 </dd></dl>
 
-<p><a href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> objects.</p>
+<p><a href="Record/Value.html"><code>Bio::GFF::GFF2::Record::Value</code></a> objects.</p>
           
           
 
           
           <div class="method-source-code" id="get_attributes-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 513</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_attributes</span>(<span class="ruby-identifier">tag</span>)
-  <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">tag</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>] }
-  <span class="ruby-identifier">ary</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">516</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get_attributes</span>(<span class="ruby-identifier">tag</span>)
+<span class="line-num">517</span>   <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">find_all</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">518</span>     <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">tag</span>
+<span class="line-num">519</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">520</span>   <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>] }
+<span class="line-num">521</span>   <span class="ruby-identifier">ary</span>
+<span class="line-num">522</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -785,36 +779,35 @@ array.</p>
 
         <div class="method-description">
           
-          <p>Parses a GFF2-formatted line and stores data from the string. Note that all
-existing data is wiped out.</p>
+          <p>Parses a GFF2-formatted line and stores data from the string. Note that all existing data is wiped out.</p>
           
           
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 413</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">string</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\s*\#/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">string</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@comment</span> = <span class="ruby-identifier">string</span>[<span class="ruby-regexp">/\#(.*)/</span>, <span class="ruby-value">1</span>].<span class="ruby-identifier">chomp</span>
-    <span class="ruby-identifier">columns</span> = []
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">columns</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>, <span class="ruby-value">10</span>)
-    <span class="ruby-ivar">@comment</span> = <span class="ruby-identifier">columns</span>[<span class="ruby-value">9</span>][<span class="ruby-regexp">/\#(.*)/</span>, <span class="ruby-value">1</span>].<span class="ruby-identifier">chomp</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">columns</span>[<span class="ruby-value">9</span>]
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-ivar">@seqname</span>, <span class="ruby-ivar">@source</span>, <span class="ruby-ivar">@feature</span>,
-  <span class="ruby-identifier">start</span>, <span class="ruby-identifier">endp</span>, <span class="ruby-identifier">score</span>, <span class="ruby-ivar">@strand</span>, <span class="ruby-identifier">frame</span> =
-    <span class="ruby-identifier">columns</span>[<span class="ruby-value">0</span>, <span class="ruby-value">8</span>].<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">str</span> = <span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">x</span>)
-    <span class="ruby-identifier">str</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;.&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">str</span>
-  }
-  <span class="ruby-ivar">@start</span> = <span class="ruby-identifier">start</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@end</span>   = <span class="ruby-identifier">endp</span>  <span class="ruby-operator">?</span> <span class="ruby-identifier">endp</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@score</span> = <span class="ruby-identifier">score</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@frame</span> = <span class="ruby-identifier">frame</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-
-  <span class="ruby-ivar">@attributes</span> = <span class="ruby-identifier">parse_attributes</span>(<span class="ruby-identifier">columns</span>[<span class="ruby-value">8</span>])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">416</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">string</span>)
+<span class="line-num">417</span>   <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\s*\#/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">string</span> <span class="ruby-keyword">then</span>
+<span class="line-num">418</span>     <span class="ruby-ivar">@comment</span> = <span class="ruby-identifier">string</span>[<span class="ruby-regexp">/\#(.*)/</span>, <span class="ruby-value">1</span>].<span class="ruby-identifier">chomp</span>
+<span class="line-num">419</span>     <span class="ruby-identifier">columns</span> = []
+<span class="line-num">420</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">421</span>     <span class="ruby-identifier">columns</span> = <span class="ruby-identifier">string</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>, <span class="ruby-value">10</span>)
+<span class="line-num">422</span>     <span class="ruby-ivar">@comment</span> = <span class="ruby-identifier">columns</span>[<span class="ruby-value">9</span>][<span class="ruby-regexp">/\#(.*)/</span>, <span class="ruby-value">1</span>].<span class="ruby-identifier">chomp</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">columns</span>[<span class="ruby-value">9</span>]
+<span class="line-num">423</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">424</span> 
+<span class="line-num">425</span>   <span class="ruby-ivar">@seqname</span>, <span class="ruby-ivar">@source</span>, <span class="ruby-ivar">@feature</span>,
+<span class="line-num">426</span>   <span class="ruby-identifier">start</span>, <span class="ruby-identifier">endp</span>, <span class="ruby-identifier">score</span>, <span class="ruby-ivar">@strand</span>, <span class="ruby-identifier">frame</span> =
+<span class="line-num">427</span>     <span class="ruby-identifier">columns</span>[<span class="ruby-value">0</span>, <span class="ruby-value">8</span>].<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">428</span>     <span class="ruby-identifier">str</span> = <span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">429</span>     <span class="ruby-identifier">str</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;.&#39;</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">str</span>
+<span class="line-num">430</span>   }
+<span class="line-num">431</span>   <span class="ruby-ivar">@start</span> = <span class="ruby-identifier">start</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">start</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">432</span>   <span class="ruby-ivar">@end</span>   = <span class="ruby-identifier">endp</span>  <span class="ruby-operator">?</span> <span class="ruby-identifier">endp</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">433</span>   <span class="ruby-ivar">@score</span> = <span class="ruby-identifier">score</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">score</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">434</span>   <span class="ruby-ivar">@frame</span> = <span class="ruby-identifier">frame</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">frame</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">435</span> 
+<span class="line-num">436</span>   <span class="ruby-ivar">@attributes</span> = <span class="ruby-identifier">parse_attributes</span>(<span class="ruby-identifier">columns</span>[<span class="ruby-value">8</span>])
+<span class="line-num">437</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -838,17 +831,14 @@ existing data is wiped out.</p>
 
         <div class="method-description">
           
-          <p>Replaces values for the given tags with new values. Existing values for the
-tag are completely wiped out and replaced by new tag-value pairs. If the
-tag does not exist, the tag-value pairs are newly added.</p>
+          <p>Replaces values for the given tags with new values. Existing values for the tag are completely wiped out and replaced by new tag-value pairs. If the tag does not exist, the tag-value pairs are newly added.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
 <p>(required) <em>tag</em>: String</p>
 </li><li>
-<p>(required) <em>values</em>: String or <a
-href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> objects.</p>
+<p>(required) <em>values</em>: String or <a href="Record/Value.html"><code>Bio::GFF::GFF2::Record::Value</code></a> objects.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -859,27 +849,27 @@ href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> objects.</p>
 
           
           <div class="method-source-code" id="replace_attributes-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 555</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace_attributes</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
-  <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">reject!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">tag</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">size</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-keyword">true</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">values</span>[<span class="ruby-identifier">i</span>]
-        <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-        <span class="ruby-keyword">false</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">false</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  (<span class="ruby-identifier">i</span><span class="ruby-operator">...</span>(<span class="ruby-identifier">values</span>.<span class="ruby-identifier">size</span>)).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span>
-    <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">push</span> [ <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tag</span>), <span class="ruby-identifier">values</span>[<span class="ruby-identifier">j</span>] ]
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">558</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace_attributes</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">values</span>)
+<span class="line-num">559</span>   <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+<span class="line-num">560</span>   <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">reject!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">561</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">tag</span> <span class="ruby-keyword">then</span>
+<span class="line-num">562</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-identifier">values</span>.<span class="ruby-identifier">size</span> <span class="ruby-keyword">then</span>
+<span class="line-num">563</span>         <span class="ruby-keyword">true</span>
+<span class="line-num">564</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">565</span>         <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">values</span>[<span class="ruby-identifier">i</span>]
+<span class="line-num">566</span>         <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+<span class="line-num">567</span>         <span class="ruby-keyword">false</span>
+<span class="line-num">568</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">569</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">570</span>       <span class="ruby-keyword">false</span>
+<span class="line-num">571</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">572</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">573</span>   (<span class="ruby-identifier">i</span><span class="ruby-operator">...</span>(<span class="ruby-identifier">values</span>.<span class="ruby-identifier">size</span>)).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">j</span><span class="ruby-operator">|</span>
+<span class="line-num">574</span>     <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">push</span> [ <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tag</span>), <span class="ruby-identifier">values</span>[<span class="ruby-identifier">j</span>] ]
+<span class="line-num">575</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">576</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">577</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -903,9 +893,7 @@ href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> objects.</p>
 
         <div class="method-description">
           
-          <p>Sets value for the given tag. If the tag exists, the value of the tag is
-replaced with <em>value</em>. Note that if two or more tag-value pairs with
-the same name found, only the first tag-value pair is replaced.</p>
+          <p>Sets value for the given tag. If the tag exists, the value of the tag is replaced with <em>value</em>. Note that if two or more tag-value pairs with the same name found, only the first tag-value pair is replaced.</p>
 
 <p>If the tag does not exist, the tag-value pair is newly added.</p>
 <hr>
@@ -914,8 +902,7 @@ the same name found, only the first tag-value pair is replaced.</p>
 <ul><li>
 <p>(required) <em>tag</em>: String</p>
 </li><li>
-<p>(required) <em>value</em>: String or <a
-href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> object.</p>
+<p>(required) <em>value</em>: String or <a href="Record/Value.html"><code>Bio::GFF::GFF2::Record::Value</code></a> object.</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -926,19 +913,19 @@ href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> object.</p>
 
           
           <div class="method-source-code" id="set_attribute-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 532</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_attribute</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">value</span>)
-  <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">find</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">tag</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">ary</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">value</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">ary</span> = [ <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tag</span>), <span class="ruby-identifier">value</span> ]
-    <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">ary</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">value</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">535</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_attribute</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">value</span>)
+<span class="line-num">536</span>   <span class="ruby-identifier">ary</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">find</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">537</span>     <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">==</span> <span class="ruby-identifier">tag</span>
+<span class="line-num">538</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">539</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">ary</span> <span class="ruby-keyword">then</span>
+<span class="line-num">540</span>     <span class="ruby-identifier">ary</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">value</span>
+<span class="line-num">541</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">542</span>     <span class="ruby-identifier">ary</span> = [ <span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">tag</span>), <span class="ruby-identifier">value</span> ]
+<span class="line-num">543</span>     <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">ary</span>
+<span class="line-num">544</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">545</span>   <span class="ruby-identifier">value</span>
+<span class="line-num">546</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -962,9 +949,7 @@ href="Record/Value.html">Bio::GFF::GFF2::Record::Value</a> object.</p>
 
         <div class="method-description">
           
-          <p>Sorts attributes order by given tag name&#39;s order. If a block is given,
-the argument <em>tags</em> is ignored, and yields two tag names like
-Array#sort!.</p>
+          <p>Sorts attributes order by given tag name&#39;s order. If a block is given, the argument <em>tags</em> is ignored, and yields two tag names like Array#sort!.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -980,34 +965,34 @@ Array#sort!.</p>
 
           
           <div class="method-source-code" id="sort_attributes_by_tag-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 625</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort_attributes_by_tag!</span>(<span class="ruby-identifier">tags</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">h</span> = {}
-  <span class="ruby-identifier">s</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">size</span>
-  <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">each_with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>  <span class="ruby-identifier">h</span>[<span class="ruby-identifier">x</span>] = <span class="ruby-identifier">i</span> }
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">sort!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">r</span> = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">y</span>[<span class="ruby-value">0</span>]
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-identifier">r</span> = (<span class="ruby-identifier">h</span>[<span class="ruby-identifier">x</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">s</span>) <span class="ruby-operator">&lt;=&gt;</span> (<span class="ruby-identifier">h</span>[<span class="ruby-identifier">y</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">s</span>)
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">r</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tags</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;wrong number of arguments (0 for 1) or wrong argument value&#39;</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">sort!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">r</span> = (<span class="ruby-identifier">tags</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]) <span class="ruby-operator">||</span> <span class="ruby-identifier">tags</span>.<span class="ruby-identifier">size</span>) <span class="ruby-operator">&lt;=&gt;</span> 
-        (<span class="ruby-identifier">tags</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">y</span>[<span class="ruby-value">0</span>]) <span class="ruby-operator">||</span> <span class="ruby-identifier">tags</span>.<span class="ruby-identifier">size</span>)
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-identifier">r</span> = (<span class="ruby-identifier">h</span>[<span class="ruby-identifier">x</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">s</span>) <span class="ruby-operator">&lt;=&gt;</span> (<span class="ruby-identifier">h</span>[<span class="ruby-identifier">y</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">s</span>)
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">r</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">628</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort_attributes_by_tag!</span>(<span class="ruby-identifier">tags</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">629</span>   <span class="ruby-identifier">h</span> = {}
+<span class="line-num">630</span>   <span class="ruby-identifier">s</span> = <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">size</span>
+<span class="line-num">631</span>   <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">each_with_index</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>  <span class="ruby-identifier">h</span>[<span class="ruby-identifier">x</span>] = <span class="ruby-identifier">i</span> }
+<span class="line-num">632</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">633</span>     <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">sort!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+<span class="line-num">634</span>       <span class="ruby-identifier">r</span> = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">y</span>[<span class="ruby-value">0</span>]
+<span class="line-num">635</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">636</span>         <span class="ruby-identifier">r</span> = (<span class="ruby-identifier">h</span>[<span class="ruby-identifier">x</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">s</span>) <span class="ruby-operator">&lt;=&gt;</span> (<span class="ruby-identifier">h</span>[<span class="ruby-identifier">y</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">s</span>)
+<span class="line-num">637</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">638</span>       <span class="ruby-identifier">r</span>
+<span class="line-num">639</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">640</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">641</span>     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">tags</span> <span class="ruby-keyword">then</span>
+<span class="line-num">642</span>       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-string">&#39;wrong number of arguments (0 for 1) or wrong argument value&#39;</span>
+<span class="line-num">643</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">644</span>     <span class="ruby-ivar">@attributes</span>.<span class="ruby-identifier">sort!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+<span class="line-num">645</span>       <span class="ruby-identifier">r</span> = (<span class="ruby-identifier">tags</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>]) <span class="ruby-operator">||</span> <span class="ruby-identifier">tags</span>.<span class="ruby-identifier">size</span>) <span class="ruby-operator">&lt;=&gt;</span> 
+<span class="line-num">646</span>         (<span class="ruby-identifier">tags</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">y</span>[<span class="ruby-value">0</span>]) <span class="ruby-operator">||</span> <span class="ruby-identifier">tags</span>.<span class="ruby-identifier">size</span>)
+<span class="line-num">647</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">648</span>         <span class="ruby-identifier">r</span> = (<span class="ruby-identifier">h</span>[<span class="ruby-identifier">x</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">s</span>) <span class="ruby-operator">&lt;=&gt;</span> (<span class="ruby-identifier">h</span>[<span class="ruby-identifier">y</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">s</span>)
+<span class="line-num">649</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">650</span>       <span class="ruby-identifier">r</span>
+<span class="line-num">651</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">652</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">653</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">654</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1031,34 +1016,34 @@ Array#sort!.</p>
 
         <div class="method-description">
           
-          <p>Return the record as a <a href="../GFF2.html">GFF2</a> compatible string</p>
+          <p>Return the record as a <a href="../GFF2.html"><code>GFF2</code></a> compatible string</p>
           
           
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 455</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-identifier">cmnt</span> = <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@comment</span>) <span class="ruby-keyword">and</span> <span class="ruby-ivar">@comment</span> <span class="ruby-keyword">and</span>
-             <span class="ruby-operator">!</span><span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
-           <span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\r\n]+/</span>, <span class="ruby-string">&#39; &#39;</span>)
-         <span class="ruby-keyword">else</span>
-           <span class="ruby-keyword">false</span>
-         <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;\##{cmnt}\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">comment_only?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">cmnt</span>
-  [
-   <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@seqname</span>),
-   <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@source</span>),
-   <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@feature</span>),
-   <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@start</span>),
-   <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@end</span>),
-   <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@score</span>),
-   <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@strand</span>),
-   <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@frame</span>),
-   <span class="ruby-identifier">attributes_to_s</span>(<span class="ruby-ivar">@attributes</span>)
-  ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>) <span class="ruby-operator">+</span> 
-    (<span class="ruby-identifier">cmnt</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;\t\##{cmnt}\n&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;\n&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">458</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">459</span>   <span class="ruby-identifier">cmnt</span> = <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@comment</span>) <span class="ruby-keyword">and</span> <span class="ruby-ivar">@comment</span> <span class="ruby-keyword">and</span>
+<span class="line-num">460</span>              <span class="ruby-operator">!</span><span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">461</span>            <span class="ruby-ivar">@comment</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\r\n]+/</span>, <span class="ruby-string">&#39; &#39;</span>)
+<span class="line-num">462</span>          <span class="ruby-keyword">else</span>
+<span class="line-num">463</span>            <span class="ruby-keyword">false</span>
+<span class="line-num">464</span>          <span class="ruby-keyword">end</span>
+<span class="line-num">465</span>   <span class="ruby-keyword">return</span> <span class="ruby-node">&quot;\##{cmnt}\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">comment_only?</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">cmnt</span>
+<span class="line-num">466</span>   [
+<span class="line-num">467</span>    <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@seqname</span>),
+<span class="line-num">468</span>    <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@source</span>),
+<span class="line-num">469</span>    <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@feature</span>),
+<span class="line-num">470</span>    <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@start</span>),
+<span class="line-num">471</span>    <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@end</span>),
+<span class="line-num">472</span>    <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@score</span>),
+<span class="line-num">473</span>    <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@strand</span>),
+<span class="line-num">474</span>    <span class="ruby-identifier">gff2_column_to_s</span>(<span class="ruby-ivar">@frame</span>),
+<span class="line-num">475</span>    <span class="ruby-identifier">attributes_to_s</span>(<span class="ruby-ivar">@attributes</span>)
+<span class="line-num">476</span>   ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>) <span class="ruby-operator">+</span> 
+<span class="line-num">477</span>     (<span class="ruby-identifier">cmnt</span> <span class="ruby-operator">?</span> <span class="ruby-node">&quot;\t\##{cmnt}\n&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&quot;\n&quot;</span>)
+<span class="line-num">478</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1072,12 +1057,13 @@ Array#sort!.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

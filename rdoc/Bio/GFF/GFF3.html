@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -103,9 +107,7 @@
     
 <h1 id="class-Bio::GFF::GFF3-label-DESCRIPTION">DESCRIPTION<span><a href="#class-Bio::GFF::GFF3-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>Represents version 3 of <a href="../GFF.html">GFF</a> specification. For
-more information on version <a href="GFF3.html">GFF3</a>, see <a
-href="http://song.sourceforge.net/gff3.shtml">song.sourceforge.net/gff3.shtml</a></p>
+<p>Represents version 3 of <a href="../GFF.html"><code>GFF</code></a> specification. For more information on version <a href="GFF3.html"><code>GFF3</code></a>, see <a href="http://song.sourceforge.net/gff3.shtml">song.sourceforge.net/gff3.shtml</a></p>
 
   </section>
 
@@ -124,8 +126,7 @@ href="http://song.sourceforge.net/gff3.shtml">song.sourceforge.net/gff3.shtml</a
       
         <dt id="MetaData">MetaData
         
-        <dd><p>stores <a href="GFF3.html">GFF3</a> <a
-href="GFF3.html#MetaData">MetaData</a></p>
+        <dd><p>stores <a href="GFF3.html"><code>GFF3</code></a> <a href="GFF3.html#MetaData"><code>MetaData</code></a></p>
         
       
         <dt id="VERSION">VERSION
@@ -152,7 +153,7 @@ href="GFF3.html#MetaData">MetaData</a></p>
 
         <div class="method-description">
         
-        <p><a href="GFF3.html">GFF3</a> version string (String or nil). nil means “3”.</p>
+        <p><a href="GFF3.html"><code>GFF3</code></a> version string (String or nil). nil means “3”.</p>
         
         </div>
       </div>
@@ -165,8 +166,7 @@ href="GFF3.html#MetaData">MetaData</a></p>
 
         <div class="method-description">
         
-        <p>Metadata (except “##sequence-region”, “##gff-version”, “###”). Must be an
-array of <a href="GFF3.html#MetaData">Bio::GFF::GFF3::MetaData</a> objects.</p>
+        <p>Metadata (except “##sequence-region”, “##gff-version”, “###”). Must be an array of <a href="GFF3.html#MetaData"><code>Bio::GFF::GFF3::MetaData</code></a> objects.</p>
         
         </div>
       </div>
@@ -179,8 +179,7 @@ array of <a href="GFF3.html#MetaData">Bio::GFF::GFF3::MetaData</a> objects.</p>
 
         <div class="method-description">
         
-        <p>Metadata of “##sequence-region”. Must be an array of <a
-href="GFF3/SequenceRegion.html">Bio::GFF::GFF3::SequenceRegion</a> objects.</p>
+        <p>Metadata of “##sequence-region”. Must be an array of <a href="GFF3/SequenceRegion.html"><code>Bio::GFF::GFF3::SequenceRegion</code></a> objects.</p>
         
         </div>
       </div>
@@ -193,8 +192,7 @@ href="GFF3/SequenceRegion.html">Bio::GFF::GFF3::SequenceRegion</a> objects.</p>
 
         <div class="method-description">
         
-        <p>Sequences bundled within <a href="GFF3.html">GFF3</a>. Must be an array of
-<a href="../Sequence.html">Bio::Sequence</a> objects.</p>
+        <p>Sequences bundled within <a href="GFF3.html"><code>GFF3</code></a>. Must be an array of <a href="../Sequence.html"><code>Bio::Sequence</code></a> objects.</p>
         
         </div>
       </div>
@@ -222,34 +220,32 @@ href="GFF3/SequenceRegion.html">Bio::GFF::GFF3::SequenceRegion</a> objects.</p>
 
         <div class="method-description">
           
-          <p>Creates a <a href="GFF3.html">Bio::GFF::GFF3</a> object by building a
-collection of <a href="GFF3/Record.html">Bio::GFF::GFF3::Record</a> (and
-metadata) objects.</p>
+          <p>Creates a <a href="GFF3.html"><code>Bio::GFF::GFF3</code></a> object by building a collection of <a href="GFF3/Record.html"><code>Bio::GFF::GFF3::Record</code></a> (and metadata) objects.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>str</em>: string in <a href="../GFF.html">GFF</a> format</p>
+<p><em>str</em>: string in <a href="../GFF.html"><code>GFF</code></a> format</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="../GFF.html">Bio::GFF</a> object</p>
+<p><a href="../GFF.html"><code>Bio::GFF</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 874</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@gff_version</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@records</span> = []
-  <span class="ruby-ivar">@sequence_regions</span> = []
-  <span class="ruby-ivar">@metadata</span> = []
-  <span class="ruby-ivar">@sequences</span> = []
-  <span class="ruby-ivar">@in_fasta</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">str</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">877</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">878</span>   <span class="ruby-ivar">@gff_version</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">879</span>   <span class="ruby-ivar">@records</span> = []
+<span class="line-num">880</span>   <span class="ruby-ivar">@sequence_regions</span> = []
+<span class="line-num">881</span>   <span class="ruby-ivar">@metadata</span> = []
+<span class="line-num">882</span>   <span class="ruby-ivar">@sequences</span> = []
+<span class="line-num">883</span>   <span class="ruby-ivar">@in_fasta</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">884</span>   <span class="ruby-identifier">parse</span>(<span class="ruby-identifier">str</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>
+<span class="line-num">885</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -281,16 +277,14 @@ metadata) objects.</p>
 
         <div class="method-description">
           
-          <p>Parses a <a href="GFF3.html">GFF3</a> entries, and concatenated the parsed
-data.</p>
+          <p>Parses a <a href="GFF3.html"><code>GFF3</code></a> entries, and concatenated the parsed data.</p>
 
-<p>Note that after “##FASTA” line is given, only fasta-formatted text is
-accepted.</p>
+<p>Note that after “##FASTA” line is given, only fasta-formatted text is accepted.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p><em>str</em>: string in <a href="../GFF.html">GFF</a> format</p>
+<p><em>str</em>: string in <a href="../GFF.html"><code>GFF</code></a> format</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -301,45 +295,45 @@ accepted.</p>
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 908</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-comment"># if already after the ##FASTA line, parses fasta format and return</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@in_fasta</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">parse_fasta</span>(<span class="ruby-identifier">str</span>)
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:gets</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-comment"># str is a IO-like object</span>
-    <span class="ruby-identifier">fst</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-comment"># str is a String</span>
-    <span class="ruby-identifier">gff</span>, <span class="ruby-identifier">sep</span>, <span class="ruby-identifier">fst</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/^(\&gt;|##FASTA.*)/n</span>, <span class="ruby-value">2</span>)
-    <span class="ruby-identifier">fst</span> = <span class="ruby-identifier">sep</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fst</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">sep</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&gt;&#39;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">fst</span>
-    <span class="ruby-identifier">str</span> = <span class="ruby-identifier">gff</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># parses GFF lines</span>
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\#\#([^\s]+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">parse_metadata</span>(<span class="ruby-node">$1</span>, <span class="ruby-identifier">line</span>)
-      <span class="ruby-identifier">parse_fasta</span>(<span class="ruby-identifier">str</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@in_fasta</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-regexp">/^\&gt;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-ivar">@in_fasta</span> = <span class="ruby-keyword">true</span>
-      <span class="ruby-identifier">parse_fasta</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">line</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@records</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">GFF3</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># parses fasta format when str is a String and fasta data exists</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">fst</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@in_fasta</span> = <span class="ruby-keyword">true</span>
-    <span class="ruby-identifier">parse_fasta</span>(<span class="ruby-identifier">fst</span>)
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">911</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">912</span>   <span class="ruby-comment"># if already after the ##FASTA line, parses fasta format and return</span>
+<span class="line-num">913</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@in_fasta</span> <span class="ruby-keyword">then</span>
+<span class="line-num">914</span>     <span class="ruby-identifier">parse_fasta</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">915</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+<span class="line-num">916</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">917</span> 
+<span class="line-num">918</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:gets</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">919</span>     <span class="ruby-comment"># str is a IO-like object</span>
+<span class="line-num">920</span>     <span class="ruby-identifier">fst</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">921</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">922</span>     <span class="ruby-comment"># str is a String</span>
+<span class="line-num">923</span>     <span class="ruby-identifier">gff</span>, <span class="ruby-identifier">sep</span>, <span class="ruby-identifier">fst</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/^(\&gt;|##FASTA.*)/n</span>, <span class="ruby-value">2</span>)
+<span class="line-num">924</span>     <span class="ruby-identifier">fst</span> = <span class="ruby-identifier">sep</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">fst</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">sep</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&gt;&#39;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">fst</span>
+<span class="line-num">925</span>     <span class="ruby-identifier">str</span> = <span class="ruby-identifier">gff</span>
+<span class="line-num">926</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">927</span> 
+<span class="line-num">928</span>   <span class="ruby-comment"># parses GFF lines</span>
+<span class="line-num">929</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">930</span>     <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\#\#([^\s]+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span> <span class="ruby-keyword">then</span>
+<span class="line-num">931</span>       <span class="ruby-identifier">parse_metadata</span>(<span class="ruby-node">$1</span>, <span class="ruby-identifier">line</span>)
+<span class="line-num">932</span>       <span class="ruby-identifier">parse_fasta</span>(<span class="ruby-identifier">str</span>) <span class="ruby-keyword">if</span> <span class="ruby-ivar">@in_fasta</span>
+<span class="line-num">933</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-regexp">/^\&gt;/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span> <span class="ruby-keyword">then</span>
+<span class="line-num">934</span>       <span class="ruby-ivar">@in_fasta</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">935</span>       <span class="ruby-identifier">parse_fasta</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">line</span>)
+<span class="line-num">936</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">937</span>       <span class="ruby-ivar">@records</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">GFF3</span><span class="ruby-operator">::</span><span class="ruby-constant">Record</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">938</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">939</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">940</span> 
+<span class="line-num">941</span>   <span class="ruby-comment"># parses fasta format when str is a String and fasta data exists</span>
+<span class="line-num">942</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">fst</span> <span class="ruby-keyword">then</span>
+<span class="line-num">943</span>     <span class="ruby-ivar">@in_fasta</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">944</span>     <span class="ruby-identifier">parse_fasta</span>(<span class="ruby-identifier">fst</span>)
+<span class="line-num">945</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">946</span> 
+<span class="line-num">947</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">948</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -369,21 +363,21 @@ accepted.</p>
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/gff.rb, line 963</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  <span class="ruby-identifier">ver</span> = <span class="ruby-ivar">@gff_version</span> <span class="ruby-operator">||</span> <span class="ruby-constant">VERSION</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sequences</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">seqs</span> = <span class="ruby-string">&quot;##FASTA\n&quot;</span> <span class="ruby-operator">+</span>
-      <span class="ruby-ivar">@sequences</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">s</span>.<span class="ruby-identifier">entry_id</span>, <span class="ruby-value">70</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">seqs</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-keyword">end</span>
-
-  ([ <span class="ruby-node">&quot;##gff-version #{escape(ver)}\n&quot;</span> ] <span class="ruby-operator">+</span>
-   <span class="ruby-ivar">@metadata</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_s</span> } <span class="ruby-operator">+</span>
-   <span class="ruby-ivar">@sequence_regions</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_s</span> } <span class="ruby-operator">+</span>
-   <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_s</span> }).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">seqs</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/gff.rb</span>
+<span class="line-num">966</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">967</span>   <span class="ruby-identifier">ver</span> = <span class="ruby-ivar">@gff_version</span> <span class="ruby-operator">||</span> <span class="ruby-constant">VERSION</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">968</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@sequences</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">969</span>     <span class="ruby-identifier">seqs</span> = <span class="ruby-string">&quot;##FASTA\n&quot;</span> <span class="ruby-operator">+</span>
+<span class="line-num">970</span>       <span class="ruby-ivar">@sequences</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_fasta</span>(<span class="ruby-identifier">s</span>.<span class="ruby-identifier">entry_id</span>, <span class="ruby-value">70</span>) }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">971</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">972</span>     <span class="ruby-identifier">seqs</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">973</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">974</span> 
+<span class="line-num">975</span>   ([ <span class="ruby-node">&quot;##gff-version #{escape(ver)}\n&quot;</span> ] <span class="ruby-operator">+</span>
+<span class="line-num">976</span>    <span class="ruby-ivar">@metadata</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_s</span> } <span class="ruby-operator">+</span>
+<span class="line-num">977</span>    <span class="ruby-ivar">@sequence_regions</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">to_s</span> } <span class="ruby-operator">+</span>
+<span class="line-num">978</span>    <span class="ruby-ivar">@records</span>.<span class="ruby-identifier">collect</span>{ <span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-identifier">r</span>.<span class="ruby-identifier">to_s</span> }).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>) <span class="ruby-operator">+</span> <span class="ruby-identifier">seqs</span>
+<span class="line-num">979</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -397,12 +391,13 @@ accepted.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

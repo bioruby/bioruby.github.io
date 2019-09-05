@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -90,11 +94,9 @@
     
 <h2 id="class-Bio::Meme::Motif-label-Description">Description<span><a href="#class-Bio::Meme::Motif-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>This class minimally represents a sequence motif according to the MEME
-program</p>
+<p>This class minimally represents a sequence motif according to the MEME program</p>
 
-<p>TODO: integrate with <a href="../Sequence.html">Bio::Sequence</a> class
-TODO: parse PSSM data</p>
+<p>TODO: integrate with <a href="../Sequence.html"><code>Bio::Sequence</code></a> class TODO: parse PSSM data</p>
 
   </section>
 
@@ -214,22 +216,21 @@ TODO: parse PSSM data</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Motif.html">Bio::Meme::Motif</a> object arguments
-are</p>
+          <p>Creates a new <a href="Motif.html"><code>Bio::Meme::Motif</code></a> object arguments are</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/meme/motif.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">sequence_name</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">motif</span>, <span class="ruby-identifier">start_pos</span>, <span class="ruby-identifier">end_pos</span>, <span class="ruby-identifier">pvalue</span>)
-  <span class="ruby-ivar">@sequence_name</span> = <span class="ruby-identifier">sequence_name</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-ivar">@strand</span> = <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-ivar">@motif</span> = <span class="ruby-identifier">motif</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@start_pos</span> = <span class="ruby-identifier">start_pos</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@end_pos</span> = <span class="ruby-identifier">end_pos</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-ivar">@pvalue</span> = <span class="ruby-identifier">pvalue</span>.<span class="ruby-identifier">to_f</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/meme/motif.rb</span>
+<span class="line-num">31</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">sequence_name</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">motif</span>, <span class="ruby-identifier">start_pos</span>, <span class="ruby-identifier">end_pos</span>, <span class="ruby-identifier">pvalue</span>)
+<span class="line-num">32</span>   <span class="ruby-ivar">@sequence_name</span> = <span class="ruby-identifier">sequence_name</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">33</span>   <span class="ruby-ivar">@strand</span> = <span class="ruby-identifier">strand</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">34</span>   <span class="ruby-ivar">@motif</span> = <span class="ruby-identifier">motif</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">35</span>   <span class="ruby-ivar">@start_pos</span> = <span class="ruby-identifier">start_pos</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">36</span>   <span class="ruby-ivar">@end_pos</span> = <span class="ruby-identifier">end_pos</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">37</span>   <span class="ruby-ivar">@pvalue</span> = <span class="ruby-identifier">pvalue</span>.<span class="ruby-identifier">to_f</span>
+<span class="line-num">38</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -267,10 +268,10 @@ are</p>
 
           
           <div class="method-source-code" id="length-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/meme/motif.rb, line 41</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length</span>
-  <span class="ruby-ivar">@end_pos</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start_pos</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/meme/motif.rb</span>
+<span class="line-num">41</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">length</span>
+<span class="line-num">42</span>   <span class="ruby-ivar">@end_pos</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@start_pos</span>
+<span class="line-num">43</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -284,12 +285,13 @@ are</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

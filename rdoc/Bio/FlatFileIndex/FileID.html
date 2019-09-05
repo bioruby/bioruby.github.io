@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -104,7 +108,7 @@
 
   <section class="description">
     
-<p><a href="FileID.html">FileID</a> class.</p>
+<p><a href="FileID.html"><code>FileID</code></a> class.</p>
 
 <p>Internal use only.</p>
 
@@ -180,12 +184,12 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 495</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">filesize</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@filename</span> = <span class="ruby-identifier">filename</span>
-  <span class="ruby-ivar">@filesize</span> = <span class="ruby-identifier">filesize</span>
-  <span class="ruby-ivar">@io</span> = <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">495</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-identifier">filesize</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">496</span>   <span class="ruby-ivar">@filename</span> = <span class="ruby-identifier">filename</span>
+<span class="line-num">497</span>   <span class="ruby-ivar">@filesize</span> = <span class="ruby-identifier">filesize</span>
+<span class="line-num">498</span>   <span class="ruby-ivar">@io</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">499</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -215,12 +219,12 @@
 
           
           <div class="method-source-code" id="new_from_string-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 489</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new_from_string</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>, <span class="ruby-value">2</span>)
-  <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>]
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">489</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new_from_string</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">490</span>   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>, <span class="ruby-value">2</span>)
+<span class="line-num">491</span>   <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>] = <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>]
+<span class="line-num">492</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>])
+<span class="line-num">493</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -258,20 +262,20 @@
 
           
           <div class="method-source-code" id="check-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 502</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check</span>
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">fsize</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">size</span>(<span class="ruby-ivar">@filename</span>)
-    <span class="ruby-identifier">r</span> = ( <span class="ruby-identifier">fsize</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@filesize</span>)
-  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
-    <span class="ruby-identifier">fsize</span> = <span class="ruby-value">-1</span>
-    <span class="ruby-identifier">r</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;FileID: File.size(#{@filename.inspect}) = &quot;</span>,
-    <span class="ruby-identifier">fsize</span>, (<span class="ruby-identifier">r</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39; == &#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39; != &#39;</span>) , <span class="ruby-ivar">@filesize</span>,
-    (<span class="ruby-identifier">r</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39; bad!&#39;</span>), <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">502</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">check</span>
+<span class="line-num">503</span>   <span class="ruby-keyword">begin</span>
+<span class="line-num">504</span>     <span class="ruby-identifier">fsize</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">size</span>(<span class="ruby-ivar">@filename</span>)
+<span class="line-num">505</span>     <span class="ruby-identifier">r</span> = ( <span class="ruby-identifier">fsize</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@filesize</span>)
+<span class="line-num">506</span>   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
+<span class="line-num">507</span>     <span class="ruby-identifier">fsize</span> = <span class="ruby-value">-1</span>
+<span class="line-num">508</span>     <span class="ruby-identifier">r</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">509</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">510</span>   <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;FileID: File.size(#{@filename.inspect}) = &quot;</span>,
+<span class="line-num">511</span>     <span class="ruby-identifier">fsize</span>, (<span class="ruby-identifier">r</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39; == &#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39; != &#39;</span>) , <span class="ruby-ivar">@filesize</span>,
+<span class="line-num">512</span>     (<span class="ruby-identifier">r</span> <span class="ruby-operator">?</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-operator">:</span> <span class="ruby-string">&#39; bad!&#39;</span>), <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">513</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">514</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -301,17 +305,17 @@
 
           
           <div class="method-source-code" id="close-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 540</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@io</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;FileID: close #{@filename}\n&quot;</span>
-    <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">close</span>
-    <span class="ruby-ivar">@io</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">540</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
+<span class="line-num">541</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@io</span> <span class="ruby-keyword">then</span>
+<span class="line-num">542</span>     <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;FileID: close #{@filename}\n&quot;</span>
+<span class="line-num">543</span>     <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">544</span>     <span class="ruby-ivar">@io</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">545</span>     <span class="ruby-keyword">nil</span>
+<span class="line-num">546</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">547</span>     <span class="ruby-keyword">true</span>
+<span class="line-num">548</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">549</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -341,14 +345,14 @@
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 559</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">pos</span>, <span class="ruby-identifier">length</span>)
-  <span class="ruby-identifier">open</span>
-  <span class="ruby-identifier">seek</span>(<span class="ruby-identifier">pos</span>, <span class="ruby-constant">IO</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_SET</span>)
-  <span class="ruby-identifier">data</span> = <span class="ruby-identifier">read</span>(<span class="ruby-identifier">length</span>)
-  <span class="ruby-identifier">close</span>
-  <span class="ruby-identifier">data</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">559</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">pos</span>, <span class="ruby-identifier">length</span>)
+<span class="line-num">560</span>   <span class="ruby-identifier">open</span>
+<span class="line-num">561</span>   <span class="ruby-identifier">seek</span>(<span class="ruby-identifier">pos</span>, <span class="ruby-constant">IO</span><span class="ruby-operator">::</span><span class="ruby-constant">SEEK_SET</span>)
+<span class="line-num">562</span>   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">read</span>(<span class="ruby-identifier">length</span>)
+<span class="line-num">563</span>   <span class="ruby-identifier">close</span>
+<span class="line-num">564</span>   <span class="ruby-identifier">data</span>
+<span class="line-num">565</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -378,16 +382,16 @@
 
           
           <div class="method-source-code" id="open-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 530</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@io</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;FileID: open #{@filename}\n&quot;</span>
-    <span class="ruby-ivar">@io</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@filename</span>, <span class="ruby-string">&#39;rb&#39;</span>)
-    <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">530</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">open</span>
+<span class="line-num">531</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@io</span> <span class="ruby-keyword">then</span>
+<span class="line-num">532</span>     <span class="ruby-constant">DEBUG</span>.<span class="ruby-identifier">print</span> <span class="ruby-node">&quot;FileID: open #{@filename}\n&quot;</span>
+<span class="line-num">533</span>     <span class="ruby-ivar">@io</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@filename</span>, <span class="ruby-string">&#39;rb&#39;</span>)
+<span class="line-num">534</span>     <span class="ruby-keyword">true</span>
+<span class="line-num">535</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">536</span>     <span class="ruby-keyword">nil</span>
+<span class="line-num">537</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">538</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -417,10 +421,10 @@
 
           
           <div class="method-source-code" id="read-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 555</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">size</span>)
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">size</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">555</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">read</span>(<span class="ruby-identifier">size</span>)
+<span class="line-num">556</span>   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">size</span>)
+<span class="line-num">557</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -450,10 +454,10 @@
 
           
           <div class="method-source-code" id="recalc-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 516</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">recalc</span>
-  <span class="ruby-ivar">@filesize</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">size</span>(<span class="ruby-ivar">@filename</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">516</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">recalc</span>
+<span class="line-num">517</span>   <span class="ruby-ivar">@filesize</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">size</span>(<span class="ruby-ivar">@filename</span>)
+<span class="line-num">518</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -483,10 +487,10 @@
 
           
           <div class="method-source-code" id="seek-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 551</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seek</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">seek</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">551</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seek</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">552</span>   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">seek</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">553</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -516,16 +520,16 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/index.rb, line 520</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>(<span class="ruby-identifier">i</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;fileid_#{i}\t&quot;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{@filename}\t#{@filesize}&quot;</span>
-  <span class="ruby-identifier">str</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/index.rb</span>
+<span class="line-num">520</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>(<span class="ruby-identifier">i</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">521</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">i</span> <span class="ruby-keyword">then</span>
+<span class="line-num">522</span>     <span class="ruby-identifier">str</span> = <span class="ruby-node">&quot;fileid_#{i}\t&quot;</span>
+<span class="line-num">523</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">524</span>     <span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">525</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">526</span>   <span class="ruby-identifier">str</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{@filename}\t#{@filesize}&quot;</span>
+<span class="line-num">527</span>   <span class="ruby-identifier">str</span>
+<span class="line-num">528</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -539,12 +543,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

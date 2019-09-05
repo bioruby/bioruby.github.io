@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -123,8 +127,7 @@
 
   <section class="description">
     
-<p><a href="AutoDetect.html">AutoDetect</a> automatically determines database
-class of given data.</p>
+<p><a href="AutoDetect.html"><code>AutoDetect</code></a> automatically determines database class of given data.</p>
 
   </section>
 
@@ -183,12 +186,12 @@ class of given data.</p>
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 361</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">e</span>) }
-  <span class="ruby-identifier">a</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">361</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">362</span>   <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">363</span>   <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">e</span>) }
+<span class="line-num">364</span>   <span class="ruby-identifier">a</span>
+<span class="line-num">365</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -218,13 +221,13 @@ class of given data.</p>
 
           
           <div class="method-source-code" id="default-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 348</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@default</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@default</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">make_default</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@default</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">348</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default</span>
+<span class="line-num">349</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@default</span> <span class="ruby-keyword">then</span>
+<span class="line-num">350</span>     <span class="ruby-ivar">@default</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">make_default</span>
+<span class="line-num">351</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">352</span>   <span class="ruby-ivar">@default</span>
+<span class="line-num">353</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -254,10 +257,10 @@ class of given data.</p>
 
           
           <div class="method-source-code" id="default-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 356</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default=</span>(<span class="ruby-identifier">ad</span>)
-  <span class="ruby-ivar">@default</span> = <span class="ruby-identifier">ad</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">356</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">default=</span>(<span class="ruby-identifier">ad</span>)
+<span class="line-num">357</span>   <span class="ruby-ivar">@default</span> = <span class="ruby-identifier">ad</span>
+<span class="line-num">358</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -287,197 +290,197 @@ class of given data.</p>
 
           
           <div class="method-source-code" id="make_default-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 368</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">make_default</span>
-  <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>[
-    <span class="ruby-identifier">genbank</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::GenBank&#39;</span>,
-      <span class="ruby-regexp">/^LOCUS       .+ bp .*[a-z]*[DR]?NA/</span> ],
-    <span class="ruby-identifier">genpept</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::GenPept&#39;</span>,
-      <span class="ruby-regexp">/^LOCUS       .+ aa .+/</span> ],
-    <span class="ruby-identifier">medline</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::MEDLINE&#39;</span>,
-      <span class="ruby-regexp">/^PMID\- [0-9]+$/</span> ],
-    <span class="ruby-identifier">embl</span>     = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::EMBL&#39;</span>,
-      <span class="ruby-regexp">/^ID   .+\; .*(DNA|RNA|XXX)\;/</span> ],
-    <span class="ruby-identifier">sptr</span>     = <span class="ruby-constant">RuleRegexp2</span>[ <span class="ruby-string">&#39;Bio::SPTR&#39;</span>,
-      <span class="ruby-regexp">/^ID   .+\; *PRT\;/</span>,
-      <span class="ruby-regexp">/^ID   [-A-Za-z0-9_\.]+ .+\; *[0-9]+ *AA\./</span> ],
-    <span class="ruby-identifier">prosite</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::PROSITE&#39;</span>,
-      <span class="ruby-regexp">/^ID   [-A-Za-z0-9_\.]+\; (PATTERN|RULE|MATRIX)\.$/</span> ],
-    <span class="ruby-identifier">transfac</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::TRANSFAC&#39;</span>,
-      <span class="ruby-regexp">/^AC  [-A-Za-z0-9_\.]+$/</span> ],
-
-    <span class="ruby-identifier">aaindex</span>  = <span class="ruby-constant">RuleProc</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;Bio::AAindex1&#39;</span>, <span class="ruby-string">&#39;Bio::AAindex2&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">text</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^H [-A-Z0-9_\.]+$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">text</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^M [rc]/</span> <span class="ruby-keyword">then</span>
-          <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AAindex2</span>
-        <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">text</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^I    A\/L/</span> <span class="ruby-keyword">then</span>
-          <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AAindex1</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-keyword">false</span> <span class="ruby-comment">#fail to determine</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-keyword">nil</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>,
-
-    <span class="ruby-identifier">litdb</span>    = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::LITDB&#39;</span>,
-      <span class="ruby-regexp">/^CODE        [0-9]+$/</span> ],
-    <span class="ruby-identifier">pathway_module</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::MODULE&#39;</span>,
-      <span class="ruby-regexp">/^ENTRY       .+ Pathway\s+Module\s*/</span> ],
-    <span class="ruby-identifier">pathway</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::PATHWAY&#39;</span>,
-      <span class="ruby-regexp">/^ENTRY       .+ Pathway\s*/</span> ],
-    <span class="ruby-identifier">brite</span>    = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::BRITE&#39;</span>,
-      <span class="ruby-regexp">/^Entry           [A-Z0-9]+/</span> ],
-    <span class="ruby-identifier">orthology</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::ORTHOLOGY&#39;</span>,
-      <span class="ruby-regexp">/^ENTRY       .+ KO\s*/</span> ],
-    <span class="ruby-identifier">drug</span>     = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::DRUG&#39;</span>,
-      <span class="ruby-regexp">/^ENTRY       .+ Drug\s*/</span> ],
-    <span class="ruby-identifier">glycan</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::GLYCAN&#39;</span>,
-      <span class="ruby-regexp">/^ENTRY       .+ Glycan\s*/</span> ],
-    <span class="ruby-identifier">enzyme</span>   = <span class="ruby-constant">RuleRegexp2</span>[ <span class="ruby-string">&#39;Bio::KEGG::ENZYME&#39;</span>,
-      <span class="ruby-regexp">/^ENTRY       EC [0-9\.]+$/</span>,
-      <span class="ruby-regexp">/^ENTRY       .+ Enzyme\s*/</span>
-    ],
-    <span class="ruby-identifier">compound</span> = <span class="ruby-constant">RuleRegexp2</span>[ <span class="ruby-string">&#39;Bio::KEGG::COMPOUND&#39;</span>,
-      <span class="ruby-regexp">/^ENTRY       C[A-Za-z0-9\._]+$/</span>,
-      <span class="ruby-regexp">/^ENTRY       .+ Compound\s*/</span>
-    ],
-    <span class="ruby-identifier">reaction</span> = <span class="ruby-constant">RuleRegexp2</span>[ <span class="ruby-string">&#39;Bio::KEGG::REACTION&#39;</span>,
-      <span class="ruby-regexp">/^ENTRY       R[A-Za-z0-9\._]+$/</span>,
-      <span class="ruby-regexp">/^ENTRY       .+ Reaction\s*/</span>
-    ],
-    <span class="ruby-identifier">genes</span>    = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::GENES&#39;</span>,
-      <span class="ruby-regexp">/^ENTRY       .+ (CDS|gene|.*RNA|Contig) /</span> ],
-    <span class="ruby-identifier">genome</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::GENOME&#39;</span>,
-      <span class="ruby-regexp">/^ENTRY       [a-z]+$/</span> ],
-
-    <span class="ruby-identifier">fantom</span> = <span class="ruby-constant">RuleProc</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;Bio::FANTOM::MaXML::Cluster&#39;</span>,
-                          <span class="ruby-string">&#39;Bio::FANTOM::MaXML::Sequence&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">text</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\&lt;\!DOCTYPE\s+maxml\-(sequences|clusters)\s+SYSTEM/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">text</span>
-        <span class="ruby-keyword">case</span> <span class="ruby-node">$1</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;clusters&#39;</span>
-          <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FANTOM</span><span class="ruby-operator">::</span><span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Cluster</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;sequences&#39;</span>
-          <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FANTOM</span><span class="ruby-operator">::</span><span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-keyword">nil</span> <span class="ruby-comment">#unknown</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-keyword">nil</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>,
-
-    <span class="ruby-identifier">pdb</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::PDB&#39;</span>,
-      <span class="ruby-regexp">/^HEADER    .{40}\d\d\-[A-Z]{3}\-\d\d   [0-9A-Z]{4}/</span> ],
-    <span class="ruby-identifier">het</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::PDB::ChemicalComponent&#39;</span>,
-      <span class="ruby-regexp">/^RESIDUE +.+ +\d+\s*$/</span> ],
-
-    <span class="ruby-identifier">clustal</span> = <span class="ruby-constant">RuleRegexp2</span>[ <span class="ruby-string">&#39;Bio::ClustalW::Report&#39;</span>,
-    <span class="ruby-regexp">/^CLUSTAL .*\(.*\).*sequence +alignment/</span>,
-    <span class="ruby-regexp">/^CLUSTAL FORMAT for T-COFFEE/</span> ],
-
-    <span class="ruby-identifier">gcg_msf</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::GCG::Msf&#39;</span>,
-    <span class="ruby-regexp">/^!!(N|A)A_MULTIPLE_ALIGNMENT .+/</span> ],
-
-    <span class="ruby-identifier">gcg_seq</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::GCG::Seq&#39;</span>,
-    <span class="ruby-regexp">/^!!(N|A)A_SEQUENCE .+/</span> ],
-
-    <span class="ruby-identifier">blastxml</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::Report&#39;</span>,
-      <span class="ruby-regexp">/\&lt;\!DOCTYPE BlastOutput PUBLIC /</span> ],
-    <span class="ruby-identifier">wublast</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::WU::Report&#39;</span>,
-      <span class="ruby-regexp">/^BLAST.? +[\-\.\w]+\-WashU +\[[\-\.\w ]+\]/</span> ],
-    <span class="ruby-identifier">wutblast</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::WU::Report_TBlast&#39;</span>,
-      <span class="ruby-regexp">/^TBLAST.? +[\-\.\w]+\-WashU +\[[\-\.\w ]+\]/</span> ],
-    <span class="ruby-identifier">blast</span>    = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::Default::Report&#39;</span>,
-      <span class="ruby-regexp">/^BLAST.? +[\-\.\w]+ +\[[\-\.\w ]+\]/</span> ],
-    <span class="ruby-identifier">tblast</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::Default::Report_TBlast&#39;</span>,
-      <span class="ruby-regexp">/^TBLAST.? +[\-\.\w]+ +\[[\-\.\w ]+\]/</span> ],
-    <span class="ruby-identifier">rpsblast</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::RPSBlast::Report&#39;</span>,
-      <span class="ruby-regexp">/^RPS\-BLAST.? +[\-\.\w]+ +\[[\-\.\w ]+\]/</span> ],
-
-    <span class="ruby-identifier">blat</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blat::Report&#39;</span>,
-      <span class="ruby-regexp">/^psLayout version \d+/</span> ],
-    <span class="ruby-identifier">spidey</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Spidey::Report&#39;</span>,
-      <span class="ruby-regexp">/^\-\-SPIDEY version .+\-\-$/</span> ],
-    <span class="ruby-identifier">hmmer</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::HMMER::Report&#39;</span>,
-      <span class="ruby-regexp">/^HMMER +\d+\./</span> ],
-    <span class="ruby-identifier">sim4</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Sim4::Report&#39;</span>,
-      <span class="ruby-regexp">/^seq1 \= .*\, \d+ bp(\r|\r?\n)seq2 \= .*\, \d+ bp(\r|\r?\n)/</span> ],
-
-    <span class="ruby-identifier">fastq</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Fastq&#39;</span>,
-      <span class="ruby-regexp">/^\@.+(?:\r|\r?\n)(?:[^\@\+].*(?:\r|\r?\n))+/</span> ],
-
-    <span class="ruby-identifier">fastaformat</span> = <span class="ruby-constant">RuleProc</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;Bio::FastaFormat&#39;</span>,
-                               <span class="ruby-string">&#39;Bio::NBRF&#39;</span>,
-                               <span class="ruby-string">&#39;Bio::FastaNumericFormat&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">text</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^&gt;.+$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">text</span>
-        <span class="ruby-keyword">case</span> <span class="ruby-identifier">text</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&gt;([PF]1|[DR][LC]|N[13]|XX)\;.+/</span>
-          <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NBRF</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&gt;.+$\s+(^\#.*$\s*)*^\s*\d*\s*[-a-zA-Z_\.\[\]\(\)\*\+\$]+/</span>
-            <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>
-        <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&gt;.+$\s+^\s*\d+(\s+\d+)*\s*$/</span>
-          <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaNumericFormat</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-keyword">false</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-keyword">nil</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  ]
-
-  <span class="ruby-comment"># dependencies</span>
-  <span class="ruby-comment"># NCBI</span>
-  <span class="ruby-identifier">genbank</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">genpept</span>
-  <span class="ruby-comment"># EMBL/UniProt</span>
-  <span class="ruby-identifier">embl</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">sptr</span>
-  <span class="ruby-identifier">sptr</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">prosite</span>
-  <span class="ruby-identifier">prosite</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">transfac</span>
-  <span class="ruby-comment"># KEGG</span>
-  <span class="ruby-comment">#aaindex.is_prior_to litdb</span>
-  <span class="ruby-comment">#litdb.is_prior_to brite</span>
-  <span class="ruby-identifier">pathway_module</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">pathway</span>
-  <span class="ruby-identifier">pathway</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">brite</span>
-  <span class="ruby-identifier">brite</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">orthology</span>
-  <span class="ruby-identifier">orthology</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">drug</span>
-  <span class="ruby-identifier">drug</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">glycan</span>
-  <span class="ruby-identifier">glycan</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">enzyme</span>
-  <span class="ruby-identifier">enzyme</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">compound</span>
-  <span class="ruby-identifier">compound</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">reaction</span>
-  <span class="ruby-identifier">reaction</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">genes</span>
-  <span class="ruby-identifier">genes</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">genome</span>
-  <span class="ruby-comment"># PDB</span>
-  <span class="ruby-identifier">pdb</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">het</span>
-  <span class="ruby-comment"># BLAST</span>
-  <span class="ruby-identifier">wublast</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">wutblast</span>
-  <span class="ruby-identifier">wutblast</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">blast</span>
-  <span class="ruby-identifier">blast</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">tblast</span>
-  <span class="ruby-comment"># Fastq</span>
-  <span class="ruby-constant">BottomRule</span>.<span class="ruby-identifier">is_prior_to</span>(<span class="ruby-identifier">fastq</span>)
-  <span class="ruby-identifier">fastq</span>.<span class="ruby-identifier">is_prior_to</span>(<span class="ruby-identifier">fastaformat</span>)
-  <span class="ruby-comment"># FastaFormat</span>
-  <span class="ruby-constant">BottomRule</span>.<span class="ruby-identifier">is_prior_to</span>(<span class="ruby-identifier">fastaformat</span>)
-
-  <span class="ruby-comment"># for debug</span>
-  <span class="ruby-comment">#debug_first = RuleDebug.new(&#39;debug_first&#39;)</span>
-  <span class="ruby-comment">#a.add(debug_first)</span>
-  <span class="ruby-comment">#debug_first.is_prior_to(TopRule)</span>
-
-  <span class="ruby-comment">## for debug</span>
-  <span class="ruby-comment">#debug_last = RuleDebug.new(&#39;debug_last&#39;)</span>
-  <span class="ruby-comment">#a.add(debug_last)</span>
-  <span class="ruby-comment">#BottomRule.is_prior_to(debug_last)</span>
-  <span class="ruby-comment">#fastaformat.is_prior_to(debug_last)</span>
-
-  <span class="ruby-comment">## for suppressing warnings</span>
-  <span class="ruby-identifier">p</span> <span class="ruby-identifier">medline</span>, <span class="ruby-identifier">aaindex</span>, <span class="ruby-identifier">litdb</span>, <span class="ruby-identifier">fantom</span>, <span class="ruby-identifier">clustal</span>,
-    <span class="ruby-identifier">gcg_msf</span>, <span class="ruby-identifier">gcg_seq</span>, <span class="ruby-identifier">blastxml</span>, <span class="ruby-identifier">rpsblast</span>, <span class="ruby-identifier">blat</span>,
-    <span class="ruby-identifier">spidey</span>, <span class="ruby-identifier">hmmer</span>, <span class="ruby-identifier">sim4</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">false</span>
-
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">rehash</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">a</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">368</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">make_default</span>
+<span class="line-num">369</span>   <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>[
+<span class="line-num">370</span>     <span class="ruby-identifier">genbank</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::GenBank&#39;</span>,
+<span class="line-num">371</span>       <span class="ruby-regexp">/^LOCUS       .+ bp .*[a-z]*[DR]?NA/</span> ],
+<span class="line-num">372</span>     <span class="ruby-identifier">genpept</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::GenPept&#39;</span>,
+<span class="line-num">373</span>       <span class="ruby-regexp">/^LOCUS       .+ aa .+/</span> ],
+<span class="line-num">374</span>     <span class="ruby-identifier">medline</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::MEDLINE&#39;</span>,
+<span class="line-num">375</span>       <span class="ruby-regexp">/^PMID\- [0-9]+$/</span> ],
+<span class="line-num">376</span>     <span class="ruby-identifier">embl</span>     = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::EMBL&#39;</span>,
+<span class="line-num">377</span>       <span class="ruby-regexp">/^ID   .+\; .*(DNA|RNA|XXX)\;/</span> ],
+<span class="line-num">378</span>     <span class="ruby-identifier">sptr</span>     = <span class="ruby-constant">RuleRegexp2</span>[ <span class="ruby-string">&#39;Bio::SPTR&#39;</span>,
+<span class="line-num">379</span>       <span class="ruby-regexp">/^ID   .+\; *PRT\;/</span>,
+<span class="line-num">380</span>       <span class="ruby-regexp">/^ID   [-A-Za-z0-9_\.]+ .+\; *[0-9]+ *AA\./</span> ],
+<span class="line-num">381</span>     <span class="ruby-identifier">prosite</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::PROSITE&#39;</span>,
+<span class="line-num">382</span>       <span class="ruby-regexp">/^ID   [-A-Za-z0-9_\.]+\; (PATTERN|RULE|MATRIX)\.$/</span> ],
+<span class="line-num">383</span>     <span class="ruby-identifier">transfac</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::TRANSFAC&#39;</span>,
+<span class="line-num">384</span>       <span class="ruby-regexp">/^AC  [-A-Za-z0-9_\.]+$/</span> ],
+<span class="line-num">385</span> 
+<span class="line-num">386</span>     <span class="ruby-identifier">aaindex</span>  = <span class="ruby-constant">RuleProc</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;Bio::AAindex1&#39;</span>, <span class="ruby-string">&#39;Bio::AAindex2&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">text</span><span class="ruby-operator">|</span>
+<span class="line-num">387</span>       <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^H [-A-Z0-9_\.]+$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">text</span> <span class="ruby-keyword">then</span>
+<span class="line-num">388</span>         <span class="ruby-keyword">if</span> <span class="ruby-identifier">text</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^M [rc]/</span> <span class="ruby-keyword">then</span>
+<span class="line-num">389</span>           <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AAindex2</span>
+<span class="line-num">390</span>         <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">text</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^I    A\/L/</span> <span class="ruby-keyword">then</span>
+<span class="line-num">391</span>           <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">AAindex1</span>
+<span class="line-num">392</span>         <span class="ruby-keyword">else</span>
+<span class="line-num">393</span>           <span class="ruby-keyword">false</span> <span class="ruby-comment">#fail to determine</span>
+<span class="line-num">394</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">395</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">396</span>         <span class="ruby-keyword">nil</span>
+<span class="line-num">397</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">398</span>     <span class="ruby-keyword">end</span>,
+<span class="line-num">399</span> 
+<span class="line-num">400</span>     <span class="ruby-identifier">litdb</span>    = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::LITDB&#39;</span>,
+<span class="line-num">401</span>       <span class="ruby-regexp">/^CODE        [0-9]+$/</span> ],
+<span class="line-num">402</span>     <span class="ruby-identifier">pathway_module</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::MODULE&#39;</span>,
+<span class="line-num">403</span>       <span class="ruby-regexp">/^ENTRY       .+ Pathway\s+Module\s*/</span> ],
+<span class="line-num">404</span>     <span class="ruby-identifier">pathway</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::PATHWAY&#39;</span>,
+<span class="line-num">405</span>       <span class="ruby-regexp">/^ENTRY       .+ Pathway\s*/</span> ],
+<span class="line-num">406</span>     <span class="ruby-identifier">brite</span>    = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::BRITE&#39;</span>,
+<span class="line-num">407</span>       <span class="ruby-regexp">/^Entry           [A-Z0-9]+/</span> ],
+<span class="line-num">408</span>     <span class="ruby-identifier">orthology</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::ORTHOLOGY&#39;</span>,
+<span class="line-num">409</span>       <span class="ruby-regexp">/^ENTRY       .+ KO\s*/</span> ],
+<span class="line-num">410</span>     <span class="ruby-identifier">drug</span>     = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::DRUG&#39;</span>,
+<span class="line-num">411</span>       <span class="ruby-regexp">/^ENTRY       .+ Drug\s*/</span> ],
+<span class="line-num">412</span>     <span class="ruby-identifier">glycan</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::GLYCAN&#39;</span>,
+<span class="line-num">413</span>       <span class="ruby-regexp">/^ENTRY       .+ Glycan\s*/</span> ],
+<span class="line-num">414</span>     <span class="ruby-identifier">enzyme</span>   = <span class="ruby-constant">RuleRegexp2</span>[ <span class="ruby-string">&#39;Bio::KEGG::ENZYME&#39;</span>,
+<span class="line-num">415</span>       <span class="ruby-regexp">/^ENTRY       EC [0-9\.]+$/</span>,
+<span class="line-num">416</span>       <span class="ruby-regexp">/^ENTRY       .+ Enzyme\s*/</span>
+<span class="line-num">417</span>     ],
+<span class="line-num">418</span>     <span class="ruby-identifier">compound</span> = <span class="ruby-constant">RuleRegexp2</span>[ <span class="ruby-string">&#39;Bio::KEGG::COMPOUND&#39;</span>,
+<span class="line-num">419</span>       <span class="ruby-regexp">/^ENTRY       C[A-Za-z0-9\._]+$/</span>,
+<span class="line-num">420</span>       <span class="ruby-regexp">/^ENTRY       .+ Compound\s*/</span>
+<span class="line-num">421</span>     ],
+<span class="line-num">422</span>     <span class="ruby-identifier">reaction</span> = <span class="ruby-constant">RuleRegexp2</span>[ <span class="ruby-string">&#39;Bio::KEGG::REACTION&#39;</span>,
+<span class="line-num">423</span>       <span class="ruby-regexp">/^ENTRY       R[A-Za-z0-9\._]+$/</span>,
+<span class="line-num">424</span>       <span class="ruby-regexp">/^ENTRY       .+ Reaction\s*/</span>
+<span class="line-num">425</span>     ],
+<span class="line-num">426</span>     <span class="ruby-identifier">genes</span>    = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::GENES&#39;</span>,
+<span class="line-num">427</span>       <span class="ruby-regexp">/^ENTRY       .+ (CDS|gene|.*RNA|Contig) /</span> ],
+<span class="line-num">428</span>     <span class="ruby-identifier">genome</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::KEGG::GENOME&#39;</span>,
+<span class="line-num">429</span>       <span class="ruby-regexp">/^ENTRY       [a-z]+$/</span> ],
+<span class="line-num">430</span> 
+<span class="line-num">431</span>     <span class="ruby-identifier">fantom</span> = <span class="ruby-constant">RuleProc</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;Bio::FANTOM::MaXML::Cluster&#39;</span>,
+<span class="line-num">432</span>                           <span class="ruby-string">&#39;Bio::FANTOM::MaXML::Sequence&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">text</span><span class="ruby-operator">|</span>
+<span class="line-num">433</span>       <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\&lt;\!DOCTYPE\s+maxml\-(sequences|clusters)\s+SYSTEM/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">text</span>
+<span class="line-num">434</span>         <span class="ruby-keyword">case</span> <span class="ruby-node">$1</span>
+<span class="line-num">435</span>         <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;clusters&#39;</span>
+<span class="line-num">436</span>           <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FANTOM</span><span class="ruby-operator">::</span><span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Cluster</span>
+<span class="line-num">437</span>         <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;sequences&#39;</span>
+<span class="line-num">438</span>           <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FANTOM</span><span class="ruby-operator">::</span><span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>
+<span class="line-num">439</span>         <span class="ruby-keyword">else</span>
+<span class="line-num">440</span>           <span class="ruby-keyword">nil</span> <span class="ruby-comment">#unknown</span>
+<span class="line-num">441</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">442</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">443</span>         <span class="ruby-keyword">nil</span>
+<span class="line-num">444</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">445</span>     <span class="ruby-keyword">end</span>,
+<span class="line-num">446</span> 
+<span class="line-num">447</span>     <span class="ruby-identifier">pdb</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::PDB&#39;</span>,
+<span class="line-num">448</span>       <span class="ruby-regexp">/^HEADER    .{40}\d\d\-[A-Z]{3}\-\d\d   [0-9A-Z]{4}/</span> ],
+<span class="line-num">449</span>     <span class="ruby-identifier">het</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::PDB::ChemicalComponent&#39;</span>,
+<span class="line-num">450</span>       <span class="ruby-regexp">/^RESIDUE +.+ +\d+\s*$/</span> ],
+<span class="line-num">451</span> 
+<span class="line-num">452</span>     <span class="ruby-identifier">clustal</span> = <span class="ruby-constant">RuleRegexp2</span>[ <span class="ruby-string">&#39;Bio::ClustalW::Report&#39;</span>,
+<span class="line-num">453</span>     <span class="ruby-regexp">/^CLUSTAL .*\(.*\).*sequence +alignment/</span>,
+<span class="line-num">454</span>     <span class="ruby-regexp">/^CLUSTAL FORMAT for T-COFFEE/</span> ],
+<span class="line-num">455</span> 
+<span class="line-num">456</span>     <span class="ruby-identifier">gcg_msf</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::GCG::Msf&#39;</span>,
+<span class="line-num">457</span>     <span class="ruby-regexp">/^!!(N|A)A_MULTIPLE_ALIGNMENT .+/</span> ],
+<span class="line-num">458</span> 
+<span class="line-num">459</span>     <span class="ruby-identifier">gcg_seq</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::GCG::Seq&#39;</span>,
+<span class="line-num">460</span>     <span class="ruby-regexp">/^!!(N|A)A_SEQUENCE .+/</span> ],
+<span class="line-num">461</span> 
+<span class="line-num">462</span>     <span class="ruby-identifier">blastxml</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::Report&#39;</span>,
+<span class="line-num">463</span>       <span class="ruby-regexp">/\&lt;\!DOCTYPE BlastOutput PUBLIC /</span> ],
+<span class="line-num">464</span>     <span class="ruby-identifier">wublast</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::WU::Report&#39;</span>,
+<span class="line-num">465</span>       <span class="ruby-regexp">/^BLAST.? +[\-\.\w]+\-WashU +\[[\-\.\w ]+\]/</span> ],
+<span class="line-num">466</span>     <span class="ruby-identifier">wutblast</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::WU::Report_TBlast&#39;</span>,
+<span class="line-num">467</span>       <span class="ruby-regexp">/^TBLAST.? +[\-\.\w]+\-WashU +\[[\-\.\w ]+\]/</span> ],
+<span class="line-num">468</span>     <span class="ruby-identifier">blast</span>    = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::Default::Report&#39;</span>,
+<span class="line-num">469</span>       <span class="ruby-regexp">/^BLAST.? +[\-\.\w]+ +\[[\-\.\w ]+\]/</span> ],
+<span class="line-num">470</span>     <span class="ruby-identifier">tblast</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::Default::Report_TBlast&#39;</span>,
+<span class="line-num">471</span>       <span class="ruby-regexp">/^TBLAST.? +[\-\.\w]+ +\[[\-\.\w ]+\]/</span> ],
+<span class="line-num">472</span>     <span class="ruby-identifier">rpsblast</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blast::RPSBlast::Report&#39;</span>,
+<span class="line-num">473</span>       <span class="ruby-regexp">/^RPS\-BLAST.? +[\-\.\w]+ +\[[\-\.\w ]+\]/</span> ],
+<span class="line-num">474</span> 
+<span class="line-num">475</span>     <span class="ruby-identifier">blat</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Blat::Report&#39;</span>,
+<span class="line-num">476</span>       <span class="ruby-regexp">/^psLayout version \d+/</span> ],
+<span class="line-num">477</span>     <span class="ruby-identifier">spidey</span> = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Spidey::Report&#39;</span>,
+<span class="line-num">478</span>       <span class="ruby-regexp">/^\-\-SPIDEY version .+\-\-$/</span> ],
+<span class="line-num">479</span>     <span class="ruby-identifier">hmmer</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::HMMER::Report&#39;</span>,
+<span class="line-num">480</span>       <span class="ruby-regexp">/^HMMER +\d+\./</span> ],
+<span class="line-num">481</span>     <span class="ruby-identifier">sim4</span>   = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Sim4::Report&#39;</span>,
+<span class="line-num">482</span>       <span class="ruby-regexp">/^seq1 \= .*\, \d+ bp(\r|\r?\n)seq2 \= .*\, \d+ bp(\r|\r?\n)/</span> ],
+<span class="line-num">483</span> 
+<span class="line-num">484</span>     <span class="ruby-identifier">fastq</span>  = <span class="ruby-constant">RuleRegexp</span>[ <span class="ruby-string">&#39;Bio::Fastq&#39;</span>,
+<span class="line-num">485</span>       <span class="ruby-regexp">/^\@.+(?:\r|\r?\n)(?:[^\@\+].*(?:\r|\r?\n))+/</span> ],
+<span class="line-num">486</span> 
+<span class="line-num">487</span>     <span class="ruby-identifier">fastaformat</span> = <span class="ruby-constant">RuleProc</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;Bio::FastaFormat&#39;</span>,
+<span class="line-num">488</span>                                <span class="ruby-string">&#39;Bio::NBRF&#39;</span>,
+<span class="line-num">489</span>                                <span class="ruby-string">&#39;Bio::FastaNumericFormat&#39;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">text</span><span class="ruby-operator">|</span>
+<span class="line-num">490</span>       <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^&gt;.+$/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">text</span>
+<span class="line-num">491</span>         <span class="ruby-keyword">case</span> <span class="ruby-identifier">text</span>
+<span class="line-num">492</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&gt;([PF]1|[DR][LC]|N[13]|XX)\;.+/</span>
+<span class="line-num">493</span>           <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">NBRF</span>
+<span class="line-num">494</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&gt;.+$\s+(^\#.*$\s*)*^\s*\d*\s*[-a-zA-Z_\.\[\]\(\)\*\+\$]+/</span>
+<span class="line-num">495</span>             <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>
+<span class="line-num">496</span>         <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&gt;.+$\s+^\s*\d+(\s+\d+)*\s*$/</span>
+<span class="line-num">497</span>           <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaNumericFormat</span>
+<span class="line-num">498</span>         <span class="ruby-keyword">else</span>
+<span class="line-num">499</span>           <span class="ruby-keyword">false</span>
+<span class="line-num">500</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">501</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">502</span>         <span class="ruby-keyword">nil</span>
+<span class="line-num">503</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">504</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">505</span>   ]
+<span class="line-num">506</span> 
+<span class="line-num">507</span>   <span class="ruby-comment"># dependencies</span>
+<span class="line-num">508</span>   <span class="ruby-comment"># NCBI</span>
+<span class="line-num">509</span>   <span class="ruby-identifier">genbank</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">genpept</span>
+<span class="line-num">510</span>   <span class="ruby-comment"># EMBL/UniProt</span>
+<span class="line-num">511</span>   <span class="ruby-identifier">embl</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">sptr</span>
+<span class="line-num">512</span>   <span class="ruby-identifier">sptr</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">prosite</span>
+<span class="line-num">513</span>   <span class="ruby-identifier">prosite</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">transfac</span>
+<span class="line-num">514</span>   <span class="ruby-comment"># KEGG</span>
+<span class="line-num">515</span>   <span class="ruby-comment">#aaindex.is_prior_to litdb</span>
+<span class="line-num">516</span>   <span class="ruby-comment">#litdb.is_prior_to brite</span>
+<span class="line-num">517</span>   <span class="ruby-identifier">pathway_module</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">pathway</span>
+<span class="line-num">518</span>   <span class="ruby-identifier">pathway</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">brite</span>
+<span class="line-num">519</span>   <span class="ruby-identifier">brite</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">orthology</span>
+<span class="line-num">520</span>   <span class="ruby-identifier">orthology</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">drug</span>
+<span class="line-num">521</span>   <span class="ruby-identifier">drug</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">glycan</span>
+<span class="line-num">522</span>   <span class="ruby-identifier">glycan</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">enzyme</span>
+<span class="line-num">523</span>   <span class="ruby-identifier">enzyme</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">compound</span>
+<span class="line-num">524</span>   <span class="ruby-identifier">compound</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">reaction</span>
+<span class="line-num">525</span>   <span class="ruby-identifier">reaction</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">genes</span>
+<span class="line-num">526</span>   <span class="ruby-identifier">genes</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">genome</span>
+<span class="line-num">527</span>   <span class="ruby-comment"># PDB</span>
+<span class="line-num">528</span>   <span class="ruby-identifier">pdb</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">het</span>
+<span class="line-num">529</span>   <span class="ruby-comment"># BLAST</span>
+<span class="line-num">530</span>   <span class="ruby-identifier">wublast</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">wutblast</span>
+<span class="line-num">531</span>   <span class="ruby-identifier">wutblast</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">blast</span>
+<span class="line-num">532</span>   <span class="ruby-identifier">blast</span>.<span class="ruby-identifier">is_prior_to</span> <span class="ruby-identifier">tblast</span>
+<span class="line-num">533</span>   <span class="ruby-comment"># Fastq</span>
+<span class="line-num">534</span>   <span class="ruby-constant">BottomRule</span>.<span class="ruby-identifier">is_prior_to</span>(<span class="ruby-identifier">fastq</span>)
+<span class="line-num">535</span>   <span class="ruby-identifier">fastq</span>.<span class="ruby-identifier">is_prior_to</span>(<span class="ruby-identifier">fastaformat</span>)
+<span class="line-num">536</span>   <span class="ruby-comment"># FastaFormat</span>
+<span class="line-num">537</span>   <span class="ruby-constant">BottomRule</span>.<span class="ruby-identifier">is_prior_to</span>(<span class="ruby-identifier">fastaformat</span>)
+<span class="line-num">538</span> 
+<span class="line-num">539</span>   <span class="ruby-comment"># for debug</span>
+<span class="line-num">540</span>   <span class="ruby-comment">#debug_first = RuleDebug.new(&#39;debug_first&#39;)</span>
+<span class="line-num">541</span>   <span class="ruby-comment">#a.add(debug_first)</span>
+<span class="line-num">542</span>   <span class="ruby-comment">#debug_first.is_prior_to(TopRule)</span>
+<span class="line-num">543</span> 
+<span class="line-num">544</span>   <span class="ruby-comment">## for debug</span>
+<span class="line-num">545</span>   <span class="ruby-comment">#debug_last = RuleDebug.new(&#39;debug_last&#39;)</span>
+<span class="line-num">546</span>   <span class="ruby-comment">#a.add(debug_last)</span>
+<span class="line-num">547</span>   <span class="ruby-comment">#BottomRule.is_prior_to(debug_last)</span>
+<span class="line-num">548</span>   <span class="ruby-comment">#fastaformat.is_prior_to(debug_last)</span>
+<span class="line-num">549</span> 
+<span class="line-num">550</span>   <span class="ruby-comment">## for suppressing warnings</span>
+<span class="line-num">551</span>   <span class="ruby-identifier">p</span> <span class="ruby-identifier">medline</span>, <span class="ruby-identifier">aaindex</span>, <span class="ruby-identifier">litdb</span>, <span class="ruby-identifier">fantom</span>, <span class="ruby-identifier">clustal</span>,
+<span class="line-num">552</span>     <span class="ruby-identifier">gcg_msf</span>, <span class="ruby-identifier">gcg_seq</span>, <span class="ruby-identifier">blastxml</span>, <span class="ruby-identifier">rpsblast</span>, <span class="ruby-identifier">blat</span>,
+<span class="line-num">553</span>     <span class="ruby-identifier">spidey</span>, <span class="ruby-identifier">hmmer</span>, <span class="ruby-identifier">sim4</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">false</span>
+<span class="line-num">554</span> 
+<span class="line-num">555</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">rehash</span>
+<span class="line-num">556</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">a</span>
+<span class="line-num">557</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -507,15 +510,15 @@ class of given data.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 226</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
-  <span class="ruby-comment"># stores autodetection rules.</span>
-  <span class="ruby-ivar">@rules</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-comment"># stores elements (cache)</span>
-  <span class="ruby-ivar">@elements</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">TopRule</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">BottomRule</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">226</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
+<span class="line-num">227</span>   <span class="ruby-comment"># stores autodetection rules.</span>
+<span class="line-num">228</span>   <span class="ruby-ivar">@rules</span> = <span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">229</span>   <span class="ruby-comment"># stores elements (cache)</span>
+<span class="line-num">230</span>   <span class="ruby-ivar">@elements</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">231</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">TopRule</span>)
+<span class="line-num">232</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add</span>(<span class="ruby-constant">BottomRule</span>)
+<span class="line-num">233</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -553,13 +556,13 @@ class of given data.</p>
 
           
           <div class="method-source-code" id="add-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 237</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add</span>(<span class="ruby-identifier">elem</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;element name conflicts&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@rules</span>[<span class="ruby-identifier">elem</span>.<span class="ruby-identifier">name</span>]
-  <span class="ruby-ivar">@elements</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@rules</span>[<span class="ruby-identifier">elem</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">elem</span>
-  <span class="ruby-identifier">elem</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">237</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add</span>(<span class="ruby-identifier">elem</span>)
+<span class="line-num">238</span>   <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;element name conflicts&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@rules</span>[<span class="ruby-identifier">elem</span>.<span class="ruby-identifier">name</span>]
+<span class="line-num">239</span>   <span class="ruby-ivar">@elements</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">240</span>   <span class="ruby-ivar">@rules</span>[<span class="ruby-identifier">elem</span>.<span class="ruby-identifier">name</span>] = <span class="ruby-identifier">elem</span>
+<span class="line-num">241</span>   <span class="ruby-identifier">elem</span>
+<span class="line-num">242</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -583,23 +586,22 @@ class of given data.</p>
 
         <div class="method-description">
           
-          <p>Autodetect from the text. Returns a database class if succeeded. Returns
-nil if failed.</p>
+          <p>Autodetect from the text. Returns a database class if succeeded. Returns nil if failed.</p>
           
           
 
           
           <div class="method-source-code" id="autodetect-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 305</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">autodetect</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">meta</span> = {})
-  <span class="ruby-identifier">r</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-    <span class="ruby-comment">#$stderr.puts e.name</span>
-    <span class="ruby-identifier">r</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">meta</span>)
-    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">305</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">autodetect</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">meta</span> = {})
+<span class="line-num">306</span>   <span class="ruby-identifier">r</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">307</span>   <span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+<span class="line-num">308</span>     <span class="ruby-comment">#$stderr.puts e.name</span>
+<span class="line-num">309</span>     <span class="ruby-identifier">r</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">guess</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">meta</span>)
+<span class="line-num">310</span>     <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
+<span class="line-num">311</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">312</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">313</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -623,39 +625,38 @@ nil if failed.</p>
 
         <div class="method-description">
           
-          <p>autodetect from the <a href="../FlatFile.html">FlatFile</a> object. Returns
-a database class if succeeded. Returns nil if failed.</p>
+          <p>autodetect from the <a href="../FlatFile.html"><code>FlatFile</code></a> object. Returns a database class if succeeded. Returns nil if failed.</p>
           
           
 
           
           <div class="method-source-code" id="autodetect_flatfile-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 318</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">autodetect_flatfile</span>(<span class="ruby-identifier">ff</span>, <span class="ruby-identifier">lines</span> = <span class="ruby-value">31</span>)
-  <span class="ruby-identifier">meta</span> = {}
-  <span class="ruby-identifier">stream</span> = <span class="ruby-identifier">ff</span>.<span class="ruby-identifier">instance_eval</span> { <span class="ruby-ivar">@stream</span> }
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">path</span>
-  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">meta</span>[<span class="ruby-value">:path</span>] = <span class="ruby-identifier">path</span>
-    <span class="ruby-comment"># call autodetect onece with meta and without any read action</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">autodetect</span>(<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">prefetch_buffer</span>, <span class="ruby-identifier">meta</span>)
-      <span class="ruby-keyword">return</span> <span class="ruby-identifier">r</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-comment"># reading stream</span>
-  <span class="ruby-value">1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">lines</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">prefetch_gets</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">autodetect</span>(<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">prefetch_buffer</span>, <span class="ruby-identifier">meta</span>)
-        <span class="ruby-keyword">return</span> <span class="ruby-identifier">r</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">318</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">autodetect_flatfile</span>(<span class="ruby-identifier">ff</span>, <span class="ruby-identifier">lines</span> = <span class="ruby-value">31</span>)
+<span class="line-num">319</span>   <span class="ruby-identifier">meta</span> = {}
+<span class="line-num">320</span>   <span class="ruby-identifier">stream</span> = <span class="ruby-identifier">ff</span>.<span class="ruby-identifier">instance_eval</span> { <span class="ruby-ivar">@stream</span> }
+<span class="line-num">321</span>   <span class="ruby-keyword">begin</span>
+<span class="line-num">322</span>     <span class="ruby-identifier">path</span> = <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">path</span>
+<span class="line-num">323</span>   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
+<span class="line-num">324</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">325</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> <span class="ruby-keyword">then</span>
+<span class="line-num">326</span>     <span class="ruby-identifier">meta</span>[<span class="ruby-value">:path</span>] = <span class="ruby-identifier">path</span>
+<span class="line-num">327</span>     <span class="ruby-comment"># call autodetect onece with meta and without any read action</span>
+<span class="line-num">328</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">autodetect</span>(<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">prefetch_buffer</span>, <span class="ruby-identifier">meta</span>)
+<span class="line-num">329</span>       <span class="ruby-keyword">return</span> <span class="ruby-identifier">r</span>
+<span class="line-num">330</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">331</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">332</span>   <span class="ruby-comment"># reading stream</span>
+<span class="line-num">333</span>   <span class="ruby-value">1</span>.<span class="ruby-identifier">upto</span>(<span class="ruby-identifier">lines</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">334</span>     <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">stream</span>.<span class="ruby-identifier">prefetch_gets</span>
+<span class="line-num">335</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">strip</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">336</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">autodetect</span>(<span class="ruby-identifier">stream</span>.<span class="ruby-identifier">prefetch_buffer</span>, <span class="ruby-identifier">meta</span>)
+<span class="line-num">337</span>         <span class="ruby-keyword">return</span> <span class="ruby-identifier">r</span>
+<span class="line-num">338</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">339</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">340</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">341</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">342</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -685,10 +686,10 @@ a database class if succeeded. Returns nil if failed.</p>
 
           
           <div class="method-source-code" id="each_rule-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 298</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_rule</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: elem</span>
-  <span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">298</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_rule</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: elem</span>
+<span class="line-num">299</span>   <span class="ruby-identifier">elements</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
+<span class="line-num">300</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -712,22 +713,21 @@ a database class if succeeded. Returns nil if failed.</p>
 
         <div class="method-description">
           
-          <p>Returns current elements as an array whose order fulfills all elements&#39;
-priorities.</p>
+          <p>Returns current elements as an array whose order fulfills all elements&#39; priorities.</p>
           
           
 
           
           <div class="method-source-code" id="elements-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 275</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">elements</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@elements</span>
-    <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">tsort</span>
-    <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">reverse!</span>
-    <span class="ruby-ivar">@elements</span> = <span class="ruby-identifier">ary</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@elements</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">275</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">elements</span>
+<span class="line-num">276</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@elements</span>
+<span class="line-num">277</span>     <span class="ruby-identifier">ary</span> = <span class="ruby-identifier">tsort</span>
+<span class="line-num">278</span>     <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">reverse!</span>
+<span class="line-num">279</span>     <span class="ruby-ivar">@elements</span> = <span class="ruby-identifier">ary</span>
+<span class="line-num">280</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">281</span>   <span class="ruby-ivar">@elements</span>
+<span class="line-num">282</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -757,12 +757,12 @@ priorities.</p>
 
           
           <div class="method-source-code" id="inspect-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 291</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
-  <span class="ruby-node">&quot;&lt;#{self.class.to_s} &quot;</span> <span class="ruby-operator">+</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">inspect</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>) <span class="ruby-operator">+</span>
-    <span class="ruby-string">&quot;&gt;&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">291</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">inspect</span>
+<span class="line-num">292</span>   <span class="ruby-node">&quot;&lt;#{self.class.to_s} &quot;</span> <span class="ruby-operator">+</span>
+<span class="line-num">293</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">inspect</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39; &#39;</span>) <span class="ruby-operator">+</span>
+<span class="line-num">294</span>     <span class="ruby-string">&quot;&gt;&quot;</span>
+<span class="line-num">295</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -792,11 +792,11 @@ priorities.</p>
 
           
           <div class="method-source-code" id="rehash-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 285</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rehash</span>
-  <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">rehash</span>
-  <span class="ruby-ivar">@elements</span> = <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">285</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rehash</span>
+<span class="line-num">286</span>   <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">rehash</span>
+<span class="line-num">287</span>   <span class="ruby-ivar">@elements</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">288</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -820,33 +820,32 @@ priorities.</p>
 
         <div class="method-description">
           
-          <p>(required by TSort.) For a given element, yields each child (= lower
-priority elements) of the element.</p>
+          <p>(required by TSort.) For a given element, yields each child (= lower priority elements) of the element.</p>
           
           
 
           
           <div class="method-source-code" id="tsort_each_child-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 253</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tsort_each_child</span>(<span class="ruby-identifier">elem</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">elem</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TopRule</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">e</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TopRule</span> <span class="ruby-keyword">or</span> 
-        <span class="ruby-identifier">e</span>.<span class="ruby-identifier">lower_priority_elements</span>.<span class="ruby-identifier">index</span>(<span class="ruby-constant">TopRule</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">elem</span> <span class="ruby-operator">==</span> <span class="ruby-constant">BottomRule</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">e</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">higher_priority_elements</span>.<span class="ruby-identifier">index</span>(<span class="ruby-constant">BottomRule</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">lower_priority_elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-identifier">e</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">BottomRule</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">higher_priority_elements</span>.<span class="ruby-identifier">index</span>(<span class="ruby-constant">BottomRule</span>)
-      <span class="ruby-keyword">yield</span> <span class="ruby-constant">BottomRule</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">253</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tsort_each_child</span>(<span class="ruby-identifier">elem</span>)
+<span class="line-num">254</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">elem</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TopRule</span> <span class="ruby-keyword">then</span>
+<span class="line-num">255</span>     <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+<span class="line-num">256</span>       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">e</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">==</span> <span class="ruby-constant">TopRule</span> <span class="ruby-keyword">or</span> 
+<span class="line-num">257</span>         <span class="ruby-identifier">e</span>.<span class="ruby-identifier">lower_priority_elements</span>.<span class="ruby-identifier">index</span>(<span class="ruby-constant">TopRule</span>)
+<span class="line-num">258</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">259</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">elem</span> <span class="ruby-operator">==</span> <span class="ruby-constant">BottomRule</span> <span class="ruby-keyword">then</span>
+<span class="line-num">260</span>     <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">each_value</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+<span class="line-num">261</span>       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">e</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">higher_priority_elements</span>.<span class="ruby-identifier">index</span>(<span class="ruby-constant">BottomRule</span>)
+<span class="line-num">262</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">263</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">264</span>     <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">lower_priority_elements</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+<span class="line-num">265</span>       <span class="ruby-keyword">yield</span> <span class="ruby-identifier">e</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">!=</span> <span class="ruby-constant">BottomRule</span>
+<span class="line-num">266</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">267</span>     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">elem</span>.<span class="ruby-identifier">higher_priority_elements</span>.<span class="ruby-identifier">index</span>(<span class="ruby-constant">BottomRule</span>)
+<span class="line-num">268</span>       <span class="ruby-keyword">yield</span> <span class="ruby-constant">BottomRule</span>
+<span class="line-num">269</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">270</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">271</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -876,10 +875,10 @@ priority elements) of the element.</p>
 
           
           <div class="method-source-code" id="tsort_each_node-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 246</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tsort_each_node</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
-  <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">each_value</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">246</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">tsort_each_node</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
+<span class="line-num">247</span>   <span class="ruby-ivar">@rules</span>.<span class="ruby-identifier">each_value</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
+<span class="line-num">248</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -893,12 +892,13 @@ priority elements) of the element.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -86,7 +90,7 @@
 
   <section class="description">
     
-<p><a href="DB.html">Bio::KEGG::Keggtab::DB</a></p>
+<p><a href="DB.html"><code>Bio::KEGG::Keggtab::DB</code></a></p>
 
   </section>
 
@@ -113,8 +117,7 @@
 
         <div class="method-description">
         
-        <p>Short name for the database. (e.g. &#39;ec&#39;, &#39;hsa&#39;,
-&#39;eco&#39;, …) korg and keggorg are alias for abbrev method.</p>
+        <p>Short name for the database. (e.g. &#39;ec&#39;, &#39;hsa&#39;, &#39;eco&#39;, …) korg and keggorg are alias for abbrev method.</p>
         
         </div>
       </div>
@@ -127,8 +130,7 @@
 
         <div class="method-description">
         
-        <p>Array containing all alias names for the database. (e.g. [“H.sapiens”,
-“hsa”], [“E.coli”, “eco”], …)</p>
+        <p>Array containing all alias names for the database. (e.g. [“H.sapiens”, “hsa”], [“E.coli”, “eco”], …)</p>
         
         </div>
       </div>
@@ -141,8 +143,7 @@
 
         <div class="method-description">
         
-        <p>Short name for the database. (e.g. &#39;ec&#39;, &#39;hsa&#39;,
-&#39;eco&#39;, …) korg and keggorg are alias for abbrev method.</p>
+        <p>Short name for the database. (e.g. &#39;ec&#39;, &#39;hsa&#39;, &#39;eco&#39;, …) korg and keggorg are alias for abbrev method.</p>
         
         </div>
       </div>
@@ -155,8 +156,7 @@
 
         <div class="method-description">
         
-        <p>Short name for the database. (e.g. &#39;ec&#39;, &#39;hsa&#39;,
-&#39;eco&#39;, …) korg and keggorg are alias for abbrev method.</p>
+        <p>Short name for the database. (e.g. &#39;ec&#39;, &#39;hsa&#39;, &#39;eco&#39;, …) korg and keggorg are alias for abbrev method.</p>
         
         </div>
       </div>
@@ -169,8 +169,7 @@
 
         <div class="method-description">
         
-        <p>Database name. (e.g. &#39;enzyme&#39;, &#39;h.sapies&#39;,
-&#39;e.coli&#39;, …)</p>
+        <p>Database name. (e.g. &#39;enzyme&#39;, &#39;h.sapies&#39;, &#39;e.coli&#39;, …)</p>
         
         </div>
       </div>
@@ -196,8 +195,7 @@
 
         <div class="method-description">
         
-        <p>Definition type. (e.g. &#39;enzyme&#39;, &#39;alias&#39;, &#39;genes&#39;,
-…)</p>
+        <p>Definition type. (e.g. &#39;enzyme&#39;, &#39;alias&#39;, &#39;genes&#39;, …)</p>
         
         </div>
       </div>
@@ -231,14 +229,14 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">db_name</span>, <span class="ruby-identifier">db_type</span>, <span class="ruby-identifier">db_path</span>, <span class="ruby-identifier">db_abbrev</span>)
-  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">db_name</span>
-  <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">db_type</span>
-  <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">db_path</span>
-  <span class="ruby-ivar">@abbrev</span> = <span class="ruby-identifier">db_abbrev</span>
-  <span class="ruby-ivar">@aliases</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/db/kegg/keggtab.rb</span>
+<span class="line-num">73</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">db_name</span>, <span class="ruby-identifier">db_type</span>, <span class="ruby-identifier">db_path</span>, <span class="ruby-identifier">db_abbrev</span>)
+<span class="line-num">74</span>   <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">db_name</span>
+<span class="line-num">75</span>   <span class="ruby-ivar">@type</span> = <span class="ruby-identifier">db_type</span>
+<span class="line-num">76</span>   <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">db_path</span>
+<span class="line-num">77</span>   <span class="ruby-ivar">@abbrev</span> = <span class="ruby-identifier">db_abbrev</span>
+<span class="line-num">78</span>   <span class="ruby-ivar">@aliases</span> = <span class="ruby-constant">Array</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">79</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -252,12 +250,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

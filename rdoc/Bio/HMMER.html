@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -106,8 +110,7 @@
     
 <h2 id="class-Bio::HMMER-label-Description">Description<span><a href="#class-Bio::HMMER-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>A wapper for <a href="HMMER.html">HMMER</a> programs (hmmsearch or
-hmmpfam).</p>
+<p>A wapper for <a href="HMMER.html"><code>HMMER</code></a> programs (hmmsearch or hmmpfam).</p>
 
 <h3 id="class-Bio::HMMER-label-Examples">Examples<span><a href="#class-Bio::HMMER-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -121,10 +124,9 @@ hmmpfam).</p>
 <span class="ruby-identifier">report</span>.<span class="ruby-identifier">class</span> <span class="ruby-comment"># =&gt; Bio::HMMER::Report</span>
 </pre>
 
-<h3 id="class-Bio::HMMER-label-References"><a href="References.html">References</a><span><a href="#class-Bio::HMMER-label-References">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h3 id="class-Bio::HMMER-label-References"><a href="References.html"><code>References</code></a><span><a href="#class-Bio::HMMER-label-References">&para;</a> <a href="#top">&uarr;</a></span></h3>
 <ul><li>
-<p><a href="HMMER.html">HMMER</a> <a
-href="http://hmmer.wustl.edu">hmmer.wustl.edu</a>/</p>
+<p><a href="HMMER.html"><code>HMMER</code></a> <a href="http://hmmer.wustl.edu">hmmer.wustl.edu</a>/</p>
 </li></ul>
 
   </section>
@@ -165,7 +167,7 @@ href="http://hmmer.wustl.edu">hmmer.wustl.edu</a>/</p>
 
         <div class="method-description">
         
-        <p><a href="Command.html">Command</a> line options.</p>
+        <p><a href="Command.html"><code>Command</code></a> line options.</p>
         
         </div>
       </div>
@@ -232,8 +234,7 @@ href="http://hmmer.wustl.edu">hmmer.wustl.edu</a>/</p>
 
         <div class="method-description">
           
-          <p>Sets a program name, a profile hmm file name, a query sequence file name 
-and options in string.</p>
+          <p>Sets a program name, a profile hmm file name, a query sequence file name  and options in string.</p>
 
 <p>Program names: hmmsearch, hmmpfam</p>
           
@@ -241,20 +242,20 @@ and options in string.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/hmmer.rb, line 60</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">program</span>, <span class="ruby-identifier">hmmfile</span>, <span class="ruby-identifier">seqfile</span>, <span class="ruby-identifier">options</span> = [])
-  <span class="ruby-ivar">@program</span> = <span class="ruby-identifier">program</span>
-  <span class="ruby-ivar">@hmmfile</span> = <span class="ruby-identifier">hmmfile</span>
-  <span class="ruby-ivar">@seqfile</span> = <span class="ruby-identifier">seqfile</span>
-  <span class="ruby-ivar">@output</span>  = <span class="ruby-string">&#39;&#39;</span>
-  
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">to_ary</span>
-  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span> <span class="ruby-comment">#NoMethodError</span>
-    <span class="ruby-comment"># backward compatibility</span>
-    <span class="ruby-ivar">@options</span> = <span class="ruby-constant">Shellwords</span>.<span class="ruby-identifier">shellwords</span>(<span class="ruby-identifier">options</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/hmmer.rb</span>
+<span class="line-num">60</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">program</span>, <span class="ruby-identifier">hmmfile</span>, <span class="ruby-identifier">seqfile</span>, <span class="ruby-identifier">options</span> = [])
+<span class="line-num">61</span>   <span class="ruby-ivar">@program</span> = <span class="ruby-identifier">program</span>
+<span class="line-num">62</span>   <span class="ruby-ivar">@hmmfile</span> = <span class="ruby-identifier">hmmfile</span>
+<span class="line-num">63</span>   <span class="ruby-ivar">@seqfile</span> = <span class="ruby-identifier">seqfile</span>
+<span class="line-num">64</span>   <span class="ruby-ivar">@output</span>  = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">65</span>   
+<span class="line-num">66</span>   <span class="ruby-keyword">begin</span>
+<span class="line-num">67</span>     <span class="ruby-ivar">@options</span> = <span class="ruby-identifier">options</span>.<span class="ruby-identifier">to_ary</span>
+<span class="line-num">68</span>   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span> <span class="ruby-comment">#NoMethodError</span>
+<span class="line-num">69</span>     <span class="ruby-comment"># backward compatibility</span>
+<span class="line-num">70</span>     <span class="ruby-ivar">@options</span> = <span class="ruby-constant">Shellwords</span>.<span class="ruby-identifier">shellwords</span>(<span class="ruby-identifier">options</span>)
+<span class="line-num">71</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">72</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -278,8 +279,7 @@ and options in string.</p>
 
         <div class="method-description">
           
-          <p>A reader interface for multiple reports text into a report 
-(Bio::HMMER::Report).</p>
+          <p>A reader interface for multiple reports text into a report  (Bio::HMMER::Report).</p>
 
 <h3 id="method-c-reports-label-Examples">Examples<span><a href="#method-c-reports-label-Examples">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -296,18 +296,18 @@ and options in string.</p>
 
           
           <div class="method-source-code" id="reports-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/hmmer/report.rb, line 62</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">reports</span>(<span class="ruby-identifier">multiple_report_text</span>)
-  <span class="ruby-identifier">ary</span> = []
-  <span class="ruby-identifier">multiple_report_text</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-string">&quot;\n//\n&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">report</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">report</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">report</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/hmmer/report.rb</span>
+<span class="line-num">62</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">reports</span>(<span class="ruby-identifier">multiple_report_text</span>)
+<span class="line-num">63</span>   <span class="ruby-identifier">ary</span> = []
+<span class="line-num">64</span>   <span class="ruby-identifier">multiple_report_text</span>.<span class="ruby-identifier">each_line</span>(<span class="ruby-string">&quot;\n//\n&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">report</span><span class="ruby-operator">|</span>
+<span class="line-num">65</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+<span class="line-num">66</span>       <span class="ruby-keyword">yield</span> <span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">report</span>)
+<span class="line-num">67</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">68</span>       <span class="ruby-identifier">ary</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">report</span>)
+<span class="line-num">69</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">70</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">71</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">ary</span>
+<span class="line-num">72</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -345,10 +345,10 @@ and options in string.</p>
 
           
           <div class="method-source-code" id="option-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/hmmer.rb, line 77</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">option</span>
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">make_command_line</span>(<span class="ruby-ivar">@options</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/hmmer.rb</span>
+<span class="line-num">77</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">option</span>
+<span class="line-num">78</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">make_command_line</span>(<span class="ruby-ivar">@options</span>)
+<span class="line-num">79</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -378,10 +378,10 @@ and options in string.</p>
 
           
           <div class="method-source-code" id="option-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/hmmer.rb, line 84</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">option=</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@options</span> = <span class="ruby-constant">Shellwords</span>.<span class="ruby-identifier">shellwords</span>(<span class="ruby-identifier">str</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/hmmer.rb</span>
+<span class="line-num">84</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">option=</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">85</span>   <span class="ruby-ivar">@options</span> = <span class="ruby-constant">Shellwords</span>.<span class="ruby-identifier">shellwords</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">86</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -405,25 +405,24 @@ and options in string.</p>
 
         <div class="method-description">
           
-          <p>Executes the hmmer search and returns the report  (Bio::HMMER::Report
-object).</p>
+          <p>Executes the hmmer search and returns the report  (Bio::HMMER::Report object).</p>
           
           
 
           
           <div class="method-source-code" id="query-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/hmmer.rb, line 91</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>
-  <span class="ruby-identifier">cmd</span> = [ <span class="ruby-ivar">@program</span>, <span class="ruby-operator">*</span><span class="ruby-ivar">@options</span> ]
-  <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">concat</span>([ <span class="ruby-ivar">@hmmfile</span>, <span class="ruby-ivar">@seqfile</span> ])
-    
-  <span class="ruby-identifier">report</span> = <span class="ruby-keyword">nil</span>
-  
-  <span class="ruby-ivar">@output</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">query_command</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">report</span> = <span class="ruby-identifier">parse_result</span>(<span class="ruby-ivar">@output</span>)
-    
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">report</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/hmmer.rb</span>
+<span class="line-num"> 91</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>
+<span class="line-num"> 92</span>   <span class="ruby-identifier">cmd</span> = [ <span class="ruby-ivar">@program</span>, <span class="ruby-operator">*</span><span class="ruby-ivar">@options</span> ]
+<span class="line-num"> 93</span>   <span class="ruby-identifier">cmd</span>.<span class="ruby-identifier">concat</span>([ <span class="ruby-ivar">@hmmfile</span>, <span class="ruby-ivar">@seqfile</span> ])
+<span class="line-num"> 94</span>     
+<span class="line-num"> 95</span>   <span class="ruby-identifier">report</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num"> 96</span>   
+<span class="line-num"> 97</span>   <span class="ruby-ivar">@output</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">query_command</span>(<span class="ruby-identifier">cmd</span>, <span class="ruby-keyword">nil</span>)
+<span class="line-num"> 98</span>   <span class="ruby-identifier">report</span> = <span class="ruby-identifier">parse_result</span>(<span class="ruby-ivar">@output</span>)
+<span class="line-num"> 99</span>     
+<span class="line-num">100</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">report</span>
+<span class="line-num">101</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -437,12 +436,13 @@ object).</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

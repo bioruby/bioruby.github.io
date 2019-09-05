@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -88,7 +92,7 @@
 
   <section class="description">
     
-<h1 id="class-Bio::SiRNA::Pair-label-Bio-3A-3ASiRNA-3A-3APair"><a href="Pair.html">Bio::SiRNA::Pair</a><span><a href="#class-Bio::SiRNA::Pair-label-Bio-3A-3ASiRNA-3A-3APair">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::SiRNA::Pair-label-Bio-3A-3ASiRNA-3A-3APair"><a href="Pair.html"><code>Bio::SiRNA::Pair</code></a><span><a href="#class-Bio::SiRNA::Pair-label-Bio-3A-3ASiRNA-3A-3APair">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
   </section>
 
@@ -227,16 +231,16 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 193</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">sense</span>, <span class="ruby-identifier">antisense</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>, <span class="ruby-identifier">rule</span>, <span class="ruby-identifier">gc_percent</span>)
-  <span class="ruby-ivar">@target</span>     = <span class="ruby-identifier">target</span>
-  <span class="ruby-ivar">@sense</span>      = <span class="ruby-identifier">sense</span>
-  <span class="ruby-ivar">@antisense</span>  = <span class="ruby-identifier">antisense</span>
-  <span class="ruby-ivar">@start</span>      = <span class="ruby-identifier">start</span>
-  <span class="ruby-ivar">@stop</span>       = <span class="ruby-identifier">stop</span>
-  <span class="ruby-ivar">@rule</span>       = <span class="ruby-identifier">rule</span>
-  <span class="ruby-ivar">@gc_percent</span> = <span class="ruby-identifier">gc_percent</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">193</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">target</span>, <span class="ruby-identifier">sense</span>, <span class="ruby-identifier">antisense</span>, <span class="ruby-identifier">start</span>, <span class="ruby-identifier">stop</span>, <span class="ruby-identifier">rule</span>, <span class="ruby-identifier">gc_percent</span>)
+<span class="line-num">194</span>   <span class="ruby-ivar">@target</span>     = <span class="ruby-identifier">target</span>
+<span class="line-num">195</span>   <span class="ruby-ivar">@sense</span>      = <span class="ruby-identifier">sense</span>
+<span class="line-num">196</span>   <span class="ruby-ivar">@antisense</span>  = <span class="ruby-identifier">antisense</span>
+<span class="line-num">197</span>   <span class="ruby-ivar">@start</span>      = <span class="ruby-identifier">start</span>
+<span class="line-num">198</span>   <span class="ruby-ivar">@stop</span>       = <span class="ruby-identifier">stop</span>
+<span class="line-num">199</span>   <span class="ruby-ivar">@rule</span>       = <span class="ruby-identifier">rule</span>
+<span class="line-num">200</span>   <span class="ruby-ivar">@gc_percent</span> = <span class="ruby-identifier">gc_percent</span>
+<span class="line-num">201</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -274,17 +278,17 @@
 
           
           <div class="method-source-code" id="report-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/sirna.rb, line 204</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">report</span>
-  <span class="ruby-identifier">report</span> =  <span class="ruby-string">&quot;### siRNA\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Start: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@start</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Stop:  &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@stop</span>.<span class="ruby-identifier">to_s</span>  <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Rule:  &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@rule</span>.<span class="ruby-identifier">to_s</span>  <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;GC %:  &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@gc_percent</span>.<span class="ruby-identifier">to_s</span>  <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Target:    &#39;</span>        <span class="ruby-operator">+</span> <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Sense:     &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;  &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@sense</span>.<span class="ruby-identifier">upcase</span>  <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-  <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Antisense: &#39;</span>        <span class="ruby-operator">+</span> <span class="ruby-ivar">@antisense</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/sirna.rb</span>
+<span class="line-num">204</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">report</span>
+<span class="line-num">205</span>   <span class="ruby-identifier">report</span> =  <span class="ruby-string">&quot;### siRNA\n&quot;</span>
+<span class="line-num">206</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Start: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@start</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">207</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Stop:  &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@stop</span>.<span class="ruby-identifier">to_s</span>  <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">208</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Rule:  &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@rule</span>.<span class="ruby-identifier">to_s</span>  <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">209</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;GC %:  &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@gc_percent</span>.<span class="ruby-identifier">to_s</span>  <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">210</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Target:    &#39;</span>        <span class="ruby-operator">+</span> <span class="ruby-ivar">@target</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">211</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Sense:     &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-string">&#39;  &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@sense</span>.<span class="ruby-identifier">upcase</span>  <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">212</span>   <span class="ruby-identifier">report</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&#39;Antisense: &#39;</span>        <span class="ruby-operator">+</span> <span class="ruby-ivar">@antisense</span>.<span class="ruby-identifier">reverse</span>.<span class="ruby-identifier">upcase</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">213</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -298,12 +302,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

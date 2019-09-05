@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -147,8 +151,7 @@
 
         <div class="method-description">
         
-        <p>Pathname, filename or URI to open the object. Like File#path, returned
-value isn&#39;t normalized.</p>
+        <p>Pathname, filename or URI to open the object. Like File#path, returned value isn&#39;t normalized.</p>
         
         </div>
       </div>
@@ -182,15 +185,15 @@ value isn&#39;t normalized.</p>
 
           
           <div class="method-source-code" id="for_io-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">for_io</span>(<span class="ruby-identifier">io</span>)
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">io</span>.<span class="ruby-identifier">path</span>
-  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
-    <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">31</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">for_io</span>(<span class="ruby-identifier">io</span>)
+<span class="line-num">32</span>   <span class="ruby-keyword">begin</span>
+<span class="line-num">33</span>     <span class="ruby-identifier">path</span> = <span class="ruby-identifier">io</span>.<span class="ruby-identifier">path</span>
+<span class="line-num">34</span>   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
+<span class="line-num">35</span>     <span class="ruby-identifier">path</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">36</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">37</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>)
+<span class="line-num">38</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -220,13 +223,13 @@ value isn&#39;t normalized.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 23</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>)
-  <span class="ruby-ivar">@io</span> = <span class="ruby-identifier">io</span>
-  <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
-  <span class="ruby-comment"># initialize prefetch buffer</span>
-  <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">&#39;&#39;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">23</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">path</span>)
+<span class="line-num">24</span>   <span class="ruby-ivar">@io</span> = <span class="ruby-identifier">io</span>
+<span class="line-num">25</span>   <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
+<span class="line-num">26</span>   <span class="ruby-comment"># initialize prefetch buffer</span>
+<span class="line-num">27</span>   <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">28</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -250,37 +253,35 @@ value isn&#39;t normalized.</p>
 
         <div class="method-description">
           
-          <p>Creates a new input stream wrapper to open file <em>filename</em> by using
-File.open. *arg is passed to File.open.</p>
+          <p>Creates a new input stream wrapper to open file <em>filename</em> by using File.open. *arg is passed to File.open.</p>
 
 <p>Like File.open, a block can be accepted.</p>
 
-<p>Unlike File.open, the default is binary mode, unless text mode is explicity
-specified in mode.</p>
+<p>Unlike File.open, the default is binary mode, unless text mode is explicity specified in mode.</p>
           
           
 
           
           <div class="method-source-code" id="open_file-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 48</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open_file</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">params</span> = <span class="ruby-identifier">_parse_file_open_arg</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:textmode</span>] <span class="ruby-keyword">or</span> <span class="ruby-regexp">/t/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:fmode_string</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">textmode</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">textmode</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fobj</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">fobj</span>.<span class="ruby-identifier">binmode</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">textmode</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj</span>, <span class="ruby-identifier">filename</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">fobj</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-    <span class="ruby-identifier">fobj</span>.<span class="ruby-identifier">binmode</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">textmode</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj</span>, <span class="ruby-identifier">filename</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">48</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open_file</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">49</span>   <span class="ruby-identifier">params</span> = <span class="ruby-identifier">_parse_file_open_arg</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">50</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:textmode</span>] <span class="ruby-keyword">or</span> <span class="ruby-regexp">/t/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:fmode_string</span>].<span class="ruby-identifier">to_s</span> <span class="ruby-keyword">then</span>
+<span class="line-num">51</span>     <span class="ruby-identifier">textmode</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">52</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">53</span>     <span class="ruby-identifier">textmode</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">54</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">55</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">56</span>     <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fobj</span><span class="ruby-operator">|</span>
+<span class="line-num">57</span>       <span class="ruby-identifier">fobj</span>.<span class="ruby-identifier">binmode</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">textmode</span>
+<span class="line-num">58</span>       <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj</span>, <span class="ruby-identifier">filename</span>)
+<span class="line-num">59</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">60</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">61</span>     <span class="ruby-identifier">fobj</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">filename</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">62</span>     <span class="ruby-identifier">fobj</span>.<span class="ruby-identifier">binmode</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">textmode</span>
+<span class="line-num">63</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj</span>, <span class="ruby-identifier">filename</span>)
+<span class="line-num">64</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">65</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -304,9 +305,7 @@ specified in mode.</p>
 
         <div class="method-description">
           
-          <p>Creates a new input stream wrapper from URI specified as <em>uri</em>. by
-using OpenURI.open_uri or URI#open. <em>uri</em> must be a String or URI
-object. *arg is passed to OpenURI.open_uri or URI#open.</p>
+          <p>Creates a new input stream wrapper from URI specified as <em>uri</em>. by using OpenURI.open_uri or URI#open. <em>uri</em> must be a String or URI object. *arg is passed to OpenURI.open_uri or URI#open.</p>
 
 <p>Like OpenURI.open_uri, it can accept a block.</p>
           
@@ -314,28 +313,28 @@ object. *arg is passed to OpenURI.open_uri or URI#open.</p>
 
           
           <div class="method-source-code" id="open_uri-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 146</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">URI</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
-      <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fobj</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">to_s</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">fobj0</span> = <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj0</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">to_s</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
-      <span class="ruby-constant">OpenURI</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fobj</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj</span>, <span class="ruby-identifier">uri</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">fobj0</span> = <span class="ruby-constant">OpenURI</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj0</span>, <span class="ruby-identifier">uri</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">146</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">147</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">URI</span>)
+<span class="line-num">148</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+<span class="line-num">149</span>       <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fobj</span><span class="ruby-operator">|</span>
+<span class="line-num">150</span>         <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">to_s</span>)
+<span class="line-num">151</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">152</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">153</span>       <span class="ruby-identifier">fobj0</span> = <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">open</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">154</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj0</span>, <span class="ruby-identifier">uri</span>.<span class="ruby-identifier">to_s</span>)
+<span class="line-num">155</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">156</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">157</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span>
+<span class="line-num">158</span>       <span class="ruby-constant">OpenURI</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fobj</span><span class="ruby-operator">|</span>
+<span class="line-num">159</span>         <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj</span>, <span class="ruby-identifier">uri</span>)
+<span class="line-num">160</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">161</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">162</span>       <span class="ruby-identifier">fobj0</span> = <span class="ruby-constant">OpenURI</span>.<span class="ruby-identifier">open_uri</span>(<span class="ruby-identifier">uri</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">163</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">fobj0</span>, <span class="ruby-identifier">uri</span>)
+<span class="line-num">164</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">165</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">166</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -373,10 +372,10 @@ object. *arg is passed to OpenURI.open_uri or URI#open.</p>
 
           
           <div class="method-source-code" id="close-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 178</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">close</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">178</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">close</span>
+<span class="line-num">179</span>   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">close</span>
+<span class="line-num">180</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -408,14 +407,14 @@ object. *arg is passed to OpenURI.open_uri or URI#open.</p>
 
           
           <div class="method-source-code" id="eof-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 207</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eof?</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-    <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">eof?</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">207</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">eof?</span>
+<span class="line-num">208</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+<span class="line-num">209</span>     <span class="ruby-keyword">false</span>
+<span class="line-num">210</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">211</span>     <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">eof?</span>
+<span class="line-num">212</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">213</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -445,16 +444,16 @@ object. *arg is passed to OpenURI.open_uri or URI#open.</p>
 
           
           <div class="method-source-code" id="getc-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 267</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getc</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">0</span>]
-    <span class="ruby-ivar">@buffer</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">getc</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">267</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">getc</span>
+<span class="line-num">268</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">269</span>     <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">0</span>]
+<span class="line-num">270</span>     <span class="ruby-ivar">@buffer</span> = <span class="ruby-ivar">@buffer</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+<span class="line-num">271</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">272</span>     <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">getc</span>
+<span class="line-num">273</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">274</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">275</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -480,48 +479,47 @@ object. *arg is passed to OpenURI.open_uri or URI#open.</p>
           
           <p>Same as IO#gets.</p>
 
-<p>Compatibility note: the bahavior of paragraph mode (io_rs = &#39;&#39;) may
-differ from that of IO#gets(&#39;&#39;).</p>
+<p>Compatibility note: the bahavior of paragraph mode (io_rs = &#39;&#39;) may differ from that of IO#gets(&#39;&#39;).</p>
           
           
 
           
           <div class="method-source-code" id="gets-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 219</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gets</span>(<span class="ruby-identifier">io_rs</span> = <span class="ruby-identifier">$/</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">io_rs</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-keyword">nil</span>).<span class="ruby-identifier">to_s</span>
-      <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">&#39;&#39;</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">io_rs</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">then</span> <span class="ruby-comment"># io_rs.empty?</span>
-        <span class="ruby-identifier">sp_rs</span> = <span class="ruby-regexp">/((?:\r?\n){2,})/n</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">sp_rs</span> = <span class="ruby-identifier">io_rs</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">sp_rs</span>, <span class="ruby-value">2</span>)
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-identifier">r</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>
-        <span class="ruby-identifier">r</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">io_rs</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">io_rs</span>)
-        <span class="ruby-ivar">@buffer</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">to_s</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-identifier">io_rs</span>).<span class="ruby-identifier">to_s</span>
-        <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">sp_rs</span>, <span class="ruby-value">2</span>)
-        <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
-          <span class="ruby-identifier">r</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>
-          <span class="ruby-identifier">r</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">io_rs</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">io_rs</span>)
-          <span class="ruby-ivar">@buffer</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">to_s</span>
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@buffer</span>
-          <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">&#39;&#39;</span>
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-identifier">io_rs</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">219</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">gets</span>(<span class="ruby-identifier">io_rs</span> = <span class="ruby-identifier">$/</span>)
+<span class="line-num">220</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">0</span>
+<span class="line-num">221</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">io_rs</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">then</span>
+<span class="line-num">222</span>       <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-keyword">nil</span>).<span class="ruby-identifier">to_s</span>
+<span class="line-num">223</span>       <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">224</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">225</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">io_rs</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">then</span> <span class="ruby-comment"># io_rs.empty?</span>
+<span class="line-num">226</span>         <span class="ruby-identifier">sp_rs</span> = <span class="ruby-regexp">/((?:\r?\n){2,})/n</span>
+<span class="line-num">227</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">228</span>         <span class="ruby-identifier">sp_rs</span> = <span class="ruby-identifier">io_rs</span>
+<span class="line-num">229</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">230</span>       <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">sp_rs</span>, <span class="ruby-value">2</span>)
+<span class="line-num">231</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
+<span class="line-num">232</span>         <span class="ruby-identifier">r</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">233</span>         <span class="ruby-identifier">r</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">io_rs</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">io_rs</span>)
+<span class="line-num">234</span>         <span class="ruby-ivar">@buffer</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">235</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">236</span>         <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-identifier">io_rs</span>).<span class="ruby-identifier">to_s</span>
+<span class="line-num">237</span>         <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">split</span>(<span class="ruby-identifier">sp_rs</span>, <span class="ruby-value">2</span>)
+<span class="line-num">238</span>         <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
+<span class="line-num">239</span>           <span class="ruby-identifier">r</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">240</span>           <span class="ruby-identifier">r</span> <span class="ruby-operator">+=</span> (<span class="ruby-identifier">io_rs</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">io_rs</span>)
+<span class="line-num">241</span>           <span class="ruby-ivar">@buffer</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">242</span>         <span class="ruby-keyword">else</span>
+<span class="line-num">243</span>           <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@buffer</span>
+<span class="line-num">244</span>           <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">245</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">246</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">247</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">248</span>     <span class="ruby-identifier">r</span>
+<span class="line-num">249</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">250</span>     <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-identifier">io_rs</span>)
+<span class="line-num">251</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">252</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -551,10 +549,10 @@ differ from that of IO#gets(&#39;&#39;).</p>
 
           
           <div class="method-source-code" id="pos-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 191</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pos</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">191</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pos</span>
+<span class="line-num">192</span>   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">pos</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">size</span>
+<span class="line-num">193</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -578,19 +576,18 @@ differ from that of IO#gets(&#39;&#39;).</p>
 
         <div class="method-description">
           
-          <p>Sets current file position if possible Internal buffer in this wrapper is
-cleared.</p>
+          <p>Sets current file position if possible Internal buffer in this wrapper is cleared.</p>
           
           
 
           
           <div class="method-source-code" id="pos-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 197</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pos=</span>(<span class="ruby-identifier">p</span>)
-  <span class="ruby-identifier">r</span> = (<span class="ruby-ivar">@io</span>.<span class="ruby-identifier">pos</span> = <span class="ruby-identifier">p</span>)
-  <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">197</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">pos=</span>(<span class="ruby-identifier">p</span>)
+<span class="line-num">198</span>   <span class="ruby-identifier">r</span> = (<span class="ruby-ivar">@io</span>.<span class="ruby-identifier">pos</span> = <span class="ruby-identifier">p</span>)
+<span class="line-num">199</span>   <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">200</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">201</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -620,10 +617,10 @@ cleared.</p>
 
           
           <div class="method-source-code" id="prefetch_buffer-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 285</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prefetch_buffer</span>
-  <span class="ruby-ivar">@buffer</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">285</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prefetch_buffer</span>
+<span class="line-num">286</span>   <span class="ruby-ivar">@buffer</span>
+<span class="line-num">287</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -647,19 +644,18 @@ cleared.</p>
 
         <div class="method-description">
           
-          <p>It does @io.gets,  and addes returned string to the internal buffer, and
-returns the string.</p>
+          <p>It does @io.gets,  and addes returned string to the internal buffer, and returns the string.</p>
           
           
 
           
           <div class="method-source-code" id="prefetch_gets-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 291</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prefetch_gets</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">291</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prefetch_gets</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">292</span>   <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">gets</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">293</span>   <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
+<span class="line-num">294</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">295</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -683,19 +679,18 @@ returns the string.</p>
 
         <div class="method-description">
           
-          <p>It does @io.readpartial, and addes returned string to the internal buffer,
-and returns the string.</p>
+          <p>It does @io.readpartial, and addes returned string to the internal buffer, and returns the string.</p>
           
           
 
           
           <div class="method-source-code" id="prefetch_readpartial-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 299</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prefetch_readpartial</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">readpartial</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">299</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">prefetch_readpartial</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">300</span>   <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">readpartial</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">301</span>   <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">r</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
+<span class="line-num">302</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">303</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -719,19 +714,18 @@ and returns the string.</p>
 
         <div class="method-description">
           
-          <p>Rewinds the IO object if possible Internal buffer in this wrapper is
-cleared.</p>
+          <p>Rewinds the IO object if possible Internal buffer in this wrapper is cleared.</p>
           
           
 
           
           <div class="method-source-code" id="rewind-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 184</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
-  <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">rewind</span>
-  <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-identifier">r</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">184</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rewind</span>
+<span class="line-num">185</span>   <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">rewind</span>
+<span class="line-num">186</span>   <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">187</span>   <span class="ruby-identifier">r</span>
+<span class="line-num">188</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -761,17 +755,17 @@ cleared.</p>
 
           
           <div class="method-source-code" id="skip_spaces-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 307</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_spaces</span>
-  <span class="ruby-identifier">ws</span> = { <span class="ruby-value">?\s</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">?\n</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">?\r</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">?\t</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> }
-  <span class="ruby-keyword">while</span> <span class="ruby-identifier">r</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">getc</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ws</span>[<span class="ruby-identifier">r</span>] <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ungetc</span>(<span class="ruby-identifier">r</span>)
-      <span class="ruby-keyword">break</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">307</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">skip_spaces</span>
+<span class="line-num">308</span>   <span class="ruby-identifier">ws</span> = { <span class="ruby-value">?\s</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">?\n</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">?\r</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span>, <span class="ruby-value">?\t</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">true</span> }
+<span class="line-num">309</span>   <span class="ruby-keyword">while</span> <span class="ruby-identifier">r</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">getc</span>
+<span class="line-num">310</span>     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">ws</span>[<span class="ruby-identifier">r</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">311</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">ungetc</span>(<span class="ruby-identifier">r</span>)
+<span class="line-num">312</span>       <span class="ruby-keyword">break</span>
+<span class="line-num">313</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">314</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">315</span>   <span class="ruby-keyword">nil</span>
+<span class="line-num">316</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -801,10 +795,10 @@ cleared.</p>
 
           
           <div class="method-source-code" id="to_io-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 173</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_io</span>
-  <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">to_io</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">173</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_io</span>
+<span class="line-num">174</span>   <span class="ruby-ivar">@io</span>.<span class="ruby-identifier">to_io</span>
+<span class="line-num">175</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -828,18 +822,17 @@ cleared.</p>
 
         <div class="method-description">
           
-          <p>Pushes back one character into the internal buffer. Unlike IO#getc, it can
-be called more than one time.</p>
+          <p>Pushes back one character into the internal buffer. Unlike IO#getc, it can be called more than one time.</p>
           
           
 
           
           <div class="method-source-code" id="ungetc-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 279</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ungetc</span>(<span class="ruby-identifier">c</span>)
-  <span class="ruby-ivar">@buffer</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;%c&quot;</span>, <span class="ruby-identifier">c</span>) <span class="ruby-operator">+</span> <span class="ruby-ivar">@buffer</span>
-  <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">279</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ungetc</span>(<span class="ruby-identifier">c</span>)
+<span class="line-num">280</span>   <span class="ruby-ivar">@buffer</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;%c&quot;</span>, <span class="ruby-identifier">c</span>) <span class="ruby-operator">+</span> <span class="ruby-ivar">@buffer</span>
+<span class="line-num">281</span>   <span class="ruby-keyword">nil</span>
+<span class="line-num">282</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -863,21 +856,19 @@ be called more than one time.</p>
 
         <div class="method-description">
           
-          <p>Pushes back given str to the internal buffer. Returns nil. str must be read
-previously with the wrapper object.</p>
+          <p>Pushes back given str to the internal buffer. Returns nil. str must be read previously with the wrapper object.</p>
 
-<p>Note that in current implementation, the str can be everything, but please
-don&#39;t depend on it.</p>
+<p>Note that in current implementation, the str can be everything, but please don&#39;t depend on it.</p>
           
           
 
           
           <div class="method-source-code" id="ungets-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb, line 261</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ungets</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@buffer</span> = <span class="ruby-identifier">str</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@buffer</span>
-  <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/buffer.rb</span>
+<span class="line-num">261</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">ungets</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">262</span>   <span class="ruby-ivar">@buffer</span> = <span class="ruby-identifier">str</span> <span class="ruby-operator">+</span> <span class="ruby-ivar">@buffer</span>
+<span class="line-num">263</span>   <span class="ruby-keyword">nil</span>
+<span class="line-num">264</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -891,12 +882,13 @@ don&#39;t depend on it.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -130,18 +134,15 @@
 <ul><li>
 <p><a href="http://www.iupac.org">www.iupac.org</a>/</p>
 </li><li>
-<p><a
-href="http://www.chem.qmw.ac.uk/iubmb/newsletter/1999/item3.html">www.chem.qmw.ac.uk/iubmb/newsletter/1999/item3.html</a></p>
+<p><a href="http://www.chem.qmw.ac.uk/iubmb/newsletter/1999/item3.html">www.chem.qmw.ac.uk/iubmb/newsletter/1999/item3.html</a></p>
 </li><li>
-<p><a
-href="http://www.ebi.ac.uk/RESID/faq.html">www.ebi.ac.uk/RESID/faq.html</a></p>
+<p><a href="http://www.ebi.ac.uk/RESID/faq.html">www.ebi.ac.uk/RESID/faq.html</a></p>
 </li></ul>
         
       
         <dt id="WEIGHT">WEIGHT
         
-        <dd><p><a href="../AAindex.html">AAindex</a> FASG760101 - Molecular weight
-(Fasman, 1976)</p>
+        <dd><p><a href="../AAindex.html"><code>AAindex</code></a> FASG760101 - Molecular weight (Fasman, 1976)</p>
 
 <pre>Fasman, G.D., ed.
 Handbook of Biochemistry and Molecular Biology&quot;, 3rd ed.,
@@ -180,10 +181,10 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 129</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">x</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">129</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">130</span>   <span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">x</span>]
+<span class="line-num">131</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -241,15 +242,15 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="name-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 139</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-identifier">str</span> = <span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">x</span>]
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
-    <span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">str</span>]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">139</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">140</span>   <span class="ruby-identifier">str</span> = <span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">x</span>]
+<span class="line-num">141</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+<span class="line-num">142</span>     <span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">str</span>]
+<span class="line-num">143</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">144</span>     <span class="ruby-identifier">str</span>
+<span class="line-num">145</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">146</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -279,15 +280,15 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="name2one-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 196</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name2one</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">reverse</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>]
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
-    <span class="ruby-identifier">three2one</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">196</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name2one</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">197</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">reverse</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>]
+<span class="line-num">198</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">==</span> <span class="ruby-value">3</span>
+<span class="line-num">199</span>     <span class="ruby-identifier">three2one</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">200</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">201</span>     <span class="ruby-identifier">str</span>
+<span class="line-num">202</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">203</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -317,10 +318,10 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="name2three-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 213</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name2three</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-identifier">reverse</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">downcase</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">213</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">name2three</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">214</span>   <span class="ruby-identifier">reverse</span>[<span class="ruby-identifier">x</span>.<span class="ruby-identifier">downcase</span>]
+<span class="line-num">215</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -350,10 +351,10 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="names-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 134</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">names</span>
-  <span class="ruby-constant">NAMES</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">134</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">names</span>
+<span class="line-num">135</span>   <span class="ruby-constant">NAMES</span>
+<span class="line-num">136</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -415,14 +416,14 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="one2name-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 188</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">one2name</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">three2name</span>(<span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">x</span>])
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">188</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">one2name</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">189</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
+<span class="line-num">190</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
+<span class="line-num">191</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">192</span>     <span class="ruby-identifier">three2name</span>(<span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">x</span>])
+<span class="line-num">193</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">194</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -452,14 +453,14 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="one2three-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 172</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">one2three</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">x</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">172</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">one2three</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">173</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span>
+<span class="line-num">174</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
+<span class="line-num">175</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">176</span>     <span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">x</span>]
+<span class="line-num">177</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">178</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -517,14 +518,14 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="three2name-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 205</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">three2name</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">3</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">x</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">205</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">three2name</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">206</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">3</span>
+<span class="line-num">207</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
+<span class="line-num">208</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">209</span>     <span class="ruby-constant">NAMES</span>[<span class="ruby-identifier">x</span>]
+<span class="line-num">210</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">211</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -554,14 +555,14 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="three2one-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 180</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">three2one</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">3</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">reverse</span>[<span class="ruby-identifier">x</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">180</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">three2one</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">181</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">!=</span> <span class="ruby-value">3</span>
+<span class="line-num">182</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>
+<span class="line-num">183</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">184</span>     <span class="ruby-identifier">reverse</span>[<span class="ruby-identifier">x</span>]
+<span class="line-num">185</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">186</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -591,17 +592,17 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="to_1-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 148</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_1</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">3</span>
-    <span class="ruby-identifier">three2one</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">name2one</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">148</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_1</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">149</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">150</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">1</span>
+<span class="line-num">151</span>     <span class="ruby-identifier">x</span>
+<span class="line-num">152</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">3</span>
+<span class="line-num">153</span>     <span class="ruby-identifier">three2one</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">154</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">155</span>     <span class="ruby-identifier">name2one</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">156</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">157</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -635,17 +636,17 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="to_3-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 160</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_3</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">one2three</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">when</span> <span class="ruby-value">3</span>
-    <span class="ruby-identifier">x</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">name2three</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">160</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_3</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">161</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">162</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">1</span>
+<span class="line-num">163</span>     <span class="ruby-identifier">one2three</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">164</span>   <span class="ruby-keyword">when</span> <span class="ruby-value">3</span>
+<span class="line-num">165</span>     <span class="ruby-identifier">x</span>
+<span class="line-num">166</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">167</span>     <span class="ruby-identifier">name2three</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">168</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">169</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -679,22 +680,22 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="to_re-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 217</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_re</span>(<span class="ruby-identifier">seq</span>)
-  <span class="ruby-identifier">replace</span> = {
-    <span class="ruby-string">&#39;B&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;[DNB]&#39;</span>,
-    <span class="ruby-string">&#39;Z&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;[EQZ]&#39;</span>,
-    <span class="ruby-string">&#39;J&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;[ILJ]&#39;</span>,
-    <span class="ruby-string">&#39;X&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;[ACDEFGHIKLMNPQRSTVWYUOX]&#39;</span>,
-  }
-  <span class="ruby-identifier">replace</span>.<span class="ruby-identifier">default</span> = <span class="ruby-string">&#39;.&#39;</span>
-
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/[^ACDEFGHIKLMNPQRSTVWYUO]/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">aa</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">replace</span>[<span class="ruby-identifier">aa</span>]
-  }
-  <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">217</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_re</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">218</span>   <span class="ruby-identifier">replace</span> = {
+<span class="line-num">219</span>     <span class="ruby-string">&#39;B&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;[DNB]&#39;</span>,
+<span class="line-num">220</span>     <span class="ruby-string">&#39;Z&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;[EQZ]&#39;</span>,
+<span class="line-num">221</span>     <span class="ruby-string">&#39;J&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;[ILJ]&#39;</span>,
+<span class="line-num">222</span>     <span class="ruby-string">&#39;X&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-string">&#39;[ACDEFGHIKLMNPQRSTVWYUOX]&#39;</span>,
+<span class="line-num">223</span>   }
+<span class="line-num">224</span>   <span class="ruby-identifier">replace</span>.<span class="ruby-identifier">default</span> = <span class="ruby-string">&#39;.&#39;</span>
+<span class="line-num">225</span> 
+<span class="line-num">226</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">upcase</span>
+<span class="line-num">227</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/[^ACDEFGHIKLMNPQRSTVWYUO]/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">aa</span><span class="ruby-operator">|</span>
+<span class="line-num">228</span>     <span class="ruby-identifier">replace</span>[<span class="ruby-identifier">aa</span>]
+<span class="line-num">229</span>   }
+<span class="line-num">230</span>   <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">231</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -724,25 +725,25 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
 
           
           <div class="method-source-code" id="weight-source">
-            <pre><span class="ruby-comment"># File lib/bio/data/aa.rb, line 110</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">weight</span>(<span class="ruby-identifier">x</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">WEIGHT</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">x</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">total</span> = <span class="ruby-value">0.0</span>
-    <span class="ruby-identifier">x</span>.<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">byte</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">aa</span> = <span class="ruby-identifier">byte</span>.<span class="ruby-identifier">chr</span>.<span class="ruby-identifier">upcase</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-constant">WEIGHT</span>[<span class="ruby-identifier">aa</span>]
-        <span class="ruby-identifier">total</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">WEIGHT</span>[<span class="ruby-identifier">aa</span>]
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Error: invalid amino acid &#39;#{aa}&#39;&quot;</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">total</span> <span class="ruby-operator">-=</span> <span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">weight</span>[<span class="ruby-value">:water</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-constant">WEIGHT</span>[<span class="ruby-identifier">x</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/data/aa.rb</span>
+<span class="line-num">110</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">weight</span>(<span class="ruby-identifier">x</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">111</span>   <span class="ruby-keyword">return</span> <span class="ruby-constant">WEIGHT</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">x</span>
+<span class="line-num">112</span> 
+<span class="line-num">113</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1</span>
+<span class="line-num">114</span>     <span class="ruby-identifier">total</span> = <span class="ruby-value">0.0</span>
+<span class="line-num">115</span>     <span class="ruby-identifier">x</span>.<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">byte</span><span class="ruby-operator">|</span>
+<span class="line-num">116</span>       <span class="ruby-identifier">aa</span> = <span class="ruby-identifier">byte</span>.<span class="ruby-identifier">chr</span>.<span class="ruby-identifier">upcase</span>
+<span class="line-num">117</span>       <span class="ruby-keyword">if</span> <span class="ruby-constant">WEIGHT</span>[<span class="ruby-identifier">aa</span>]
+<span class="line-num">118</span>         <span class="ruby-identifier">total</span> <span class="ruby-operator">+=</span> <span class="ruby-constant">WEIGHT</span>[<span class="ruby-identifier">aa</span>]
+<span class="line-num">119</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">120</span>         <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Error: invalid amino acid &#39;#{aa}&#39;&quot;</span>
+<span class="line-num">121</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">122</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">123</span>     <span class="ruby-identifier">total</span> <span class="ruby-operator">-=</span> <span class="ruby-constant">NucleicAcid</span>.<span class="ruby-identifier">weight</span>[<span class="ruby-value">:water</span>] <span class="ruby-operator">*</span> (<span class="ruby-identifier">x</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>)
+<span class="line-num">124</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">125</span>     <span class="ruby-constant">WEIGHT</span>[<span class="ruby-identifier">x</span>]
+<span class="line-num">126</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">127</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -756,12 +757,13 @@ Proteins - Volume 1, CRC Press, Cleveland (1976)</pre>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

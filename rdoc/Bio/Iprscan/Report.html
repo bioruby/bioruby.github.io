@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -115,11 +119,9 @@
     
 <h1 id="class-Bio::Iprscan::Report-label-DESCRIPTION">DESCRIPTION<span><a href="#class-Bio::Iprscan::Report-label-DESCRIPTION">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>Class for InterProScan report. It is used to parse results and reformat 
-results from (raw|xml|txt) into (html, xml, ebihtml, txt, gff3) format.</p>
+<p>Class for InterProScan report. It is used to parse results and reformat  results from (raw|xml|txt) into (html, xml, ebihtml, txt, gff3) format.</p>
 
-<p>See <a
-href="ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/README.html">ftp.ebi.ac.uk/pub/software/unix/iprscan/README.html</a></p>
+<p>See <a href="ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/README.html">ftp.ebi.ac.uk/pub/software/unix/iprscan/README.html</a></p>
 
 <h2 id="class-Bio::Iprscan::Report-label-USAGE">USAGE<span><a href="#class-Bio::Iprscan::Report-label-USAGE">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -211,10 +213,7 @@ href="ftp://ftp.ebi.ac.uk/pub/software/unix/iprscan/README.html">ftp.ebi.ac.uk/p
 
         <div class="method-description">
         
-        <p>Matched InterPro motifs in Hash. Each InterPro motif have :name, 
-:definition, :accession and :motifs keys. And :motifs key contains motifs
-in Array. Each motif have :method, :accession, :definition,  :score,
-:location_from and :location_to keys.</p>
+        <p>Matched InterPro motifs in Hash. Each InterPro motif have :name,  :definition, :accession and :motifs keys. And :motifs key contains motifs in Array. Each motif have :method, :accession, :definition,  :score, :location_from and :location_to keys.</p>
         
         </div>
       </div>
@@ -274,13 +273,13 @@ in Array. Each motif have :method, :accession, :definition,  :score,
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb, line 235</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
-  <span class="ruby-ivar">@query_id</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@query_length</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@crc64</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@matches</span> = []
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb</span>
+<span class="line-num">235</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
+<span class="line-num">236</span>   <span class="ruby-ivar">@query_id</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">237</span>   <span class="ruby-ivar">@query_length</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">238</span>   <span class="ruby-ivar">@crc64</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">239</span>   <span class="ruby-ivar">@matches</span> = []
+<span class="line-num">240</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -317,12 +316,12 @@ in Array. Each motif have :method, :accession, :definition,  :score,
 
           
           <div class="method-source-code" id="parse_ptxt-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb, line 193</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_ptxt</span>(<span class="ruby-identifier">io</span>)
-  <span class="ruby-identifier">io</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&quot;\n\/\/\n&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse_ptxt_entry</span>(<span class="ruby-identifier">entry</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb</span>
+<span class="line-num">193</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_ptxt</span>(<span class="ruby-identifier">io</span>)
+<span class="line-num">194</span>   <span class="ruby-identifier">io</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&quot;\n\/\/\n&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+<span class="line-num">195</span>     <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse_ptxt_entry</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">196</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">197</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -346,8 +345,7 @@ in Array. Each motif have :method, :accession, :definition,  :score,
 
         <div class="method-description">
           
-          <p>Parser method for a pseudo-txt formated entry. Retruns a <a
-href="Report.html">Bio::Iprscan::Report</a>  object.</p>
+          <p>Parser method for a pseudo-txt formated entry. Retruns a <a href="Report.html"><code>Bio::Iprscan::Report</code></a>  object.</p>
 
 <h2 id="method-c-parse_ptxt_entry-label-Usage">Usage<span><a href="#method-c-parse_ptxt_entry-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -360,32 +358,32 @@ href="Report.html">Bio::Iprscan::Report</a>  object.</p>
 
           
           <div class="method-source-code" id="parse_ptxt_entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb, line 208</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_ptxt_entry</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">ipr_line</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_id</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>]
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_length</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;//&#39;</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;InterPro&#39;</span>
-      <span class="ruby-identifier">ipr_line</span> = <span class="ruby-identifier">line</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">startp</span>, <span class="ruby-identifier">endp</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">4</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;-&quot;</span>)
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Match</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:ipr_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ipr_line</span>[<span class="ruby-value">1</span>], 
-                                  <span class="ruby-value">:ipr_description</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ipr_line</span>[<span class="ruby-value">2</span>],
-                                  <span class="ruby-value">:method</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>], 
-                                  <span class="ruby-value">:accession</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span>],
-                                  <span class="ruby-value">:description</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">2</span>], 
-                                  <span class="ruby-value">:evalue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">3</span>],
-                                  <span class="ruby-value">:match_start</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">startp</span>.<span class="ruby-identifier">to_i</span>,
-                                  <span class="ruby-value">:match_end</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">endp</span>.<span class="ruby-identifier">to_i</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">report</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb</span>
+<span class="line-num">208</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_ptxt_entry</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">209</span>   <span class="ruby-identifier">report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">210</span>   <span class="ruby-identifier">ipr_line</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">211</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">212</span>     <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>)
+<span class="line-num">213</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">2</span>
+<span class="line-num">214</span>       <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_id</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>]
+<span class="line-num">215</span>       <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_length</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>
+<span class="line-num">216</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;//&#39;</span>
+<span class="line-num">217</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;InterPro&#39;</span>
+<span class="line-num">218</span>       <span class="ruby-identifier">ipr_line</span> = <span class="ruby-identifier">line</span>
+<span class="line-num">219</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">220</span>       <span class="ruby-identifier">startp</span>, <span class="ruby-identifier">endp</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">4</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;-&quot;</span>)
+<span class="line-num">221</span>       <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Match</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:ipr_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ipr_line</span>[<span class="ruby-value">1</span>], 
+<span class="line-num">222</span>                                   <span class="ruby-value">:ipr_description</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ipr_line</span>[<span class="ruby-value">2</span>],
+<span class="line-num">223</span>                                   <span class="ruby-value">:method</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>], 
+<span class="line-num">224</span>                                   <span class="ruby-value">:accession</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span>],
+<span class="line-num">225</span>                                   <span class="ruby-value">:description</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">2</span>], 
+<span class="line-num">226</span>                                   <span class="ruby-value">:evalue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">3</span>],
+<span class="line-num">227</span>                                   <span class="ruby-value">:match_start</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">startp</span>.<span class="ruby-identifier">to_i</span>,
+<span class="line-num">228</span>                                   <span class="ruby-value">:match_end</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">endp</span>.<span class="ruby-identifier">to_i</span>)
+<span class="line-num">229</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">230</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">231</span>   <span class="ruby-identifier">report</span>
+<span class="line-num">232</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -420,21 +418,21 @@ href="Report.html">Bio::Iprscan::Report</a>  object.</p>
 
           
           <div class="method-source-code" id="parse_raw-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb, line 71</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_raw</span>(<span class="ruby-identifier">io</span>)
-  <span class="ruby-identifier">entry</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-keyword">while</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">io</span>.<span class="ruby-identifier">gets</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>).<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>).<span class="ruby-identifier">first</span>
-      <span class="ruby-identifier">entry</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
-      <span class="ruby-keyword">yield</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Iprscan</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">parse_raw_entry</span>(<span class="ruby-identifier">entry</span>)
-      <span class="ruby-identifier">entry</span> = <span class="ruby-identifier">line</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">entry</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">yield</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Iprscan</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">parse_raw_entry</span>(<span class="ruby-identifier">entry</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb</span>
+<span class="line-num">71</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_raw</span>(<span class="ruby-identifier">io</span>)
+<span class="line-num">72</span>   <span class="ruby-identifier">entry</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">73</span>   <span class="ruby-keyword">while</span> <span class="ruby-identifier">line</span> = <span class="ruby-identifier">io</span>.<span class="ruby-identifier">gets</span>
+<span class="line-num">74</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>).<span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>).<span class="ruby-identifier">first</span>
+<span class="line-num">75</span>       <span class="ruby-identifier">entry</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
+<span class="line-num">76</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">77</span>       <span class="ruby-keyword">yield</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Iprscan</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">parse_raw_entry</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">78</span>       <span class="ruby-identifier">entry</span> = <span class="ruby-identifier">line</span>
+<span class="line-num">79</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">80</span>       <span class="ruby-identifier">entry</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
+<span class="line-num">81</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">82</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">83</span>   <span class="ruby-keyword">yield</span> <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Iprscan</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">parse_raw_entry</span>(<span class="ruby-identifier">entry</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">!=</span> <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">84</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -458,39 +456,38 @@ href="Report.html">Bio::Iprscan::Report</a>  object.</p>
 
         <div class="method-description">
           
-          <p>Parser method for a raw formated entry. Retruns a <a
-href="Report.html">Bio::Iprscan::Report</a>  object.</p>
+          <p>Parser method for a raw formated entry. Retruns a <a href="Report.html"><code>Bio::Iprscan::Report</code></a>  object.</p>
           
           
 
           
           <div class="method-source-code" id="parse_raw_entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_raw_entry</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>)
-    <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Match</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:query_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>],
-                                <span class="ruby-value">:crc64</span>    <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span>],
-                                <span class="ruby-value">:query_length</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span>,
-                                <span class="ruby-value">:method</span>       <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">3</span>], 
-                                <span class="ruby-value">:accession</span>    <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">4</span>],
-                                <span class="ruby-value">:description</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">5</span>], 
-                                <span class="ruby-value">:match_start</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">6</span>].<span class="ruby-identifier">to_i</span>,
-                                <span class="ruby-value">:match_end</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">7</span>].<span class="ruby-identifier">to_i</span>,
-                                <span class="ruby-value">:evalue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">8</span>],
-                                <span class="ruby-value">:status</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">9</span>],
-                                <span class="ruby-value">:date</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">10</span>])
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">11</span>]
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">ipr_id</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">11</span>]
-      <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">ipr_description</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">12</span>]
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">go_terms</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">13</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/(\w+ \w+\:.+? \(GO:\d+\))/</span>).<span class="ruby-identifier">flatten</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">13</span>]          
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_id</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">query_id</span>
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_length</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">query_length</span>
-  <span class="ruby-identifier">report</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb</span>
+<span class="line-num"> 88</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_raw_entry</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num"> 89</span>   <span class="ruby-identifier">report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num"> 90</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num"> 91</span>     <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\t&quot;</span>)
+<span class="line-num"> 92</span>     <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Match</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:query_id</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>],
+<span class="line-num"> 93</span>                                 <span class="ruby-value">:crc64</span>    <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">1</span>],
+<span class="line-num"> 94</span>                                 <span class="ruby-value">:query_length</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span>,
+<span class="line-num"> 95</span>                                 <span class="ruby-value">:method</span>       <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">3</span>], 
+<span class="line-num"> 96</span>                                 <span class="ruby-value">:accession</span>    <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">4</span>],
+<span class="line-num"> 97</span>                                 <span class="ruby-value">:description</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">5</span>], 
+<span class="line-num"> 98</span>                                 <span class="ruby-value">:match_start</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">6</span>].<span class="ruby-identifier">to_i</span>,
+<span class="line-num"> 99</span>                                 <span class="ruby-value">:match_end</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">7</span>].<span class="ruby-identifier">to_i</span>,
+<span class="line-num">100</span>                                 <span class="ruby-value">:evalue</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">8</span>],
+<span class="line-num">101</span>                                 <span class="ruby-value">:status</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">9</span>],
+<span class="line-num">102</span>                                 <span class="ruby-value">:date</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">10</span>])
+<span class="line-num">103</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">11</span>]
+<span class="line-num">104</span>       <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">ipr_id</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">11</span>]
+<span class="line-num">105</span>       <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">ipr_description</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">12</span>]
+<span class="line-num">106</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">107</span>     <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">last</span>.<span class="ruby-identifier">go_terms</span> = <span class="ruby-identifier">line</span>[<span class="ruby-value">13</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/(\w+ \w+\:.+? \(GO:\d+\))/</span>).<span class="ruby-identifier">flatten</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">13</span>]          
+<span class="line-num">108</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">109</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_id</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">query_id</span>
+<span class="line-num">110</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_length</span> = <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">query_length</span>
+<span class="line-num">111</span>   <span class="ruby-identifier">report</span>
+<span class="line-num">112</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -527,18 +524,18 @@ href="Report.html">Bio::Iprscan::Report</a>  object.</p>
 
           
           <div class="method-source-code" id="parse_txt-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb, line 129</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_txt</span>(<span class="ruby-identifier">io</span>)
-  <span class="ruby-identifier">io</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&quot;\n\nSequence&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/Sequence$/</span>
-      <span class="ruby-identifier">entry</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/Sequence$/</span>, <span class="ruby-string">&#39;&#39;</span>)
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^Sequence/</span>
-      <span class="ruby-identifier">entry</span> = <span class="ruby-string">&#39;Sequence&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">entry</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse_txt_entry</span>(<span class="ruby-identifier">entry</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb</span>
+<span class="line-num">129</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_txt</span>(<span class="ruby-identifier">io</span>)
+<span class="line-num">130</span>   <span class="ruby-identifier">io</span>.<span class="ruby-identifier">each</span>(<span class="ruby-string">&quot;\n\nSequence&quot;</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">entry</span><span class="ruby-operator">|</span>
+<span class="line-num">131</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/Sequence$/</span>
+<span class="line-num">132</span>       <span class="ruby-identifier">entry</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/Sequence$/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">133</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">134</span>     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">entry</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^Sequence/</span>
+<span class="line-num">135</span>       <span class="ruby-identifier">entry</span> = <span class="ruby-string">&#39;Sequence&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">entry</span>
+<span class="line-num">136</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">137</span>     <span class="ruby-keyword">yield</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse_txt_entry</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">138</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">139</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -562,53 +559,52 @@ href="Report.html">Bio::Iprscan::Report</a>  object.</p>
 
         <div class="method-description">
           
-          <p>Parser method for a txt formated entry. Returns a <a
-href="Report.html">Bio::Iprscan::Report</a> object.</p>
+          <p>Parser method for a txt formated entry. Returns a <a href="Report.html"><code>Bio::Iprscan::Report</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="parse_txt_entry-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb, line 146</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_txt_entry</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^Sequence /</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid format:  \n\n#{str}&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">matches</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n\n/</span>)
-  <span class="ruby-identifier">report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_id</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">header</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/Sequence \&quot;(.+)\&quot; /</span> <span class="ruby-keyword">then</span> <span class="ruby-node">$1</span> <span class="ruby-keyword">else</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_length</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">header</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/length: (\d+) aa./</span> <span class="ruby-keyword">then</span> <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">else</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">report</span>.<span class="ruby-identifier">crc64</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">header</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/crc64 checksum: (\S+) /</span> <span class="ruby-keyword">then</span> <span class="ruby-node">$1</span> <span class="ruby-keyword">else</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">ipr_line</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-identifier">go_annotation</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">m</span> = <span class="ruby-identifier">m</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/  +/</span>) }
-    <span class="ruby-identifier">m</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">case</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">0</span>]
-      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;method&#39;</span>
-      <span class="ruby-keyword">when</span> <span class="ruby-regexp">/(Molecular Function|Cellular Component|Biological Process):/</span>
-        <span class="ruby-identifier">go_annotation</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/([MCB]\w+ \w+): (\S.+?\S) \((GO:\d+)\),*/</span>)
-      <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;InterPro&#39;</span>
-        <span class="ruby-identifier">ipr_line</span> = <span class="ruby-identifier">match</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">pos_scores</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/(\S)\[(\d+)-(\d+)\] (\S+) */</span>)
-        <span class="ruby-identifier">pos_scores</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pos_score</span><span class="ruby-operator">|</span>
-          <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Match</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:ipr_id</span>          <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ipr_line</span>[<span class="ruby-value">1</span>],
-                                      <span class="ruby-value">:ipr_description</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ipr_line</span>[<span class="ruby-value">2</span>],
-                                      <span class="ruby-value">:method</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">0</span>], 
-                                      <span class="ruby-value">:accession</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>],
-                                      <span class="ruby-value">:description</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">2</span>], 
-                                      <span class="ruby-value">:evalue</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">pos_score</span>[<span class="ruby-value">3</span>],
-                                      <span class="ruby-value">:status</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">pos_score</span>[<span class="ruby-value">0</span>],
-                                      <span class="ruby-value">:match_start</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">pos_score</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>,
-                                      <span class="ruby-value">:match_end</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">pos_score</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span>,
-                                      <span class="ruby-value">:go_terms</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">go_annotation</span>)
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">report</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb</span>
+<span class="line-num">146</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_txt_entry</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">147</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">str</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^Sequence /</span>
+<span class="line-num">148</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ArgumentError</span>, <span class="ruby-node">&quot;Invalid format:  \n\n#{str}&quot;</span>
+<span class="line-num">149</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">150</span>   <span class="ruby-identifier">header</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">matches</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n\n/</span>)
+<span class="line-num">151</span>   <span class="ruby-identifier">report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">152</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_id</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">header</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/Sequence \&quot;(.+)\&quot; /</span> <span class="ruby-keyword">then</span> <span class="ruby-node">$1</span> <span class="ruby-keyword">else</span> <span class="ruby-string">&#39;&#39;</span> <span class="ruby-keyword">end</span>
+<span class="line-num">153</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">query_length</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">header</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/length: (\d+) aa./</span> <span class="ruby-keyword">then</span> <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">else</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">end</span>
+<span class="line-num">154</span>   <span class="ruby-identifier">report</span>.<span class="ruby-identifier">crc64</span> = <span class="ruby-keyword">if</span> <span class="ruby-identifier">header</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/crc64 checksum: (\S+) /</span> <span class="ruby-keyword">then</span> <span class="ruby-node">$1</span> <span class="ruby-keyword">else</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">end</span>
+<span class="line-num">155</span>   <span class="ruby-identifier">ipr_line</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">156</span>   <span class="ruby-identifier">go_annotation</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">157</span>   <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+<span class="line-num">158</span>     <span class="ruby-identifier">m</span> = <span class="ruby-identifier">m</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\n/</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/  +/</span>) }
+<span class="line-num">159</span>     <span class="ruby-identifier">m</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
+<span class="line-num">160</span>       <span class="ruby-keyword">case</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">0</span>]
+<span class="line-num">161</span>       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;method&#39;</span>
+<span class="line-num">162</span>       <span class="ruby-keyword">when</span> <span class="ruby-regexp">/(Molecular Function|Cellular Component|Biological Process):/</span>
+<span class="line-num">163</span>         <span class="ruby-identifier">go_annotation</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/([MCB]\w+ \w+): (\S.+?\S) \((GO:\d+)\),*/</span>)
+<span class="line-num">164</span>       <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;InterPro&#39;</span>
+<span class="line-num">165</span>         <span class="ruby-identifier">ipr_line</span> = <span class="ruby-identifier">match</span>
+<span class="line-num">166</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">167</span>         <span class="ruby-identifier">pos_scores</span> = <span class="ruby-identifier">match</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/(\S)\[(\d+)-(\d+)\] (\S+) */</span>)
+<span class="line-num">168</span>         <span class="ruby-identifier">pos_scores</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">pos_score</span><span class="ruby-operator">|</span>
+<span class="line-num">169</span>           <span class="ruby-identifier">report</span>.<span class="ruby-identifier">matches</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Match</span>.<span class="ruby-identifier">new</span>(<span class="ruby-value">:ipr_id</span>          <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ipr_line</span>[<span class="ruby-value">1</span>],
+<span class="line-num">170</span>                                       <span class="ruby-value">:ipr_description</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">ipr_line</span>[<span class="ruby-value">2</span>],
+<span class="line-num">171</span>                                       <span class="ruby-value">:method</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">0</span>], 
+<span class="line-num">172</span>                                       <span class="ruby-value">:accession</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">1</span>],
+<span class="line-num">173</span>                                       <span class="ruby-value">:description</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">match</span>[<span class="ruby-value">2</span>], 
+<span class="line-num">174</span>                                       <span class="ruby-value">:evalue</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">pos_score</span>[<span class="ruby-value">3</span>],
+<span class="line-num">175</span>                                       <span class="ruby-value">:status</span>      <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">pos_score</span>[<span class="ruby-value">0</span>],
+<span class="line-num">176</span>                                       <span class="ruby-value">:match_start</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">pos_score</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>,
+<span class="line-num">177</span>                                       <span class="ruby-value">:match_end</span>   <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">pos_score</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span>,
+<span class="line-num">178</span>                                       <span class="ruby-value">:go_terms</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">go_annotation</span>)
+<span class="line-num">179</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">180</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">181</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">182</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">183</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">report</span>
+<span class="line-num">184</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -646,26 +642,26 @@ href="Report.html">Bio::Iprscan::Report</a> object.</p>
 
           
           <div class="method-source-code" id="format_raw-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb, line 265</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_raw</span>
-  <span class="ruby-ivar">@matches</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
-    [<span class="ruby-keyword">self</span>.<span class="ruby-identifier">query_id</span>,
-     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">crc64</span>,
-     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">query_length</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">method_name</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">accession</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">description</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">match_start</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">match_end</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">evalue</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">status</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">date</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">ipr_id</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">ipr_description</span>,
-     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">go_terms</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39; (&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;)&#39;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
-    ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>)
-  }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb</span>
+<span class="line-num">265</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">format_raw</span>
+<span class="line-num">266</span>   <span class="ruby-ivar">@matches</span>.<span class="ruby-identifier">map</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
+<span class="line-num">267</span>     [<span class="ruby-keyword">self</span>.<span class="ruby-identifier">query_id</span>,
+<span class="line-num">268</span>      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">crc64</span>,
+<span class="line-num">269</span>      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">query_length</span>,
+<span class="line-num">270</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">method_name</span>,
+<span class="line-num">271</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">accession</span>,
+<span class="line-num">272</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">description</span>,
+<span class="line-num">273</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">match_start</span>,
+<span class="line-num">274</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">match_end</span>,
+<span class="line-num">275</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">evalue</span>,
+<span class="line-num">276</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">status</span>,
+<span class="line-num">277</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">date</span>,
+<span class="line-num">278</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">ipr_id</span>,
+<span class="line-num">279</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">ipr_description</span>,
+<span class="line-num">280</span>      <span class="ruby-identifier">match</span>.<span class="ruby-identifier">go_terms</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">0</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;: &#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39; (&#39;</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">x</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">+</span> <span class="ruby-string">&#39;)&#39;</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;, &#39;</span>)
+<span class="line-num">281</span>     ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>)
+<span class="line-num">282</span>   }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+<span class="line-num">283</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -695,15 +691,15 @@ href="Report.html">Bio::Iprscan::Report</a> object.</p>
 
           
           <div class="method-source-code" id="output-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb, line 244</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output</span>(<span class="ruby-identifier">format_type</span>)
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">format_type</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;raw&#39;</span>, <span class="ruby-value">:raw</span>
-    <span class="ruby-identifier">format_raw</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">NameError</span>, <span class="ruby-string">&quot;Invalid format_type.&quot;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb</span>
+<span class="line-num">244</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output</span>(<span class="ruby-identifier">format_type</span>)
+<span class="line-num">245</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">format_type</span>
+<span class="line-num">246</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;raw&#39;</span>, <span class="ruby-value">:raw</span>
+<span class="line-num">247</span>     <span class="ruby-identifier">format_raw</span>
+<span class="line-num">248</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">249</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">NameError</span>, <span class="ruby-string">&quot;Invalid format_type.&quot;</span>
+<span class="line-num">250</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">251</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -727,8 +723,7 @@ href="Report.html">Bio::Iprscan::Report</a> object.</p>
 
         <div class="method-description">
           
-          <p>Returns a Hash (key as an Interpro ID and value as a <a
-href="Report/Match.html">Match</a>).</p>
+          <p>Returns a Hash (key as an Interpro ID and value as a <a href="Report/Match.html"><code>Match</code></a>).</p>
 
 <pre class="ruby"><span class="ruby-identifier">report</span>.<span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ipr_id</span>, <span class="ruby-identifier">matches</span><span class="ruby-operator">|</span>
   <span class="ruby-identifier">matches</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">match</span><span class="ruby-operator">|</span>
@@ -741,19 +736,19 @@ href="Report/Match.html">Match</a>).</p>
 
           
           <div class="method-source-code" id="to_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb, line 297</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_hash</span>
-  <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@ipr_ids</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@ipr_ids</span>
-    <span class="ruby-ivar">@ipr_ids</span> = {} 
-    <span class="ruby-ivar">@matches</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">match</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-      <span class="ruby-ivar">@ipr_ids</span>[<span class="ruby-identifier">match</span>.<span class="ruby-identifier">ipr_id</span>] <span class="ruby-operator">||=</span> []
-      <span class="ruby-ivar">@ipr_ids</span>[<span class="ruby-identifier">match</span>.<span class="ruby-identifier">ipr_id</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">match</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@ipr_ids</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@ipr_ids</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/iprscan/report.rb</span>
+<span class="line-num">297</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_hash</span>
+<span class="line-num">298</span>   <span class="ruby-keyword">unless</span> (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@ipr_ids</span>) <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-ivar">@ipr_ids</span>
+<span class="line-num">299</span>     <span class="ruby-ivar">@ipr_ids</span> = {} 
+<span class="line-num">300</span>     <span class="ruby-ivar">@matches</span>.<span class="ruby-identifier">each_with_index</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">match</span>, <span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+<span class="line-num">301</span>       <span class="ruby-ivar">@ipr_ids</span>[<span class="ruby-identifier">match</span>.<span class="ruby-identifier">ipr_id</span>] <span class="ruby-operator">||=</span> []
+<span class="line-num">302</span>       <span class="ruby-ivar">@ipr_ids</span>[<span class="ruby-identifier">match</span>.<span class="ruby-identifier">ipr_id</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">match</span>
+<span class="line-num">303</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">304</span>     <span class="ruby-keyword">return</span> <span class="ruby-ivar">@ipr_ids</span>
+<span class="line-num">305</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">306</span>     <span class="ruby-keyword">return</span> <span class="ruby-ivar">@ipr_ids</span>
+<span class="line-num">307</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">308</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -767,12 +762,13 @@ href="Report/Match.html">Match</a>).</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

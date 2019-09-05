@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -79,8 +83,7 @@
 
   <section class="description">
     
-<p>This module provides <a
-href="GenesAsHash.html#method-i-genes_as_hash">#genes_as_hash</a> method.</p>
+<p>This module provides <a href="GenesAsHash.html#method-i-genes_as_hash"><code>genes_as_hash</code></a> method.</p>
 
 <p>Bio::KEGG::* internal use only.</p>
 
@@ -116,28 +119,27 @@ href="GenesAsHash.html#method-i-genes_as_hash">#genes_as_hash</a> method.</p>
 
         <div class="method-description">
           
-          <p>Returns a Hash of the organism ID and an Array of entry IDs in <a
-href="../GENES.html">GENES</a> field.</p>
+          <p>Returns a Hash of the organism ID and an Array of entry IDs in <a href="../GENES.html"><code>GENES</code></a> field.</p>
           
           
 
           
           <div class="method-source-code" id="genes_as_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/kegg/common.rb, line 157</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">genes_as_hash</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@genes_as_hash</span>
-    <span class="ruby-identifier">hash</span> = {}
-    <span class="ruby-identifier">genes_as_strings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">list</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
-      <span class="ruby-identifier">org</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/:/</span>, <span class="ruby-string">&#39;&#39;</span>)
-      <span class="ruby-identifier">genes</span> = <span class="ruby-identifier">list</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\(.*\)/</span>, <span class="ruby-string">&#39;&#39;</span>)}
-      <span class="ruby-comment">#names = list.map {|x| x.scan(/.*\((.*)\)/)}</span>
-      <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">org</span>] = <span class="ruby-identifier">genes</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@genes_as_hash</span> = <span class="ruby-identifier">hash</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@genes_as_hash</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/kegg/common.rb</span>
+<span class="line-num">157</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">genes_as_hash</span>
+<span class="line-num">158</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@genes_as_hash</span>
+<span class="line-num">159</span>     <span class="ruby-identifier">hash</span> = {}
+<span class="line-num">160</span>     <span class="ruby-identifier">genes_as_strings</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">161</span>       <span class="ruby-identifier">name</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">list</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s+/</span>)
+<span class="line-num">162</span>       <span class="ruby-identifier">org</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/:/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">163</span>       <span class="ruby-identifier">genes</span> = <span class="ruby-identifier">list</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\(.*\)/</span>, <span class="ruby-string">&#39;&#39;</span>)}
+<span class="line-num">164</span>       <span class="ruby-comment">#names = list.map {|x| x.scan(/.*\((.*)\)/)}</span>
+<span class="line-num">165</span>       <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">org</span>] = <span class="ruby-identifier">genes</span>
+<span class="line-num">166</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">167</span>     <span class="ruby-ivar">@genes_as_hash</span> = <span class="ruby-identifier">hash</span>
+<span class="line-num">168</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">169</span>   <span class="ruby-ivar">@genes_as_hash</span>
+<span class="line-num">170</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -151,12 +153,13 @@ href="../GENES.html">GENES</a> field.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

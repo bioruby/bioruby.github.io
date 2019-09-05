@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -90,11 +94,9 @@
     
 <p>Internal use only. Users should not use this class directly.</p>
 
-<p><a href="Remover.html">Bio::Command::Tmpdir::Remover</a> is a class to
-remove temporary directory.</p>
+<p><a href="Remover.html"><code>Bio::Command::Tmpdir::Remover</code></a> is a class to remove temporary directory.</p>
 
-<p>Acknowledgement: The essense of the code is taken from tempfile.rb in Ruby
-trunk (svn 34413) and in Ruby 1.8.7.</p>
+<p>Acknowledgement: The essense of the code is taken from tempfile.rb in Ruby trunk (svn 34413) and in Ruby 1.8.7.</p>
 
   </section>
 
@@ -134,11 +136,11 @@ trunk (svn 34413) and in Ruby 1.8.7.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 637</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-ivar">@pid</span> = <span class="ruby-identifier">$$</span>
-  <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">data</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/command.rb</span>
+<span class="line-num">637</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">data</span>)
+<span class="line-num">638</span>   <span class="ruby-ivar">@pid</span> = <span class="ruby-identifier">$$</span>
+<span class="line-num">639</span>   <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">data</span>
+<span class="line-num">640</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -176,22 +178,22 @@ trunk (svn 34413) and in Ruby 1.8.7.</p>
 
           
           <div class="method-source-code" id="call-source">
-            <pre><span class="ruby-comment"># File lib/bio/command.rb, line 643</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@pid</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">$$</span>
-
-  <span class="ruby-identifier">path</span>, = <span class="ruby-operator">*</span><span class="ruby-ivar">@data</span>
-
-  <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;removing &quot;</span>, <span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;...&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">path</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">and</span>
-      <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">and</span>
-      <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">symlink?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">remove_entry_secure</span>(<span class="ruby-identifier">path</span>)
-    <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;done\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;skipped\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/command.rb</span>
+<span class="line-num">643</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">call</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">644</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@pid</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">$$</span>
+<span class="line-num">645</span> 
+<span class="line-num">646</span>   <span class="ruby-identifier">path</span>, = <span class="ruby-operator">*</span><span class="ruby-ivar">@data</span>
+<span class="line-num">647</span> 
+<span class="line-num">648</span>   <span class="ruby-constant">STDERR</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;removing &quot;</span>, <span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;...&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
+<span class="line-num">649</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> <span class="ruby-keyword">and</span> <span class="ruby-operator">!</span><span class="ruby-identifier">path</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">and</span>
+<span class="line-num">650</span>       <span class="ruby-constant">File</span>.<span class="ruby-identifier">directory?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">and</span>
+<span class="line-num">651</span>       <span class="ruby-operator">!</span><span class="ruby-constant">File</span>.<span class="ruby-identifier">symlink?</span>(<span class="ruby-identifier">path</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">652</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Command</span>.<span class="ruby-identifier">remove_entry_secure</span>(<span class="ruby-identifier">path</span>)
+<span class="line-num">653</span>     <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;done\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
+<span class="line-num">654</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">655</span>     <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">print</span> <span class="ruby-string">&quot;skipped\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
+<span class="line-num">656</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">657</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -205,12 +207,13 @@ trunk (svn 34413) and in Ruby 1.8.7.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

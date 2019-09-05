@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -199,14 +203,9 @@
 
   <section class="description">
     
-<p><a href="OriginalAlignment.html">Bio::Alignment::OriginalAlignment</a> is
-the BioRuby original multiple sequence alignment container class. It
-includes <a href="HashExtension.html">HashExtension</a>.</p>
+<p><a href="OriginalAlignment.html"><code>Bio::Alignment::OriginalAlignment</code></a> is the BioRuby original multiple sequence alignment container class. It includes <a href="HashExtension.html"><code>HashExtension</code></a>.</p>
 
-<p>It is recommended only to use methods defined in <a
-href="EnumerableExtension.html">EnumerableExtension</a> (and the <a
-href="OriginalAlignment.html#method-i-each_seq">#each_seq</a> method). The
-method only defined in this class might be obsoleted in the future.</p>
+<p>It is recommended only to use methods defined in <a href="EnumerableExtension.html"><code>EnumerableExtension</code></a> (and the <a href="OriginalAlignment.html#method-i-each_seq"><code>each_seq</code></a> method). The method only defined in this class might be obsoleted in the future.</p>
 
   </section>
 
@@ -261,20 +260,18 @@ method only defined in this class might be obsoleted in the future.</p>
 
         <div class="method-description">
           
-          <p>Creates a new alignment object. <em>seqs</em> may be one of follows: an
-array of sequences (or strings), an array of sequence database objects, an
-alignment object.</p>
+          <p>Creates a new alignment object. <em>seqs</em> may be one of follows: an array of sequences (or strings), an array of sequence database objects, an alignment object.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1548</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">seqs</span> = [])
-  <span class="ruby-ivar">@seqs</span> = {}
-  <span class="ruby-ivar">@keys</span> = []
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add_sequences</span>(<span class="ruby-identifier">seqs</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1548</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">seqs</span> = [])
+<span class="line-num">1549</span>   <span class="ruby-ivar">@seqs</span> = {}
+<span class="line-num">1550</span>   <span class="ruby-ivar">@keys</span> = []
+<span class="line-num">1551</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">add_sequences</span>(<span class="ruby-identifier">seqs</span>)
+<span class="line-num">1552</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -306,10 +303,10 @@ alignment object.</p>
 
           
           <div class="method-source-code" id="new2-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1539</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new2</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">arg</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1539</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new2</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">1540</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">arg</span>)
+<span class="line-num">1541</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -341,17 +338,17 @@ alignment object.</p>
 
           
           <div class="method-source-code" id="readfiles-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1525</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">readfiles</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">files</span>)
-  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio/io/flatfile&#39;</span>
-  <span class="ruby-identifier">aln</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fn</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatFile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">fn</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ff</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">add_sequences</span>(<span class="ruby-identifier">ff</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">aln</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1525</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">readfiles</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">files</span>)
+<span class="line-num">1526</span>   <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio/io/flatfile&#39;</span>
+<span class="line-num">1527</span>   <span class="ruby-identifier">aln</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">1528</span>   <span class="ruby-identifier">files</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">fn</span><span class="ruby-operator">|</span>
+<span class="line-num">1529</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FlatFile</span>.<span class="ruby-identifier">open</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">fn</span>) <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">ff</span><span class="ruby-operator">|</span>
+<span class="line-num">1530</span>       <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">add_sequences</span>(<span class="ruby-identifier">ff</span>)
+<span class="line-num">1531</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1532</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1533</span>   <span class="ruby-identifier">aln</span>
+<span class="line-num">1534</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -389,12 +386,12 @@ alignment object.</p>
 
           
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1703</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">seq</span>)
-  <span class="ruby-comment">#(Array-like)</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">seq</span>)
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1703</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">1704</span>   <span class="ruby-comment">#(Array-like)</span>
+<span class="line-num">1705</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">seq</span>)
+<span class="line-num">1706</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">1707</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -424,15 +421,15 @@ alignment object.</p>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1556</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_hash</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1556</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">1557</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">1558</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
+<span class="line-num">1559</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_hash</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_hash</span>
+<span class="line-num">1560</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1561</span>     <span class="ruby-keyword">false</span>
+<span class="line-num">1562</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1563</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -462,11 +459,11 @@ alignment object.</p>
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1710</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-ivar">@seqs</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1710</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">1711</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1712</span>   <span class="ruby-ivar">@seqs</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>]
+<span class="line-num">1713</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -503,14 +500,14 @@ alignment object.</p>
 
           
           <div class="method-source-code" id="__store__-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1609</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">__store__</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-identifier">h</span> = { <span class="ruby-identifier">key</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">seq</span> }
-  <span class="ruby-ivar">@keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">keys</span>[<span class="ruby-value">0</span>]
-  <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">h</span>)
-  <span class="ruby-identifier">seq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1609</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">__store__</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
+<span class="line-num">1610</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1611</span>   <span class="ruby-identifier">h</span> = { <span class="ruby-identifier">key</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">seq</span> }
+<span class="line-num">1612</span>   <span class="ruby-ivar">@keys</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">h</span>.<span class="ruby-identifier">keys</span>[<span class="ruby-value">0</span>]
+<span class="line-num">1613</span>   <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">h</span>)
+<span class="line-num">1614</span>   <span class="ruby-identifier">seq</span>
+<span class="line-num">1615</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -534,8 +531,7 @@ alignment object.</p>
 
         <div class="method-description">
           
-          <p>Adds a sequence to the alignment. Returns key if succeeded. Returns nil
-(and not added to the alignment) if key is already used.</p>
+          <p>Adds a sequence to the alignment. Returns key if succeeded. Returns nil (and not added to the alignment) if key is already used.</p>
 
 <p>It resembles BioPerl&#39;s AlignI::add_seq method.</p>
           
@@ -543,16 +539,16 @@ alignment object.</p>
 
           
           <div class="method-source-code" id="add_seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1899</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_seq</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-comment">#(BioPerl) AlignI::add_seq like method</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>)
-    <span class="ruby-identifier">s</span> =   <span class="ruby-identifier">extract_seq</span>(<span class="ruby-identifier">seq</span>)
-    <span class="ruby-identifier">key</span> = <span class="ruby-identifier">extract_key</span>(<span class="ruby-identifier">seq</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span>
-    <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">s</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1899</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_seq</span>(<span class="ruby-identifier">seq</span>, <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">1900</span>   <span class="ruby-comment">#(BioPerl) AlignI::add_seq like method</span>
+<span class="line-num">1901</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>)
+<span class="line-num">1902</span>     <span class="ruby-identifier">s</span> =   <span class="ruby-identifier">extract_seq</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">1903</span>     <span class="ruby-identifier">key</span> = <span class="ruby-identifier">extract_key</span>(<span class="ruby-identifier">seq</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span>
+<span class="line-num">1904</span>     <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">s</span>
+<span class="line-num">1905</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1906</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
+<span class="line-num">1907</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -576,41 +572,39 @@ alignment object.</p>
 
         <div class="method-description">
           
-          <p>Adds sequences to the alignment.  <em>seqs</em> may be one of follows: an
-array of sequences (or strings), an array of sequence database objects, an
-alignment object.</p>
+          <p>Adds sequences to the alignment.  <em>seqs</em> may be one of follows: an array of sequences (or strings), an array of sequence database objects, an alignment object.</p>
           
           
 
           
           <div class="method-source-code" id="add_sequences-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1576</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_sequences</span>(<span class="ruby-identifier">seqs</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">s</span>, <span class="ruby-identifier">key</span> = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">s</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:each_pair</span>)
-      <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">s</span> = <span class="ruby-identifier">extract_seq</span>(<span class="ruby-identifier">x</span>)
-        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-        <span class="ruby-identifier">s</span> = <span class="ruby-identifier">extract_seq</span>(<span class="ruby-identifier">x</span>)
-        <span class="ruby-identifier">k</span> = <span class="ruby-identifier">extract_key</span>(<span class="ruby-identifier">x</span>)
-        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1576</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_sequences</span>(<span class="ruby-identifier">seqs</span>)
+<span class="line-num">1577</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1578</span>     <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">1579</span>       <span class="ruby-identifier">s</span>, <span class="ruby-identifier">key</span> = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span>
+<span class="line-num">1580</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">s</span>)
+<span class="line-num">1581</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1582</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1583</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">1584</span>       <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">1585</span>         <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
+<span class="line-num">1586</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">1587</span>     <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:each_pair</span>)
+<span class="line-num">1588</span>       <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">1589</span>         <span class="ruby-identifier">s</span> = <span class="ruby-identifier">extract_seq</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">1590</span>         <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
+<span class="line-num">1591</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">1592</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">1593</span>       <span class="ruby-identifier">seqs</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">1594</span>         <span class="ruby-identifier">s</span> = <span class="ruby-identifier">extract_seq</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">1595</span>         <span class="ruby-identifier">k</span> = <span class="ruby-identifier">extract_key</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">1596</span>         <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
+<span class="line-num">1597</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">1598</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1599</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1600</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">1601</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -634,26 +628,24 @@ alignment object.</p>
 
         <div class="method-description">
           
-          <p>Iterates over each sequence and each results running block are collected
-and returns a new alignment.</p>
+          <p>Iterates over each sequence and each results running block are collected and returns a new alignment.</p>
 
-<p>The method name &#39;collect_align&#39; will be obsoleted. Please use
-&#39;alignment_collect&#39; instead.</p>
+<p>The method name &#39;collect_align&#39; will be obsoleted. Please use &#39;alignment_collect&#39; instead.</p>
           
           
 
           
           <div class="method-source-code" id="alignment_collect-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1858</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">alignment_collect</span>
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">set_all_property</span>(<span class="ruby-identifier">get_all_property</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">na</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">s</span>))
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">na</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1858</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">alignment_collect</span>
+<span class="line-num">1859</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">1860</span>   <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">1861</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">set_all_property</span>(<span class="ruby-identifier">get_all_property</span>)
+<span class="line-num">1862</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">1863</span>     <span class="ruby-identifier">na</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">s</span>))
+<span class="line-num">1864</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1865</span>   <span class="ruby-identifier">na</span>
+<span class="line-num">1866</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -681,20 +673,19 @@ and returns a new alignment.</p>
 
         <div class="method-description">
           
-          <p>Iterates over each sequence, replacing the sequence with the value returned
-by the block.</p>
+          <p>Iterates over each sequence, replacing the sequence with the value returned by the block.</p>
           
           
 
           
           <div class="method-source-code" id="collect-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1750</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">collect!</span>
-  <span class="ruby-comment">#(Array-like)</span>
-  <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-    <span class="ruby-ivar">@seqs</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-keyword">yield</span> <span class="ruby-ivar">@seqs</span>[<span class="ruby-identifier">k</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1750</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">collect!</span>
+<span class="line-num">1751</span>   <span class="ruby-comment">#(Array-like)</span>
+<span class="line-num">1752</span>   <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">1753</span>     <span class="ruby-ivar">@seqs</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-keyword">yield</span> <span class="ruby-ivar">@seqs</span>[<span class="ruby-identifier">k</span>]
+<span class="line-num">1754</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1755</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -746,20 +737,19 @@ by the block.</p>
 
         <div class="method-description">
           
-          <p>Removes empty sequences or nil and returns new alignment. (Like
-Array#compact)</p>
+          <p>Removes empty sequences or nil and returns new alignment. (Like Array#compact)</p>
           
           
 
           
           <div class="method-source-code" id="compact-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1887</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compact</span>
-  <span class="ruby-comment">#(Array-like)</span>
-  <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">compact!</span>
-  <span class="ruby-identifier">na</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1887</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compact</span>
+<span class="line-num">1888</span>   <span class="ruby-comment">#(Array-like)</span>
+<span class="line-num">1889</span>   <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">1890</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">compact!</span>
+<span class="line-num">1891</span>   <span class="ruby-identifier">na</span>
+<span class="line-num">1892</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -789,20 +779,20 @@ Array#compact)</p>
 
           
           <div class="method-source-code" id="compact-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1871</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compact!</span>
-  <span class="ruby-comment">#(Array-like)</span>
-  <span class="ruby-identifier">d</span> = []
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">s</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">empty?</span>
-      <span class="ruby-identifier">d</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">k</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">d</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">d</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">d</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1871</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">compact!</span>
+<span class="line-num">1872</span>   <span class="ruby-comment">#(Array-like)</span>
+<span class="line-num">1873</span>   <span class="ruby-identifier">d</span> = []
+<span class="line-num">1874</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">1875</span>     <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">s</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">1876</span>       <span class="ruby-identifier">d</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">k</span>
+<span class="line-num">1877</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1878</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1879</span>   <span class="ruby-identifier">d</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">1880</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>)
+<span class="line-num">1881</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1882</span>   <span class="ruby-identifier">d</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">nil</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">d</span>
+<span class="line-num">1883</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -828,26 +818,24 @@ Array#compact)</p>
           
           <p>Concatenates a string or an alignment. Returns self.</p>
 
-<p>Note that the method will be obsoleted. Please use <code>each_seq { |s| s
-&lt;&lt; str }</code> for concatenating a string and
-<code>alignment_concat(aln)</code> for concatenating an alignment.</p>
+<p>Note that the method will be obsoleted. Please use <code>each_seq { |s| s &lt;&lt; str }</code> for concatenating a string and <code>alignment_concat(aln)</code> for concatenating an alignment.</p>
           
           
 
           
           <div class="method-source-code" id="concat-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 2032</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">concat</span>(<span class="ruby-identifier">aln</span>)
-  <span class="ruby-comment">#(String-like)</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_str</span>) <span class="ruby-keyword">then</span> <span class="ruby-comment">#aln.is_a?(String)</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">aln</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">self</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">alignment_concat</span>(<span class="ruby-identifier">aln</span>)
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">2032</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">concat</span>(<span class="ruby-identifier">aln</span>)
+<span class="line-num">2033</span>   <span class="ruby-comment">#(String-like)</span>
+<span class="line-num">2034</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_str</span>) <span class="ruby-keyword">then</span> <span class="ruby-comment">#aln.is_a?(String)</span>
+<span class="line-num">2035</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">2036</span>       <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">aln</span>
+<span class="line-num">2037</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">2038</span>     <span class="ruby-keyword">self</span>
+<span class="line-num">2039</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">2040</span>     <span class="ruby-identifier">alignment_concat</span>(<span class="ruby-identifier">aln</span>)
+<span class="line-num">2041</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">2042</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -871,19 +859,18 @@ Array#compact)</p>
 
         <div class="method-description">
           
-          <p>Removes the sequence whose key is <em>key</em>. Returns the removed
-sequence. If not found, returns nil.</p>
+          <p>Removes the sequence whose key is <em>key</em>. Returns the removed sequence. If not found, returns nil.</p>
           
           
 
           
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1689</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1689</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1690</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1691</span>   <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1692</span>   <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1693</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -913,23 +900,23 @@ sequence. If not found, returns nil.</p>
 
           
           <div class="method-source-code" id="do_align-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 2070</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">do_align</span>(<span class="ruby-identifier">factory</span>)
-  <span class="ruby-identifier">a0</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
-  (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">size</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a0</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">i</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">i</span>)) }
-  <span class="ruby-identifier">r</span> = <span class="ruby-identifier">factory</span>.<span class="ruby-identifier">query</span>(<span class="ruby-identifier">a0</span>)
-  <span class="ruby-identifier">a1</span> = <span class="ruby-identifier">r</span>.<span class="ruby-identifier">alignment</span>
-  <span class="ruby-identifier">a0</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a1</span>[<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>] <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;alignment result is inconsistent with input data&#39;</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">a2</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">a0</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">a2</span>.<span class="ruby-identifier">store</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">keys</span>[<span class="ruby-identifier">k</span>], <span class="ruby-identifier">a1</span>[<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>])
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">a2</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">2070</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">do_align</span>(<span class="ruby-identifier">factory</span>)
+<span class="line-num">2071</span>   <span class="ruby-identifier">a0</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">2072</span>   (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-keyword">self</span>.<span class="ruby-identifier">size</span>).<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a0</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">i</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">i</span>)) }
+<span class="line-num">2073</span>   <span class="ruby-identifier">r</span> = <span class="ruby-identifier">factory</span>.<span class="ruby-identifier">query</span>(<span class="ruby-identifier">a0</span>)
+<span class="line-num">2074</span>   <span class="ruby-identifier">a1</span> = <span class="ruby-identifier">r</span>.<span class="ruby-identifier">alignment</span>
+<span class="line-num">2075</span>   <span class="ruby-identifier">a0</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">2076</span>     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">a1</span>[<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">2077</span>       <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;alignment result is inconsistent with input data&#39;</span>
+<span class="line-num">2078</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">2079</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">2080</span>   <span class="ruby-identifier">a2</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">2081</span>   <span class="ruby-identifier">a0</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">2082</span>     <span class="ruby-identifier">a2</span>.<span class="ruby-identifier">store</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">keys</span>[<span class="ruby-identifier">k</span>], <span class="ruby-identifier">a1</span>[<span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>])
+<span class="line-num">2083</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">2084</span>   <span class="ruby-identifier">a2</span>
+<span class="line-num">2085</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -959,11 +946,11 @@ sequence. If not found, returns nil.</p>
 
           
           <div class="method-source-code" id="dup-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1772</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dup</span>
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1772</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dup</span>
+<span class="line-num">1773</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1774</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">1775</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -993,13 +980,13 @@ sequence. If not found, returns nil.</p>
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1731</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
-  <span class="ruby-comment">#(Array-like)</span>
-  <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-ivar">@seqs</span>[<span class="ruby-identifier">k</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1731</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
+<span class="line-num">1732</span>   <span class="ruby-comment">#(Array-like)</span>
+<span class="line-num">1733</span>   <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">1734</span>     <span class="ruby-keyword">yield</span> <span class="ruby-ivar">@seqs</span>[<span class="ruby-identifier">k</span>]
+<span class="line-num">1735</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1736</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1033,13 +1020,13 @@ sequence. If not found, returns nil.</p>
 
           
           <div class="method-source-code" id="each_pair-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1741</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_pair</span>
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">yield</span> <span class="ruby-identifier">k</span>, <span class="ruby-ivar">@seqs</span>[<span class="ruby-identifier">k</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1741</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_pair</span>
+<span class="line-num">1742</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1743</span>   <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">1744</span>     <span class="ruby-keyword">yield</span> <span class="ruby-identifier">k</span>, <span class="ruby-ivar">@seqs</span>[<span class="ruby-identifier">k</span>]
+<span class="line-num">1745</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1746</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1091,18 +1078,17 @@ sequence. If not found, returns nil.</p>
 
         <div class="method-description">
           
-          <p>If the key exists, returns true. Otherwise, returns false. (Like
-Hash#has_key?)</p>
+          <p>If the key exists, returns true. Otherwise, returns false. (Like Hash#has_key?)</p>
           
           
 
           
           <div class="method-source-code" id="has_key-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1724</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">has_key?</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1724</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">has_key?</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1725</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1726</span>   <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1727</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1132,21 +1118,21 @@ Hash#has_key?)</p>
 
           
           <div class="method-source-code" id="index-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1816</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>(<span class="ruby-identifier">seq</span>)
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-identifier">last_key</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">last_key</span> = <span class="ruby-identifier">k</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">r</span> = (<span class="ruby-identifier">s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">seq</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">r</span> = (<span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_s</span>)
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">last_key</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1816</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">index</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">1817</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1818</span>   <span class="ruby-identifier">last_key</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">1819</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">1820</span>     <span class="ruby-identifier">last_key</span> = <span class="ruby-identifier">k</span>
+<span class="line-num">1821</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">class</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1822</span>       <span class="ruby-identifier">r</span> = (<span class="ruby-identifier">s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">seq</span>)
+<span class="line-num">1823</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">1824</span>       <span class="ruby-identifier">r</span> = (<span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">to_s</span>)
+<span class="line-num">1825</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1826</span>     <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span>
+<span class="line-num">1827</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1828</span>   <span class="ruby-identifier">last_key</span>
+<span class="line-num">1829</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1170,8 +1156,7 @@ Hash#has_key?)</p>
 
         <div class="method-description">
           
-          <p>Sequences in the alignment are duplicated. If keys are given to the
-argument, sequences of given keys are duplicated.</p>
+          <p>Sequences in the alignment are duplicated. If keys are given to the argument, sequences of given keys are duplicated.</p>
 
 <p>It will be obsoleted.</p>
           
@@ -1179,23 +1164,23 @@ argument, sequences of given keys are duplicated.</p>
 
           
           <div class="method-source-code" id="isolate-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1836</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">isolate</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">seqclass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>) <span class="ruby-keyword">then</span>
-        <span class="ruby-identifier">s</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
-        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">seqclass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>))
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1836</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">isolate</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">1837</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">1838</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1839</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">1840</span>       <span class="ruby-identifier">seqclass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>)
+<span class="line-num">1841</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1842</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1843</span>     <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">1844</span>       <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">1845</span>         <span class="ruby-identifier">s</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">key</span>)
+<span class="line-num">1846</span>         <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">seqclass</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">s</span>))
+<span class="line-num">1847</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">1848</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1849</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1850</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">1851</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1225,14 +1210,14 @@ argument, sequences of given keys are duplicated.</p>
 
           
           <div class="method-source-code" id="lstrip-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1994</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lstrip</span>
-  <span class="ruby-comment">#(String-like)</span>
-  <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">isolate</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">alignment_lstrip!</span>
-  <span class="ruby-identifier">na</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1994</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">lstrip</span>
+<span class="line-num">1995</span>   <span class="ruby-comment">#(String-like)</span>
+<span class="line-num">1996</span>   <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">1997</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">isolate</span>
+<span class="line-num">1998</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">alignment_lstrip!</span>
+<span class="line-num">1999</span>   <span class="ruby-identifier">na</span>
+<span class="line-num">2000</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1262,13 +1247,13 @@ argument, sequences of given keys are duplicated.</p>
 
           
           <div class="method-source-code" id="merge-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1782</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">other</span>)
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">other</span>)
-  <span class="ruby-identifier">na</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1782</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">other</span>)
+<span class="line-num">1783</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1784</span>   <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="line-num">1785</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">merge!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">other</span>)
+<span class="line-num">1786</span>   <span class="ruby-identifier">na</span>
+<span class="line-num">1787</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1298,30 +1283,30 @@ argument, sequences of given keys are duplicated.</p>
 
           
           <div class="method-source-code" id="merge-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1791</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">other</span>)
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">other</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">aln</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>) <span class="ruby-keyword">then</span>
-          <span class="ruby-identifier">s</span> = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">k</span>, <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>], <span class="ruby-identifier">s</span>
-          <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
-        <span class="ruby-keyword">else</span>
-          <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
-        <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">other</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">aln</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>)
-        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1791</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">merge!</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">other</span>)
+<span class="line-num">1792</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1793</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1794</span>     <span class="ruby-identifier">other</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">aln</span><span class="ruby-operator">|</span>
+<span class="line-num">1795</span>       <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">1796</span>         <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">1797</span>           <span class="ruby-identifier">s</span> = <span class="ruby-keyword">yield</span> <span class="ruby-identifier">k</span>, <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>], <span class="ruby-identifier">s</span>
+<span class="line-num">1798</span>           <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_hash</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
+<span class="line-num">1799</span>         <span class="ruby-keyword">else</span>
+<span class="line-num">1800</span>           <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
+<span class="line-num">1801</span>         <span class="ruby-keyword">end</span>
+<span class="line-num">1802</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">1803</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1804</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1805</span>     <span class="ruby-identifier">other</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">aln</span><span class="ruby-operator">|</span>
+<span class="line-num">1806</span>       <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">1807</span>         <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">k</span>)
+<span class="line-num">1808</span>         <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
+<span class="line-num">1809</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">1810</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1811</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1812</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">1813</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1351,13 +1336,13 @@ argument, sequences of given keys are duplicated.</p>
 
           
           <div class="method-source-code" id="normalize-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1975</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">normalize</span>
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">alignment_normalize!</span>
-  <span class="ruby-identifier">na</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1975</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">normalize</span>
+<span class="line-num">1976</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">1977</span>   <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">1978</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">alignment_normalize!</span>
+<span class="line-num">1979</span>   <span class="ruby-identifier">na</span>
+<span class="line-num">1980</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1415,11 +1400,11 @@ argument, sequences of given keys are duplicated.</p>
 
           
           <div class="method-source-code" id="order-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1681</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">order</span>(<span class="ruby-identifier">n</span>)
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-ivar">@seqs</span>[<span class="ruby-ivar">@keys</span>[<span class="ruby-identifier">n</span>]]
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1681</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">order</span>(<span class="ruby-identifier">n</span>)
+<span class="line-num">1682</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">1683</span>   <span class="ruby-ivar">@seqs</span>[<span class="ruby-ivar">@keys</span>[<span class="ruby-identifier">n</span>]]
+<span class="line-num">1684</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1443,8 +1428,7 @@ argument, sequences of given keys are duplicated.</p>
 
         <div class="method-description">
           
-          <p>Removes sequences from the alignment by given keys. Returns an alignment
-object consists of removed sequences.</p>
+          <p>Removes sequences from the alignment by given keys. Returns an alignment object consists of removed sequences.</p>
 
 <p>It resembles BioPerl&#39;s AlignI::purge method.</p>
           
@@ -1452,17 +1436,17 @@ object consists of removed sequences.</p>
 
           
           <div class="method-source-code" id="purge-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1926</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">purge</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-comment">#(BioPerl) AlignI::purge like method</span>
-  <span class="ruby-identifier">purged</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>] <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">purged</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>))
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">purged</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1926</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">purge</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">1927</span>   <span class="ruby-comment">#(BioPerl) AlignI::purge like method</span>
+<span class="line-num">1928</span>   <span class="ruby-identifier">purged</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">1929</span>   <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">1930</span>     <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">1931</span>       <span class="ruby-identifier">purged</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>))
+<span class="line-num">1932</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1933</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1934</span>   <span class="ruby-identifier">purged</span>
+<span class="line-num">1935</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1492,17 +1476,17 @@ object consists of removed sequences.</p>
 
           
           <div class="method-source-code" id="rehash-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1646</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rehash</span>
-  <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">rehash</span>
-  <span class="ruby-identifier">tmpkeys</span> = <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">keys</span>
-  <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">tmpkeys</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">compact!</span>
-  <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">tmpkeys</span>)
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1646</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rehash</span>
+<span class="line-num">1647</span>   <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">rehash</span>
+<span class="line-num">1648</span>   <span class="ruby-identifier">tmpkeys</span> = <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">keys</span>
+<span class="line-num">1649</span>   <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">1650</span>     <span class="ruby-identifier">tmpkeys</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>)
+<span class="line-num">1651</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1652</span>   <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">compact!</span>
+<span class="line-num">1653</span>   <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">concat</span>(<span class="ruby-identifier">tmpkeys</span>)
+<span class="line-num">1654</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">1655</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1528,21 +1512,20 @@ object consists of removed sequences.</p>
           
           <p>Not-destructive version of remove_gaps!. Returns a new alignment.</p>
 
-<p>The method name &#39;remove_gap&#39; will be obsoleted. Please use
-&#39;remove_all_gaps&#39; instead.</p>
+<p>The method name &#39;remove_gap&#39; will be obsoleted. Please use &#39;remove_all_gaps&#39; instead.</p>
           
           
 
           
           <div class="method-source-code" id="remove_all_gaps-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 2017</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_all_gaps</span>
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">isolate</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">remove_all_gaps!</span>
-  <span class="ruby-identifier">na</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">2017</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_all_gaps</span>
+<span class="line-num">2018</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">2019</span>   <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">2020</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">isolate</span>
+<span class="line-num">2021</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">remove_all_gaps!</span>
+<span class="line-num">2022</span>   <span class="ruby-identifier">na</span>
+<span class="line-num">2023</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1566,8 +1549,7 @@ object consists of removed sequences.</p>
 
         <div class="method-description">
           
-          <p>Removes given sequence from the alignment. Returns removed sequence. If
-nothing removed, returns nil.</p>
+          <p>Removes given sequence from the alignment. Returns removed sequence. If nothing removed, returns nil.</p>
 
 <p>It resembles BioPerl&#39;s AlignI::remove_seq.</p>
           
@@ -1575,15 +1557,15 @@ nothing removed, returns nil.</p>
 
           
           <div class="method-source-code" id="remove_seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1913</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_seq</span>(<span class="ruby-identifier">seq</span>)
-  <span class="ruby-comment">#(BioPerl) AlignI::remove_seq like method</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">k</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">seq</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1913</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">remove_seq</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">1914</span>   <span class="ruby-comment">#(BioPerl) AlignI::remove_seq like method</span>
+<span class="line-num">1915</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">k</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">seq</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">1916</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>)
+<span class="line-num">1917</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1918</span>     <span class="ruby-keyword">nil</span>
+<span class="line-num">1919</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1920</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1610,7 +1592,7 @@ nothing removed, returns nil.</p>
           <p>Replace the specified region of the alignment to aln.</p>
 <dl class="rdoc-list note-list"><dt>aln
 <dd>
-<p>String or <a href="../Alignment.html">Bio::Alignment</a> object</p>
+<p>String or <a href="../Alignment.html"><code>Bio::Alignment</code></a> object</p>
 </dd><dt>arg
 <dd>
 <p>same format as String#slice</p>
@@ -1622,26 +1604,26 @@ nothing removed, returns nil.</p>
 
           
           <div class="method-source-code" id="replace_slice-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 2049</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace_slice</span>(<span class="ruby-identifier">aln</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_str</span>) <span class="ruby-keyword">then</span> <span class="ruby-comment">#aln.is_a?(String)</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">s</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>] = <span class="ruby-identifier">aln</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>][<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>] = <span class="ruby-identifier">s</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
-    <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">self</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">i</span>)[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>] = <span class="ruby-identifier">s</span>
-      <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">2049</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace_slice</span>(<span class="ruby-identifier">aln</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">2050</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">2051</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">respond_to?</span>(<span class="ruby-value">:to_str</span>) <span class="ruby-keyword">then</span> <span class="ruby-comment">#aln.is_a?(String)</span>
+<span class="line-num">2052</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">2053</span>       <span class="ruby-identifier">s</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>] = <span class="ruby-identifier">aln</span>
+<span class="line-num">2054</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">2055</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">2056</span>     <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">each_pair</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">2057</span>       <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>][<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>] = <span class="ruby-identifier">s</span>
+<span class="line-num">2058</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">2059</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">2060</span>     <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+<span class="line-num">2061</span>     <span class="ruby-identifier">aln</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">2062</span>       <span class="ruby-keyword">self</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">i</span>)[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>] = <span class="ruby-identifier">s</span>
+<span class="line-num">2063</span>       <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+<span class="line-num">2064</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">2065</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">2066</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">2067</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1671,14 +1653,14 @@ nothing removed, returns nil.</p>
 
           
           <div class="method-source-code" id="rstrip-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1984</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rstrip</span>
-  <span class="ruby-comment">#(String-like)</span>
-  <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">isolate</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">alignment_rstrip!</span>
-  <span class="ruby-identifier">na</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1984</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rstrip</span>
+<span class="line-num">1985</span>   <span class="ruby-comment">#(String-like)</span>
+<span class="line-num">1986</span>   <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">1987</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">isolate</span>
+<span class="line-num">1988</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">alignment_rstrip!</span>
+<span class="line-num">1989</span>   <span class="ruby-identifier">na</span>
+<span class="line-num">1990</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1702,12 +1684,9 @@ nothing removed, returns nil.</p>
 
         <div class="method-description">
           
-          <p>If block is given, it acts like Array#select (Enumerable#select).  Returns
-a new alignment containing all sequences of the alignment for which return
-value of given block is not false nor nil.</p>
+          <p>If block is given, it acts like Array#select (Enumerable#select).  Returns a new alignment containing all sequences of the alignment for which return value of given block is not false nor nil.</p>
 
-<p>If no block is given, it acts like the BioPerl&#39;s AlignI::select.
-Returns a new alignment containing sequences of given keys.</p>
+<p>If no block is given, it acts like the BioPerl&#39;s AlignI::select. Returns a new alignment containing sequences of given keys.</p>
 
 <p>The BioPerl&#39;s AlignI::select-like action will be obsoleted.</p>
           
@@ -1715,26 +1694,26 @@ Returns a new alignment containing sequences of given keys.</p>
 
           
           <div class="method-source-code" id="select-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1945</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-comment"># &#39;arg&#39; is ignored</span>
-    <span class="ruby-comment"># nearly same action as Array#select (Enumerable#select)</span>
-    <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_pair</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">na</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">s</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-comment"># BioPerl&#39;s AlignI::select like function</span>
-    <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>] <span class="ruby-keyword">then</span>
-        <span class="ruby-identifier">na</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">na</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1945</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">select</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">1946</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">1947</span>   <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">1948</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">block_given?</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1949</span>     <span class="ruby-comment"># &#39;arg&#39; is ignored</span>
+<span class="line-num">1950</span>     <span class="ruby-comment"># nearly same action as Array#select (Enumerable#select)</span>
+<span class="line-num">1951</span>     <span class="ruby-keyword">self</span>.<span class="ruby-identifier">each_pair</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">1952</span>       <span class="ruby-identifier">na</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>) <span class="ruby-keyword">if</span> <span class="ruby-keyword">yield</span>(<span class="ruby-identifier">s</span>)
+<span class="line-num">1953</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1954</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1955</span>     <span class="ruby-comment"># BioPerl&#39;s AlignI::select like function</span>
+<span class="line-num">1956</span>     <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span>
+<span class="line-num">1957</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span> = <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">1958</span>         <span class="ruby-identifier">na</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span>)
+<span class="line-num">1959</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">1960</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1961</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1962</span>   <span class="ruby-identifier">na</span>
+<span class="line-num">1963</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1764,16 +1743,16 @@ Returns a new alignment containing sequences of given keys.</p>
 
           
           <div class="method-source-code" id="shift-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1669</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">shift</span>
-  <span class="ruby-identifier">k</span> = <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">k</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">s</span> = <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>)
-    [ <span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span> ]
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1669</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">shift</span>
+<span class="line-num">1670</span>   <span class="ruby-identifier">k</span> = <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">1671</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">k</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1672</span>     <span class="ruby-identifier">s</span> = <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">k</span>)
+<span class="line-num">1673</span>     [ <span class="ruby-identifier">k</span>, <span class="ruby-identifier">s</span> ]
+<span class="line-num">1674</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">1675</span>     <span class="ruby-keyword">nil</span>
+<span class="line-num">1676</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1677</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1803,11 +1782,11 @@ Returns a new alignment containing sequences of given keys.</p>
 
           
           <div class="method-source-code" id="size-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1716</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>
-  <span class="ruby-comment">#(Hash&amp;Array-like)</span>
-  <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">size</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1716</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>
+<span class="line-num">1717</span>   <span class="ruby-comment">#(Hash&amp;Array-like)</span>
+<span class="line-num">1718</span>   <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">size</span>
+<span class="line-num">1719</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1835,35 +1814,33 @@ Returns a new alignment containing sequences of given keys.</p>
 
         <div class="method-description">
           
-          <p>stores a sequence with <em>key</em> (name or definition of the sequence).
-Unlike <code>__store__</code> method, the method doesn&#39;t allow same
-keys. If the key is already used, returns nil. When succeeded, returns key.</p>
+          <p>stores a sequence with <em>key</em> (name or definition of the sequence). Unlike <code>__store__</code> method, the method doesn&#39;t allow same keys. If the key is already used, returns nil. When succeeded, returns key.</p>
           
           
 
           
           <div class="method-source-code" id="store-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1623</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
-  <span class="ruby-comment">#(Hash-like) returns key instead of seq</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-comment"># don&#39;t allow same key</span>
-    <span class="ruby-comment"># New key is discarded, while existing key is preserved.</span>
-    <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@serial</span>)
-      <span class="ruby-ivar">@serial</span> = <span class="ruby-value">0</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@serial</span> = <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">size</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@serial</span>
-    <span class="ruby-keyword">while</span> <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-ivar">@serial</span>)
-      <span class="ruby-ivar">@serial</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">key</span> = <span class="ruby-ivar">@serial</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">__store__</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
-  <span class="ruby-identifier">key</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1623</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
+<span class="line-num">1624</span>   <span class="ruby-comment">#(Hash-like) returns key instead of seq</span>
+<span class="line-num">1625</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">key</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">1626</span>     <span class="ruby-comment"># don&#39;t allow same key</span>
+<span class="line-num">1627</span>     <span class="ruby-comment"># New key is discarded, while existing key is preserved.</span>
+<span class="line-num">1628</span>     <span class="ruby-identifier">key</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">1629</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1630</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span> <span class="ruby-keyword">then</span>
+<span class="line-num">1631</span>     <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@serial</span>)
+<span class="line-num">1632</span>       <span class="ruby-ivar">@serial</span> = <span class="ruby-value">0</span>
+<span class="line-num">1633</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1634</span>     <span class="ruby-ivar">@serial</span> = <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">size</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@serial</span>
+<span class="line-num">1635</span>     <span class="ruby-keyword">while</span> <span class="ruby-ivar">@seqs</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-ivar">@serial</span>)
+<span class="line-num">1636</span>       <span class="ruby-ivar">@serial</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+<span class="line-num">1637</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">1638</span>     <span class="ruby-identifier">key</span> = <span class="ruby-ivar">@serial</span>
+<span class="line-num">1639</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">1640</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">__store__</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
+<span class="line-num">1641</span>   <span class="ruby-identifier">key</span>
+<span class="line-num">1642</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1893,14 +1870,14 @@ keys. If the key is already used, returns nil. When succeeded, returns key.</p>
 
           
           <div class="method-source-code" id="strip-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 2004</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strip</span>
-  <span class="ruby-comment">#(String-like)</span>
-  <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">isolate</span>
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">alignment_strip!</span>
-  <span class="ruby-identifier">na</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">2004</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strip</span>
+<span class="line-num">2005</span>   <span class="ruby-comment">#(String-like)</span>
+<span class="line-num">2006</span>   <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">2007</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">isolate</span>
+<span class="line-num">2008</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">alignment_strip!</span>
+<span class="line-num">2009</span>   <span class="ruby-identifier">na</span>
+<span class="line-num">2010</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1928,19 +1905,18 @@ keys. If the key is already used, returns nil. When succeeded, returns key.</p>
 
 <p>The specification of the argument will be changed.</p>
 
-<p>Note: <code>to_fasta</code> is deprecated. Please use
-<code>output_fasta</code> instead.</p>
+<p>Note: <code>to_fasta</code> is deprecated. Please use <code>output_fasta</code> instead.</p>
           
           
 
           
           <div class="method-source-code" id="to_fasta-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 2133</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fasta</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;to_fasta is deprecated. Please use output_fasta.&quot;</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_fasta_array</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">2133</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fasta</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">2134</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">2135</span>   <span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;to_fasta is deprecated. Please use output_fasta.&quot;</span>
+<span class="line-num">2136</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_fasta_array</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">2137</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1972,30 +1948,30 @@ keys. If the key is already used, returns nil. When succeeded, returns key.</p>
 
           
           <div class="method-source-code" id="to_fasta_array-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 2090</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fasta_array</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-identifier">width</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">width</span> = <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">shift</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">options</span> = (<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">shift</span> <span class="ruby-keyword">or</span> {})
-  <span class="ruby-identifier">width</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:width</span>] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">width</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:avoid_same_name</span>] <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">na</span> = <span class="ruby-identifier">__clustal_avoid_same_name</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">keys</span>, <span class="ruby-value">30</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\r\n\x00]/</span>, <span class="ruby-string">&#39; &#39;</span>) }
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
-    <span class="ruby-node">&quot;&gt;#{na.shift}\n&quot;</span> <span class="ruby-operator">+</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">width</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;.{1,#{width}}&quot;</span>), <span class="ruby-string">&quot;\\0\n&quot;</span>)
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
-      <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">a</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">2090</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fasta_array</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">2091</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">2092</span>   <span class="ruby-identifier">width</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">2093</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Integer</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">2094</span>     <span class="ruby-identifier">width</span> = <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">shift</span>
+<span class="line-num">2095</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">2096</span>   <span class="ruby-identifier">options</span> = (<span class="ruby-identifier">arg</span>.<span class="ruby-identifier">shift</span> <span class="ruby-keyword">or</span> {})
+<span class="line-num">2097</span>   <span class="ruby-identifier">width</span> = <span class="ruby-identifier">options</span>[<span class="ruby-value">:width</span>] <span class="ruby-keyword">unless</span> <span class="ruby-identifier">width</span>
+<span class="line-num">2098</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">options</span>[<span class="ruby-value">:avoid_same_name</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">2099</span>     <span class="ruby-identifier">na</span> = <span class="ruby-identifier">__clustal_avoid_same_name</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">keys</span>, <span class="ruby-value">30</span>)
+<span class="line-num">2100</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">2101</span>     <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">k</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/[\r\n\x00]/</span>, <span class="ruby-string">&#39; &#39;</span>) }
+<span class="line-num">2102</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">2103</span>   <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+<span class="line-num">2104</span>     <span class="ruby-node">&quot;&gt;#{na.shift}\n&quot;</span> <span class="ruby-operator">+</span>
+<span class="line-num">2105</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">width</span> <span class="ruby-keyword">then</span>
+<span class="line-num">2106</span>         <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;.{1,#{width}}&quot;</span>), <span class="ruby-string">&quot;\\0\n&quot;</span>)
+<span class="line-num">2107</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">2108</span>         <span class="ruby-identifier">s</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">+</span> <span class="ruby-string">&quot;\n&quot;</span>
+<span class="line-num">2109</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">2110</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">2111</span>   <span class="ruby-identifier">a</span>
+<span class="line-num">2112</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2019,8 +1995,7 @@ keys. If the key is already used, returns nil. When succeeded, returns key.</p>
 
         <div class="method-description">
           
-          <p>Convets to fasta format and returns an array of <a
-href="../FastaFormat.html">FastaFormat</a> objects.</p>
+          <p>Convets to fasta format and returns an array of <a href="../FastaFormat.html"><code>FastaFormat</code></a> objects.</p>
 
 <p>It will be obsoleted.</p>
           
@@ -2028,16 +2003,16 @@ href="../FastaFormat.html">FastaFormat</a> objects.</p>
 
           
           <div class="method-source-code" id="to_fastaformat_array-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 2117</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fastaformat_array</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-comment">#(original)</span>
-  <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio/db/fasta&#39;</span>
-  <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_fasta_array</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">a</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">2117</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_fastaformat_array</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">2118</span>   <span class="ruby-comment">#(original)</span>
+<span class="line-num">2119</span>   <span class="ruby-identifier">require</span> <span class="ruby-string">&#39;bio/db/fasta&#39;</span>
+<span class="line-num">2120</span>   <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">to_fasta_array</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">2121</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">2122</span>     <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">FastaFormat</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">x</span>)
+<span class="line-num">2123</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">2124</span>   <span class="ruby-identifier">a</span>
+<span class="line-num">2125</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2067,11 +2042,11 @@ href="../FastaFormat.html">FastaFormat</a> objects.</p>
 
           
           <div class="method-source-code" id="to_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1566</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_hash</span>
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-ivar">@seqs</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1566</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_hash</span>
+<span class="line-num">1567</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1568</span>   <span class="ruby-ivar">@seqs</span>
+<span class="line-num">1569</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2101,14 +2076,14 @@ href="../FastaFormat.html">FastaFormat</a> objects.</p>
 
           
           <div class="method-source-code" id="unshift-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1659</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unshift</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
-  <span class="ruby-comment">#(Array-like)</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
-  <span class="ruby-identifier">k</span> = <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">pop</span>
-  <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">k</span>)
-  <span class="ruby-identifier">k</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1659</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unshift</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
+<span class="line-num">1660</span>   <span class="ruby-comment">#(Array-like)</span>
+<span class="line-num">1661</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">store</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">seq</span>)
+<span class="line-num">1662</span>   <span class="ruby-identifier">k</span> = <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">pop</span>
+<span class="line-num">1663</span>   <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">unshift</span>(<span class="ruby-identifier">k</span>)
+<span class="line-num">1664</span>   <span class="ruby-identifier">k</span>
+<span class="line-num">1665</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2138,11 +2113,11 @@ href="../FastaFormat.html">FastaFormat</a> objects.</p>
 
           
           <div class="method-source-code" id="values-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1696</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">values</span>
-  <span class="ruby-comment">#(Hash-like)</span>
-  <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@seqs</span>[<span class="ruby-identifier">k</span>] }
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1696</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">values</span>
+<span class="line-num">1697</span>   <span class="ruby-comment">#(Hash-like)</span>
+<span class="line-num">1698</span>   <span class="ruby-ivar">@keys</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-ivar">@seqs</span>[<span class="ruby-identifier">k</span>] }
+<span class="line-num">1699</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2180,12 +2155,12 @@ href="../FastaFormat.html">FastaFormat</a> objects.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/alignment.rb, line 1764</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">na</span>.<span class="ruby-identifier">set_all_property</span>(<span class="ruby-identifier">get_all_property</span>)
-  <span class="ruby-identifier">na</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>     <span class="ruby-comment"># File lib/bio/alignment.rb</span>
+<span class="line-num">1764</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">1765</span>   <span class="ruby-identifier">na</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">1766</span>   <span class="ruby-identifier">na</span>.<span class="ruby-identifier">set_all_property</span>(<span class="ruby-identifier">get_all_property</span>)
+<span class="line-num">1767</span>   <span class="ruby-identifier">na</span>
+<span class="line-num">1768</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -2199,12 +2174,13 @@ href="../FastaFormat.html">FastaFormat</a> objects.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

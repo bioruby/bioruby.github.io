@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -129,20 +133,20 @@
           
             <div class="method-calls-super">
               Calls superclass method
-              <a href="RuleTemplate.html#method-c-new">Bio::FlatFile::AutoDetect::RuleTemplate.new</a>
+              <a href="RuleTemplate.html#method-c-new"><code>Bio::FlatFile::AutoDetect::RuleTemplate::new</code></a>
             </div>
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 199</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">dbclasses</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">proc</span>)
-  <span class="ruby-keyword">super</span>()
-  <span class="ruby-ivar">@proc</span> = <span class="ruby-identifier">proc</span>
-  <span class="ruby-ivar">@dbclasses</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@dbclasses_lazy</span> = <span class="ruby-identifier">dbclasses</span>
-  <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">dbclasses</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;|&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">199</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">dbclasses</span>, <span class="ruby-operator">&amp;</span><span class="ruby-identifier">proc</span>)
+<span class="line-num">200</span>   <span class="ruby-keyword">super</span>()
+<span class="line-num">201</span>   <span class="ruby-ivar">@proc</span> = <span class="ruby-identifier">proc</span>
+<span class="line-num">202</span>   <span class="ruby-ivar">@dbclasses</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">203</span>   <span class="ruby-ivar">@dbclasses_lazy</span> = <span class="ruby-identifier">dbclasses</span>
+<span class="line-num">204</span>   <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">dbclasses</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span> }.<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;|&#39;</span>)
+<span class="line-num">205</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -180,13 +184,13 @@
 
           
           <div class="method-source-code" id="dbclasses-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 208</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dbclasses</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@dbclasses</span>
-    <span class="ruby-ivar">@dbclasses</span> = <span class="ruby-ivar">@dbclasses_lazy</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">get_dbclass</span>(<span class="ruby-identifier">x</span>) }
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@dbclasses</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">208</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dbclasses</span>
+<span class="line-num">209</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@dbclasses</span>
+<span class="line-num">210</span>     <span class="ruby-ivar">@dbclasses</span> = <span class="ruby-ivar">@dbclasses_lazy</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">get_dbclass</span>(<span class="ruby-identifier">x</span>) }
+<span class="line-num">211</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">212</span>   <span class="ruby-ivar">@dbclasses</span>
+<span class="line-num">213</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -210,21 +214,18 @@
 
         <div class="method-description">
           
-          <p>If given text (and/or meta information) is known, returns the database
-class. Otherwise, returns nil or false.</p>
+          <p>If given text (and/or meta information) is known, returns the database class. Otherwise, returns nil or false.</p>
 
-<p>Refer <a
-href="RuleTemplate.html#method-i-guess">Bio::FlatFile::AutoDetect::RuleTemplate#guess</a>
-for <em>meta</em>.</p>
+<p>Refer <a href="RuleTemplate.html#method-i-guess"><code>RuleTemplate#guess</code></a> for <em>meta</em>.</p>
           
           
 
           
           <div class="method-source-code" id="guess-source">
-            <pre><span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb, line 220</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">guess</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">meta</span>)
-  <span class="ruby-ivar">@proc</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">text</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/io/flatfile/autodetection.rb</span>
+<span class="line-num">220</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">guess</span>(<span class="ruby-identifier">text</span>, <span class="ruby-identifier">meta</span>)
+<span class="line-num">221</span>   <span class="ruby-ivar">@proc</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">text</span>)
+<span class="line-num">222</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -238,12 +239,13 @@ for <em>meta</em>.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

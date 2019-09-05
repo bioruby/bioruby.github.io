@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -115,8 +119,7 @@
       
         <dt id="Data_XPath">Data_XPath
         
-        <dd><p>(MaXML cluster) <a
-href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz">fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz</a></p>
+        <dd><p>(MaXML cluster) <a href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz">fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz</a></p>
         
       
       </dl>
@@ -151,11 +154,11 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz">fantom2.gsc.
 
           
           <div class="method-source-code" id="representative_annotations-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 145</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">representative_annotations</span>
-  <span class="ruby-identifier">e</span> = <span class="ruby-identifier">representative_sequence</span>
-  <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">annotations</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">145</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">representative_annotations</span>
+<span class="line-num">146</span>   <span class="ruby-identifier">e</span> = <span class="ruby-identifier">representative_sequence</span>
+<span class="line-num">147</span>   <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">annotations</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">148</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -213,11 +216,11 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz">fantom2.gsc.
 
           
           <div class="method-source-code" id="representative_cloneid-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 150</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">representative_cloneid</span>
-  <span class="ruby-identifier">e</span> = <span class="ruby-identifier">representative_sequence</span>
-  <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">cloneid</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">150</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">representative_cloneid</span>
+<span class="line-num">151</span>   <span class="ruby-identifier">e</span> = <span class="ruby-identifier">representative_sequence</span>
+<span class="line-num">152</span>   <span class="ruby-identifier">e</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">cloneid</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">153</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -247,14 +250,14 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz">fantom2.gsc.
 
           
           <div class="method-source-code" id="representative_seqid-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 116</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">representative_seqid</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@representative_seqid</span>)
-    <span class="ruby-ivar">@representative_seqid</span> =
-      <span class="ruby-identifier">gsub_entities</span>(<span class="ruby-ivar">@elem</span>.<span class="ruby-identifier">text</span>(<span class="ruby-string">&#39;representative-seqid&#39;</span>))
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@representative_seqid</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">116</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">representative_seqid</span>
+<span class="line-num">117</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@representative_seqid</span>)
+<span class="line-num">118</span>     <span class="ruby-ivar">@representative_seqid</span> =
+<span class="line-num">119</span>       <span class="ruby-identifier">gsub_entities</span>(<span class="ruby-ivar">@elem</span>.<span class="ruby-identifier">text</span>(<span class="ruby-string">&#39;representative-seqid&#39;</span>))
+<span class="line-num">120</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">121</span>   <span class="ruby-ivar">@representative_seqid</span>
+<span class="line-num">122</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -284,15 +287,15 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz">fantom2.gsc.
 
           
           <div class="method-source-code" id="representative_sequence-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 135</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">representative_sequence</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@representative_sequence</span>)
-    <span class="ruby-identifier">rid</span> = <span class="ruby-identifier">representative_seqid</span>
-    <span class="ruby-ivar">@representative_sequence</span> =
-      <span class="ruby-identifier">rid</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">sequences</span>[<span class="ruby-identifier">representative_seqid</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@representative_sequence</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">135</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">representative_sequence</span>
+<span class="line-num">136</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@representative_sequence</span>)
+<span class="line-num">137</span>     <span class="ruby-identifier">rid</span> = <span class="ruby-identifier">representative_seqid</span>
+<span class="line-num">138</span>     <span class="ruby-ivar">@representative_sequence</span> =
+<span class="line-num">139</span>       <span class="ruby-identifier">rid</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">sequences</span>[<span class="ruby-identifier">representative_seqid</span>] <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">140</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">141</span>   <span class="ruby-ivar">@representative_sequence</span>
+<span class="line-num">142</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -326,10 +329,10 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz">fantom2.gsc.
 
           
           <div class="method-source-code" id="sequence-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 131</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sequence</span>(<span class="ruby-identifier">idstr</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">idstr</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">sequences</span>[<span class="ruby-identifier">idstr</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">representative_sequence</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">131</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sequence</span>(<span class="ruby-identifier">idstr</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">132</span>   <span class="ruby-identifier">idstr</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">sequences</span>[<span class="ruby-identifier">idstr</span>] <span class="ruby-operator">:</span> <span class="ruby-identifier">representative_sequence</span>
+<span class="line-num">133</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -359,13 +362,13 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz">fantom2.gsc.
 
           
           <div class="method-source-code" id="sequences-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 124</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sequences</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@sequences</span>)
-    <span class="ruby-ivar">@sequences</span> = <span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequences</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@elem</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@sequences</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">124</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sequences</span>
+<span class="line-num">125</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@sequences</span>)
+<span class="line-num">126</span>     <span class="ruby-ivar">@sequences</span> = <span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequences</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@elem</span>)
+<span class="line-num">127</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">128</span>   <span class="ruby-ivar">@sequences</span>
+<span class="line-num">129</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -379,12 +382,13 @@ href="ftp://fantom2.gsc.riken.go.jp/fantom/2.1/allclust.sep.xml.gz">fantom2.gsc.
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

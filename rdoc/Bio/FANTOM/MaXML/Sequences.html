@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -159,14 +163,14 @@
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 186</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">get</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>])
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">to_a</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>]
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">186</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">187</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">String</span>) <span class="ruby-keyword">and</span> <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-keyword">then</span>
+<span class="line-num">188</span>     <span class="ruby-identifier">get</span>(<span class="ruby-identifier">arg</span>[<span class="ruby-value">0</span>])
+<span class="line-num">189</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">190</span>     <span class="ruby-identifier">to_a</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>]
+<span class="line-num">191</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">192</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -196,13 +200,13 @@
 
           
           <div class="method-source-code" id="cloneids-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 194</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cloneids</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@cloneids</span>)
-    <span class="ruby-ivar">@cloneids</span> = <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">cloneid</span> }
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@cloneids</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">194</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">cloneids</span>
+<span class="line-num">195</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@cloneids</span>)
+<span class="line-num">196</span>     <span class="ruby-ivar">@cloneids</span> = <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">cloneid</span> }
+<span class="line-num">197</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">198</span>   <span class="ruby-ivar">@cloneids</span>
+<span class="line-num">199</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -232,10 +236,10 @@
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 162</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
-  <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span> }
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">162</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
+<span class="line-num">163</span>   <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">x</span> }
+<span class="line-num">164</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -265,18 +269,18 @@
 
           
           <div class="method-source-code" id="get-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 174</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">idstr</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@hash</span>)
-    <span class="ruby-ivar">@hash</span> = {}
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">idstr</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">idstr</span>] = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">x</span>.<span class="ruby-identifier">altid</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">idstr</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">idstr</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">174</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">get</span>(<span class="ruby-identifier">idstr</span>)
+<span class="line-num">175</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@hash</span>)
+<span class="line-num">176</span>     <span class="ruby-ivar">@hash</span> = {}
+<span class="line-num">177</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">178</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">member?</span>(<span class="ruby-identifier">idstr</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">179</span>     <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">idstr</span>] = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">find</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span>
+<span class="line-num">180</span>       <span class="ruby-identifier">x</span>.<span class="ruby-identifier">altid</span>.<span class="ruby-identifier">values</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">idstr</span>)
+<span class="line-num">181</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">182</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">183</span>   <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">idstr</span>]
+<span class="line-num">184</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -306,16 +310,16 @@
 
           
           <div class="method-source-code" id="id_strings-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 201</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">id_strings</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@id_strings</span>)
-    <span class="ruby-ivar">@id_strings</span> = <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">id_strings</span> }
-    <span class="ruby-ivar">@id_strings</span>.<span class="ruby-identifier">flatten!</span>
-    <span class="ruby-ivar">@id_strings</span>.<span class="ruby-identifier">sort!</span>
-    <span class="ruby-ivar">@id_strings</span>.<span class="ruby-identifier">uniq!</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@id_strings</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">201</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">id_strings</span>
+<span class="line-num">202</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@id_strings</span>)
+<span class="line-num">203</span>     <span class="ruby-ivar">@id_strings</span> = <span class="ruby-identifier">to_a</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">id_strings</span> }
+<span class="line-num">204</span>     <span class="ruby-ivar">@id_strings</span>.<span class="ruby-identifier">flatten!</span>
+<span class="line-num">205</span>     <span class="ruby-ivar">@id_strings</span>.<span class="ruby-identifier">sort!</span>
+<span class="line-num">206</span>     <span class="ruby-ivar">@id_strings</span>.<span class="ruby-identifier">uniq!</span>
+<span class="line-num">207</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">208</span>   <span class="ruby-ivar">@id_strings</span>
+<span class="line-num">209</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -345,14 +349,14 @@
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/fantom.rb, line 166</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@sequences</span>)
-    <span class="ruby-ivar">@sequences</span> = <span class="ruby-ivar">@elem</span>.<span class="ruby-identifier">get_elements</span>(<span class="ruby-string">&#39;sequence&#39;</span>)
-    <span class="ruby-ivar">@sequences</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>) }
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@sequences</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/fantom.rb</span>
+<span class="line-num">166</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
+<span class="line-num">167</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@sequences</span>)
+<span class="line-num">168</span>     <span class="ruby-ivar">@sequences</span> = <span class="ruby-ivar">@elem</span>.<span class="ruby-identifier">get_elements</span>(<span class="ruby-string">&#39;sequence&#39;</span>)
+<span class="line-num">169</span>     <span class="ruby-ivar">@sequences</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-constant">MaXML</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>) }
+<span class="line-num">170</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">171</span>   <span class="ruby-ivar">@sequences</span>
+<span class="line-num">172</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -366,12 +370,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

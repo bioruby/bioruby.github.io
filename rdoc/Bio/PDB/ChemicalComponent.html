@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -98,12 +102,9 @@
 
   <section class="description">
     
-<p>Bio::PDB::ChemicalComponet is a parser for a entry of the <a
-href="../PDB.html">PDB</a> Chemical Component Dictionary.</p>
+<p>Bio::PDB::ChemicalComponet is a parser for a entry of the <a href="../PDB.html"><code>PDB</code></a> Chemical Component Dictionary.</p>
 
-<p>The <a href="../PDB.html">PDB</a> Chemical Component Dictionary is
-available in <a
-href="http://deposit.pdb.org/het_dictionary.txt">deposit.pdb.org/het_dictionary.txt</a></p>
+<p>The <a href="../PDB.html"><code>PDB</code></a> Chemical Component Dictionary is available in <a href="http://deposit.pdb.org/het_dictionary.txt">deposit.pdb.org/het_dictionary.txt</a></p>
 
   </section>
 
@@ -122,7 +123,7 @@ href="http://deposit.pdb.org/het_dictionary.txt">deposit.pdb.org/het_dictionary.
       
         <dt id="DELIMITER">DELIMITER
         
-        <dd><p>delimiter for reading via <a href="../FlatFile.html">Bio::FlatFile</a></p>
+        <dd><p>delimiter for reading via <a href="../FlatFile.html"><code>Bio::FlatFile</code></a></p>
         
       
       </dl>
@@ -191,38 +192,38 @@ href="http://deposit.pdb.org/het_dictionary.txt">deposit.pdb.org/het_dictionary.
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 124</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/[\r\n]+/</span>)
-  <span class="ruby-ivar">@hash</span> = {}
-
-  <span class="ruby-comment">#Flag to say whether the current line is part of a continuation</span>
-  <span class="ruby-identifier">cont</span> = <span class="ruby-keyword">false</span>
-  
-  <span class="ruby-comment">#Goes through each line and replace that line with a PDB::Record</span>
-  <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-comment">#Go to next if the previous line was contiunation able, and</span>
-    <span class="ruby-comment">#add_continuation returns true. Line is added by add_continuation</span>
-    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cont</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">cont</span> = <span class="ruby-identifier">cont</span>.<span class="ruby-identifier">add_continuation</span>(<span class="ruby-identifier">line</span>)
-
-    <span class="ruby-comment">#Make the new record</span>
-    <span class="ruby-identifier">f</span> = <span class="ruby-constant">Record</span>.<span class="ruby-identifier">get_record_class</span>(<span class="ruby-identifier">line</span>).<span class="ruby-identifier">new</span>.<span class="ruby-identifier">initialize_from_string</span>(<span class="ruby-identifier">line</span>)
-    <span class="ruby-comment">#p f</span>
-    <span class="ruby-comment">#Set cont</span>
-    <span class="ruby-identifier">cont</span> = <span class="ruby-identifier">f</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">continue?</span>
-    <span class="ruby-comment">#Set the hash to point to this record either by adding to an</span>
-    <span class="ruby-comment">#array, or on it&#39;s own</span>
-    <span class="ruby-identifier">key</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">record_name</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">key</span>] <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">f</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">key</span>] = [ <span class="ruby-identifier">f</span> ]
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">f</span>
-  <span class="ruby-keyword">end</span> <span class="ruby-comment">#each</span>
-  <span class="ruby-comment">#At the end we need to add the final model</span>
-  <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">compact!</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb</span>
+<span class="line-num">124</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">125</span>   <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/[\r\n]+/</span>)
+<span class="line-num">126</span>   <span class="ruby-ivar">@hash</span> = {}
+<span class="line-num">127</span> 
+<span class="line-num">128</span>   <span class="ruby-comment">#Flag to say whether the current line is part of a continuation</span>
+<span class="line-num">129</span>   <span class="ruby-identifier">cont</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">130</span>   
+<span class="line-num">131</span>   <span class="ruby-comment">#Goes through each line and replace that line with a PDB::Record</span>
+<span class="line-num">132</span>   <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">collect!</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">133</span>     <span class="ruby-comment">#Go to next if the previous line was contiunation able, and</span>
+<span class="line-num">134</span>     <span class="ruby-comment">#add_continuation returns true. Line is added by add_continuation</span>
+<span class="line-num">135</span>     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">cont</span> <span class="ruby-keyword">and</span> <span class="ruby-identifier">cont</span> = <span class="ruby-identifier">cont</span>.<span class="ruby-identifier">add_continuation</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">136</span> 
+<span class="line-num">137</span>     <span class="ruby-comment">#Make the new record</span>
+<span class="line-num">138</span>     <span class="ruby-identifier">f</span> = <span class="ruby-constant">Record</span>.<span class="ruby-identifier">get_record_class</span>(<span class="ruby-identifier">line</span>).<span class="ruby-identifier">new</span>.<span class="ruby-identifier">initialize_from_string</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">139</span>     <span class="ruby-comment">#p f</span>
+<span class="line-num">140</span>     <span class="ruby-comment">#Set cont</span>
+<span class="line-num">141</span>     <span class="ruby-identifier">cont</span> = <span class="ruby-identifier">f</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">continue?</span>
+<span class="line-num">142</span>     <span class="ruby-comment">#Set the hash to point to this record either by adding to an</span>
+<span class="line-num">143</span>     <span class="ruby-comment">#array, or on it&#39;s own</span>
+<span class="line-num">144</span>     <span class="ruby-identifier">key</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">record_name</span>
+<span class="line-num">145</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span> = <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">key</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">146</span>       <span class="ruby-identifier">a</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">f</span>
+<span class="line-num">147</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">148</span>       <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">key</span>] = [ <span class="ruby-identifier">f</span> ]
+<span class="line-num">149</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">150</span>     <span class="ruby-identifier">f</span>
+<span class="line-num">151</span>   <span class="ruby-keyword">end</span> <span class="ruby-comment">#each</span>
+<span class="line-num">152</span>   <span class="ruby-comment">#At the end we need to add the final model</span>
+<span class="line-num">153</span>   <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">compact!</span>
+<span class="line-num">154</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -254,29 +255,28 @@ href="http://deposit.pdb.org/het_dictionary.txt">deposit.pdb.org/het_dictionary.
 
         <div class="method-description">
           
-          <p>Returns an hash of bindings of atoms. Note that each white spaces are
-stripped for atom symbols.</p>
+          <p>Returns an hash of bindings of atoms. Note that each white spaces are stripped for atom symbols.</p>
           
           
 
           
           <div class="method-source-code" id="conect-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 193</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">conect</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@conect</span>
-    <span class="ruby-identifier">c</span> = {}
-    <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;CONECT&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">key</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
-      <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">empty?</span>
-        <span class="ruby-identifier">val</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">other_atoms</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">strip</span> }
-        <span class="ruby-comment">#warn &quot;Warning: #{key}: atom name conflict?&quot; if c[key]</span>
-        <span class="ruby-identifier">c</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@conect</span> = <span class="ruby-identifier">c</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@conect</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb</span>
+<span class="line-num">193</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">conect</span>
+<span class="line-num">194</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@conect</span>
+<span class="line-num">195</span>     <span class="ruby-identifier">c</span> = {}
+<span class="line-num">196</span>     <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;CONECT&quot;</span>].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+<span class="line-num">197</span>       <span class="ruby-identifier">key</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
+<span class="line-num">198</span>       <span class="ruby-keyword">unless</span> <span class="ruby-identifier">key</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">199</span>         <span class="ruby-identifier">val</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">other_atoms</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">strip</span> }
+<span class="line-num">200</span>         <span class="ruby-comment">#warn &quot;Warning: #{key}: atom name conflict?&quot; if c[key]</span>
+<span class="line-num">201</span>         <span class="ruby-identifier">c</span>[<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">val</span>
+<span class="line-num">202</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">203</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">204</span>     <span class="ruby-ivar">@conect</span> = <span class="ruby-identifier">c</span>
+<span class="line-num">205</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">206</span>   <span class="ruby-ivar">@conect</span>
+<span class="line-num">207</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -306,10 +306,10 @@ stripped for atom symbols.</p>
 
           
           <div class="method-source-code" id="entry_id-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 163</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
-  <span class="ruby-ivar">@data</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">hetID</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb</span>
+<span class="line-num">163</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">entry_id</span>
+<span class="line-num">164</span>   <span class="ruby-ivar">@data</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">hetID</span>
+<span class="line-num">165</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -333,17 +333,16 @@ stripped for atom symbols.</p>
 
         <div class="method-description">
           
-          <p>The chemical formula of the chemical component. Returns a string  (or nil,
-if the entry is something wrong).</p>
+          <p>The chemical formula of the chemical component. Returns a string  (or nil, if the entry is something wrong).</p>
           
           
 
           
           <div class="method-source-code" id="formul-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 187</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">formul</span>
-  <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;FORMUL&quot;</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">text</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb</span>
+<span class="line-num">187</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">formul</span>
+<span class="line-num">188</span>   <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;FORMUL&quot;</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">text</span>
+<span class="line-num">189</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -367,17 +366,16 @@ if the entry is something wrong).</p>
 
         <div class="method-description">
           
-          <p>The name of the chemical component. Returns a string (or nil, if the entry
-is something wrong).</p>
+          <p>The name of the chemical component. Returns a string (or nil, if the entry is something wrong).</p>
           
           
 
           
           <div class="method-source-code" id="hetnam-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 181</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hetnam</span>
-  <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;HETNAM&quot;</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">text</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb</span>
+<span class="line-num">181</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hetnam</span>
+<span class="line-num">182</span>   <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;HETNAM&quot;</span>][<span class="ruby-value">0</span>].<span class="ruby-identifier">text</span>
+<span class="line-num">183</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -407,17 +405,17 @@ is something wrong).</p>
 
           
           <div class="method-source-code" id="hetsyn-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 168</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hetsyn</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@hetsyn</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;HETSYN&quot;</span>]
-      <span class="ruby-ivar">@hetsyn</span> = <span class="ruby-identifier">r</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">hetSynonyms</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\;\s*/</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">return</span> []
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@hetsyn</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb</span>
+<span class="line-num">168</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hetsyn</span>
+<span class="line-num">169</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@hetsyn</span>
+<span class="line-num">170</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-ivar">@hash</span>[<span class="ruby-string">&quot;HETSYN&quot;</span>]
+<span class="line-num">171</span>       <span class="ruby-ivar">@hetsyn</span> = <span class="ruby-identifier">r</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">hetSynonyms</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\;\s*/</span>)
+<span class="line-num">172</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">173</span>       <span class="ruby-keyword">return</span> []
+<span class="line-num">174</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">175</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">176</span>   <span class="ruby-ivar">@hetsyn</span>
+<span class="line-num">177</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -441,8 +439,7 @@ is something wrong).</p>
 
         <div class="method-description">
           
-          <p>Gets all records whose record type is <em>name</em>. Returns an array of
-<code>Bio::PDB::Record::*</code> objects.</p>
+          <p>Gets all records whose record type is <em>name</em>. Returns an array of <code>Bio::PDB::Record::*</code> objects.</p>
 
 <p>if <em>name</em> is nil, returns hash storing all record data.</p>
 
@@ -452,10 +449,10 @@ is something wrong).</p>
 
           
           <div class="method-source-code" id="record-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb, line 218</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">record</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">:</span> <span class="ruby-ivar">@hash</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/pdb/chemicalcomponent.rb</span>
+<span class="line-num">218</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">record</span>(<span class="ruby-identifier">name</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">219</span>   <span class="ruby-identifier">name</span> <span class="ruby-operator">?</span> <span class="ruby-ivar">@hash</span>[<span class="ruby-identifier">name</span>] <span class="ruby-operator">:</span> <span class="ruby-ivar">@hash</span>
+<span class="line-num">220</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -469,12 +466,13 @@ is something wrong).</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

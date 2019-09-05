@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -119,16 +123,13 @@
 
   <section class="description">
     
-<p>bio/db/rebase.rb - Interface for <a href="EMBOSS.html">EMBOSS</a> formatted
-<a href="REBASE.html">REBASE</a> files</p>
+<p>bio/db/rebase.rb - Interface for <a href="EMBOSS.html"><code>EMBOSS</code></a> formatted <a href="REBASE.html"><code>REBASE</code></a> files</p>
 <dl class="rdoc-list note-list"><dt>Author
 <dd>
-<p>Trevor Wennblom  &lt;<a
-href="mailto:trevor@corevx.com">trevor@corevx.com</a>&gt;</p>
+<p>Trevor Wennblom  &lt;<a href="mailto:trevor@corevx.com">trevor@corevx.com</a>&gt;</p>
 </dd><dt>Copyright
 <dd>
-<p>Copyright © 2005-2007 Midwinter Laboratories, LLC (<a
-href="http://midwinterlabs.com">midwinterlabs.com</a>)</p>
+<p>Copyright © 2005-2007 Midwinter Laboratories, LLC (<a href="http://midwinterlabs.com">midwinterlabs.com</a>)</p>
 </dd><dt>License
 <dd>
 <p>The Ruby License</p>
@@ -136,18 +137,14 @@ href="http://midwinterlabs.com">midwinterlabs.com</a>)</p>
 
 <h1 id="class-Bio::REBASE-label-Description">Description<span><a href="#class-Bio::REBASE-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p><a href="REBASE.html">Bio::REBASE</a> provides utilties for interacting
-with <a href="REBASE.html">REBASE</a> data in <a
-href="EMBOSS.html">EMBOSS</a> format.  <a href="REBASE.html">REBASE</a> is
-the Restriction Enzyme Database, more information can be found here:</p>
+<p><a href="REBASE.html"><code>Bio::REBASE</code></a> provides utilties for interacting with <a href="REBASE.html"><code>REBASE</code></a> data in <a href="EMBOSS.html"><code>EMBOSS</code></a> format.  <a href="REBASE.html"><code>REBASE</code></a> is the Restriction Enzyme Database, more information can be found here:</p>
 <ul><li>
 <p><a href="http://rebase.neb.com">rebase.neb.com</a></p>
 </li></ul>
 
-<p><a href="EMBOSS.html">EMBOSS</a> formatted files located at:</p>
+<p><a href="EMBOSS.html"><code>EMBOSS</code></a> formatted files located at:</p>
 <ul><li>
-<p><a
-href="http://rebase.neb.com/rebase/rebase.f37.html">rebase.neb.com/rebase/rebase.f37.html</a></p>
+<p><a href="http://rebase.neb.com/rebase/rebase.f37.html">rebase.neb.com/rebase/rebase.f37.html</a></p>
 </li></ul>
 
 <p>These files are the same as the “emboss_?.???” files located at:</p>
@@ -155,8 +152,7 @@ href="http://rebase.neb.com/rebase/rebase.f37.html">rebase.neb.com/rebase/rebase
 <p><a href="ftp://ftp.neb.com/pub/rebase">ftp.neb.com/pub/rebase</a>/</p>
 </li></ul>
 
-<p>To easily get started with the data you can simply type this command at
-your shell prompt:</p>
+<p>To easily get started with the data you can simply type this command at your shell prompt:</p>
 
 <pre class="ruby"><span class="ruby-string">% wget </span><span class="ruby-string">&quot;ftp://ftp.neb.com/pub/rebase/emboss_*&quot;</span>
 </pre>
@@ -268,31 +264,28 @@ your shell prompt:</p>
 
 <p><strong>Arguments</strong></p>
 <ul><li>
-<p><code>f_enzyme</code>: (<em>required</em>) Filename to read YAML-formatted
-enzyme data</p>
+<p><code>f_enzyme</code>: (<em>required</em>) Filename to read YAML-formatted enzyme data</p>
 </li><li>
-<p><code>f_reference</code>: (<em>optional</em>) Filename to read
-YAML-formatted reference data</p>
+<p><code>f_reference</code>: (<em>optional</em>) Filename to read YAML-formatted reference data</p>
 </li><li>
-<p><code>f_supplier</code>: (<em>optional</em>) Filename to read
-YAML-formatted supplier data</p>
+<p><code>f_supplier</code>: (<em>optional</em>) Filename to read YAML-formatted supplier data</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="REBASE.html">Bio::REBASE</a> object</p>
+<p><a href="REBASE.html"><code>Bio::REBASE</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="load_yaml-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 258</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">load_yaml</span>( <span class="ruby-identifier">f_enzyme</span>, <span class="ruby-identifier">f_reference</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">f_supplier</span>=<span class="ruby-keyword">nil</span> )
-  <span class="ruby-identifier">e</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">f_enzyme</span>)
-  <span class="ruby-identifier">r</span> = <span class="ruby-identifier">f_reference</span> <span class="ruby-operator">?</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">f_reference</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">f_supplier</span> <span class="ruby-operator">?</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">f_supplier</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>,<span class="ruby-identifier">r</span>,<span class="ruby-identifier">s</span>,<span class="ruby-keyword">true</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">258</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">load_yaml</span>( <span class="ruby-identifier">f_enzyme</span>, <span class="ruby-identifier">f_reference</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">f_supplier</span>=<span class="ruby-keyword">nil</span> )
+<span class="line-num">259</span>   <span class="ruby-identifier">e</span> = <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">f_enzyme</span>)
+<span class="line-num">260</span>   <span class="ruby-identifier">r</span> = <span class="ruby-identifier">f_reference</span> <span class="ruby-operator">?</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">f_reference</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">261</span>   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">f_supplier</span> <span class="ruby-operator">?</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">load_file</span>(<span class="ruby-identifier">f_supplier</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">262</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>,<span class="ruby-identifier">r</span>,<span class="ruby-identifier">s</span>,<span class="ruby-keyword">true</span>)
+<span class="line-num">263</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -321,45 +314,40 @@ YAML-formatted supplier data</p>
 
 <p><strong>Arguments</strong></p>
 <ul><li>
-<p><code>enzyme_lines</code>: (<em>required</em>) contents of <a
-href="EMBOSS.html">EMBOSS</a> formatted enzymes file</p>
+<p><code>enzyme_lines</code>: (<em>required</em>) contents of <a href="EMBOSS.html"><code>EMBOSS</code></a> formatted enzymes file </p>
 </li><li>
-<p><code>reference_lines</code>: (<em>optional</em>) contents of <a
-href="EMBOSS.html">EMBOSS</a> formatted references file</p>
+<p><code>reference_lines</code>: (<em>optional</em>) contents of <a href="EMBOSS.html"><code>EMBOSS</code></a> formatted references file </p>
 </li><li>
-<p><code>supplier_lines</code>: (<em>optional</em>) contents of <a
-href="EMBOSS.html">EMBOSS</a> formatted suppliers files</p>
+<p><code>supplier_lines</code>: (<em>optional</em>) contents of <a href="EMBOSS.html"><code>EMBOSS</code></a> formatted suppliers files </p>
 </li><li>
-<p><code>yaml</code>: (<em>optional</em>, <em>default</em> <code>false</code>)
-enzyme_lines, reference_lines, and supplier_lines are read as YAML if set
-to true</p>
+<p><code>yaml</code>: (<em>optional</em>, <em>default</em> <code>false</code>) enzyme_lines, reference_lines, and supplier_lines are read as YAML if set to true </p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="REBASE.html">Bio::REBASE</a></p>
+<p><a href="REBASE.html"><code>Bio::REBASE</code></a></p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 174</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>( <span class="ruby-identifier">enzyme_lines</span>, <span class="ruby-identifier">reference_lines</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">supplier_lines</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">yaml</span> = <span class="ruby-keyword">false</span> )
-  <span class="ruby-comment"># All your REBASE are belong to us.</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">yaml</span>
-    <span class="ruby-ivar">@enzyme_data</span> = <span class="ruby-identifier">enzyme_lines</span>
-    <span class="ruby-ivar">@reference_data</span> = <span class="ruby-identifier">reference_lines</span>
-    <span class="ruby-ivar">@supplier_data</span> = <span class="ruby-identifier">supplier_lines</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@enzyme_data</span> = <span class="ruby-identifier">parse_enzymes</span>(<span class="ruby-identifier">enzyme_lines</span>)
-    <span class="ruby-ivar">@reference_data</span> = <span class="ruby-identifier">parse_references</span>(<span class="ruby-identifier">reference_lines</span>)
-    <span class="ruby-ivar">@supplier_data</span> = <span class="ruby-identifier">parse_suppliers</span>(<span class="ruby-identifier">supplier_lines</span>)
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-constant">EnzymeEntry</span>.<span class="ruby-identifier">supplier_data</span> = <span class="ruby-ivar">@supplier_data</span>
-  <span class="ruby-identifier">setup_enzyme_data</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">174</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>( <span class="ruby-identifier">enzyme_lines</span>, <span class="ruby-identifier">reference_lines</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">supplier_lines</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">yaml</span> = <span class="ruby-keyword">false</span> )
+<span class="line-num">175</span>   <span class="ruby-comment"># All your REBASE are belong to us.</span>
+<span class="line-num">176</span> 
+<span class="line-num">177</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">yaml</span>
+<span class="line-num">178</span>     <span class="ruby-ivar">@enzyme_data</span> = <span class="ruby-identifier">enzyme_lines</span>
+<span class="line-num">179</span>     <span class="ruby-ivar">@reference_data</span> = <span class="ruby-identifier">reference_lines</span>
+<span class="line-num">180</span>     <span class="ruby-ivar">@supplier_data</span> = <span class="ruby-identifier">supplier_lines</span>
+<span class="line-num">181</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">182</span>     <span class="ruby-ivar">@enzyme_data</span> = <span class="ruby-identifier">parse_enzymes</span>(<span class="ruby-identifier">enzyme_lines</span>)
+<span class="line-num">183</span>     <span class="ruby-ivar">@reference_data</span> = <span class="ruby-identifier">parse_references</span>(<span class="ruby-identifier">reference_lines</span>)
+<span class="line-num">184</span>     <span class="ruby-ivar">@supplier_data</span> = <span class="ruby-identifier">parse_suppliers</span>(<span class="ruby-identifier">supplier_lines</span>)
+<span class="line-num">185</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">186</span> 
+<span class="line-num">187</span>   <span class="ruby-constant">EnzymeEntry</span>.<span class="ruby-identifier">supplier_data</span> = <span class="ruby-ivar">@supplier_data</span>
+<span class="line-num">188</span>   <span class="ruby-identifier">setup_enzyme_data</span>
+<span class="line-num">189</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -383,7 +371,7 @@ to true</p>
 
         <div class="method-description">
           
-          <p>Read <a href="REBASE.html">REBASE</a> EMBOSS-formatted files</p>
+          <p>Read <a href="REBASE.html"><code>REBASE</code></a> EMBOSS-formatted files</p>
 
 <pre class="ruby"><span class="ruby-identifier">rebase</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">REBASE</span>.<span class="ruby-identifier">read</span>( <span class="ruby-string">&#39;emboss_e&#39;</span> )
 <span class="ruby-identifier">rebase</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">REBASE</span>.<span class="ruby-identifier">read</span>( <span class="ruby-string">&#39;emboss_e&#39;</span>, <span class="ruby-string">&#39;emboss_r&#39;</span> )
@@ -395,27 +383,26 @@ to true</p>
 <ul><li>
 <p><code>f_enzyme</code>: (<em>required</em>) Filename to read enzyme data</p>
 </li><li>
-<p><code>f_reference</code>: (<em>optional</em>) Filename to read reference
-data</p>
+<p><code>f_reference</code>: (<em>optional</em>) Filename to read reference data</p>
 </li><li>
 <p><code>f_supplier</code>: (<em>optional</em>) Filename to read supplier data</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="REBASE.html">Bio::REBASE</a> object</p>
+<p><a href="REBASE.html"><code>Bio::REBASE</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="read-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 240</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">read</span>( <span class="ruby-identifier">f_enzyme</span>, <span class="ruby-identifier">f_reference</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">f_supplier</span>=<span class="ruby-keyword">nil</span> )
-  <span class="ruby-identifier">e</span> = <span class="ruby-constant">IO</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-identifier">f_enzyme</span>)
-  <span class="ruby-identifier">r</span> = <span class="ruby-identifier">f_reference</span> <span class="ruby-operator">?</span> <span class="ruby-constant">IO</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-identifier">f_reference</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">s</span> = <span class="ruby-identifier">f_supplier</span> <span class="ruby-operator">?</span> <span class="ruby-constant">IO</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-identifier">f_supplier</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>,<span class="ruby-identifier">r</span>,<span class="ruby-identifier">s</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">240</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">read</span>( <span class="ruby-identifier">f_enzyme</span>, <span class="ruby-identifier">f_reference</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">f_supplier</span>=<span class="ruby-keyword">nil</span> )
+<span class="line-num">241</span>   <span class="ruby-identifier">e</span> = <span class="ruby-constant">IO</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-identifier">f_enzyme</span>)
+<span class="line-num">242</span>   <span class="ruby-identifier">r</span> = <span class="ruby-identifier">f_reference</span> <span class="ruby-operator">?</span> <span class="ruby-constant">IO</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-identifier">f_reference</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">243</span>   <span class="ruby-identifier">s</span> = <span class="ruby-identifier">f_supplier</span> <span class="ruby-operator">?</span> <span class="ruby-constant">IO</span>.<span class="ruby-identifier">readlines</span>(<span class="ruby-identifier">f_supplier</span>) <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">244</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">e</span>,<span class="ruby-identifier">r</span>,<span class="ruby-identifier">s</span>)
+<span class="line-num">245</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -447,8 +434,7 @@ data</p>
 
         <div class="method-description">
           
-          <p>Calls <em>block</em> once for each element in <code>@data</code> hash,
-passing that element as a parameter.</p>
+          <p>Calls <em>block</em> once for each element in <code>@data</code> hash, passing that element as a parameter.</p>
 <hr>
 
 <p><strong>Arguments</strong></p>
@@ -464,10 +450,10 @@ passing that element as a parameter.</p>
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 150</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
-  <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">item</span> }
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">150</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>
+<span class="line-num">151</span>   <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">item</span><span class="ruby-operator">|</span> <span class="ruby-keyword">yield</span> <span class="ruby-identifier">item</span> }
+<span class="line-num">152</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -507,10 +493,10 @@ passing that element as a parameter.</p>
 
           
           <div class="method-source-code" id="enzyme_name-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 207</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enzyme_name?</span>(<span class="ruby-identifier">name</span>)
-  <span class="ruby-ivar">@enzyme_names_downcased</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">downcase</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">207</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enzyme_name?</span>(<span class="ruby-identifier">name</span>)
+<span class="line-num">208</span>   <span class="ruby-ivar">@enzyme_names_downcased</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">name</span>.<span class="ruby-identifier">downcase</span>)
+<span class="line-num">209</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -550,10 +536,10 @@ passing that element as a parameter.</p>
 
           
           <div class="method-source-code" id="enzymes-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 197</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enzymes</span>
-  <span class="ruby-ivar">@enzyme_names</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">197</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">enzymes</span>
+<span class="line-num">198</span>   <span class="ruby-ivar">@enzyme_names</span>
+<span class="line-num">199</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -587,14 +573,11 @@ passing that element as a parameter.</p>
 
 <p><strong>Arguments</strong></p>
 <ul><li>
-<p><code>f_enzyme</code>: (<em>required</em>) Filename to save YAML formatted
-output of enzyme data</p>
+<p><code>f_enzyme</code>: (<em>required</em>) Filename to save YAML formatted output of enzyme data</p>
 </li><li>
-<p><code>f_reference</code>: (<em>optional</em>) Filename to save YAML
-formatted output of reference data</p>
+<p><code>f_reference</code>: (<em>optional</em>) Filename to save YAML formatted output of reference data</p>
 </li><li>
-<p><code>f_supplier</code>: (<em>optional</em>) Filename to save YAML
-formatted output of supplier data</p>
+<p><code>f_supplier</code>: (<em>optional</em>) Filename to save YAML formatted output of supplier data</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -605,13 +588,13 @@ formatted output of supplier data</p>
 
           
           <div class="method-source-code" id="save_yaml-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 222</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save_yaml</span>( <span class="ruby-identifier">f_enzyme</span>, <span class="ruby-identifier">f_reference</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">f_supplier</span>=<span class="ruby-keyword">nil</span> )
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">f_enzyme</span>, <span class="ruby-string">&#39;w&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@enzyme_data</span>) }
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">f_reference</span>, <span class="ruby-string">&#39;w&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@reference_data</span>) } <span class="ruby-keyword">if</span> <span class="ruby-identifier">f_reference</span>
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">f_supplier</span>, <span class="ruby-string">&#39;w&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@supplier_data</span>) } <span class="ruby-keyword">if</span> <span class="ruby-identifier">f_supplier</span>
-  <span class="ruby-keyword">return</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">222</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">save_yaml</span>( <span class="ruby-identifier">f_enzyme</span>, <span class="ruby-identifier">f_reference</span>=<span class="ruby-keyword">nil</span>, <span class="ruby-identifier">f_supplier</span>=<span class="ruby-keyword">nil</span> )
+<span class="line-num">223</span>   <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">f_enzyme</span>, <span class="ruby-string">&#39;w&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@enzyme_data</span>) }
+<span class="line-num">224</span>   <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">f_reference</span>, <span class="ruby-string">&#39;w&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@reference_data</span>) } <span class="ruby-keyword">if</span> <span class="ruby-identifier">f_reference</span>
+<span class="line-num">225</span>   <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">f_supplier</span>, <span class="ruby-string">&#39;w&#39;</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">puts</span> <span class="ruby-constant">YAML</span>.<span class="ruby-identifier">dump</span>(<span class="ruby-ivar">@supplier_data</span>) } <span class="ruby-keyword">if</span> <span class="ruby-identifier">f_supplier</span>
+<span class="line-num">226</span>   <span class="ruby-keyword">return</span>
+<span class="line-num">227</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -645,40 +628,37 @@ formatted output of supplier data</p>
           
           <p>data is a hash indexed by the :name of each entry which is also a hash</p>
 <ul><li>
-<p><a href="enzyme_name">data</a> has the following keys: :name, :pattern,
-:len, :ncuts, :blunt, :c1, :c2, :c3, :c4 :c1 =&gt; First 5&#39; cut :c2
-=&gt; First 3&#39; cut :c3 =&gt; Second 5&#39; cut :c4 =&gt; Seocnd 3&#39;
-cut</p>
+<p><a href="enzyme_name">data</a> has the following keys: :name, :pattern, :len, :ncuts, :blunt, :c1, :c2, :c3, :c4 :c1 =&gt; First 5&#39; cut :c2 =&gt; First 3&#39; cut :c3 =&gt; Second 5&#39; cut :c4 =&gt; Seocnd 3&#39; cut</p>
 </li></ul>
           
           
 
           
           <div class="method-source-code" id="parse_enzymes-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 314</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_enzymes</span>( <span class="ruby-identifier">lines</span> )
-  <span class="ruby-identifier">data</span> = {}
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lines</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;#&#39;</span>
-    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp!</span>
-    
-    <span class="ruby-identifier">a</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\s&quot;</span>)
-    
-    <span class="ruby-identifier">data</span>[ <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] ] = {
-      <span class="ruby-value">:name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>],
-      <span class="ruby-value">:pattern</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>],
-      <span class="ruby-value">:len</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">2</span>],
-      <span class="ruby-value">:ncuts</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">3</span>],
-      <span class="ruby-value">:blunt</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">4</span>],
-      <span class="ruby-value">:c1</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">5</span>],
-      <span class="ruby-value">:c2</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">6</span>],
-      <span class="ruby-value">:c3</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">7</span>],
-      <span class="ruby-value">:c4</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">8</span>]
-    }
-  <span class="ruby-keyword">end</span>  <span class="ruby-comment"># lines.each</span>
-  <span class="ruby-identifier">data</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">314</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_enzymes</span>( <span class="ruby-identifier">lines</span> )
+<span class="line-num">315</span>   <span class="ruby-identifier">data</span> = {}
+<span class="line-num">316</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lines</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">317</span>   <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">318</span>     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;#&#39;</span>
+<span class="line-num">319</span>     <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp!</span>
+<span class="line-num">320</span>     
+<span class="line-num">321</span>     <span class="ruby-identifier">a</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\s&quot;</span>)
+<span class="line-num">322</span>     
+<span class="line-num">323</span>     <span class="ruby-identifier">data</span>[ <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>] ] = {
+<span class="line-num">324</span>       <span class="ruby-value">:name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">0</span>],
+<span class="line-num">325</span>       <span class="ruby-value">:pattern</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">1</span>],
+<span class="line-num">326</span>       <span class="ruby-value">:len</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">2</span>],
+<span class="line-num">327</span>       <span class="ruby-value">:ncuts</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">3</span>],
+<span class="line-num">328</span>       <span class="ruby-value">:blunt</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">4</span>],
+<span class="line-num">329</span>       <span class="ruby-value">:c1</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">5</span>],
+<span class="line-num">330</span>       <span class="ruby-value">:c2</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">6</span>],
+<span class="line-num">331</span>       <span class="ruby-value">:c3</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">7</span>],
+<span class="line-num">332</span>       <span class="ruby-value">:c4</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">8</span>]
+<span class="line-num">333</span>     }
+<span class="line-num">334</span>   <span class="ruby-keyword">end</span>  <span class="ruby-comment"># lines.each</span>
+<span class="line-num">335</span>   <span class="ruby-identifier">data</span>
+<span class="line-num">336</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -704,58 +684,56 @@ cut</p>
           
           <p>data is a hash indexed by the :name of each entry which is also a hash</p>
 <ul><li>
-<p><a href="enzyme_name">data</a> has the following keys: :organism,
-:isoschizomers, :references, :source, :methylation, :suppliers, :name,
-:number_of_references</p>
+<p><a href="enzyme_name">data</a> has the following keys: :organism, :isoschizomers, :references, :source, :methylation, :suppliers, :name, :number_of_references</p>
 </li></ul>
           
           
 
           
           <div class="method-source-code" id="parse_references-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 341</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_references</span>( <span class="ruby-identifier">lines</span> )
-  <span class="ruby-identifier">data</span> = {}
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lines</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">index</span> = <span class="ruby-value">1</span>
-  <span class="ruby-identifier">h</span> = {}
-  <span class="ruby-identifier">references_left</span> = <span class="ruby-value">0</span>
-
-  <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;#&#39;</span>  <span class="ruby-comment"># Comment</span>
-    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;//&#39;</span>  <span class="ruby-comment"># End of entry marker</span>
-    <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp!</span>
-
-    <span class="ruby-keyword">if</span> (<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">7</span>).<span class="ruby-identifier">include?</span>( <span class="ruby-identifier">index</span> )
-      <span class="ruby-identifier">h</span>[<span class="ruby-identifier">index</span>] = <span class="ruby-identifier">line</span>
-      <span class="ruby-identifier">references_left</span> = <span class="ruby-identifier">h</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">==</span> <span class="ruby-value">7</span>
-      <span class="ruby-identifier">index</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-      <span class="ruby-keyword">next</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">==</span> <span class="ruby-value">8</span>
-      <span class="ruby-identifier">h</span>[<span class="ruby-identifier">index</span>] <span class="ruby-operator">||=</span> []
-      <span class="ruby-identifier">h</span>[<span class="ruby-identifier">index</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-identifier">references_left</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">references_left</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-      <span class="ruby-identifier">data</span>[ <span class="ruby-identifier">h</span>[<span class="ruby-value">1</span>] ] = {
-        <span class="ruby-value">:name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">1</span>],
-        <span class="ruby-value">:organism</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">2</span>],
-        <span class="ruby-value">:isoschizomers</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">3</span>],
-        <span class="ruby-value">:methylation</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">4</span>],
-        <span class="ruby-value">:source</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">5</span>],
-        <span class="ruby-value">:suppliers</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">6</span>],
-        <span class="ruby-value">:number_of_references</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">7</span>],
-        <span class="ruby-value">:references</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">8</span>]
-      }
-      <span class="ruby-identifier">index</span> = <span class="ruby-value">1</span>
-      <span class="ruby-identifier">h</span> = {}
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>  <span class="ruby-comment"># lines.each</span>
-  <span class="ruby-identifier">data</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">341</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_references</span>( <span class="ruby-identifier">lines</span> )
+<span class="line-num">342</span>   <span class="ruby-identifier">data</span> = {}
+<span class="line-num">343</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lines</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">344</span>   <span class="ruby-identifier">index</span> = <span class="ruby-value">1</span>
+<span class="line-num">345</span>   <span class="ruby-identifier">h</span> = {}
+<span class="line-num">346</span>   <span class="ruby-identifier">references_left</span> = <span class="ruby-value">0</span>
+<span class="line-num">347</span> 
+<span class="line-num">348</span>   <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">349</span>     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;#&#39;</span>  <span class="ruby-comment"># Comment</span>
+<span class="line-num">350</span>     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;//&#39;</span>  <span class="ruby-comment"># End of entry marker</span>
+<span class="line-num">351</span>     <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp!</span>
+<span class="line-num">352</span> 
+<span class="line-num">353</span>     <span class="ruby-keyword">if</span> (<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">7</span>).<span class="ruby-identifier">include?</span>( <span class="ruby-identifier">index</span> )
+<span class="line-num">354</span>       <span class="ruby-identifier">h</span>[<span class="ruby-identifier">index</span>] = <span class="ruby-identifier">line</span>
+<span class="line-num">355</span>       <span class="ruby-identifier">references_left</span> = <span class="ruby-identifier">h</span>[<span class="ruby-identifier">index</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">==</span> <span class="ruby-value">7</span>
+<span class="line-num">356</span>       <span class="ruby-identifier">index</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+<span class="line-num">357</span>       <span class="ruby-keyword">next</span>
+<span class="line-num">358</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">359</span> 
+<span class="line-num">360</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span> <span class="ruby-operator">==</span> <span class="ruby-value">8</span>
+<span class="line-num">361</span>       <span class="ruby-identifier">h</span>[<span class="ruby-identifier">index</span>] <span class="ruby-operator">||=</span> []
+<span class="line-num">362</span>       <span class="ruby-identifier">h</span>[<span class="ruby-identifier">index</span>] <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
+<span class="line-num">363</span>       <span class="ruby-identifier">references_left</span> <span class="ruby-operator">-=</span> <span class="ruby-value">1</span>
+<span class="line-num">364</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">365</span> 
+<span class="line-num">366</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">references_left</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+<span class="line-num">367</span>       <span class="ruby-identifier">data</span>[ <span class="ruby-identifier">h</span>[<span class="ruby-value">1</span>] ] = {
+<span class="line-num">368</span>         <span class="ruby-value">:name</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">1</span>],
+<span class="line-num">369</span>         <span class="ruby-value">:organism</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">2</span>],
+<span class="line-num">370</span>         <span class="ruby-value">:isoschizomers</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">3</span>],
+<span class="line-num">371</span>         <span class="ruby-value">:methylation</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">4</span>],
+<span class="line-num">372</span>         <span class="ruby-value">:source</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">5</span>],
+<span class="line-num">373</span>         <span class="ruby-value">:suppliers</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">6</span>],
+<span class="line-num">374</span>         <span class="ruby-value">:number_of_references</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">7</span>],
+<span class="line-num">375</span>         <span class="ruby-value">:references</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">h</span>[<span class="ruby-value">8</span>]
+<span class="line-num">376</span>       }
+<span class="line-num">377</span>       <span class="ruby-identifier">index</span> = <span class="ruby-value">1</span>
+<span class="line-num">378</span>       <span class="ruby-identifier">h</span> = {}
+<span class="line-num">379</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">380</span>   <span class="ruby-keyword">end</span>  <span class="ruby-comment"># lines.each</span>
+<span class="line-num">381</span>   <span class="ruby-identifier">data</span>
+<span class="line-num">382</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -789,16 +767,16 @@ cut</p>
 
           
           <div class="method-source-code" id="parse_suppliers-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 387</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_suppliers</span>( <span class="ruby-identifier">lines</span> )
-  <span class="ruby-identifier">data</span> = {}
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lines</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;#&#39;</span>
-    <span class="ruby-identifier">data</span>[<span class="ruby-node">$1</span>] = <span class="ruby-node">$2</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{(.+?)\s(.+)}</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">data</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">387</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">parse_suppliers</span>( <span class="ruby-identifier">lines</span> )
+<span class="line-num">388</span>   <span class="ruby-identifier">data</span> = {}
+<span class="line-num">389</span>   <span class="ruby-keyword">return</span> <span class="ruby-identifier">data</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">lines</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">390</span>   <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">391</span>     <span class="ruby-keyword">next</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">chr</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;#&#39;</span>
+<span class="line-num">392</span>     <span class="ruby-identifier">data</span>[<span class="ruby-node">$1</span>] = <span class="ruby-node">$2</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">line</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{(.+?)\s(.+)}</span>
+<span class="line-num">393</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">394</span>   <span class="ruby-identifier">data</span>
+<span class="line-num">395</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -822,72 +800,66 @@ cut</p>
 
         <div class="method-description">
           
-          <p>Takes a string in one of the three formats listed below and returns a <a
-href="Reference.html">Bio::Reference</a> object</p>
+          <p>Takes a string in one of the three formats listed below and returns a <a href="Reference.html"><code>Bio::Reference</code></a> object</p>
 <ul><li>
-<p>Possible input styles: a = &#39;Inagaki, K., Hikita, T., Yanagidani, S.,
-Nomura, Y., Kishimoto, N., Tano, T., Tanaka, H., (1993) Biosci. Biotechnol.
-Biochem., vol. 57, pp. 1716-1721.&#39; b = &#39;Nekrasiene, D.,
-Lapcinskaja, S., Kiuduliene, L., Vitkute, J., Janulaitis, A., Unpublished
-observations.&#39; c = “Grigaite, R., Maneliene, Z., Janulaitis, A., (2002)
-Nucleic Acids Res., vol. 30.”</p>
+<p>Possible input styles: a = &#39;Inagaki, K., Hikita, T., Yanagidani, S., Nomura, Y., Kishimoto, N., Tano, T., Tanaka, H., (1993) Biosci. Biotechnol. Biochem., vol. 57, pp. 1716-1721.&#39; b = &#39;Nekrasiene, D., Lapcinskaja, S., Kiuduliene, L., Vitkute, J., Janulaitis, A., Unpublished observations.&#39; c = “Grigaite, R., Maneliene, Z., Janulaitis, A., (2002) Nucleic Acids Res., vol. 30.”</p>
 </li></ul>
           
           
 
           
           <div class="method-source-code" id="raw_to_reference-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 403</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">raw_to_reference</span>( <span class="ruby-identifier">line</span> )
-  <span class="ruby-identifier">a</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;, &#39;</span>)
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Unpublished observations.&#39;</span>
-    <span class="ruby-identifier">title</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">pop</span>.<span class="ruby-identifier">chop</span>
-    <span class="ruby-identifier">pages</span> = <span class="ruby-identifier">volume</span> = <span class="ruby-identifier">year</span> = <span class="ruby-identifier">journal</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">title</span> = <span class="ruby-string">&#39;&#39;</span>
-
-    <span class="ruby-identifier">pages_or_volume</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">pop</span>.<span class="ruby-identifier">chop</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">pages_or_volume</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{pp\.\s}</span>
-      <span class="ruby-identifier">pages</span> = <span class="ruby-identifier">pages_or_volume</span>
-      <span class="ruby-identifier">pages</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&#39;pp. &#39;</span>, <span class="ruby-string">&#39;&#39;</span>)
-      <span class="ruby-identifier">volume</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">pop</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">pages</span> = <span class="ruby-string">&#39;&#39;</span>
-      <span class="ruby-identifier">volume</span> = <span class="ruby-identifier">pages_or_volume</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-identifier">volume</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&#39;vol. &#39;</span>, <span class="ruby-string">&#39;&#39;</span>)
-
-    <span class="ruby-identifier">year_and_journal</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">pop</span>
-    <span class="ruby-identifier">year_and_journal</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{\((\d+)\)\s(.+)}</span>
-    <span class="ruby-identifier">year</span> = <span class="ruby-node">$1</span>
-    <span class="ruby-identifier">journal</span> = <span class="ruby-node">$2</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">authors</span> = []
-
-  <span class="ruby-identifier">last_name</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">last_name</span>
-      <span class="ruby-identifier">authors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{last_name}, #{e}&quot;</span>
-      <span class="ruby-identifier">last_name</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">last_name</span> = <span class="ruby-identifier">e</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">ref</span> = {
-    <span class="ruby-string">&#39;title&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">title</span>,
-    <span class="ruby-string">&#39;pages&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">pages</span>,
-    <span class="ruby-string">&#39;volume&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">volume</span>,
-    <span class="ruby-string">&#39;year&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">year</span>,
-    <span class="ruby-string">&#39;journal&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">journal</span>,
-    <span class="ruby-string">&#39;authors&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">authors</span>,
-  }
-
-  <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Reference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ref</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">403</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">raw_to_reference</span>( <span class="ruby-identifier">line</span> )
+<span class="line-num">404</span>   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;, &#39;</span>)
+<span class="line-num">405</span> 
+<span class="line-num">406</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">a</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&#39;Unpublished observations.&#39;</span>
+<span class="line-num">407</span>     <span class="ruby-identifier">title</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">pop</span>.<span class="ruby-identifier">chop</span>
+<span class="line-num">408</span>     <span class="ruby-identifier">pages</span> = <span class="ruby-identifier">volume</span> = <span class="ruby-identifier">year</span> = <span class="ruby-identifier">journal</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">409</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">410</span>     <span class="ruby-identifier">title</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">411</span> 
+<span class="line-num">412</span>     <span class="ruby-identifier">pages_or_volume</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">pop</span>.<span class="ruby-identifier">chop</span>
+<span class="line-num">413</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">pages_or_volume</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{pp\.\s}</span>
+<span class="line-num">414</span>       <span class="ruby-identifier">pages</span> = <span class="ruby-identifier">pages_or_volume</span>
+<span class="line-num">415</span>       <span class="ruby-identifier">pages</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&#39;pp. &#39;</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">416</span>       <span class="ruby-identifier">volume</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">pop</span>
+<span class="line-num">417</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">418</span>       <span class="ruby-identifier">pages</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">419</span>       <span class="ruby-identifier">volume</span> = <span class="ruby-identifier">pages_or_volume</span>
+<span class="line-num">420</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">421</span> 
+<span class="line-num">422</span>     <span class="ruby-identifier">volume</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-string">&#39;vol. &#39;</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">423</span> 
+<span class="line-num">424</span>     <span class="ruby-identifier">year_and_journal</span> = <span class="ruby-identifier">a</span>.<span class="ruby-identifier">pop</span>
+<span class="line-num">425</span>     <span class="ruby-identifier">year_and_journal</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">%r{\((\d+)\)\s(.+)}</span>
+<span class="line-num">426</span>     <span class="ruby-identifier">year</span> = <span class="ruby-node">$1</span>
+<span class="line-num">427</span>     <span class="ruby-identifier">journal</span> = <span class="ruby-node">$2</span>
+<span class="line-num">428</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">429</span> 
+<span class="line-num">430</span>   <span class="ruby-identifier">authors</span> = []
+<span class="line-num">431</span> 
+<span class="line-num">432</span>   <span class="ruby-identifier">last_name</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">433</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+<span class="line-num">434</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">last_name</span>
+<span class="line-num">435</span>       <span class="ruby-identifier">authors</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{last_name}, #{e}&quot;</span>
+<span class="line-num">436</span>       <span class="ruby-identifier">last_name</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">437</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">438</span>       <span class="ruby-identifier">last_name</span> = <span class="ruby-identifier">e</span>
+<span class="line-num">439</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">440</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">441</span> 
+<span class="line-num">442</span>   <span class="ruby-identifier">ref</span> = {
+<span class="line-num">443</span>     <span class="ruby-string">&#39;title&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">title</span>,
+<span class="line-num">444</span>     <span class="ruby-string">&#39;pages&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">pages</span>,
+<span class="line-num">445</span>     <span class="ruby-string">&#39;volume&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">volume</span>,
+<span class="line-num">446</span>     <span class="ruby-string">&#39;year&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">year</span>,
+<span class="line-num">447</span>     <span class="ruby-string">&#39;journal&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">journal</span>,
+<span class="line-num">448</span>     <span class="ruby-string">&#39;authors&#39;</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">authors</span>,
+<span class="line-num">449</span>   }
+<span class="line-num">450</span> 
+<span class="line-num">451</span>   <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Reference</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">ref</span>)
+<span class="line-num">452</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -917,18 +889,18 @@ Nucleic Acids Res., vol. 30.”</p>
 
           
           <div class="method-source-code" id="setup_enzyme_and_reference_association-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 295</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setup_enzyme_and_reference_association</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@reference_data</span>
-  <span class="ruby-ivar">@reference_data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">hash</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">name</span>]
-    [<span class="ruby-value">:organism</span>, <span class="ruby-value">:isoschizomers</span>, 
-    <span class="ruby-value">:methylation</span>, <span class="ruby-value">:source</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">d</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] }
-    <span class="ruby-identifier">d</span>.<span class="ruby-identifier">suppliers</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:suppliers</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;&#39;</span>)
-    <span class="ruby-identifier">d</span>.<span class="ruby-identifier">references</span> = []
-    <span class="ruby-identifier">hash</span>[<span class="ruby-value">:references</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">references</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">raw_to_reference</span>(<span class="ruby-identifier">k</span>) }
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">295</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setup_enzyme_and_reference_association</span>
+<span class="line-num">296</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@reference_data</span>
+<span class="line-num">297</span>   <span class="ruby-ivar">@reference_data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">hash</span><span class="ruby-operator">|</span>
+<span class="line-num">298</span>     <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">name</span>]
+<span class="line-num">299</span>     [<span class="ruby-value">:organism</span>, <span class="ruby-value">:isoschizomers</span>, 
+<span class="line-num">300</span>     <span class="ruby-value">:methylation</span>, <span class="ruby-value">:source</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">d</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">k</span>] }
+<span class="line-num">301</span>     <span class="ruby-identifier">d</span>.<span class="ruby-identifier">suppliers</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:suppliers</span>].<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">302</span>     <span class="ruby-identifier">d</span>.<span class="ruby-identifier">references</span> = []
+<span class="line-num">303</span>     <span class="ruby-identifier">hash</span>[<span class="ruby-value">:references</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">d</span>.<span class="ruby-identifier">references</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">raw_to_reference</span>(<span class="ruby-identifier">k</span>) }
+<span class="line-num">304</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">305</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -958,32 +930,32 @@ Nucleic Acids Res., vol. 30.”</p>
 
           
           <div class="method-source-code" id="setup_enzyme_data-source">
-            <pre><span class="ruby-comment"># File lib/bio/db/rebase.rb, line 269</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setup_enzyme_data</span>
-  <span class="ruby-ivar">@data</span> = {}
-  
-  <span class="ruby-ivar">@enzyme_data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">hash</span><span class="ruby-operator">|</span>
-    <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-constant">EnzymeEntry</span>.<span class="ruby-identifier">new</span>
-    <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">name</span>]
-    <span class="ruby-identifier">d</span>.<span class="ruby-identifier">pattern</span>                   = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:pattern</span>]
-    <span class="ruby-comment"># d.blunt?= is a syntax error</span>
-    <span class="ruby-identifier">d</span>[<span class="ruby-value">:blunt?</span>] = (<span class="ruby-identifier">hash</span>[<span class="ruby-value">:blunt</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
-    <span class="ruby-identifier">d</span>.<span class="ruby-identifier">primary_strand_cut1</span>       = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:c1</span>].<span class="ruby-identifier">to_i</span>
-    <span class="ruby-identifier">d</span>.<span class="ruby-identifier">complementary_strand_cut1</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:c2</span>].<span class="ruby-identifier">to_i</span>
-    <span class="ruby-identifier">d</span>.<span class="ruby-identifier">primary_strand_cut2</span>       = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:c3</span>].<span class="ruby-identifier">to_i</span>
-    <span class="ruby-identifier">d</span>.<span class="ruby-identifier">complementary_strand_cut2</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:c4</span>].<span class="ruby-identifier">to_i</span>
-
-    <span class="ruby-comment"># Set up keys just in case there&#39;s no reference data supplied</span>
-    [<span class="ruby-value">:organism</span>, <span class="ruby-value">:isoschizomers</span>, 
-    <span class="ruby-value">:methylation</span>, <span class="ruby-value">:source</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">d</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-string">&#39;&#39;</span> }
-    <span class="ruby-identifier">d</span>.<span class="ruby-identifier">suppliers</span> = []
-    <span class="ruby-identifier">d</span>.<span class="ruby-identifier">references</span> = []
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-ivar">@enzyme_names</span> = <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>
-  <span class="ruby-ivar">@enzyme_names_downcased</span> = <span class="ruby-ivar">@enzyme_names</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">downcase</span>}
-  <span class="ruby-identifier">setup_enzyme_and_reference_association</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/db/rebase.rb</span>
+<span class="line-num">269</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">setup_enzyme_data</span>
+<span class="line-num">270</span>   <span class="ruby-ivar">@data</span> = {}
+<span class="line-num">271</span>   
+<span class="line-num">272</span>   <span class="ruby-ivar">@enzyme_data</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">name</span>, <span class="ruby-identifier">hash</span><span class="ruby-operator">|</span>
+<span class="line-num">273</span>     <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">name</span>] = <span class="ruby-constant">EnzymeEntry</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">274</span>     <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@data</span>[<span class="ruby-identifier">name</span>]
+<span class="line-num">275</span>     <span class="ruby-identifier">d</span>.<span class="ruby-identifier">pattern</span>                   = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:pattern</span>]
+<span class="line-num">276</span>     <span class="ruby-comment"># d.blunt?= is a syntax error</span>
+<span class="line-num">277</span>     <span class="ruby-identifier">d</span>[<span class="ruby-value">:blunt?</span>] = (<span class="ruby-identifier">hash</span>[<span class="ruby-value">:blunt</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">==</span> <span class="ruby-value">1</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">true</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>)
+<span class="line-num">278</span>     <span class="ruby-identifier">d</span>.<span class="ruby-identifier">primary_strand_cut1</span>       = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:c1</span>].<span class="ruby-identifier">to_i</span>
+<span class="line-num">279</span>     <span class="ruby-identifier">d</span>.<span class="ruby-identifier">complementary_strand_cut1</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:c2</span>].<span class="ruby-identifier">to_i</span>
+<span class="line-num">280</span>     <span class="ruby-identifier">d</span>.<span class="ruby-identifier">primary_strand_cut2</span>       = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:c3</span>].<span class="ruby-identifier">to_i</span>
+<span class="line-num">281</span>     <span class="ruby-identifier">d</span>.<span class="ruby-identifier">complementary_strand_cut2</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:c4</span>].<span class="ruby-identifier">to_i</span>
+<span class="line-num">282</span> 
+<span class="line-num">283</span>     <span class="ruby-comment"># Set up keys just in case there&#39;s no reference data supplied</span>
+<span class="line-num">284</span>     [<span class="ruby-value">:organism</span>, <span class="ruby-value">:isoschizomers</span>, 
+<span class="line-num">285</span>     <span class="ruby-value">:methylation</span>, <span class="ruby-value">:source</span>].<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">k</span><span class="ruby-operator">|</span> <span class="ruby-identifier">d</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-string">&#39;&#39;</span> }
+<span class="line-num">286</span>     <span class="ruby-identifier">d</span>.<span class="ruby-identifier">suppliers</span> = []
+<span class="line-num">287</span>     <span class="ruby-identifier">d</span>.<span class="ruby-identifier">references</span> = []
+<span class="line-num">288</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">289</span> 
+<span class="line-num">290</span>   <span class="ruby-ivar">@enzyme_names</span> = <span class="ruby-ivar">@data</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span>
+<span class="line-num">291</span>   <span class="ruby-ivar">@enzyme_names_downcased</span> = <span class="ruby-ivar">@enzyme_names</span>.<span class="ruby-identifier">map</span>{<span class="ruby-operator">|</span><span class="ruby-identifier">a</span><span class="ruby-operator">|</span> <span class="ruby-identifier">a</span>.<span class="ruby-identifier">downcase</span>}
+<span class="line-num">292</span>   <span class="ruby-identifier">setup_enzyme_and_reference_association</span>
+<span class="line-num">293</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -997,12 +969,13 @@ Nucleic Acids Res., vol. 30.”</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -106,13 +110,7 @@
 
   <section class="description">
     
-<p><a href="../../Sequence.html">Sequence</a> segment pair of <a
-href="../../Spidey.html">Spidey</a> result. Similar to <a
-href="../../Blast/Report/Hsp.html">Bio::Blast::Report::Hsp</a> but lacks
-many methods. For mRNA-genome mapping programs, unlike other homology
-search programs, the class is used not only for exons but also for introns.
-(Note that intron data would not be available according to run-time options
-of the program.)</p>
+<p><a href="../../Sequence.html"><code>Sequence</code></a> segment pair of <a href="../../Spidey.html"><code>Spidey</code></a> result. Similar to <a href="../../Blast/Report/Hsp.html"><code>Bio::Blast::Report::Hsp</code></a> but lacks many methods. For mRNA-genome mapping programs, unlike other homology search programs, the class is used not only for exons but also for introns. (Note that intron data would not be available according to run-time options of the program.)</p>
 
   </section>
 
@@ -139,8 +137,7 @@ of the program.)</p>
 
         <div class="method-description">
         
-        <p>Returns amino acide sequence in alignment. Returns String, because white
-spaces is also important. Returns nil if no alignment data are available.</p>
+        <p>Returns amino acide sequence in alignment. Returns String, because white spaces is also important. Returns nil if no alignment data are available.</p>
         
         </div>
       </div>
@@ -153,8 +150,7 @@ spaces is also important. Returns nil if no alignment data are available.</p>
 
         <div class="method-description">
         
-        <p>Returns alignment length of the segment pair. Returns nil if no alignment
-data are available.</p>
+        <p>Returns alignment length of the segment pair. Returns nil if no alignment data are available.</p>
         
         </div>
       </div>
@@ -180,9 +176,7 @@ data are available.</p>
 
         <div class="method-description">
         
-        <p>Returns segment informations of the &#39;Genomic&#39;. Returns a <a
-href="Segment.html">Bio::Spidey::Report::Segment</a> object. This would be
-a <a href="../../Spidey.html">Bio::Spidey</a> specific method.</p>
+        <p>Returns segment informations of the &#39;Genomic&#39;. Returns a <a href="Segment.html"><code>Bio::Spidey::Report::Segment</code></a> object. This would be a <a href="../../Spidey.html"><code>Bio::Spidey</code></a> specific method.</p>
         
         </div>
       </div>
@@ -195,8 +189,7 @@ a <a href="../../Spidey.html">Bio::Spidey</a> specific method.</p>
 
         <div class="method-description">
         
-        <p>Returns the middle line of the alignment of the segment pair. Returns nil
-if no alignment data are available.</p>
+        <p>Returns the middle line of the alignment of the segment pair. Returns nil if no alignment data are available.</p>
         
         </div>
       </div>
@@ -235,9 +228,7 @@ if no alignment data are available.</p>
 
         <div class="method-description">
         
-        <p>Returns segment informations of the &#39;mRNA&#39;. Returns a <a
-href="Segment.html">Bio::Spidey::Report::Segment</a> object. This would be
-a <a href="../../Spidey.html">Bio::Spidey</a> specific method.</p>
+        <p>Returns segment informations of the &#39;mRNA&#39;. Returns a <a href="Segment.html"><code>Bio::Spidey::Report::Segment</code></a> object. This would be a <a href="../../Spidey.html"><code>Bio::Spidey</code></a> specific method.</p>
         
         </div>
       </div>
@@ -263,9 +254,7 @@ a <a href="../../Spidey.html">Bio::Spidey</a> specific method.</p>
 
         <div class="method-description">
         
-        <p>Returns splice site information. Returns a hash which contains :d and :a
-for keys and 0, 1, or nil for values. This would be a <a
-href="../../Spidey.html">Bio::Spidey</a> specific methods.</p>
+        <p>Returns splice site information. Returns a hash which contains :d and :a for keys and 0, 1, or nil for values. This would be a <a href="../../Spidey.html"><code>Bio::Spidey</code></a> specific methods.</p>
         
         </div>
       </div>
@@ -293,28 +282,26 @@ href="../../Spidey.html">Bio::Spidey</a> specific methods.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="SegmentPair.html">SegmentPair</a> object. It is
-designed to be called from Bio::Spidey::Report::* classes. Users shall not
-call it directly.</p>
+          <p>Creates a new <a href="SegmentPair.html"><code>SegmentPair</code></a> object. It is designed to be called from Bio::Spidey::Report::* classes. Users shall not call it directly.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 125</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">genomic</span>, <span class="ruby-identifier">mrna</span>, <span class="ruby-identifier">midline</span>, <span class="ruby-identifier">aaseqline</span>,
-               <span class="ruby-identifier">percent_identity</span>, <span class="ruby-identifier">mismatches</span>, <span class="ruby-identifier">gaps</span>, <span class="ruby-identifier">splice_site</span>,
-               <span class="ruby-identifier">align_len</span>)
-  <span class="ruby-ivar">@genomic</span>   = <span class="ruby-identifier">genomic</span>
-  <span class="ruby-ivar">@mrna</span>      = <span class="ruby-identifier">mrna</span>
-  <span class="ruby-ivar">@midline</span>   = <span class="ruby-identifier">midline</span>
-  <span class="ruby-ivar">@aaseqline</span> = <span class="ruby-identifier">aaseqline</span>
-  <span class="ruby-ivar">@percent_identity</span> = <span class="ruby-identifier">percent_identity</span>
-  <span class="ruby-ivar">@mismaches</span>        = <span class="ruby-identifier">mismatches</span>
-  <span class="ruby-ivar">@gaps</span>             = <span class="ruby-identifier">gaps</span>
-  <span class="ruby-ivar">@splice_site</span>      = <span class="ruby-identifier">splice_site</span>
-  <span class="ruby-ivar">@align_len</span>        = <span class="ruby-identifier">align_len</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">125</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">genomic</span>, <span class="ruby-identifier">mrna</span>, <span class="ruby-identifier">midline</span>, <span class="ruby-identifier">aaseqline</span>,
+<span class="line-num">126</span>                <span class="ruby-identifier">percent_identity</span>, <span class="ruby-identifier">mismatches</span>, <span class="ruby-identifier">gaps</span>, <span class="ruby-identifier">splice_site</span>,
+<span class="line-num">127</span>                <span class="ruby-identifier">align_len</span>)
+<span class="line-num">128</span>   <span class="ruby-ivar">@genomic</span>   = <span class="ruby-identifier">genomic</span>
+<span class="line-num">129</span>   <span class="ruby-ivar">@mrna</span>      = <span class="ruby-identifier">mrna</span>
+<span class="line-num">130</span>   <span class="ruby-ivar">@midline</span>   = <span class="ruby-identifier">midline</span>
+<span class="line-num">131</span>   <span class="ruby-ivar">@aaseqline</span> = <span class="ruby-identifier">aaseqline</span>
+<span class="line-num">132</span>   <span class="ruby-ivar">@percent_identity</span> = <span class="ruby-identifier">percent_identity</span>
+<span class="line-num">133</span>   <span class="ruby-ivar">@mismaches</span>        = <span class="ruby-identifier">mismatches</span>
+<span class="line-num">134</span>   <span class="ruby-ivar">@gaps</span>             = <span class="ruby-identifier">gaps</span>
+<span class="line-num">135</span>   <span class="ruby-ivar">@splice_site</span>      = <span class="ruby-identifier">splice_site</span>
+<span class="line-num">136</span>   <span class="ruby-ivar">@align_len</span>        = <span class="ruby-identifier">align_len</span>
+<span class="line-num">137</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -338,23 +325,21 @@ call it directly.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="SegmentPair.html">SegmentPair</a> object when the
-segment pair is an intron. It is designed to be called internally from
-Bio::Spidey::Report::* classes. Users shall not call it directly.</p>
+          <p>Creates a new <a href="SegmentPair.html"><code>SegmentPair</code></a> object when the segment pair is an intron. It is designed to be called internally from Bio::Spidey::Report::* classes. Users shall not call it directly.</p>
           
           
 
           
           <div class="method-source-code" id="new_intron-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 182</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new_intron</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">aln</span>)
-  <span class="ruby-identifier">genomic</span>   = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>])
-  <span class="ruby-identifier">mrna</span>      = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>,    <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>])
-  <span class="ruby-identifier">midline</span>   = <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>]
-  <span class="ruby-identifier">aaseqline</span> = <span class="ruby-identifier">aln</span>[<span class="ruby-value">3</span>]
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">genomic</span>, <span class="ruby-identifier">mrna</span>, <span class="ruby-identifier">midline</span>, <span class="ruby-identifier">aaseqline</span>,
-           <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">182</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">new_intron</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">aln</span>)
+<span class="line-num">183</span>   <span class="ruby-identifier">genomic</span>   = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">from</span>, <span class="ruby-identifier">to</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>])
+<span class="line-num">184</span>   <span class="ruby-identifier">mrna</span>      = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>,    <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>])
+<span class="line-num">185</span>   <span class="ruby-identifier">midline</span>   = <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>]
+<span class="line-num">186</span>   <span class="ruby-identifier">aaseqline</span> = <span class="ruby-identifier">aln</span>[<span class="ruby-value">3</span>]
+<span class="line-num">187</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">genomic</span>, <span class="ruby-identifier">mrna</span>, <span class="ruby-identifier">midline</span>, <span class="ruby-identifier">aaseqline</span>,
+<span class="line-num">188</span>            <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>)
+<span class="line-num">189</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -378,41 +363,38 @@ Bio::Spidey::Report::* classes. Users shall not call it directly.</p>
 
         <div class="method-description">
           
-          <p>Parses a piece of <a href="../../Spidey.html">Spidey</a> result text and
-creates a new <a href="SegmentPair.html">SegmentPair</a> object. It is
-designed to be called internally from Bio::Spidey::Report::* classes. Users
-shall not call it directly.</p>
+          <p>Parses a piece of <a href="../../Spidey.html"><code>Spidey</code></a> result text and creates a new <a href="SegmentPair.html"><code>SegmentPair</code></a> object. It is designed to be called internally from Bio::Spidey::Report::* classes. Users shall not call it directly.</p>
           
           
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 196</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">complement</span>, <span class="ruby-identifier">aln</span>)
-  <span class="ruby-regexp">/\AExon\s*\d+(\(\-\))?\:\s*(\d+)\-(\d+)\s*\(gen\)\s+(\d+)\-(\d+)\s*\(mRNA\)\s+id\s*([\d\.]+)\s*\%\s+mismatches\s+(\d+)\s+gaps\s+(\d+)\s+splice site\s*\(d +a\)\s*\:\s*(\d+)\s+(\d+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;minus&#39;</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">genomic</span> = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$3</span>, <span class="ruby-node">$2</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>])
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">genomic</span> = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$2</span>, <span class="ruby-node">$3</span>, <span class="ruby-string">&#39;plus&#39;</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>])
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">complement</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">mrna</span>    = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$4</span>, <span class="ruby-node">$5</span>, <span class="ruby-string">&#39;minus&#39;</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>])
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">mrna</span>    = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$4</span>, <span class="ruby-node">$5</span>, <span class="ruby-string">&#39;plus&#39;</span>,  <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>])
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">percent_identity</span> = <span class="ruby-node">$6</span>
-  <span class="ruby-identifier">mismatches</span> = (<span class="ruby-node">$7</span> <span class="ruby-operator">?</span> <span class="ruby-node">$7</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">gaps</span> = (<span class="ruby-node">$8</span> <span class="ruby-operator">?</span> <span class="ruby-node">$8</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">splice_site</span> = {
-    <span class="ruby-value">:d</span> <span class="ruby-operator">=&gt;</span> (<span class="ruby-node">$9</span>  <span class="ruby-operator">?</span> <span class="ruby-node">$9</span>.<span class="ruby-identifier">to_i</span>  <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>),
-    <span class="ruby-value">:a</span> <span class="ruby-operator">=&gt;</span> (<span class="ruby-node">$10</span> <span class="ruby-operator">?</span> <span class="ruby-node">$10</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
-  }
-  <span class="ruby-identifier">midline</span>   = <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>]
-  <span class="ruby-identifier">aaseqline</span> = <span class="ruby-identifier">aln</span>[<span class="ruby-value">3</span>]
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">genomic</span>, <span class="ruby-identifier">mrna</span>, <span class="ruby-identifier">midline</span>, <span class="ruby-identifier">aaseqline</span>,
-           <span class="ruby-identifier">percent_identity</span>, <span class="ruby-identifier">mismatches</span>, <span class="ruby-identifier">gaps</span>, <span class="ruby-identifier">splice_site</span>,
-           (<span class="ruby-identifier">midline</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">midline</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>))
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">196</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">complement</span>, <span class="ruby-identifier">aln</span>)
+<span class="line-num">197</span>   <span class="ruby-regexp">/\AExon\s*\d+(\(\-\))?\:\s*(\d+)\-(\d+)\s*\(gen\)\s+(\d+)\-(\d+)\s*\(mRNA\)\s+id\s*([\d\.]+)\s*\%\s+mismatches\s+(\d+)\s+gaps\s+(\d+)\s+splice site\s*\(d +a\)\s*\:\s*(\d+)\s+(\d+)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">str</span>
+<span class="line-num">198</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">strand</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;minus&#39;</span> <span class="ruby-keyword">then</span>
+<span class="line-num">199</span>     <span class="ruby-identifier">genomic</span> = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$3</span>, <span class="ruby-node">$2</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>])
+<span class="line-num">200</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">201</span>     <span class="ruby-identifier">genomic</span> = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$2</span>, <span class="ruby-node">$3</span>, <span class="ruby-string">&#39;plus&#39;</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>])
+<span class="line-num">202</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">203</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">complement</span> <span class="ruby-keyword">then</span>
+<span class="line-num">204</span>     <span class="ruby-identifier">mrna</span>    = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$4</span>, <span class="ruby-node">$5</span>, <span class="ruby-string">&#39;minus&#39;</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>])
+<span class="line-num">205</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">206</span>     <span class="ruby-identifier">mrna</span>    = <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$4</span>, <span class="ruby-node">$5</span>, <span class="ruby-string">&#39;plus&#39;</span>,  <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>])
+<span class="line-num">207</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">208</span>   <span class="ruby-identifier">percent_identity</span> = <span class="ruby-node">$6</span>
+<span class="line-num">209</span>   <span class="ruby-identifier">mismatches</span> = (<span class="ruby-node">$7</span> <span class="ruby-operator">?</span> <span class="ruby-node">$7</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+<span class="line-num">210</span>   <span class="ruby-identifier">gaps</span> = (<span class="ruby-node">$8</span> <span class="ruby-operator">?</span> <span class="ruby-node">$8</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+<span class="line-num">211</span>   <span class="ruby-identifier">splice_site</span> = {
+<span class="line-num">212</span>     <span class="ruby-value">:d</span> <span class="ruby-operator">=&gt;</span> (<span class="ruby-node">$9</span>  <span class="ruby-operator">?</span> <span class="ruby-node">$9</span>.<span class="ruby-identifier">to_i</span>  <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>),
+<span class="line-num">213</span>     <span class="ruby-value">:a</span> <span class="ruby-operator">=&gt;</span> (<span class="ruby-node">$10</span> <span class="ruby-operator">?</span> <span class="ruby-node">$10</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+<span class="line-num">214</span>   }
+<span class="line-num">215</span>   <span class="ruby-identifier">midline</span>   = <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>]
+<span class="line-num">216</span>   <span class="ruby-identifier">aaseqline</span> = <span class="ruby-identifier">aln</span>[<span class="ruby-value">3</span>]
+<span class="line-num">217</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">genomic</span>, <span class="ruby-identifier">mrna</span>, <span class="ruby-identifier">midline</span>, <span class="ruby-identifier">aaseqline</span>,
+<span class="line-num">218</span>            <span class="ruby-identifier">percent_identity</span>, <span class="ruby-identifier">mismatches</span>, <span class="ruby-identifier">gaps</span>, <span class="ruby-identifier">splice_site</span>,
+<span class="line-num">219</span>            (<span class="ruby-identifier">midline</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">midline</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>))
+<span class="line-num">220</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -444,15 +426,14 @@ shall not call it directly.</p>
 
         <div class="method-description">
           
-          <p>Returns start position of the genomic (target, hit) (the first position is
-1).</p>
+          <p>Returns start position of the genomic (target, hit) (the first position is 1).</p>
           
           
 
           
           <div class="method-source-code" id="hit_from-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 243</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hit_from</span>;     <span class="ruby-ivar">@genomic</span>.<span class="ruby-identifier">from</span>;    <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">243</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hit_from</span>;     <span class="ruby-ivar">@genomic</span>.<span class="ruby-identifier">from</span>;    <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -476,15 +457,14 @@ shall not call it directly.</p>
 
         <div class="method-description">
           
-          <p>Returns strand information of the genomic (target, hit). Returns
-&#39;plus&#39;, &#39;minus&#39;, or nil.</p>
+          <p>Returns strand information of the genomic (target, hit). Returns &#39;plus&#39;, &#39;minus&#39;, or nil.</p>
           
           
 
           
           <div class="method-source-code" id="hit_strand-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 254</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hit_strand</span>;   <span class="ruby-ivar">@genomic</span>.<span class="ruby-identifier">strand</span>;  <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">254</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hit_strand</span>;   <span class="ruby-ivar">@genomic</span>.<span class="ruby-identifier">strand</span>;  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -514,8 +494,8 @@ shall not call it directly.</p>
 
           
           <div class="method-source-code" id="hit_to-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 247</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hit_to</span>;       <span class="ruby-ivar">@genomic</span>.<span class="ruby-identifier">to</span>;      <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">247</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hit_to</span>;       <span class="ruby-ivar">@genomic</span>.<span class="ruby-identifier">to</span>;      <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -545,8 +525,8 @@ shall not call it directly.</p>
 
           
           <div class="method-source-code" id="hseq-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 250</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hseq</span>;         <span class="ruby-ivar">@genomic</span>.<span class="ruby-identifier">seq</span>;     <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">250</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hseq</span>;         <span class="ruby-ivar">@genomic</span>.<span class="ruby-identifier">seq</span>;     <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -576,8 +556,8 @@ shall not call it directly.</p>
 
           
           <div class="method-source-code" id="qseq-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 235</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">qseq</span>;         <span class="ruby-ivar">@mrna</span>.<span class="ruby-identifier">seq</span>;        <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">235</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">qseq</span>;         <span class="ruby-ivar">@mrna</span>.<span class="ruby-identifier">seq</span>;        <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -607,8 +587,8 @@ shall not call it directly.</p>
 
           
           <div class="method-source-code" id="query_from-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 229</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_from</span>;   <span class="ruby-ivar">@mrna</span>.<span class="ruby-identifier">from</span>;       <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">229</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_from</span>;   <span class="ruby-ivar">@mrna</span>.<span class="ruby-identifier">from</span>;       <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -632,15 +612,14 @@ shall not call it directly.</p>
 
         <div class="method-description">
           
-          <p>Returns strand information of the mRNA (query). Returns &#39;plus&#39;,
-&#39;minus&#39;, or nil.</p>
+          <p>Returns strand information of the mRNA (query). Returns &#39;plus&#39;, &#39;minus&#39;, or nil.</p>
           
           
 
           
           <div class="method-source-code" id="query_strand-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 239</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_strand</span>; <span class="ruby-ivar">@mrna</span>.<span class="ruby-identifier">strand</span>;     <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">239</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_strand</span>; <span class="ruby-ivar">@mrna</span>.<span class="ruby-identifier">strand</span>;     <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -670,8 +649,8 @@ shall not call it directly.</p>
 
           
           <div class="method-source-code" id="query_to-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/spidey/report.rb, line 232</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_to</span>;     <span class="ruby-ivar">@mrna</span>.<span class="ruby-identifier">to</span>;         <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/spidey/report.rb</span>
+<span class="line-num">232</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_to</span>;     <span class="ruby-ivar">@mrna</span>.<span class="ruby-identifier">to</span>;         <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -685,12 +664,13 @@ shall not call it directly.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

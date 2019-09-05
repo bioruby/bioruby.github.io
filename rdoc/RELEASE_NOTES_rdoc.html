@@ -11,11 +11,15 @@
   var index_rel_prefix = "./";
 </script>
 
-<script src="./js/jquery.js"></script>
-<script src="./js/darkfish.js"></script>
+<script src="./js/navigation.js" defer></script>
+<script src="./js/search.js" defer></script>
+<script src="./js/search_index.js" defer></script>
+<script src="./js/searcher.js" defer></script>
+<script src="./js/darkfish.js" defer></script>
 
 <link href="./css/fonts.css" rel="stylesheet">
 <link href="./css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -115,17 +119,13 @@
 
 <h1 id="label-BioRuby+2.0.0+RELEASE+NOTES">BioRuby 2.0.0 RELEASE NOTES<span><a href="#label-BioRuby+2.0.0+RELEASE+NOTES">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>A lot of changes have been made to the BioRuby 2.0.0 after the version
-1.5.x is released. This document describes important and/or incompatible
-changes since the BioRuby 1.5.0 release.</p>
+<p>A lot of changes have been made to the BioRuby 2.0.0 after the version 1.5.x is released. This document describes important and/or incompatible changes since the BioRuby 1.5.0 release.</p>
 
-<p>For known problems, see <a
-href="KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a>.</p>
+<p>For known problems, see <a href="KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a>.</p>
 
 <h2 id="label-Features+moved+to+separete+gems">Features moved to separete gems<span><a href="#label-Features+moved+to+separete+gems">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>Some features are moved to separate gems because of reducing complexity
-and/or to avoid external library dependency of BioRuby core.</p>
+<p>Some features are moved to separate gems because of reducing complexity and/or to avoid external library dependency of BioRuby core.</p>
 
 <h3 id="label-BioRuby+Shell+is+moved+to+-22bio-shell-22">BioRuby Shell is moved to “bio-shell”<span><a href="#label-BioRuby+Shell+is+moved+to+-22bio-shell-22">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -133,24 +133,17 @@ and/or to avoid external library dependency of BioRuby core.</p>
 
 <h3 id="label-Executable+files+are+moved+to+-22bio-executables-22">Executable files are moved to “bio-executables”<span><a href="#label-Executable+files+are+moved+to+-22bio-executables-22">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>To avoid unexpected loading of executable files by some Rails software, all
-executable commands are moved to “bio-executables” gem (except the
-“bioruby” command that is included in the above “bio-shell” gem).</p>
+<p>To avoid unexpected loading of executable files by some Rails software, all executable commands are moved to “bio-executables” gem (except the “bioruby” command that is included in the above “bio-shell” gem).</p>
 
 <h3 id="label-Fast+BLAST+XML+result+parser+by+using+Expat+XML+Parser+is+moved+to+-22bio-blast-xmlparser-22">Fast BLAST XML result parser by using Expat XML Parser is moved to “bio-blast-xmlparser”<span><a href="#label-Fast+BLAST+XML+result+parser+by+using+Expat+XML+Parser+is+moved+to+-22bio-blast-xmlparser-22">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Fast BLAST XML result parser by using Expat XML Parser is split to
-“bio-blast-xmlparser” gem, because of external C library dependency. Please
-install “bio-blast-xmlparser” gem if possible. If it is installed, BioRuby
-automatically use it.</p>
+<p>Fast BLAST XML result parser by using Expat XML Parser is split to “bio-blast-xmlparser” gem, because of external C library dependency. Please install “bio-blast-xmlparser” gem if possible. If it is installed, BioRuby automatically use it.</p>
 
 <h3 id="label-Bio-3A-3APhyloXML+is+moved+to+-22bioruby-phyloxml-22">Bio::PhyloXML is moved to “bioruby-phyloxml”<span><a href="#label-Bio-3A-3APhyloXML+is+moved+to+-22bioruby-phyloxml-22">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
 <p>Bio::PhyloXML is split to “bioruby-phyloxml” gem.</p>
 
-<p>NOTE: Please uninstall “bio-phyloxml” gem, that have been created as a
-preliminary trial of splitting a module in 2012 and have not been
-maintained after that.</p>
+<p>NOTE: Please uninstall “bio-phyloxml” gem, that have been created as a preliminary trial of splitting a module in 2012 and have not been maintained after that.</p>
 
 <h3 id="label-Bio-3A-3ASQL+is+moved+to+-22bio-biosql-22">Bio::SQL is moved to “bio-biosql”<span><a href="#label-Bio-3A-3ASQL+is+moved+to+-22bio-biosql-22">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -160,23 +153,16 @@ maintained after that.</p>
 
 <h3 id="label-HTTPS+is+used+to+access+NCBI+web+services">HTTPS is used to access NCBI web services<span><a href="#label-HTTPS+is+used+to+access+NCBI+web+services">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>As you may know, NCBI announced that all HTTP resources will be switched to
-HTTPS on September 30, 2016. To follow the transition, all URLs for
-accessing NCBI E-utilities in BioRuby are changed to use HTTPS.</p>
+<p>As you may know, NCBI announced that all HTTP resources will be switched to HTTPS on September 30, 2016. To follow the transition, all URLs for accessing NCBI E-utilities in BioRuby are changed to use HTTPS.</p>
 
 <p>In BioRuby, the following classes/modules are affected.</p>
 <ul><li>
-<p><a href="Bio/NCBI/REST.html">Bio::NCBI::REST</a> and descending classes</p>
+<p><a href="Bio/NCBI/REST.html"><code>Bio::NCBI::REST</code></a> and descending classes</p>
 </li><li>
-<p><a href="Bio/PubMed.html">Bio::PubMed</a></p>
+<p><a href="Bio/PubMed.html"><code>Bio::PubMed</code></a></p>
 </li></ul>
 
-<p>In some rare cases (especially when building Ruby and/or OpenSSL by
-yourself from source code), Ruby does not include SSL/TLS support, or Ruby
-fails to detect SSL root certificates. In such cases, you may need to
-reinstall or upgrade Ruby, OpenSSL (or alternatives), and/or SSL root
-certificates with appropriate configuration options. Alternatively,
-installing binary packages is generally a good idea.</p>
+<p>In some rare cases (especially when building Ruby and/or OpenSSL by yourself from source code), Ruby does not include SSL/TLS support, or Ruby fails to detect SSL root certificates. In such cases, you may need to reinstall or upgrade Ruby, OpenSSL (or alternatives), and/or SSL root certificates with appropriate configuration options. Alternatively, installing binary packages is generally a good idea.</p>
 
 <h3 id="label-KEGG-3A-3AGENES-23diseases+and+related+methods+are+added">KEGG::GENES#diseases and related methods are added<span><a href="#label-KEGG-3A-3AGENES-23diseases+and+related+methods+are+added">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
@@ -193,22 +179,17 @@ installing binary packages is generally a good idea.</p>
 <p>drug_targets_as_strings</p>
 </li></ul>
 
-<h3 id="label-Pre-calculated+ambiguity+codon+tables+in+Bio-3A-3ACodonTable">Pre-calculated ambiguity codon tables in <a href="Bio/CodonTable.html">Bio::CodonTable</a><span><a href="#label-Pre-calculated+ambiguity+codon+tables+in+Bio-3A-3ACodonTable">&para;</a> <a href="#top">&uarr;</a></span></h3>
+<h3 id="label-Pre-calculated+ambiguity+codon+tables+in+Bio-3A-3ACodonTable">Pre-calculated ambiguity codon tables in <a href="Bio/CodonTable.html"><code>Bio::CodonTable</code></a><span><a href="#label-Pre-calculated+ambiguity+codon+tables+in+Bio-3A-3ACodonTable">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Pre-calculated ambiguity codon tables are added, contributed by Tomoaki
-NISHIYAMA.</p>
+<p>Pre-calculated ambiguity codon tables are added, contributed by Tomoaki NISHIYAMA.</p>
 
 <h2 id="label-Bug+fixes">Bug fixes<span><a href="#label-Bug+fixes">&para;</a> <a href="#top">&uarr;</a></span></h2>
 <ul><li>
-<p>Fixed a parser bug in <a
-href="Bio/Fasta/Report.html">Bio::Fasta::Report</a>, FASTA output (-m 10)
-parser, contributed by William Van Etten and Mark Wilkinson via GitHub.</p>
+<p>Fixed a parser bug in <a href="Bio/Fasta/Report.html"><code>Bio::Fasta::Report</code></a>, FASTA output (-m 10) parser, contributed by William Van Etten and Mark Wilkinson via GitHub.</p>
 </li><li>
-<p>HTTPS is used to access GenomeNet BLAST web service, contributed by
-@ramadis via GitHub.</p>
+<p>HTTPS is used to access GenomeNet BLAST web service, contributed by @ramadis via GitHub.</p>
 </li><li>
-<p><a href="Bio/AAindex.html">Bio::AAindex</a> documentation fix, suggested by
-@kojix2 via GitHub.</p>
+<p><a href="Bio/AAindex.html"><code>Bio::AAindex</code></a> documentation fix, suggested by @kojix2 via GitHub.</p>
 </li><li>
 <p>Suppress warning messages in Ruby 2.4 and later.</p>
 </li></ul>
@@ -217,15 +198,9 @@ parser, contributed by William Van Etten and Mark Wilkinson via GitHub.</p>
 
 <h3 id="label-Bio-3A-3ATaxonomy+is+removed+and+merged+to+Bio-3A-3APhyloXML-3A-3ATaxonomy">Bio::Taxonomy is removed and merged to Bio::PhyloXML::Taxonomy<span><a href="#label-Bio-3A-3ATaxonomy+is+removed+and+merged+to+Bio-3A-3APhyloXML-3A-3ATaxonomy">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Bio::Taxonomy in lib/bio/db/phyloxml/phyloxml_elements.rb was written for
-PhyloXML in 2009. It was intended to become general taxonomy data class in
-BioRuby in these days. However, no efforts have been made to improve the
-Bio::Taxonomy class, and it still remains to be a PhyloXML specific class.
-Because Bio::PhyloXML is split as a different Gem (Biogem) package, we now
-decide to remove Bio::Taxonomy and merge it to Bio::PhyloXML::Taxonomy.</p>
+<p>Bio::Taxonomy in lib/bio/db/phyloxml/phyloxml_elements.rb was written for PhyloXML in 2009. It was intended to become general taxonomy data class in BioRuby in these days. However, no efforts have been made to improve the Bio::Taxonomy class, and it still remains to be a PhyloXML specific class. Because Bio::PhyloXML is split as a different Gem (Biogem) package, we now decide to remove Bio::Taxonomy and merge it to Bio::PhyloXML::Taxonomy.</p>
 
-<p>In the codes using Bio::Taxonomy directly, changing Bio::Taxonomy to
-Bio::PhyloXML::Taxonomy or adding the following monkey patch may be needed.</p>
+<p>In the codes using Bio::Taxonomy directly, changing Bio::Taxonomy to Bio::PhyloXML::Taxonomy or adding the following monkey patch may be needed.</p>
 
 <pre class="ruby"><span class="ruby-keyword">module</span> <span class="ruby-constant">Bio</span>
    <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span> <span class="ruby-constant">Taxonomy</span>
@@ -234,39 +209,33 @@ Bio::PhyloXML::Taxonomy or adding the following monkey patch may be needed.</p>
 <span class="ruby-keyword">end</span>
 </pre>
 
-<p>In the future, Bio::Taxonomy might be added as general taxonomy data class.
-The new Bio::Taxonomy might be incompatible with the current Bio::Taxonmy.</p>
+<p>In the future, Bio::Taxonomy might be added as general taxonomy data class. The new Bio::Taxonomy might be incompatible with the current Bio::Taxonmy.</p>
 
 <h3 id="label-Some+features+are+moved+to+separete+gems">Some features are moved to separete gems<span><a href="#label-Some+features+are+moved+to+separete+gems">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Some features are split to separete gems and removed from this “bio” gem.
-See the above “Features moved to separete gems” topics for details.</p>
+<p>Some features are split to separete gems and removed from this “bio” gem. See the above “Features moved to separete gems” topics for details.</p>
 
 <h2 id="label-Known+issues">Known issues<span><a href="#label-Known+issues">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>The following issues are added or updated. See <a
-href="KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a> for other already known
-issues.</p>
+<p>The following issues are added or updated. See <a href="KNOWN_ISSUES_rdoc.html">KNOWN_ISSUES.rdoc</a> for other already known issues.</p>
 
 <h2 id="label-Other+important+news">Other important news<span><a href="#label-Other+important+news">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
 <h3 id="label-Ruby+1.8+is+no+longer+supported">Ruby 1.8 is no longer supported<span><a href="#label-Ruby+1.8+is+no+longer+supported">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Ruby 1.8.x is no longer supported. Though unsupported, some components may
-still run on Ruby 1.8.7. Please use Ruby 1.8.7 at your own risk with this
-version of BioRuby.</p>
+<p>Ruby 1.8.x is no longer supported. Though unsupported, some components may still run on Ruby 1.8.7. Please use Ruby 1.8.7 at your own risk with this version of BioRuby.</p>
 
 <h3 id="label-Installation+without+RubyGems+is+no+longer+supported">Installation without RubyGems is no longer supported<span><a href="#label-Installation+without+RubyGems+is+no+longer+supported">&para;</a> <a href="#top">&uarr;</a></span></h3>
 
-<p>Installation by using setup.rb without RubyGems is no longer supported, and
-setup.rb is no longer included in BioRuby distribution.</p>
+<p>Installation by using setup.rb without RubyGems is no longer supported, and setup.rb is no longer included in BioRuby distribution.</p>
+
 </main>
 
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

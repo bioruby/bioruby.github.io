@@ -11,11 +11,15 @@
   var index_rel_prefix = "../";
 </script>
 
-<script src="../js/jquery.js"></script>
-<script src="../js/darkfish.js"></script>
+<script src="../js/navigation.js" defer></script>
+<script src="../js/search.js" defer></script>
+<script src="../js/search_index.js" defer></script>
+<script src="../js/searcher.js" defer></script>
+<script src="../js/darkfish.js" defer></script>
 
 <link href="../css/fonts.css" rel="stylesheet">
 <link href="../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -118,11 +122,7 @@
     
 <h2 id="class-Bio::Location-label-Description">Description<span><a href="#class-Bio::Location-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p>The <a href="Location.html">Bio::Location</a> class describes the position
-of a genomic locus. Typically, <a href="Location.html">Bio::Location</a>
-objects are created automatically when the user creates a <a
-href="Locations.html">Bio::Locations</a> object, instead of initialized
-directly.</p>
+<p>The <a href="Location.html"><code>Bio::Location</code></a> class describes the position of a genomic locus. Typically, <a href="Location.html"><code>Bio::Location</code></a> objects are created automatically when the user creates a <a href="Locations.html"><code>Bio::Locations</code></a> object, instead of initialized directly.</p>
 
 <h2 id="class-Bio::Location-label-Usage">Usage<span><a href="#class-Bio::Location-label-Usage">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
@@ -161,8 +161,7 @@ directly.</p>
 
         <div class="method-description">
         
-        <p>(true, false or nil) true if the location indicates the site between two
-adjoining nucleotides</p>
+        <p>(true, false or nil) true if the location indicates the site between two adjoining nucleotides</p>
         
         </div>
       </div>
@@ -227,8 +226,7 @@ adjoining nucleotides</p>
 
         <div class="method-description">
         
-        <p>(Integer) strand direction of the location (forward =&gt; 1 or complement
-=&gt; -1)</p>
+        <p>(Integer) strand direction of the location (forward =&gt; 1 or complement =&gt; -1)</p>
         
         </div>
       </div>
@@ -254,8 +252,7 @@ adjoining nucleotides</p>
 
         <div class="method-description">
         
-        <p>(String) link to the external entry as <a href="GenBank.html">GenBank</a>
-ID</p>
+        <p>(String) link to the external entry as <a href="GenBank.html"><code>GenBank</code></a> ID</p>
         
         </div>
       </div>
@@ -283,10 +280,7 @@ ID</p>
 
         <div class="method-description">
           
-          <p>Parses a&#39;location&#39; segment, which can be &#39;ID:&#39; +
-(&#39;n&#39; or &#39;n..m&#39; or &#39;n^m&#39; or “seq”) with
-&#39;&lt;&#39; or &#39;&gt;&#39;, and returns a <a
-href="Location.html">Bio::Location</a> object.</p>
+          <p>Parses a&#39;location&#39; segment, which can be &#39;ID:&#39; + (&#39;n&#39; or &#39;n..m&#39; or &#39;n^m&#39; or “seq”) with &#39;&lt;&#39; or &#39;&gt;&#39;, and returns a <a href="Location.html"><code>Bio::Location</code></a> object.</p>
 
 <pre class="ruby"><span class="ruby-identifier">location</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Location</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;500..550&#39;</span>)
 </pre>
@@ -294,72 +288,71 @@ href="Location.html">Bio::Location</a> object.</p>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>str</em>: <a href="GenBank.html">GenBank</a> style position
-string (see <a href="Locations.html">Bio::Locations</a> documentation)</p>
+<p>(required) <em>str</em>: <a href="GenBank.html"><code>GenBank</code></a> style position string (see <a href="Locations.html"><code>Bio::Locations</code></a> documentation)</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>the <a href="Location.html">Bio::Location</a> object</p>
+<p>the <a href="Location.html"><code>Bio::Location</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 45</span>
-  <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">location</span> = <span class="ruby-keyword">nil</span>)
-
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/:/</span>                                <span class="ruby-comment"># (G) ID:location</span>
-        <span class="ruby-identifier">xref_id</span>, <span class="ruby-identifier">location</span> = <span class="ruby-identifier">location</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;:&#39;</span>)
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/&lt;/</span>                                <span class="ruby-comment"># (I) &lt;,&gt;</span>
-        <span class="ruby-identifier">lt</span> = <span class="ruby-keyword">true</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/&gt;/</span>
-        <span class="ruby-identifier">gt</span> = <span class="ruby-keyword">true</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-comment"># s : start base, e : end base =&gt; from, to</span>
-    <span class="ruby-keyword">case</span> <span class="ruby-identifier">location</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^[&lt;&gt;]?(\d+)$/</span>                                 <span class="ruby-comment"># (A, I) n</span>
-      <span class="ruby-identifier">s</span> = <span class="ruby-identifier">e</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^[&lt;&gt;]?(\d+)\.\.[&lt;&gt;]?(\d+)$/</span>                   <span class="ruby-comment"># (B, I) n..m</span>
-      <span class="ruby-identifier">s</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
-      <span class="ruby-identifier">e</span> = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
-<span class="ruby-comment">#       raise &quot;Error: invalid range : #{location}&quot;</span>
-        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[Warning] invalid range : #{location}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^[&lt;&gt;]?(\d+)\^[&lt;&gt;]?(\d+)$/</span>                     <span class="ruby-comment"># (C, I) n^m</span>
-      <span class="ruby-identifier">s</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
-      <span class="ruby-identifier">e</span> = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>
-      <span class="ruby-identifier">carat</span> = <span class="ruby-keyword">true</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span> <span class="ruby-comment"># assert n^n+1 or n^1</span>
-<span class="ruby-comment">#       raise &quot;Error: invalid range : #{location}&quot;</span>
-        <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[Warning] invalid range : #{location}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&quot;?([ATGCatgc]+)&quot;?$/</span>                  <span class="ruby-comment"># (H) literal sequence</span>
-      <span class="ruby-identifier">sequence</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">downcase</span>
-      <span class="ruby-identifier">s</span> = <span class="ruby-identifier">e</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
-      ;
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Error: unknown location format : #{location}&quot;</span>
-    <span class="ruby-keyword">end</span>
-
-    <span class="ruby-ivar">@from</span>       = <span class="ruby-identifier">s</span>             <span class="ruby-comment"># start position of the location</span>
-    <span class="ruby-ivar">@to</span>         = <span class="ruby-identifier">e</span>             <span class="ruby-comment"># end position of the location</span>
-    <span class="ruby-ivar">@strand</span>     = <span class="ruby-value">1</span>             <span class="ruby-comment"># strand direction of the location</span>
-                                <span class="ruby-comment">#   forward =&gt; 1 or complement =&gt; -1</span>
-    <span class="ruby-ivar">@sequence</span>   = <span class="ruby-identifier">sequence</span>      <span class="ruby-comment"># literal sequence of the location</span>
-    <span class="ruby-ivar">@lt</span>         = <span class="ruby-identifier">lt</span>            <span class="ruby-comment"># true if the position contains &#39;&lt;&#39;</span>
-    <span class="ruby-ivar">@gt</span>         = <span class="ruby-identifier">gt</span>            <span class="ruby-comment"># true if the position contains &#39;&gt;&#39;</span>
-    <span class="ruby-ivar">@xref_id</span>    = <span class="ruby-identifier">xref_id</span>       <span class="ruby-comment"># link to the external entry as GenBank ID</span>
-    <span class="ruby-ivar">@carat</span>      = <span class="ruby-identifier">carat</span>         <span class="ruby-comment"># true if the location indicates the site</span>
-                                <span class="ruby-comment"># between two adjoining nucleotides</span>
-  <span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">45</span>   <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">location</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">46</span> 
+<span class="line-num">47</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span>
+<span class="line-num">48</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/:/</span>                                <span class="ruby-comment"># (G) ID:location</span>
+<span class="line-num">49</span>         <span class="ruby-identifier">xref_id</span>, <span class="ruby-identifier">location</span> = <span class="ruby-identifier">location</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39;:&#39;</span>)
+<span class="line-num">50</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">51</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/&lt;/</span>                                <span class="ruby-comment"># (I) &lt;,&gt;</span>
+<span class="line-num">52</span>         <span class="ruby-identifier">lt</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">53</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">54</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">location</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/&gt;/</span>
+<span class="line-num">55</span>         <span class="ruby-identifier">gt</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">56</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">57</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">58</span> 
+<span class="line-num">59</span>     <span class="ruby-comment"># s : start base, e : end base =&gt; from, to</span>
+<span class="line-num">60</span>     <span class="ruby-keyword">case</span> <span class="ruby-identifier">location</span>
+<span class="line-num">61</span>     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^[&lt;&gt;]?(\d+)$/</span>                                 <span class="ruby-comment"># (A, I) n</span>
+<span class="line-num">62</span>       <span class="ruby-identifier">s</span> = <span class="ruby-identifier">e</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">63</span>     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^[&lt;&gt;]?(\d+)\.\.[&lt;&gt;]?(\d+)$/</span>                   <span class="ruby-comment"># (B, I) n..m</span>
+<span class="line-num">64</span>       <span class="ruby-identifier">s</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">65</span>       <span class="ruby-identifier">e</span> = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">66</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+<span class="line-num">67</span> <span class="ruby-comment">#       raise &quot;Error: invalid range : #{location}&quot;</span>
+<span class="line-num">68</span>         <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[Warning] invalid range : #{location}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
+<span class="line-num">69</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">70</span>     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^[&lt;&gt;]?(\d+)\^[&lt;&gt;]?(\d+)$/</span>                     <span class="ruby-comment"># (C, I) n^m</span>
+<span class="line-num">71</span>       <span class="ruby-identifier">s</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">72</span>       <span class="ruby-identifier">e</span> = <span class="ruby-node">$2</span>.<span class="ruby-identifier">to_i</span>
+<span class="line-num">73</span>       <span class="ruby-identifier">carat</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">74</span>       <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">s</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">e</span> <span class="ruby-operator">!=</span> <span class="ruby-value">1</span> <span class="ruby-comment"># assert n^n+1 or n^1</span>
+<span class="line-num">75</span> <span class="ruby-comment">#       raise &quot;Error: invalid range : #{location}&quot;</span>
+<span class="line-num">76</span>         <span class="ruby-identifier">$stderr</span>.<span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;[Warning] invalid range : #{location}&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">$DEBUG</span>
+<span class="line-num">77</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">78</span>     <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^&quot;?([ATGCatgc]+)&quot;?$/</span>                  <span class="ruby-comment"># (H) literal sequence</span>
+<span class="line-num">79</span>       <span class="ruby-identifier">sequence</span> = <span class="ruby-node">$1</span>.<span class="ruby-identifier">downcase</span>
+<span class="line-num">80</span>       <span class="ruby-identifier">s</span> = <span class="ruby-identifier">e</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">81</span>     <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">82</span>       ;
+<span class="line-num">83</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">84</span>       <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;Error: unknown location format : #{location}&quot;</span>
+<span class="line-num">85</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">86</span> 
+<span class="line-num">87</span>     <span class="ruby-ivar">@from</span>       = <span class="ruby-identifier">s</span>             <span class="ruby-comment"># start position of the location</span>
+<span class="line-num">88</span>     <span class="ruby-ivar">@to</span>         = <span class="ruby-identifier">e</span>             <span class="ruby-comment"># end position of the location</span>
+<span class="line-num">89</span>     <span class="ruby-ivar">@strand</span>     = <span class="ruby-value">1</span>             <span class="ruby-comment"># strand direction of the location</span>
+<span class="line-num">90</span>                                 <span class="ruby-comment">#   forward =&gt; 1 or complement =&gt; -1</span>
+<span class="line-num">91</span>     <span class="ruby-ivar">@sequence</span>   = <span class="ruby-identifier">sequence</span>      <span class="ruby-comment"># literal sequence of the location</span>
+<span class="line-num">92</span>     <span class="ruby-ivar">@lt</span>         = <span class="ruby-identifier">lt</span>            <span class="ruby-comment"># true if the position contains &#39;&lt;&#39;</span>
+<span class="line-num">93</span>     <span class="ruby-ivar">@gt</span>         = <span class="ruby-identifier">gt</span>            <span class="ruby-comment"># true if the position contains &#39;&gt;&#39;</span>
+<span class="line-num">94</span>     <span class="ruby-ivar">@xref_id</span>    = <span class="ruby-identifier">xref_id</span>       <span class="ruby-comment"># link to the external entry as GenBank ID</span>
+<span class="line-num">95</span>     <span class="ruby-ivar">@carat</span>      = <span class="ruby-identifier">carat</span>         <span class="ruby-comment"># true if the location indicates the site</span>
+<span class="line-num">96</span>                                 <span class="ruby-comment"># between two adjoining nucleotides</span>
+<span class="line-num">97</span>   <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -391,18 +384,12 @@ string (see <a href="Locations.html">Bio::Locations</a> documentation)</p>
 
         <div class="method-description">
           
-          <p>Check where a <a href="Location.html">Bio::Location</a> object is located
-compared to another <a href="Location.html">Bio::Location</a> object
-(mainly to facilitate the use of Comparable). A location A is upstream of
-location B if the start position of location A is smaller than the start
-position of location B. If they&#39;re the same, the end positions are
-checked.</p>
+          <p>Check where a <a href="Location.html"><code>Bio::Location</code></a> object is located compared to another <a href="Location.html"><code>Bio::Location</code></a> object (mainly to facilitate the use of Comparable). A location A is upstream of location B if the start position of location A is smaller than the start position of location B. If they&#39;re the same, the end positions are checked.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) _other location_: a <a href="Location.html">Bio::Location</a>
-object</p>
+<p>(required) _other location_: a <a href="Location.html"><code>Bio::Location</code></a> object</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd></dd></dl>
@@ -413,33 +400,32 @@ object</p>
 </li><li>
 <p>0 if both location are the same</p>
 </li><li>
-<p>nil if the argument is not a <a href="Location.html">Bio::Location</a>
-object</p>
+<p>nil if the argument is not a <a href="Location.html"><code>Bio::Location</code></a> object</p>
 </li></ul>
           
           
 
           
           <div class="method-source-code" id="3C-3D-3E-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 163</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Location</span>)
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@from</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_f</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-value">-1</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@from</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_f</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@to</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_f</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-value">-1</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@to</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_f</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-value">0</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">163</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;=&gt;</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">164</span>   <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">kind_of?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Location</span>)
+<span class="line-num">165</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">166</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">167</span> 
+<span class="line-num">168</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@from</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_f</span>
+<span class="line-num">169</span>     <span class="ruby-keyword">return</span> <span class="ruby-value">-1</span>
+<span class="line-num">170</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@from</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">from</span>.<span class="ruby-identifier">to_f</span>
+<span class="line-num">171</span>     <span class="ruby-keyword">return</span> <span class="ruby-value">1</span>
+<span class="line-num">172</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">173</span> 
+<span class="line-num">174</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@to</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_f</span>
+<span class="line-num">175</span>     <span class="ruby-keyword">return</span> <span class="ruby-value">-1</span>
+<span class="line-num">176</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@to</span>.<span class="ruby-identifier">to_f</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">to</span>.<span class="ruby-identifier">to_f</span>
+<span class="line-num">177</span>     <span class="ruby-keyword">return</span> <span class="ruby-value">1</span>
+<span class="line-num">178</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">179</span>   <span class="ruby-keyword">return</span> <span class="ruby-value">0</span>
+<span class="line-num">180</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -463,8 +449,7 @@ object</p>
 
         <div class="method-description">
           
-          <p>If <em>other</em> is equal with the self, returns true. Otherwise, returns
-false.</p>
+          <p>If <em>other</em> is equal with the self, returns true. Otherwise, returns false.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -485,22 +470,22 @@ false.</p>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 188</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
-  <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
-  [ <span class="ruby-value">:from</span>, <span class="ruby-value">:to</span>, <span class="ruby-value">:strand</span>, <span class="ruby-value">:sequence</span>, <span class="ruby-value">:lt</span>, <span class="ruby-value">:gt</span>,
-    <span class="ruby-value">:xref_id</span>, <span class="ruby-value">:carat</span> ].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">begin</span>
-      <span class="ruby-identifier">flag</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">m</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">m</span>))
-    <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>, <span class="ruby-constant">ArgumentError</span>, <span class="ruby-constant">NameError</span>
-      <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">flag</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">flag</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">188</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">189</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">true</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">190</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">instance_of?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>)
+<span class="line-num">191</span>   <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">192</span>   [ <span class="ruby-value">:from</span>, <span class="ruby-value">:to</span>, <span class="ruby-value">:strand</span>, <span class="ruby-value">:sequence</span>, <span class="ruby-value">:lt</span>, <span class="ruby-value">:gt</span>,
+<span class="line-num">193</span>     <span class="ruby-value">:xref_id</span>, <span class="ruby-value">:carat</span> ].<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+<span class="line-num">194</span>     <span class="ruby-keyword">begin</span>
+<span class="line-num">195</span>       <span class="ruby-identifier">flag</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">m</span>) <span class="ruby-operator">==</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">__send__</span>(<span class="ruby-identifier">m</span>))
+<span class="line-num">196</span>     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>, <span class="ruby-constant">ArgumentError</span>, <span class="ruby-constant">NameError</span>
+<span class="line-num">197</span>       <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">198</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">199</span>     <span class="ruby-keyword">break</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">flag</span>
+<span class="line-num">200</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">201</span>   <span class="ruby-identifier">flag</span>
+<span class="line-num">202</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -524,24 +509,22 @@ false.</p>
 
         <div class="method-description">
           
-          <p>Complements the sequence location (i.e. alternates the strand). Note that
-it is destructive method (i.e. modifies itself), but it does not modify the
-“sequence” attribute.</p>
+          <p>Complements the sequence location (i.e. alternates the strand). Note that it is destructive method (i.e. modifies itself), but it does not modify the “sequence” attribute.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>the <a href="Location.html">Bio::Location</a> object</p>
+<p>the <a href="Location.html"><code>Bio::Location</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="complement-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 129</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">complement</span>
-  <span class="ruby-ivar">@strand</span> <span class="ruby-operator">*=</span> <span class="ruby-value">-1</span>
-  <span class="ruby-keyword">self</span>                                        <span class="ruby-comment"># return Location object</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">129</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">complement</span>
+<span class="line-num">130</span>   <span class="ruby-ivar">@strand</span> <span class="ruby-operator">*=</span> <span class="ruby-value">-1</span>
+<span class="line-num">131</span>   <span class="ruby-keyword">self</span>                                        <span class="ruby-comment"># return Location object</span>
+<span class="line-num">132</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -571,10 +554,10 @@ it is destructive method (i.e. modifies itself), but it does not modify the
 
           
           <div class="method-source-code" id="range-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 146</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">range</span>
-  <span class="ruby-ivar">@from</span><span class="ruby-operator">..</span><span class="ruby-ivar">@to</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">146</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">range</span>
+<span class="line-num">147</span>   <span class="ruby-ivar">@from</span><span class="ruby-operator">..</span><span class="ruby-ivar">@to</span>
+<span class="line-num">148</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -603,23 +586,22 @@ it is destructive method (i.e. modifies itself), but it does not modify the
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>sequence</em>: sequence to be used to replace the sequence
-at the location</p>
+<p>(required) <em>sequence</em>: sequence to be used to replace the sequence at the location</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p>the <a href="Location.html">Bio::Location</a> object</p>
+<p>the <a href="Location.html"><code>Bio::Location</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="replace-source">
-            <pre><span class="ruby-comment"># File lib/bio/location.rb, line 140</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace</span>(<span class="ruby-identifier">sequence</span>)
-  <span class="ruby-ivar">@sequence</span> = <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">downcase</span>
-  <span class="ruby-keyword">self</span>                                        <span class="ruby-comment"># return Location object</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/location.rb</span>
+<span class="line-num">140</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">replace</span>(<span class="ruby-identifier">sequence</span>)
+<span class="line-num">141</span>   <span class="ruby-ivar">@sequence</span> = <span class="ruby-identifier">sequence</span>.<span class="ruby-identifier">downcase</span>
+<span class="line-num">142</span>   <span class="ruby-keyword">self</span>                                        <span class="ruby-comment"># return Location object</span>
+<span class="line-num">143</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -633,12 +615,13 @@ at the location</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

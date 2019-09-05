@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -108,11 +112,7 @@
 
   <section class="description">
     
-<p><a href="../../Sequence.html">Sequence</a> segment pair of the sim4 result.
-Similar to Bio::Blast::Report::HSP but lacks many methods. For mRNA-genome
-mapping programs, unlike other homology search programs, the class is used
-not only for exons but also for introns. (Note that intron data would not
-be available according to run-time options of the program.)</p>
+<p><a href="../../Sequence.html"><code>Sequence</code></a> segment pair of the sim4 result. Similar to Bio::Blast::Report::HSP but lacks many methods. For mRNA-genome mapping programs, unlike other homology search programs, the class is used not only for exons but also for introns. (Note that intron data would not be available according to run-time options of the program.)</p>
 
   </section>
 
@@ -139,9 +139,7 @@ be available according to run-time options of the program.)</p>
 
         <div class="method-description">
         
-        <p>Returns directions of mapping. Maybe one of “-&gt;”, “&lt;-”, “==” or “” or
-nil. This would be a <a href="../../Sim4.html">Bio::Sim4</a> specific
-method.</p>
+        <p>Returns directions of mapping. Maybe one of “-&gt;”, “&lt;-”, “==” or “” or nil. This would be a <a href="../../Sim4.html"><code>Bio::Sim4</code></a> specific method.</p>
         
         </div>
       </div>
@@ -154,8 +152,7 @@ method.</p>
 
         <div class="method-description">
         
-        <p>Returns the “midline” of the segment pair. Returns nil if no alignment data
-are available.</p>
+        <p>Returns the “midline” of the segment pair. Returns nil if no alignment data are available.</p>
         
         </div>
       </div>
@@ -181,9 +178,7 @@ are available.</p>
 
         <div class="method-description">
         
-        <p>Returns segment informations of &#39;seq1&#39;. Returns a <a
-href="Segment.html">Bio::Sim4::Report::Segment</a> object. These would be
-<a href="../../Sim4.html">Bio::Sim4</a> specific methods.</p>
+        <p>Returns segment informations of &#39;seq1&#39;. Returns a <a href="Segment.html"><code>Bio::Sim4::Report::Segment</code></a> object. These would be <a href="../../Sim4.html"><code>Bio::Sim4</code></a> specific methods.</p>
         
         </div>
       </div>
@@ -196,9 +191,7 @@ href="Segment.html">Bio::Sim4::Report::Segment</a> object. These would be
 
         <div class="method-description">
         
-        <p>Returns segment informations of &#39;seq2&#39;. Returns a <a
-href="Segment.html">Bio::Sim4::Report::Segment</a> object. These would be
-<a href="../../Sim4.html">Bio::Sim4</a> specific methods.</p>
+        <p>Returns segment informations of &#39;seq2&#39;. Returns a <a href="Segment.html"><code>Bio::Sim4::Report::Segment</code></a> object. These would be <a href="../../Sim4.html"><code>Bio::Sim4</code></a> specific methods.</p>
         
         </div>
       </div>
@@ -226,22 +219,18 @@ href="Segment.html">Bio::Sim4::Report::Segment</a> object. These would be
 
         <div class="method-description">
           
-          <p>Parses part of sim4 result text and creates a new <a
-href="SegmentPair.html">SegmentPair</a> object for regions which can not be
-aligned correctly. It is designed to be called internally from <a
-href="Hit.html">Bio::Sim4::Report::Hit</a> class. Users shall not use it
-directly.</p>
+          <p>Parses part of sim4 result text and creates a new <a href="SegmentPair.html"><code>SegmentPair</code></a> object for regions which can not be aligned correctly. It is designed to be called internally from <a href="Hit.html"><code>Bio::Sim4::Report::Hit</code></a> class. Users shall not use it directly.</p>
           
           
 
           
           <div class="method-source-code" id="both_intron-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 206</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">both_intron</span>(<span class="ruby-identifier">prev_e</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">aln</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_e</span>.<span class="ruby-identifier">seq1</span>.<span class="ruby-identifier">to</span><span class="ruby-value">+1</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">seq1</span>.<span class="ruby-identifier">from</span><span class="ruby-value">-1</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>]),
-           <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_e</span>.<span class="ruby-identifier">seq2</span>.<span class="ruby-identifier">to</span><span class="ruby-value">+1</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">seq2</span>.<span class="ruby-identifier">from</span><span class="ruby-value">-1</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>]),
-           <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">206</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">both_intron</span>(<span class="ruby-identifier">prev_e</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">aln</span>)
+<span class="line-num">207</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_e</span>.<span class="ruby-identifier">seq1</span>.<span class="ruby-identifier">to</span><span class="ruby-value">+1</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">seq1</span>.<span class="ruby-identifier">from</span><span class="ruby-value">-1</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>]),
+<span class="line-num">208</span>            <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_e</span>.<span class="ruby-identifier">seq2</span>.<span class="ruby-identifier">to</span><span class="ruby-value">+1</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">seq2</span>.<span class="ruby-identifier">from</span><span class="ruby-value">-1</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>]),
+<span class="line-num">209</span>            <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>])
+<span class="line-num">210</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -265,24 +254,21 @@ directly.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="SegmentPair.html">SegmentPair</a> object. It is
-designed to be called internally from <a
-href="Hit.html">Bio::Sim4::Report::Hit</a> object. Users shall not use it
-directly.</p>
+          <p>Creates a new <a href="SegmentPair.html"><code>SegmentPair</code></a> object. It is designed to be called internally from <a href="Hit.html"><code>Bio::Sim4::Report::Hit</code></a> object. Users shall not use it directly.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 139</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">seq1</span>, <span class="ruby-identifier">seq2</span>, <span class="ruby-identifier">midline</span> = <span class="ruby-keyword">nil</span>,
-               <span class="ruby-identifier">percent_identity</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">direction</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-ivar">@seq1</span> = <span class="ruby-identifier">seq1</span>
-  <span class="ruby-ivar">@seq2</span> = <span class="ruby-identifier">seq2</span>
-  <span class="ruby-ivar">@midline</span> = <span class="ruby-identifier">midline</span>
-  <span class="ruby-ivar">@percent_identity</span> = <span class="ruby-identifier">percent_identity</span>
-  <span class="ruby-ivar">@direction</span> = <span class="ruby-identifier">direction</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">139</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">seq1</span>, <span class="ruby-identifier">seq2</span>, <span class="ruby-identifier">midline</span> = <span class="ruby-keyword">nil</span>,
+<span class="line-num">140</span>                <span class="ruby-identifier">percent_identity</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">direction</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">141</span>   <span class="ruby-ivar">@seq1</span> = <span class="ruby-identifier">seq1</span>
+<span class="line-num">142</span>   <span class="ruby-ivar">@seq2</span> = <span class="ruby-identifier">seq2</span>
+<span class="line-num">143</span>   <span class="ruby-ivar">@midline</span> = <span class="ruby-identifier">midline</span>
+<span class="line-num">144</span>   <span class="ruby-ivar">@percent_identity</span> = <span class="ruby-identifier">percent_identity</span>
+<span class="line-num">145</span>   <span class="ruby-ivar">@direction</span> = <span class="ruby-identifier">direction</span>
+<span class="line-num">146</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -306,22 +292,19 @@ directly.</p>
 
         <div class="method-description">
           
-          <p>Parses part of sim4 result text and creates a new <a
-href="SegmentPair.html">SegmentPair</a> object. It is designed to be called
-internally from <a href="Hit.html">Bio::Sim4::Report::Hit</a> class. Users
-shall not use it directly.</p>
+          <p>Parses part of sim4 result text and creates a new <a href="SegmentPair.html"><code>SegmentPair</code></a> object. It is designed to be called internally from <a href="Hit.html"><code>Bio::Sim4::Report::Hit</code></a> class. Users shall not use it directly.</p>
           
           
 
           
           <div class="method-source-code" id="parse-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 172</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">aln</span>)
-  <span class="ruby-regexp">/^(\d+)\-(\d+)\s*\((\d+)\-(\d+)\)\s*([\d\.]+)\%\s*([\-\&lt;\&gt;\=]*)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">str</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$1</span>, <span class="ruby-node">$2</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>]),
-           <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$3</span>, <span class="ruby-node">$4</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>]),
-           <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>], <span class="ruby-node">$5</span>, <span class="ruby-node">$6</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">172</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">aln</span>)
+<span class="line-num">173</span>   <span class="ruby-regexp">/^(\d+)\-(\d+)\s*\((\d+)\-(\d+)\)\s*([\d\.]+)\%\s*([\-\&lt;\&gt;\=]*)/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">str</span>
+<span class="line-num">174</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$1</span>, <span class="ruby-node">$2</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>]),
+<span class="line-num">175</span>            <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">$3</span>, <span class="ruby-node">$4</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>]),
+<span class="line-num">176</span>            <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>], <span class="ruby-node">$5</span>, <span class="ruby-node">$6</span>)
+<span class="line-num">177</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -345,22 +328,18 @@ shall not use it directly.</p>
 
         <div class="method-description">
           
-          <p>Parses part of sim4 result text and creates a new <a
-href="SegmentPair.html">SegmentPair</a> object when the seq1 is a intron.
-It is designed to be called internally from <a
-href="Hit.html">Bio::Sim4::Report::Hit</a> class. Users shall not use it
-directly.</p>
+          <p>Parses part of sim4 result text and creates a new <a href="SegmentPair.html"><code>SegmentPair</code></a> object when the seq1 is a intron. It is designed to be called internally from <a href="Hit.html"><code>Bio::Sim4::Report::Hit</code></a> class. Users shall not use it directly.</p>
           
           
 
           
           <div class="method-source-code" id="seq1_intron-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 184</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">seq1_intron</span>(<span class="ruby-identifier">prev_e</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">aln</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_e</span>.<span class="ruby-identifier">seq1</span>.<span class="ruby-identifier">to</span><span class="ruby-value">+1</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">seq1</span>.<span class="ruby-identifier">from</span><span class="ruby-value">-1</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>]),
-           <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>]),
-           <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">184</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">seq1_intron</span>(<span class="ruby-identifier">prev_e</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">aln</span>)
+<span class="line-num">185</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_e</span>.<span class="ruby-identifier">seq1</span>.<span class="ruby-identifier">to</span><span class="ruby-value">+1</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">seq1</span>.<span class="ruby-identifier">from</span><span class="ruby-value">-1</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>]),
+<span class="line-num">186</span>            <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>]),
+<span class="line-num">187</span>            <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>])
+<span class="line-num">188</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -384,22 +363,18 @@ directly.</p>
 
         <div class="method-description">
           
-          <p>Parses part of sim4 result text and creates a new <a
-href="SegmentPair.html">SegmentPair</a> object when seq2 is a intron. It is
-designed to be called internally from <a
-href="Hit.html">Bio::Sim4::Report::Hit</a> class. Users shall not use it
-directly.</p>
+          <p>Parses part of sim4 result text and creates a new <a href="SegmentPair.html"><code>SegmentPair</code></a> object when seq2 is a intron. It is designed to be called internally from <a href="Hit.html"><code>Bio::Sim4::Report::Hit</code></a> class. Users shall not use it directly.</p>
           
           
 
           
           <div class="method-source-code" id="seq2_intron-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 195</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">seq2_intron</span>(<span class="ruby-identifier">prev_e</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">aln</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>]),
-           <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_e</span>.<span class="ruby-identifier">seq2</span>.<span class="ruby-identifier">to</span><span class="ruby-value">+1</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">seq2</span>.<span class="ruby-identifier">from</span><span class="ruby-value">-1</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>]),
-           <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>])
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">195</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">seq2_intron</span>(<span class="ruby-identifier">prev_e</span>, <span class="ruby-identifier">e</span>, <span class="ruby-identifier">aln</span>)
+<span class="line-num">196</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">nil</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">0</span>]),
+<span class="line-num">197</span>            <span class="ruby-constant">Segment</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">prev_e</span>.<span class="ruby-identifier">seq2</span>.<span class="ruby-identifier">to</span><span class="ruby-value">+1</span>, <span class="ruby-identifier">e</span>.<span class="ruby-identifier">seq2</span>.<span class="ruby-identifier">from</span><span class="ruby-value">-1</span>, <span class="ruby-identifier">aln</span>[<span class="ruby-value">2</span>]),
+<span class="line-num">198</span>            <span class="ruby-identifier">aln</span>[<span class="ruby-value">1</span>])
+<span class="line-num">199</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -431,17 +406,16 @@ directly.</p>
 
         <div class="method-description">
           
-          <p>Returns alignment length of the segment pair. Returns nil if no alignment
-data are available.</p>
+          <p>Returns alignment length of the segment pair. Returns nil if no alignment data are available.</p>
           
           
 
           
           <div class="method-source-code" id="align_len-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 238</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">align_len</span>
-  (<span class="ruby-ivar">@midline</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@seq1</span>.<span class="ruby-identifier">seq</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@seq2</span>.<span class="ruby-identifier">seq</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@midline</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">238</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">align_len</span>
+<span class="line-num">239</span>   (<span class="ruby-ivar">@midline</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@seq1</span>.<span class="ruby-identifier">seq</span> <span class="ruby-keyword">and</span> <span class="ruby-ivar">@seq2</span>.<span class="ruby-identifier">seq</span>) <span class="ruby-operator">?</span> <span class="ruby-ivar">@midline</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">240</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -471,8 +445,8 @@ data are available.</p>
 
           
           <div class="method-source-code" id="hit_from-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 227</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hit_from</span>;   <span class="ruby-ivar">@seq2</span>.<span class="ruby-identifier">from</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">227</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hit_from</span>;   <span class="ruby-ivar">@seq2</span>.<span class="ruby-identifier">from</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -502,8 +476,8 @@ data are available.</p>
 
           
           <div class="method-source-code" id="hit_to-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 230</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hit_to</span>;     <span class="ruby-ivar">@seq2</span>.<span class="ruby-identifier">to</span>;   <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">230</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hit_to</span>;     <span class="ruby-ivar">@seq2</span>.<span class="ruby-identifier">to</span>;   <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -533,8 +507,8 @@ data are available.</p>
 
           
           <div class="method-source-code" id="hseq-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 234</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hseq</span>;       <span class="ruby-ivar">@seq2</span>.<span class="ruby-identifier">seq</span>;  <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">234</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">hseq</span>;       <span class="ruby-ivar">@seq2</span>.<span class="ruby-identifier">seq</span>;  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -564,8 +538,8 @@ data are available.</p>
 
           
           <div class="method-source-code" id="qseq-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 224</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">qseq</span>;       <span class="ruby-ivar">@seq1</span>.<span class="ruby-identifier">seq</span>;  <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">224</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">qseq</span>;       <span class="ruby-ivar">@seq1</span>.<span class="ruby-identifier">seq</span>;  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -595,8 +569,8 @@ data are available.</p>
 
           
           <div class="method-source-code" id="query_from-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 218</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_from</span>; <span class="ruby-ivar">@seq1</span>.<span class="ruby-identifier">from</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">218</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_from</span>; <span class="ruby-ivar">@seq1</span>.<span class="ruby-identifier">from</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -626,8 +600,8 @@ data are available.</p>
 
           
           <div class="method-source-code" id="query_to-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/sim4/report.rb, line 221</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_to</span>;   <span class="ruby-ivar">@seq1</span>.<span class="ruby-identifier">to</span>;   <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/sim4/report.rb</span>
+<span class="line-num">221</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_to</span>;   <span class="ruby-ivar">@seq1</span>.<span class="ruby-identifier">to</span>;   <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -641,12 +615,13 @@ data are available.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

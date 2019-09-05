@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -102,12 +106,9 @@
 
   <section class="description">
     
-<p><a href="Solexa.html">Bio::Sequence::QualityScore::Solexa</a> is a module
-having quality calculation methods for the <a href="Solexa.html">Solexa</a>
-quality score.</p>
+<p><a href="Solexa.html"><code>Bio::Sequence::QualityScore::Solexa</code></a> is a module having quality calculation methods for the <a href="Solexa.html"><code>Solexa</code></a> quality score.</p>
 
-<p>BioRuby internal use only (mainly from <a
-href="../../Fastq.html">Bio::Fastq</a>).</p>
+<p>BioRuby internal use only (mainly from <a href="../../Fastq.html"><code>Bio::Fastq</code></a>).</p>
 
   </section>
 
@@ -272,10 +273,10 @@ href="../../Fastq.html">Bio::Fastq</a>).</p>
 
           
           <div class="method-source-code" id="quality_score_type-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/quality_score.rb, line 152</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quality_score_type</span>
-  <span class="ruby-value">:solexa</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/quality_score.rb</span>
+<span class="line-num">152</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">quality_score_type</span>
+<span class="line-num">153</span>   <span class="ruby-value">:solexa</span>
+<span class="line-num">154</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -299,7 +300,7 @@ href="../../Fastq.html">Bio::Fastq</a>).</p>
 
         <div class="method-description">
           
-          <p>Probability to <a href="Solexa.html">Solexa</a> score conversion.</p>
+          <p>Probability to <a href="Solexa.html"><code>Solexa</code></a> score conversion.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -315,15 +316,15 @@ href="../../Fastq.html">Bio::Fastq</a>).</p>
 
           
           <div class="method-source-code" id="solexa_p2q-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/quality_score.rb, line 182</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">solexa_p2q</span>(<span class="ruby-identifier">probabilities</span>)
-  <span class="ruby-identifier">probabilities</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">t</span> = <span class="ruby-identifier">p</span> <span class="ruby-operator">/</span> (<span class="ruby-value">1.0</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">p</span>)
-    <span class="ruby-identifier">t</span> = <span class="ruby-constant">Float</span><span class="ruby-operator">::</span><span class="ruby-constant">MIN</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Float</span><span class="ruby-operator">::</span><span class="ruby-constant">MIN</span>
-    <span class="ruby-identifier">q</span> = <span class="ruby-value">-10</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-identifier">t</span>)
-    <span class="ruby-identifier">q</span>.<span class="ruby-identifier">finite?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">q</span>.<span class="ruby-identifier">round</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">q</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/quality_score.rb</span>
+<span class="line-num">182</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">solexa_p2q</span>(<span class="ruby-identifier">probabilities</span>)
+<span class="line-num">183</span>   <span class="ruby-identifier">probabilities</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">p</span><span class="ruby-operator">|</span>
+<span class="line-num">184</span>     <span class="ruby-identifier">t</span> = <span class="ruby-identifier">p</span> <span class="ruby-operator">/</span> (<span class="ruby-value">1.0</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">p</span>)
+<span class="line-num">185</span>     <span class="ruby-identifier">t</span> = <span class="ruby-constant">Float</span><span class="ruby-operator">::</span><span class="ruby-constant">MIN</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">&lt;</span> <span class="ruby-constant">Float</span><span class="ruby-operator">::</span><span class="ruby-constant">MIN</span>
+<span class="line-num">186</span>     <span class="ruby-identifier">q</span> = <span class="ruby-value">-10</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">log10</span>(<span class="ruby-identifier">t</span>)
+<span class="line-num">187</span>     <span class="ruby-identifier">q</span>.<span class="ruby-identifier">finite?</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">q</span>.<span class="ruby-identifier">round</span> <span class="ruby-operator">:</span> <span class="ruby-identifier">q</span>
+<span class="line-num">188</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">189</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -351,7 +352,7 @@ href="../../Fastq.html">Bio::Fastq</a>).</p>
 
         <div class="method-description">
           
-          <p><a href="Solexa.html">Solexa</a> score to probability conversion.</p>
+          <p><a href="Solexa.html"><code>Solexa</code></a> score to probability conversion.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -367,19 +368,19 @@ href="../../Fastq.html">Bio::Fastq</a>).</p>
 
           
           <div class="method-source-code" id="solexa_q2p-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/quality_score.rb, line 161</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">solexa_q2p</span>(<span class="ruby-identifier">scores</span>)
-  <span class="ruby-identifier">scores</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">t</span> = <span class="ruby-value">10</span> <span class="ruby-operator">**</span> (<span class="ruby-operator">-</span> <span class="ruby-identifier">q</span> <span class="ruby-operator">/</span> <span class="ruby-value">10.0</span>)
-    <span class="ruby-identifier">t</span> <span class="ruby-operator">/=</span> (<span class="ruby-value">1.0</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>)
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1.0</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-identifier">t</span> = <span class="ruby-value">1.0</span>
-    <span class="ruby-comment">#elsif t &lt; 0.0 then</span>
-    <span class="ruby-comment">#  t = 0.0</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-identifier">t</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/sequence/quality_score.rb</span>
+<span class="line-num">161</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">solexa_q2p</span>(<span class="ruby-identifier">scores</span>)
+<span class="line-num">162</span>   <span class="ruby-identifier">scores</span>.<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">q</span><span class="ruby-operator">|</span>
+<span class="line-num">163</span>     <span class="ruby-identifier">t</span> = <span class="ruby-value">10</span> <span class="ruby-operator">**</span> (<span class="ruby-operator">-</span> <span class="ruby-identifier">q</span> <span class="ruby-operator">/</span> <span class="ruby-value">10.0</span>)
+<span class="line-num">164</span>     <span class="ruby-identifier">t</span> <span class="ruby-operator">/=</span> (<span class="ruby-value">1.0</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">t</span>)
+<span class="line-num">165</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span> <span class="ruby-operator">&gt;</span> <span class="ruby-value">1.0</span> <span class="ruby-keyword">then</span>
+<span class="line-num">166</span>       <span class="ruby-identifier">t</span> = <span class="ruby-value">1.0</span>
+<span class="line-num">167</span>     <span class="ruby-comment">#elsif t &lt; 0.0 then</span>
+<span class="line-num">168</span>     <span class="ruby-comment">#  t = 0.0</span>
+<span class="line-num">169</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">170</span>     <span class="ruby-identifier">t</span>
+<span class="line-num">171</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">172</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -397,12 +398,13 @@ href="../../Fastq.html">Bio::Fastq</a>).</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -102,20 +106,11 @@
 
   <section class="description">
     
-<p><a href="Report.html">Bio::Blat::Report</a> is a BLAT report parser class.
-Its object may contain some Bio::Blat::Report::Hits objects.</p>
+<p><a href="Report.html"><code>Bio::Blat::Report</code></a> is a BLAT report parser class. Its object may contain some Bio::Blat::Report::Hits objects.</p>
 
-<p>In BLAT results, the start position of a sequnece is numbered as 0. On the
-other hand, in many other homology search programs, the start position of a
-sequence is numbered as 1. To keep compatibility, the BLAT parser adds 1 to
-every position number except Bio::Blat::Report::Seqdesc and some <a
-href="../Blat.html">Bio::Blat</a> specific methods.</p>
+<p>In BLAT results, the start position of a sequnece is numbered as 0. On the other hand, in many other homology search programs, the start position of a sequence is numbered as 1. To keep compatibility, the BLAT parser adds 1 to every position number except Bio::Blat::Report::Seqdesc and some <a href="../Blat.html"><code>Bio::Blat</code></a> specific methods.</p>
 
-<p>Note that <a href="Report.html#method-i-query_def">#query_def</a>, <a
-href="Report.html#method-i-query_id">query_id</a>, <a
-href="Report.html#method-i-query_len">query_len</a>  methods simply return
-first hit&#39;s query_*. If multiple query sequences are given, these
-values will be incorrect.</p>
+<p>Note that <a href="Report.html#method-i-query_def"><code>Bio::Blat::Report#query_def</code></a>, <a href="Report.html#method-i-query_id"><code>query_id</code></a>, <a href="Report.html#method-i-query_len"><code>query_len</code></a>  methods simply return first hit&#39;s query_*. If multiple query sequences are given, these values will be incorrect.</p>
 
   </section>
 
@@ -134,14 +129,12 @@ values will be incorrect.</p>
       
         <dt id="DELIMITER">DELIMITER
         
-        <dd><p>Delimiter of each entry. <a href="../FlatFile.html">Bio::FlatFile</a> uses
-it. In <a href="Report.html">Bio::Blat::Report</a>, it it nil (1 entry 1
-file).</p>
+        <dd><p>Delimiter of each entry. <a href="../FlatFile.html"><code>Bio::FlatFile</code></a> uses it. In <a href="Report.html"><code>Bio::Blat::Report</code></a>, it it nil (1 entry 1 file).</p>
         
       
         <dt id="FLATFILE_SPLITTER">FLATFILE_SPLITTER
         
-        <dd><p>Splitter for <a href="../FlatFile.html">Bio::FlatFile</a></p>
+        <dd><p>Splitter for <a href="../FlatFile.html"><code>Bio::FlatFile</code></a></p>
         
       
       </dl>
@@ -163,8 +156,7 @@ file).</p>
 
         <div class="method-description">
         
-        <p>Returns descriptions of columns. Returns an Array. This would be a <a
-href="../Blat.html">Bio::Blat</a> specific method.</p>
+        <p>Returns descriptions of columns. Returns an Array. This would be a <a href="../Blat.html"><code>Bio::Blat</code></a> specific method.</p>
         
         </div>
       </div>
@@ -177,8 +169,7 @@ href="../Blat.html">Bio::Blat</a> specific method.</p>
 
         <div class="method-description">
         
-        <p>hits of the result. Returns an Array of <a
-href="Report/Hit.html">Bio::Blat::Report::Hit</a> objects.</p>
+        <p>hits of the result. Returns an Array of <a href="Report/Hit.html"><code>Bio::Blat::Report::Hit</code></a> objects.</p>
         
         </div>
       </div>
@@ -219,39 +210,36 @@ href="Report/Hit.html">Bio::Blat::Report::Hit</a> objects.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Report.html">Bio::Blat::Report</a> object from BLAT
-result text (String). You can use <a
-href="../FlatFile.html">Bio::FlatFile</a> to read a file. Currently,
-results created with options -out=psl (default) or -out=pslx are supported.</p>
+          <p>Creates a new <a href="Report.html"><code>Bio::Blat::Report</code></a> object from BLAT result text (String). You can use <a href="../FlatFile.html"><code>Bio::FlatFile</code></a> to read a file. Currently, results created with options -out=psl (default) or -out=pslx are supported.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 56</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">text</span> = <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-identifier">head</span> = []
-  <span class="ruby-ivar">@hits</span> = []
-  <span class="ruby-identifier">text</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">flag</span> <span class="ruby-keyword">then</span>
-      <span class="ruby-ivar">@hits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>)
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-comment"># for headerless data</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\d/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span> <span class="ruby-keyword">then</span>
-        <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
-        <span class="ruby-keyword">redo</span>
-      <span class="ruby-keyword">end</span>
-      <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\A\-+\s*\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
-        <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
-      <span class="ruby-keyword">else</span>
-        <span class="ruby-identifier">head</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-keyword">end</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@columns</span> = <span class="ruby-identifier">parse_header</span>(<span class="ruby-identifier">head</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">head</span>.<span class="ruby-identifier">empty?</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">56</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">text</span> = <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">57</span>   <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">false</span>
+<span class="line-num">58</span>   <span class="ruby-identifier">head</span> = []
+<span class="line-num">59</span>   <span class="ruby-ivar">@hits</span> = []
+<span class="line-num">60</span>   <span class="ruby-identifier">text</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">61</span>     <span class="ruby-keyword">if</span> <span class="ruby-identifier">flag</span> <span class="ruby-keyword">then</span>
+<span class="line-num">62</span>       <span class="ruby-ivar">@hits</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">63</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">64</span>       <span class="ruby-comment"># for headerless data</span>
+<span class="line-num">65</span>       <span class="ruby-keyword">if</span> <span class="ruby-regexp">/^\d/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span> <span class="ruby-keyword">then</span>
+<span class="line-num">66</span>         <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">67</span>         <span class="ruby-keyword">redo</span>
+<span class="line-num">68</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">69</span>       <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+<span class="line-num">70</span>       <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\A\-+\s*\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span>
+<span class="line-num">71</span>         <span class="ruby-identifier">flag</span> = <span class="ruby-keyword">true</span>
+<span class="line-num">72</span>       <span class="ruby-keyword">else</span>
+<span class="line-num">73</span>         <span class="ruby-identifier">head</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
+<span class="line-num">74</span>       <span class="ruby-keyword">end</span>
+<span class="line-num">75</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">76</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">77</span>   <span class="ruby-ivar">@columns</span> = <span class="ruby-identifier">parse_header</span>(<span class="ruby-identifier">head</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">head</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">78</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -283,30 +271,28 @@ results created with options -out=psl (default) or -out=pslx are supported.</p>
 
         <div class="method-description">
           
-          <p>Adds a header line if the header data is not yet given and the given line
-is suitable for header. Returns self if adding header line is succeeded.
-Otherwise, returns false (the line is not added).</p>
+          <p>Adds a header line if the header data is not yet given and the given line is suitable for header. Returns self if adding header line is succeeded. Otherwise, returns false (the line is not added).</p>
           
           
 
           
           <div class="method-source-code" id="add_header_line-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 84</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_header_line</span>(<span class="ruby-identifier">line</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@columns</span>
-  <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
-  <span class="ruby-keyword">case</span> <span class="ruby-identifier">line</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^\d/</span>
-    <span class="ruby-ivar">@columns</span> = (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">parse_header</span>(<span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">:</span> []
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A\-+\s*\z/</span>
-    <span class="ruby-ivar">@columns</span> = (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">parse_header</span>(<span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">:</span> []
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@header_lines</span> <span class="ruby-operator">||=</span> []
-    <span class="ruby-ivar">@header_lines</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">line</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">84</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_header_line</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">85</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@columns</span>
+<span class="line-num">86</span>   <span class="ruby-identifier">line</span> = <span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>
+<span class="line-num">87</span>   <span class="ruby-keyword">case</span> <span class="ruby-identifier">line</span>
+<span class="line-num">88</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/^\d/</span>
+<span class="line-num">89</span>     <span class="ruby-ivar">@columns</span> = (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">parse_header</span>(<span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">:</span> []
+<span class="line-num">90</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+<span class="line-num">91</span>   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/\A\-+\s*\z/</span>
+<span class="line-num">92</span>     <span class="ruby-ivar">@columns</span> = (<span class="ruby-keyword">defined?</span> <span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">parse_header</span>(<span class="ruby-ivar">@header_lines</span>) <span class="ruby-operator">:</span> []
+<span class="line-num">93</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+<span class="line-num">94</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">95</span>     <span class="ruby-ivar">@header_lines</span> <span class="ruby-operator">||=</span> []
+<span class="line-num">96</span>     <span class="ruby-ivar">@header_lines</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">line</span>
+<span class="line-num">97</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">98</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -330,28 +316,25 @@ Otherwise, returns false (the line is not added).</p>
 
         <div class="method-description">
           
-          <p>Adds a line to the entry if the given line is regarded as a part of the
-current entry. If the current entry (self) is empty, or the line has the
-same query name, the line is added and returns self. Otherwise, returns
-false (the line is not added).</p>
+          <p>Adds a line to the entry if the given line is regarded as a part of the current entry. If the current entry (self) is empty, or the line has the same query name, the line is added and returns self. Otherwise, returns false (the line is not added).</p>
           
           
 
           
           <div class="method-source-code" id="add_line-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 105</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_line</span>(<span class="ruby-identifier">line</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\A\s*\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">hit</span> = <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">hit</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">name</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">hit</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">105</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">add_line</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">106</span>   <span class="ruby-keyword">if</span> <span class="ruby-regexp">/\A\s*\z/</span> <span class="ruby-operator">=~</span> <span class="ruby-identifier">line</span> <span class="ruby-keyword">then</span>
+<span class="line-num">107</span>     <span class="ruby-keyword">return</span> <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-operator">?</span> <span class="ruby-keyword">self</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="line-num">108</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">109</span>   <span class="ruby-identifier">hit</span> = <span class="ruby-constant">Hit</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">line</span>.<span class="ruby-identifier">chomp</span>)
+<span class="line-num">110</span>   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">empty?</span> <span class="ruby-keyword">or</span> <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">first</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">hit</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">name</span> <span class="ruby-keyword">then</span>
+<span class="line-num">111</span>     <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">hit</span>
+<span class="line-num">112</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">self</span>
+<span class="line-num">113</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">114</span>     <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
+<span class="line-num">115</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">116</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -403,17 +386,16 @@ false (the line is not added).</p>
 
         <div class="method-description">
           
-          <p>Iterates over each <a href="Report/Hit.html">Bio::Blat::Report::Hit</a>
-object. Same as hits.each.</p>
+          <p>Iterates over each <a href="Report/Hit.html"><code>Bio::Blat::Report::Hit</code></a> object. Same as hits.each.</p>
           
           
 
           
           <div class="method-source-code" id="each_hit-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 496</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_hit</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: hit</span>
-  <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">496</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each_hit</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: hit</span>
+<span class="line-num">497</span>   <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
+<span class="line-num">498</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -447,8 +429,8 @@ object. Same as hits.each.</p>
 
           
           <div class="method-source-code" id="num_hits-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 492</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">num_hits</span>;     <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">size</span>;     <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">492</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">num_hits</span>;     <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">size</span>;     <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -472,16 +454,14 @@ object. Same as hits.each.</p>
 
         <div class="method-description">
           
-          <p>Returns the name of query sequence. CAUTION: query_* methods simply return
-first hit&#39;s query_*. If multiple query sequences are given, these
-values will be incorrect.</p>
+          <p>Returns the name of query sequence. CAUTION: query_* methods simply return first hit&#39;s query_*. If multiple query sequences are given, these values will be incorrect.</p>
           
           
 
           
           <div class="method-source-code" id="query_def-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 505</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_def</span>; (<span class="ruby-identifier">x</span> = <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">query_def</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">505</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_def</span>; (<span class="ruby-identifier">x</span> = <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">query_def</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -537,16 +517,14 @@ values will be incorrect.</p>
 
         <div class="method-description">
           
-          <p>Returns the length of query sequence. CAUTION: query_* methods simply
-return first hit&#39;s query_*. If multiple query sequences are given,
-these values will be incorrect.</p>
+          <p>Returns the length of query sequence. CAUTION: query_* methods simply return first hit&#39;s query_*. If multiple query sequences are given, these values will be incorrect.</p>
           
           
 
           
           <div class="method-source-code" id="query_len-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 511</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_len</span>; (<span class="ruby-identifier">x</span> = <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">query_len</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">511</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_len</span>; (<span class="ruby-identifier">x</span> = <span class="ruby-ivar">@hits</span>.<span class="ruby-identifier">first</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">query_len</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -560,12 +538,13 @@ these values will be incorrect.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

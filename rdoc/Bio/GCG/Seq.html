@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -107,31 +111,26 @@
 
   <section class="description">
     
-<h1 id="class-Bio::GCG::Seq-label-Bio-3A-3AGCG-3A-3ASeq"><a href="Seq.html">Bio::GCG::Seq</a><span><a href="#class-Bio::GCG::Seq-label-Bio-3A-3AGCG-3A-3ASeq">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::GCG::Seq-label-Bio-3A-3AGCG-3A-3ASeq"><a href="Seq.html"><code>Bio::GCG::Seq</code></a><span><a href="#class-Bio::GCG::Seq-label-Bio-3A-3AGCG-3A-3ASeq">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
-<p>This is <a href="../GCG.html">GCG</a> sequence file format (.seq or .pep)
-parser class.</p>
+<p>This is <a href="../GCG.html"><code>GCG</code></a> sequence file format (.seq or .pep) parser class.</p>
 
-<h1 id="class-Bio::GCG::Seq-label-References"><a href="../References.html">References</a><span><a href="#class-Bio::GCG::Seq-label-References">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::GCG::Seq-label-References"><a href="../References.html"><code>References</code></a><span><a href="#class-Bio::GCG::Seq-label-References">&para;</a> <a href="#top">&uarr;</a></span></h1>
 <ul><li>
-<p>Information about <a href="../GCG.html">GCG</a> Wisconsin Package(R)</p>
+<p>Information about <a href="../GCG.html"><code>GCG</code></a> Wisconsin Package(R)</p>
 </li></ul>
 
-<p><a
-href="http://www.accelrys.com/products/gcg_wisconsin_package">www.accelrys.com/products/gcg_wisconsin_package</a>
-.</p>
+<p><a href="http://www.accelrys.com/products/gcg_wisconsin_package">www.accelrys.com/products/gcg_wisconsin_package</a> .</p>
 <ul><li>
-<p><a href="../EMBOSS.html">EMBOSS</a> sequence formats</p>
+<p><a href="../EMBOSS.html"><code>EMBOSS</code></a> sequence formats</p>
 </li></ul>
 
-<p><a
-href="http://www.hgmp.mrc.ac.uk/Software/EMBOSS/Themes/SequenceFormats.html">www.hgmp.mrc.ac.uk/Software/EMBOSS/Themes/SequenceFormats.html</a></p>
+<p><a href="http://www.hgmp.mrc.ac.uk/Software/EMBOSS/Themes/SequenceFormats.html">www.hgmp.mrc.ac.uk/Software/EMBOSS/Themes/SequenceFormats.html</a></p>
 <ul><li>
 <p>BioPerl document</p>
 </li></ul>
 
-<p><a
-href="http://docs.bioperl.org/releases/bioperl-1.2.3/Bio/SeqIO/gcg.html">docs.bioperl.org/releases/bioperl-1.2.3/Bio/SeqIO/gcg.html</a></p>
+<p><a href="http://docs.bioperl.org/releases/bioperl-1.2.3/Bio/SeqIO/gcg.html">docs.bioperl.org/releases/bioperl-1.2.3/Bio/SeqIO/gcg.html</a></p>
 
   </section>
 
@@ -150,7 +149,7 @@ href="http://docs.bioperl.org/releases/bioperl-1.2.3/Bio/SeqIO/gcg.html">docs.bi
       
         <dt id="DELIMITER">DELIMITER
         
-        <dd><p>delimiter used by <a href="../FlatFile.html">Bio::FlatFile</a></p>
+        <dd><p>delimiter used by <a href="../FlatFile.html"><code>Bio::FlatFile</code></a></p>
         
       
       </dl>
@@ -237,8 +236,7 @@ href="http://docs.bioperl.org/releases/bioperl-1.2.3/Bio/SeqIO/gcg.html">docs.bi
 
         <div class="method-description">
         
-        <p>“Length:” field. Note that sometimes this might differ from real sequence
-length.</p>
+        <p>“Length:” field. Note that sometimes this might differ from real sequence length.</p>
         
         </div>
       </div>
@@ -251,8 +249,7 @@ length.</p>
 
         <div class="method-description">
         
-        <p>“Type:” field, which indicates sequence type. “N” means nucleic acid
-sequence, “P” means protein sequence.</p>
+        <p>“Type:” field, which indicates sequence type. “N” means nucleic acid sequence, “P” means protein sequence.</p>
         
         </div>
       </div>
@@ -286,18 +283,18 @@ sequence, “P” means protein sequence.</p>
 
           
           <div class="method-source-code" id="calc_checksum-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 141</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">calc_checksum</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-comment"># Reference: Bio::SeqIO::gcg of BioPerl-1.2.3</span>
-  <span class="ruby-identifier">idx</span> = <span class="ruby-value">0</span>
-  <span class="ruby-identifier">sum</span> = <span class="ruby-value">0</span>
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;^A-Z.~&#39;</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">idx</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-    <span class="ruby-identifier">sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">idx</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">c</span>
-    <span class="ruby-identifier">idx</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">idx</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">57</span>
-  <span class="ruby-keyword">end</span>
-  (<span class="ruby-identifier">sum</span> <span class="ruby-operator">%</span> <span class="ruby-value">10000</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb</span>
+<span class="line-num">141</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">calc_checksum</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">142</span>   <span class="ruby-comment"># Reference: Bio::SeqIO::gcg of BioPerl-1.2.3</span>
+<span class="line-num">143</span>   <span class="ruby-identifier">idx</span> = <span class="ruby-value">0</span>
+<span class="line-num">144</span>   <span class="ruby-identifier">sum</span> = <span class="ruby-value">0</span>
+<span class="line-num">145</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;^A-Z.~&#39;</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">each_byte</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+<span class="line-num">146</span>     <span class="ruby-identifier">idx</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+<span class="line-num">147</span>     <span class="ruby-identifier">sum</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">idx</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">c</span>
+<span class="line-num">148</span>     <span class="ruby-identifier">idx</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">idx</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-value">57</span>
+<span class="line-num">149</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">150</span>   (<span class="ruby-identifier">sum</span> <span class="ruby-operator">%</span> <span class="ruby-value">10000</span>)
+<span class="line-num">151</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -321,31 +318,30 @@ sequence, “P” means protein sequence.</p>
 
         <div class="method-description">
           
-          <p>Creates new instance of this class. str must be a <a
-href="../GCG.html">GCG</a> seq formatted string.</p>
+          <p>Creates new instance of this class. str must be a <a href="../GCG.html"><code>GCG</code></a> seq formatted string.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@heading</span> = <span class="ruby-identifier">str</span>[<span class="ruby-regexp">/.*/</span>] <span class="ruby-comment"># &#39;!!NA_SEQUENCE 1.0&#39; or like this</span>
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/.*/</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/.*\.\.$/m</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-ivar">@definition</span> = <span class="ruby-node">$&amp;</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^.*\.\.$/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">desc</span> = <span class="ruby-node">$&amp;</span>.<span class="ruby-identifier">to_s</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span> = <span class="ruby-regexp">/(.+)\s+Length\:\s+(\d+)\s+(.+)\s+Type\:\s+(\w)\s+Check\:\s+(\d+)/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">desc</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
-    <span class="ruby-ivar">@length</span>   = (<span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
-    <span class="ruby-ivar">@date</span>     = <span class="ruby-identifier">m</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
-    <span class="ruby-ivar">@seq_type</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">4</span>]
-    <span class="ruby-ivar">@checksum</span> = (<span class="ruby-identifier">m</span>[<span class="ruby-value">5</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">5</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>
-  <span class="ruby-ivar">@seq</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@definition</span>.<span class="ruby-identifier">strip!</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb</span>
+<span class="line-num">38</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">39</span>   <span class="ruby-ivar">@heading</span> = <span class="ruby-identifier">str</span>[<span class="ruby-regexp">/.*/</span>] <span class="ruby-comment"># &#39;!!NA_SEQUENCE 1.0&#39; or like this</span>
+<span class="line-num">40</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/.*/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">41</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/.*\.\.$/m</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">42</span>   <span class="ruby-ivar">@definition</span> = <span class="ruby-node">$&amp;</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/^.*\.\.$/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">to_s</span>
+<span class="line-num">43</span>   <span class="ruby-identifier">desc</span> = <span class="ruby-node">$&amp;</span>.<span class="ruby-identifier">to_s</span>
+<span class="line-num">44</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span> = <span class="ruby-regexp">/(.+)\s+Length\:\s+(\d+)\s+(.+)\s+Type\:\s+(\w)\s+Check\:\s+(\d+)/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">desc</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">45</span>     <span class="ruby-ivar">@entry_id</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
+<span class="line-num">46</span>     <span class="ruby-ivar">@length</span>   = (<span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+<span class="line-num">47</span>     <span class="ruby-ivar">@date</span>     = <span class="ruby-identifier">m</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
+<span class="line-num">48</span>     <span class="ruby-ivar">@seq_type</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">4</span>]
+<span class="line-num">49</span>     <span class="ruby-ivar">@checksum</span> = (<span class="ruby-identifier">m</span>[<span class="ruby-value">5</span>] <span class="ruby-operator">?</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">5</span>].<span class="ruby-identifier">to_i</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>)
+<span class="line-num">50</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">51</span>   <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>
+<span class="line-num">52</span>   <span class="ruby-ivar">@seq</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">53</span>   <span class="ruby-ivar">@definition</span>.<span class="ruby-identifier">strip!</span>
+<span class="line-num">54</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -369,8 +365,7 @@ href="../GCG.html">GCG</a> seq formatted string.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="../GCG.html">GCG</a> sequence format text.
-Parameters can be omitted.</p>
+          <p>Creates a new <a href="../GCG.html"><code>GCG</code></a> sequence format text. Parameters can be omitted.</p>
 
 <p>Examples:</p>
 
@@ -383,37 +378,37 @@ Parameters can be omitted.</p>
 
           
           <div class="method-source-code" id="to_gcg-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 161</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_gcg</span>(<span class="ruby-identifier">hash</span>)
-  <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:seq</span>]
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">seq_type</span> = <span class="ruby-string">&#39;N&#39;</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">seq_type</span> = <span class="ruby-string">&#39;P&#39;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">seq_type</span> = (<span class="ruby-identifier">hash</span>[<span class="ruby-value">:seq_type</span>] <span class="ruby-keyword">or</span> <span class="ruby-string">&#39;P&#39;</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq_type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;N&#39;</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">head</span> = <span class="ruby-string">&#39;!!NA_SEQUENCE 1.0&#39;</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">head</span> = <span class="ruby-string">&#39;!!AA_SEQUENCE 1.0&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">date</span> = (<span class="ruby-identifier">hash</span>[<span class="ruby-value">:date</span>] <span class="ruby-keyword">or</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%B %d, %Y %H:%M&#39;</span>))
-  <span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:entry_id</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
-  <span class="ruby-identifier">len</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
-  <span class="ruby-identifier">checksum</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">calc_checksum</span>(<span class="ruby-identifier">seq</span>)
-  <span class="ruby-identifier">definition</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:definition</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
-  <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/.{1,50}/</span>, <span class="ruby-string">&quot;\\0\n&quot;</span>)
-  <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/.{10}/</span>, <span class="ruby-string">&quot;\\0 &quot;</span>)
-  <span class="ruby-identifier">w</span> = <span class="ruby-identifier">len</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
-  <span class="ruby-identifier">i</span> = <span class="ruby-value">1</span>
-  <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;\n%*d &quot;</span>, <span class="ruby-identifier">w</span>, <span class="ruby-identifier">i</span>); <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">50</span>; <span class="ruby-identifier">s</span> }
-
-  [ <span class="ruby-identifier">head</span>, <span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-identifier">definition</span>, <span class="ruby-string">&quot;\n\n&quot;</span>,
-    <span class="ruby-node">&quot;#{entry_id}  Length: #{len}  #{date}  &quot;</span> \
-    <span class="ruby-node">&quot;Type: #{seq_type}  Check: #{checksum}  ..\n&quot;</span>,
-    <span class="ruby-identifier">seq</span>, <span class="ruby-string">&quot;\n&quot;</span> ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb</span>
+<span class="line-num">161</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">to_gcg</span>(<span class="ruby-identifier">hash</span>)
+<span class="line-num">162</span>   <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:seq</span>]
+<span class="line-num">163</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">164</span>     <span class="ruby-identifier">seq_type</span> = <span class="ruby-string">&#39;N&#39;</span>
+<span class="line-num">165</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">166</span>     <span class="ruby-identifier">seq_type</span> = <span class="ruby-string">&#39;P&#39;</span>
+<span class="line-num">167</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">168</span>     <span class="ruby-identifier">seq_type</span> = (<span class="ruby-identifier">hash</span>[<span class="ruby-value">:seq_type</span>] <span class="ruby-keyword">or</span> <span class="ruby-string">&#39;P&#39;</span>)
+<span class="line-num">169</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">170</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq_type</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;N&#39;</span> <span class="ruby-keyword">then</span>
+<span class="line-num">171</span>     <span class="ruby-identifier">head</span> = <span class="ruby-string">&#39;!!NA_SEQUENCE 1.0&#39;</span>
+<span class="line-num">172</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">173</span>     <span class="ruby-identifier">head</span> = <span class="ruby-string">&#39;!!AA_SEQUENCE 1.0&#39;</span>
+<span class="line-num">174</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">175</span>   <span class="ruby-identifier">date</span> = (<span class="ruby-identifier">hash</span>[<span class="ruby-value">:date</span>] <span class="ruby-keyword">or</span> <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-string">&#39;%B %d, %Y %H:%M&#39;</span>))
+<span class="line-num">176</span>   <span class="ruby-identifier">entry_id</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:entry_id</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
+<span class="line-num">177</span>   <span class="ruby-identifier">len</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">length</span>
+<span class="line-num">178</span>   <span class="ruby-identifier">checksum</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">calc_checksum</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">179</span>   <span class="ruby-identifier">definition</span> = <span class="ruby-identifier">hash</span>[<span class="ruby-value">:definition</span>].<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">strip</span>
+<span class="line-num">180</span>   <span class="ruby-identifier">seq</span> = <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">upcase</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/.{1,50}/</span>, <span class="ruby-string">&quot;\\0\n&quot;</span>)
+<span class="line-num">181</span>   <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/.{10}/</span>, <span class="ruby-string">&quot;\\0 &quot;</span>)
+<span class="line-num">182</span>   <span class="ruby-identifier">w</span> = <span class="ruby-identifier">len</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>
+<span class="line-num">183</span>   <span class="ruby-identifier">i</span> = <span class="ruby-value">1</span>
+<span class="line-num">184</span>   <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">gsub!</span>(<span class="ruby-regexp">/^/</span>) { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">s</span> = <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;\n%*d &quot;</span>, <span class="ruby-identifier">w</span>, <span class="ruby-identifier">i</span>); <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">50</span>; <span class="ruby-identifier">s</span> }
+<span class="line-num">185</span> 
+<span class="line-num">186</span>   [ <span class="ruby-identifier">head</span>, <span class="ruby-string">&quot;\n&quot;</span>, <span class="ruby-identifier">definition</span>, <span class="ruby-string">&quot;\n\n&quot;</span>,
+<span class="line-num">187</span>     <span class="ruby-node">&quot;#{entry_id}  Length: #{len}  #{date}  &quot;</span> \
+<span class="line-num">188</span>     <span class="ruby-node">&quot;Type: #{seq_type}  Check: #{checksum}  ..\n&quot;</span>,
+<span class="line-num">189</span>     <span class="ruby-identifier">seq</span>, <span class="ruby-string">&quot;\n&quot;</span> ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">190</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -445,24 +440,22 @@ Parameters can be omitted.</p>
 
         <div class="method-description">
           
-          <p>If you know the sequence is AA, use this method. Returns a <a
-href="../Sequence/AA.html">Bio::Sequence::AA</a> object.</p>
+          <p>If you know the sequence is AA, use this method. Returns a <a href="../Sequence/AA.html"><code>Bio::Sequence::AA</code></a> object.</p>
 
-<p>If you call naseq for protein sequence, or aaseq for nucleic sequence,
-RuntimeError will be raised.</p>
+<p>If you call naseq for protein sequence, or aaseq for nucleic sequence, RuntimeError will be raised.</p>
           
           
 
           
           <div class="method-source-code" id="aaseq-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 108</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aaseq</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@seq</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;seq_type != \&#39;P\&#39;&#39;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb</span>
+<span class="line-num">108</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">aaseq</span>
+<span class="line-num">109</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">110</span>     <span class="ruby-ivar">@seq</span>
+<span class="line-num">111</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">112</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;seq_type != \&#39;P\&#39;&#39;</span>
+<span class="line-num">113</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">114</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -486,24 +479,22 @@ RuntimeError will be raised.</p>
 
         <div class="method-description">
           
-          <p>If you know the sequence is NA, use this method. Returens a <a
-href="../Sequence/NA.html">Bio::Sequence::NA</a> object.</p>
+          <p>If you know the sequence is NA, use this method. Returens a <a href="../Sequence/NA.html"><code>Bio::Sequence::NA</code></a> object.</p>
 
-<p>If you call naseq for protein sequence, or aaseq for nucleic sequence,
-RuntimeError will be raised.</p>
+<p>If you call naseq for protein sequence, or aaseq for nucleic sequence, RuntimeError will be raised.</p>
           
           
 
           
           <div class="method-source-code" id="naseq-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 121</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">naseq</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@seq</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;seq_type != \&#39;N\&#39;&#39;</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb</span>
+<span class="line-num">121</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">naseq</span>
+<span class="line-num">122</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">seq</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">123</span>     <span class="ruby-ivar">@seq</span>
+<span class="line-num">124</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">125</span>     <span class="ruby-identifier">raise</span> <span class="ruby-string">&#39;seq_type != \&#39;N\&#39;&#39;</span>
+<span class="line-num">126</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">127</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -527,30 +518,27 @@ RuntimeError will be raised.</p>
 
         <div class="method-description">
           
-          <p><a href="../Sequence.html">Sequence</a> data. The class of the sequence is
-<a href="../Sequence/NA.html">Bio::Sequence::NA</a>, <a
-href="../Sequence/AA.html">Bio::Sequence::AA</a> or Bio::Sequence::Generic,
-according to the sequence type.</p>
+          <p><a href="../Sequence.html"><code>Sequence</code></a> data. The class of the sequence is <a href="../Sequence/NA.html"><code>Bio::Sequence::NA</code></a>, <a href="../Sequence/AA.html"><code>Bio::Sequence::AA</code></a> or Bio::Sequence::Generic, according to the sequence type.</p>
           
           
 
           
           <div class="method-source-code" id="seq-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@seq</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-keyword">case</span> <span class="ruby-ivar">@seq_type</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;N&#39;</span>, <span class="ruby-string">&#39;n&#39;</span>
-      <span class="ruby-identifier">k</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>
-    <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;P&#39;</span>, <span class="ruby-string">&#39;p&#39;</span>
-      <span class="ruby-identifier">k</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">k</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@seq</span> = <span class="ruby-identifier">k</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@data</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;^-a-zA-Z.~&#39;</span>, <span class="ruby-string">&#39;&#39;</span>))
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@seq</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb</span>
+<span class="line-num"> 88</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">seq</span>
+<span class="line-num"> 89</span>   <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@seq</span> <span class="ruby-keyword">then</span>
+<span class="line-num"> 90</span>     <span class="ruby-keyword">case</span> <span class="ruby-ivar">@seq_type</span>
+<span class="line-num"> 91</span>     <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;N&#39;</span>, <span class="ruby-string">&#39;n&#39;</span>
+<span class="line-num"> 92</span>       <span class="ruby-identifier">k</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">NA</span>
+<span class="line-num"> 93</span>     <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;P&#39;</span>, <span class="ruby-string">&#39;p&#39;</span>
+<span class="line-num"> 94</span>       <span class="ruby-identifier">k</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span><span class="ruby-operator">::</span><span class="ruby-constant">AA</span>
+<span class="line-num"> 95</span>     <span class="ruby-keyword">else</span>
+<span class="line-num"> 96</span>       <span class="ruby-identifier">k</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>
+<span class="line-num"> 97</span>     <span class="ruby-keyword">end</span>
+<span class="line-num"> 98</span>     <span class="ruby-ivar">@seq</span> = <span class="ruby-identifier">k</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@data</span>.<span class="ruby-identifier">tr</span>(<span class="ruby-string">&#39;^-a-zA-Z.~&#39;</span>, <span class="ruby-string">&#39;&#39;</span>))
+<span class="line-num"> 99</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">100</span>   <span class="ruby-ivar">@seq</span>
+<span class="line-num">101</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -574,17 +562,16 @@ according to the sequence type.</p>
 
         <div class="method-description">
           
-          <p>Validates checksum. If validation succeeds, returns true. Otherwise,
-returns false.</p>
+          <p>Validates checksum. If validation succeeds, returns true. Otherwise, returns false.</p>
           
           
 
           
           <div class="method-source-code" id="validate_checksum-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb, line 132</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_checksum</span>
-  <span class="ruby-identifier">checksum</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">calc_checksum</span>(<span class="ruby-identifier">seq</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/gcg/seq.rb</span>
+<span class="line-num">132</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">validate_checksum</span>
+<span class="line-num">133</span>   <span class="ruby-identifier">checksum</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">calc_checksum</span>(<span class="ruby-identifier">seq</span>)
+<span class="line-num">134</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -598,12 +585,13 @@ returns false.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

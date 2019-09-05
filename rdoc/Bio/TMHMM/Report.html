@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -90,7 +94,7 @@
 
   <section class="description">
     
-<h1 id="class-Bio::TMHMM::Report-label-TMHMM+report+parser+class."><a href="../TMHMM.html">TMHMM</a> report parser class.<span><a href="#class-Bio::TMHMM::Report-label-TMHMM+report+parser+class.">&para;</a> <a href="#top">&uarr;</a></span></h1>
+<h1 id="class-Bio::TMHMM::Report-label-TMHMM+report+parser+class."><a href="../TMHMM.html"><code>TMHMM</code></a> report parser class.<span><a href="#class-Bio::TMHMM::Report-label-TMHMM+report+parser+class.">&para;</a> <a href="#top">&uarr;</a></span></h1>
 
   </section>
 
@@ -195,7 +199,7 @@
 
         <div class="method-description">
         
-        <p>Returns an Array of <a href="TMH.html">Bio::TMHMM::TMH</a>.</p>
+        <p>Returns an Array of <a href="TMH.html"><code>Bio::TMHMM::TMH</code></a>.</p>
         
         </div>
       </div>
@@ -242,18 +246,18 @@
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/tmhmm/report.rb, line 85</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">str</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">to_str</span>
-  <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">entry</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">enum_for</span>(<span class="ruby-value">:each_line</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">parse_header</span>(<span class="ruby-identifier">entry</span>)
-  <span class="ruby-ivar">@tmhs</span> = <span class="ruby-identifier">parse_tmhs</span>(<span class="ruby-identifier">entry</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/tmhmm/report.rb</span>
+<span class="line-num">85</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">entry</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">86</span>   <span class="ruby-keyword">begin</span>
+<span class="line-num">87</span>     <span class="ruby-identifier">str</span> = <span class="ruby-identifier">entry</span>.<span class="ruby-identifier">to_str</span>
+<span class="line-num">88</span>   <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NoMethodError</span>
+<span class="line-num">89</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">90</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span> <span class="ruby-keyword">then</span>
+<span class="line-num">91</span>     <span class="ruby-identifier">entry</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">enum_for</span>(<span class="ruby-value">:each_line</span>)
+<span class="line-num">92</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">93</span>   <span class="ruby-identifier">parse_header</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">94</span>   <span class="ruby-ivar">@tmhs</span> = <span class="ruby-identifier">parse_tmhs</span>(<span class="ruby-identifier">entry</span>)
+<span class="line-num">95</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -285,17 +289,16 @@
 
         <div class="method-description">
           
-          <p>Returns an Array of <a href="TMH.html">Bio::TMHMM::TMH</a> including only
-“TMhelix”.</p>
+          <p>Returns an Array of <a href="TMH.html"><code>Bio::TMHMM::TMH</code></a> including only “TMhelix”.</p>
           
           
 
           
           <div class="method-source-code" id="helix-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/tmhmm/report.rb, line 98</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">helix</span>
-  <span class="ruby-ivar">@tmhs</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;TMhelix&#39;</span> }.<span class="ruby-identifier">compact</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/tmhmm/report.rb</span>
+<span class="line-num"> 98</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">helix</span>
+<span class="line-num"> 99</span>   <span class="ruby-ivar">@tmhs</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">t</span><span class="ruby-operator">|</span> <span class="ruby-identifier">t</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">t</span>.<span class="ruby-identifier">status</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;TMhelix&#39;</span> }.<span class="ruby-identifier">compact</span>
+<span class="line-num">100</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -325,19 +328,19 @@
 
           
           <div class="method-source-code" id="to_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/tmhmm/report.rb, line 103</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
-  [
-    [
-      [<span class="ruby-string">&quot;Length:&quot;</span>,                    <span class="ruby-ivar">@query_len</span>],
-      [<span class="ruby-string">&quot;Number of predicted TMHs:&quot;</span>,  <span class="ruby-ivar">@predicted_tmhs</span>],
-      [<span class="ruby-string">&quot;Exp number of AAs in THMs:&quot;</span>, <span class="ruby-ivar">@exp_aas_in_tmhs</span>],
-      [<span class="ruby-string">&quot;Exp number, first 60 AAs:&quot;</span>,  <span class="ruby-ivar">@exp_first_60aa</span>],
-      [<span class="ruby-string">&quot;Total prob of N-in:&quot;</span>,        <span class="ruby-ivar">@total_prob_of_N_in</span>]
-    ].<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;\# &quot;</span> <span class="ruby-operator">+</span> [<span class="ruby-ivar">@entry_id</span>, <span class="ruby-identifier">e</span>].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>) },
-    <span class="ruby-identifier">tmhs</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">ent</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">to_s</span> }
-  ].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/tmhmm/report.rb</span>
+<span class="line-num">103</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_s</span>
+<span class="line-num">104</span>   [
+<span class="line-num">105</span>     [
+<span class="line-num">106</span>       [<span class="ruby-string">&quot;Length:&quot;</span>,                    <span class="ruby-ivar">@query_len</span>],
+<span class="line-num">107</span>       [<span class="ruby-string">&quot;Number of predicted TMHs:&quot;</span>,  <span class="ruby-ivar">@predicted_tmhs</span>],
+<span class="line-num">108</span>       [<span class="ruby-string">&quot;Exp number of AAs in THMs:&quot;</span>, <span class="ruby-ivar">@exp_aas_in_tmhs</span>],
+<span class="line-num">109</span>       [<span class="ruby-string">&quot;Exp number, first 60 AAs:&quot;</span>,  <span class="ruby-ivar">@exp_first_60aa</span>],
+<span class="line-num">110</span>       [<span class="ruby-string">&quot;Total prob of N-in:&quot;</span>,        <span class="ruby-ivar">@total_prob_of_N_in</span>]
+<span class="line-num">111</span>     ].<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-string">&quot;\# &quot;</span> <span class="ruby-operator">+</span> [<span class="ruby-ivar">@entry_id</span>, <span class="ruby-identifier">e</span>].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\t&quot;</span>) },
+<span class="line-num">112</span>     <span class="ruby-identifier">tmhs</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">ent</span><span class="ruby-operator">|</span> <span class="ruby-identifier">ent</span>.<span class="ruby-identifier">to_s</span> }
+<span class="line-num">113</span>   ].<span class="ruby-identifier">flatten</span>.<span class="ruby-identifier">join</span>(<span class="ruby-string">&quot;\n&quot;</span>)
+<span class="line-num">114</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -351,12 +354,13 @@
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

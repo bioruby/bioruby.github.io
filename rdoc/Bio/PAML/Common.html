@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -100,9 +104,7 @@
     
 <h2 id="class-Bio::PAML::Common-label-Description">Description<span><a href="#class-Bio::PAML::Common-label-Description">&para;</a> <a href="#top">&uarr;</a></span></h2>
 
-<p><a href="Common.html">Bio::PAML::Common</a> is a basic wrapper class for <a
-href="../PAML.html">PAML</a> programs.  The class provides methods for
-generating the necessary configuration  file, and running a program.</p>
+<p><a href="Common.html"><code>Bio::PAML::Common</code></a> is a basic wrapper class for <a href="../PAML.html"><code>PAML</code></a> programs.  The class provides methods for generating the necessary configuration  file, and running a program.</p>
 
   </section>
 
@@ -205,8 +207,7 @@ generating the necessary configuration  file, and running a program.</p>
 
         <div class="method-description">
         
-        <p>Parameters described in the control file. (Hash) Each key of the hash must
-be a Symbol object, and each value must be a String object or nil.</p>
+        <p>Parameters described in the control file. (Hash) Each key of the hash must be a Symbol object, and each value must be a String object or nil.</p>
         
         </div>
       </div>
@@ -219,7 +220,7 @@ be a Symbol object, and each value must be a String object or nil.</p>
 
         <div class="method-description">
         
-        <p><a href="Common/Report.html">Report</a> object created from the last result</p>
+        <p><a href="Common/Report.html"><code>Report</code></a> object created from the last result</p>
         
         </div>
       </div>
@@ -232,8 +233,7 @@ be a Symbol object, and each value must be a String object or nil.</p>
 
         <div class="method-description">
         
-        <p>contents of supplemental output files (Hash). Each key is a file name and
-value is content of the file.</p>
+        <p>contents of supplemental output files (Hash). Each key is a file name and value is content of the file.</p>
         
         </div>
       </div>
@@ -261,11 +261,7 @@ value is content of the file.</p>
 
         <div class="method-description">
           
-          <p>Creates a wrapper instance, which will run using the specified binary
-location or the command in the PATH. If program is specified as nil, <a
-href="Common.html#DEFAULT_PROGRAM">DEFAULT_PROGRAM</a> is used. Default
-parameters are automatically loaded and merged with the specified
-parameters.</p>
+          <p>Creates a wrapper instance, which will run using the specified binary location or the command in the PATH. If program is specified as nil, <a href="Common.html#DEFAULT_PROGRAM"><code>DEFAULT_PROGRAM</code></a> is used. Default parameters are automatically loaded and merged with the specified parameters.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -279,12 +275,12 @@ parameters.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/common.rb, line 73</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">program</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">params</span> = {})
-  <span class="ruby-ivar">@program</span> = <span class="ruby-identifier">program</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_PROGRAM</span>
-  <span class="ruby-identifier">set_default_parameters</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">params</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/paml/common.rb</span>
+<span class="line-num">73</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">program</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">params</span> = {})
+<span class="line-num">74</span>   <span class="ruby-ivar">@program</span> = <span class="ruby-identifier">program</span> <span class="ruby-operator">||</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_PROGRAM</span>
+<span class="line-num">75</span>   <span class="ruby-identifier">set_default_parameters</span>
+<span class="line-num">76</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">params</span>)
+<span class="line-num">77</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -316,8 +312,7 @@ parameters.</p>
 
         <div class="method-description">
           
-          <p>Shows parameters (content of control file) as a string. The string can be
-used for control file.</p>
+          <p>Shows parameters (content of control file) as a string. The string can be used for control file.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -328,21 +323,21 @@ used for control file.</p>
 
           
           <div class="method-source-code" id="dump_parameters-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/common.rb, line 270</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dump_parameters</span>
-  <span class="ruby-identifier">keyorder</span> = <span class="ruby-constant">DEFAULT_PARAMETERS_ORDER</span>
-  <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">keys</span>
-  <span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;&#39;</span>
-  <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
-    (<span class="ruby-identifier">keyorder</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">x</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">keyorder</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">x</span>))) <span class="ruby-operator">&lt;=&gt;</span>
-      (<span class="ruby-identifier">keyorder</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">y</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">keyorder</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">y</span>)))
-  <span class="ruby-keyword">end</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">value</span> = <span class="ruby-identifier">parameters</span>[<span class="ruby-identifier">key</span>]
-    <span class="ruby-comment"># Note: spaces are required in both side of the &quot;=&quot;.</span>
-    <span class="ruby-identifier">str</span>.<span class="ruby-identifier">concat</span> <span class="ruby-node">&quot;#{key.to_s} = #{value.to_s}\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">str</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/common.rb</span>
+<span class="line-num">270</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">dump_parameters</span>
+<span class="line-num">271</span>   <span class="ruby-identifier">keyorder</span> = <span class="ruby-constant">DEFAULT_PARAMETERS_ORDER</span>
+<span class="line-num">272</span>   <span class="ruby-identifier">keys</span> = <span class="ruby-identifier">parameters</span>.<span class="ruby-identifier">keys</span>
+<span class="line-num">273</span>   <span class="ruby-identifier">str</span> = <span class="ruby-string">&#39;&#39;</span>
+<span class="line-num">274</span>   <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">sort</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">x</span>, <span class="ruby-identifier">y</span><span class="ruby-operator">|</span>
+<span class="line-num">275</span>     (<span class="ruby-identifier">keyorder</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">x</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">keyorder</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">x</span>))) <span class="ruby-operator">&lt;=&gt;</span>
+<span class="line-num">276</span>       (<span class="ruby-identifier">keyorder</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">y</span>) <span class="ruby-operator">||</span> (<span class="ruby-identifier">keyorder</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">keys</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">y</span>)))
+<span class="line-num">277</span>   <span class="ruby-keyword">end</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+<span class="line-num">278</span>     <span class="ruby-identifier">value</span> = <span class="ruby-identifier">parameters</span>[<span class="ruby-identifier">key</span>]
+<span class="line-num">279</span>     <span class="ruby-comment"># Note: spaces are required in both side of the &quot;=&quot;.</span>
+<span class="line-num">280</span>     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">concat</span> <span class="ruby-node">&quot;#{key.to_s} = #{value.to_s}\n&quot;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>
+<span class="line-num">281</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">282</span>   <span class="ruby-identifier">str</span>
+<span class="line-num">283</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -366,14 +361,12 @@ used for control file.</p>
 
         <div class="method-description">
           
-          <p>Loads parameters from the specified string. Note that all previous
-parameters are erased. Returns the parameters as a hash.</p>
+          <p>Loads parameters from the specified string. Note that all previous parameters are erased. Returns the parameters as a hash.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>str</em>: contents of a <a href="../PAML.html">PAML</a>
-control file (String)</p>
+<p>(required) <em>str</em>: contents of a <a href="../PAML.html"><code>PAML</code></a> control file (String)</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -384,15 +377,15 @@ control file (String)</p>
 
           
           <div class="method-source-code" id="load_parameters-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/common.rb, line 248</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_parameters</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">hash</span> = {}
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">param</span>, <span class="ruby-identifier">value</span> = <span class="ruby-identifier">parse_parameter</span>(<span class="ruby-identifier">line</span>)
-    <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">param</span>] = <span class="ruby-identifier">value</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">param</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parameters</span> = <span class="ruby-identifier">hash</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/common.rb</span>
+<span class="line-num">248</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">load_parameters</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">249</span>   <span class="ruby-identifier">hash</span> = {}
+<span class="line-num">250</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">each_line</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
+<span class="line-num">251</span>     <span class="ruby-identifier">param</span>, <span class="ruby-identifier">value</span> = <span class="ruby-identifier">parse_parameter</span>(<span class="ruby-identifier">line</span>)
+<span class="line-num">252</span>     <span class="ruby-identifier">hash</span>[<span class="ruby-identifier">param</span>] = <span class="ruby-identifier">value</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">param</span>
+<span class="line-num">253</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">254</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parameters</span> = <span class="ruby-identifier">hash</span>
+<span class="line-num">255</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -416,52 +409,45 @@ control file (String)</p>
 
         <div class="method-description">
           
-          <p>Runs the program on the internal parameters with the specified sequence
-alignment and tree.</p>
+          <p>Runs the program on the internal parameters with the specified sequence alignment and tree.</p>
 
-<p>Note that <a href=":seqfile">parameters</a> and <a
-href=":outfile">parameters</a> are always modified, and <a
-href=":treefile">parameters</a> is modified when tree is specified.</p>
+<p>Note that <a href=":seqfile">parameters</a> and <a href=":outfile">parameters</a> are always modified, and <a href=":treefile">parameters</a> is modified when tree is specified.</p>
 
-<p>To prevent overwrite of existing files by <a href="../PAML.html">PAML</a>,
-this method automatically creates a temporary directory and the program is
-run inside the directory. After the end of the program, the temporary
-directory is automatically removed.</p>
+<p>To prevent overwrite of existing files by <a href="../PAML.html"><code>PAML</code></a>, this method automatically creates a temporary directory and the program is run inside the directory. After the end of the program, the temporary directory is automatically removed.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
 <ul><li>
-<p>(required) <em>alignment</em>: <a
-href="../Alignment.html">Bio::Alignment</a> object or similar object</p>
+<p>(required) <em>alignment</em>: <a href="../Alignment.html"><code>Bio::Alignment</code></a> object or similar object</p>
 </li><li>
-<p>(optional) <em>tree</em>: <a href="../Tree.html">Bio::Tree</a> object</p>
+<p>(optional) <em>tree</em>: <a href="../Tree.html"><code>Bio::Tree</code></a> object</p>
 </li></ul>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
-<p><a href="Common/Report.html">Report</a> object</p>
+<p><a href="Common/Report.html"><code>Report</code></a> object</p>
 </dd></dl>
           
           
 
           
           <div class="method-source-code" id="query-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/common.rb, line 117</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">astr</span> = <span class="ruby-identifier">alignment</span>.<span class="ruby-identifier">output</span>(<span class="ruby-value">:phylipnon</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tree</span> <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">tstr</span> = [ <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;%3d %2d\n&quot;</span>, <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">leaves</span>.<span class="ruby-identifier">size</span>, <span class="ruby-value">1</span>), <span class="ruby-string">&quot;\n&quot;</span>,
-             <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">output</span>(<span class="ruby-value">:newick</span>,
-                         { <span class="ruby-value">:indent</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span>,
-                           <span class="ruby-value">:bootstrap_style</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">:disabled</span>,
-                           <span class="ruby-value">:branch_length_style</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">:disabled</span> })
-           ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">tstr</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">_query_by_string</span>(<span class="ruby-identifier">astr</span>, <span class="ruby-identifier">tstr</span>)
-  <span class="ruby-ivar">@report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@report</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/common.rb</span>
+<span class="line-num">117</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">118</span>   <span class="ruby-identifier">astr</span> = <span class="ruby-identifier">alignment</span>.<span class="ruby-identifier">output</span>(<span class="ruby-value">:phylipnon</span>)
+<span class="line-num">119</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">tree</span> <span class="ruby-keyword">then</span>
+<span class="line-num">120</span>     <span class="ruby-identifier">tstr</span> = [ <span class="ruby-identifier">sprintf</span>(<span class="ruby-string">&quot;%3d %2d\n&quot;</span>, <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">leaves</span>.<span class="ruby-identifier">size</span>, <span class="ruby-value">1</span>), <span class="ruby-string">&quot;\n&quot;</span>,
+<span class="line-num">121</span>              <span class="ruby-identifier">tree</span>.<span class="ruby-identifier">output</span>(<span class="ruby-value">:newick</span>,
+<span class="line-num">122</span>                          { <span class="ruby-value">:indent</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-keyword">false</span>,
+<span class="line-num">123</span>                            <span class="ruby-value">:bootstrap_style</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">:disabled</span>,
+<span class="line-num">124</span>                            <span class="ruby-value">:branch_length_style</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-value">:disabled</span> })
+<span class="line-num">125</span>            ].<span class="ruby-identifier">join</span>(<span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">126</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">127</span>     <span class="ruby-identifier">tstr</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">128</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">129</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">_query_by_string</span>(<span class="ruby-identifier">astr</span>, <span class="ruby-identifier">tstr</span>)
+<span class="line-num">130</span>   <span class="ruby-ivar">@report</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">Report</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">131</span>   <span class="ruby-ivar">@report</span>
+<span class="line-num">132</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -485,15 +471,11 @@ href="../Alignment.html">Bio::Alignment</a> object or similar object</p>
 
         <div class="method-description">
           
-          <p>Runs the program on the internal parameters with the specified sequence
-alignment data string and tree data string.</p>
+          <p>Runs the program on the internal parameters with the specified sequence alignment data string and tree data string.</p>
 
-<p>Note that <a href=":outfile">parameters</a> is always modified, and <a
-href=":seqfile">parameters</a> and <a href=":treefile">parameters</a> are
-modified when alignment and tree are specified respectively.</p>
+<p>Note that <a href=":outfile">parameters</a> is always modified, and <a href=":seqfile">parameters</a> and <a href=":treefile">parameters</a> are modified when alignment and tree are specified respectively.</p>
 
-<p>It raises RuntimeError if seqfile is not specified in the argument or in
-the parameter.</p>
+<p>It raises RuntimeError if seqfile is not specified in the argument or in the parameter.</p>
 
 <p>For other information, see the document of query method.</p>
 <hr>
@@ -513,10 +495,10 @@ the parameter.</p>
 
           
           <div class="method-source-code" id="query_by_string-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/common.rb, line 151</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_by_string</span>(<span class="ruby-identifier">alignment</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>)
-  <span class="ruby-identifier">_query_by_string</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/common.rb</span>
+<span class="line-num">151</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_by_string</span>(<span class="ruby-identifier">alignment</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">tree</span> = <span class="ruby-keyword">nil</span>)
+<span class="line-num">152</span>   <span class="ruby-identifier">_query_by_string</span>(<span class="ruby-identifier">alignment</span>, <span class="ruby-identifier">tree</span>)
+<span class="line-num">153</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -540,16 +522,9 @@ the parameter.</p>
 
         <div class="method-description">
           
-          <p>Runs the program on the parameters in the passed control file. No
-parameters checks are performed. All internal parameters are ignored and
-are kept untouched. The output and report attributes are cleared in this
-method.</p>
+          <p>Runs the program on the parameters in the passed control file. No parameters checks are performed. All internal parameters are ignored and are kept untouched. The output and report attributes are cleared in this method.</p>
 
-<p>Warning about PAML&#39;s behavior: <a href="../PAML.html">PAML</a> writes
-supplemental output files in the current directory with fixed file names
-which can not be changed with parameters or command-line options, for
-example, rates, rst, and rub. This behavior may ovarwrite existing files,
-especially previous supplemental results.</p>
+<p>Warning about PAML&#39;s behavior: <a href="../PAML.html"><code>PAML</code></a> writes supplemental output files in the current directory with fixed file names which can not be changed with parameters or command-line options, for example, rates, rst, and rub. This behavior may ovarwrite existing files, especially previous supplemental results.</p>
 <hr>
 
 <p><strong>Arguments</strong>:</p>
@@ -565,10 +540,10 @@ especially previous supplemental results.</p>
 
           
           <div class="method-source-code" id="run-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/common.rb, line 95</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run</span>(<span class="ruby-identifier">control_file</span>)
-  <span class="ruby-identifier">exec_local</span>([ <span class="ruby-identifier">control_file</span> ])
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/appl/paml/common.rb</span>
+<span class="line-num">95</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">run</span>(<span class="ruby-identifier">control_file</span>)
+<span class="line-num">96</span>   <span class="ruby-identifier">exec_local</span>([ <span class="ruby-identifier">control_file</span> ])
+<span class="line-num">97</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -592,8 +567,7 @@ especially previous supplemental results.</p>
 
         <div class="method-description">
           
-          <p>Loads system-wide default parameters. Note that all previous parameters are
-erased. Returns the parameters as a hash.</p>
+          <p>Loads system-wide default parameters. Note that all previous parameters are erased. Returns the parameters as a hash.</p>
 <hr>
 <dl class="rdoc-list note-list"><dt><strong>Returns</strong>
 <dd>
@@ -604,10 +578,10 @@ erased. Returns the parameters as a hash.</p>
 
           
           <div class="method-source-code" id="set_default_parameters-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/paml/common.rb, line 262</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_default_parameters</span>
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_PARAMETERS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/paml/common.rb</span>
+<span class="line-num">262</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">set_default_parameters</span>
+<span class="line-num">263</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parameters</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span><span class="ruby-operator">::</span><span class="ruby-constant">DEFAULT_PARAMETERS</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-constant">Hash</span>.<span class="ruby-identifier">new</span>)
+<span class="line-num">264</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -621,12 +595,13 @@ erased. Returns the parameters as a hash.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

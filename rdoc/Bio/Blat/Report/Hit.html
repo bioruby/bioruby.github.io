@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../../";
 </script>
 
-<script src="../../../js/jquery.js"></script>
-<script src="../../../js/darkfish.js"></script>
+<script src="../../../js/navigation.js" defer></script>
+<script src="../../../js/search.js" defer></script>
+<script src="../../../js/search_index.js" defer></script>
+<script src="../../../js/searcher.js" defer></script>
+<script src="../../../js/darkfish.js" defer></script>
 
 <link href="../../../css/fonts.css" rel="stylesheet">
 <link href="../../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -136,10 +140,7 @@
 
   <section class="description">
     
-<p><a href="Hit.html">Hit</a> class for the BLAT result parser. Similar to <a
-href="../../Blast/Report/Hit.html">Bio::Blast::Report::Hit</a> but lacks
-many methods. Its object may contain some <a
-href="SegmentPair.html">Bio::Blat::Report::SegmentPair</a> objects.</p>
+<p><a href="Hit.html"><code>Hit</code></a> class for the BLAT result parser. Similar to <a href="../../Blast/Report/Hit.html"><code>Bio::Blast::Report::Hit</code></a> but lacks many methods. Its object may contain some <a href="SegmentPair.html"><code>Bio::Blat::Report::SegmentPair</code></a> objects.</p>
 
   </section>
 
@@ -194,19 +195,16 @@ href="SegmentPair.html">Bio::Blat::Report::SegmentPair</a> objects.</p>
 
         <div class="method-description">
           
-          <p>Creates a new <a href="Hit.html">Hit</a> object from a piece of BLAT result
-text. It is designed to be called internally from <a
-href="../Report.html">Bio::Blat::Report</a> object. Users shall not use it
-directly.</p>
+          <p>Creates a new <a href="Hit.html"><code>Hit</code></a> object from a piece of BLAT result text. It is designed to be called internally from <a href="../Report.html"><code>Bio::Blat::Report</code></a> object. Users shall not use it directly.</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 293</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\t/</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">293</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">294</span>   <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">chomp</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\t/</span>)
+<span class="line-num">295</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -244,8 +242,8 @@ directly.</p>
 
           
           <div class="method-source-code" id="block_count-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 350</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">block_count</span>; <span class="ruby-ivar">@data</span>[<span class="ruby-value">17</span>].<span class="ruby-identifier">to_i</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">350</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">block_count</span>; <span class="ruby-ivar">@data</span>[<span class="ruby-value">17</span>].<span class="ruby-identifier">to_i</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -275,13 +273,13 @@ directly.</p>
 
           
           <div class="method-source-code" id="block_sizes-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 354</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">block_sizes</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@block_sizes</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-ivar">@block_sizes</span> = <span class="ruby-identifier">split_comma</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-value">18</span>]).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_i</span> }
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@block_sizes</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">354</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">block_sizes</span>
+<span class="line-num">355</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@block_sizes</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">356</span>     <span class="ruby-ivar">@block_sizes</span> = <span class="ruby-identifier">split_comma</span>(<span class="ruby-ivar">@data</span>[<span class="ruby-value">18</span>]).<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_i</span> }
+<span class="line-num">357</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">358</span>   <span class="ruby-ivar">@block_sizes</span>
+<span class="line-num">359</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -305,30 +303,29 @@ directly.</p>
 
         <div class="method-description">
           
-          <p>Returns blocks(exons, segment pairs) of the hit. Returns an array of <a
-href="SegmentPair.html">Bio::Blat::Report::SegmentPair</a> objects.</p>
+          <p>Returns blocks(exons, segment pairs) of the hit. Returns an array of <a href="SegmentPair.html"><code>Bio::Blat::Report::SegmentPair</code></a> objects.</p>
           
           
 
           
           <div class="method-source-code" id="blocks-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 363</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">blocks</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@blocks</span>)
-    <span class="ruby-identifier">bs</span>    = <span class="ruby-identifier">block_sizes</span>
-    <span class="ruby-identifier">qst</span>   = <span class="ruby-identifier">query</span>.<span class="ruby-identifier">starts</span>
-    <span class="ruby-identifier">tst</span>   = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">starts</span>
-    <span class="ruby-identifier">qseqs</span> = <span class="ruby-identifier">query</span>.<span class="ruby-identifier">seqs</span>
-    <span class="ruby-identifier">tseqs</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">seqs</span>
-    <span class="ruby-identifier">pflag</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">protein?</span>
-    <span class="ruby-ivar">@blocks</span> = (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">block_count</span>).<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
-      <span class="ruby-constant">SegmentPair</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">target</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">bs</span>[<span class="ruby-identifier">i</span>],
-                      <span class="ruby-identifier">qst</span>[<span class="ruby-identifier">i</span>], <span class="ruby-identifier">tst</span>[<span class="ruby-identifier">i</span>], <span class="ruby-identifier">qseqs</span>[<span class="ruby-identifier">i</span>], <span class="ruby-identifier">tseqs</span>[<span class="ruby-identifier">i</span>],
-                      <span class="ruby-identifier">pflag</span>)
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@blocks</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">363</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">blocks</span>
+<span class="line-num">364</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@blocks</span>)
+<span class="line-num">365</span>     <span class="ruby-identifier">bs</span>    = <span class="ruby-identifier">block_sizes</span>
+<span class="line-num">366</span>     <span class="ruby-identifier">qst</span>   = <span class="ruby-identifier">query</span>.<span class="ruby-identifier">starts</span>
+<span class="line-num">367</span>     <span class="ruby-identifier">tst</span>   = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">starts</span>
+<span class="line-num">368</span>     <span class="ruby-identifier">qseqs</span> = <span class="ruby-identifier">query</span>.<span class="ruby-identifier">seqs</span>
+<span class="line-num">369</span>     <span class="ruby-identifier">tseqs</span> = <span class="ruby-identifier">target</span>.<span class="ruby-identifier">seqs</span>
+<span class="line-num">370</span>     <span class="ruby-identifier">pflag</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">protein?</span>
+<span class="line-num">371</span>     <span class="ruby-ivar">@blocks</span> = (<span class="ruby-value">0</span><span class="ruby-operator">...</span><span class="ruby-identifier">block_count</span>).<span class="ruby-identifier">collect</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+<span class="line-num">372</span>       <span class="ruby-constant">SegmentPair</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">query</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">target</span>.<span class="ruby-identifier">size</span>, <span class="ruby-identifier">strand</span>, <span class="ruby-identifier">bs</span>[<span class="ruby-identifier">i</span>],
+<span class="line-num">373</span>                       <span class="ruby-identifier">qst</span>[<span class="ruby-identifier">i</span>], <span class="ruby-identifier">tst</span>[<span class="ruby-identifier">i</span>], <span class="ruby-identifier">qseqs</span>[<span class="ruby-identifier">i</span>], <span class="ruby-identifier">tseqs</span>[<span class="ruby-identifier">i</span>],
+<span class="line-num">374</span>                       <span class="ruby-identifier">pflag</span>)
+<span class="line-num">375</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">376</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">377</span>   <span class="ruby-ivar">@blocks</span>
+<span class="line-num">378</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -392,10 +389,10 @@ href="SegmentPair.html">Bio::Blat::Report::SegmentPair</a> objects.</p>
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 404</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: segmentpair</span>
-  <span class="ruby-identifier">exons</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">404</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>) <span class="ruby-comment">#:yields: segmentpair</span>
+<span class="line-num">405</span>   <span class="ruby-identifier">exons</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">x</span>)
+<span class="line-num">406</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -509,8 +506,8 @@ href="SegmentPair.html">Bio::Blat::Report::SegmentPair</a> objects.</p>
 
           
           <div class="method-source-code" id="match-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 332</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">match</span>;       <span class="ruby-ivar">@data</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_i</span>;  <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">332</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">match</span>;       <span class="ruby-ivar">@data</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_i</span>;  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -534,30 +531,28 @@ href="SegmentPair.html">Bio::Blat::Report::SegmentPair</a> objects.</p>
 
         <div class="method-description">
           
-          <p>Calculates the pslCalcMilliBad value defined in the BLAT FAQ (<a
-href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
+          <p>Calculates the pslCalcMilliBad value defined in the BLAT FAQ (<a href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
 
-<p>The algorithm is taken from the BLAT FAQ (<a
-href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
+<p>The algorithm is taken from the BLAT FAQ (<a href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
           
           
 
           
           <div class="method-source-code" id="milli_bad-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 418</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">milli_bad</span>
-  <span class="ruby-identifier">w</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">protein?</span> <span class="ruby-operator">?</span> <span class="ruby-value">3</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>)
-  <span class="ruby-identifier">qalen</span> = <span class="ruby-identifier">w</span> <span class="ruby-operator">*</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">start</span>)
-  <span class="ruby-identifier">talen</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">start</span>
-  <span class="ruby-identifier">alen</span> = (<span class="ruby-keyword">if</span> <span class="ruby-identifier">qalen</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">talen</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">qalen</span>; <span class="ruby-keyword">else</span> <span class="ruby-identifier">talen</span>; <span class="ruby-keyword">end</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">alen</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
-  <span class="ruby-identifier">d</span> = <span class="ruby-identifier">qalen</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">talen</span>
-  <span class="ruby-identifier">d</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
-  <span class="ruby-identifier">total</span> = <span class="ruby-identifier">w</span> <span class="ruby-operator">*</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">match</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rep_match</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mismatch</span>)
-  <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-  <span class="ruby-keyword">return</span> (<span class="ruby-value">1000</span> <span class="ruby-operator">*</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">mismatch</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">gap_count</span> <span class="ruby-operator">+</span>
-                    (<span class="ruby-value">3</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">log</span>(<span class="ruby-value">1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">d</span>)).<span class="ruby-identifier">round</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">total</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">418</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">milli_bad</span>
+<span class="line-num">419</span>   <span class="ruby-identifier">w</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">protein?</span> <span class="ruby-operator">?</span> <span class="ruby-value">3</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>)
+<span class="line-num">420</span>   <span class="ruby-identifier">qalen</span> = <span class="ruby-identifier">w</span> <span class="ruby-operator">*</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">start</span>)
+<span class="line-num">421</span>   <span class="ruby-identifier">talen</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">start</span>
+<span class="line-num">422</span>   <span class="ruby-identifier">alen</span> = (<span class="ruby-keyword">if</span> <span class="ruby-identifier">qalen</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">talen</span> <span class="ruby-keyword">then</span> <span class="ruby-identifier">qalen</span>; <span class="ruby-keyword">else</span> <span class="ruby-identifier">talen</span>; <span class="ruby-keyword">end</span>)
+<span class="line-num">423</span>   <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">alen</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-value">0</span>
+<span class="line-num">424</span>   <span class="ruby-identifier">d</span> = <span class="ruby-identifier">qalen</span> <span class="ruby-operator">-</span> <span class="ruby-identifier">talen</span>
+<span class="line-num">425</span>   <span class="ruby-identifier">d</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">d</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+<span class="line-num">426</span>   <span class="ruby-identifier">total</span> = <span class="ruby-identifier">w</span> <span class="ruby-operator">*</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">match</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">rep_match</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mismatch</span>)
+<span class="line-num">427</span>   <span class="ruby-keyword">return</span> <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">total</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+<span class="line-num">428</span>   <span class="ruby-keyword">return</span> (<span class="ruby-value">1000</span> <span class="ruby-operator">*</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">mismatch</span> <span class="ruby-operator">*</span> <span class="ruby-identifier">w</span> <span class="ruby-operator">+</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">gap_count</span> <span class="ruby-operator">+</span>
+<span class="line-num">429</span>                     (<span class="ruby-value">3</span> <span class="ruby-operator">*</span> <span class="ruby-constant">Math</span>.<span class="ruby-identifier">log</span>(<span class="ruby-value">1</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">d</span>)).<span class="ruby-identifier">round</span>) <span class="ruby-operator">/</span> <span class="ruby-identifier">total</span>)
+<span class="line-num">430</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -587,8 +582,8 @@ href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat
 
           
           <div class="method-source-code" id="mismatch-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 334</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mismatch</span>;    <span class="ruby-ivar">@data</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>;  <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">334</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">mismatch</span>;    <span class="ruby-ivar">@data</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span>;  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -618,8 +613,8 @@ href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat
 
           
           <div class="method-source-code" id="n_s-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 342</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">n_s</span>;         <span class="ruby-ivar">@data</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">to_i</span>;  <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">342</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">n_s</span>;         <span class="ruby-ivar">@data</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">to_i</span>;  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -643,21 +638,18 @@ href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat
 
         <div class="method-description">
           
-          <p>Calculates the percent identity compatible with the BLAT web server as
-described in the BLAT FAQ (<a
-href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
+          <p>Calculates the percent identity compatible with the BLAT web server as described in the BLAT FAQ (<a href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
 
-<p>The algorithm is taken from the BLAT FAQ (<a
-href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
+<p>The algorithm is taken from the BLAT FAQ (<a href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
           
           
 
           
           <div class="method-source-code" id="percent_identity-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 438</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">percent_identity</span>
-  <span class="ruby-value">100.0</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">milli_bad</span> <span class="ruby-operator">*</span> <span class="ruby-value">0.1</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">438</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">percent_identity</span>
+<span class="line-num">439</span>   <span class="ruby-value">100.0</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">milli_bad</span> <span class="ruby-operator">*</span> <span class="ruby-value">0.1</span>
+<span class="line-num">440</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -681,42 +673,38 @@ href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat
 
         <div class="method-description">
           
-          <p>When the output data comes from the protein query, returns true. Otherwise
-(nucleotide query), returns false. It returns nil if this cannot be
-determined.</p>
+          <p>When the output data comes from the protein query, returns true. Otherwise (nucleotide query), returns false. It returns nil if this cannot be determined.</p>
 
-<p>The algorithm is taken from the BLAT FAQ (<a
-href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
+<p>The algorithm is taken from the BLAT FAQ (<a href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
 
-<p>Note: It seems that it returns true only when protein query with nucleotide
-database (blat options: -q=prot -t=dnax).</p>
+<p>Note: It seems that it returns true only when protein query with nucleotide database (blat options: -q=prot -t=dnax).</p>
           
           
 
           
           <div class="method-source-code" id="protein-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 451</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">protein?</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">block_sizes</span>.<span class="ruby-identifier">empty?</span>
-  <span class="ruby-keyword">case</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">strand</span>[<span class="ruby-value">1</span>,<span class="ruby-value">1</span>]
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;+&#39;</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">starts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">+</span>
-        <span class="ruby-value">3</span> <span class="ruby-operator">*</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">block_sizes</span>[<span class="ruby-value">-1</span>] <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">true</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">false</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;-&#39;</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span>
-        <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">starts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">-</span> <span class="ruby-value">3</span> <span class="ruby-operator">*</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">block_sizes</span>[<span class="ruby-value">-1</span>] <span class="ruby-keyword">then</span>
-      <span class="ruby-keyword">true</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-keyword">false</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">nil</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">451</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">protein?</span>
+<span class="line-num">452</span>   <span class="ruby-keyword">return</span> <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">block_sizes</span>.<span class="ruby-identifier">empty?</span>
+<span class="line-num">453</span>   <span class="ruby-keyword">case</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">strand</span>[<span class="ruby-value">1</span>,<span class="ruby-value">1</span>]
+<span class="line-num">454</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;+&#39;</span>
+<span class="line-num">455</span>     <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">end</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">starts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">+</span>
+<span class="line-num">456</span>         <span class="ruby-value">3</span> <span class="ruby-operator">*</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">block_sizes</span>[<span class="ruby-value">-1</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">457</span>       <span class="ruby-keyword">true</span>
+<span class="line-num">458</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">459</span>       <span class="ruby-keyword">false</span>
+<span class="line-num">460</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">461</span>   <span class="ruby-keyword">when</span> <span class="ruby-string">&#39;-&#39;</span>
+<span class="line-num">462</span>     <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">start</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">-</span>
+<span class="line-num">463</span>         <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">starts</span>[<span class="ruby-value">-1</span>] <span class="ruby-operator">-</span> <span class="ruby-value">3</span> <span class="ruby-operator">*</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">block_sizes</span>[<span class="ruby-value">-1</span>] <span class="ruby-keyword">then</span>
+<span class="line-num">464</span>       <span class="ruby-keyword">true</span>
+<span class="line-num">465</span>     <span class="ruby-keyword">else</span>
+<span class="line-num">466</span>       <span class="ruby-keyword">false</span>
+<span class="line-num">467</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">468</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">469</span>     <span class="ruby-keyword">nil</span>
+<span class="line-num">470</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">471</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -740,23 +728,21 @@ database (blat options: -q=prot -t=dnax).</p>
 
         <div class="method-description">
           
-          <p>Returns sequence informations of the query. Returns a <a
-href="SeqDesc.html">Bio::Blat::Report::SeqDesc</a> object. This would be <a
-href="../../Blat.html">Bio::Blat</a> specific method.</p>
+          <p>Returns sequence informations of the query. Returns a <a href="SeqDesc.html"><code>Bio::Blat::Report::SeqDesc</code></a> object. This would be <a href="../../Blat.html"><code>Bio::Blat</code></a> specific method.</p>
           
           
 
           
           <div class="method-source-code" id="query-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 310</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@query</span>)
-    <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@data</span>
-    <span class="ruby-ivar">@query</span> = <span class="ruby-constant">SeqDesc</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">4</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">5</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">9</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">10</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">11</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">12</span>],
-                         <span class="ruby-identifier">split_comma</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">19</span>]), <span class="ruby-identifier">split_comma</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">21</span>]))
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@query</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">310</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query</span>
+<span class="line-num">311</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@query</span>)
+<span class="line-num">312</span>     <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@data</span>
+<span class="line-num">313</span>     <span class="ruby-ivar">@query</span> = <span class="ruby-constant">SeqDesc</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">4</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">5</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">9</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">10</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">11</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">12</span>],
+<span class="line-num">314</span>                          <span class="ruby-identifier">split_comma</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">19</span>]), <span class="ruby-identifier">split_comma</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">21</span>]))
+<span class="line-num">315</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">316</span>   <span class="ruby-ivar">@query</span>
+<span class="line-num">317</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -786,8 +772,8 @@ href="../../Blat.html">Bio::Blat</a> specific method.</p>
 
           
           <div class="method-source-code" id="query_def-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 390</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_def</span>;  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">name</span>;  <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">390</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_def</span>;  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">name</span>;  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -849,8 +835,8 @@ href="../../Blat.html">Bio::Blat</a> specific method.</p>
 
           
           <div class="method-source-code" id="query_len-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 387</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_len</span>;  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">size</span>;  <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">387</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">query_len</span>;  <span class="ruby-identifier">query</span>.<span class="ruby-identifier">size</span>;  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -874,15 +860,14 @@ href="../../Blat.html">Bio::Blat</a> specific method.</p>
 
         <div class="method-description">
           
-          <p>“rep. match”. Number of bases that match but are part of repeats. Note that
-current version of BLAT always set 0.</p>
+          <p>“rep. match”. Number of bases that match but are part of repeats. Note that current version of BLAT always set 0.</p>
           
           
 
           
           <div class="method-source-code" id="rep_match-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 339</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rep_match</span>;   <span class="ruby-ivar">@data</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span>;  <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">339</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">rep_match</span>;   <span class="ruby-ivar">@data</span>[<span class="ruby-value">2</span>].<span class="ruby-identifier">to_i</span>;  <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -906,23 +891,20 @@ current version of BLAT always set 0.</p>
 
         <div class="method-description">
           
-          <p>Calculates the score compatible with the BLAT web server as described in
-the BLAT FAQ (<a
-href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
+          <p>Calculates the score compatible with the BLAT web server as described in the BLAT FAQ (<a href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
 
-<p>The algorithm is taken from the BLAT FAQ (<a
-href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
+<p>The algorithm is taken from the BLAT FAQ (<a href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat4</a>).</p>
           
           
 
           
           <div class="method-source-code" id="score-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 479</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">score</span>
-  <span class="ruby-identifier">w</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">protein?</span> <span class="ruby-operator">?</span> <span class="ruby-value">3</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>)
-  <span class="ruby-identifier">w</span> <span class="ruby-operator">*</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">match</span> <span class="ruby-operator">+</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">rep_match</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">1</span>)) <span class="ruby-operator">-</span>
-    <span class="ruby-identifier">w</span> <span class="ruby-operator">*</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mismatch</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">gap_count</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">gap_count</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">479</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">score</span>
+<span class="line-num">480</span>   <span class="ruby-identifier">w</span> = (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">protein?</span> <span class="ruby-operator">?</span> <span class="ruby-value">3</span> <span class="ruby-operator">:</span> <span class="ruby-value">1</span>)
+<span class="line-num">481</span>   <span class="ruby-identifier">w</span> <span class="ruby-operator">*</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">match</span> <span class="ruby-operator">+</span> (<span class="ruby-keyword">self</span>.<span class="ruby-identifier">rep_match</span> <span class="ruby-operator">&gt;&gt;</span> <span class="ruby-value">1</span>)) <span class="ruby-operator">-</span>
+<span class="line-num">482</span>     <span class="ruby-identifier">w</span> <span class="ruby-operator">*</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">mismatch</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">query</span>.<span class="ruby-identifier">gap_count</span> <span class="ruby-operator">-</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">target</span>.<span class="ruby-identifier">gap_count</span>
+<span class="line-num">483</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -946,15 +928,14 @@ href="http://genome.ucsc.edu/FAQ/FAQblat#blat4">genome.ucsc.edu/FAQ/FAQblat#blat
 
         <div class="method-description">
           
-          <p>Returns strand information of the hit. Returns &#39;+&#39; or &#39;-&#39;.
-This would be a <a href="../../Blat.html">Bio::Blat</a> specific method.</p>
+          <p>Returns strand information of the hit. Returns &#39;+&#39; or &#39;-&#39;. This would be a <a href="../../Blat.html"><code>Bio::Blat</code></a> specific method.</p>
           
           
 
           
           <div class="method-source-code" id="strand-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 347</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strand</span>;      <span class="ruby-ivar">@data</span>[<span class="ruby-value">8</span>];       <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">347</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">strand</span>;      <span class="ruby-ivar">@data</span>[<span class="ruby-value">8</span>];       <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -978,23 +959,21 @@ This would be a <a href="../../Blat.html">Bio::Blat</a> specific method.</p>
 
         <div class="method-description">
           
-          <p>Returns sequence informations of the target(hit). Returns a <a
-href="SeqDesc.html">Bio::Blat::Report::SeqDesc</a> object. This would be <a
-href="../../Blat.html">Bio::Blat</a> specific method.</p>
+          <p>Returns sequence informations of the target(hit). Returns a <a href="SeqDesc.html"><code>Bio::Blat::Report::SeqDesc</code></a> object. This would be <a href="../../Blat.html"><code>Bio::Blat</code></a> specific method.</p>
           
           
 
           
           <div class="method-source-code" id="target-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 322</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@target</span>)
-    <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@data</span>
-    <span class="ruby-ivar">@target</span> = <span class="ruby-constant">SeqDesc</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">6</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">7</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">13</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">14</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">15</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">16</span>],
-                          <span class="ruby-identifier">split_comma</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">20</span>]), <span class="ruby-identifier">split_comma</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">22</span>]))
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@target</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">322</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target</span>
+<span class="line-num">323</span>   <span class="ruby-keyword">unless</span> <span class="ruby-keyword">defined?</span>(<span class="ruby-ivar">@target</span>)
+<span class="line-num">324</span>     <span class="ruby-identifier">d</span> = <span class="ruby-ivar">@data</span>
+<span class="line-num">325</span>     <span class="ruby-ivar">@target</span> = <span class="ruby-constant">SeqDesc</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">6</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">7</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">13</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">14</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">15</span>], <span class="ruby-identifier">d</span>[<span class="ruby-value">16</span>],
+<span class="line-num">326</span>                           <span class="ruby-identifier">split_comma</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">20</span>]), <span class="ruby-identifier">split_comma</span>(<span class="ruby-identifier">d</span>[<span class="ruby-value">22</span>]))
+<span class="line-num">327</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">328</span>   <span class="ruby-ivar">@target</span>
+<span class="line-num">329</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1024,8 +1003,8 @@ href="../../Blat.html">Bio::Blat</a> specific method.</p>
 
           
           <div class="method-source-code" id="target_def-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 398</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_def</span>; <span class="ruby-identifier">target</span>.<span class="ruby-identifier">name</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">398</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_def</span>; <span class="ruby-identifier">target</span>.<span class="ruby-identifier">name</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1087,8 +1066,8 @@ href="../../Blat.html">Bio::Blat</a> specific method.</p>
 
           
           <div class="method-source-code" id="target_len-source">
-            <pre><span class="ruby-comment"># File lib/bio/appl/blat/report.rb, line 394</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_len</span>; <span class="ruby-identifier">target</span>.<span class="ruby-identifier">size</span>; <span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/appl/blat/report.rb</span>
+<span class="line-num">394</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">target_len</span>; <span class="ruby-identifier">target</span>.<span class="ruby-identifier">size</span>; <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1106,12 +1085,13 @@ href="../../Blat.html">Bio::Blat</a> specific method.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

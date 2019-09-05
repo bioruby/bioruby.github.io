@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -90,9 +94,7 @@
 
   <section class="description">
     
-<p><a href="DBLink.html">Bio::Sequence::DBLink</a> stores IDs with the
-database name. Its main purpose is to store database cross-reference
-information for a sequence entry.</p>
+<p><a href="DBLink.html"><code>Bio::Sequence::DBLink</code></a> stores IDs with the database name. Its main purpose is to store database cross-reference information for a sequence entry.</p>
 
   </section>
 
@@ -173,18 +175,18 @@ information for a sequence entry.</p>
 
         <div class="method-description">
           
-          <p>creates a new <a href="DBLink.html">DBLink</a> object</p>
+          <p>creates a new <a href="DBLink.html"><code>DBLink</code></a> object</p>
           
           
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/dblink.rb, line 19</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">database</span>, <span class="ruby-identifier">primary_id</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">secondary_ids</span>)
-  <span class="ruby-ivar">@database</span> = <span class="ruby-identifier">database</span>
-  <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">primary_id</span>
-  <span class="ruby-ivar">@secondary_ids</span> = <span class="ruby-identifier">secondary_ids</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/dblink.rb</span>
+<span class="line-num">19</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>(<span class="ruby-identifier">database</span>, <span class="ruby-identifier">primary_id</span>, <span class="ruby-operator">*</span><span class="ruby-identifier">secondary_ids</span>)
+<span class="line-num">20</span>   <span class="ruby-ivar">@database</span> = <span class="ruby-identifier">database</span>
+<span class="line-num">21</span>   <span class="ruby-ivar">@id</span> = <span class="ruby-identifier">primary_id</span>
+<span class="line-num">22</span>   <span class="ruby-ivar">@secondary_ids</span> = <span class="ruby-identifier">secondary_ids</span>
+<span class="line-num">23</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -208,19 +210,18 @@ information for a sequence entry.</p>
 
         <div class="method-description">
           
-          <p>Parses DR line in <a href="../EMBL.html">EMBL</a> entry, and returns a <a
-href="DBLink.html">DBLink</a> object.</p>
+          <p>Parses DR line in <a href="../EMBL.html"><code>EMBL</code></a> entry, and returns a <a href="DBLink.html"><code>DBLink</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="parse_embl_DR_line-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/dblink.rb, line 39</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_embl_DR_line</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\.\s*\z/</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\ADR   /</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span>(<span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s*\;\s*/</span>, <span class="ruby-value">3</span>)))
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/dblink.rb</span>
+<span class="line-num">39</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_embl_DR_line</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">40</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\.\s*\z/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">41</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\ADR   /</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">42</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span>(<span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s*\;\s*/</span>, <span class="ruby-value">3</span>)))
+<span class="line-num">43</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -244,19 +245,18 @@ href="DBLink.html">DBLink</a> object.</p>
 
         <div class="method-description">
           
-          <p>Parses DR line in UniProt entry, and returns a <a
-href="DBLink.html">DBLink</a> object.</p>
+          <p>Parses DR line in <a href="../UniProtKB.html"><code>UniProt</code></a> entry, and returns a <a href="DBLink.html"><code>DBLink</code></a> object.</p>
           
           
 
           
           <div class="method-source-code" id="parse_uniprot_DR_line-source">
-            <pre><span class="ruby-comment"># File lib/bio/sequence/dblink.rb, line 46</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_uniprot_DR_line</span>(<span class="ruby-identifier">str</span>)
-  <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\.\s*\z/</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\ADR   /</span>, <span class="ruby-string">&#39;&#39;</span>)
-  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span>(<span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s*\;\s*/</span>)))
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/sequence/dblink.rb</span>
+<span class="line-num">46</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">parse_uniprot_DR_line</span>(<span class="ruby-identifier">str</span>)
+<span class="line-num">47</span>   <span class="ruby-identifier">str</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub</span>(<span class="ruby-regexp">/\.\s*\z/</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">48</span>   <span class="ruby-identifier">str</span>.<span class="ruby-identifier">sub!</span>(<span class="ruby-regexp">/\ADR   /</span>, <span class="ruby-string">&#39;&#39;</span>)
+<span class="line-num">49</span>   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-operator">*</span>(<span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-regexp">/\s*\;\s*/</span>)))
+<span class="line-num">50</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -270,12 +270,13 @@ href="DBLink.html">DBLink</a> object.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 

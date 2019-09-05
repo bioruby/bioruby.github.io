@@ -11,11 +11,15 @@
   var index_rel_prefix = "../../";
 </script>
 
-<script src="../../js/jquery.js"></script>
-<script src="../../js/darkfish.js"></script>
+<script src="../../js/navigation.js" defer></script>
+<script src="../../js/search.js" defer></script>
+<script src="../../js/search_index.js" defer></script>
+<script src="../../js/searcher.js" defer></script>
+<script src="../../js/darkfish.js" defer></script>
 
 <link href="../../css/fonts.css" rel="stylesheet">
 <link href="../../css/rdoc.css" rel="stylesheet">
+
 
 
 
@@ -134,9 +138,7 @@
     
 <p>a class to store sorted numerics.</p>
 
-<p><a href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a> internal use
-only. Please do not create the instance outside <a
-href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
+<p><a href="../RestrictionEnzyme.html"><code>Bio::RestrictionEnzyme</code></a> internal use only. Please do not create the instance outside <a href="../RestrictionEnzyme.html"><code>Bio::RestrictionEnzyme</code></a>.</p>
 
   </section>
 
@@ -176,14 +178,14 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">elem</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">a</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">elem</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">a</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">22</span> <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">23</span>   <span class="ruby-identifier">a</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">24</span>   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">elem</span><span class="ruby-operator">|</span>
+<span class="line-num">25</span>     <span class="ruby-identifier">a</span>.<span class="ruby-identifier">push</span> <span class="ruby-identifier">elem</span>
+<span class="line-num">26</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">27</span>   <span class="ruby-identifier">a</span>
+<span class="line-num">28</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -213,11 +215,11 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="new-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 31</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
-  <span class="ruby-ivar">@hash</span> = {}
-  <span class="ruby-comment">#clear_cache</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">31</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize</span>
+<span class="line-num">32</span>   <span class="ruby-ivar">@hash</span> = {}
+<span class="line-num">33</span>   <span class="ruby-comment">#clear_cache</span>
+<span class="line-num">34</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -255,16 +257,16 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="2B-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 124</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">+</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;unsupported data type&#39;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">new_hash</span> = <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">internal_data_hash</span>)
-  <span class="ruby-identifier">result</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
-  <span class="ruby-identifier">result</span>.<span class="ruby-identifier">internal_data_hash</span> = <span class="ruby-identifier">new_hash</span>
-  <span class="ruby-identifier">result</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">124</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">+</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">125</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">126</span>     <span class="ruby-identifier">raise</span> <span class="ruby-constant">TypeError</span>, <span class="ruby-string">&#39;unsupported data type&#39;</span>
+<span class="line-num">127</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">128</span>   <span class="ruby-identifier">new_hash</span> = <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-identifier">other</span>.<span class="ruby-identifier">internal_data_hash</span>)
+<span class="line-num">129</span>   <span class="ruby-identifier">result</span> = <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">new</span>
+<span class="line-num">130</span>   <span class="ruby-identifier">result</span>.<span class="ruby-identifier">internal_data_hash</span> = <span class="ruby-identifier">new_hash</span>
+<span class="line-num">131</span>   <span class="ruby-identifier">result</span>
+<span class="line-num">132</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -294,11 +296,11 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="3C-3C-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 168</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">elem</span>)
-  <span class="ruby-identifier">push_element</span>(<span class="ruby-identifier">elem</span>)
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">168</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">&lt;&lt;</span>(<span class="ruby-identifier">elem</span>)
+<span class="line-num">169</span>   <span class="ruby-identifier">push_element</span>(<span class="ruby-identifier">elem</span>)
+<span class="line-num">170</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">171</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -333,16 +335,16 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="3D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 135</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">r</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-keyword">then</span>
-    <span class="ruby-identifier">other</span>.<span class="ruby-identifier">internal_data_hash</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@hash</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-keyword">false</span>
-  <span class="ruby-keyword">end</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">135</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">==</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">136</span>   <span class="ruby-keyword">if</span> <span class="ruby-identifier">r</span> = <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">137</span>     <span class="ruby-identifier">r</span>
+<span class="line-num">138</span>   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">other</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>) <span class="ruby-keyword">then</span>
+<span class="line-num">139</span>     <span class="ruby-identifier">other</span>.<span class="ruby-identifier">internal_data_hash</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@hash</span>
+<span class="line-num">140</span>   <span class="ruby-keyword">else</span>
+<span class="line-num">141</span>     <span class="ruby-keyword">false</span>
+<span class="line-num">142</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">143</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -372,11 +374,11 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="5B-5D-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 103</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-comment">#$stderr.puts &quot;SortedNumArray#[]&quot;</span>
-  <span class="ruby-identifier">sorted_keys</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>]
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">103</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">104</span>   <span class="ruby-comment">#$stderr.puts &quot;SortedNumArray#[]&quot;</span>
+<span class="line-num">105</span>   <span class="ruby-identifier">sorted_keys</span>[<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>]
+<span class="line-num">106</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -406,10 +408,10 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="5B-5D-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 109</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-string">&#39;SortedNumArray#[]= is not implemented.&#39;</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">109</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">[]=</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">110</span>   <span class="ruby-identifier">raise</span> <span class="ruby-constant">NotImplementedError</span>, <span class="ruby-string">&#39;SortedNumArray#[]= is not implemented.&#39;</span>
+<span class="line-num">111</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -439,11 +441,11 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="concat-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 146</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">concat</span>(<span class="ruby-identifier">ary</span>)
-  <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">elem</span><span class="ruby-operator">|</span> <span class="ruby-identifier">push_element</span>(<span class="ruby-identifier">elem</span>) }
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">146</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">concat</span>(<span class="ruby-identifier">ary</span>)
+<span class="line-num">147</span>   <span class="ruby-identifier">ary</span>.<span class="ruby-identifier">each</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">elem</span><span class="ruby-operator">|</span> <span class="ruby-identifier">push_element</span>(<span class="ruby-identifier">elem</span>) }
+<span class="line-num">148</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">149</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -473,11 +475,11 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="delete-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 195</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">elem</span>)
-  <span class="ruby-comment">#clear_cache</span>
-  <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">elem</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">elem</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">195</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">delete</span>(<span class="ruby-identifier">elem</span>)
+<span class="line-num">196</span>   <span class="ruby-comment">#clear_cache</span>
+<span class="line-num">197</span>   <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-identifier">elem</span>) <span class="ruby-operator">?</span> <span class="ruby-identifier">elem</span> <span class="ruby-operator">:</span> <span class="ruby-keyword">nil</span>
+<span class="line-num">198</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -507,10 +509,10 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="each-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 114</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-identifier">sorted_keys</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">114</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">115</span>   <span class="ruby-identifier">sorted_keys</span>.<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">116</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -540,10 +542,10 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="first-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 179</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">first</span>
-  <span class="ruby-identifier">sorted_keys</span>.<span class="ruby-identifier">first</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">179</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">first</span>
+<span class="line-num">180</span>   <span class="ruby-identifier">sorted_keys</span>.<span class="ruby-identifier">first</span>
+<span class="line-num">181</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -573,10 +575,10 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="include-3F-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 174</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">include?</span>(<span class="ruby-identifier">elem</span>)
-  <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">elem</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">174</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">include?</span>(<span class="ruby-identifier">elem</span>)
+<span class="line-num">175</span>   <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">has_key?</span>(<span class="ruby-identifier">elem</span>)
+<span class="line-num">176</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -611,11 +613,11 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="initialize_copy-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 37</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize_copy</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
-  <span class="ruby-ivar">@hash</span> = <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">dup</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">37</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">initialize_copy</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">38</span>   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">other</span>)
+<span class="line-num">39</span>   <span class="ruby-ivar">@hash</span> = <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">dup</span>
+<span class="line-num">40</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -645,10 +647,10 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="last-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 184</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">last</span>
-  <span class="ruby-identifier">sorted_keys</span>.<span class="ruby-identifier">last</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">184</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">last</span>
+<span class="line-num">185</span>   <span class="ruby-identifier">sorted_keys</span>.<span class="ruby-identifier">last</span>
+<span class="line-num">186</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -706,13 +708,13 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="push-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 152</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
-  <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">elem</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">push_element</span>(<span class="ruby-identifier">elem</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">152</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">push</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">args</span>)
+<span class="line-num">153</span>   <span class="ruby-identifier">args</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">elem</span><span class="ruby-operator">|</span>
+<span class="line-num">154</span>     <span class="ruby-identifier">push_element</span>(<span class="ruby-identifier">elem</span>)
+<span class="line-num">155</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">156</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">157</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -742,10 +744,10 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="reverse_each-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 119</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse_each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-identifier">sorted_keys</span>.<span class="ruby-identifier">reverse_each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">119</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">reverse_each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">120</span>   <span class="ruby-identifier">sorted_keys</span>.<span class="ruby-identifier">reverse_each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">121</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -775,10 +777,10 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="size-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 189</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>
-  <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">size</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">189</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">size</span>
+<span class="line-num">190</span>   <span class="ruby-ivar">@hash</span>.<span class="ruby-identifier">size</span>
+<span class="line-num">191</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -812,11 +814,11 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="sort-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 201</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
-  <span class="ruby-comment"># does nothing</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">201</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">sort!</span>(<span class="ruby-operator">&amp;</span><span class="ruby-identifier">block</span>)
+<span class="line-num">202</span>   <span class="ruby-comment"># does nothing</span>
+<span class="line-num">203</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">204</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -846,11 +848,11 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="to_a-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 213</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
-  <span class="ruby-comment">#sorted_keys.dup</span>
-  <span class="ruby-identifier">sorted_keys</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">213</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">to_a</span>
+<span class="line-num">214</span>   <span class="ruby-comment">#sorted_keys.dup</span>
+<span class="line-num">215</span>   <span class="ruby-identifier">sorted_keys</span>
+<span class="line-num">216</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -880,11 +882,11 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="uniq-21-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 207</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uniq!</span>
-  <span class="ruby-comment"># does nothing</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">207</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">uniq!</span>
+<span class="line-num">208</span>   <span class="ruby-comment"># does nothing</span>
+<span class="line-num">209</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">210</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -914,13 +916,13 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="unshift-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 160</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unshift</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
-  <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">reverse_each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">elem</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">unshift_element</span>(<span class="ruby-identifier">elem</span>)
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>    <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">160</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">unshift</span>(<span class="ruby-operator">*</span><span class="ruby-identifier">arg</span>)
+<span class="line-num">161</span>   <span class="ruby-identifier">arg</span>.<span class="ruby-identifier">reverse_each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">elem</span><span class="ruby-operator">|</span>
+<span class="line-num">162</span>     <span class="ruby-identifier">unshift_element</span>(<span class="ruby-identifier">elem</span>)
+<span class="line-num">163</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">164</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">165</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -958,10 +960,10 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="internal_data_hash-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 51</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">internal_data_hash</span>
-  <span class="ruby-ivar">@hash</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">51</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">internal_data_hash</span>
+<span class="line-num">52</span>   <span class="ruby-ivar">@hash</span>
+<span class="line-num">53</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -991,12 +993,12 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
 
           
           <div class="method-source-code" id="internal_data_hash-3D-source">
-            <pre><span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb, line 43</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">internal_data_hash=</span>(<span class="ruby-identifier">h</span>)
-  <span class="ruby-comment">#clear_cache</span>
-  <span class="ruby-ivar">@hash</span> = <span class="ruby-identifier">h</span>
-  <span class="ruby-keyword">self</span>
-<span class="ruby-keyword">end</span></pre>
+            <pre>   <span class="ruby-comment"># File lib/bio/util/restriction_enzyme/sorted_num_array.rb</span>
+<span class="line-num">43</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">internal_data_hash=</span>(<span class="ruby-identifier">h</span>)
+<span class="line-num">44</span>   <span class="ruby-comment">#clear_cache</span>
+<span class="line-num">45</span>   <span class="ruby-ivar">@hash</span> = <span class="ruby-identifier">h</span>
+<span class="line-num">46</span>   <span class="ruby-keyword">self</span>
+<span class="line-num">47</span> <span class="ruby-keyword">end</span></pre>
           </div>
           
         </div>
@@ -1010,12 +1012,13 @@ href="../RestrictionEnzyme.html">Bio::RestrictionEnzyme</a>.</p>
     </section>
   
   </section>
+
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.0.1.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
