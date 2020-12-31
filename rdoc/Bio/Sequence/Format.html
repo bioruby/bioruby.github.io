@@ -21,8 +21,6 @@
 <link href="../../css/rdoc.css" rel="stylesheet">
 
 
-
-
 <body id="top" role="document" class="module">
 <nav role="navigation">
   <div id="project-navigation">
@@ -71,18 +69,15 @@
     
     
     
-    <!-- Method Quickref -->
+    
+<!-- Method Quickref -->
 <div id="method-list-section" class="nav-section">
   <h3>Methods</h3>
 
   <ul class="link-list" role="directory">
-    
     <li ><a href="#method-i-list_output_formats">#list_output_formats</a>
-    
     <li ><a href="#method-i-output">#output</a>
-    
     <li ><a href="#method-i-output_fasta">#output_fasta</a>
-    
   </ul>
 </div>
 
@@ -110,36 +105,25 @@
 
   </section>
 
-  
   <section id="5Buntitled-5D" class="documentation-section">
-    
 
-    
 
-    
 
-    
 
-    
+
      <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
        <header>
          <h3>Public Instance Methods</h3>
        </header>
 
-    
       <div id="method-i-list_output_formats" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">list_output_formats</span><span
             class="method-args">()</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Returns a list of available output formats for the sequence</p>
 <hr>
 
@@ -148,41 +132,29 @@
 <dd>
 <p>Array of Symbols</p>
 </dd></dl>
-          
-          
 
-          
           <div class="method-source-code" id="list_output_formats-source">
             <pre>    <span class="ruby-comment"># File lib/bio/sequence/format.rb</span>
-<span class="line-num">173</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_output_formats</span>
-<span class="line-num">174</span>   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">get_formatter_repositories</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mod</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">constants</span> }
-<span class="line-num">175</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">flatten!</span>
-<span class="line-num">176</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">intern</span> }
-<span class="line-num">177</span>   <span class="ruby-identifier">a</span>
-<span class="line-num">178</span> <span class="ruby-keyword">end</span></pre>
+<span class="line-num">174</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">list_output_formats</span>
+<span class="line-num">175</span>   <span class="ruby-identifier">a</span> = <span class="ruby-identifier">get_formatter_repositories</span>.<span class="ruby-identifier">collect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">mod</span><span class="ruby-operator">|</span> <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">constants</span> }
+<span class="line-num">176</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">flatten!</span>
+<span class="line-num">177</span>   <span class="ruby-identifier">a</span>.<span class="ruby-identifier">collect!</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">x</span><span class="ruby-operator">|</span> <span class="ruby-identifier">x</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">downcase</span>.<span class="ruby-identifier">intern</span> }
+<span class="line-num">178</span>   <span class="ruby-identifier">a</span>
+<span class="line-num">179</span> <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-output" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">output</span><span
             class="method-args">(format = :fasta, options = {})</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>Using <a href="Format.html"><code>Bio::Sequence::Format</code></a>, return a String with the <a href="../Sequence.html"><code>Bio::Sequence</code></a> object formatted in the given style.</p>
 
 <p>Formats currently implemented are: &#39;fasta&#39;, &#39;genbank&#39;, and &#39;embl&#39;</p>
@@ -202,52 +174,40 @@
 <dd>
 <p>String object</p>
 </dd></dl>
-          
-          
 
-          
           <div class="method-source-code" id="output-source">
             <pre>    <span class="ruby-comment"># File lib/bio/sequence/format.rb</span>
-<span class="line-num">151</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output</span>(<span class="ruby-identifier">format</span> = <span class="ruby-value">:fasta</span>, <span class="ruby-identifier">options</span> = {})
-<span class="line-num">152</span>   <span class="ruby-identifier">formatter_const</span> = <span class="ruby-identifier">format</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">capitalize</span>.<span class="ruby-identifier">intern</span>
-<span class="line-num">153</span> 
-<span class="line-num">154</span>   <span class="ruby-identifier">formatter_class</span> = <span class="ruby-keyword">nil</span>
-<span class="line-num">155</span>   <span class="ruby-identifier">get_formatter_repositories</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mod</span><span class="ruby-operator">|</span>
-<span class="line-num">156</span>     <span class="ruby-keyword">begin</span>
-<span class="line-num">157</span>       <span class="ruby-identifier">formatter_class</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">formatter_const</span>)
-<span class="line-num">158</span>     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
-<span class="line-num">159</span>     <span class="ruby-keyword">end</span>
-<span class="line-num">160</span>     <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">formatter_class</span>
-<span class="line-num">161</span>   <span class="ruby-keyword">end</span>
-<span class="line-num">162</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">formatter_class</span> <span class="ruby-keyword">then</span>
-<span class="line-num">163</span>     <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;unknown format name #{format.inspect}&quot;</span>
-<span class="line-num">164</span>   <span class="ruby-keyword">end</span>
-<span class="line-num">165</span> 
-<span class="line-num">166</span>   <span class="ruby-identifier">formatter_class</span>.<span class="ruby-identifier">output</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>)
-<span class="line-num">167</span> <span class="ruby-keyword">end</span></pre>
+<span class="line-num">152</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output</span>(<span class="ruby-identifier">format</span> = <span class="ruby-value">:fasta</span>, <span class="ruby-identifier">options</span> = {})
+<span class="line-num">153</span>   <span class="ruby-identifier">formatter_const</span> = <span class="ruby-identifier">format</span>.<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">capitalize</span>.<span class="ruby-identifier">intern</span>
+<span class="line-num">154</span> 
+<span class="line-num">155</span>   <span class="ruby-identifier">formatter_class</span> = <span class="ruby-keyword">nil</span>
+<span class="line-num">156</span>   <span class="ruby-identifier">get_formatter_repositories</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">mod</span><span class="ruby-operator">|</span>
+<span class="line-num">157</span>     <span class="ruby-keyword">begin</span>
+<span class="line-num">158</span>       <span class="ruby-identifier">formatter_class</span> = <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">const_get</span>(<span class="ruby-identifier">formatter_const</span>)
+<span class="line-num">159</span>     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">NameError</span>
+<span class="line-num">160</span>     <span class="ruby-keyword">end</span>
+<span class="line-num">161</span>     <span class="ruby-keyword">break</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">formatter_class</span>
+<span class="line-num">162</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">163</span>   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">formatter_class</span> <span class="ruby-keyword">then</span>
+<span class="line-num">164</span>     <span class="ruby-identifier">raise</span> <span class="ruby-node">&quot;unknown format name #{format.inspect}&quot;</span>
+<span class="line-num">165</span>   <span class="ruby-keyword">end</span>
+<span class="line-num">166</span> 
+<span class="line-num">167</span>   <span class="ruby-identifier">formatter_class</span>.<span class="ruby-identifier">output</span>(<span class="ruby-keyword">self</span>, <span class="ruby-identifier">options</span>)
+<span class="line-num">168</span> <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
       <div id="method-i-output_fasta" class="method-detail ">
-        
         <div class="method-heading">
           <span class="method-name">output_fasta</span><span
             class="method-args">(definition = nil, width = 70)</span>
-          
           <span class="method-click-advice">click to toggle source</span>
-          
         </div>
-        
 
         <div class="method-description">
-          
           <p>The same as output(:fasta, :header=&gt;definition, :width=&gt;width) This method is intended to replace Bio::Sequence#to_fasta.</p>
 
 <pre class="ruby"><span class="ruby-identifier">s</span> = <span class="ruby-constant">Bio</span><span class="ruby-operator">::</span><span class="ruby-constant">Sequence</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&#39;atgc&#39;</span>)
@@ -265,35 +225,27 @@
 <dd>
 <p>String object</p>
 </dd></dl>
-          
-          
 
-          
           <div class="method-source-code" id="output_fasta-source">
             <pre>    <span class="ruby-comment"># File lib/bio/sequence/format.rb</span>
-<span class="line-num">190</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_fasta</span>(<span class="ruby-identifier">definition</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">width</span> = <span class="ruby-value">70</span>)
-<span class="line-num">191</span>   <span class="ruby-identifier">output</span>(<span class="ruby-value">:fasta</span>, <span class="ruby-value">:header</span><span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">definition</span>, <span class="ruby-value">:width</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">width</span>)
-<span class="line-num">192</span> <span class="ruby-keyword">end</span></pre>
+<span class="line-num">191</span> <span class="ruby-keyword">def</span> <span class="ruby-identifier ruby-title">output_fasta</span>(<span class="ruby-identifier">definition</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">width</span> = <span class="ruby-value">70</span>)
+<span class="line-num">192</span>   <span class="ruby-identifier">output</span>(<span class="ruby-value">:fasta</span>, <span class="ruby-value">:header</span><span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">definition</span>, <span class="ruby-value">:width</span> <span class="ruby-operator">=&gt;</span> <span class="ruby-identifier">width</span>)
+<span class="line-num">193</span> <span class="ruby-keyword">end</span></pre>
           </div>
-          
         </div>
 
-        
 
-        
       </div>
 
-    
     </section>
-  
-  </section>
 
+  </section>
 </main>
 
 
 <footer id="validator-badges" role="contentinfo">
   <p><a href="https://validator.w3.org/check/referer">Validate</a>
-  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.2.0.
+  <p>Generated by <a href="https://ruby.github.io/rdoc/">RDoc</a> 6.3.0.
   <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
 </footer>
 
